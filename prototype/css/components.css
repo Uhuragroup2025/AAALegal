@@ -1,0 +1,1596 @@
+/* Componentes — cada bloque está pensado como un pattern/template part independiente */
+
+/* ---------- Header / navegación — píldora flotante (§ 2) ----------
+   El <header> ya NO pinta nada: es solo un contenedor sticky de ancho completo que
+   centra la píldora (necesario para que `margin-inline:auto` funcione). La píldora en
+   sí — fondo, blur, borde, radio — vive en `.site-header__inner`, que ya existe en las
+   3 páginas (index/servicios/proximamente) con el mismo nombre de clase, así que este
+   rediseño no requiere tocar el HTML de ninguna de ellas para propagarse.
+   Mentalidad WordPress: `.site-header` ~ el contenedor que genera el tema (Group/Row);
+   `.site-header__inner` ~ el Group interno que en Gutenberg tendría el estilo de
+   "barra de navegación" aplicado; `.nav` ~ bloque Navigation; `.brand` ~ Site Logo/Title;
+   `.site-header__actions` ~ bloque Buttons. El CSS solo debe tocar estos contenedores
+   externos para que, al migrar, el marcado real de Navigation/Site Logo no se rompa. */
+/* Bug corregido (2026-07-31): `position:sticky` sigue reservando su propio alto en el
+   flujo normal del documento (aunque se pinte desplazado por `top`) — eso dejaba una
+   franja del fondo de <body> (blanco) visible antes de que empezara el hero, del alto
+   exacto de la píldora. Con `position:fixed` la píldora sale del flujo por completo:
+   no reserva espacio, flota directamente sobre el hero desde el primer pixel — que es
+   el efecto que se buscaba (nav flotante tipo "isla"), no una barra que empuja el resto
+   de la página hacia abajo. `inset-inline:0` es necesario porque, a diferencia de un
+   bloque normal, un elemento `fixed` no ocupa el ancho completo por defecto. */
+.site-header {
+  position: fixed;
+  inset-inline: 0;
+  top: 1.5rem;
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  background: transparent;
+  /* El header pasa a ser más angosto que el ancho completo — el "colchón" transparente
+     a los costados de la píldora no debe interceptar clics del contenido de abajo. */
+  pointer-events: none;
+}
+.site-header__inner {
+  pointer-events: auto;
+  position: relative; /* ancla el desplegable móvil (.nav__panel) a la píldora, no al header completo */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+  gap: var(--space-6);
+  width: 92%;
+  /* Bug corregido (2026-07-31): al sumar los 3 enlaces nuevos (Talento AAA, Captación
+     B2B, Noticias y Análisis) los 7 ítems del menú se partían en 2 líneas incluso a
+     1440px — 1250px alcanzaba para 4 ítems, no para 7. Ver también el breakpoint del
+     menú hamburguesa más abajo (subió de 1023px a 1365px por el mismo motivo). */
+  max-width: 1500px;
+  margin-inline: auto;
+  padding: 0.75rem 2rem;
+  border-radius: var(--radius-pill);
+  background-color: var(--header-glass-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: var(--shadow-lg);
+  /* `.container` (base.css) aporta max-width/padding-inline propios que esta píldora no
+     necesita — al cargar components.css después de base.css, este `padding`/`max-width`
+     (propiedades completas, no solo `-inline`) ganan la cascada sin tocar el HTML. */
+}
+/* Sin soporte de backdrop-filter: cae a navy sólido (ya es opaco al 88%, la diferencia
+   visual es mínima) — nunca un header transparente sin blur, que sí rompería contraste. */
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .site-header__inner { background-color: var(--color-navy-900); }
+}
+/* `position:fixed` ya no reserva alto propio en ninguna resolución, así que el primer
+   bloque de cada página (hero inmersivo o, en páginas sin hero como proximamente.html,
+   la primera `.section`) queda por defecto detrás de la píldora al cargar. En las
+   páginas con hero inmersivo esto es intencional (el hero es oscuro y alto — la
+   píldora flota sobre la foto a propósito, como en el resto del sistema). En páginas
+   sin ese tratamiento, `.section` ya reserva 96–160px de padding-top (token
+   `--space-section`), más que suficiente para que su título no quede tapado — se
+   verificó visualmente, no hace falta un padding-top adicional solo para el header. */
+@media (max-width: 640px) {
+  .site-header { top: 0.75rem; }
+  .site-header__inner { padding: 0.6rem 1.25rem; gap: var(--space-4); width: 94%; }
+}
+.brand {
+  font-family: var(--font-display);
+  font-size: var(--text-md);
+  color: var(--color-white);
+  text-decoration: none;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  flex-shrink: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.brand span { color: var(--color-accent-on-dark); }
+
+.site-header__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  margin-left: auto;
+}
+
+.lang-toggle {
+  font-size: var(--text-xs);
+  color: var(--color-gold-100);
+  border: 1px solid var(--color-border-on-dark);
+  border-radius: var(--radius-pill);
+  padding: var(--space-1) var(--space-3);
+  cursor: default;
+}
+
+/* nav como <details>: sin JS queda expandida (fallback funcional); con JS se colapsa en mobile.
+   Nota: se evita `display:contents` en <details> — no es fiable entre navegadores para
+   elementos interactivos (puede sacar el control del árbol de accesibilidad). */
+.nav {
+  display: flex;
+  align-items: center;
+}
+.nav__toggle {
+  display: none;
+  list-style: none;
+  cursor: pointer;
+  color: var(--color-white);
+  padding: var(--space-2);
+  border-radius: var(--radius-sm);
+  flex-shrink: 0;
+}
+.nav__toggle::-webkit-details-marker { display: none; }
+.nav__toggle-icon { width: 24px; height: 24px; display: block; }
+
+.nav__panel ul {
+  display: flex;
+  gap: var(--space-4);
+  align-items: center;
+  /* Bug corregido (2026-07-31): este <ul> no lleva atributo class, así que el reset
+     `ul[class]{list-style:none}` de base.css no lo alcanzaba — el navegador mostraba
+     sus viñetas por defecto (los puntos negros junto a cada enlace). */
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.nav__panel a {
+  text-decoration: none;
+  font-size: var(--text-sm);
+  color: var(--color-white);
+  padding: var(--space-2) 0;
+  border-bottom: 2px solid transparent;
+  transition: border-color var(--motion-fast) var(--motion-ease), color var(--motion-fast) var(--motion-ease);
+}
+.nav__panel a:hover,
+.nav__panel a[aria-current="page"] {
+  border-color: var(--color-accent-on-dark);
+  color: var(--color-accent-on-dark);
+}
+
+@media (max-width: 1535px) {
+  /* Bug corregido (2026-07-31): con 7 ítems en el menú (antes 4), el nav horizontal
+     no cabe en una sola línea ni siquiera a 1440px (uno de los anchos de escritorio
+     más comunes) — se probó en el navegador con 1365px de corte y seguía partiéndose.
+     Subió a 1535px para que 1440px (y cualquier ancho "normal" de escritorio) reciba
+     el menú hamburguesa de forma confiable; el nav horizontal queda reservado a
+     pantallas realmente anchas (1536px+). Debe coincidir con el `matchMedia` de
+     js/main.js — si se cambia aquí, cambiar también ahí. */
+  .nav__toggle { display: flex; align-items: center; }
+  /* El desplegable ahora cuelga de la píldora (su ancestro posicionado es
+     `.site-header__inner`, no el <header> completo) — mismo ancho que la píldora,
+     mismo tratamiento de vidrio, para sentirse como una extensión de esta y no como
+     un panel suelto de borde recto. */
+  .nav__panel {
+    position: absolute;
+    inset-inline: 0;
+    top: calc(100% + 0.5rem);
+    background-color: var(--header-glass-bg);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-container);
+    padding: var(--space-4) var(--space-6) var(--space-6);
+  }
+  @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    .nav__panel { background-color: var(--color-navy-900); }
+  }
+  .nav__panel ul {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-2);
+  }
+  .site-header__actions { gap: var(--space-3); }
+  .btn--header { padding: var(--space-2) var(--space-4); font-size: var(--text-sm); }
+}
+
+@media (max-width: 560px) {
+  .lang-toggle { display: none; }
+  .brand { font-size: var(--text-sm); }
+}
+
+@media (max-width: 480px) {
+  /* El CTA de header pasa a solo-ícono para no romper el layout — el texto completo
+     sigue disponible para lectores de pantalla y como CTA de texto completo en el hero. */
+  .btn--header-label {
+    position: absolute;
+    width: 1px; height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+  }
+  .btn--header { padding: var(--space-3); border-radius: var(--radius-pill); }
+  .btn--header .btn--icon { width: 1.2em; height: 1.2em; }
+}
+
+/* ---------- Botón / CTA principal (D18) ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: var(--text-sm);
+  text-decoration: none;
+  border-radius: var(--radius-pill);
+  padding: var(--space-3) var(--space-6);
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: background-color var(--motion-fast) var(--motion-ease),
+              border-color var(--motion-fast) var(--motion-ease),
+              transform var(--motion-fast) var(--motion-ease);
+}
+.btn:active { transform: scale(0.97); }
+
+.btn--primary {
+  background: var(--color-navy-900);
+  color: var(--color-white);
+  border-color: var(--color-navy-900);
+}
+.btn--primary:hover {
+  background: var(--color-navy-800);
+  border-color: var(--color-accent-on-dark);
+}
+.btn--primary:focus-visible {
+  outline: 3px solid var(--color-accent-on-dark);
+  outline-offset: 3px;
+}
+
+/* variante sobre fondo claro: mismo componente, mismo contraste garantizado */
+section[data-surface="light"] .btn--primary,
+section[data-surface="muted"] .btn--primary { border-color: var(--color-navy-900); }
+
+.btn--icon { width: 1em; height: 1em; flex-shrink: 0; }
+
+.btn--ghost {
+  background: transparent;
+  color: var(--color-white);
+  border-color: var(--color-border-on-dark);
+}
+.btn--ghost:hover { border-color: var(--color-accent-on-dark); color: var(--color-accent-on-dark); }
+/* Bug corregido (2026-07-31): el botón "Conoce nuestros servicios" traía un `style`
+   inline con estos mismos valores para arreglar su contraste sobre fondo claro — pero
+   un estilo inline gana por especificidad incluso sobre `:hover`, así que el color
+   quedaba congelado en navy SIEMPRE, sin importar el estado. Se añade `atmosphere`
+   a esta regla (antes solo cubría light/muted) para que el color base se resuelva
+   aquí, no en el HTML. */
+section[data-surface="light"] .btn--ghost,
+section[data-surface="muted"] .btn--ghost,
+section[data-surface="atmosphere"] .btn--ghost {
+  color: var(--color-navy-900);
+  border-color: var(--color-border-subtle);
+}
+/* Segundo bug corregido en la misma pasada: la regla de arriba (selector con
+   `section[data-surface=...]`) tiene MÁS especificidad que `.btn--ghost:hover` sola,
+   así que seguía ganando incluso en hover — el color quedaba congelado en navy de
+   nuevo, solo que ahora por especificidad CSS en vez de por `style` inline. Hace
+   falta un :hover explícito a este mismo nivel de especificidad para que gane.
+   `--color-accent-on-dark` (el tono del hover genérico) es un teal pálido pensado
+   para leerse sobre navy — sobre fondo claro perdería casi todo el contraste, así
+   que aquí se usa `--color-accent-main`, el único tono que cumple 3:1 en ambos fondos. */
+section[data-surface="light"] .btn--ghost:hover,
+section[data-surface="muted"] .btn--ghost:hover,
+section[data-surface="atmosphere"] .btn--ghost:hover {
+  color: var(--color-accent-main);
+  border-color: var(--color-accent-main);
+}
+
+/* ---------- Hero ---------- */
+.hero {
+  position: relative;
+  background: var(--color-surface-dark);
+  color: var(--color-text-on-dark);
+  padding-top: var(--space-24);
+  padding-bottom: var(--space-32);
+  overflow: hidden;
+}
+.hero__grid {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: var(--space-16);
+  align-items: center;
+}
+.hero__content { max-width: 46ch; }
+.hero__title { margin-bottom: var(--space-6); }
+.hero__actions {
+  display: flex;
+  gap: var(--space-4);
+  margin-top: var(--space-8);
+  flex-wrap: wrap;
+}
+@media (max-width: 900px) {
+  .hero__grid { grid-template-columns: 1fr; }
+  .hero__content { max-width: none; }
+  /* El texto y el CTA principal deben verse sin scroll también en mobile (D18) —
+     la imagen (secundaria, aún placeholder) va después, no antes. */
+  .hero__media { aspect-ratio: 16 / 10; }
+  .hero__media .media-placeholder { aspect-ratio: 16 / 10; }
+  /* Titular más compacto para que el CTA quede cerca del primer viewport en mobile */
+  .hero__title { font-size: var(--text-xl); }
+  .hero { padding-top: var(--space-12); padding-bottom: var(--space-24); }
+}
+
+/* Transición curva hero → contenido (Referente 03) — gesto estático, sin animación */
+.curve-divider {
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 100%;
+  height: 64px;
+  color: var(--color-surface-light);
+}
+section[data-surface="muted"] + .hero .curve-divider,
+.curve-divider--to-muted { color: var(--color-surface-muted); }
+
+/* ---------- Placeholder de fotografía (sin banco de imágenes, sin inventar contenido) ---------- */
+.media-placeholder {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  border-radius: var(--radius-xl);
+  background:
+    repeating-linear-gradient(135deg, rgba(var(--color-accent-light-rgb), 0.14) 0 2px, transparent 2px 18px),
+    linear-gradient(160deg, var(--color-navy-700), var(--color-navy-900));
+  border: 1px solid var(--color-border-on-dark);
+  display: flex;
+  align-items: flex-end;
+  padding: var(--space-6);
+}
+.media-placeholder--wide { aspect-ratio: 16 / 10; }
+/* Ajuste (2026-07-31): antes ocupaba toda la mitad de la grilla (columna 1fr, muy grande) —
+   se pidió explícitamente un tratamiento más compacto para dejar sitio a la banda de
+   "pills" del equipo debajo, sin que la sección se vuelva demasiado alta. */
+.people-intro__media {
+  aspect-ratio: 4 / 3;
+  max-width: 360px;
+  padding: var(--space-4);
+}
+.media-placeholder__label {
+  font-size: var(--text-xs);
+  color: var(--color-gold-100);
+  background: rgba(var(--color-navy-deep-rgb), 0.55);
+  border: 1px solid var(--color-border-on-dark);
+  border-radius: var(--radius-sm);
+  padding: var(--space-2) var(--space-3);
+  line-height: var(--leading-snug);
+}
+
+/* ---------- Grid de los 4 focos / servicios ---------- */
+.focus-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-6);
+}
+@media (max-width: 1023px) { .focus-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 560px) { .focus-grid { grid-template-columns: 1fr; } }
+
+.focus-card {
+  background: var(--color-surface-light);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-md);
+  padding: var(--space-6);
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--motion-base) var(--motion-ease), box-shadow var(--motion-base) var(--motion-ease);
+}
+.focus-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
+.focus-card--emphasis {
+  background: var(--color-surface-dark);
+  color: var(--color-white);
+  border-color: var(--color-border-on-dark);
+}
+.focus-card__index {
+  font-family: var(--font-display);
+  font-size: var(--text-md);
+  color: var(--color-accent-strong);
+  display: block;
+  margin-bottom: var(--space-3);
+}
+.focus-card h3 { font-size: var(--text-md); margin-bottom: var(--space-2); }
+.focus-card p { font-size: var(--text-sm); }
+
+/* ---------- Servicios (bloques editoriales, Capacidad Técnica) ---------- */
+.service-list {
+  display: grid;
+  gap: var(--space-8);
+}
+.service-block {
+  display: grid;
+  grid-template-columns: 0.6fr 1.4fr;
+  gap: var(--space-8);
+  padding-block: var(--space-12);
+  border-top: 1px solid var(--color-border-subtle);
+}
+.service-block:first-child { border-top: none; padding-top: 0; }
+@media (max-width: 800px) {
+  .service-block { grid-template-columns: 1fr; gap: var(--space-3); }
+}
+.service-block__tag {
+  font-size: var(--text-xs);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-navy-900);
+  opacity: 0.6;
+}
+/* Los 3 bloques de "Nuestros servicios" comparten esta misma clase (2026-07-31,
+   ronda 2 — antes cada uno tenía su propia estructura y su propio min-height de
+   imagen, por eso los recuadros se veían de tamaños distintos). El bloque 01·02
+   además lleva `.surface-glass` (es el único destacado con tratamiento de vidrio);
+   `--media-reverse` solo cambia qué columna va primero (imagen a la izquierda en
+   vez de a la derecha), nunca el tamaño — ambas comparten exactamente el mismo
+   `grid-template-columns` y el mismo `.service-block__media { min-height }`. */
+.service-block--media {
+  display: grid;
+  grid-template-columns: 1fr minmax(220px, 320px);
+  gap: var(--space-8);
+  align-items: center;
+}
+.service-block--media-reverse { grid-template-columns: minmax(220px, 320px) 1fr; }
+.service-block__media { min-height: 280px; }
+@media (max-width: 800px) {
+  .service-block--media,
+  .service-block--media-reverse { grid-template-columns: 1fr; }
+}
+
+/* ---------- Franja de sectores (prueba social sin logos/cifras) ---------- */
+.sector-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}
+.sector-chip {
+  font-size: var(--text-sm);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-pill);
+  padding: var(--space-2) var(--space-4);
+}
+
+/* ---------- Mapa de sectores — mapa vectorial con insignias flotantes ----------
+   Reemplaza el rail horizontal de chips por una composición más editorial: mapa
+   vectorial real de América Latina (dominio público, ver README/IMAGE-BRIEF para
+   la fuente) recoloreado en la paleta propia, con las mismas seis etiquetas de
+   sector flotando encima — inspirado en la composición del referente del Owner
+   (insignias sobre un mapa), reinterpretado con nuestros propios colores.
+   Ajuste (2026-07-31): la primera versión era una silueta dibujada a mano que el
+   Owner señaló correctamente que "ni de broma" era un mapa de Latinoamérica — se
+   reemplazó por este archivo SVG real (fronteras políticas reales, no una forma
+   decorativa aproximada). */
+.sector-map {
+  position: relative;
+  max-width: 380px;
+  aspect-ratio: 2690 / 3445;
+  margin-inline: auto;
+}
+.sector-map__img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.sector-map__tags {
+  position: absolute;
+  inset: 0;
+}
+/* `--tag-x`/`--tag-y` (posición en % dentro del mapa) se definen inline por cada
+   insignia — así la posición vive junto al dato en el HTML, no repetida 6 veces en CSS. */
+.sector-map__tag {
+  position: absolute;
+  top: var(--tag-y);
+  left: var(--tag-x);
+  transform: translate(-50%, -50%);
+  background: rgba(255, 255, 255, 0.92);
+  border-color: rgba(255, 255, 255, 0.9);
+  box-shadow: var(--shadow-md);
+  white-space: nowrap;
+  color: var(--color-ink-dark);
+}
+@media (max-width: 800px) {
+  .sector-map { max-width: 340px; margin-top: var(--space-8); }
+}
+@media (max-width: 560px) {
+  .sector-map__tag { font-size: var(--text-xs); padding: var(--space-1) var(--space-3); }
+}
+
+/* ---------- Cierre — dos tarjetas lado a lado ----------
+   Reemplaza el bloque plano `data-surface="dark"` (idéntico en color al footer de
+   abajo — el bug que señaló el Owner) por dos tarjetas independientes sobre el fondo
+   "atmósfera" claro ya usado en otras secciones, inspirado en la composición del
+   referente del Owner: una SOLO con la imagen (izquierda) y otra con el mensaje + el
+   CTA, uno debajo del otro (derecha) — ajuste pedido tras una primera versión que
+   ponía el texto en la tarjeta izquierda en vez de una foto. */
+.cierre-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: var(--space-8);
+  align-items: stretch;
+}
+@media (max-width: 800px) { .cierre-grid { grid-template-columns: 1fr; } }
+.cierre-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-xl);
+  min-height: 320px;
+}
+.cierre-card--image { background: var(--color-navy-deep); }
+.cierre-card__img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+/* Placeholder de imagen (en vez de foto real) dentro de la tarjeta de cierre — mismo
+   ajuste "a pantalla completa" que ya usan `.hero-shell__media`/`.surface-visual`
+   para que un `.media-placeholder` (pensado por defecto para ir suelto, con su propio
+   aspect-ratio) ocupe toda la tarjeta en vez de solo una porción con su propio ratio. */
+.cierre-card--image .media-placeholder {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 0;
+  aspect-ratio: auto;
+}
+.cierre-card--cta {
+  display: flex;
+  align-items: center;
+  /* Bug corregido (2026-07-31): usaba `var(--space-10)`, el mismo token inexistente
+     que ya había causado el bug de padding-cero en `.people-intro` — una var() inválida
+     invalida TODA la declaración `padding`, no solo ese lado, así que el texto y el
+     botón quedaban pegados a los cuatro bordes de la tarjeta (confirmado: 0px medido
+     en el navegador). Ahora usa un token real de la escala. */
+  padding: var(--space-12);
+  background: linear-gradient(135deg, var(--color-navy-elevated), var(--color-accent-main) 65%, var(--color-accent-light));
+}
+.cierre-card__content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-6);
+}
+.cierre-card__content h2 {
+  color: var(--color-white);
+  font-size: var(--text-lg);
+  margin: 0;
+}
+/* Variante "statement" (2026-07-31, sección Transparencia de Servicios): eyebrow +
+   título + párrafo deben leerse como una sola declaración cohesiva, no como bloques
+   separados — el `gap: var(--space-6)` del contenedor base está pensado para el otro
+   caso de uso (título + botón, donde SÍ conviene ese salto grande). Aquí se reduce el
+   gap y se neutralizan los márgenes propios de `.eyebrow`/`p` (que se sumarían al
+   gap del flex si no se resetean, duplicando el espacio). */
+.cierre-card__content--statement { gap: var(--space-3); }
+.cierre-card__content--statement .eyebrow { margin-bottom: 0; }
+.cierre-card__content--statement p { margin-bottom: 0; }
+/* Halo decorativo — el mismo lenguaje visual que las secciones "atmósfera" (círculo
+   difuminado), aquí a escala de tarjeta en vez de vw, y en un tono claro para que se
+   perciba como una capa de luz sobre el degradado (eco del ícono de fondo del
+   referente, sin copiar su gráfico literal). */
+.cierre-card__halo {
+  position: absolute;
+  width: 60%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.25);
+  filter: blur(40px);
+  top: -20%;
+  right: -15%;
+  pointer-events: none;
+}
+.cierre-card__btn {
+  position: relative;
+  z-index: 1;
+  background: var(--color-white);
+  color: var(--color-navy-900);
+  border-color: var(--color-white);
+}
+.cierre-card__btn:hover { background: var(--color-surface-soft); border-color: var(--color-surface-soft); }
+.cierre-card__btn:focus-visible { outline: 3px solid var(--color-white); outline-offset: 2px; }
+@media (max-width: 640px) {
+  .cierre-card { min-height: 240px; }
+  .cierre-card--cta { padding: var(--space-8); }
+}
+
+/* ---------- Nota ADY (transparencia sobre el estado del CTA en el prototipo) ---------- */
+.ady-note {
+  margin-top: var(--space-16);
+  padding: var(--space-6);
+  border: 1px dashed var(--color-border-subtle);
+  border-radius: var(--radius-md);
+  background: var(--color-surface-muted);
+  color: var(--color-text-on-light); /* fondo fijo claro: el texto no debe heredar el blanco de la sección oscura que lo envuelve */
+  font-size: var(--text-sm);
+}
+.ady-note strong { display: block; margin-bottom: var(--space-2); color: var(--color-navy-900); }
+
+/* ---------- Footer ---------- */
+.site-footer {
+  background: var(--color-navy-900);
+  color: var(--color-white);
+  padding-block: var(--space-16) var(--space-8);
+}
+.site-footer a { color: var(--color-white); text-decoration: none; }
+.site-footer a:hover { color: var(--color-accent-on-dark); }
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr 1fr;
+  gap: var(--space-12);
+}
+@media (max-width: 800px) {
+  .footer-grid { grid-template-columns: 1fr; gap: var(--space-8); }
+}
+.footer-grid h2 {
+  font-family: var(--font-sans);
+  font-size: var(--text-xs);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-gold-100);
+  margin-bottom: var(--space-4);
+}
+.footer-links { display: grid; gap: var(--space-2); font-size: var(--text-sm); }
+.footer-bottom {
+  margin-top: var(--space-16);
+  padding-top: var(--space-6);
+  border-top: 1px solid var(--color-border-on-dark);
+  font-size: var(--text-xs);
+  opacity: 0.75;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+/* ---------- Aviso de cookies (GA4/GTM/Clarity — D20) ---------- */
+.cookie-banner {
+  position: fixed;
+  inset-inline: var(--space-4);
+  bottom: var(--space-4);
+  max-width: 640px;
+  margin-inline: auto;
+  background: var(--color-navy-900);
+  color: var(--color-white);
+  border: 1px solid var(--color-border-on-dark);
+  border-radius: var(--radius-md);
+  padding: var(--space-6);
+  box-shadow: var(--shadow-lg);
+  z-index: 200;
+  display: flex;
+  gap: var(--space-4);
+  align-items: center;
+  flex-wrap: wrap;
+}
+.cookie-banner[hidden] { display: none; }
+.cookie-banner p { font-size: var(--text-sm); margin: 0; flex: 1 1 320px; }
+
+/* ---------- Revelado en scroll — mejora progresiva (ver README § Animaciones) ---------- */
+.reveal {
+  opacity: 1;
+  transform: none;
+}
+/* :not(.is-visible) — bug corregido (2026-07-29): sin este guard, una vez que el JS
+   añade `.is-visible` (y nunca quita el atributo `data-reveal-ready`, que es del sistema
+   de entrada y no debería tocarse aquí), este selector seguía coincidiendo para siempre
+   con especificidad (0,3,0) — más alta que `.surface-*:hover` (0,2,0) — así que el
+   `transform:none` de abajo ganaba la cascada y el translateY del hover de las cards
+   nunca se aplicaba, aunque el resto de la coreografía (brillo, borde, CTA) sí. */
+.js .reveal[data-reveal-ready]:not(.is-visible) {
+  opacity: 0;
+  transform: translateY(var(--reveal-distance));
+  transition: opacity var(--motion-entrance) var(--motion-ease-entrance),
+              transform var(--motion-entrance) var(--motion-ease-entrance);
+  /* Stagger: cada elemento define --stagger-index (0,1,2…) en el HTML; sin JS o sin el
+     atributo, el valor por defecto es 0 y no hay retraso — nunca depende de JS para ser correcto. */
+  transition-delay: calc(var(--stagger-index, 0) * var(--motion-stagger-step));
+}
+.js .reveal.is-visible {
+  opacity: 1;
+  /* Ya no fija `transform:none` aquí — ver el `:not(.is-visible)` de arriba. Una vez
+     revelada, la card vuelve a depender solo de la regla base `.reveal{transform:none}`
+     (especificidad baja), dejando que `:hover`/`:focus-within`/`:active` puedan tomar
+     el control del transform como corresponde a cualquier elemento interactivo normal. */
+}
+
+/* ---------- Utilidades de sección ---------- */
+.section-head { max-width: 68ch; margin-bottom: var(--space-12); }
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-12); align-items: center; }
+@media (max-width: 800px) { .grid-2 { grid-template-columns: 1fr; } }
+/* En la sección de equipo, la imagen ya es compacta (`.people-intro__media`, max-width
+   360px) — sin esto seguiría estirándose a ocupar la mitad completa de la columna. */
+/* Bug corregido (2026-07-31): usaba `var(--space-10)`, un token que NO existe en la
+   escala de espaciado (ver tokens.css — salta de --space-8 a --space-12). Una var()
+   inválida invalida toda la declaración `padding` (no solo ese lado), así que el
+   bloque quedaba sin padding en ningún lado en desktop — la causa de que la tarjeta
+   se sintiera sin aire. Ahora usa tokens reales de la escala, con más aire del que
+   tenía antes del bug (pedido explícito del Owner). */
+.people-intro { grid-template-columns: auto 1fr; padding: var(--space-16) var(--space-12) var(--space-8); }
+@media (max-width: 800px) { .people-intro { grid-template-columns: 1fr; } }
+
+/* ---------- Tarjeta de equipo — un solo contenedor redondeado (2026-07-31) ----------
+   Corrección pedida por el Owner tras la primera versión: la intro (imagen+texto) y la
+   banda de "pills" vivían en dos bloques separados, cada uno con su propio fondo — el
+   referente (firma alemana Kümmerlein) usa UN solo contenedor grande de esquinas
+   redondeadas que envuelve todo, con las píldoras recortándose contra ese mismo borde
+   redondeado inferior. Ahora `.people-card` es ese contenedor único: fondo
+   `--color-surface-muted` (se distingue del blanco cálido de la página alrededor, ya
+   que la sección ya no lleva `data-surface="muted"` — el color vive aquí, no en toda
+   la sección), `overflow:hidden` para que el recorrido infinito de `.team-marquee` se
+   recorte limpiamente contra las esquinas redondeadas en vez de necesitar su propio
+   fondo/máscara de difuminado. */
+.people-card {
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  background: var(--color-surface-muted);
+}
+
+/* ---------- Banda de equipo — "pills" con desplazamiento continuo ----------
+   Vive dentro de `.people-card` (arriba) — ya no tiene fondo ni bordes propios, solo
+   el recorrido horizontal; el recorte contra las esquinas redondeadas lo aporta el
+   `overflow:hidden` del contenedor padre.
+   Estructura anti-duplicado-para-lectores-de-pantalla: `.team-marquee__track` contiene
+   DOS copias del set de píldoras (necesario para el loop visual sin salto), pero solo
+   la primera copia lleva `role="list"`/`role="listitem"` — la segunda es `aria-hidden`,
+   así un lector de pantalla nunca anuncia los 4 nombres dos veces. */
+.team-marquee {
+  padding-block: var(--space-8);
+}
+.team-marquee__track {
+  display: flex;
+  width: max-content;
+}
+.team-marquee__set {
+  display: flex;
+  gap: var(--space-4);
+  padding-inline: var(--space-4);
+  flex-shrink: 0;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .team-marquee__track { animation: team-marquee-scroll 24s linear infinite; }
+  /* Pausa al pasar el mouse o al enfocar cualquier elemento dentro con teclado —
+     requisito de accesibilidad (WCAG 2.2.2) para contenido que se mueve solo más
+     de 5s: el usuario debe poder detenerlo sin perder la fila de vista. */
+  .team-marquee:hover .team-marquee__track,
+  .team-marquee:focus-within .team-marquee__track { animation-play-state: paused; }
+}
+@keyframes team-marquee-scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.team-pill {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  background: var(--color-white);
+  border-radius: var(--radius-pill);
+  padding: var(--space-2) var(--space-6) var(--space-2) var(--space-2);
+  box-shadow: var(--shadow-sm);
+  white-space: nowrap;
+}
+.team-pill__avatar {
+  width: 3rem;
+  height: 3rem;
+  flex-shrink: 0;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--avatar-bg, var(--color-navy-deep));
+  color: var(--color-white);
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--text-sm);
+}
+.team-pill__info { display: flex; flex-direction: column; gap: 0.125rem; }
+.team-pill__name { font-weight: 600; font-size: var(--text-sm); color: var(--color-ink-dark); }
+.team-pill__role {
+  font-size: var(--text-xs);
+  color: var(--color-ink-dark);
+  opacity: 0.6;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+@media (max-width: 640px) {
+  .people-card { border-radius: var(--radius-container); }
+  .people-intro { padding: var(--space-8) var(--space-6) var(--space-6); }
+  .team-pill { padding: var(--space-2) var(--space-4) var(--space-2) var(--space-2); }
+  .team-pill__avatar { width: 2.5rem; height: 2.5rem; }
+}
+
+/* =====================================================================
+   PROFUNDIDAD VISUAL — iteración C2 (candidata), inspirada en REF-BIOFARMA
+   Ver REFERENCES.md § "Referente de profundidad visual" y prototype/README.md
+   ===================================================================== */
+
+/* ---------- Atmósfera de fondo — "nebulosa" muy sutil (§ 6) ---------- */
+[data-surface="atmosphere"] {
+  position: relative;
+  background: var(--color-surface-atmosphere);
+  overflow: hidden;
+  isolation: isolate;
+}
+.atmosphere {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+.atmosphere::before,
+.atmosphere::after,
+.atmosphere__halo {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(var(--halo-blur));
+  will-change: transform;
+}
+.atmosphere::before {
+  width: 50vw;
+  height: 50vw;
+  top: -20vw;
+  right: -12vw;
+  background: var(--halo-accent-main);
+}
+.atmosphere::after {
+  width: 42vw;
+  height: 42vw;
+  bottom: -18vw;
+  left: -10vw;
+  background: var(--halo-cool);
+}
+/* Tercer halo — elemento real (no pseudo-elemento: un solo nodo ya usa ::before/::after).
+   Anclado al borde INFERIOR de la sección (igual que el halo frío de ::after) — no al
+   centro por porcentaje: la sección es alta y su contenido varía, así que anclar desde
+   abajo garantiza que el halo quede detrás del mosaico de focos (el bloque más cercano
+   al final de la sección) sin depender de adivinar la altura total. */
+.atmosphere__halo {
+  width: 44vw;
+  height: 44vw;
+  bottom: 0%;
+  left: 28%;
+  background: var(--halo-navy);
+}
+/* Deriva ambiental extremadamente sutil — decorativa, nunca narrativa; se anula por completo
+   con prefers-reduced-motion (variables en 0 vía tokens.css) o si el usuario ya la percibe como ruido. */
+@media (prefers-reduced-motion: no-preference) {
+  .js .atmosphere::before { animation: atmosphere-drift-a 42s ease-in-out infinite alternate; }
+  .js .atmosphere::after { animation: atmosphere-drift-b 54s ease-in-out infinite alternate; }
+}
+@keyframes atmosphere-drift-a {
+  from { transform: translate(0, 0); }
+  to { transform: translate(-3%, 4%); }
+}
+@keyframes atmosphere-drift-b {
+  from { transform: translate(0, 0); }
+  to { transform: translate(4%, -3%); }
+}
+/* Bug corregido (2026-07-29): el selector comodín `> *` de esta regla también
+   capturaba a `.atmosphere` (su propio hermano), sobrescribiendo su `position:absolute`
+   por `relative` y colapsando su altura a 0 — los halos posicionados por porcentaje
+   quedaban anclados a una caja de 0px en vez de cubrir toda la sección. Se acota
+   explícitamente al `.container` de contenido, que es lo único que necesitaba pintarse
+   por encima de los halos. */
+[data-surface="atmosphere"] > .container { position: relative; z-index: 1; }
+
+/* ---------- Texto en degradado — reservado a 1–2 mensajes narrativos (§ 7) ---------- */
+.text-gradient {
+  background: linear-gradient(100deg, var(--color-gold-100), var(--color-accent-cool-100));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: var(--color-gold-100); /* respaldo sólido si el navegador no soporta background-clip:text */
+  -webkit-text-fill-color: transparent;
+}
+@supports not (background-clip: text) {
+  .text-gradient { -webkit-text-fill-color: unset; color: var(--color-gold-100); }
+}
+/* Sobre fondo claro (atmósfera), el degradado corre entre navy y el acento frío — ambos AA sobre blanco */
+section:not([data-surface="dark"]) .text-gradient {
+  background: linear-gradient(100deg, var(--color-navy-900), var(--color-accent-cool-200));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: var(--color-navy-900);
+}
+
+/* ---------- Declaración destacada — mensaje central de la sección "Atmósfera" (2026-07-31) ----------
+   Antes era un párrafo alineado a la izquierda, de paso. El pedido fue darle más peso
+   visual como el de una referencia externa (afiche de identidad de marca: bloque
+   centrado, con una pequeña marca decorativa arriba y una frase clave resaltada) —
+   reinterpretado con la paleta propia (teal/navy, no el rosa/dorado del referente) y
+   con el propio motivo visual de la marca (halos difuminados, ya usados en el fondo
+   "atmósfera") en vez de copiar literalmente el grafismo ajeno. */
+/* Ajuste (2026-07-31): el `max-width: 52ch` original partía el texto en 7 líneas
+   estrechas — se pidió explícitamente que ocupara el mismo ancho que la banda de
+   pills de arriba (ambas viven dentro del mismo `.container`, así que basta con
+   no limitar el ancho aquí para que coincidan los márgenes izquierdo/derecho). */
+.feature-statement {
+  text-align: center;
+}
+.feature-statement__mark {
+  position: relative;
+  display: inline-block;
+  width: 3.5rem;
+  height: 3rem;
+  margin-bottom: var(--space-6);
+}
+.feature-statement__dot {
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, var(--color-accent-light), var(--color-accent-main));
+  box-shadow: 0 6px 16px rgba(var(--color-accent-main-rgb), 0.35);
+}
+.feature-statement__dot--lg { width: 2rem; height: 2rem; top: 0; left: 0.75rem; }
+.feature-statement__dot--md { width: 1.25rem; height: 1.25rem; bottom: 0; left: 0; opacity: 0.85; }
+.feature-statement__dot--sm {
+  width: 0.875rem;
+  height: 0.875rem;
+  bottom: 0.125rem;
+  right: 0;
+  opacity: 0.75;
+  background: radial-gradient(circle at 35% 35%, var(--color-navy-elevated), var(--color-navy-deep));
+  box-shadow: 0 4px 10px rgba(var(--color-navy-deep-rgb), 0.30);
+}
+.feature-statement__text {
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  line-height: var(--leading-snug);
+  color: var(--color-ink-dark);
+}
+@media (max-width: 640px) {
+  .feature-statement__text { font-size: var(--text-lg); }
+}
+
+/* ---------- Hero inmersivo — contenedor redondeado con capas (§ Composición) ----------
+   Refinamiento (2026-07-31): enfoque más compacto (antes 92vh) con fotografía real de
+   fondo — ya no el placeholder abstracto — inspirado en la proporción del hero de
+   REF-BIOFARMA (tarjeta corta, texto centrado a la izquierda, foto visible a la derecha),
+   reinterpretado con la paleta navy/teal ya establecida (no el fondo claro del referente). */
+.hero-immersive {
+  position: relative;
+  z-index: 1; /* contexto de apilamiento explícito: la banda de credibilidad de la
+                 siguiente sección debe pintarse por encima de este, nunca por debajo */
+  /* Bug corregido (2026-07-31): `.hero-immersive` también lleva la clase `.section`,
+     que aporta `padding-block: var(--space-section)` (96–160px) — eso dejaba un gran
+     bloque navy vacío entre la píldora flotante y el inicio de la foto. Se sobrescribe
+     el padding-top aquí (misma especificidad que `.section`, pero components.css carga
+     después de base.css, así que gana) dejando solo el margen mínimo `--hero-inset`;
+     el padding-bottom sigue en 0 vía el estilo inline existente en el HTML. */
+  padding-top: var(--hero-inset);
+}
+/* Refinamiento (2026-07-31): la foto ya no vive dentro de `.container` (max-width:1200px) —
+   eso la hacía sentir "enmarcada"/angosta con una fotografía real de por medio. Ahora
+   `.hero-shell` es hijo directo de la sección y toma casi todo el ancho del viewport,
+   con el mismo margen mínimo `--hero-inset` (arriba y a los costados) en vez del gutter
+   estándar de `--container-padding` — un marco parejo y casi imperceptible, como en
+   REF-BIOFARMA, no un padding grande de sección de contenido normal. */
+.hero-shell {
+  position: relative;
+  margin-inline: var(--hero-inset);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  min-height: clamp(460px, 58vh, 640px);
+  display: flex;
+  align-items: center; /* antes flex-end — con el hero corto, el contenido se centra en vez de pegarse abajo */
+  box-shadow: var(--shadow-lg);
+}
+.hero-shell__media {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-color: var(--color-navy-900); /* fallback sólido si la imagen no carga */
+}
+/* Fotografía real (IMG-01, ver IMAGE-BRIEF.md) — reemplaza el placeholder abstracto.
+   `object-fit:cover` + `object-position` recortan favoreciendo el centro/derecha, que es
+   donde queda el detalle de la escena una vez que el scrim oscurece la mitad izquierda. */
+.hero-shell__img {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 60% 50%;
+}
+.hero-shell__media .media-placeholder {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 0;
+  aspect-ratio: auto;
+  /* Placeholder estructural más rico que el genérico (§1): dos manchas de luz cálida/fría
+     simulan profundidad fotográfica (sujeto + ambiente) sin simular una foto real — sigue
+     leyéndose como marcador de posición honesto, no como una imagen de banco o generada.
+     Se mantiene para Capacidad Técnica (IMG-04), que aún no tiene fotografía real. */
+  background-image:
+    radial-gradient(115% 95% at 18% 22%, rgba(var(--color-accent-main-rgb), 0.26) 0%, transparent 55%),
+    radial-gradient(95% 85% at 88% 78%, rgba(var(--color-accent-light-rgb), 0.20) 0%, transparent 60%),
+    repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0 2px, transparent 2px 20px),
+    linear-gradient(160deg, var(--color-navy-700) 0%, var(--color-navy-900) 100%);
+}
+/* Overlay: degradado horizontal (izquierda oscura para el texto, derecha despejada para
+   que la foto se vea) + un lavado vertical suave para que el texto nunca dependa del
+   contraste de la foto de fondo — ambos en navy de marca, nunca negro genérico. */
+.hero-shell__scrim {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(100deg, rgba(var(--color-navy-deep-rgb),0.94) 0%, rgba(var(--color-navy-deep-rgb),0.82) 38%, rgba(var(--color-navy-deep-rgb),0.35) 65%, rgba(var(--color-navy-deep-rgb),0.10) 100%),
+    linear-gradient(0deg, rgba(var(--color-navy-deep-rgb),0.55) 0%, rgba(var(--color-navy-deep-rgb),0.15) 30%, rgba(var(--color-navy-deep-rgb),0.15) 70%, rgba(var(--color-navy-deep-rgb),0.55) 100%);
+}
+.hero-shell__content {
+  position: relative;
+  z-index: 1;
+  color: var(--color-white);
+  /* Más padding abajo que arriba a propósito: con el contenido centrado, esto empuja el
+     bloque completo un poco hacia arriba, dejando más aire antes de que empiece a
+     superponerse la banda de credibilidad (ver el ajuste de esa banda más abajo).
+     Bug corregido (2026-07-31): al reducir `.hero-immersive` a `padding-top: var(--hero-inset)`
+     (~12px) para el hero de ancho completo, el título quedó tapado por la píldora flotante
+     del header (position:fixed, se superpone en vez de empujar el layout). El padding-top
+     de este bloque es lo único que puede compensarlo — clamp calibrado para despejar la
+     altura real del header (~78px en desktop) más un respiro de aire visual. */
+  padding: clamp(6.5rem, 9vw, 7.25rem) var(--space-8) var(--space-16);
+  max-width: 64ch; /* antes 56ch — insuficiente para los 2 CTA uno al lado del otro sin partir el texto */
+}
+/* Título: ancho acotado para que envuelva en ~3 líneas organizadas (pedido explícito),
+   en vez de depender de un <br> manual que un editor de Gutenberg no podría ajustar. */
+.hero-shell__content .hero__title {
+  max-width: 23ch;
+  font-size: var(--text-2xl);
+}
+/* Los dos CTA uno al lado del otro. `flex-shrink:0` en cada botón es la parte que
+   realmente evita que el texto se parta en 2 líneas: sin esto, flexbox encoge los
+   botones por debajo del ancho de su propio texto en vez de respetar `nowrap` en el
+   contenedor — quedaban "Conoce nuestra / capacidad técnica" partido en dos renglones
+   incluso con espacio de sobra en la columna. */
+.hero-shell__content .hero__actions { flex-wrap: nowrap; }
+.hero-shell__content .hero__actions .btn { flex-shrink: 0; white-space: nowrap; }
+@media (max-width: 640px) {
+  .hero-shell { min-height: clamp(420px, 68vh, 520px); border-radius: var(--radius-container); }
+  .hero-shell__content { padding: 5.75rem var(--space-6) var(--space-8); }
+  .hero-shell__content .hero__title { font-size: var(--text-xl); max-width: 20ch; }
+  /* En móvil sí se apilan — un solo renglón por CTA sigue siendo la prioridad sobre
+     mantenerlos uno al lado del otro cuando no cabe un ancho razonable. */
+  .hero-shell__content .hero__actions { flex-wrap: wrap; }
+  .hero-shell__content .hero__actions .btn { flex-shrink: 1; white-space: normal; }
+}
+
+/* ---------- Banda de credibilidad — flota sobre el borde del hero (§ Composición) ----------
+   Envoltorio posicionado de forma absoluta respecto a `.hero-immersive` (su ancestro
+   posicionado más cercano); la banda en sí se desplaza 50% de su propia altura hacia
+   abajo, quedando mitad sobre el hero, mitad sobre la sección siguiente. */
+.hero-credibility-wrap {
+  position: absolute;
+  inset-inline: 0;
+  bottom: 0;
+  z-index: 5;
+}
+/* El desplazamiento se calcula en píxeles fijos (100% de la propia altura menos N px),
+   no en un porcentaje simple — la altura de la banda cambia mucho entre 1 fila
+   (desktop) y 4 tarjetas apiladas (mobile), y un porcentaje fijo como translateY(50%)
+   en la versión apilada llegaba a cubrir los botones CTA del hero (bug encontrado y
+   corregido en esta verificación). Con `calc(100% - Npx)` siempre queda exactamente
+   N píxeles de la banda por encima del borde, sin importar cuántas filas tenga. */
+/* Ajuste (2026-07-31): N bajó de 48px a 16px — con el hero ya compacto y el contenido
+   centrado (no pegado abajo), un solapamiento de 48px dejaba los CTA casi tocando las
+   tarjetas. Menos solapamiento = más aire entre los botones y la banda, sin perder del
+   todo el gesto de "flotar sobre el borde". Ver también el padding-bottom extra de
+   `.hero-shell__content` — ambos ajustes trabajan juntos para el mismo espacio. */
+.credibility-band {
+  transform: translateY(calc(100% - 16px));
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-4);
+}
+@media (max-width: 1023px) { .credibility-band { grid-template-columns: repeat(2, 1fr); } }
+/* Bug corregido (2026-07-31): con 4 tarjetas apiladas en una sola columna, la banda
+   se vuelve mucho más alta (~4 tarjetas + gaps) que en desktop/tablet. El overlap
+   `calc(100% - Npx)` es proporcional a esa altura total, así que en vez de asomar
+   apenas Npx sobre la sección siguiente, terminaba tapando el ícono y el texto de
+   "Combinamos conocimiento técnico-jurídico..." (ver captura del Owner). La causa raíz
+   es depender de un % de la altura total cuando esa altura ya no es predecible.
+   Solución: en este breakpoint la banda sale del posicionamiento absoluto y vuelve al
+   flujo normal del documento (ya no puede solaparse con nada de la sección siguiente,
+   porque ahora la empuja hacia abajo en vez de flotar sobre ella); conserva un pequeño
+   "peek" fijo en píxeles — no un porcentaje — sobre el borde del hero para no perder
+   del todo el gesto visual de "tarjetas flotantes". */
+@media (max-width: 560px) {
+  .credibility-band {
+    grid-template-columns: 1fr;
+    transform: none; /* la banda vuelve al flujo normal — ver nota sobre `.hero-credibility-wrap` */
+  }
+  .hero-credibility-wrap {
+    position: static;
+    margin-top: -1.25rem;
+  }
+}
+.credibility-card {
+  font-size: var(--text-sm);
+  padding: var(--space-4) var(--space-6);
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  line-height: var(--leading-snug);
+}
+.credibility-card__icon {
+  width: 1.4em; height: 1.4em; flex-shrink: 0;
+  color: var(--color-accent-strong);
+}
+/* Esta tarjeta flota sobre el hero oscuro Y la atmósfera clara al mismo tiempo — necesita
+   más blanco que el vidrio genérico para que el texto navy tenga contraste garantizado
+   en ambos fondos, no solo en uno (ver prototype/README.md § 6, tabla de contraste). Nota:
+   son insignias informativas sin destino navegable — reciben la elevación/brillo del
+   sistema de abajo, pero no el CTA revelado ni el nudge de ícono (no aplica, no hay "más"). */
+.credibility-card.surface-glass {
+  background: rgba(255, 255, 255, 0.78);
+  border-color: rgba(255, 255, 255, 0.85);
+}
+/* Bug corregido (2026-07-29): `.surface-glass:hover` (regla genérica, misma especificidad)
+   bajaba el fondo a 0.26 de opacidad en hover — sobre el hero oscuro, el texto navy de
+   estas tarjetas quedaba casi ilegible. Esta regla es más específica (2 clases + :hover)
+   y gana en la cascada: en hover el fondo se vuelve MÁS opaco, nunca menos — el color del
+   texto no se toca en ningún estado. */
+.credibility-card.surface-glass:hover,
+.credibility-card.surface-glass:focus-within {
+  background: rgba(255, 255, 255, 0.9);
+  border-color: rgba(255, 255, 255, 0.95);
+}
+
+/* =====================================================================
+   COREOGRAFÍA DE CARDS (2026-07-29) — sistema de estados para
+   .surface-glass / .surface-solid / .surface-visual: base, hover, focus,
+   tap. Arquitectura de accesibilidad/movimiento, léase antes de tocar:
+
+   1. El ESTADO (qué cambia: transform final, opacity final, color final)
+      se declara SIEMPRE, sin media query — así el sistema funciona por
+      completo (aunque sin animar) incluso bajo `prefers-reduced-motion`
+      o en navegadores sin soporte de alguna característica.
+   2. La TRANSICIÓN (cómo se anima ese cambio) solo se declara dentro de
+      `@media (prefers-reduced-motion: no-preference)` — es la única
+      forma de que "todos los estados interactivos" queden envueltos en
+      esa media query tal como pide el encargo, sin que el estado en sí
+      deje de funcionar para quien pide reducir el movimiento (solo deja
+      de animarse; el cambio sigue ocurriendo, instantáneo).
+   3. Los efectos que dependen de :hover real (brillo, nudge de ícono)
+      viven en `@media (hover: hover) and (pointer: fine)` — un tap en
+      móvil no debe dejar una card "pegada" en estado hover. `:active`
+      (la presión física) y `:focus-within`/`:focus-visible` (teclado)
+      NO se gatean por tipo de puntero — deben funcionar en cualquier
+      dispositivo.
+   4. El CTA revelado (`.card-cta`) empieza SIEMPRE visible (estado base
+      sin media query) — la ocultación-hasta-hover es una mejora que solo
+      se aplica cuando `(hover:hover) and (pointer:fine)` lo confirma, no
+      al revés. Así, cualquier dispositivo táctil (o un navegador que no
+      reconozca esas media features) nunca depende del hover para mostrar
+      información — cumple el requisito incluso en el caso límite de un
+      navegador que ignore la media query por completo.
+   ===================================================================== */
+
+/* ---------- Superficies: vidrio, sólida, visual, editorial (§ 8) ---------- */
+.surface-glass, .surface-solid, .surface-visual {
+  position: relative;
+  overflow: hidden;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .surface-glass, .surface-solid, .surface-visual {
+    transition: var(--transition-smooth);
+  }
+}
+
+.surface-glass {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-container);
+  box-shadow: var(--glass-shadow), var(--glass-highlight);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  color: var(--color-text-on-light);
+}
+/* Sin soporte de backdrop-filter, cae a una superficie sólida clara — el texto nunca pierde legibilidad */
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .surface-glass { background: rgba(255,255,255,0.92); }
+}
+
+.surface-solid {
+  background: var(--color-surface-light);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-container);
+  box-shadow: var(--shadow-sm);
+}
+
+/* Tarjeta visual — para fotografía (placeholder mientras no exista el asset, ver IMAGE-BRIEF.md) */
+.surface-visual {
+  border-radius: var(--radius-container);
+  box-shadow: var(--shadow-md);
+  color: var(--color-white);
+  display: flex;
+  align-items: flex-end;
+  min-height: 260px;
+}
+.surface-visual .media-placeholder { position: absolute; inset: 0; z-index: 0; border-radius: 0; aspect-ratio: auto; }
+.surface-visual__caption {
+  position: relative;
+  z-index: 2; /* por encima del brillo (z:1) y de la foto (z:0) — ver "Iluminación radial" abajo */
+  padding: var(--space-5, var(--space-4)) var(--space-6);
+  background: linear-gradient(0deg, rgba(var(--color-navy-deep-rgb),0.85), transparent);
+  width: 100%;
+}
+.surface-visual__caption h3 { color: var(--color-white); margin-bottom: 0; font-size: var(--text-md); }
+
+/* Contenido por encima del brillo radial (::before, z-index:0) — necesario porque un
+   pseudo-elemento posicionado pinta sobre el contenido estático aunque este vaya después
+   en el DOM; forzar `position:relative` en los hijos directos los sube a su propia capa. */
+.surface-glass > *, .surface-solid > * { position: relative; z-index: 1; }
+
+/* ---------- Iluminación radial (efecto 2 de la coreografía) ---------- */
+.surface-glass::before, .surface-solid::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: radial-gradient(circle at 22% 15%, rgba(var(--color-accent-light-rgb), 0.28), transparent 62%);
+  opacity: 0;
+  pointer-events: none;
+}
+.surface-visual::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1; /* sobre la foto, bajo el pie de foto — se siente como luz pasando sobre la imagen */
+  background: radial-gradient(circle at 75% 20%, rgba(var(--color-accent-light-rgb), 0.35), transparent 55%);
+  opacity: 0;
+  pointer-events: none;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .surface-glass::before, .surface-solid::before, .surface-visual::before {
+    transition: opacity var(--transition-smooth);
+  }
+}
+
+/* ---------- CTA revelado / información secundaria (efecto 5) ----------
+   Visible por defecto (ver arquitectura arriba) — la ocultación es la mejora,
+   no el punto de partida. */
+.card-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-top: var(--space-4);
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: inherit; /* hereda navy sobre vidrio/sólida, blanco sobre el pie de foto oscuro */
+  text-decoration: none;
+  border-bottom: 1px solid currentColor;
+  padding-bottom: 2px;
+  width: fit-content;
+}
+.card-cta__icon { width: 1em; height: 1em; }
+.focus-mosaic__banner .card-cta { margin-top: 0; margin-left: auto; flex-shrink: 0; }
+.card-cta:focus-visible {
+  outline: 2px solid var(--color-accent-main);
+  outline-offset: 4px;
+  border-radius: var(--radius-sm);
+}
+
+/* ---------- Efectos exclusivos de hover real (2, 3, 4) ----------
+   `(hover:hover) and (pointer:fine)` evita el "hover pegado" en táctil: sin esto,
+   tocar una card en móvil la dejaría iluminada/desplazada hasta tocar otra cosa. */
+@media (hover: hover) and (pointer: fine) {
+  /* Efecto 5 aquí, no arriba: la ocultación-hasta-hover SOLO se activa si el
+     dispositivo confirma que tiene hover real — ver arquitectura, punto 4. */
+  .card-cta { opacity: 0; transform: translateY(10px); }
+  @media (prefers-reduced-motion: no-preference) {
+    .card-cta { transition: opacity var(--transition-smooth), transform var(--transition-smooth); }
+  }
+
+  /* Efecto 1 (desplazamiento) + Efecto 3 (borde luminoso) — mismo disparador para
+     mouse (:hover) y teclado (:focus-within, cuando el CTA interno recibe foco). */
+  .surface-glass:hover, .surface-glass:focus-within,
+  .surface-solid:hover, .surface-solid:focus-within,
+  .surface-visual:hover, .surface-visual:focus-within {
+    border-color: rgba(var(--color-accent-light-rgb), 0.5);
+  }
+  .surface-glass:hover, .surface-glass:focus-within { transform: translateY(-6px); }
+  .surface-solid:hover, .surface-solid:focus-within,
+  .surface-visual:hover, .surface-visual:focus-within { transform: translateY(-4px); }
+  .surface-glass:hover { background: rgba(255, 255, 255, 0.26); }
+  .surface-glass:hover, .surface-glass:focus-within {
+    box-shadow: 0 16px 40px rgba(var(--color-navy-deep-rgb), 0.24), var(--glass-highlight);
+  }
+  .surface-solid:hover, .surface-solid:focus-within { box-shadow: var(--shadow-md); }
+  .surface-visual:hover, .surface-visual:focus-within { box-shadow: var(--shadow-lg); }
+
+  /* Efecto 2 (brillo) */
+  .surface-glass:hover::before, .surface-glass:focus-within::before,
+  .surface-solid:hover::before, .surface-solid:focus-within::before,
+  .surface-visual:hover::before, .surface-visual:focus-within::before {
+    opacity: 1;
+  }
+
+  /* Efecto 5 (CTA revelado) */
+  .surface-glass:hover .card-cta, .surface-glass:focus-within .card-cta,
+  .surface-solid:hover .card-cta, .surface-solid:focus-within .card-cta,
+  .surface-visual:hover .card-cta, .surface-visual:focus-within .card-cta {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Efecto 4 (nudge del ícono) — se mueve cuando el hover/foco es en la CARD, no en el link */
+  .surface-glass:hover .card-cta__icon, .surface-glass:focus-within .card-cta__icon,
+  .surface-solid:hover .card-cta__icon, .surface-solid:focus-within .card-cta__icon,
+  .surface-visual:hover .card-cta__icon, .surface-visual:focus-within .card-cta__icon {
+    transform: translateX(4px) scale(1.05);
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .card-cta__icon { transition: transform var(--transition-smooth); }
+  }
+}
+
+/* ---------- Tap / :active (efecto de "presión física", cualquier dispositivo) ---------- */
+.surface-glass:active, .surface-solid:active, .surface-visual:active {
+  transform: translateY(0) scale(0.98);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .surface-glass:active, .surface-solid:active, .surface-visual:active {
+    transition: var(--transition-snap);
+  }
+}
+
+/* ---------- Mosaico asimétrico de los 4 focos (§ Composición — evita "3 cards iguales") ----------
+   Refinamiento (2026-07-29): la destacada pasa a ocupar 8/12 columnas (antes 5/12) y
+   queda acompañada por dos tarjetas apiladas de 4/12 a su lado — proporción explícita
+   7-8 / 4-5 columnas — y una cuarta tarjeta como banda ancha inferior (12/12, corta),
+   para que las 4 alturas sean claramente distintas, no solo dos "carriles" de igual alto. */
+.focus-mosaic {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-auto-rows: minmax(180px, auto);
+  gap: var(--space-6);
+}
+.focus-mosaic > * { grid-column: span 12; }
+@media (min-width: 1024px) {
+  .focus-mosaic > :nth-child(1) { grid-column: 1 / 9; grid-row: 1 / 3; }
+  .focus-mosaic > :nth-child(2) { grid-column: 9 / 13; grid-row: 1 / 2; }
+  .focus-mosaic > :nth-child(3) { grid-column: 9 / 13; grid-row: 2 / 3; }
+  .focus-mosaic > :nth-child(4) { grid-column: 1 / 13; grid-row: 3 / 4; min-height: 200px; }
+}
+@media (min-width: 640px) and (max-width: 1023px) {
+  .focus-mosaic > * { grid-column: span 6; }
+}
+.focus-mosaic .focus-card__index {
+  font-family: var(--font-display);
+  font-size: var(--text-md);
+  color: var(--color-accent-strong);
+  display: block;
+  margin-bottom: var(--space-3);
+}
+/* Ajuste (2026-07-31): las 4 cards del mosaico pasaron a `.surface-visual` (imagen +
+   caption) — la card 01 ya no necesita el numeral gigante de fondo que antes rellenaba
+   el espacio vacío de una card sin foto; ahora ese espacio lo ocupa la fotografía real.
+   El texto de su caption se agranda un poco (`--text-lg`) para que siga leyéndose como
+   la card destacada del mosaico, ya que es la más grande por tamaño de grid. */
+.focus-mosaic > :nth-child(1) .surface-visual__caption h3 { font-size: var(--text-lg); }
+.surface-visual__caption p {
+  font-size: var(--text-sm);
+  margin-bottom: var(--space-3);
+  color: rgba(255, 255, 255, 0.85);
+}
+/* Card 04 — banda ancha y corta: la caption se vuelve una fila horizontal (índice +
+   título + texto + CTA en línea) en vez de apilada, aprovechando el formato panorámico
+   en vez de dejarla como una card vertical más. */
+@media (min-width: 1024px) {
+  .focus-mosaic__banner .surface-visual__caption {
+    display: flex;
+    align-items: center;
+    gap: var(--space-6);
+    background: linear-gradient(90deg, rgba(var(--color-navy-deep-rgb),0.85), rgba(var(--color-navy-deep-rgb),0.55));
+  }
+  .focus-mosaic__banner .focus-card__index { margin-bottom: 0; }
+  .focus-mosaic__banner .surface-visual__caption h3 { margin-bottom: 0; flex-shrink: 0; }
+  .focus-mosaic__banner .surface-visual__caption p { margin-bottom: 0; max-width: 46ch; }
+  .focus-mosaic__banner .card-cta { margin-left: auto; flex-shrink: 0; }
+}
+/* ---------- Rail horizontal arrastrable (§ 3) — sectores, capacidades ---------- */
+.rail {
+  display: flex;
+  gap: var(--space-3);
+  overflow-x: auto;
+  scroll-snap-type: x proximity;
+  padding-block: var(--space-2);
+  padding-inline: var(--space-1);
+  margin-inline: calc(-1 * var(--space-1));
+  scrollbar-width: thin;
+  cursor: grab;
+}
+.rail:active { cursor: grabbing; }
+.rail:focus-visible { outline: 3px solid var(--color-focus-ring); outline-offset: 3px; border-radius: var(--radius-sm); }
+.rail > * { scroll-snap-align: start; flex-shrink: 0; }
+.rail.is-dragging { scroll-snap-type: none; user-select: none; }
+
+/* ---------- Utilidades de composición editorial ---------- */
+.text-wide { max-width: 34ch; }
+.eyebrow-inline { display: inline-flex; align-items: center; gap: var(--space-2); }
+
+/* =====================================================================
+   METODOLOGÍA — stepper con scroll (Servicios § "Cómo trabajamos")
+   Especificación del Owner (docx "Sección Metología - AAA Legal", 2026-07-31):
+   columna izquierda sticky (eyebrow+título) + 3 pasos a la derecha; el paso que
+   cruza el centro del viewport se activa (opacity:1, scale(1)), los demás quedan
+   atenuados (opacity ~.3, scale(.98)). Lógica bidireccional en js/main.js vía
+   IntersectionObserver. Sin ancho/contenedor propio — usa el `.container` global,
+   igual que el resto de secciones (requisito explícito del brief).
+   ===================================================================== */
+.stepper__grid {
+  display: grid;
+  grid-template-columns: 1fr 1.3fr;
+  gap: var(--space-12);
+  align-items: start;
+}
+@media (max-width: 800px) { .stepper__grid { grid-template-columns: 1fr; } }
+
+.stepper__intro {
+  position: sticky;
+  /* Bug corregido (2026-07-31, verificado en navegador): a 1024px el header mide
+     126px de alto (el menú envuelve a 2 líneas en ese ancho), pero este offset
+     estaba calculado a ojo en 112px (7rem) — el título quedaba 14px por debajo del
+     borde del header, tapado. 9rem (144px) despeja el caso más alto con margen. */
+  top: 9rem;
+  align-self: start;
+}
+/* Bug corregido (2026-07-31, verificado en navegador): por debajo de 800px la grilla
+   colapsa a 1 columna (arriba) — el título de 5 líneas ya no tiene una columna de
+   pasos al lado, sino que queda apilado ENCIMA de ellos. Mantenerlo sticky ahí lo
+   deja flotando sobre el primer paso, tapando el ícono y el texto. Sticky es una
+   técnica de dos columnas; en 1 columna vuelve al flujo normal. */
+@media (max-width: 800px) {
+  .stepper__intro { position: static; margin-bottom: var(--space-8); }
+}
+
+.stepper__steps {
+  display: flex;
+  flex-direction: column;
+}
+/* Cada paso reserva medio viewport de alto — el "recorrido" de scroll necesario
+   para que la activación por IntersectionObserver se sienta como una progresión
+   pausada (storytelling), no como un parpadeo instantáneo entre los 3 pasos. */
+.stepper__step {
+  min-height: 50vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-block: var(--space-10);
+  border-top: 1px solid var(--color-border-subtle);
+}
+.stepper__step:first-child { border-top: none; }
+.stepper__step h3 { margin-bottom: var(--space-3); }
+.stepper__step p { max-width: 46ch; margin-bottom: 0; }
+
+.stepper__icon {
+  display: inline-flex;
+  width: 2.25rem;
+  height: 2.25rem;
+  margin-bottom: var(--space-4);
+  color: var(--color-ink-dark);
+  opacity: 0.45;
+}
+.stepper__icon svg { width: 100%; height: 100%; }
+.stepper__step.is-active .stepper__icon {
+  color: var(--color-accent-main);
+  opacity: 1;
+}
+/* Fondo oscuro (2026-07-31, Servicios § Metodología, a pedido del Owner — más
+   contraste frente a las secciones claras de alrededor): el divisor y el ícono
+   inactivo estaban calibrados para un fondo claro (`--color-border-subtle`,
+   `--color-ink-dark`, casi invisibles sobre navy). El ícono activo no cambia —
+   `--color-accent-main` ya cumple 3:1 tanto sobre navy-deep como sobre blanco. */
+section[data-surface="dark"] .stepper__step { border-top-color: var(--color-border-on-dark); }
+section[data-surface="dark"] .stepper__icon { color: var(--color-white); }
+
+/* Estado base (sin JS / sin soporte IntersectionObserver): los 3 pasos quedan
+   totalmente legibles — el atenuado de "paso inactivo" solo se activa una vez que
+   main.js confirma que puede gestionar el estado activo (mismo patrón que
+   `.reveal`/`data-reveal-ready`: la mejora se añade, nunca se asume). */
+.stepper__step[data-stepper-ready]:not(.is-active) {
+  opacity: 0.3;
+  transform: scale(0.98) translateY(16px);
+}
+.stepper__step.is-active {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .stepper__step { transition: opacity 600ms ease-out, transform 600ms ease-out; }
+  .stepper__icon { transition: color 600ms ease-out, opacity 600ms ease-out; }
+}
+/* Con reduce-motion no hay transición de scroll que "revele" los pasos — deben
+   leerse todos de una vez, nunca quedar atenuados permanentemente. */
+@media (prefers-reduced-motion: reduce) {
+  .stepper__step { opacity: 1; transform: none; }
+  .stepper__icon { color: var(--color-accent-main); opacity: 1; }
+}
+
+/* =====================================================================
+   FORMULARIO DE POSTULACIÓN — Talento AAA (2026-07-31)
+   Único formulario real del prototipo; vive sobre fondo oscuro (mismo tono que el
+   resto de bloques `data-surface="dark"`). Sin backend — `onsubmit="return false"`
+   en el HTML evita la recarga nativa de la página al enviar.
+   ===================================================================== */
+.talent-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  margin-top: var(--space-8);
+}
+.talent-form__field { display: flex; flex-direction: column; gap: var(--space-2); }
+.talent-form__field label {
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--color-white);
+}
+.talent-form__field input,
+.talent-form__field textarea {
+  font: inherit;
+  color: var(--color-white);
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border-on-dark);
+  background: rgba(255, 255, 255, 0.06);
+}
+.talent-form__field input::placeholder,
+.talent-form__field textarea::placeholder { color: rgba(255, 255, 255, 0.5); }
+.talent-form__field input[type="file"] { padding: var(--space-2) var(--space-4); }
+.talent-form__field input:focus-visible,
+.talent-form__field textarea:focus-visible {
+  outline: 3px solid var(--color-focus-ring);
+  outline-offset: 2px;
+}
+.talent-form__submit { align-self: flex-start; }
+.talent-form__note { margin: 0; font-size: var(--text-xs); opacity: 0.75; }
+.talent-form__note a { color: inherit; text-decoration: underline; }
+
+/* =====================================================================
+   BLOG — Noticias y Análisis (2026-07-31)
+   Listado + single page. Reutiliza `.surface-solid`/`.card-cta`/`.media-placeholder`
+   ya existentes — la única pieza nueva es el grid de tarjetas y la miniatura 16:10.
+   ===================================================================== */
+.blog-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-8);
+}
+@media (max-width: 800px) { .blog-grid { grid-template-columns: 1fr; } }
+.blog-card { padding: var(--space-6); display: flex; flex-direction: column; }
+.blog-card__media { aspect-ratio: 16 / 10; margin-bottom: var(--space-4); border-radius: var(--radius-container); }
+.blog-card__tag {
+  font-size: var(--text-xs);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-accent-strong);
+  margin-bottom: var(--space-2);
+}
+.blog-card h3 { font-size: var(--text-md); margin-bottom: var(--space-2); }
+.blog-card p:not(.blog-card__tag) { font-size: var(--text-sm); }
+
+/* Single page de un artículo */
+.post-meta {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  font-size: var(--text-sm);
+  opacity: 0.75;
+  margin-top: var(--space-2);
+}
+.post-meta__badge {
+  font-size: var(--text-xs);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 0.2em 0.6em;
+  border-radius: var(--radius-sm);
+  border: 1px dashed var(--color-border-on-dark);
+  opacity: 0.85;
+}
+section[data-surface="light"] .post-meta__badge,
+section[data-surface="atmosphere"] .post-meta__badge,
+section[data-surface="muted"] .post-meta__badge { border-color: var(--color-border-subtle); }
+.post-body p { max-width: 68ch; }
+.post-body p + p { margin-top: var(--space-4); }
+.talent-form__note a { color: inherit; text-decoration: underline; }

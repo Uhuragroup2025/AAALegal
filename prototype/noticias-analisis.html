@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Blog — AAA Estudio Legal</title>
+<meta name="description" content="Lectura técnica sobre insolvencia, derecho concursal y derecho corporativo — sin relleno.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Krub:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/components.css">
+</head>
+<body>
+
+<a class="skip-link" href="#contenido">Saltar al contenido</a>
+
+<header class="site-header">
+  <div class="container site-header__inner">
+    <a class="brand" href="index.html">AAA <span>Estudio Legal</span></a>
+
+    <details class="nav" open>
+      <summary class="nav__toggle" aria-expanded="true">
+        <svg class="nav__toggle-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        <span class="visually-hidden">Menú de navegación</span>
+      </summary>
+      <div class="nav__panel">
+        <nav aria-label="Navegación principal">
+          <ul>
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="servicios.html">Servicios</a></li>
+            <li><a href="proximamente.html">Nuestra Experiencia</a></li>
+            <li><a href="nuestro-equipo.html">Nuestro Equipo</a></li>
+            <li><a href="noticias-analisis.html" aria-current="page">Blog</a></li>
+            <li><a href="captacion-b2b.html">Contacto</a></li>
+          </ul>
+        </nav>
+      </div>
+    </details>
+
+    <div class="site-header__actions">
+      <span class="lang-toggle" title="Traducción automática vía Polylang — no funcional en este prototipo">ES · EN</span>
+      <a class="btn btn--primary btn--header" href="#nota-ady">
+        <span class="btn--header-label">Consulta tu caso aquí</span>
+        <svg class="btn--icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+    </div>
+  </div>
+</header>
+
+<main id="contenido">
+
+  <!-- ENCABEZADO — deliberadamente más ligero que el hero fotográfico de Inicio/
+       Servicios/Contacto: esta es una página utilitaria de listado (SEO/GEO,
+       "sin CTA comercial directo", content/07-noticias-analisis.md), no de conversión. -->
+  <section class="section" data-surface="dark" style="padding-bottom: var(--space-12);">
+    <div class="container">
+      <div style="max-width: 62ch;">
+        <p class="eyebrow">Blog</p>
+        <h1>Blog</h1>
+        <p style="font-size: var(--text-md);">Lectura técnica sobre insolvencia, derecho concursal y derecho corporativo — sin relleno.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- LISTADO — hasta 2 entradas iniciales (outline C1). Ambas son contenido de
+       ejemplo construido para prototipar esta plantilla y la single page interna;
+       la autoría/redacción editorial real sigue pendiente (ver STATUS.md → vacíos). -->
+  <section class="section" data-surface="light" aria-label="Listado de publicaciones">
+    <div class="container">
+      <div class="blog-grid">
+        <article class="surface-solid reveal blog-card">
+          <div class="media-placeholder blog-card__media" data-img-id="IMG-17" role="img" aria-label="Espacio reservado para imagen del artículo (IMG-17) — ver IMAGE-BRIEF.md"></div>
+          <p class="blog-card__tag">Insolvencia y derecho concursal</p>
+          <h3>Qué debe saber un acreedor antes de participar en un proceso de insolvencia</h3>
+          <p>Entender la calificación y graduación de créditos, y por qué el seguimiento permanente marca la diferencia en la recuperación.</p>
+          <a class="card-cta" href="noticia-insolvencia-acreedores.html">
+            Lee el análisis completo
+            <svg class="card-cta__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+        </article>
+
+        <article class="surface-solid reveal blog-card" style="--stagger-index:1">
+          <div class="media-placeholder blog-card__media" data-img-id="IMG-18" role="img" aria-label="Espacio reservado para imagen del artículo (IMG-18) — ver IMAGE-BRIEF.md"></div>
+          <p class="blog-card__tag">Normalización de activos</p>
+          <h3>Normalización de activos: cuándo conviene antes de litigar</h3>
+          <p>Por qué la normalización de activos es, muchas veces, el paso técnico que determina si litigar es realmente el camino más eficiente.</p>
+          <a class="card-cta" href="noticia-normalizacion-activos.html">
+            Lee el análisis completo
+            <svg class="card-cta__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+        </article>
+      </div>
+
+      <div class="ady-note reveal" style="margin-top: var(--space-12);">
+        <strong>Contenido de ejemplo — prototipo</strong>
+        Las dos publicaciones de arriba se escribieron para construir y probar esta plantilla (listado + single page interna), no como contenido editorial final. content/07-noticias-analisis.md marca la autoría y redacción real del blog como pendiente — no se publica contenido real hasta resolver ese punto.
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div>
+      <p class="brand" style="margin-bottom: var(--space-4);">AAA <span>Estudio Legal</span></p>
+      <p style="font-size: var(--text-sm); opacity: .85;">Calle 28 Norte # 6BIS-26, Barrio San Vicente, Cali, Valle.</p>
+      <p style="font-size: var(--text-sm);"><a href="mailto:info@agudeloabogados.com">info@agudeloabogados.com</a></p>
+    </div>
+    <div>
+      <h2>Sitio</h2>
+      <nav class="footer-links" aria-label="Mapa del sitio">
+        <a href="index.html">Inicio</a>
+        <a href="servicios.html">Servicios</a>
+        <a href="proximamente.html">Nuestra Experiencia</a>
+        <a href="nuestro-equipo.html">Nuestro Equipo</a>
+        <a href="noticias-analisis.html">Blog</a>
+        <a href="captacion-b2b.html">Contacto</a>
+      </nav>
+    </div>
+    <div>
+      <h2>Legal</h2>
+      <nav class="footer-links" aria-label="Legal">
+        <a href="proximamente.html">Aviso legal y de privacidad</a>
+      </nav>
+    </div>
+  </div>
+  <div class="container footer-bottom">
+    <span>© 2026 Agudelo Abogados Asociados SAS — AAA Estudio Legal.</span>
+    <span>Prototipo C2 · No es el sitio final.</span>
+  </div>
+</footer>
+
+<div class="cookie-banner" role="region" aria-label="Aviso de cookies" hidden>
+  <p>Usamos cookies propias y de terceros (GA4, GTM, Microsoft Clarity) para medir el uso del sitio. Puedes conocer más en nuestro aviso de privacidad.</p>
+  <a class="btn btn--ghost" href="proximamente.html" style="color:var(--color-white); border-color: var(--color-border-on-dark);">Más información</a>
+  <button class="btn btn--primary" type="button" data-cookie-accept>Aceptar</button>
+</div>
+
+<script src="js/main.js"></script>
+</body>
+</html>

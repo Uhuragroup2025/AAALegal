@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Servicios — AAA Estudio Legal</title>
+<meta name="description" content="Soluciones jurídicas para proteger, normalizar y recuperar activos: insolvencia, derecho concursal, normalización de activos y derecho corporativo.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Krub:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/components.css">
+</head>
+<body>
+
+<a class="skip-link" href="#contenido">Saltar al contenido</a>
+
+<header class="site-header">
+  <div class="container site-header__inner">
+    <a class="brand" href="index.html">AAA <span>Estudio Legal</span></a>
+
+    <details class="nav" open>
+      <summary class="nav__toggle" aria-expanded="true">
+        <svg class="nav__toggle-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        <span class="visually-hidden">Menú de navegación</span>
+      </summary>
+      <div class="nav__panel">
+        <nav aria-label="Navegación principal">
+          <ul>
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="servicios.html" aria-current="page">Servicios</a></li>
+            <li><a href="proximamente.html">Nuestra Experiencia</a></li>
+            <li><a href="nuestro-equipo.html">Nuestro Equipo</a></li>
+            <li><a href="noticias-analisis.html">Blog</a></li>
+            <li><a href="captacion-b2b.html">Contacto</a></li>
+          </ul>
+        </nav>
+      </div>
+    </details>
+
+    <div class="site-header__actions">
+      <span class="lang-toggle" title="Traducción automática vía Polylang — no funcional en este prototipo">ES · EN</span>
+      <a class="btn btn--primary btn--header" href="#nota-ady">
+        <span class="btn--header-label">Consulta tu caso aquí</span>
+        <svg class="btn--icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+    </div>
+  </div>
+</header>
+
+<main id="contenido">
+
+  <!-- ENCABEZADO DE POSICIONAMIENTO TÉCNICO — misma estructura que el hero inmersivo de
+       Inicio (2026-07-31: alineado explícitamente a pedido del Owner). Sin foto propia
+       todavía (sigue en placeholder, IMG-04) y sin CTA — a diferencia de Inicio, este
+       hero es solo presentación, el CTA de conversión vive en el cierre de la página. -->
+  <section class="hero-immersive section" data-surface="dark" aria-label="Presentación de Servicios" style="padding-bottom: 0;">
+    <div class="hero-shell">
+      <div class="hero-shell__media">
+        <div class="media-placeholder" data-img-id="IMG-04" role="img" aria-label="Espacio reservado para fotografía o recurso visual de Servicios (IMG-04) — ver IMAGE-BRIEF.md">
+          <span class="media-placeholder__label">IMG-04 — pendiente de material del cliente</span>
+        </div>
+        <div class="hero-shell__scrim" aria-hidden="true"></div>
+      </div>
+      <div class="hero-shell__content">
+        <p class="eyebrow">Servicios</p>
+        <h1 class="hero__title">Soluciones jurídicas para <span class="text-gradient">proteger, normalizar y recuperar activos</span></h1>
+        <p>Anticipamos riesgos, protegemos el crédito y maximizamos las posibilidades de recuperación, incluso en los escenarios más complejos.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- NUESTROS SERVICIOS — 3 tratamientos distintos (vidrio destacado / texto+visual / editorial simple) -->
+  <section class="section" data-surface="atmosphere" aria-labelledby="servicios-heading">
+    <div class="atmosphere" aria-hidden="true"></div>
+    <div class="container">
+      <div class="section-head reveal">
+        <h2 id="servicios-heading">Nuestros servicios</h2>
+      </div>
+
+      <!-- Bug corregido (2026-07-31): el "eyebrow" (.service-block__tag) repetía el
+           mismo texto del título de abajo — ahora es un abrebocas distinto, tomado del
+           contenido real de cada bloque (no una afirmación nueva). También se agregó el
+           recuadro de imagen que faltaba en los bloques 01·02 y 04 (el 03 ya lo tenía) —
+           mismo tratamiento `.media-placeholder`, alternando el lado de la imagen para
+           que el mosaico completo (imagen-derecha / imagen-izquierda / imagen-derecha)
+           no se sienta repetitivo.
+           Ajuste (2026-07-31, ronda 2): los 3 bloques usaban 3 estructuras distintas
+           (vidrio+grid propio / surface-visual con título superpuesto / grid-2 plano),
+           cada una con su propio min-height para la imagen — de ahí que los recuadros
+           se vieran de tamaños distintos. Ahora los 3 comparten la misma clase
+           `.service-block--media` (misma proporción de columnas, mismo min-height de
+           imagen vía `.service-block__media`); el bloque 02 pierde el título superpuesto
+           sobre la imagen y pasa a un <h3> normal debajo del eyebrow, igual que los
+           otros dos. Solo cambia el lado de la imagen (`--media-reverse` para
+           alternar imagen-izquierda), nunca el tamaño. -->
+      <article class="surface-glass reveal service-block--media" style="padding: var(--space-8); margin-bottom: var(--space-8);">
+        <div>
+          <div class="service-block__tag">Perspectiva técnica y estratégica</div>
+          <h3>Insolvencia y derecho concursal</h3>
+          <p class="text-wide" style="max-width: 60ch;">Representamos exclusivamente a acreedores en todos los regímenes concursales vigentes en Colombia, defendiendo sus derechos desde una perspectiva técnica y estratégica, orientada a la recuperación de activos.</p>
+          <p class="text-wide" style="max-width: 60ch;">Representamos a Persona Natural No Comerciante, Pequeño Comerciante, y Entidades públicas y de economía mixta.</p>
+        </div>
+        <div class="media-placeholder service-block__media" data-img-id="IMG-11" role="img" aria-label="Espacio reservado para fotografía o recurso visual de Insolvencia y Derecho Concursal (IMG-11) — ver IMAGE-BRIEF.md"></div>
+      </article>
+
+      <article class="reveal service-block--media service-block--media-reverse" style="margin-bottom: var(--space-8);">
+        <div class="media-placeholder service-block__media" data-img-id="IMG-05" role="img" aria-label="Espacio reservado para fotografía o recurso visual de Normalización de Activos (IMG-05) — ver IMAGE-BRIEF.md"></div>
+        <div>
+          <div class="service-block__tag">Preventivo, reactivo y a la medida</div>
+          <h3>Normalización de activos</h3>
+          <p style="margin-top: var(--space-3);">Desarrollamos procesos integrales que analizan el comportamiento del deudor, la viabilidad jurídica y las alternativas más eficientes para maximizar la recuperación.</p>
+          <p>Intervenimos tanto en escenarios preventivos como reactivos, antes, durante y después de un proceso de insolvencia.</p>
+        </div>
+      </article>
+
+      <article class="surface-glass reveal service-block--media" style="padding: var(--space-8); margin-bottom: var(--space-8);">
+        <div>
+          <div class="service-block__tag">Prevención antes que contingencia</div>
+          <h3>Derecho corporativo</h3>
+          <p>Acompañamos a empresas en la estructuración de relaciones comerciales sólidas, mitigando riesgos legales antes de que se conviertan en contingencias.</p>
+          <p>Convertimos el derecho en una herramienta para fortalecer la operación de su negocio.</p>
+        </div>
+        <div class="media-placeholder service-block__media" data-img-id="IMG-12" role="img" aria-label="Espacio reservado para fotografía o recurso visual de Derecho Corporativo (IMG-12) — ver IMAGE-BRIEF.md"></div>
+      </article>
+    </div>
+  </section>
+
+  <!-- CÓMO TRABAJAMOS / METODOLOGÍA — rediseño 2026-07-31 según brief del Owner
+       ("Sección Metología - AAA Legal.docx"): stepper con scroll, columna izquierda
+       sticky + 3 pasos a la derecha que se activan según cruzan el centro del
+       viewport (lógica en js/main.js). Ya no usa fotografía (IMG-06 queda sin uso,
+       ver IMAGE-BRIEF.md) — el brief no contempla imagen para este diseño. -->
+  <section class="section stepper" data-surface="dark" aria-labelledby="proceso-heading">
+    <div class="container stepper__grid">
+      <div class="stepper__intro reveal">
+        <p class="eyebrow">Nuestra metodología</p>
+        <h2 id="proceso-heading">Convertimos cada caso en una estrategia jurídica de recuperación.</h2>
+      </div>
+      <div class="stepper__steps">
+        <article class="stepper__step">
+          <span class="stepper__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="10" cy="10" r="6"/><path d="M15 15l5 5"/></svg>
+          </span>
+          <h3>Diagnóstico</h3>
+          <p>Antes de actuar, entendemos el contexto completo. Estudiamos el expediente, identificamos riesgos y construimos un diagnóstico jurídico que define la estrategia más adecuada para proteger los intereses del acreedor.</p>
+        </article>
+        <article class="stepper__step">
+          <span class="stepper__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M15 9l-2 6-6 2 2-6 6-2z"/></svg>
+          </span>
+          <h3>Estrategia</h3>
+          <p>No aplicamos soluciones estándar. Definimos el camino legal según el estado del riesgo, ya sea en una etapa preventiva, durante un proceso de insolvencia o en la recuperación posterior del activo.</p>
+        </article>
+        <article class="stepper__step">
+          <span class="stepper__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/></svg>
+          </span>
+          <h3>Representación</h3>
+          <p>Ejecutamos la estrategia con seguimiento permanente, representación especializada y control continuo del proceso para maximizar las posibilidades de recuperación del crédito.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- OBJECIONES RESUELTAS / TRANSPARENCIA — ajuste 2026-07-31 a pedido del Owner:
+       fondo blanco (antes "atmósfera") y el placeholder de imagen (en vez de la foto
+       reutilizada de Inicio) para dejar explícito ante el cliente que aquí falta
+       material propio — mismo tratamiento `.media-placeholder` usado en el resto del
+       sitio, no una fotografía real. -->
+  <section class="section" data-surface="light" aria-labelledby="objeciones-heading">
+    <div class="container">
+      <div class="cierre-grid reveal">
+        <div class="cierre-card cierre-card--image">
+          <div class="media-placeholder" data-img-id="IMG-13" role="img" aria-label="Espacio reservado para fotografía o recurso visual de Transparencia (IMG-13) — ver IMAGE-BRIEF.md">
+            <span class="media-placeholder__label">IMG-13 — pendiente de material del cliente</span>
+          </div>
+        </div>
+        <div class="cierre-card cierre-card--cta">
+          <span class="cierre-card__halo" aria-hidden="true"></span>
+          <div class="cierre-card__content cierre-card__content--statement">
+            <p class="eyebrow" style="color: var(--color-accent-light);">Transparencia</p>
+            <h2 id="objeciones-heading">Sin promesas que no podemos sostener</h2>
+            <p style="color: rgba(255,255,255,0.85);">No garantizamos el recaudo — nuestro compromiso es la defensa técnica más rigurosa del crédito. Los honorarios se definen caso a caso, siempre en proporción a lo que está en juego.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CIERRE — mismo bloque de dos tarjetas que Transparencia (2026-07-31), invertido:
+       texto+CTA a la izquierda, imagen a la derecha. Reutiliza `hero-inicio.webp`
+       como relleno temporal, igual que en el bloque anterior. -->
+  <section class="section" data-surface="atmosphere" aria-labelledby="cierre-heading">
+    <div class="atmosphere" aria-hidden="true"></div>
+    <div class="container">
+      <div class="cierre-grid reveal">
+        <div class="cierre-card cierre-card--cta">
+          <span class="cierre-card__halo" aria-hidden="true"></span>
+          <div class="cierre-card__content">
+            <h2 id="cierre-heading">¿Tu empresa tiene un crédito en riesgo o en proceso de insolvencia?</h2>
+            <a class="btn cierre-card__btn" href="#nota-ady">
+              Consulta tu caso con ADY
+              <svg class="btn--icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </a>
+          </div>
+        </div>
+        <div class="cierre-card cierre-card--image">
+          <img class="cierre-card__img" src="assets/img/hero-inicio.webp" alt="Equipo de AAA Estudio Legal trabajando en sala de reuniones" data-img-id="IMG-14">
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div>
+      <p class="brand" style="margin-bottom: var(--space-4);">AAA <span>Estudio Legal</span></p>
+      <p style="font-size: var(--text-sm); opacity: .85;">Calle 28 Norte # 6BIS-26, Barrio San Vicente, Cali, Valle.</p>
+      <p style="font-size: var(--text-sm);"><a href="mailto:info@agudeloabogados.com">info@agudeloabogados.com</a></p>
+    </div>
+    <div>
+      <h2>Sitio</h2>
+      <nav class="footer-links" aria-label="Mapa del sitio">
+        <a href="index.html">Inicio</a>
+        <a href="servicios.html">Servicios</a>
+        <a href="proximamente.html">Nuestra Experiencia</a>
+        <a href="nuestro-equipo.html">Nuestro Equipo</a>
+        <a href="noticias-analisis.html">Blog</a>
+        <a href="captacion-b2b.html">Contacto</a>
+      </nav>
+    </div>
+    <div>
+      <h2>Legal</h2>
+      <nav class="footer-links" aria-label="Legal">
+        <a href="proximamente.html">Aviso legal y de privacidad</a>
+      </nav>
+    </div>
+  </div>
+  <div class="container footer-bottom">
+    <span>© 2026 Agudelo Abogados Asociados SAS — AAA Estudio Legal.</span>
+    <span>Prototipo C2 · No es el sitio final.</span>
+  </div>
+</footer>
+
+<div class="cookie-banner" role="region" aria-label="Aviso de cookies" hidden>
+  <p>Usamos cookies propias y de terceros (GA4, GTM, Microsoft Clarity) para medir el uso del sitio. Puedes conocer más en nuestro aviso de privacidad.</p>
+  <a class="btn btn--ghost" href="proximamente.html" style="color:var(--color-white); border-color: var(--color-border-on-dark);">Más información</a>
+  <button class="btn btn--primary" type="button" data-cookie-accept>Aceptar</button>
+</div>
+
+<script src="js/main.js"></script>
+</body>
+</html>

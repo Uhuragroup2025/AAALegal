@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Soluciones para Acreedores — AAA Estudio Legal</title>
+<meta name="description" content="Representamos exclusivamente a acreedores en procesos de insolvencia y normalización de activos, combinando especialización jurídica, cobertura nacional y tecnología propia.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Krub:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/components.css">
+</head>
+<body>
+
+<a class="skip-link" href="#contenido">Saltar al contenido</a>
+
+<header class="site-header">
+  <div class="container site-header__inner">
+    <a class="brand" href="index.html">AAA <span>Estudio Legal</span></a>
+
+    <details class="nav" open>
+      <summary class="nav__toggle" aria-expanded="true">
+        <svg class="nav__toggle-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        <span class="visually-hidden">Menú de navegación</span>
+      </summary>
+      <div class="nav__panel">
+        <nav aria-label="Navegación principal">
+          <ul>
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="servicios.html">Servicios</a></li>
+            <li><a href="proximamente.html">Nuestra Experiencia</a></li>
+            <li><a href="nuestro-equipo.html">Nuestro Equipo</a></li>
+            <li><a href="noticias-analisis.html">Blog</a></li>
+            <li><a href="captacion-b2b.html" aria-current="page">Contacto</a></li>
+          </ul>
+        </nav>
+      </div>
+    </details>
+
+    <div class="site-header__actions">
+      <span class="lang-toggle" title="Traducción automática vía Polylang — no funcional en este prototipo">ES · EN</span>
+      <a class="btn btn--primary btn--header" href="#nota-ady">
+        <span class="btn--header-label">Consulta tu caso aquí</span>
+        <svg class="btn--icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+    </div>
+  </div>
+</header>
+
+<main id="contenido">
+
+  <!-- HERO — mismo sistema de hero inmersivo que Inicio/Servicios. Esta es la única
+       página donde el CTA "Consulta tu caso aquí" vive en el hero mismo: es la
+       acción de conversión PRINCIPAL del sitio (D17), dirigida directamente al
+       evento que activa la necesidad (la deuda), no al público general de Inicio. -->
+  <section class="hero-immersive section" data-surface="dark" aria-label="Presentación" style="padding-bottom: 0;">
+    <div class="hero-shell">
+      <div class="hero-shell__media">
+        <div class="media-placeholder" data-img-id="IMG-15" role="img" aria-label="Espacio reservado para fotografía o recurso visual de Contacto (IMG-15) — ver IMAGE-BRIEF.md">
+          <span class="media-placeholder__label">IMG-15 — pendiente de material del cliente</span>
+        </div>
+        <div class="hero-shell__scrim" aria-hidden="true"></div>
+      </div>
+      <div class="hero-shell__content">
+        <p class="eyebrow">Soluciones para acreedores</p>
+        <h1 class="hero__title">¿Un deudor puso en riesgo tu crédito?</h1>
+        <p>Representamos exclusivamente a acreedores en procesos de insolvencia y normalización de activos, combinando especialización jurídica, cobertura nacional y tecnología propia para respaldar decisiones críticas.</p>
+        <div class="hero__actions">
+          <a class="btn btn--primary" href="#nota-ady">
+            Consulta tu caso aquí
+            <svg class="btn--icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- POR QUÉ ELEGIR AAA -->
+  <section class="section" data-surface="atmosphere" aria-labelledby="por-que-heading">
+    <div class="atmosphere" aria-hidden="true"></div>
+    <div class="container" style="max-width: 72ch;">
+      <div class="reveal">
+        <p class="eyebrow">Por qué AAA</p>
+        <h2 id="por-que-heading">Por qué elegir AAA Estudio Legal</h2>
+        <p>En AAA Estudio Legal representamos exclusivamente a acreedores, una especialización que nos permite diseñar estrategias jurídicas enfocadas en la protección del crédito y la recuperación de activos en escenarios de alta complejidad.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- NUESTRO PROCESO — mismo componente stepper con scroll que Servicios § Metodología
+       (reutilizado a pedido explícito del Owner), con el copy propio de esta página. -->
+  <section class="section stepper" data-surface="muted" aria-labelledby="proceso-b2b-heading">
+    <div class="container stepper__grid">
+      <div class="stepper__intro reveal">
+        <p class="eyebrow">Proceso</p>
+        <h2 id="proceso-b2b-heading">Nuestro proceso</h2>
+      </div>
+      <div class="stepper__steps">
+        <article class="stepper__step">
+          <span class="stepper__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="10" cy="10" r="6"/><path d="M15 15l5 5"/></svg>
+          </span>
+          <h3>Diagnóstico del caso</h3>
+          <p>Analizamos el estado jurídico del crédito, la situación del deudor y las alternativas legales disponibles.</p>
+        </article>
+        <article class="stepper__step">
+          <span class="stepper__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M15 9l-2 6-6 2 2-6 6-2z"/></svg>
+          </span>
+          <h3>Definición de estrategia</h3>
+          <p>Diseñamos una ruta de actuación ajustada a los objetivos del cliente, el tipo de proceso y las posibilidades reales de recuperación.</p>
+        </article>
+        <article class="stepper__step">
+          <span class="stepper__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/></svg>
+          </span>
+          <h3>Representación y seguimiento</h3>
+          <p>Ejecutamos la estrategia con acompañamiento permanente, comunicación continua y acceso a información relevante durante todo el proceso a través de nuestra tecnología.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- OBJECIONES RESUELTAS -->
+  <section class="section" data-surface="atmosphere" aria-labelledby="objeciones-b2b-heading">
+    <div class="atmosphere" aria-hidden="true"></div>
+    <div class="container" style="max-width: 72ch;">
+      <div class="surface-glass reveal" style="padding: var(--space-8);">
+        <p class="eyebrow">Transparencia</p>
+        <h2 id="objeciones-b2b-heading">Objeciones resueltas</h2>
+        <p>En AAA Estudio Legal actuamos con total transparencia: no prometemos resultados que ninguna firma seria puede garantizar, sino una representación jurídica especializada, una estrategia construida sobre un diagnóstico técnico y honorarios proporcionales a la naturaleza del caso. Nuestro compromiso es brindar a cada cliente el criterio, la experiencia y el acompañamiento necesarios para tomar decisiones informadas y proteger el valor de sus activos.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- EVIDENCIA DE CONFIANZA — placeholder explícito: cifras reales pendientes de
+       aprobación del cliente, no se inventan (content/06-captacion-b2b.md). -->
+  <section class="section" data-surface="muted" aria-labelledby="evidencia-heading">
+    <div class="container" style="max-width: 68ch;">
+      <p class="eyebrow">Evidencia de confianza</p>
+      <h2 id="evidencia-heading">Evidencia de confianza</h2>
+      <div class="ady-note reveal">
+        <strong>Contenido pendiente del cliente</strong>
+        Esta sección reserva espacio para cifras de experiencia, cantidad de casos y capacidad del equipo — solo se publican si son reales y están aprobadas por el cliente. No se inventan cifras.
+      </div>
+    </div>
+  </section>
+
+  <!-- CIERRE / FORMULARIO — mismo bloque de dos tarjetas usado en Inicio y en
+       Transparencia/Cierre de Servicios. -->
+  <section class="section" data-surface="atmosphere" aria-labelledby="cierre-b2b-heading">
+    <div class="atmosphere" aria-hidden="true"></div>
+    <div class="container">
+      <div class="cierre-grid reveal">
+        <div class="cierre-card cierre-card--image">
+          <img class="cierre-card__img" src="assets/img/hero-inicio.webp" alt="Equipo de AAA Estudio Legal trabajando en sala de reuniones" data-img-id="IMG-16">
+        </div>
+        <div class="cierre-card cierre-card--cta">
+          <span class="cierre-card__halo" aria-hidden="true"></span>
+          <div class="cierre-card__content cierre-card__content--statement">
+            <h2 id="cierre-b2b-heading">Cuéntanos tu caso y te contactamos con un diagnóstico inicial</h2>
+            <a class="btn cierre-card__btn" href="#nota-ady">
+              Consulta tu caso aquí
+              <svg class="btn--icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div>
+      <p class="brand" style="margin-bottom: var(--space-4);">AAA <span>Estudio Legal</span></p>
+      <p style="font-size: var(--text-sm); opacity: .85;">Calle 28 Norte # 6BIS-26, Barrio San Vicente, Cali, Valle.</p>
+      <p style="font-size: var(--text-sm);"><a href="mailto:info@agudeloabogados.com">info@agudeloabogados.com</a></p>
+    </div>
+    <div>
+      <h2>Sitio</h2>
+      <nav class="footer-links" aria-label="Mapa del sitio">
+        <a href="index.html">Inicio</a>
+        <a href="servicios.html">Servicios</a>
+        <a href="proximamente.html">Nuestra Experiencia</a>
+        <a href="nuestro-equipo.html">Nuestro Equipo</a>
+        <a href="noticias-analisis.html">Blog</a>
+        <a href="captacion-b2b.html">Contacto</a>
+      </nav>
+    </div>
+    <div>
+      <h2>Legal</h2>
+      <nav class="footer-links" aria-label="Legal">
+        <a href="proximamente.html">Aviso legal y de privacidad</a>
+      </nav>
+    </div>
+  </div>
+  <div class="container footer-bottom">
+    <span>© 2026 Agudelo Abogados Asociados SAS — AAA Estudio Legal.</span>
+    <span>Prototipo C2 · No es el sitio final.</span>
+  </div>
+</footer>
+
+<div class="cookie-banner" role="region" aria-label="Aviso de cookies" hidden>
+  <p>Usamos cookies propias y de terceros (GA4, GTM, Microsoft Clarity) para medir el uso del sitio. Puedes conocer más en nuestro aviso de privacidad.</p>
+  <a class="btn btn--ghost" href="proximamente.html" style="color:var(--color-white); border-color: var(--color-border-on-dark);">Más información</a>
+  <button class="btn btn--primary" type="button" data-cookie-accept>Aceptar</button>
+</div>
+
+<script src="js/main.js"></script>
+</body>
+</html>

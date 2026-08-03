@@ -1,0 +1,46 @@
+# Secretos y configuración sensible
+.env
+.env.*
+!.env.example
+wp-config.php
+*.pem
+*.key
+secrets/
+credentials/
+
+# Base de datos
+*.sql
+*.sqlite
+*.sqlite3
+/db-backup/
+/database/
+
+# Uploads (contenido subido por el CMS, no versionado)
+wp-content/uploads/
+
+# Cachés
+wp-content/cache/
+wp-content/cache-*/
+.cache/
+*.cache
+
+# Logs
+*.log
+logs/
+debug.log
+wp-content/debug.log
+
+# Temporales / SO / editor
+*.tmp
+*.temp
+~*
+Thumbs.db
+.DS_Store
+*.swp
+
+# Dependencias generadas
+node_modules/
+vendor/
+
+# Configuración local de Claude Code (permisos específicos de esta máquina)
+.claude/settings.local.json

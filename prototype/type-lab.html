@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Type Lab — alternativas tipográficas (Space Grotesk aprobada, D22) — AAA Estudio Legal</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Krub:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Newsreader:ital,wght@0,400;0,500;0,600;1,400&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/components.css">
+<style>
+  body { background: var(--color-surface-atmosphere); }
+  .lab-wrap { max-width: 980px; margin-inline: auto; padding: var(--space-12) var(--container-padding) var(--space-32); }
+  .lab-option { background: var(--color-white); border: 1px solid var(--color-border-subtle); border-radius: var(--radius-container); padding: var(--space-8); margin-bottom: var(--space-12); }
+  .lab-option__meta { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-4) var(--space-8); font-family: var(--font-sans); font-size: var(--text-sm); margin-bottom: var(--space-8); padding-bottom: var(--space-6); border-bottom: 1px solid var(--color-border-subtle); }
+  .lab-option__meta dt { font-weight: 600; color: var(--color-navy-900); }
+  .lab-option__meta dd { margin: 0 0 var(--space-3); color: var(--color-ink); opacity: .85; }
+  .lab-sample { margin-bottom: var(--space-8); }
+  .lab-sample__label { font-family: var(--font-sans); font-size: var(--text-xs); text-transform: uppercase; letter-spacing: .06em; color: var(--color-gold-300); margin-bottom: var(--space-2); }
+  .lab-sample h1, .lab-sample h2, .lab-sample h3 { margin: 0; }
+</style>
+</head>
+<body>
+<div class="lab-wrap">
+  <p class="eyebrow" style="color:var(--color-gold-300)">Decisión D22 (Owner, 2026-07-29) — registro histórico de la comparación</p>
+  <h1 style="font-size:var(--text-2xl); margin-bottom:var(--space-4);">Alternativas tipográficas para títulos</h1>
+  <p class="text-wide" style="max-width:60ch; margin-bottom:var(--space-16);">Esta página compara las 3 alternativas de Google Fonts que se presentaron frente al stack anterior (Big Caslon). <strong>El Owner aprobó la alternativa C — Space Grotesk</strong>: ya es la fuente de títulos en <code>index.html</code> y <code>servicios.html</code> (token <code>--font-display</code>). Esta comparación se conserva como registro de las opciones evaluadas, no como un laboratorio activo. Ver Decisiones en PROJECT.md y <code>prototype/README.md</code> § Tipografía.</p>
+
+  <!-- BASE: fuente actual -->
+  <section class="lab-option">
+    <dl class="lab-option__meta">
+      <div><dt>Opción base — conservar</dt><dd>Big Caslon (con respaldo de sistema)</dd></div>
+      <div><dt>Personalidad</dt><dd>Serif clásica, institucional, calma</dd></div>
+      <div><dt>Razón</dt><dd>Ya está en el manual de marca; requiere solo mejorar escala/tracking/interlineado, no una fuente nueva</dd></div>
+      <div><dt>Combina con</dt><dd>Krub (ya en uso)</dd></div>
+    </dl>
+    <div class="lab-sample"><p class="lab-sample__label">H1 del hero</p><h1 style="font-family:var(--font-serif); font-size:clamp(2.25rem, 5vw, 3.75rem); line-height:1.05;">Insolvencia y asuntos corporativos: somos la voz del acreedor</h1></div>
+    <div class="lab-sample"><p class="lab-sample__label">Título narrativo grande</p><h2 style="font-family:var(--font-serif); font-size:2.5rem; line-height:1.1;">Cuatro focos, un mismo rigor técnico</h2></div>
+    <div class="lab-sample"><p class="lab-sample__label">Título de página interior</p><h3 style="font-family:var(--font-serif); font-size:1.75rem;">Soluciones jurídicas para proteger, normalizar y recuperar activos</h3></div>
+  </section>
+
+  <!-- A: Fraunces -->
+  <section class="lab-option">
+    <dl class="lab-option__meta">
+      <div><dt>Alternativa A — Fraunces</dt><dd>Google Fonts, familia variable</dd></div>
+      <div><dt>Personalidad</dt><dd>Serif editorial cálida, con carácter contemporáneo — menos rígida que una serif clásica, sin perder autoridad</dd></div>
+      <div><dt>Razón para usarla</dt><dd>Se siente "editorial premium" (coherente con el tono dinámico/sofisticado del brief) sin caer en lo genérico corporativo</dd></div>
+      <div><dt>Combina con</dt><dd>Krub — el contraste cálido/geométrico funciona bien</dd></div>
+    </dl>
+    <div class="lab-sample"><p class="lab-sample__label">H1 del hero</p><h1 style="font-family:'Fraunces', serif; font-optical-sizing:auto; font-size:clamp(2.25rem, 5vw, 3.75rem); line-height:1.05;">Insolvencia y asuntos corporativos: somos la voz del acreedor</h1></div>
+    <div class="lab-sample"><p class="lab-sample__label">Título narrativo grande</p><h2 style="font-family:'Fraunces', serif; font-size:2.5rem; line-height:1.1;">Cuatro focos, un mismo rigor técnico</h2></div>
+    <div class="lab-sample"><p class="lab-sample__label">Título de página interior</p><h3 style="font-family:'Fraunces', serif; font-size:1.75rem;">Soluciones jurídicas para proteger, normalizar y recuperar activos</h3></div>
+  </section>
+
+  <!-- B: Newsreader -->
+  <section class="lab-option">
+    <dl class="lab-option__meta">
+      <div><dt>Alternativa B — Newsreader</dt><dd>Google Fonts, diseñada específicamente para lectura en pantalla</dd></div>
+      <div><dt>Personalidad</dt><dd>Serif literaria, serena — autoridad tranquila, muy legible, más neutra que Fraunces</dd></div>
+      <div><dt>Razón para usarla</dt><dd>Nativa de pantalla (nace para web, no es una migración de una fuente de impresión) — reduce el riesgo de licencia/renderizado que sí tiene Big Caslon</dd></div>
+      <div><dt>Combina con</dt><dd>Krub — combinación serena, buen contraste de peso</dd></div>
+    </dl>
+    <div class="lab-sample"><p class="lab-sample__label">H1 del hero</p><h1 style="font-family:'Newsreader', serif; font-size:clamp(2.25rem, 5vw, 3.75rem); line-height:1.05;">Insolvencia y asuntos corporativos: somos la voz del acreedor</h1></div>
+    <div class="lab-sample"><p class="lab-sample__label">Título narrativo grande</p><h2 style="font-family:'Newsreader', serif; font-size:2.5rem; line-height:1.1;">Cuatro focos, un mismo rigor técnico</h2></div>
+    <div class="lab-sample"><p class="lab-sample__label">Título de página interior</p><h3 style="font-family:'Newsreader', serif; font-size:1.75rem;">Soluciones jurídicas para proteger, normalizar y recuperar activos</h3></div>
+  </section>
+
+  <!-- C: Space Grotesk — APROBADA (D22) -->
+  <section class="lab-option" style="border-color: var(--color-navy-900); border-width: 2px;">
+    <dl class="lab-option__meta">
+      <div><dt>Alternativa C — Space Grotesk ✅ Aprobada (D22)</dt><dd>Google Fonts, sans geométrica técnica</dd></div>
+      <div><dt>Personalidad</dt><dd>Digital, técnica, contemporánea — la más "tecnológica" de las tres, pero la que más se aleja del carácter jurídico clásico</dd></div>
+      <div><dt>Razón para usarla</dt><dd>Refuerza el pilar "solidez con tecnología" (ADY) de forma directa; riesgo: en exceso puede sentirse más "startup" que "firma legal" (ver REFERENTS.md → qué evitar)</dd></div>
+      <div><dt>Combina con</dt><dd>Requeriría revisar Krub en párrafos para no duplicar el carácter geométrico — probablemente se usa solo en títulos, nunca en cuerpo</dd></div>
+    </dl>
+    <div class="lab-sample"><p class="lab-sample__label">H1 del hero</p><h1 style="font-family:'Space Grotesk', sans-serif; font-size:clamp(2.25rem, 5vw, 3.75rem); line-height:1.05;">Insolvencia y asuntos corporativos: somos la voz del acreedor</h1></div>
+    <div class="lab-sample"><p class="lab-sample__label">Título narrativo grande</p><h2 style="font-family:'Space Grotesk', sans-serif; font-size:2.5rem; line-height:1.1;">Cuatro focos, un mismo rigor técnico</h2></div>
+    <div class="lab-sample"><p class="lab-sample__label">Título de página interior</p><h3 style="font-family:'Space Grotesk', sans-serif; font-size:1.75rem;">Soluciones jurídicas para proteger, normalizar y recuperar activos</h3></div>
+  </section>
+
+  <p style="font-size:var(--text-sm); opacity:.75;"><a href="index.html">← Volver al prototipo</a></p>
+</div>
+</body>
+</html>
