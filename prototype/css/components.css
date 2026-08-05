@@ -47,7 +47,12 @@
   max-width: 1500px;
   margin-inline: auto;
   padding: 0.75rem 2rem;
-  border-radius: var(--radius-pill);
+  /* D26: la píldora totalmente redondeada era herencia de D23 ("header píldora
+     flotante") — el laboratorio no usa esa forma en ningún componente, ni siquiera
+     en su propio header de muestra (barra recta). Se mantiene flotante/sticky (valor
+     de UX ya establecido, D18: el CTA debe seguir siempre visible) pero con el mismo
+     radio discreto que botones y cards, no un capsule. */
+  border-radius: var(--radius-sm);
   background-color: var(--header-glass-bg);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
@@ -99,7 +104,7 @@
   font-size: var(--text-xs);
   color: var(--color-gold-100);
   border: 1px solid var(--color-border-on-dark);
-  border-radius: var(--radius-pill);
+  border-radius: var(--radius-sm);
   padding: var(--space-1) var(--space-3);
   cursor: default;
 }
@@ -172,7 +177,7 @@
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
     border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: var(--radius-container);
+    border-radius: var(--radius-sm); /* D26: mismo radio discreto que la píldora del header */
     padding: var(--space-4) var(--space-6) var(--space-6);
   }
   @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
@@ -215,7 +220,10 @@
   font-weight: 600;
   font-size: var(--text-sm);
   text-decoration: none;
-  border-radius: var(--radius-pill);
+  /* D26: radio discreto (--radius-sm = --radius-control del lab, 4px) — no pill.
+     "Radios discretos, superficies planas, bordes precisos" es el principio del
+     laboratorio; los botones en píldora eran herencia de D23. */
+  border-radius: var(--radius-sm);
   padding: var(--space-3) var(--space-6);
   border: 2px solid transparent;
   cursor: pointer;
@@ -461,7 +469,7 @@ section[data-surface="muted"] + .hero .curve-divider,
 .sector-chip {
   font-size: var(--text-sm);
   border: 1px solid var(--color-border-subtle);
-  border-radius: var(--radius-pill);
+  border-radius: var(--radius-sm);
   padding: var(--space-2) var(--space-4);
 }
 
@@ -718,6 +726,21 @@ section[data-surface="muted"] + .hero .curve-divider,
 
 /* ---------- Utilidades de sección ---------- */
 .section-head { max-width: 68ch; margin-bottom: var(--space-12); }
+/* D26: encabezado de sección en dos columnas (etiqueta a la izquierda, título a la
+   derecha) — el patrón que usa `.section-heading` en cada sección del laboratorio,
+   en vez del apilado vertical simple. Modificador explícito (no el `.section-head`
+   base) porque no todas las secciones tienen eyebrow — sin uno, la cuadrícula
+   dejaría una columna vacía. */
+.section-head--split {
+  display: grid;
+  grid-template-columns: minmax(160px, .5fr) minmax(0, 1.5fr);
+  gap: var(--space-8);
+  align-items: start;
+  max-width: none;
+}
+@media (max-width: 900px) {
+  .section-head--split { grid-template-columns: 1fr; gap: var(--space-2); }
+}
 .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-12); align-items: center; }
 @media (max-width: 800px) { .grid-2 { grid-template-columns: 1fr; } }
 /* En la sección de equipo, la imagen ya es compacta (`.people-intro__media`, max-width
@@ -815,7 +838,7 @@ section[data-surface="muted"] + .hero .curve-divider,
   letter-spacing: 0.03em;
 }
 @media (max-width: 640px) {
-  .people-card { border-radius: var(--radius-container); }
+  .people-card { border-radius: var(--radius-md); }
   .people-intro { padding: var(--space-8) var(--space-6) var(--space-6); }
   .team-pill { padding: var(--space-2) var(--space-4) var(--space-2) var(--space-2); }
   .team-pill__avatar { width: 2.5rem; height: 2.5rem; }
@@ -1215,7 +1238,7 @@ section:not([data-surface="dark"]) .text-gradient {
 .surface-glass {
   background: var(--glass-bg);
   border: 1px solid var(--glass-border);
-  border-radius: var(--radius-container);
+  border-radius: var(--radius-md); /* D26: radio de card del lab (8px), no --radius-container */
   box-shadow: var(--glass-shadow), var(--glass-highlight);
   backdrop-filter: blur(var(--glass-blur));
   -webkit-backdrop-filter: blur(var(--glass-blur));
@@ -1230,7 +1253,7 @@ section:not([data-surface="dark"]) .text-gradient {
   background: var(--color-surface-light);
   color: var(--color-text-on-light);
   border: 1px solid var(--color-border-subtle);
-  border-radius: var(--radius-container);
+  border-radius: var(--radius-md); /* D26: radio de card del lab (8px), no --radius-container */
   box-shadow: var(--shadow-sm);
 }
 /* Bug encontrado en QA de la migración D26 (2026-08-05): `.surface-solid` siempre tiene
@@ -1247,7 +1270,7 @@ section[data-surface="dark"] .surface-solid h3 {
 
 /* Tarjeta visual — para fotografía (placeholder mientras no exista el asset, ver IMAGE-BRIEF.md) */
 .surface-visual {
-  border-radius: var(--radius-container);
+  border-radius: var(--radius-md); /* D26: radio de card del lab (8px), no --radius-container */
   box-shadow: var(--shadow-md);
   color: var(--color-white);
   display: flex;
@@ -1602,7 +1625,7 @@ section[data-surface="dark"] .stepper__step.is-active .stepper__icon { color: va
 }
 @media (max-width: 800px) { .blog-grid { grid-template-columns: 1fr; } }
 .blog-card { padding: var(--space-6); display: flex; flex-direction: column; }
-.blog-card__media { aspect-ratio: 16 / 10; margin-bottom: var(--space-4); border-radius: var(--radius-container); }
+.blog-card__media { aspect-ratio: 16 / 10; margin-bottom: var(--space-4); border-radius: var(--radius-md); }
 .blog-card__tag {
   font-size: var(--text-xs);
   letter-spacing: 0.06em;

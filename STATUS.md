@@ -213,6 +213,21 @@ Por instrucción del Owner se recuperó, dentro del bloque “Dimensión humana�
 
 **Estado:** ✅ Candidato a revisión — **no aprobado**. Mismos pendientes que el resto del prototipo (QA de Content, consolidación de Product Lead, Gate 1).
 
+### Iteración 14 — segunda pasada de fidelidad al Visual Language Lab (2026-08-05, candidato a revisión)
+
+**Motivo:** el Owner revisó `prototype/type-lab.html` completo de nuevo (no solo los especímenes ya auditados) y señaló que la iteración 13 fue parcial: forma del menú principal, radios de botones/cards/header, y estructura de los encabezados de sección de Home todavía no correspondían al laboratorio.
+
+**Qué se hizo (todo en `components.css`, salvo lo indicado):**
+- **Encabezados de sección (Home):** el laboratorio pone la etiqueta (kicker) a la izquierda y el título a la derecha en una cuadrícula de dos columnas (`.section-heading`) — Home los apilaba verticalmente. Se creó el modificador `.section-head--split` (grid de 2 columnas, colapsa a 1 en móvil) y se aplicó a los 4 encabezados de Home que tienen eyebrow+título (situaciones, servicios, confianza, casos). El único encabezado sin eyebrow (Servicios, "Nuestros servicios") se dejó igual — una cuadrícula de 2 columnas con un solo hijo dejaría una columna vacía.
+- **Radio de botones:** `.btn` pasó de píldora (`--radius-pill`, 999px) a `--radius-sm` (4px, = `--radius-control` del lab) — "radios discretos" es un principio explícito del laboratorio, no solo una preferencia estética. Mismo cambio en `.lang-toggle` y `.sector-chip` (antes píldora, ahora igual que los badges del lab). El botón de header en modo solo-ícono (`<480px`) conserva su radio circular — ahí es una excepción deliberada (botón cuadrado de ícono, no un botón de texto).
+- **Forma del menú principal:** `.site-header__inner` (la píldora flotante) pasó del mismo `--radius-pill` a `--radius-sm` — el laboratorio no usa píldoras en ningún componente, ni en su propio header de muestra (barra recta). Se mantiene flotante/sticky con blur (valor de UX ya establecido, D18), solo cambia la forma de la esquina. El panel desplegable del menú móvil (`.nav__panel`) se ajustó al mismo radio para sentirse como una extensión de la píldora.
+- **Radio de cards:** `.surface-solid`, `.surface-glass`, `.surface-visual`, `.people-card` (móvil) y `.blog-card__media` pasaron de `--radius-container` (12px, interpolado) a `--radius-md` (8px, = `--radius-card` del lab exacto). Los paneles fotográficos grandes (`.hero-shell`, `.cierre-card`, `.media-placeholder`) conservan `--radius-xl` — el lab no define un radio para paneles de esa escala, y ya estaba documentado como categoría aparte en tokens.css.
+- **Colores del hero:** re-verificado explícitamente a pedido del Owner — el scrim (`.hero-shell__scrim`) y el patrón de placeholder ya leían de `--color-navy-deep-rgb`/`--color-accent-main-rgb`/`--color-accent-light-rgb`, correctamente migrados a D26 desde la iteración 12. No se encontró ningún valor residual de la paleta teal.
+
+**QA ejecutado:** verificado en navegador (Home y Servicios) tras descubrir que esta herramienta de previsualización cachea agresivamente los archivos CSS de `file://` entre ediciones sucesivas — los cambios de radio no se reflejaban hasta forzar una recarga completa de la pestaña, no solo del stylesheet. Confirmado por lectura directa de disco (no solo del navegador) que las 3 hojas de estilo tienen los valores correctos: `--radius-sm:4px`, `--radius-md:8px` en tokens.css, y cada selector afectado referenciándolos. Verificado además, tras una recarga limpia, que los valores computados coinciden exactamente (botón 4px, header 4px, card 8px). Sin overflow horizontal.
+
+**Estado:** ✅ Candidato a revisión — **no aprobado**. Mismos pendientes que el resto del prototipo (QA de Content, consolidación de Product Lead, Gate 1).
+
 ## Fase actual
 
 **Fase:** Cierre de C1 y preparación de **Gate 1 — Prototipo**.
