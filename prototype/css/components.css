@@ -148,14 +148,17 @@
   color: var(--color-accent-on-dark);
 }
 
-@media (max-width: 1535px) {
-  /* Bug corregido (2026-07-31): con 7 ítems en el menú (antes 4), el nav horizontal
-     no cabe en una sola línea ni siquiera a 1440px (uno de los anchos de escritorio
-     más comunes) — se probó en el navegador con 1365px de corte y seguía partiéndose.
-     Subió a 1535px para que 1440px (y cualquier ancho "normal" de escritorio) reciba
-     el menú hamburguesa de forma confiable; el nav horizontal queda reservado a
-     pantallas realmente anchas (1536px+). Debe coincidir con el `matchMedia` de
-     js/main.js — si se cambia aquí, cambiar también ahí. */
+@media (max-width: 1023px) {
+  /* Bug corregido (2026-08-05, migración D26): el corte había subido a 1535px en
+     2026-07-31 porque con 7 ítems en el menú (Krub) el nav horizontal no cabía ni a
+     1440px. Desde entonces (a) Talento AAA se eliminó (iteración 5) — quedan 6 ítems,
+     no 7 — y (b) la tipografía de UI cambió a Instrument Sans. Medido en navegador:
+     con la configuración actual el `<ul>` del nav ocupa ~370px a 1440px y ~409px a
+     1024px, en ambos casos en una sola línea y sin desbordar la píldora — ya no hace
+     falta un corte tan alto, y dejarlo en 1535px mostraba el menú como hamburguesa en
+     cualquier resolución "normal" de escritorio. Se regresa al breakpoint estándar del
+     resto del sistema (tablet/desktop en 1023px, ver README § 4). Debe coincidir con
+     el `matchMedia` de js/main.js — si se cambia aquí, cambiar también ahí. */
   .nav__toggle { display: flex; align-items: center; }
   /* El desplegable ahora cuelga de la píldora (su ancestro posicionado es
      `.site-header__inner`, no el <header> completo) — mismo ancho que la píldora,
@@ -388,6 +391,23 @@ section[data-surface="muted"] + .hero .curve-divider,
 }
 .focus-card h3 { font-size: var(--text-md); margin-bottom: var(--space-2); }
 .focus-card p { font-size: var(--text-sm); }
+
+/* Ícono de situación (Inicio, "Sabemos lo que está enfrentando") — reemplaza los
+   índices numéricos por iconografía Phosphor, mismo criterio del laboratorio
+   (SVG inline individual, sin librería completa, un símbolo distinto y relevante
+   por tarjeta, sin clichés jurídicos). */
+.situation-icon {
+  display: block;
+  width: 32px;
+  height: 32px;
+  margin-bottom: var(--space-3);
+  color: var(--color-gold-200);
+  fill: currentColor;
+}
+/* Todas las tarjetas de esta cuadrícula deben verse como un mismo conjunto,
+   sin importar cuánto texto tenga cada una. */
+.grid-2--stretch { align-items: stretch; }
+.grid-2--stretch > .surface-solid { display: flex; flex-direction: column; }
 
 /* ---------- Servicios (bloques editoriales, Capacidad Técnica) ---------- */
 .service-list {
@@ -879,18 +899,28 @@ section[data-surface="muted"] + .hero .curve-divider,
 
 /* ---------- Texto en degradado — reservado a 1–2 mensajes narrativos (§ 7) ---------- */
 .text-gradient {
-  background: linear-gradient(100deg, var(--color-gold-100), var(--color-accent-cool-100));
+  /* D26: itálica, igual que el tratamiento de énfasis (<em>) del Visual Language Lab
+     — el degradado por sí solo (color) ya no basta para replicar el lab, que combina
+     color + cursiva en Playfair Display. */
+  font-style: italic;
+  /* --color-gold-100 y --color-accent-cool-100 son ambos alias de --color-accent-light
+     en la paleta D26 (a diferencia de la teal de D23, donde eran tonos distintos) — un
+     degradado entre el mismo color dos veces se ve como color plano, no como degradado.
+     Se usa aquí el par azul claro → cobre (accent-on-dark / accent-main) para que el
+     degradado siga siendo visible sobre fondo oscuro. */
+  background: linear-gradient(100deg, var(--color-accent-on-dark), var(--color-accent-main));
   -webkit-background-clip: text;
   background-clip: text;
-  color: var(--color-gold-100); /* respaldo sólido si el navegador no soporta background-clip:text */
+  color: var(--color-accent-on-dark); /* respaldo sólido si el navegador no soporta background-clip:text */
   -webkit-text-fill-color: transparent;
 }
 @supports not (background-clip: text) {
-  .text-gradient { -webkit-text-fill-color: unset; color: var(--color-gold-100); }
+  .text-gradient { -webkit-text-fill-color: unset; color: var(--color-accent-on-dark); }
 }
-/* Sobre fondo claro (atmósfera), el degradado corre entre navy y el acento frío — ambos AA sobre blanco */
+/* Sobre fondo claro (atmósfera), el degradado corre entre navy y cobre — ambos con
+   contraste adecuado sobre blanco/marfil (ver tokens.css para las razones de cada tono) */
 section:not([data-surface="dark"]) .text-gradient {
-  background: linear-gradient(100deg, var(--color-navy-900), var(--color-accent-cool-200));
+  background: linear-gradient(100deg, var(--color-navy-900), var(--color-gold-200));
   -webkit-background-clip: text;
   background-clip: text;
   color: var(--color-navy-900);
