@@ -288,6 +288,24 @@ section[data-surface="atmosphere"] .btn--ghost:hover {
   border-color: var(--color-gold-200);
 }
 
+/* Variante "texto" (D26, lab: "Ver sistema de marca") — para CTA de menor jerarquía
+   que el botón sólido/ghost: una frase que ya funciona como oración, subrayada, sin
+   fondo ni padding de botón. No reemplaza al CTA principal (D18); es para transiciones
+   internas de página como "si esto le resulta familiar, podemos ayudarle". */
+.btn--text {
+  padding: 0 0 2px;
+  border-color: transparent;
+  border-bottom-color: var(--color-gold-200);
+  border-radius: 0;
+  color: var(--color-navy-900);
+}
+.btn--text:hover { color: var(--color-gold-200); border-bottom-color: currentColor; }
+section[data-surface="dark"] .btn--text {
+  color: var(--color-white);
+  border-bottom-color: var(--color-accent-on-dark);
+}
+section[data-surface="dark"] .btn--text:hover { color: var(--color-accent-on-dark); }
+
 /* ---------- Hero ---------- */
 .hero {
   position: relative;
