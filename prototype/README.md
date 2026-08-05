@@ -6,7 +6,7 @@
 > La página de Captación de Empresas (D11) **no se incluyó**: no está confirmada contractualmente y construirla habría ampliado alcance sin autorización (condición de parada, AGENTS.md).
 > Cómo ver el prototipo: abrir `prototype/index.html` directamente en un navegador (no requiere servidor). Referencia visual interna aprobada: `prototype/type-lab.html`.
 
-> **Transición visual (D26, 2026-08-05):** este README documenta fielmente la implementación actual de la Home, todavía construida sobre D22/D23. El Visual Language Lab reemplaza esas decisiones como dirección futura, pero aún no se aplica a `index.html`: Playfair Display + Instrument Sans, paleta reducida alineada con marca y escala de spacing aprobada. Esta separación evita confundir el estado implementado con el sistema aprobado para la siguiente iteración.
+> **Migración visual (D26, 2026-08-05 — iteración 12 de STATUS.md):** el Visual Language Lab (Playfair Display + Instrument Sans, paleta reducida alineada con marca, radios discretos) ya está aplicado en `tokens.css`/`base.css`/`components.css` y por tanto en las 7 páginas construidas del sitio, no solo en Home. **Las secciones § 1.2 (dirección cromática) y § 1.3 (tipografía) de abajo describen la implementación anterior (D22/D23, teal + Space Grotesk) y quedan como registro histórico** — para los valores vigentes ver `prototype/css/tokens.css` (comentarios inline) y STATUS.md → Iteración 12.
 
 ## Iteración 2 (2026-07-29) — profundidad visual
 

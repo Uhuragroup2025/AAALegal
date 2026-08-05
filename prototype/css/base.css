@@ -21,10 +21,11 @@ h1, h2, h3, h4 {
   line-height: var(--leading-tight);
   margin: 0 0 var(--space-4);
   font-weight: 500;
+  letter-spacing: -0.02em; /* D26: Playfair Display se ajusta mejor con tracking negativo que Space Grotesk */
 }
 
-h1 { font-size: var(--text-3xl); }
-h2 { font-size: var(--text-2xl); }
+h1 { font-size: var(--text-3xl); letter-spacing: -0.03em; }
+h2 { font-size: var(--text-2xl); letter-spacing: -0.03em; }
 h3 { font-size: var(--text-lg); }
 
 p { margin: 0 0 var(--space-4); max-width: 62ch; }
@@ -42,6 +43,13 @@ ul[class] { list-style: none; margin: 0; padding: 0; }
   outline: 3px solid var(--color-focus-ring);
   outline-offset: 3px;
   border-radius: var(--radius-sm);
+}
+/* D26: la paleta reducida no tiene un tono único que cumpla 3:1 sobre navy Y sobre
+   blanco a la vez (ver tokens.css → --color-focus-ring). El valor global de arriba
+   está calibrado para el caso más común (fondo claro); esta regla lo corrige dentro
+   de cualquier superficie oscura para que el foco siga siendo visible ahí. */
+[data-surface="dark"] :focus-visible {
+  outline-color: var(--color-focus-ring-on-dark);
 }
 
 .container {
