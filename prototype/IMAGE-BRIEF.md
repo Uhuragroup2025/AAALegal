@@ -18,7 +18,7 @@
 
 ### IMG-02 — Card visual "Normalización de Activos", Inicio
 
-- **Página / sección:** Inicio → mosaico de los 4 focos, card 03
+- **Página / sección:** Inicio → mosaico de los 3 focos, card 02
 - **Función narrativa:** dar peso "premium" a Normalización de Activos — nunca debe sentirse como cobranza
 - **Qué debe comunicar:** precisión y trazabilidad — no presión ni urgencia
 - **Escena recomendada:** detalle abstracto/editorial — documentos ordenados, un dashboard o pantalla con datos de seguimiento (sin mostrar información real de clientes), o una composición de manos organizando expedientes
@@ -78,9 +78,9 @@
 
 ---
 
-### IMG-08 — Card visual "Insolvencia", Inicio
+### IMG-08 — Card visual "Defensa de acreedores en procesos de insolvencia", Inicio
 
-- **Página / sección:** Inicio → mosaico de los 4 focos, card 01 (la card grande/destacada)
+- **Página / sección:** Inicio → mosaico de los 3 focos, card 01 (la card grande/destacada)
 - **Función narrativa:** dar rostro al servicio de mayor volumen de la firma — la primera que ve el visitante en el mosaico
 - **Qué debe comunicar:** rigor técnico en acción, gesto de análisis
 - **Escena recomendada:** similar dirección que IMG-01/IMG-04 pero un encuadre distinto — evitar repetir literalmente la misma toma
@@ -89,33 +89,28 @@
 
 ---
 
-### IMG-09 — Card visual "Derecho Concursal", Inicio
+### IMG-09 — ❌ Ya no aplica (D24, 2026-08-04)
 
-- **Página / sección:** Inicio → mosaico de los 4 focos, card 02
-- **Función narrativa:** dar peso visual a uno de los tres regímenes concursales
-- **Qué debe comunicar:** precisión técnica, sin dramatismo
-- **Escena recomendada:** detalle abstracto/editorial — documentos, expedientes, o una pantalla con datos de seguimiento
-- **Evitar:** iconografía jurídica genérica (mazos, balanzas)
-- **Encuadre y proporción:** card compacta (1 fila), 4/12 columnas en desktop — el título va superpuesto abajo, sin espacio para párrafo largo
+- **Estado:** Derecho Concursal dejó de ser una tarjeta independiente y se integró como disciplina técnica en “Defensa de acreedores en procesos de insolvencia”. Se conserva el ID por trazabilidad y no se reasigna.
 
 ---
 
 ### IMG-10 — Card visual "Derecho Corporativo", Inicio
 
-- **Página / sección:** Inicio → mosaico de los 4 focos, card 04 (banda ancha y corta)
-- **Función narrativa:** cerrar el mosaico con el cuarto foco de especialización
+- **Página / sección:** Inicio → mosaico de los 3 focos, card 03
+- **Función narrativa:** cerrar el mosaico con el tercer macroservicio
 - **Qué debe comunicar:** relaciones comerciales sólidas, gestión preventiva
 - **Escena recomendada:** firma/revisión de un contrato, o dos personas en una negociación de trabajo (no una pose de "apretón de manos")
 - **Evitar:** clichés de "cierre de negocio" (apretones de manos, plumas sobre documentos en primer plano genérico)
-- **Encuadre y proporción:** panorámico horizontal corto (banda ancha, ~200px de alto en desktop) — el texto se superpone en una franja horizontal, no vertical
+- **Encuadre y proporción:** card compacta de 4/12 columnas en desktop — el título se superpone en la franja inferior
 
 ---
 
-### IMG-11 — Bloque "Insolvencia y derecho concursal", Servicios
+### IMG-11 — Bloque "Defensa de acreedores en procesos de insolvencia", Servicios
 
-- **Página / sección:** Servicios → sección "Nuestros servicios", bloque 01·02 (el de vidrio, el único con imagen antes de este ajuste era el 03)
+- **Página / sección:** Servicios → sección "Nuestros servicios", bloque 01 (el de vidrio)
 - **Función narrativa:** dar peso visual al bloque de mayor volumen de la firma, dentro de la tarjeta de vidrio destacada
-- **Qué debe comunicar:** perspectiva técnica y estratégica — mismo criterio que IMG-09
+- **Qué debe comunicar:** perspectiva técnica y estratégica desde la representación exclusiva del acreedor
 - **Evitar:** iconografía jurídica genérica (mazos, balanzas)
 - **Encuadre y proporción:** vertical/horizontal media, la tarjeta de vidrio reserva ~320px de ancho para la imagen junto al texto
 
@@ -123,8 +118,8 @@
 
 ### IMG-12 — Bloque "Derecho corporativo", Servicios
 
-- **Página / sección:** Servicios → sección "Nuestros servicios", bloque 04
-- **Función narrativa:** cerrar la sección con el cuarto servicio — mismo criterio que IMG-10 en Inicio, pero en composición texto+imagen a dos columnas en vez de banda horizontal
+- **Página / sección:** Servicios → sección "Nuestros servicios", bloque 03
+- **Función narrativa:** cerrar la sección con el tercer macroservicio — mismo criterio que IMG-10 en Inicio, pero en composición texto+imagen a dos columnas
 - **Qué debe comunicar:** relaciones comerciales sólidas, gestión preventiva
 - **Evitar:** clichés de "cierre de negocio" (apretones de manos, plumas sobre documentos)
 - **Encuadre y proporción:** horizontal 3:2 aprox., columna derecha de una composición texto+imagen
@@ -196,8 +191,7 @@
 |---|---|---|
 | Hero panorámico | ancho completo, velo inferior (~4:3 a 16:9 según viewport) | IMG-01, IMG-04, IMG-15 |
 | Card visual de mosaico (grande) | horizontal ancha, 8/12 columnas × 2 filas | IMG-08 |
-| Card visual de mosaico (compacta) | 3:2 aprox. (min-height fijo, ancho variable) | IMG-02, IMG-09 |
-| Card visual de mosaico (banda) | panorámico corto, texto en franja horizontal | IMG-10 |
+| Card visual de mosaico (compacta) | 3:2 aprox. (min-height fijo, ancho variable) | IMG-02, IMG-10 |
 | Texto + imagen (grid-2) | 3:2 / 16:10 | IMG-03, IMG-05, IMG-12 |
 | Tarjeta de vidrio + imagen | vertical/horizontal media (~320px) junto al texto | IMG-11 |
 | Miniatura de blog / imagen destacada | 16:10 en listado, ancho completo en single page | IMG-17, IMG-18 |
@@ -205,6 +199,6 @@
 
 ## Notas para producción
 
-- Estas diecisiete imágenes (IMG-01 a IMG-05, IMG-07 a IMG-18 — IMG-06 quedó sin uso, ver arriba) son las requeridas para el alcance actual (Inicio + Servicios + Contacto + Noticias y Análisis). **Talento AAA se eliminó como página el 2026-08-03** (su formulario de postulación se trasladó a Nuestro Equipo) — nunca tuvo brief propio, su hero no usaba fotografía. **Nuestro Equipo** ya se construyó (`nuestro-equipo.html`) pero tampoco tiene brief propio todavía: las fotos del equipo por área y la foto de founders siguen sin recibirse del cliente, así que la página usa placeholders de texto (`.ady-note`), no bloques `.media-placeholder` — su brief se agregará cuando el cliente confirme cuántas fotos y de qué formato. Nuestra Experiencia sigue sin construir y también tendrá su propio brief cuando se construya.
+- El inventario conserva los IDs IMG-06 e IMG-09 como retirados por trazabilidad; no deben producirse ni reasignarse. Las imágenes activas corresponden al alcance actual de Inicio + Servicios + Contacto + Noticias y Análisis. **Talento AAA se eliminó como página el 2026-08-03** (su formulario de postulación se trasladó a Nuestro Equipo) — nunca tuvo brief propio, su hero no usaba fotografía. **Nuestro Equipo** ya se construyó (`nuestro-equipo.html`) pero tampoco tiene brief propio todavía: las fotos del equipo por área y la foto de founders siguen sin recibirse del cliente, así que la página usa placeholders de texto (`.ady-note`), no bloques `.media-placeholder` — su brief se agregará cuando el cliente confirme cuántas fotos y de qué formato. Nuestra Experiencia sigue sin construir y también tendrá su propio brief cuando se construya.
 - Todas deben poder recortarse (object-fit: cover) sin perder al sujeto principal — evitar sujetos pegados al borde del encuadre.
 - Ninguna imagen debe incluir texto incrustado (los titulares van en HTML, no en la fotografía).
