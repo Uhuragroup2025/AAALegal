@@ -1,6 +1,6 @@
 # STATUS.md — Estado del proyecto y síntesis de insumos
 
-> Actualizado: 2026-08-05 · **C0 = APROBADO** · **C1 = APROBADO (narrativa + copy, v1 y v2)** · **C2 = CANDIDATO A REVISIÓN (iteración 11 — Visual Language Lab como referencia interna; ver abajo)** · Decisiones vigentes hasta D26. La dirección visual futura vuelve a una paleta reducida alineada con marca y reemplaza D22/D23 por D26; la Home actual todavía no ha sido migrada a este sistema.
+> Actualizado: 2026-08-05 · **C0 = APROBADO** · **C1 = APROBADO (narrativa + copy, v1 y v2)** · **C2 = CANDIDATO A REVISIÓN (iteración 12 — Visual Language Lab migrado a las 7 páginas del sitio; ver abajo)** · Decisiones vigentes hasta D26. La paleta reducida alineada con marca (D26) reemplaza D22/D23 y ya está aplicada en todo el prototipo, no solo en la Home.
 
 ## C2 — Prototipo (candidato, 2026-07-29)
 
@@ -178,6 +178,26 @@ Por instrucción del Owner se recuperó, dentro del bloque “Dimensión humana�
 **Alcance técnico:** no se añadieron dependencias, frameworks, procesos de compilación, carpetas ni cambios de arquitectura. El laboratorio es una página interna aislada y no comparte CSS con la Home.
 
 **Estado:** dirección general aprobada como referencia interna; implementación en Home y refinamiento final de atmósfera/iconografía pendientes. Gate 1 no se autoaprueba.
+
+### Iteración 12 — Migración de D26 a las 7 páginas del sitio (2026-08-05, candidato a revisión)
+
+**Motivo:** el Owner pidió avanzar con la migración del Visual Language Lab (D26) sobre el mismo `index.html` en vez de crear una segunda versión de Home en paralelo — la historia previa queda disponible vía git (commit `e52782d` y anteriores), sin duplicar archivos ni mantenimiento. Como `tokens.css`/`base.css`/`components.css` son compartidos por las 7 páginas construidas, la migración se aplicó al sitio completo, no solo a Home (confirmado explícitamente con el Owner antes de ejecutar).
+
+**Qué se hizo:**
+- `tokens.css`: paleta reemplazada de la teal de D23 a la paleta reducida de D26 (`#063B59`/`#B9CEED`/`#F5F3EE`/`#FFFFFF`/`#CAA181`/`#D9D9D9`/`#111820`, valores tomados literalmente de `type-lab.html`); tipografía cambiada de Space Grotesk/Krub a Playfair Display/Instrument Sans; radios reducidos a los valores discretos del lab (4px/8px, con 12/16/24px interpolados para contenedores que el lab no cubre). La escala de espaciado no cambió — ya coincidía exactamente con la del lab (`4/8/12/16/24/32/48/64/96/128`).
+- Alias retrocompatibles (`--color-gold-100/200/300`, `--color-navy-900/800/700`, etc.) se remapearon a la nueva paleta para no reescribir las ~50 reglas de `components.css` que ya los referencian — mismo patrón usado en la migración de D23.
+- `<link>` de Google Fonts actualizado en las 8 páginas HTML del sitio (Krub+Space Grotesk → Instrument Sans+Playfair Display).
+- **Foco de teclado (accesibilidad):** a diferencia de la paleta teal, ningún tono único de D26 cumple 3:1 tanto sobre navy como sobre blanco a la vez. Se resolvió con dos tokens (`--color-focus-ring` claro por defecto, `--color-focus-ring-on-dark` para secciones oscuras) en vez de uno solo, con overrides explícitos donde el CSS ya existente tenía reglas más específicas que el override genérico no alcanzaba a vencer (ver defectos abajo).
+- `.cierre-card--cta` (tarjeta de cierre de Inicio) pasó de fondo en degradado a color sólido, alineándose con la regla ya cerrada en D-10 (degradados solo como fondo de sección, nunca en cards) — no se había detectado antes porque el cierre de D-10 fue sobre el laboratorio, no sobre los componentes reales de Home.
+- `prototype/assets/img/latam-map.svg` (mapa de "Sectores") tenía colores de la paleta teal fijos en el propio archivo SVG, no en CSS — recoloreado manualmente a los equivalentes de D26.
+
+**Defectos encontrados y corregidos durante el QA de esta misma migración (detalle completo en QA.md → D-11 a D-14):** texto blanco invisible sobre cards claras (`.surface-solid`) dentro de secciones oscuras (Casos de éxito); anillo de foco de teclado invisible en el formulario de postulación (Nuestro Equipo) por una regla más específica que el override genérico de accesibilidad; los dos hallazgos ya descritos arriba (mapa SVG, card de cierre). Ninguno bloqueó continuar — los cuatro quedaron corregidos y reverificados en la misma sesión.
+
+**QA ejecutado:** verificado en 1440px/1024px/768px/390px en Inicio, Servicios, Nuestro Equipo, Contacto y Blog — sin overflow horizontal en ninguna página ni ancho. Verificación específica de accesibilidad: anillo de foco del stepper (Servicios) y del formulario de postulación (Nuestro Equipo) confirmados con el tono correcto por color computado, no solo a simple vista. Sin errores de consola.
+
+**No se creó ninguna página ni archivo nuevo** — toda la migración vive en los archivos CSS/SVG ya existentes y en el `<link>` de fuentes de cada página, por instrucción explícita del Owner de no mantener una segunda versión de Home en paralelo.
+
+**Estado:** ✅ Candidato a revisión — **no aprobado**. Con esta iteración, D26 queda completamente implementado (ya no solo en el laboratorio) en las 7 páginas construidas. Pendiente: QA de Content, consolidación de Product Lead y Gate 1, igual que el resto del prototipo.
 
 ## Fase actual
 

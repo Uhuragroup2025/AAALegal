@@ -265,14 +265,16 @@ section[data-surface="atmosphere"] .btn--ghost {
    así que seguía ganando incluso en hover — el color quedaba congelado en navy de
    nuevo, solo que ahora por especificidad CSS en vez de por `style` inline. Hace
    falta un :hover explícito a este mismo nivel de especificidad para que gane.
-   `--color-accent-on-dark` (el tono del hover genérico) es un teal pálido pensado
-   para leerse sobre navy — sobre fondo claro perdería casi todo el contraste, así
-   que aquí se usa `--color-accent-main`, el único tono que cumple 3:1 en ambos fondos. */
+   `--color-accent-on-dark` (el tono del hover genérico) es el azul claro de la paleta
+   D26, pensado para leerse sobre navy — sobre fondo claro perdería casi todo el
+   contraste (1.60:1), así que aquí se usa `--color-gold-200` (accent-deep, ~4.5:1
+   sobre blanco): a diferencia de la paleta teal de D23, esta paleta no tiene un tono
+   único que cumpla 3:1 en ambos fondos, así que cada contexto usa el suyo. */
 section[data-surface="light"] .btn--ghost:hover,
 section[data-surface="muted"] .btn--ghost:hover,
 section[data-surface="atmosphere"] .btn--ghost:hover {
-  color: var(--color-accent-main);
-  border-color: var(--color-accent-main);
+  color: var(--color-gold-200);
+  border-color: var(--color-gold-200);
 }
 
 /* ---------- Hero ---------- */
@@ -538,7 +540,11 @@ section[data-surface="muted"] + .hero .curve-divider,
      botón quedaban pegados a los cuatro bordes de la tarjeta (confirmado: 0px medido
      en el navegador). Ahora usa un token real de la escala. */
   padding: var(--space-12);
-  background: linear-gradient(135deg, var(--color-navy-elevated), var(--color-accent-main) 65%, var(--color-accent-light));
+  /* Color sólido, no degradado (D-10, QA.md): los degradados quedan reservados a
+     fondos de sección/foto a pantalla completa, nunca a cards — esta tarjeta lo
+     tenía desde la iteración "profundidad visual" (D23) y se corrige aquí junto con
+     la migración a D26. */
+  background: var(--color-navy-elevated);
 }
 .cierre-card__content {
   position: relative;
@@ -1192,9 +1198,21 @@ section:not([data-surface="dark"]) .text-gradient {
 
 .surface-solid {
   background: var(--color-surface-light);
+  color: var(--color-text-on-light);
   border: 1px solid var(--color-border-subtle);
   border-radius: var(--radius-container);
   box-shadow: var(--shadow-sm);
+}
+/* Bug encontrado en QA de la migración D26 (2026-08-05): `.surface-solid` siempre tiene
+   fondo claro (arriba), pero nunca fijaba su propio color de texto — dependía de heredar
+   el del contenedor. Dentro de una sección `data-surface="dark"` (p. ej. Casos de éxito),
+   la regla de base.css que pone los h1/h2/h3 en blanco gana por especificidad sobre el
+   `color` del contenedor, dejando texto blanco sobre una card clara (ilegible). El fix de
+   arriba resuelve el body text; los encabezados necesitan este override explícito. */
+section[data-surface="dark"] .surface-solid h1,
+section[data-surface="dark"] .surface-solid h2,
+section[data-surface="dark"] .surface-solid h3 {
+  color: var(--color-ink-dark);
 }
 
 /* Tarjeta visual — para fotografía (placeholder mientras no exista el asset, ver IMAGE-BRIEF.md) */
@@ -1264,11 +1282,17 @@ section:not([data-surface="dark"]) .text-gradient {
   width: fit-content;
 }
 .card-cta__icon { width: 1em; height: 1em; }
+/* `.card-cta` vive dentro de `.surface-solid`/`.surface-visual` (mayoría en fondo claro)
+   y de `.surface-glass` (puede flotar sobre atmósfera oscura) — igual que el foco global
+   (tokens.css), esta paleta no tiene un tono único que cumpla 3:1 en ambos fondos, así
+   que el claro es el valor base y el oscuro se sobreescribe explícitamente abajo. */
 .card-cta:focus-visible {
-  outline: 2px solid var(--color-accent-main);
+  outline: 2px solid var(--color-gold-200);
   outline-offset: 4px;
   border-radius: var(--radius-sm);
 }
+[data-surface="dark"] .card-cta:focus-visible,
+.surface-glass .card-cta:focus-visible { outline-color: var(--color-accent-on-dark); }
 
 /* ---------- Efectos exclusivos de hover real (2, 3, 4) ----------
    `(hover:hover) and (pointer:fine)` evita el "hover pegado" en táctil: sin esto,
@@ -1455,16 +1479,19 @@ section:not([data-surface="dark"]) .text-gradient {
 }
 .stepper__icon svg { width: 100%; height: 100%; }
 .stepper__step.is-active .stepper__icon {
-  color: var(--color-accent-main);
+  color: var(--color-gold-200);
   opacity: 1;
 }
 /* Fondo oscuro (2026-07-31, Servicios § Metodología, a pedido del Owner — más
    contraste frente a las secciones claras de alrededor): el divisor y el ícono
    inactivo estaban calibrados para un fondo claro (`--color-border-subtle`,
-   `--color-ink-dark`, casi invisibles sobre navy). El ícono activo no cambia —
-   `--color-accent-main` ya cumple 3:1 tanto sobre navy-deep como sobre blanco. */
+   `--color-ink-dark`, casi invisibles sobre navy). El ícono activo (D26): a
+   diferencia de la paleta teal de D23, `--color-gold-200` (accent-deep) da buen
+   contraste sobre blanco pero se apaga sobre navy — se sobreescribe aquí al azul
+   claro (`--color-accent-on-dark`), que sí funciona sobre fondo oscuro. */
 section[data-surface="dark"] .stepper__step { border-top-color: var(--color-border-on-dark); }
 section[data-surface="dark"] .stepper__icon { color: var(--color-white); }
+section[data-surface="dark"] .stepper__step.is-active .stepper__icon { color: var(--color-accent-on-dark); }
 
 /* Estado base (sin JS / sin soporte IntersectionObserver): los 3 pasos quedan
    totalmente legibles — el atenuado de "paso inactivo" solo se activa una vez que
@@ -1486,7 +1513,8 @@ section[data-surface="dark"] .stepper__icon { color: var(--color-white); }
    leerse todos de una vez, nunca quedar atenuados permanentemente. */
 @media (prefers-reduced-motion: reduce) {
   .stepper__step { opacity: 1; transform: none; }
-  .stepper__icon { color: var(--color-accent-main); opacity: 1; }
+  .stepper__icon { color: var(--color-gold-200); opacity: 1; }
+  section[data-surface="dark"] .stepper__icon { color: var(--color-accent-on-dark); opacity: 1; }
 }
 
 /* =====================================================================
@@ -1521,7 +1549,11 @@ section[data-surface="dark"] .stepper__icon { color: var(--color-white); }
 .talent-form__field input[type="file"] { padding: var(--space-2) var(--space-4); }
 .talent-form__field input:focus-visible,
 .talent-form__field textarea:focus-visible {
-  outline: 3px solid var(--color-focus-ring);
+  /* Este formulario vive siempre sobre fondo oscuro (§ arriba) — se referencia
+     directamente el token "on-dark" en vez del override genérico de base.css
+     ([data-surface="dark"] :focus-visible), porque esta regla ya es más específica
+     (clase + tipo + pseudo-clase) y ganaría igual con el valor claro por defecto. */
+  outline: 3px solid var(--color-focus-ring-on-dark);
   outline-offset: 2px;
 }
 .talent-form__submit { align-self: flex-start; }

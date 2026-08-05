@@ -8,34 +8,40 @@
 
 :root {
   /* ============================================================
-     PALETA — Decisión D23 (Owner, 2026-07-29): reemplaza la paleta
-     institucional (navy #063B59 + dorados) por esta nueva dirección
-     cromática turquesa/teal. Ver PROJECT.md → Decisiones D23 y
-     STATUS.md para el registro completo — esto NO estaba en el
-     manual de marca original; es un cambio de identidad visual
-     confirmado explícitamente por el Owner, pendiente de validación
-     formal de Product Lead/cliente antes de Gate 1.
+     PALETA — Decisión D26 (Product Lead, 2026-08-05): Visual Language
+     Lab como sistema vigente. Reemplaza la paleta turquesa/teal de D23
+     por una paleta reducida alineada con el manual de marca (el navy
+     #063B59 es el mismo del manual original; D23 lo había sustituido,
+     D26 lo restaura). Valores tomados literalmente de la referencia
+     interna aprobada, prototype/type-lab.html (:root). Ver PROJECT.md
+     → Decisiones D26 y QA.md para el registro de migración.
      Nombrada en capas para mapear 1:1 a theme.json settings.color.palette. */
-  --color-navy-deep: #04445F;     /* fondo profundo / navegación oscura */
-  --color-accent-main: #189AB4;   /* acento principal / interacción */
-  --color-accent-light: #74E7DA;  /* iluminación y acentos sobre fondo oscuro */
-  --color-surface-soft: #D4F2F4;  /* fondos suaves / tarjetas claras */
-  --color-ink-dark: #101820;      /* texto oscuro */
-  --color-surface-light: #F7F8F5; /* fondo general cálido/claro */
-  --color-white: #FFFFFF;          /* se conserva: blanco puro para texto/iconos sobre navy-deep */
+  --color-navy-deep: #063B59;     /* "Primary" del lab — autoridad y estructura */
+  --color-accent-main: #CAA181;   /* "Accent" del lab — cobre mate, uso decorativo/dark */
+  --color-accent-light: #B9CEED;  /* "Secondary" del lab — azul claro, tecnología tranquila */
+  --color-surface-soft: #F5F3EE;  /* "Background" del lab — marfil/calidez editorial */
+  --color-ink-dark: #111820;      /* "Text" del lab — tinta, no negro puro */
+  --color-surface-light: #F5F3EE; /* fondo general — mismo marfil que surface-soft (D26 no distingue ambos roles) */
+  --color-white: #FFFFFF;          /* "Surface" del lab — claridad funcional */
 
   /* Tripletes RGB — para componer rgba() en sombras/scrims sin duplicar el valor hex */
-  --color-navy-deep-rgb: 4, 68, 95;
-  --color-accent-main-rgb: 24, 154, 180;
-  --color-accent-light-rgb: 116, 231, 218;
+  --color-navy-deep-rgb: 6, 59, 89;
+  --color-accent-main-rgb: 202, 161, 129;
+  --color-accent-light-rgb: 185, 206, 237;
 
-  /* Variantes derivadas (no son parte de los 6 tonos base — se calculan a partir de ellos,
-     igual que antes existían navy-800/navy-700 derivados del navy institucional) */
-  --color-navy-hover: #033349;      /* navy-deep oscurecido — hover de botones sólidos */
-  --color-navy-elevated: #0A5A78;   /* navy-deep aclarado — superficies oscuras elevadas */
-  --color-accent-main-strong: #106475; /* accent-main oscurecido — único caso: texto pequeño
-     sobre fondo CLARO (accent-main puro da 3.3:1 sobre blanco, insuficiente para texto
-     normal; esta variante da 6.8:1, ver justificación de contraste en README). */
+  /* Variantes derivadas (no son parte de los tonos base del lab — se calculan a partir de
+     ellos, igual que antes existían navy-800/navy-700 derivados del navy institucional) */
+  --color-navy-hover: #032C43;      /* "Primary-deep" del lab — hover de botones sólidos */
+  --color-navy-elevated: #084D74;   /* navy-deep aclarado (no está en el lab, interpolado en
+     la misma proporción que la variante anterior) — superficies oscuras elevadas */
+  --color-accent-main-strong: #9A6D4D; /* "Accent-deep" del lab — único caso: texto/ícono/
+     borde con requisito de AA sobre fondo CLARO. El cobre puro (--color-accent-main) da
+     solo 2.35:1 sobre blanco (falla incluso el mínimo de 3:1 para UI); esta variante da
+     ~4.5:1, verificado por fórmula de luminancia relativa — ver detalle en README. */
+  --color-surface-muted: #E6E4DC; /* fondo suave para cards/citas (no está en el lab —
+     interpolado entre Background #F5F3EE y Border #D9D9D9 para distinguirse de ambos) */
+  --color-text-muted: #5E666D; /* "Text-muted" del lab — texto secundario/captions/ayudas */
+  --color-border-flat: #D9D9D9; /* "Border" del lab — línea sólida, distinta de --color-border-subtle (rgba) */
 
   /* Alias retrocompatibles — todo el sistema de componentes ya construido (~50 reglas)
      referencia estos nombres; remapearlos aquí propaga la nueva paleta sin tocar cada
@@ -43,36 +49,40 @@
   --color-navy-900: var(--color-navy-deep);
   --color-navy-800: var(--color-navy-hover);
   --color-navy-700: var(--color-navy-elevated);
-  --color-gold-100: var(--color-accent-light);   /* rol "acento claro sobre fondo oscuro" */
-  --color-gold-200: var(--color-accent-main);    /* rol "acento medio — bordes/iconos" */
-  --color-gold-300: var(--color-accent-main-strong); /* rol "acento sobre superficie clara" */
-  --color-gray-100: var(--color-surface-soft);
+  --color-gold-100: var(--color-accent-light);   /* rol "acento claro sobre fondo oscuro" — ahora el azul claro del lab */
+  --color-gold-200: var(--color-accent-main-strong); /* rol "acento con AA sobre superficie clara" — ahora accent-deep */
+  --color-gold-300: var(--color-accent-main-strong); /* mismo rol que gold-200 — el lab da un solo tono oscurecido, no dos */
+  --color-gray-100: var(--color-surface-muted);
   --color-ink: var(--color-ink-dark);
   /* La "dirección cromática candidata B" (acento frío) de la iteración anterior queda
-     absorbida por la nueva paleta — ya es teal de base, no un acento aparte. */
+     absorbida por la nueva paleta — el azul claro del lab cumple el mismo rol. */
   --color-accent-cool-100: var(--color-accent-light);
   --color-accent-cool-200: var(--color-accent-main);
 
   /* Color — roles semánticos (para no acoplar componentes a un valor de marca directo) */
-  --color-surface-muted: var(--color-gray-100);
   --color-surface-dark: var(--color-navy-900);
   --color-surface-dark-elevated: var(--color-navy-700);
   --color-text-on-light: var(--color-ink);
   --color-text-on-dark: var(--color-white);
-  --color-accent-on-dark: var(--color-gold-100);   /* contraste 7.1:1 sobre navy-deep */
-  --color-accent-strong: var(--color-gold-200);     /* contraste 3.2:1 sobre navy-deep — solo texto grande/bordes/iconos */
+  --color-accent-on-dark: var(--color-gold-100);   /* azul claro — 7.38:1 sobre navy-deep */
+  --color-accent-strong: var(--color-gold-200);     /* accent-deep — ~4.5:1 sobre blanco, texto/bordes/iconos en superficie clara */
   --color-border-subtle: rgba(var(--color-navy-deep-rgb), 0.12);
   --color-border-on-dark: rgba(var(--color-accent-light-rgb), 0.35);
-  /* Foco: accent-main, no accent-light — es el único tono del sistema que cumple 3:1
-     (mínimo WCAG para indicadores no textuales) tanto sobre navy-deep (3.2:1) como sobre
-     blanco (3.3:1). accent-light falla sobre blanco (1.5:1) pese a ser mejor texto sobre oscuro. */
-  --color-focus-ring: var(--color-accent-main);
+  /* Foco (D26): a diferencia de la paleta teal (D23), ningún tono único de esta paleta
+     cumple 3:1 tanto sobre navy-deep como sobre blanco a la vez — el azul claro da 7.38:1
+     sobre navy pero solo 1.60:1 sobre blanco; el cobre da 5.02:1 sobre navy pero 2.35:1
+     sobre blanco. Se resuelve con dos tokens en vez de uno: navy-deep como anillo por
+     defecto (11.8:1 sobre blanco/marfil, el caso más común en el sitio) y un override
+     explícito a azul claro dentro de `[data-surface="dark"]` (ver base.css) para que el
+     foco siga siendo visible sobre fondo oscuro (formularios, CTAs oscuros). */
+  --color-focus-ring: var(--color-navy-deep);
+  --color-focus-ring-on-dark: var(--color-accent-light);
 
   --color-surface-atmosphere: var(--color-surface-light); /* consolidado — un solo tono de base clara */
 
   /* Halos — capas difuminadas muy desaturadas para el fondo "nebulosa" (§ 6).
-     Ya no hay dorado en la paleta: los halos ahora recorren tonos de la propia
-     paleta teal (accent-main / accent-light / navy-deep) en vez de dorado + azul frío. */
+     Recorren los tonos de la paleta reducida (D26): cobre / azul claro / navy-deep,
+     en vez de los dorados del manual original o el teal de D23. */
   --halo-accent-main: rgba(var(--color-accent-main-rgb), 0.40);
   --halo-cool: rgba(var(--color-accent-light-rgb), 0.35);
   --halo-navy: rgba(var(--color-navy-deep-rgb), 0.14);
@@ -81,9 +91,11 @@
   /* Header sticky con glass. Opacidad calibrada, no arbitraria: con el header fijo, al
      hacer scroll puede quedar cualquier sección (clara u oscura) detrás. Se calculó el
      mínimo de opacidad que garantiza AA (4.5:1) para texto blanco incluso en el peor
-     caso — fondo blanco puro detrás. Con la nueva paleta, 0.88 de navy-deep sobre blanco
-     da luminancia combinada ~0.19, contraste ~4.6:1. El valor de referencia (0.85)
-     quedaba en ~4.3:1, justo por debajo de AA — se ajustó +0.03 para asegurar el mínimo. */
+     caso — fondo blanco puro detrás. Con la paleta D26, 0.88 de navy-deep (#063B59)
+     sobre blanco da luminancia combinada ~0.077, contraste ~8.3:1 — más margen que con
+     el navy de D23 (~4.6:1), porque #063B59 es más oscuro/saturado. Se mantiene 0.88
+     sin cambios: ya cumple AA con holgura y no hay motivo para tocar un valor que
+     funciona. */
   --header-glass-bg: rgba(var(--color-navy-deep-rgb), 0.88);
 
   /* Superficies "vidrio" — vidrio real (translúcido), pensado para flotar sobre la
@@ -99,13 +111,14 @@
   --glass-shadow: 0 8px 32px rgba(var(--color-navy-deep-rgb), 0.18);
   --glass-highlight: inset 0 1px 0 rgba(255, 255, 255, 0.45);
 
-  /* Tipografía — familias.
-     --font-display: Space Grotesk (Decisión D22, Owner, 2026-07-29) — reemplaza a Big Caslon
-     en títulos; alternativa "C" del comparativo en type-lab.html. Reservada a encabezados,
-     nunca a cuerpo de texto (ver prototype/README.md § 1.3).
-     --font-sans: Krub (manual de marca) — se mantiene sin cambios en cuerpo de texto/UI. */
-  --font-display: 'Space Grotesk', 'Segoe UI', system-ui, -apple-system, sans-serif;
-  --font-sans: 'Krub', 'Segoe UI', system-ui, -apple-system, sans-serif;
+  /* Tipografía — familias. Decisión D26 (Product Lead, 2026-08-05): reemplaza Space
+     Grotesk/Krub (D22) por el par tipográfico del Visual Language Lab.
+     --font-display: Playfair Display — encabezados y énfasis, nunca cuerpo de texto.
+     --font-sans: Instrument Sans — cuerpo de texto y UI. Ambas Google Fonts de uso
+     libre, cargadas vía <link> (ver prototype/README.md § 1.3 y § 7 — mismo riesgo de
+     dependencia externa ya registrado para Krub/Space Grotesk, sin cambios). */
+  --font-display: 'Playfair Display', Georgia, 'Times New Roman', serif;
+  --font-sans: 'Instrument Sans', 'Segoe UI', system-ui, -apple-system, sans-serif;
 
   /* Tipografía — escala (mapeable a settings.typography.fontSizes) */
   --text-xs: 0.8125rem;
@@ -143,13 +156,18 @@
   --space-section: clamp(6rem, 9vw, 10rem);        /* ~96–160px desktop */
   --space-section-mobile: clamp(4rem, 12vw, 6rem);  /* ~64–96px — se aplica bajo 640px */
 
-  /* Radios — contenedores principales 18–24px (§ 2); xl se reserva a paneles fotográficos grandes */
-  --radius-sm: 6px;
-  --radius-md: 14px;
-  --radius-container: 20px;
-  --radius-lg: 28px;
-  --radius-xl: 40px;
-  --radius-pill: 999px;
+  /* Radios (D26) — el lab define solo dos: --radius-control (4px) y --radius-card (8px),
+     bajo el principio "radios discretos, superficies planas, bordes precisos" (más
+     institucional que el 18–24px de la dirección anterior). Los tres tokens que el lab
+     no cubre (container/lg/xl, para paneles más grandes que un botón o una card de
+     componente) se interpolan reduciendo cada uno a poco menos de la mitad de su valor
+     anterior, manteniendo el mismo principio de discreción sin inventar una escala nueva. */
+  --radius-sm: 4px;         /* = --radius-control del lab */
+  --radius-md: 8px;         /* = --radius-card del lab */
+  --radius-container: 12px; /* interpolado — contenedores principales */
+  --radius-lg: 16px;        /* interpolado */
+  --radius-xl: 24px;        /* interpolado — paneles fotográficos grandes */
+  --radius-pill: 999px;     /* sin cambio — pills/badges siguen totalmente redondeados */
 
   /* Sombra — suave, nunca dura (Referente 02) */
   --shadow-sm: 0 1px 2px rgba(var(--color-navy-deep-rgb), 0.06);
