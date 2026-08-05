@@ -414,9 +414,6 @@ section[data-surface="muted"] + .hero .curve-divider,
 }
 /* Todas las tarjetas de esta cuadrícula deben verse como un mismo conjunto,
    sin importar cuánto texto tenga cada una. */
-.grid-2--stretch { align-items: stretch; }
-.grid-2--stretch > .surface-solid { display: flex; flex-direction: column; }
-
 /* ---------- Servicios (bloques editoriales, Capacidad Técnica) ---------- */
 .service-list {
   display: grid;
@@ -743,6 +740,13 @@ section[data-surface="muted"] + .hero .curve-divider,
 }
 .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-12); align-items: center; }
 @media (max-width: 800px) { .grid-2 { grid-template-columns: 1fr; } }
+/* Modificador para cuadrículas de cards (p. ej. "situaciones" en Inicio): las 4 deben
+   verse como un mismo conjunto sin importar cuánto texto tenga cada una. Debe ir
+   DESPUÉS de `.grid-2` en el archivo — misma especificidad (una clase), así que si
+   apareciera antes, `align-items:center` de arriba ganaría por orden de cascada y las
+   cards volverían a verse de alturas distintas (bug encontrado 2026-08-05). */
+.grid-2--stretch { align-items: stretch; }
+.grid-2--stretch > .surface-solid { display: flex; flex-direction: column; }
 /* En la sección de equipo, la imagen ya es compacta (`.people-intro__media`, max-width
    360px) — sin esto seguiría estirándose a ocupar la mitad completa de la columna. */
 /* Bug corregido (2026-07-31): usaba `var(--space-10)`, un token que NO existe en la
