@@ -1,6 +1,6 @@
 # STATUS.md — Estado del proyecto y síntesis de insumos
 
-> Actualizado: 2026-08-03 · **C0 = APROBADO** · **C1 = APROBADO (narrativa + copy, v1 y v2)** · **C2 = CANDIDATO A REVISIÓN (iteración 6 — página "Captación B2B" renombrada a "Contacto" en el menú y reordenada al final; ver abajo)** · Decisiones vigentes hasta D23. **Colores de marca del manual (navy `#063B59`/dorados, ver "Hechos confirmados" abajo) reemplazados en el prototipo por D23 — pendiente de validación de Product Lead/cliente, no de un cambio al manual de marca real.**
+> Actualizado: 2026-08-05 · **C0 = APROBADO** · **C1 = APROBADO (narrativa + copy, v1 y v2)** · **C2 = CANDIDATO A REVISIÓN (iteración 11 — Visual Language Lab como referencia interna; ver abajo)** · Decisiones vigentes hasta D26. La dirección visual futura vuelve a una paleta reducida alineada con marca y reemplaza D22/D23 por D26; la Home actual todavía no ha sido migrada a este sistema.
 
 ## C2 — Prototipo (candidato, 2026-07-29)
 
@@ -123,6 +123,62 @@
 
 **Estado:** ✅ Candidato a revisión — **no aprobado**.
 
+### Iteración 8 — posicionamiento exclusivo del acreedor y 3 macroservicios (2026-08-04, candidato a revisión)
+
+**Origen:** el Owner reportó una decisión explícita del cliente (Julián): AAA defiende exclusivamente a quien le deben y no asesora ni representa al deudor insolvente. La distinción debe quedar inequívoca para bancos y acreedores corporativos. Registrado como Decisión D24 en PROJECT.md.
+
+**Qué cambió:**
+- En Inicio se conservaron sin cambios el H1, el subhead y la banda de credibilidad, por instrucción expresa del Owner.
+- El mosaico pasó de “Cuatro focos” a **“Tres focos, un mismo rigor técnico”** y quedó compuesto por Defensa de acreedores en procesos de insolvencia, Normalización de Activos y Derecho Corporativo.
+- Derecho Concursal dejó de ser una tarjeta/macroservicio independiente y se integró como disciplina técnica dentro del primer servicio.
+- En Servicios, el primer bloque se renombró **“Defensa de acreedores en procesos de insolvencia”** y declara en tono institucional que la práctica está dedicada exclusivamente al acreedor y no representa al deudor insolvente.
+- Los contenidos de hero de Servicios y Contacto se intercambiaron: Servicios ahora abre con “Soluciones para acreedores / ¿Un deudor puso en riesgo tu crédito?”; Contacto recibe “Soluciones jurídicas para proteger, normalizar y recuperar activos”.
+- Metadatos, etiquetas editoriales, contenido fuente, documentación del pattern y checklist de QA se alinearon a los tres macroservicios. El término “derecho concursal” se conserva en el cuerpo técnico, no como categoría independiente.
+
+**Alcance:** es una actualización de posicionamiento, copy y organización interna del portafolio; no agrega páginas, integraciones ni funcionalidades. D11 sigue sin confirmación contractual y C2 continúa sin aprobación de Gate 1.
+
+**Estado:** ✅ Candidato a revisión — **no aprobado**.
+
+### Iteración 9 — Narrativa de Homepage (2026-08-04, candidato a revisión)
+
+**Objetivo:** reorganizar únicamente la Homepage para que el usuario avance desde el reconocimiento de su problema hasta el contacto con AAA, sin crear archivos, carpetas, componentes ni cambios de arquitectura.
+
+**Recorrido implementado:** problema → situaciones reconocibles → definición de AAA → tres formas de intervención → razones para confiar → evidencia/casos → sectores → equipo → contacto.
+
+**Qué se hizo:**
+- Hero actualizado con el problema del acreedor y dos CTA: “Hablemos de su caso” hacia Contacto y “Conozca cómo lo hacemos” hacia Servicios.
+- Nuevas secciones de situaciones, definición de AAA y razones de confianza, construidas con `grid-2`, `focus-grid`, `surface-solid` y `media-placeholder` ya existentes.
+- Bloque de servicios reutiliza el mosaico vigente de tres focos y conserva D24.
+- Casos de éxito incorpora la estructura solicitada para tres casos, logos, testimonio y cifra, pero muestra placeholders explícitos porque esos insumos siguen pendientes del cliente; no se inventó evidencia.
+- La sección de sectores se conservó sin cambios.
+- El bloque de equipo se simplificó a una fotografía pendiente, texto corto y CTA; se retiró el carrusel de nombres y cargos ficticios que existía en la versión anterior.
+- Cierre actualizado a “Conversemos sobre su caso” con CTA hacia Contacto.
+
+**Límites respetados:** solo se modificó `prototype/index.html` en el prototipo; no se crearon componentes, archivos ni dependencias. La documentación de gobierno y el copy fuente se actualizaron por trazabilidad (D25).
+
+**Estado:** ✅ Candidato a revisión — **no aprobado**. Casos, logos, testimonio, cifra e ilustración del proceso siguen pendientes de insumo y validación del cliente.
+
+### Iteración 10 — pills animadas del equipo recuperadas (2026-08-04, candidato a revisión)
+
+Por instrucción del Owner se recuperó, dentro del bloque “Dimensión humana”, la banda animada de pills con avatar, nombre y cargo. Se reutilizó el componente existente `.team-marquee`/`.team-pill`, sin crear CSS, archivos o componentes. Para no reintroducir los perfiles ficticios de versiones anteriores, se muestran únicamente Julián Agudelo (socio cofundador), Angélica Chamorro (socia cofundadora) y Jaime Marmolejo (director), todos confirmados en las fuentes del proyecto. Las fotografías individuales no han sido entregadas: los avatares muestran iniciales y quedan identificados como placeholders accesibles. C2 continúa candidato, no aprobado.
+
+### Iteración 11 — Visual Language Lab (2026-08-05, referencia interna aprobada)
+
+**Decisión:** la Product Lead aprobó la dirección visual general y estableció [`prototype/type-lab.html`](prototype/type-lab.html) como referencia interna para la siguiente implementación, sin aplicar todavía el sistema a la Home ni cambiar su arquitectura o narrativa (D26).
+
+**Sistema consolidado en el laboratorio:**
+- Playfair Display para títulos y énfasis; Instrument Sans para body copy y UI.
+- Paleta reducida: azul AAA `#063B59`, azul claro `#B9CEED`, marfil `#F5F3EE`, blanco `#FFFFFF`, cobre mate `#CAA181`, borde `#D9D9D9` y tinta `#111820`.
+- Escala de espacio: `4/8/12/16/24/32/48/64/96/128`; en la futura aplicación se conserva la estructura responsive existente y se normalizan los valores de la Home hacia estos tokens.
+- Especímenes internos de tipografía, color, botones, cards, formularios, estados, header, footer, marca, loader y fotografía.
+- Isotipo provisional extraído del manual para validación interna (`prototype/assets/img/aaa-isotipo-manual.png`); producción requiere el archivo maestro entregado por el cliente.
+
+**Exploraciones todavía no cerradas:** los tratamientos de degradado emulan fondos completos de sección —no cards— y deben presentarse así en el siguiente refinamiento. La muestra de Phosphor Icons usa SVG individuales sin instalar la librería, pero su diferencia frente al sistema anterior aún debe hacerse más evidente mediante peso, selección de símbolos y aplicaciones en contexto, evitando balanzas, mazos y otros clichés jurídicos. Ninguno de estos tratamientos se ha aplicado a la Home.
+
+**Alcance técnico:** no se añadieron dependencias, frameworks, procesos de compilación, carpetas ni cambios de arquitectura. El laboratorio es una página interna aislada y no comparte CSS con la Home.
+
+**Estado:** dirección general aprobada como referencia interna; implementación en Home y refinamiento final de atmósfera/iconografía pendientes. Gate 1 no se autoaprueba.
+
 ## Fase actual
 
 **Fase:** Cierre de C1 y preparación de **Gate 1 — Prototipo**.
@@ -194,7 +250,7 @@ Equipo (según instrucción directa del Owner, no proviene de los insumos):
 **Nuevos hechos confirmados — Brief visión de la firma AAA Abogados.docx (Sesión 01, 2026-07-17):**
 - Razón social: AGUDELO ABOGADOS ASOCIADOS SAS, NIT 901.419.44-5. Nombre comercial: AAA ESTUDIO LEGAL. Fundación: octubre 2020.
 - Leads comerciales y postulaciones de talento llegan al mismo correo: `info@agudeloabogados.com`.
-- Confirma los 4 focos de servicio ya acordados (Insolvencia, Normalización de Activos, Derecho Corporativo + Concursal), con matiz de tono: normalización de activos debe sentirse "premium", no como cobranza/casa de cobro.
+- Históricamente confirmó 4 focos (Insolvencia, Normalización de Activos, Derecho Corporativo + Concursal); D24 reemplaza esa estructura por 3 macroservicios e integra Concursal dentro de Defensa de acreedores en procesos de insolvencia. Se mantiene el matiz de tono: normalización de activos debe sentirse "premium", no como cobranza/casa de cobro.
 - Servicio de mayor ingreso: insolvencia persona natural no comerciante. No representan deudores, solo acreedores (reconfirma brochure).
 - Perfil de comprador B2B: gerente jurídico, director de cartera/riesgo/cobranza, CFO, representante legal; evento activador = la deuda; objeción principal = garantía de recaudo y honorarios vs. deuda.
 - ADY: el botón debe llevar directo al portal de login, **sin explicar qué es ADY** — solo transmitir que hay tecnología detrás (refina D10, ver PROJECT.md → D13).
@@ -235,7 +291,7 @@ Equipo (según instrucción directa del Owner, no proviene de los insumos):
 2. **✅ Resuelta (Decisión D2).** Página legal no nombrada en brief/propuesta. El Owner autorizó la página legal como obligatoria y adicional, no contabilizada dentro de las 6 páginas principales. *(Queda una nota para Product Lead: confirmar que esta 7ª página no genera fricción contractual con la lectura literal de "hasta 6 secciones" de la propuesta — no bloquea C0.)*
 3. **Abierta.** Timeline con cifras distintas dentro de la propia propuesta. Slide 7: "4–6 semanas" (4 efectivas + 2 de aprobación cliente). Slide 10: "4 semanas productivas" (sin contar aprobaciones). Slide 11: "6 semanas laborables" (etiquetada como laborable, no calendario). No es necesariamente contradictorio (podrían ser 4 productivas + 2 de aprobación = 6 calendario), pero la slide 11 rotula esas 6 como "laborables", lo cual sí choca con slide 10. Confirmar la cifra y su etiqueta antes de comprometerla con el cliente. No bloquea C0.
 4. **✅ Resuelta (Decisión D14, Owner, 2026-07-23).** Dirección de oficina: había 3 versiones en conflicto (brochure "Of. 701"; sitio actual "Of. 403, Edificio Alcázar"; brief ampliado "Calle 28 Norte #6BIS-26"). El Owner confirmó explícitamente que la dirección real y definitiva es la del brief ampliado: **Calle 28 Norte # 6BIS-26, Barrio San Vicente, Cali, Valle**. Las otras dos quedan descartadas como desactualizadas, no como inventadas.
-5. **Abierta (riesgo de proceso, no de contenido).** Alcance amplio (brochure/sitio actual) vs. alcance reducido (brief/propuesta). No es técnicamente una contradicción a resolver — brief y propuesta están de acuerdo entre sí en reducir el relato a 4 focos (Insolvencia, Concursal, Normalización de Activos, Corporativo) — pero se registra porque el brochure seguirá usándose como fuente de contenido y hay riesgo de que se filtre contenido de las áreas descartadas si no se aplica el filtro conscientemente.
+5. **Abierta (riesgo de proceso, no de contenido; actualizada por D24).** Alcance amplio (brochure/sitio actual) vs. alcance reducido. El portafolio narrativo vigente se limita a 3 macroservicios (Defensa de acreedores en procesos de insolvencia, Normalización de Activos y Derecho Corporativo); Derecho Concursal se integra en el primero. El riesgo persiste porque el brochure seguirá usándose como fuente y podrían filtrarse áreas descartadas si no se aplica el filtro conscientemente.
 6. **✅ Resuelta (Decisión D17, Owner, 2026-07-23).** La síntesis previa de Conversión (basada en el brief) establecía que la acción del usuario "no es agendar cita, ni formulario de contacto tradicional... el brief lo descarta implícitamente al priorizar talento sobre lead comercial directo". Esto quedó formalmente invertido y cerrado por D17: la conversión principal del sitio es captar empresas (formulario B2B, ex-D9); el formulario de talento (D8) es secundario y estrictamente contextual — no CTA global, no objetivo central, no equivalente al de empresas. El Owner dio esta instrucción de forma explícita y final ("estas decisiones reemplazan cualquier interpretación anterior contradictoria") — ya no depende de que el brief marque o no una opción; no requiere validación adicional de Product Lead para registrarse, aunque sigue sujeta al mismo flujo de QA de C1 (Content → Producer → Product Lead) antes de "C1 APROBADO".
 7. **✅ Cerrada (Decisión D19, Owner, 2026-07-23).** El sitemap y REFERENCES.md establecían a Julián Agudelo como eje narrativo humano único; el brief ampliado pide que "quiénes somos" cuente la historia de Julián Agudelo y Angélica Chamorro juntos. El Owner instruyó crear la **estructura narrativa** de "quiénes somos" ahora, reemplazando el copy más adelante con lo que cuente el cliente. Estructura creada en [content/04-nuestro-equipo.md](content/04-nuestro-equipo.md) (sección "Quiénes somos", dentro de Nuestro Equipo, no página aparte). Se mantiene **separada** del eje narrativo de Talento AAA (Julián solo, inspirado en Brigard Urrutia) — no se fuerza su unificación; Jaime Marmolejo permanece en Nuestro Equipo como parte del equipo, fuera de la dupla fundadora. Copy = placeholder explícito hasta recibir el insumo real del cliente.
 8. **Menor, no bloquea (Sesión 01).** N.º de casos de éxito: propuesta dice "hasta 4"; el brief ampliado pide "entre 3 y 5". Diferencia menor, mismo patrón que otras contradicciones de cifras ya registradas (ver #3).

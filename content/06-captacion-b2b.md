@@ -21,13 +21,16 @@
 
 ## Copy (v2 — corregido por SEO Manager, `COPYS QA _ COMENTARIOS.docx`, 2026-07-24)
 
-> Reemplaza la v1 (C1). SEO mantiene el H1 (lo escribió truncado como "¿Un deudor puso.." en el documento, entendido como "sin cambios") y agrega una sección nueva, "Nuestro proceso", que no existía en la v1 — se incorpora porque el documento la propone como contenido de la página, no solo como comentario. "Evidencia de confianza" y "Formulario" no fueron tocados.
+> Reemplaza la v1 (C1). D24 intercambia el contenido de hero con la página de Servicios. “Nuestro proceso”, “Evidencia de confianza” y “Formulario” no cambian.
 
-**H1 (sin cambios — el documento lo truncó, se interpreta como confirmación del mismo título):**
-> ¿Un deudor puso en riesgo tu crédito?
+**Eyebrow — D24:**
+> Contacto
 
-**Subhead (p) — SEO:**
-> Representamos exclusivamente a acreedores en procesos de insolvencia y normalización de activos, combinando especialización jurídica, cobertura nacional y tecnología propia para respaldar decisiones críticas.
+**H1 — D24:**
+> Soluciones jurídicas para proteger, normalizar y recuperar activos
+
+**Subhead (p) — D24:**
+> Anticipamos riesgos, protegemos el crédito y maximizamos las posibilidades de recuperación, incluso en los escenarios más complejos.
 
 ---
 

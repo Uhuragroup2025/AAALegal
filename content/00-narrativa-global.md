@@ -4,7 +4,7 @@
 
 ## Mensaje central
 
-AAA Estudio Legal defiende al **acreedor** — no al deudor — en procesos de insolvencia y derecho corporativo, con rigor técnico y un componente tecnológico visible. De ser la firma que más procesos de este tipo lleva, busca posicionarse como el **referente** del sector (fuente: brief ampliado, propuesta de valor).
+AAA Estudio Legal representa exclusivamente al **acreedor** — no al deudor insolvente — con rigor técnico y un componente tecnológico visible. En insolvencia, su práctica está dedicada a personas y organizaciones cuyos créditos están comprometidos; no asesora ni representa deudores insolventes. Su portafolio se articula en tres macroservicios: Defensa de acreedores en procesos de insolvencia, Normalización de Activos y Derecho Corporativo (D24).
 
 ## Jerarquía narrativa (D15) y de conversión (D17/D18 — actualizado 2026-07-23)
 
@@ -30,4 +30,4 @@ El brief ampliado incluye un párrafo extenso en primera persona sobre servicios
 
 ## Filtro obligatorio
 
-Toda página que use el brochure o el sitio actual como fuente de contenido debe filtrar hacia los 4 focos acordados (Insolvencia, Derecho Concursal, Normalización de Activos, Derecho Corporativo) — nunca las 14 áreas de práctica del sitio actual/brochure completo.
+Toda página que use el brochure o el sitio actual como fuente de contenido debe filtrar hacia los 3 macroservicios acordados (Defensa de acreedores en procesos de insolvencia, Normalización de Activos y Derecho Corporativo) — nunca las 14 áreas de práctica del sitio actual/brochure completo. “Derecho concursal” se conserva como vocabulario técnico dentro del primer macroservicio, no como una línea de servicio independiente (D24).

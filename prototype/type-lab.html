@@ -1,87 +1,1168 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Type Lab — alternativas tipográficas (Space Grotesk aprobada, D22) — AAA Estudio Legal</title>
-<meta name="robots" content="noindex">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Krub:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Newsreader:ital,wght@0,400;0,500;0,600;1,400&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/tokens.css">
-<link rel="stylesheet" href="css/base.css">
-<link rel="stylesheet" href="css/components.css">
-<style>
-  body { background: var(--color-surface-atmosphere); }
-  .lab-wrap { max-width: 980px; margin-inline: auto; padding: var(--space-12) var(--container-padding) var(--space-32); }
-  .lab-option { background: var(--color-white); border: 1px solid var(--color-border-subtle); border-radius: var(--radius-container); padding: var(--space-8); margin-bottom: var(--space-12); }
-  .lab-option__meta { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-4) var(--space-8); font-family: var(--font-sans); font-size: var(--text-sm); margin-bottom: var(--space-8); padding-bottom: var(--space-6); border-bottom: 1px solid var(--color-border-subtle); }
-  .lab-option__meta dt { font-weight: 600; color: var(--color-navy-900); }
-  .lab-option__meta dd { margin: 0 0 var(--space-3); color: var(--color-ink); opacity: .85; }
-  .lab-sample { margin-bottom: var(--space-8); }
-  .lab-sample__label { font-family: var(--font-sans); font-size: var(--text-xs); text-transform: uppercase; letter-spacing: .06em; color: var(--color-gold-300); margin-bottom: var(--space-2); }
-  .lab-sample h1, .lab-sample h2, .lab-sample h3 { margin: 0; }
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Visual Language Lab — AAA Estudio Legal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400;1,500&amp;family=Playfair+Display:ital,wght@0,500;0,600;1,500&amp;display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #063B59;
+      --primary-deep: #032C43;
+      --secondary: #B9CEED;
+      --background: #F5F3EE;
+      --surface: #FFFFFF;
+      --accent: #CAA181;
+      --accent-deep: #9A6D4D;
+      --border: #D9D9D9;
+      --text: #111820;
+      --text-muted: #5E666D;
+      --success: #2E6A51;
+      --error: #A63E3E;
+      --white: #FFFFFF;
+
+      --font-display: "Playfair Display", Georgia, serif;
+      --font-sans: "Instrument Sans", "Helvetica Neue", Arial, sans-serif;
+
+      --space-1: 4px;
+      --space-2: 8px;
+      --space-3: 12px;
+      --space-4: 16px;
+      --space-6: 24px;
+      --space-8: 32px;
+      --space-12: 48px;
+      --space-16: 64px;
+      --space-24: 96px;
+      --space-32: 128px;
+
+      --radius-control: 4px;
+      --radius-card: 8px;
+      --container: 1240px;
+      --gutter: clamp(20px, 4vw, 48px);
+      --ease: cubic-bezier(.2, .8, .2, 1);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--background);
+      color: var(--text);
+      font-family: var(--font-sans);
+      font-size: 17px;
+      line-height: 1.6;
+      letter-spacing: -.008em;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+    img, svg { display: block; max-width: 100%; }
+    button, input, textarea, select { font: inherit; }
+    a { color: inherit; }
+    :focus { outline: none; }
+    :focus-visible {
+      outline: 3px solid var(--accent);
+      outline-offset: 3px;
+    }
+
+    .skip-link {
+      position: fixed;
+      left: 16px;
+      top: -80px;
+      z-index: 100;
+      background: var(--surface);
+      color: var(--primary);
+      padding: 10px 16px;
+      border-radius: var(--radius-control);
+    }
+    .skip-link:focus { top: 16px; }
+
+    .lab-container {
+      width: min(100%, var(--container));
+      margin-inline: auto;
+      padding-inline: var(--gutter);
+    }
+
+    .lab-nav {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(245, 243, 238, .96);
+      border-bottom: 1px solid var(--border);
+    }
+    .lab-nav__inner {
+      min-height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-6);
+    }
+    .lab-nav__brand {
+      color: var(--primary);
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: .065em;
+      text-decoration: none;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+    .lab-nav__links {
+      display: flex;
+      align-items: center;
+      gap: var(--space-6);
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    .lab-nav__links::-webkit-scrollbar { display: none; }
+    .lab-nav__links a {
+      color: var(--text-muted);
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: -.005em;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+    .lab-nav__links a:hover { color: var(--primary); }
+
+    .lab-hero {
+      min-height: 86vh;
+      display: grid;
+      align-items: end;
+      background: var(--primary);
+      color: var(--white);
+      overflow: hidden;
+      position: relative;
+    }
+    .lab-hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      opacity: .16;
+      background-image:
+        linear-gradient(rgba(255,255,255,.14) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.14) 1px, transparent 1px);
+      background-size: 12.5% 100%, 100% 25%;
+    }
+    .lab-hero__inner {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(240px, .6fr);
+      gap: var(--space-16);
+      align-items: end;
+      padding-top: var(--space-32);
+      padding-bottom: var(--space-24);
+    }
+    .lab-kicker, .section-kicker {
+      margin: 0 0 var(--space-4);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: .095em;
+      text-transform: uppercase;
+    }
+    .lab-kicker { color: var(--secondary); }
+    .lab-hero h1 {
+      max-width: 12ch;
+      margin: 0;
+      font-family: var(--font-display);
+      font-size: clamp(54px, 8.5vw, 116px);
+      font-weight: 500;
+      letter-spacing: -.045em;
+      line-height: .94;
+    }
+    .lab-hero h1 em {
+      color: var(--accent);
+      font-weight: 500;
+    }
+    .lab-hero__aside {
+      border-top: 1px solid rgba(255,255,255,.35);
+      padding-top: var(--space-6);
+    }
+    .lab-hero__aside p { margin: 0 0 var(--space-8); }
+    .lab-meta {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 6px 18px;
+      margin: 0;
+      font-size: 13px;
+    }
+    .lab-meta dt { color: var(--secondary); }
+    .lab-meta dd { margin: 0; }
+
+    .lab-section {
+      padding-block: var(--space-24);
+      border-bottom: 1px solid var(--border);
+    }
+    .lab-section--white { background: var(--surface); }
+    .lab-section--dark { background: var(--primary); color: var(--white); }
+    .section-heading {
+      display: grid;
+      grid-template-columns: minmax(180px, .5fr) minmax(0, 1.5fr);
+      gap: var(--space-12);
+      margin-bottom: var(--space-16);
+      align-items: start;
+    }
+    .section-kicker { color: var(--accent-deep); }
+    .lab-section--dark .section-kicker { color: var(--secondary); }
+    .section-heading h2 {
+      max-width: 15ch;
+      margin: 0;
+      font-family: var(--font-display);
+      font-size: clamp(40px, 5vw, 68px);
+      font-weight: 500;
+      letter-spacing: -.035em;
+      line-height: 1;
+    }
+    .section-heading h2 em { color: var(--accent-deep); font-weight: 500; }
+    .lab-section--dark .section-heading h2 em { color: var(--accent); }
+    .section-heading__copy { max-width: 55ch; margin: 6px 0 0; color: var(--text-muted); }
+    .lab-section--dark .section-heading__copy { color: rgba(255,255,255,.72); }
+
+    .specimen {
+      border-top: 1px solid var(--border);
+      padding-top: var(--space-8);
+      margin-top: var(--space-12);
+    }
+    .specimen__label {
+      margin: 0 0 var(--space-6);
+      color: var(--text-muted);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: .075em;
+      text-transform: uppercase;
+    }
+    .lab-section--dark .specimen { border-color: rgba(255,255,255,.22); }
+    .lab-section--dark .specimen__label { color: var(--secondary); }
+
+    .type-display {
+      margin: 0;
+      max-width: 12ch;
+      font-family: var(--font-display);
+      font-size: clamp(54px, 7vw, 96px);
+      font-weight: 500;
+      letter-spacing: -.045em;
+      line-height: .98;
+    }
+    .type-display em { color: var(--accent-deep); font-weight: 500; }
+    .type-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: var(--space-12);
+    }
+    .type-scale { margin: 0; padding: 0; list-style: none; }
+    .type-scale li {
+      display: grid;
+      grid-template-columns: 72px 1fr;
+      gap: var(--space-6);
+      align-items: baseline;
+      padding-block: var(--space-4);
+      border-bottom: 1px solid var(--border);
+    }
+    .type-scale span:first-child { color: var(--text-muted); font-size: 12px; }
+    .type-h2 { font: 500 clamp(34px, 4vw, 52px)/1.05 var(--font-display); letter-spacing: -.03em; }
+    .type-h3 { font: 500 clamp(26px, 3vw, 34px)/1.15 var(--font-display); letter-spacing: -.02em; }
+    .type-body { font: 400 18px/1.58 var(--font-sans); letter-spacing: -.012em; }
+    .type-small { font: 500 14px/1.45 var(--font-sans); letter-spacing: .045em; }
+    .type-editorial {
+      max-width: 60ch;
+      margin: 0;
+      font-size: 20px;
+      line-height: 1.62;
+      letter-spacing: -.014em;
+    }
+    .type-editorial::first-letter {
+      float: left;
+      margin: 8px 10px 0 0;
+      color: var(--primary);
+      font: 500 74px/.72 var(--font-display);
+    }
+
+    .palette-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      border: 1px solid var(--border);
+    }
+    .swatch {
+      min-height: 220px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: var(--space-6);
+      border-right: 1px solid rgba(17,24,32,.12);
+      border-bottom: 1px solid rgba(17,24,32,.12);
+    }
+    .swatch:nth-child(4n) { border-right: 0; }
+    .swatch__name { font: 500 24px/1.1 var(--font-display); }
+    .swatch__meta { font-size: 13px; line-height: 1.4; }
+    .swatch--primary { background: var(--primary); color: var(--white); }
+    .swatch--secondary { background: var(--secondary); color: var(--primary-deep); }
+    .swatch--background { background: var(--background); }
+    .swatch--surface { background: var(--surface); }
+    .swatch--accent { background: var(--accent); color: var(--primary-deep); }
+    .swatch--border { background: var(--border); }
+    .swatch--text { background: var(--text); color: var(--white); }
+    .swatch--ratio {
+      background: var(--primary-deep);
+      color: var(--white);
+      justify-content: flex-end;
+    }
+
+    .atmosphere-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: var(--space-6);
+    }
+    .atmosphere-sample {
+      min-height: 470px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: var(--space-12);
+      border: 1px solid var(--border);
+      overflow: hidden;
+    }
+    .atmosphere-sample--light {
+      background:
+        radial-gradient(circle at 84% 12%, rgba(6,59,89,.075), transparent 34%),
+        linear-gradient(138deg, var(--surface) 0%, var(--background) 74%, rgba(202,161,129,.16) 100%);
+    }
+    .atmosphere-sample--dark {
+      background:
+        radial-gradient(circle at 82% 14%, rgba(255,255,255,.085), transparent 31%),
+        linear-gradient(138deg, var(--primary) 0%, var(--primary-deep) 100%);
+      color: var(--white);
+      border-color: var(--primary);
+    }
+    .atmosphere-sample__meta {
+      display: flex;
+      justify-content: space-between;
+      gap: var(--space-4);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: .075em;
+      text-transform: uppercase;
+    }
+    .atmosphere-sample--light .atmosphere-sample__meta { color: var(--accent-deep); }
+    .atmosphere-sample--dark .atmosphere-sample__meta { color: var(--secondary); }
+    .atmosphere-sample__content { max-width: 440px; }
+    .atmosphere-sample__content h3 {
+      max-width: 12ch;
+      margin: 0 0 var(--space-5, 20px);
+      font: 500 clamp(34px, 4vw, 52px)/1.02 var(--font-display);
+      letter-spacing: -.03em;
+    }
+    .atmosphere-sample__content p { max-width: 44ch; margin: 0; color: var(--text-muted); }
+    .atmosphere-sample--dark .atmosphere-sample__content p { color: rgba(255,255,255,.72); }
+    .atmosphere-guidance {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: var(--space-6);
+      margin-top: var(--space-8);
+    }
+    .atmosphere-guidance p { margin: 0; color: var(--text-muted); font-size: 14px; }
+    .atmosphere-guidance strong { display: block; margin-bottom: var(--space-2); color: var(--primary); }
+
+    .button-row, .state-row, .icon-row, .badge-row {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: var(--space-4);
+    }
+    .button-row + .button-row { margin-top: var(--space-6); }
+    .btn {
+      min-height: 50px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 11px 22px;
+      border: 1px solid transparent;
+      border-radius: var(--radius-control);
+      font-size: 15px;
+      font-weight: 500;
+      letter-spacing: -.006em;
+      line-height: 1;
+      text-decoration: none;
+      cursor: pointer;
+      transition: color 160ms var(--ease), background 160ms var(--ease), border-color 160ms var(--ease);
+    }
+    .btn svg { width: 18px; height: 18px; }
+    .ph-icon { flex: none; fill: currentColor; }
+    .btn--primary { background: var(--primary); color: var(--white); }
+    .btn--primary:hover, .btn--primary.is-hover { background: var(--primary-deep); }
+    .btn--secondary { background: transparent; color: var(--primary); border-color: var(--primary); }
+    .btn--secondary:hover, .btn--secondary.is-hover { background: var(--primary); color: var(--white); }
+    .btn--text { min-height: auto; padding: 6px 0; color: var(--primary); border-bottom-color: var(--accent); border-radius: 0; }
+    .btn--text:hover { color: var(--accent-deep); }
+    .btn.is-focus { outline: 3px solid var(--accent); outline-offset: 3px; }
+    .btn.is-active { background: var(--accent); color: var(--primary-deep); }
+    .btn:disabled, .btn.is-disabled { opacity: .42; cursor: not-allowed; }
+
+    .state-sample { min-width: 128px; }
+    .state-sample small { display: block; margin-top: 8px; color: var(--text-muted); font-size: 12px; }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: var(--space-6);
+    }
+    .card {
+      min-height: 320px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: var(--space-8);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-card);
+    }
+    .card--dark { background: var(--primary); border-color: var(--primary); color: var(--white); }
+    .card--blue { background: var(--secondary); border-color: var(--secondary); color: var(--primary-deep); }
+    .card__index { color: var(--accent-deep); font-size: 13px; font-weight: 600; letter-spacing: .065em; }
+    .card--dark .card__index { color: var(--accent); }
+    .card--blue .card__index { color: var(--primary); }
+    .card h3 {
+      max-width: 13ch;
+      margin: 0 0 var(--space-4);
+      font: 500 30px/1.08 var(--font-display);
+      letter-spacing: -.02em;
+    }
+    .card p { margin: 0; color: var(--text-muted); font-size: 15px; line-height: 1.55; letter-spacing: -.008em; }
+    .card--dark p { color: rgba(255,255,255,.7); }
+    .card--blue p { color: rgba(3,44,67,.72); }
+    .card--interactive { text-decoration: none; transition: border-color 160ms var(--ease); }
+    .card--interactive:hover { border-color: var(--accent-deep); }
+    .card--blue.card--interactive:hover,
+    .card--blue.card--interactive:focus-visible { border-color: var(--primary); }
+
+    .component-split {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(340px, .8fr);
+      gap: var(--space-16);
+      align-items: start;
+    }
+    .form-panel {
+      padding: var(--space-8);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-card);
+    }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-4); }
+    .field { margin-bottom: var(--space-6); }
+    .field label { display: block; margin-bottom: 7px; font-size: 14px; font-weight: 500; }
+    .field input, .field textarea, .field select {
+      width: 100%;
+      min-height: 52px;
+      padding: 12px 14px;
+      color: var(--text);
+      background: var(--surface);
+      border: 1px solid #B7BABD;
+      border-radius: var(--radius-control);
+      letter-spacing: -.006em;
+    }
+    .field textarea { min-height: 120px; resize: vertical; }
+    .field input::placeholder, .field textarea::placeholder { color: #858A8E; }
+    .field input:focus, .field textarea:focus, .field select:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(202,161,129,.35);
+      outline: none;
+    }
+    .field__help { display: block; margin-top: 6px; color: var(--text-muted); font-size: 12px; }
+    .field--error input { border-color: var(--error); }
+    .field--error .field__help { color: var(--error); }
+    .check {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--space-3);
+      margin-bottom: var(--space-6);
+      font-size: 14px;
+    }
+    .check input { width: 18px; height: 18px; margin-top: 3px; accent-color: var(--primary); }
+
+    .state-list { display: grid; gap: var(--space-4); }
+    .status {
+      display: grid;
+      grid-template-columns: 28px 1fr;
+      gap: var(--space-3);
+      align-items: start;
+      padding: var(--space-4);
+      background: var(--surface);
+      border-left: 3px solid var(--border);
+    }
+    .status svg { width: 20px; height: 20px; margin-top: 2px; }
+    .status strong { display: block; font-size: 14px; }
+    .status span { display: block; color: var(--text-muted); font-size: 13px; }
+    .status--success { border-color: var(--success); color: var(--success); }
+    .status--error { border-color: var(--error); color: var(--error); }
+    .status--info { border-color: var(--primary); color: var(--primary); }
+
+    .header-stage {
+      padding: var(--space-8);
+      background: var(--primary-deep);
+      border-radius: var(--radius-card);
+    }
+    .site-header-demo {
+      min-height: 78px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-8);
+      padding-inline: var(--space-8);
+      background: var(--primary);
+      color: var(--white);
+      border-bottom: 1px solid rgba(255,255,255,.2);
+    }
+    .wordmark {
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+      text-decoration: none;
+    }
+    .wordmark__aaa { color: var(--accent); font: 500 28px/1 var(--font-display); letter-spacing: -.12em; }
+    .wordmark__name { font: 500 19px/1.05 var(--font-display); }
+    .site-header-demo nav { display: flex; gap: var(--space-6); }
+    .site-header-demo nav a { color: rgba(255,255,255,.78); font-size: 14px; text-decoration: none; }
+    .site-header-demo nav a:hover { color: var(--white); }
+    .site-header-demo__actions { display: flex; align-items: center; gap: var(--space-4); }
+    .site-header-demo__menu {
+      width: 42px;
+      height: 42px;
+      display: none;
+      place-items: center;
+      padding: 0;
+      background: transparent;
+      color: var(--white);
+      border: 1px solid rgba(255,255,255,.32);
+      border-radius: var(--radius-control);
+      cursor: pointer;
+    }
+    .site-header-demo__menu svg { width: 20px; height: 20px; fill: currentColor; }
+    .site-header-demo .btn { min-height: 42px; padding: 9px 16px; background: var(--accent); color: var(--primary-deep); }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      min-height: 30px;
+      padding: 4px 10px;
+      background: transparent;
+      color: var(--primary);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-control);
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: .015em;
+    }
+    .badge--blue { background: var(--secondary); border-color: var(--secondary); }
+    .badge--accent { background: rgba(202,161,129,.22); border-color: var(--accent); }
+
+    .icon-tile {
+      width: 112px;
+      min-height: 112px;
+      display: grid;
+      place-items: center;
+      gap: 4px;
+      padding: var(--space-4);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--primary);
+      text-align: center;
+    }
+    .icon-tile svg { width: 28px; height: 28px; fill: currentColor; }
+    .icon-tile span { color: var(--text-muted); font-size: 11px; }
+
+    .icon-use-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      margin-top: var(--space-8);
+      border: 1px solid var(--border);
+    }
+    .icon-use {
+      min-height: 210px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: var(--space-6);
+      background: var(--surface);
+      border-right: 1px solid var(--border);
+    }
+    .icon-use:last-child { border-right: 0; }
+    .icon-use__label {
+      color: var(--text-muted);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .075em;
+      text-transform: uppercase;
+    }
+    .icon-action,
+    .icon-with-text {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-3);
+      color: var(--primary);
+      font-size: 15px;
+      font-weight: 500;
+      text-decoration: none;
+    }
+    .icon-action svg { width: 19px; height: 19px; }
+    .icon-with-text svg { width: 24px; height: 24px; }
+    .icon-info {
+      display: grid;
+      grid-template-columns: 22px 1fr;
+      gap: var(--space-3);
+      align-items: start;
+      color: var(--primary);
+    }
+    .icon-info svg { width: 20px; height: 20px; margin-top: 2px; }
+    .icon-info span,
+    .iconless-state span { display: block; margin-top: 4px; color: var(--text-muted); font-size: 13px; line-height: 1.45; }
+    .iconless-state {
+      padding-left: var(--space-4);
+      color: var(--success);
+      border-left: 2px solid var(--success);
+    }
+    .iconless-state strong { display: block; font-size: 14px; }
+
+    .brand-grid {
+      display: grid;
+      grid-template-columns: .85fr 1.15fr;
+      border: 1px solid var(--border);
+    }
+    .brand-mark-panel, .pattern-panel { min-height: 500px; padding: var(--space-12); }
+    .brand-mark-panel {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      background: var(--surface);
+    }
+    .brand-mark-panel img { width: min(100%, 280px); mix-blend-mode: multiply; }
+    .brand-note { max-width: 42ch; margin: 0; color: var(--text-muted); font-size: 14px; }
+    .pattern-panel {
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: flex-end;
+      background-color: var(--primary);
+      color: var(--white);
+    }
+    .pattern-panel::before {
+      content: "AAA AAA AAA\A AAA AAA AAA\A AAA AAA AAA\A AAA AAA AAA";
+      position: absolute;
+      inset: -30px;
+      color: transparent;
+      font: 500 108px/.78 var(--font-display);
+      letter-spacing: -.22em;
+      white-space: pre;
+      -webkit-text-stroke: 1px rgba(185,206,237,.28);
+      transform: rotate(-7deg) scale(1.08);
+      transform-origin: center;
+    }
+    .pattern-panel__copy { position: relative; z-index: 1; max-width: 30ch; }
+    .pattern-panel__copy h3 { margin: 0 0 var(--space-3); font: 500 32px/1.05 var(--font-display); }
+    .pattern-panel__copy p { margin: 0; color: rgba(255,255,255,.7); font-size: 14px; }
+
+    .loader-stage {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-6);
+    }
+    .loader-card {
+      min-height: 260px;
+      display: grid;
+      place-items: center;
+      padding: var(--space-8);
+      background: var(--surface);
+      border: 1px solid var(--border);
+    }
+    .loader-card--dark { background: var(--primary); border-color: var(--primary); color: var(--white); }
+    .aaa-loader {
+      width: 120px;
+      height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px;
+      border: 1px solid currentColor;
+      color: var(--accent-deep);
+    }
+    .loader-card--dark .aaa-loader { color: var(--accent); }
+    .aaa-loader span {
+      margin-left: -8px;
+      font: 500 50px/1 var(--font-display);
+      animation: loader-pulse 1.5s var(--ease) infinite;
+    }
+    .aaa-loader span:first-child { margin-left: 0; animation-delay: -1s; }
+    .aaa-loader span:nth-child(2) { animation-delay: -.5s; }
+    @keyframes loader-pulse {
+      0%, 100% { opacity: .25; }
+      50% { opacity: 1; }
+    }
+
+    .photo-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.35fr) minmax(260px, .65fr);
+      gap: var(--space-6);
+    }
+    .photo-treatment {
+      min-height: 610px;
+      position: relative;
+      overflow: hidden;
+      background: var(--primary);
+    }
+    .photo-treatment img {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      inset: 0;
+      object-fit: cover;
+      object-position: 58% center;
+      filter: saturate(.55) contrast(1.04) brightness(.83);
+    }
+    .photo-treatment::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, rgba(3,44,67,.9) 0%, rgba(3,44,67,.42) 45%, rgba(3,44,67,.08) 78%);
+    }
+    .photo-treatment__copy {
+      max-width: 420px;
+      position: absolute;
+      z-index: 2;
+      left: var(--space-12);
+      bottom: var(--space-12);
+      color: var(--white);
+    }
+    .photo-treatment__copy h3 { margin: 0 0 var(--space-4); font: 500 46px/1 var(--font-display); letter-spacing: -.03em; }
+    .photo-treatment__copy p { margin: 0; color: rgba(255,255,255,.72); }
+    .photo-notes {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      border-top: 1px solid var(--border);
+    }
+    .photo-notes li {
+      display: grid;
+      grid-template-columns: 36px 1fr;
+      gap: var(--space-4);
+      padding-block: var(--space-6);
+      border-bottom: 1px solid var(--border);
+    }
+    .photo-notes strong { color: var(--accent-deep); font-size: 12px; letter-spacing: .065em; }
+    .photo-notes span { font-size: 15px; }
+    .photo-disclaimer { margin-top: var(--space-6); color: var(--text-muted); font-size: 12px; }
+
+    .footer-stage { background: var(--primary); color: var(--white); }
+    .site-footer-demo { padding-block: var(--space-16) var(--space-8); }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.2fr repeat(2, .55fr);
+      gap: var(--space-12);
+      padding-bottom: var(--space-16);
+    }
+    .footer-brand h2 { max-width: 10ch; margin: 0 0 var(--space-6); font: 500 48px/1 var(--font-display); letter-spacing: -.03em; }
+    .footer-brand h2 em { color: var(--accent); font-weight: 500; }
+    .footer-brand p { max-width: 42ch; margin: 0; color: rgba(255,255,255,.68); }
+    .footer-col h3 { margin: 0 0 var(--space-4); color: var(--secondary); font-size: 12px; letter-spacing: .085em; text-transform: uppercase; }
+    .footer-col a, .footer-col span { display: block; margin-bottom: 8px; color: rgba(255,255,255,.76); font-size: 14px; text-decoration: none; }
+    .footer-col a:hover { color: var(--white); }
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      gap: var(--space-6);
+      padding-top: var(--space-6);
+      border-top: 1px solid rgba(255,255,255,.22);
+      color: rgba(255,255,255,.58);
+      font-size: 12px;
+    }
+
+    @media (max-width: 900px) {
+      .lab-hero__inner, .section-heading, .component-split, .brand-grid, .photo-grid { grid-template-columns: 1fr; }
+      .lab-hero__inner { gap: var(--space-12); }
+      .lab-hero__aside { max-width: 520px; }
+      .palette-grid { grid-template-columns: repeat(2, 1fr); }
+      .swatch:nth-child(4n) { border-right: 1px solid rgba(17,24,32,.12); }
+      .swatch:nth-child(2n) { border-right: 0; }
+      .card-grid { grid-template-columns: 1fr 1fr; }
+      .icon-use-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .icon-use:nth-child(2) { border-right: 0; }
+      .icon-use:nth-child(-n+2) { border-bottom: 1px solid var(--border); }
+      .site-header-demo nav { display: none; }
+      .site-header-demo__menu { display: grid; }
+      .photo-treatment { min-height: 540px; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+      .footer-brand { grid-column: 1 / -1; }
+    }
+
+    @media (max-width: 640px) {
+      body { font-size: 16px; }
+      .lab-nav__inner { min-height: 54px; }
+      .lab-nav__links { display: none; }
+      .lab-hero { min-height: 720px; }
+      .lab-hero__inner { padding-top: var(--space-24); padding-bottom: var(--space-16); }
+      .lab-section { padding-block: var(--space-16); }
+      .section-heading { gap: var(--space-6); margin-bottom: var(--space-12); }
+      .type-grid, .card-grid, .loader-stage, .form-row, .atmosphere-grid, .atmosphere-guidance, .icon-use-grid { grid-template-columns: 1fr; }
+      .palette-grid { grid-template-columns: 1fr; }
+      .swatch, .swatch:nth-child(n) { min-height: 170px; border-right: 0; }
+      .type-scale li { grid-template-columns: 56px 1fr; }
+      .card { min-height: 280px; }
+      .atmosphere-sample { min-height: 410px; padding: var(--space-8); }
+      .icon-use { min-height: 170px; border-right: 0; border-bottom: 1px solid var(--border); }
+      .icon-use:last-child { border-bottom: 0; }
+      .header-stage { padding: var(--space-3); }
+      .site-header-demo { min-height: 66px; padding-inline: var(--space-4); }
+      .site-header-demo__actions .btn { width: 42px; padding: 0; overflow: hidden; color: transparent; gap: 0; }
+      .site-header-demo__actions .btn svg { color: var(--primary-deep); }
+      .brand-mark-panel, .pattern-panel { min-height: 390px; padding: var(--space-8); }
+      .photo-treatment { min-height: 500px; }
+      .photo-treatment__copy { left: var(--space-6); right: var(--space-6); bottom: var(--space-8); }
+      .photo-treatment__copy h3 { font-size: 36px; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .footer-brand { grid-column: auto; }
+      .footer-bottom { flex-direction: column; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+      .aaa-loader span { opacity: 1; }
+    }
+  </style>
 </head>
 <body>
-<div class="lab-wrap">
-  <p class="eyebrow" style="color:var(--color-gold-300)">Decisión D22 (Owner, 2026-07-29) — registro histórico de la comparación</p>
-  <h1 style="font-size:var(--text-2xl); margin-bottom:var(--space-4);">Alternativas tipográficas para títulos</h1>
-  <p class="text-wide" style="max-width:60ch; margin-bottom:var(--space-16);">Esta página compara las 3 alternativas de Google Fonts que se presentaron frente al stack anterior (Big Caslon). <strong>El Owner aprobó la alternativa C — Space Grotesk</strong>: ya es la fuente de títulos en <code>index.html</code> y <code>servicios.html</code> (token <code>--font-display</code>). Esta comparación se conserva como registro de las opciones evaluadas, no como un laboratorio activo. Ver Decisiones en PROJECT.md y <code>prototype/README.md</code> § Tipografía.</p>
+  <a class="skip-link" href="#contenido">Saltar al contenido</a>
 
-  <!-- BASE: fuente actual -->
-  <section class="lab-option">
-    <dl class="lab-option__meta">
-      <div><dt>Opción base — conservar</dt><dd>Big Caslon (con respaldo de sistema)</dd></div>
-      <div><dt>Personalidad</dt><dd>Serif clásica, institucional, calma</dd></div>
-      <div><dt>Razón</dt><dd>Ya está en el manual de marca; requiere solo mejorar escala/tracking/interlineado, no una fuente nueva</dd></div>
-      <div><dt>Combina con</dt><dd>Krub (ya en uso)</dd></div>
-    </dl>
-    <div class="lab-sample"><p class="lab-sample__label">H1 del hero</p><h1 style="font-family:var(--font-serif); font-size:clamp(2.25rem, 5vw, 3.75rem); line-height:1.05;">Insolvencia y asuntos corporativos: somos la voz del acreedor</h1></div>
-    <div class="lab-sample"><p class="lab-sample__label">Título narrativo grande</p><h2 style="font-family:var(--font-serif); font-size:2.5rem; line-height:1.1;">Cuatro focos, un mismo rigor técnico</h2></div>
-    <div class="lab-sample"><p class="lab-sample__label">Título de página interior</p><h3 style="font-family:var(--font-serif); font-size:1.75rem;">Soluciones jurídicas para proteger, normalizar y recuperar activos</h3></div>
-  </section>
+  <nav class="lab-nav" aria-label="Navegación del laboratorio">
+    <div class="lab-container lab-nav__inner">
+      <a class="lab-nav__brand" href="#inicio">AAA · Visual Language Lab</a>
+      <div class="lab-nav__links">
+        <a href="#tipografia">Tipografía</a>
+        <a href="#atmosfera">Atmósfera</a>
+        <a href="#componentes">Componentes</a>
+        <a href="#marca">Marca</a>
+        <a href="#fotografia">Fotografía</a>
+        <a href="#footer">Footer</a>
+      </div>
+    </div>
+  </nav>
 
-  <!-- A: Fraunces -->
-  <section class="lab-option">
-    <dl class="lab-option__meta">
-      <div><dt>Alternativa A — Fraunces</dt><dd>Google Fonts, familia variable</dd></div>
-      <div><dt>Personalidad</dt><dd>Serif editorial cálida, con carácter contemporáneo — menos rígida que una serif clásica, sin perder autoridad</dd></div>
-      <div><dt>Razón para usarla</dt><dd>Se siente "editorial premium" (coherente con el tono dinámico/sofisticado del brief) sin caer en lo genérico corporativo</dd></div>
-      <div><dt>Combina con</dt><dd>Krub — el contraste cálido/geométrico funciona bien</dd></div>
-    </dl>
-    <div class="lab-sample"><p class="lab-sample__label">H1 del hero</p><h1 style="font-family:'Fraunces', serif; font-optical-sizing:auto; font-size:clamp(2.25rem, 5vw, 3.75rem); line-height:1.05;">Insolvencia y asuntos corporativos: somos la voz del acreedor</h1></div>
-    <div class="lab-sample"><p class="lab-sample__label">Título narrativo grande</p><h2 style="font-family:'Fraunces', serif; font-size:2.5rem; line-height:1.1;">Cuatro focos, un mismo rigor técnico</h2></div>
-    <div class="lab-sample"><p class="lab-sample__label">Título de página interior</p><h3 style="font-family:'Fraunces', serif; font-size:1.75rem;">Soluciones jurídicas para proteger, normalizar y recuperar activos</h3></div>
-  </section>
+  <main id="contenido">
+    <header class="lab-hero" id="inicio">
+      <div class="lab-container lab-hero__inner">
+        <div>
+          <p class="lab-kicker">Design Language · Ruta B refinada</p>
+          <h1>Autoridad <em>serena.</em></h1>
+        </div>
+        <aside class="lab-hero__aside">
+          <p>Un sistema editorial para una firma especializada: humano en su expresión, preciso en su construcción y tecnológico en su comportamiento.</p>
+          <dl class="lab-meta">
+            <dt>Display</dt><dd>Playfair Display</dd>
+            <dt>Texto / UI</dt><dd>Instrument Sans</dd>
+            <dt>Estado</dt><dd>Laboratorio candidato</dd>
+            <dt>Alcance</dt><dd>Sin aplicación en Home</dd>
+          </dl>
+        </aside>
+      </div>
+    </header>
 
-  <!-- B: Newsreader -->
-  <section class="lab-option">
-    <dl class="lab-option__meta">
-      <div><dt>Alternativa B — Newsreader</dt><dd>Google Fonts, diseñada específicamente para lectura en pantalla</dd></div>
-      <div><dt>Personalidad</dt><dd>Serif literaria, serena — autoridad tranquila, muy legible, más neutra que Fraunces</dd></div>
-      <div><dt>Razón para usarla</dt><dd>Nativa de pantalla (nace para web, no es una migración de una fuente de impresión) — reduce el riesgo de licencia/renderizado que sí tiene Big Caslon</dd></div>
-      <div><dt>Combina con</dt><dd>Krub — combinación serena, buen contraste de peso</dd></div>
-    </dl>
-    <div class="lab-sample"><p class="lab-sample__label">H1 del hero</p><h1 style="font-family:'Newsreader', serif; font-size:clamp(2.25rem, 5vw, 3.75rem); line-height:1.05;">Insolvencia y asuntos corporativos: somos la voz del acreedor</h1></div>
-    <div class="lab-sample"><p class="lab-sample__label">Título narrativo grande</p><h2 style="font-family:'Newsreader', serif; font-size:2.5rem; line-height:1.1;">Cuatro focos, un mismo rigor técnico</h2></div>
-    <div class="lab-sample"><p class="lab-sample__label">Título de página interior</p><h3 style="font-family:'Newsreader', serif; font-size:1.75rem;">Soluciones jurídicas para proteger, normalizar y recuperar activos</h3></div>
-  </section>
+    <section class="lab-section lab-section--white" id="tipografia">
+      <div class="lab-container">
+        <header class="section-heading">
+          <div><p class="section-kicker">01 · Tipografía</p></div>
+          <div>
+            <h2>Contraste editorial, <em>claridad funcional.</em></h2>
+            <p class="section-heading__copy">Playfair Display concentra autoridad y emoción en títulos. Instrument Sans aporta una lectura más contenida y distintiva a párrafos e interfaz, sin desplazar la voz editorial.</p>
+          </div>
+        </header>
 
-  <!-- C: Space Grotesk — APROBADA (D22) -->
-  <section class="lab-option" style="border-color: var(--color-navy-900); border-width: 2px;">
-    <dl class="lab-option__meta">
-      <div><dt>Alternativa C — Space Grotesk ✅ Aprobada (D22)</dt><dd>Google Fonts, sans geométrica técnica</dd></div>
-      <div><dt>Personalidad</dt><dd>Digital, técnica, contemporánea — la más "tecnológica" de las tres, pero la que más se aleja del carácter jurídico clásico</dd></div>
-      <div><dt>Razón para usarla</dt><dd>Refuerza el pilar "solidez con tecnología" (ADY) de forma directa; riesgo: en exceso puede sentirse más "startup" que "firma legal" (ver REFERENTS.md → qué evitar)</dd></div>
-      <div><dt>Combina con</dt><dd>Requeriría revisar Krub en párrafos para no duplicar el carácter geométrico — probablemente se usa solo en títulos, nunca en cuerpo</dd></div>
-    </dl>
-    <div class="lab-sample"><p class="lab-sample__label">H1 del hero</p><h1 style="font-family:'Space Grotesk', sans-serif; font-size:clamp(2.25rem, 5vw, 3.75rem); line-height:1.05;">Insolvencia y asuntos corporativos: somos la voz del acreedor</h1></div>
-    <div class="lab-sample"><p class="lab-sample__label">Título narrativo grande</p><h2 style="font-family:'Space Grotesk', sans-serif; font-size:2.5rem; line-height:1.1;">Cuatro focos, un mismo rigor técnico</h2></div>
-    <div class="lab-sample"><p class="lab-sample__label">Título de página interior</p><h3 style="font-family:'Space Grotesk', sans-serif; font-size:1.75rem;">Soluciones jurídicas para proteger, normalizar y recuperar activos</h3></div>
-  </section>
+        <div class="specimen">
+          <p class="specimen__label">Display · Playfair Display Medium / Italic</p>
+          <p class="type-display">La precisión jurídica también puede sentirse <em>humana.</em></p>
+        </div>
 
-  <p style="font-size:var(--text-sm); opacity:.75;"><a href="index.html">← Volver al prototipo</a></p>
-</div>
+        <div class="specimen type-grid">
+          <div>
+            <p class="specimen__label">Escala</p>
+            <ul class="type-scale">
+              <li><span>H2</span><span class="type-h2">Criterio estratégico</span></li>
+              <li><span>H3</span><span class="type-h3">Defensa del acreedor</span></li>
+              <li><span>Body</span><span class="type-body">Información clara para decisiones complejas.</span></li>
+              <li><span>UI</span><span class="type-small">CONSULTA · ESTADO · DOCUMENTO</span></li>
+            </ul>
+          </div>
+          <div>
+            <p class="specimen__label">Lectura editorial · Instrument Sans Regular</p>
+            <p class="type-editorial">Nuestro trabajo se construye desde el análisis riguroso de cada escenario, la protección del crédito y una representación especializada que permite tomar decisiones informadas.</p>
+          </div>
+        </div>
+
+        <div class="specimen">
+          <p class="specimen__label">Paleta reducida</p>
+          <div class="palette-grid">
+            <article class="swatch swatch--primary"><span class="swatch__name">Primary</span><span class="swatch__meta">#063B59<br>Autoridad y estructura</span></article>
+            <article class="swatch swatch--secondary"><span class="swatch__name">Secondary</span><span class="swatch__meta">#B9CEED<br>Tecnología tranquila</span></article>
+            <article class="swatch swatch--background"><span class="swatch__name">Background</span><span class="swatch__meta">#F5F3EE<br>Calidez editorial</span></article>
+            <article class="swatch swatch--surface"><span class="swatch__name">Surface</span><span class="swatch__meta">#FFFFFF<br>Claridad funcional</span></article>
+            <article class="swatch swatch--accent"><span class="swatch__name">Accent</span><span class="swatch__meta">#CAA181<br>Cobre mate</span></article>
+            <article class="swatch swatch--border"><span class="swatch__name">Border</span><span class="swatch__meta">#D9D9D9<br>División silenciosa</span></article>
+            <article class="swatch swatch--text"><span class="swatch__name">Text</span><span class="swatch__meta">#111820<br>Tinta, no negro puro</span></article>
+            <article class="swatch swatch--ratio"><span class="swatch__name">70 / 20 / 10</span><span class="swatch__meta">Neutros / azul / acentos</span></article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="lab-section" id="atmosfera">
+      <div class="lab-container">
+        <header class="section-heading">
+          <div><p class="section-kicker">02 · Atmósfera</p></div>
+          <div>
+            <h2>Profundidad que se percibe, no se <em>anuncia.</em></h2>
+            <p class="section-heading__copy">Los degradados se reservan para fondos de gran escala. Utilizan exclusivamente la paleta aprobada, mantienen contraste estable y nunca entran en botones, formularios, badges o cards.</p>
+          </div>
+        </header>
+
+        <div class="atmosphere-grid">
+          <article class="atmosphere-sample atmosphere-sample--light">
+            <div class="atmosphere-sample__meta"><span>Tratamiento A</span><span>Claro · editorial</span></div>
+            <div class="atmosphere-sample__content">
+              <h3>Una transición de luz casi imperceptible.</h3>
+              <p>Blanco y marfil dominan. El azul AAA aparece como profundidad atmosférica y el cobre se limita al extremo inferior como temperatura, no como mancha.</p>
+            </div>
+          </article>
+          <article class="atmosphere-sample atmosphere-sample--dark">
+            <div class="atmosphere-sample__meta"><span>Tratamiento B</span><span>Oscuro · institucional</span></div>
+            <div class="atmosphere-sample__content">
+              <h3>Azul profundo con una luz contenida.</h3>
+              <p>La transición ocurre dentro de la familia azul. Una presencia blanca de baja opacidad evita que el fondo se sienta plano sin producir halo.</p>
+            </div>
+          </article>
+        </div>
+        <div class="atmosphere-guidance">
+          <p><strong>Mejor uso del tratamiento A</strong>Bloque narrativo claro o transición hacia “¿Qué hace AAA?”. Permite sostener párrafos extensos sin que el fondo compita con la lectura.</p>
+          <p><strong>Mejor uso del tratamiento B</strong>Hero o CTA final, pero no ambos por defecto. Si el hero necesita fotografía, este tratamiento debe trasladarse al CTA final o descartarse.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="lab-section" id="componentes">
+      <div class="lab-container">
+        <header class="section-heading">
+          <div><p class="section-kicker">03 · Componentes</p></div>
+          <div>
+            <h2>Componentes que organizan, no que <em>decoran.</em></h2>
+            <p class="section-heading__copy">Radios discretos, superficies planas, bordes precisos y estados visibles. La interacción no debe alterar la estabilidad de la composición.</p>
+          </div>
+        </header>
+
+        <div class="specimen">
+          <p class="specimen__label">Botones</p>
+          <div class="button-row">
+            <a class="btn btn--primary" href="#formularios">Hablemos de su caso
+              <svg class="ph-icon" viewBox="0 0 256 256" aria-hidden="true"><path d="M221.66,133.66l-72,72a8,8,0,0,1-11.32-11.32L196.69,136H40a8,8,0,0,1,0-16H196.69L138.34,61.66a8,8,0,0,1,11.32-11.32l72,72A8,8,0,0,1,221.66,133.66Z"/></svg>
+            </a>
+            <a class="btn btn--secondary" href="#cards">Conocer el enfoque</a>
+            <a class="btn btn--text" href="#marca">Ver sistema de marca
+              <svg class="ph-icon" viewBox="0 0 256 256" aria-hidden="true"><path d="M221.66,133.66l-72,72a8,8,0,0,1-11.32-11.32L196.69,136H40a8,8,0,0,1,0-16H196.69L138.34,61.66a8,8,0,0,1,11.32-11.32l72,72A8,8,0,0,1,221.66,133.66Z"/></svg>
+            </a>
+          </div>
+          <div class="button-row state-row" aria-label="Estados visuales de botones">
+            <div class="state-sample"><button class="btn btn--primary">Default</button><small>Default</small></div>
+            <div class="state-sample"><button class="btn btn--primary is-hover">Hover</button><small>Hover</small></div>
+            <div class="state-sample"><button class="btn btn--primary is-focus">Focus</button><small>Focus visible</small></div>
+            <div class="state-sample"><button class="btn btn--primary is-active">Active</button><small>Active</small></div>
+            <div class="state-sample"><button class="btn btn--primary" disabled>Disabled</button><small>Disabled</small></div>
+          </div>
+        </div>
+
+        <div class="specimen" id="cards">
+          <p class="specimen__label">Cards editoriales</p>
+          <div class="card-grid">
+            <article class="card">
+              <span class="card__index">01 · ESPECIALIDAD</span>
+              <div><h3>Defensa de acreedores.</h3><p>Superficie clara para lectura y contenidos de profundidad.</p></div>
+            </article>
+            <article class="card card--dark">
+              <span class="card__index">02 · ÉNFASIS</span>
+              <div><h3>Decisiones con respaldo técnico.</h3><p>La superficie oscura se reserva para momentos prioritarios.</p></div>
+            </article>
+            <a class="card card--blue card--interactive" href="#formularios">
+              <span class="card__index">03 · ACCIÓN</span>
+              <div><h3>Una ruta clara para cada caso.</h3><p>La interacción se indica mediante borde y cursor, nunca elevación.</p></div>
+            </a>
+          </div>
+        </div>
+
+        <div class="specimen" id="formularios">
+          <p class="specimen__label">Formulario y estados de sistema</p>
+          <div class="component-split">
+            <form class="form-panel" action="#" onsubmit="return false">
+              <div class="form-row">
+                <div class="field"><label for="nombre">Nombre</label><input id="nombre" type="text" placeholder="Nombre completo"></div>
+                <div class="field"><label for="empresa">Empresa</label><input id="empresa" type="text" placeholder="Nombre de la organización"></div>
+              </div>
+              <div class="field field--error">
+                <label for="correo">Correo corporativo</label>
+                <input id="correo" type="email" value="nombre@" aria-invalid="true" aria-describedby="correo-error">
+                <span class="field__help" id="correo-error">Ingrese un correo válido.</span>
+              </div>
+              <div class="field"><label for="consulta">¿Cómo podemos ayudarle?</label><textarea id="consulta" placeholder="Describa brevemente su situación"></textarea><span class="field__help">No incluya información confidencial en este primer contacto.</span></div>
+              <label class="check"><input type="checkbox"><span>Autorizo el tratamiento de mis datos conforme a la política de privacidad.</span></label>
+              <button class="btn btn--primary" type="submit">Enviar consulta</button>
+            </form>
+
+            <div class="state-list">
+              <div class="status status--info">
+                <svg class="ph-icon" viewBox="0 0 256 256" aria-hidden="true"><path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm0,192a88,88,0,1,1,88-88A88.1,88.1,0,0,1,128,216Zm16-40a8,8,0,0,1-8,8,16,16,0,0,1-16-16V128a8,8,0,0,1,0-16,16,16,0,0,1,16,16v40A8,8,0,0,1,144,176ZM112,84a12,12,0,1,1,12,12A12,12,0,0,1,112,84Z"/></svg>
+                <div><strong>Información</strong><span>El sistema explica antes de solicitar una acción.</span></div>
+              </div>
+              <div class="status status--success">
+                <svg class="ph-icon" viewBox="0 0 256 256" aria-hidden="true"><path d="M173.66,98.34a8,8,0,0,1,0,11.32l-56,56a8,8,0,0,1-11.32,0l-24-24a8,8,0,0,1,11.32-11.32L112,148.69l50.34-50.35A8,8,0,0,1,173.66,98.34ZM232,128A104,104,0,1,1,128,24,104.11,104.11,0,0,1,232,128Zm-16,0a88,88,0,1,0-88,88A88.1,88.1,0,0,0,216,128Z"/></svg>
+                <div><strong>Consulta recibida</strong><span>Confirmación directa, sin celebración excesiva.</span></div>
+              </div>
+              <div class="status status--error">
+                <svg class="ph-icon" viewBox="0 0 256 256" aria-hidden="true"><path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm0,192a88,88,0,1,1,88-88A88.1,88.1,0,0,1,128,216Zm-8-80V80a8,8,0,0,1,16,0v56a8,8,0,0,1-16,0Zm20,36a12,12,0,1,1-12-12A12,12,0,0,1,140,172Z"/></svg>
+                <div><strong>No fue posible enviar</strong><span>El mensaje indica el problema y una alternativa.</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="specimen">
+          <p class="specimen__label">Header · desktop y adaptación responsive</p>
+          <div class="header-stage">
+            <header class="site-header-demo">
+              <a class="wordmark" href="#inicio"><span class="wordmark__aaa">AAA</span><span class="wordmark__name">Estudio<br>Legal</span></a>
+              <nav aria-label="Navegación de muestra"><a href="#">Firma</a><a href="#">Servicios</a><a href="#">Experiencia</a><a href="#">Equipo</a></nav>
+              <div class="site-header-demo__actions">
+                <button class="site-header-demo__menu" type="button" aria-label="Abrir menú">
+                  <svg class="ph-icon" viewBox="0 0 256 256" aria-hidden="true"><path d="M224,128a8,8,0,0,1-8,8H40a8,8,0,0,1,0-16H216A8,8,0,0,1,224,128ZM40,72H216a8,8,0,0,0,0-16H40a8,8,0,0,0,0,16ZM216,184H40a8,8,0,0,0,0,16H216a8,8,0,0,0,0-16Z"/></svg>
+                </button>
+                <a class="btn" href="#formularios">Contactar
+                  <svg class="ph-icon" viewBox="0 0 256 256" aria-hidden="true"><path d="M221.66,133.66l-72,72a8,8,0,0,1-11.32-11.32L196.69,136H40a8,8,0,0,1,0-16H196.69L138.34,61.66a8,8,0,0,1,11.32-11.32l72,72A8,8,0,0,1,221.66,133.66Z"/></svg>
+                </a>
+              </div>
+            </header>
+          </div>
+        </div>
+
+        <div class="specimen" id="iconografia">
+          <p class="specimen__label">Etiquetas, badges e iconografía · Phosphor Regular</p>
+          <div class="badge-row" style="margin-bottom:24px">
+            <span class="badge">Sector financiero</span>
+            <span class="badge badge--blue">Tecnología propia</span>
+            <span class="badge badge--accent">Caso destacado</span>
+          </div>
+          <div class="icon-row">
+            <div class="icon-tile"><svg class="ph-icon" viewBox="0 0 256 256" aria-hidden="true"><path d="M221.66,133.66l-72,72a8,8,0,0,1-11.32-11.32L196.69,136H40a8,8,0,0,1,0-16H196.69L138.34,61.66a8,8,0,0,1,11.32-11.32l72,72A8,8,0,0,1,221.66,133.66Z"/></svg><span>Dirección</span></div>
+            <div class="icon-tile"><svg class="ph-icon" viewBox="0 0 256 256" aria-hidden="true"><path d="M224,48H32a8,8,0,0,0-8,8V192a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V56A8,8,0,0,0,224,48ZM203.43,64,128,133.15,52.57,64ZM216,192H40V74.19l82.59,75.71a8,8,0,0,0,10.82,0L216,74.19V192Z"/></svg><span>Contacto</span></div>
+            <div class="icon-tile"><svg class="ph-icon" viewBox="0 0 256 256" aria-hidden="true"><path d="M240,208H224V96a16,16,0,0,0-16-16H144V32a16,16,0,0,0-24.88-13.32L39.12,72A16,16,0,0,0,32,85.34V208H16a8,8,0,0,0,0,16H240a8,8,0,0,0,0-16ZM208,96V208H144V96ZM48,85.34,128,32V208H48ZM112,112v16a8,8,0,0,1-16,0V112a8,8,0,1,1,16,0Zm-32,0v16a8,8,0,0,1-16,0V112a8,8,0,1,1,16,0Zm0,56v16a8,8,0,0,1-16,0V168a8,8,0,0,1,16,0Zm32,0v16a8,8,0,0,1-16,0V168a8,8,0,0,1,16,0Z"/></svg><span>Organización</span></div>
+            <div class="icon-tile"><svg class="ph-icon" viewBox="0 0 256 256" aria-hidden="true"><path d="M239.43,133l-32-80h0a8,8,0,0,0-9.16-4.84L136,62V40a8,8,0,0,0-16,0V65.58L54.26,80.19A8,8,0,0,0,48.57,85h0v.06L16.57,165a7.92,7.92,0,0,0-.57,3c0,23.31,24.54,32,40,32s40-8.69,40-32a7.92,7.92,0,0,0-.57-3L66.92,93.77,120,82V208H104a8,8,0,0,0,0,16h48a8,8,0,0,0,0-16H136V78.42L187,67.1,160.57,133a7.92,7.92,0,0,0-.57,3c0,23.31,24.54,32,40,32s40-8.69,40-32A7.92,7.92,0,0,0,239.43,133ZM56,184c-7.53,0-22.76-3.61-23.93-14.64L56,109.54l23.93,59.82C78.76,180.39,63.53,184,56,184Zm144-32c-7.53,0-22.76-3.61-23.93-14.64L200,77.54l23.93,59.82C222.76,148.39,207.53,152,200,152Z"/></svg><span>Materia</span></div>
+            <div class="icon-tile"><svg class="ph-icon" viewBox="0 0 256 256" aria-hidden="true"><path d="M213.66,82.34l-56-56A8,8,0,0,0,152,24H56A16,16,0,0,0,40,40V216a16,16,0,0,0,16,16H200a16,16,0,0,0,16-16V88A8,8,0,0,0,213.66,82.34ZM160,51.31,188.69,80H160ZM200,216H56V40h88V88a8,8,0,0,0,8,8h48V216Zm-32-80a8,8,0,0,1-8,8H96a8,8,0,0,1,0-16h64A8,8,0,0,1,168,136Zm0,32a8,8,0,0,1-8,8H96a8,8,0,0,1,0-16h64A8,8,0,0,1,168,168Z"/></svg><span>Documento</span></div>
+          </div>
+          <div class="icon-use-grid">
+            <article class="icon-use">
+              <span class="icon-use__label">Ícono funcional</span>
+              <a class="icon-action" href="#formularios">Conocer el proceso<svg class="ph-icon" viewBox="0 0 256 256" aria-hidden="true"><path d="M221.66,133.66l-72,72a8,8,0,0,1-11.32-11.32L196.69,136H40a8,8,0,0,1,0-16H196.69L138.34,61.66a8,8,0,0,1,11.32-11.32l72,72A8,8,0,0,1,221.66,133.66Z"/></svg></a>
+            </article>
+            <article class="icon-use">
+              <span class="icon-use__label">Ícono informativo</span>
+              <div class="icon-info"><svg class="ph-icon" viewBox="0 0 256 256" aria-hidden="true"><path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm0,192a88,88,0,1,1,88-88A88.1,88.1,0,0,1,128,216Zm16-40a8,8,0,0,1-8,8,16,16,0,0,1-16-16V128a8,8,0,0,1,0-16,16,16,0,0,1,16,16v40A8,8,0,0,1,144,176ZM112,84a12,12,0,1,1,12,12A12,12,0,0,1,112,84Z"/></svg><div><strong>Información relevante</strong><span>El ícono orienta; el texto conserva todo el significado.</span></div></div>
+            </article>
+            <article class="icon-use">
+              <span class="icon-use__label">Ícono junto a texto</span>
+              <div class="icon-with-text"><svg class="ph-icon" viewBox="0 0 256 256" aria-hidden="true"><path d="M240,208H224V96a16,16,0,0,0-16-16H144V32a16,16,0,0,0-24.88-13.32L39.12,72A16,16,0,0,0,32,85.34V208H16a8,8,0,0,0,0,16H240a8,8,0,0,0,0-16ZM208,96V208H144V96ZM48,85.34,128,32V208H48ZM112,112v16a8,8,0,0,1-16,0V112a8,8,0,1,1,16,0Zm-32,0v16a8,8,0,0,1-16,0V112a8,8,0,1,1,16,0Zm0,56v16a8,8,0,0,1-16,0V168a8,8,0,0,1,16,0Zm32,0v16a8,8,0,0,1-16,0V168a8,8,0,0,1,16,0Z"/></svg><span>Cobertura nacional</span></div>
+            </article>
+            <article class="icon-use">
+              <span class="icon-use__label">Estado sin ícono</span>
+              <div class="iconless-state"><strong>Documentación recibida</strong><span>Cuando color, jerarquía y texto bastan, el ícono se omite.</span></div>
+            </article>
+          </div>
+          <p class="photo-disclaimer">Criterio técnico: SVG inline individuales de Phosphor Icons, peso Regular, heredando color del contexto. Sin fuente de íconos, paquete completo, framework ni proceso de compilación.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="lab-section lab-section--white" id="marca">
+      <div class="lab-container">
+        <header class="section-heading">
+          <div><p class="section-kicker">04 · Marca</p></div>
+          <div>
+            <h2>El isotipo como firma, no como <em>textura constante.</em></h2>
+            <p class="section-heading__copy">El monograma debe conservar espacios de respeto y aparecer en momentos de identificación. El patrón deriva de su repetición lineal, pero nunca compite con contenido.</p>
+          </div>
+        </header>
+
+        <div class="brand-grid">
+          <article class="brand-mark-panel">
+            <img src="assets/img/aaa-isotipo-manual.png" alt="Isotipo AAA extraído del manual de marca">
+            <p class="brand-note"><strong>Uso candidato:</strong> portada, footer, piezas institucionales y transiciones de marca. Esta extracción es provisional para el laboratorio; producción requiere el archivo maestro del cliente.</p>
+          </article>
+          <article class="pattern-panel">
+            <div class="pattern-panel__copy">
+              <h3>Patrón institucional</h3>
+              <p>Contorno monocromático, baja opacidad y escala amplia. Nunca detrás de texto extenso ni como fondo universal.</p>
+            </div>
+          </article>
+        </div>
+
+        <div class="specimen">
+          <p class="specimen__label">Loader · único gesto de marca en movimiento</p>
+          <div class="loader-stage">
+            <div class="loader-card"><div class="aaa-loader" role="img" aria-label="Cargando"><span>A</span><span>A</span><span>A</span></div></div>
+            <div class="loader-card loader-card--dark"><div class="aaa-loader" role="img" aria-label="Cargando"><span>A</span><span>A</span><span>A</span></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="lab-section" id="fotografia">
+      <div class="lab-container">
+        <header class="section-heading">
+          <div><p class="section-kicker">05 · Fotografía</p></div>
+          <div>
+            <h2>Documental, cercana y <em>contenida.</em></h2>
+            <p class="section-heading__copy">La fotografía debe demostrar que hay personas reales detrás de la especialización. El tratamiento unifica sin convertir cada imagen en un filtro de marca.</p>
+          </div>
+        </header>
+
+        <div class="photo-grid">
+          <figure class="photo-treatment" style="margin:0">
+            <img src="assets/img/banner-AAA-abogados.jpg" alt="Muestra provisional de tratamiento fotográfico corporativo">
+            <figcaption class="photo-treatment__copy">
+              <h3>Personas reales. Criterio visible.</h3>
+              <p>Desaturación moderada, contraste controlado y superposición azul únicamente para sostener legibilidad.</p>
+            </figcaption>
+          </figure>
+          <div>
+            <ol class="photo-notes">
+              <li><strong>01</strong><span>Luz natural lateral y pieles cálidas.</span></li>
+              <li><strong>02</strong><span>Encuadres 4:5, 3:2 y planos con espacio negativo.</span></li>
+              <li><strong>03</strong><span>Conversación, escucha y concentración; nunca poses comerciales.</span></li>
+              <li><strong>04</strong><span>Vestuario en azul, grafito, marfil y tonos tierra.</span></li>
+              <li><strong>05</strong><span>Fondos reales, documentos autorizados y arquitectura propia.</span></li>
+            </ol>
+            <p class="photo-disclaimer">La imagen mostrada es un activo provisional del prototipo. Valida el tratamiento cromático y compositivo, no la selección fotográfica definitiva.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer-stage" id="footer">
+    <div class="lab-container site-footer-demo">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <p class="lab-kicker">AAA Estudio Legal</p>
+          <h2>Autoridad jurídica con <em>dimensión humana.</em></h2>
+          <p>Un footer sobrio, tipográfico y orientado a información. Sin tarjetas, brillos ni módulos decorativos.</p>
+        </div>
+        <div class="footer-col"><h3>Firma</h3><a href="#">Servicios</a><a href="#">Experiencia</a><a href="#">Equipo</a><a href="#">Noticias</a></div>
+        <div class="footer-col"><h3>Contacto</h3><span>Cali, Colombia</span><a href="mailto:info@agudeloabogados.com">info@agudeloabogados.com</a><a href="#formularios">Conversemos</a></div>
+      </div>
+      <div class="footer-bottom"><span>© 2026 AAA Estudio Legal</span><span>Visual Language Lab · Candidato para validación</span></div>
+    </div>
+  </footer>
 </body>
 </html>

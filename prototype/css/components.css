@@ -354,10 +354,10 @@ section[data-surface="muted"] + .hero .curve-divider,
   line-height: var(--leading-snug);
 }
 
-/* ---------- Grid de los 4 focos / servicios ---------- */
+/* ---------- Grid de los 3 focos / servicios ---------- */
 .focus-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: var(--space-6);
 }
 @media (max-width: 1023px) { .focus-grid { grid-template-columns: repeat(2, 1fr); } }
@@ -1264,7 +1264,6 @@ section:not([data-surface="dark"]) .text-gradient {
   width: fit-content;
 }
 .card-cta__icon { width: 1em; height: 1em; }
-.focus-mosaic__banner .card-cta { margin-top: 0; margin-left: auto; flex-shrink: 0; }
 .card-cta:focus-visible {
   outline: 2px solid var(--color-accent-main);
   outline-offset: 4px;
@@ -1335,11 +1334,9 @@ section:not([data-surface="dark"]) .text-gradient {
   }
 }
 
-/* ---------- Mosaico asimétrico de los 4 focos (§ Composición — evita "3 cards iguales") ----------
-   Refinamiento (2026-07-29): la destacada pasa a ocupar 8/12 columnas (antes 5/12) y
-   queda acompañada por dos tarjetas apiladas de 4/12 a su lado — proporción explícita
-   7-8 / 4-5 columnas — y una cuarta tarjeta como banda ancha inferior (12/12, corta),
-   para que las 4 alturas sean claramente distintas, no solo dos "carriles" de igual alto. */
+/* ---------- Mosaico asimétrico de los 3 focos (D24) ----------
+   La tarjeta principal ocupa 8/12 columnas y queda acompañada por dos tarjetas
+   apiladas de 4/12. Derecho Concursal ya no ocupa una tarjeta independiente. */
 .focus-mosaic {
   display: grid;
   grid-template-columns: repeat(12, 1fr);
@@ -1351,7 +1348,6 @@ section:not([data-surface="dark"]) .text-gradient {
   .focus-mosaic > :nth-child(1) { grid-column: 1 / 9; grid-row: 1 / 3; }
   .focus-mosaic > :nth-child(2) { grid-column: 9 / 13; grid-row: 1 / 2; }
   .focus-mosaic > :nth-child(3) { grid-column: 9 / 13; grid-row: 2 / 3; }
-  .focus-mosaic > :nth-child(4) { grid-column: 1 / 13; grid-row: 3 / 4; min-height: 200px; }
 }
 @media (min-width: 640px) and (max-width: 1023px) {
   .focus-mosaic > * { grid-column: span 6; }
@@ -1363,7 +1359,7 @@ section:not([data-surface="dark"]) .text-gradient {
   display: block;
   margin-bottom: var(--space-3);
 }
-/* Ajuste (2026-07-31): las 4 cards del mosaico pasaron a `.surface-visual` (imagen +
+/* Ajuste (D24): las 3 cards del mosaico usan `.surface-visual` (imagen +
    caption) — la card 01 ya no necesita el numeral gigante de fondo que antes rellenaba
    el espacio vacío de una card sin foto; ahora ese espacio lo ocupa la fotografía real.
    El texto de su caption se agranda un poco (`--text-lg`) para que siga leyéndose como
@@ -1373,21 +1369,6 @@ section:not([data-surface="dark"]) .text-gradient {
   font-size: var(--text-sm);
   margin-bottom: var(--space-3);
   color: rgba(255, 255, 255, 0.85);
-}
-/* Card 04 — banda ancha y corta: la caption se vuelve una fila horizontal (índice +
-   título + texto + CTA en línea) en vez de apilada, aprovechando el formato panorámico
-   en vez de dejarla como una card vertical más. */
-@media (min-width: 1024px) {
-  .focus-mosaic__banner .surface-visual__caption {
-    display: flex;
-    align-items: center;
-    gap: var(--space-6);
-    background: linear-gradient(90deg, rgba(var(--color-navy-deep-rgb),0.85), rgba(var(--color-navy-deep-rgb),0.55));
-  }
-  .focus-mosaic__banner .focus-card__index { margin-bottom: 0; }
-  .focus-mosaic__banner .surface-visual__caption h3 { margin-bottom: 0; flex-shrink: 0; }
-  .focus-mosaic__banner .surface-visual__caption p { margin-bottom: 0; max-width: 46ch; }
-  .focus-mosaic__banner .card-cta { margin-left: auto; flex-shrink: 0; }
 }
 /* ---------- Rail horizontal arrastrable (§ 3) — sectores, capacidades ---------- */
 .rail {

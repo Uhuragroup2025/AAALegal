@@ -4,7 +4,9 @@
 > Alcance: **Inicio** (`index.html`) + **Capacidad Técnica** (`servicios.html`), navegables entre sí.
 > Las demás páginas del sitemap (Nuestra Experiencia, Nuestro Equipo, Talento AAA, Noticias y Análisis, Página Legal) apuntan a `proximamente.html` — no están construidas todavía (no forman parte de este C2, ver [PROJECT.md](../PROJECT.md) → Ficha C1).
 > La página de Captación de Empresas (D11) **no se incluyó**: no está confirmada contractualmente y construirla habría ampliado alcance sin autorización (condición de parada, AGENTS.md).
-> Cómo ver el prototipo: abrir `prototype/index.html` directamente en un navegador (no requiere servidor). Comparación tipográfica: `prototype/type-lab.html`.
+> Cómo ver el prototipo: abrir `prototype/index.html` directamente en un navegador (no requiere servidor). Referencia visual interna aprobada: `prototype/type-lab.html`.
+
+> **Transición visual (D26, 2026-08-05):** este README documenta fielmente la implementación actual de la Home, todavía construida sobre D22/D23. El Visual Language Lab reemplaza esas decisiones como dirección futura, pero aún no se aplica a `index.html`: Playfair Display + Instrument Sans, paleta reducida alineada con marca y escala de spacing aprobada. Esta separación evita confundir el estado implementado con el sistema aprobado para la siguiente iteración.
 
 ## Iteración 2 (2026-07-29) — profundidad visual
 
@@ -26,7 +28,7 @@ No se mezclan los tres referentes visuales con el mismo peso (regla explícita d
 
 | Referente | Qué se tomó | Dónde se aplicó en este prototipo | Qué se dejó fuera deliberadamente |
 |---|---|---|---|
-| **01 — Autoridad** (`REFE_VISUAL_1.jpg`) | Hero oscuro con retrato protagonista; cards editoriales para servicios con distinto peso; alternancia de módulos oscuros/claros como ritmo de marca | Hero de Inicio y Capacidad Técnica (`.hero`, `data-surface="dark"`); grid de los 4 focos (`.focus-grid`); alternancia dark/muted/light entre secciones | **Indicadores/cifras** (años, casos, %) — no hay ninguna cifra real aprobada todavía (ver STATUS.md → vacíos); inventarlas está prohibido. Se sustituyó por contenido cualitativo (chips de sectores, sin números) |
+| **01 — Autoridad** (`REFE_VISUAL_1.jpg`) | Hero oscuro con retrato protagonista; cards editoriales para servicios con distinto peso; alternancia de módulos oscuros/claros como ritmo de marca | Hero de Inicio y Capacidad Técnica (`.hero`, `data-surface="dark"`); grid de los 3 macroservicios (`.focus-grid`); alternancia dark/muted/light entre secciones | **Indicadores/cifras** (años, casos, %) — no hay ninguna cifra real aprobada todavía (ver STATUS.md → vacíos); inventarlas está prohibido. Se sustituyó por contenido cualitativo (chips de sectores, sin números) |
 | **02 — Sistema modular** (`REFE_VISUAL_2.jpg`) | Retícula modular, cards con un elemento destacado en oscuro, hover states claros, lenguaje digital sin perder seriedad | `.focus-grid` (4 cards, una en `--emphasis`), `.btn` con estados hover/focus/active, navegación clara y persistente | Composiciones tipo "bento" muy fragmentadas — se mantuvo una retícula simple de 3–4 columnas para no restar seriedad institucional (riesgo explícito del referente) |
 | **03 — Elegancia institucional** (`REFE_VISUAL_3.jpg`) | Transición curva entre hero y contenido como gesto de marca recurrente; paleta cálida y dorado opaco (nunca metálico/brillante); espacio en blanco generoso | `.curve-divider` (SVG estático) al final de cada hero; dorado (`--color-gold-100/200`) reservado a acentos de texto/borde, nunca como fondo sólido con texto encima | Hero fotográfico real con tratamiento cinematográfico — no hay fotografía institucional entregada todavía; se usa un **placeholder explícito**, no una imagen de banco (regla: no comprar banco de imágenes, no inventar contenido) |
 | **OlarteMoure / Kreisson / Sheff&Cook** (storytelling en scroll) | — | **No aplicado en este C2** | Ver § 5 Animaciones — decisión explícita de no implementar scrollytelling/sticky-crossfade en Inicio/Capacidad Técnica; ver justificación de C2 abajo |
@@ -128,7 +130,7 @@ Cada componente está pensado como un **pattern** o **template part** independie
 | Superficie de vidrio | `.surface-glass` | Variación de bloque Group (fondo + borde + `backdrop-filter`) | Cualquier contenido — requiere fondo con atmósfera detrás para verse |
 | Superficie sólida | `.surface-solid` | Variación de bloque Group (ya existía como `.focus-card`) | — |
 | Superficie visual (foto + caption) | `.surface-visual` + `.surface-visual__caption` | Pattern sobre core Cover | Imagen (`IMG-xx`, ver `IMAGE-BRIEF.md`) + título corto |
-| Mosaico asimétrico de los 4 focos | `.focus-mosaic` | Pattern `mosaico-focos` sobre core Group con layout tipo Grid (spans manuales) | 4 focos — 1 vidrio destacado + 1 sólida + 1 visual + 1 sólida |
+| Mosaico asimétrico de los 3 focos | `.focus-mosaic` | Pattern `mosaico-focos` sobre core Group con layout tipo Grid (spans manuales) | 3 macroservicios (D24) — 1 tarjeta destacada + 2 apiladas |
 | Texto en degradado | `.text-gradient` | Clase de bloque / estilo de bloque registrado — **máx. 2 usos en todo el sitio** | Frase corta dentro de un H1 |
 | Rail arrastrable | `.rail` + `js/main.js` (pointer events) | Pattern con overflow-x — no requiere bloque nuevo | Lista de chips/tarjetas (sectores, capacidades) |
 | Placeholder de fotografía | `.media-placeholder` | Solo de prototipo — en producción es una imagen real (core Image) | — (se retira cuando llegue material real, ver `IMAGE-BRIEF.md`) |
@@ -152,12 +154,12 @@ Cada componente está pensado como un **pattern** o **template part** independie
 | CTA de header | Botón completo con texto | Igual | Bajo 480px: solo ícono (texto accesible vía `visually-hidden`, ver § 6) |
 | Hero inmersivo | `.hero-shell` con `min-height:560px`, contenido anclado abajo sobre el scrim | Igual, altura fluida por contenido | `min-height:440px`, radio de contenedor reducido a 20px |
 | Banda de credibilidad | 4 columnas, se superpone ~64px al hero | 2×2 | 1 columna, se superpone solo ~32px (evita ocupar demasiado alto en pantallas chicas) |
-| Mosaico de 4 focos | Retícula asimétrica 12 columnas (1 card destacada de doble alto + 3 variadas) | 2 columnas, sin spans especiales | 1 columna — cada card conserva su tratamiento (vidrio/sólida/visual) aunque pierda el layout asimétrico |
+| Mosaico de 3 focos | Retícula asimétrica de 12 columnas (1 card destacada de doble alto + 2 apiladas) | 2 columnas, sin spans especiales | 1 columna — cada card conserva su tratamiento visual aunque pierda el layout asimétrico |
 | Rail de sectores | Todos los chips caben sin scroll en la mayoría de anchos | Puede requerir scroll horizontal según cantidad | Scroll horizontal + arrastre táctil/puntero, `scroll-snap` |
 | Bloques de servicio (Capacidad Técnica) | Vidrio ancho / texto+visual en 2 columnas / editorial simple | Igual, columnas se angostan | 1 columna en todos los tratamientos |
 | Footer | 3 columnas | 1 columna (mismo corte que `.grid-2`, 800px) | 1 columna |
 
-**Nota tablet:** el mosaico de 4 focos pierde su asimetría en tablet (spans especiales solo activos desde 1024px) pero conserva la variación de tipos de tarjeta (vidrio/sólida/visual) — se decidió así porque a ese ancho un layout asimétrico de 12 columnas se vuelve demasiado angosto por celda; 2 columnas simples es más legible sin perder la variedad de superficies, que es lo que realmente resuelve la "planitud".
+**Nota tablet:** el mosaico de 3 focos pierde su asimetría en tablet (spans especiales solo activos desde 1024px) y pasa a columnas simples para conservar legibilidad.
 
 ---
 
@@ -220,7 +222,7 @@ Bugs encontrados y corregidos durante esta verificación: (1) la nota `.ady-note
 
 - Ningún componente depende de una longitud de texto fija: los `.focus-card`, `.service-block` y el hero usan alto automático (no alturas fijas), así que un administrador puede escribir más o menos texto sin romper el layout.
 - Las cards con `--emphasis` (fondo oscuro) son una clase, no un bloque distinto — en Gutenberg esto se resuelve con una variación de bloque o un atributo de color de fondo por bloque Group, no con un CPT nuevo.
-- El grid de 4 focos asume 4 elementos (según Ref. 02 y el copy aprobado); si en el futuro cambia el número, el CSS Grid con `repeat(4, 1fr)` necesitaría ajustarse — no es una limitación bloqueante, pero sí una dependencia a documentar en 03A.
+- El grid de focos asume los 3 macroservicios aprobados por D24; si en el futuro cambia el número, el layout necesitará ajustarse y registrarse como una nueva decisión de portafolio.
 
 ### Performance
 
@@ -237,14 +239,14 @@ Bugs encontrados y corregidos durante esta verificación: (1) la nota `.ady-note
 |---|---|---|
 | ~~Licencia de Big Caslon para web~~ | **Cerrado por Decisión D22** (Owner, 2026-07-29): Big Caslon queda retirada de los encabezados, reemplazada por Space Grotesk (Google Fonts, uso libre) — el riesgo de licencia deja de existir | — |
 | **Carga de Google Fonts (Krub + Space Grotesk) vía CDN externo** | Cada visita hace una petición a `fonts.googleapis.com` — implica una dependencia externa y envío de IP a Google | Evaluar auto-hospedar ambas fuentes (`.woff2` local vía `theme.json`/`enqueue`) en 03A — elimina la dependencia externa y mejora privacidad/rendimiento, sin costo de licencia (ambas son de uso libre) |
-| **Grid de 4 focos asume exactamente 4 elementos** | El layout (`repeat(4, 1fr)`) no está pensado para un número variable | En 03A decidir si es un pattern fijo (4 bloques manuales) o si necesita lógica de bloque distinta si el número de focos cambiara |
+| **Grid de 3 focos con estructura fija** | El layout responde a los 3 macroservicios aprobados por D24 y no está pensado como una lista de longitud variable | En 03A implementarlo como pattern fijo; cualquier cambio en el número de servicios requiere revisar el layout y la decisión de portafolio |
 | **CTA "Consulta tu caso aquí" sin destino real** | Apunta a una nota explicativa (`#nota-ady`), no a la URL externa de ADY (aún no compartida) ni al formulario nativo de empresas (mecanismo pendiente de 03A) | No implementar el enlace real hasta que el cliente comparta la URL de ADY y se resuelva si es el mismo flujo que el formulario nativo (pregunta abierta registrada en PROJECT.md → Conversión) |
 | **Aviso de cookies como HTML estático** | En este prototipo es un componente de ejemplo (localStorage propio); en producción debe integrarse con el mecanismo real de consentimiento antes de que GTM dispare GA4/Clarity | Definir en 03A si se usa un plugin de consentimiento mínimo o un snippet propio vía GTM (Decisión D20 ya aprueba Clarity vía el mismo contenedor, sin plugin nuevo — el aviso de cookies es la única pieza aún sin mecanismo definido) |
 | **Fotografía pendiente** | Todo el prototipo depende de placeholders; el layout (aspect-ratio, recorte) no está validado contra fotografías reales | Cuando llegue material real (STATUS.md → pre-requisitos), validar que el aspect-ratio/objet-fit elegido no recorta mal caras/elementos clave |
 | **`<details>` como patrón de navegación** | Es un patrón robusto y accesible, pero poco común en temas WordPress estándar (la mayoría usa el bloque Navigation nativo con su propio JS de colapso) | En 03A decidir si se replica este patrón a mano en el template part, o si se adopta el comportamiento nativo del bloque Navigation de Gutenberg (que ya resuelve mobile/desktop de forma equivalente) — evaluar sin perder el fallback sin-JS que sí tiene el patrón `<details>` |
 | **`backdrop-filter` (superficies de vidrio) y soporte de navegador** | Es una propiedad CSS moderna, bien soportada en navegadores actuales, pero con costo de rendimiento en dispositivos de gama baja si se abusa (muchas superficies de vidrio grandes simultáneas en pantalla) | Ya mitigado parcialmente: fallback sólido vía `@supports`, y el vidrio se usa con moderación (nunca todas las cards a la vez, ver criterio de aplicación en `REFERENCES.md`). Validar rendimiento real en un dispositivo de gama media/baja antes de Gate 1 |
 | **Halos de fondo (`.atmosphere`) con `filter:blur()`** | `blur()` en elementos grandes (`46vw`) puede ser costoso en GPUs débiles si se combina con la animación de deriva | La deriva ya está limitada a navegadores con `prefers-reduced-motion: no-preference`; si en dispositivos reales se detecta costo alto, la mitigación es reducir el tamaño de los halos o quitar la animación de deriva y dejarlos estáticos (no afecta la composición, solo el "extra" de vida sutil) |
-| **Mosaico asimétrico (`.focus-mosaic`) con spans manuales** | Los `grid-column`/`grid-row` fijos por `:nth-child` asumen exactamente 4 elementos en un orden específico — un CPT o bloque repetidor genérico no podría variar el número sin ajustar el CSS | Igual que el riesgo ya registrado del grid de 4 focos: en 03A, si el layout de Gutenberg necesita soportar un número variable, este mosaico debe convertirse en variaciones de bloque explícitas (p. ej. "card destacada" como bloque distinto de "card simple"), no en una repetición genérica |
+| **Mosaico asimétrico (`.focus-mosaic`) con spans manuales** | Los `grid-column`/`grid-row` fijos por `:nth-child` asumen exactamente 3 elementos en un orden específico — un CPT o bloque repetidor genérico no debería variar el número sin ajustar el CSS | En 03A implementarlo como pattern fijo con una tarjeta destacada y dos secundarias, no como repetición genérica |
 
 ---
 
