@@ -39,6 +39,12 @@
 | D-13 | La paleta D26 no tiene, a diferencia de la teal de D23, un tono único que cumpla 3:1 tanto sobre navy como sobre blanco — afecta el anillo de foco global y varios usos directos de `--color-accent-main`. Corregido con tokens duales (claro por defecto + override en `[data-surface="dark"]`), pero una de las reglas específicas (`.talent-form__field input/textarea:focus-visible`, Nuestro Equipo) ya tenía su propio `outline` con especificidad más alta que el override genérico, por lo que seguía ganando el valor claro (invisible sobre el fondo oscuro real del formulario). | Alta (foco de teclado invisible en el único formulario real del prototipo) | Sí, para accesibilidad de teclado | **Corregido** — la regla del formulario referencia directamente `--color-focus-ring-on-dark`, sin depender del override genérico |
 | D-14 | `.cierre-card--cta` (tarjeta de cierre "Conversemos sobre su caso") tenía un fondo en degradado (`linear-gradient` navy→cobre→azul), incumpliendo la regla ya cerrada en D-10 ("degradados solo como fondo de sección, nunca en cards"). Quedó sin detectar en el cierre de D-10 porque esa revisión fue sobre el laboratorio (`type-lab.html`), no sobre los componentes reales de Home. | Media | No, pero es una inconsistencia de regla ya aprobada | **Corregido** — fondo aplanado a color sólido (`--color-navy-elevated`); el halo decorativo (`.cierre-card__halo`, blur circular) se conserva sin cambios, no es un degradado de identidad |
 
+## Defecto encontrado y corregido — orden de cascada en `.grid-2--stretch` (2026-08-05)
+
+| ID | Descripción | Severidad | ¿Bloquea? | Estado |
+|---|---|---|---|---|
+| D-15 | El modificador `.grid-2--stretch` (iteración 9, "situaciones" en Inicio) y la clase base `.grid-2` tienen la misma especificidad (una clase cada una); `.grid-2--stretch` estaba definida ANTES que `.grid-2` en `components.css`, así que el `align-items:center` de la clase base ganaba por orden de cascada — la 4ª tarjeta ("Necesito visibilidad y seguimiento...") se veía centrada y más baja que las otras 3 en vez de estirada a la misma altura. Reportado por el Owner con captura de pantalla. | Media (visual, no de contenido) | No | **Corregido** — `.grid-2--stretch` movida a inmediatamente después de `.grid-2` en el archivo; verificado que las 4 cards miden exactamente lo mismo (173.6px) |
+
 ## Capas de QA (según propuesta comercial)
 
 1. **Técnico** — funcionamiento, performance, SEO/GEO básico, formularios, CPTs, responsive, sin errores de consola/enlaces rotos.
