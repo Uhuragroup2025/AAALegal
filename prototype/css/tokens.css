@@ -66,7 +66,10 @@
   --color-text-on-dark: var(--color-white);
   --color-accent-on-dark: var(--color-gold-100);   /* azul claro — 7.38:1 sobre navy-deep */
   --color-accent-strong: var(--color-gold-200);     /* accent-deep — ~4.5:1 sobre blanco, texto/bordes/iconos en superficie clara */
-  --color-border-subtle: rgba(var(--color-navy-deep-rgb), 0.12);
+  /* D26: gris plano del lab (--border, #D9D9D9), no un tinte de navy en transparencia
+     — el lab lo usa como color sólido en cards/divisores ("división silenciosa"), y un
+     tinte azulado se notaba como una desviación frente a la referencia aprobada. */
+  --color-border-subtle: var(--color-border-flat);
   --color-border-on-dark: rgba(var(--color-accent-light-rgb), 0.35);
   /* Foco (D26): a diferencia de la paleta teal (D23), ningún tono único de esta paleta
      cumple 3:1 tanto sobre navy-deep como sobre blanco a la vez — el azul claro da 7.38:1

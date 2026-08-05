@@ -199,6 +199,20 @@ Por instrucción del Owner se recuperó, dentro del bloque “Dimensión humana�
 
 **Estado:** ✅ Candidato a revisión — **no aprobado**. Con esta iteración, D26 queda completamente implementado (ya no solo en el laboratorio) en las 7 páginas construidas. Pendiente: QA de Content, consolidación de Product Lead y Gate 1, igual que el resto del prototipo.
 
+### Iteración 13 — brechas de fidelidad al Visual Language Lab (2026-08-05, candidato a revisión)
+
+**Motivo:** el Owner revisó la iteración 12 en navegador y señaló elementos que seguían sin corresponder al laboratorio: títulos de énfasis sin cursiva, bordes con un tinte azulado en vez del gris plano del lab, el menú principal mostrando solo el ícono de hamburguesa en anchos de escritorio normales, y la sección "Sabemos lo que está enfrentando" con números en vez de iconografía y tarjetas de altura despareja.
+
+**Qué se hizo:**
+- `.text-gradient`: se agregó cursiva (el lab combina color + itálica en su tratamiento de énfasis, no solo color). Se corrigió además un efecto colateral de la migración: sobre fondo oscuro el degradado usaba dos alias que en D26 apuntan al mismo tono (`--color-gold-100`/`--color-accent-cool-100`, ambos ahora el azul claro), por lo que se veía como color plano, no como degradado — ahora usa azul claro → cobre.
+- `--color-border-subtle` pasó de `rgba(navy, 0.12)` (tinte azulado, herencia de D23) al gris plano `#D9D9D9` del lab (token `--color-border-flat`, creado en la iteración 12 pero nunca conectado).
+- **Menú principal:** medido en navegador que, con Instrument Sans y los 6 ítems vigentes (ya no 7), el nav cabe en una sola línea sin desbordar la píldora incluso a 1024px. El corte de 1535px (calibrado en 2026-07-31 para 7 ítems con Krub) volvió al estándar del resto del sistema, 1023px, en `components.css` y `js/main.js` (deben coincidir, ya sincronizados).
+- Sección "situaciones" (Inicio): los índices "01–04" se reemplazaron por 4 íconos Phosphor distintos y semánticamente relevantes (alerta, análisis, representación, seguimiento), mismo criterio sin clichés jurídicos que la iteración 11. Las 4 tarjetas ahora usan una variante `.grid-2--stretch` para altura uniforme, sin afectar los otros 4 usos de `.grid-2` en la página (equipo, sectores, etc., que si necesitan centrado vertical).
+
+**QA ejecutado:** verificado en navegador a 768px, 1024px, 1100px y 1440px — nav en una sola línea sin hamburguesa desde 1024px, hamburguesa funcional por debajo; cursiva e ícono de foco confirmados por estilo computado, no solo a simple vista; bordes verificados en `rgb(217,217,217)` exacto; sin overflow horizontal en ningún ancho probado.
+
+**Estado:** ✅ Candidato a revisión — **no aprobado**. Mismos pendientes que el resto del prototipo (QA de Content, consolidación de Product Lead, Gate 1).
+
 ## Fase actual
 
 **Fase:** Cierre de C1 y preparación de **Gate 1 — Prototipo**.
