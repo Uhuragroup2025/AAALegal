@@ -498,6 +498,58 @@ Por instrucción del Owner se recuperó, dentro del bloque “Dimensión humana�
 
 **Publicación:** esta sincronización corresponde únicamente a GitHub. No autoriza ni incluye deploy, Cloudflare Pages/Workers, cambios de configuración de Cloudflare o merge a `main`.
 
+### Iteración 32 — carruseles de cards en mobile (2026-08-05, candidato a revisión)
+
+**Motivo:** la Product Lead pidió reducir la altura acumulada de tres bloques de la Homepage en móvil, conservando intactas sus composiciones desktop y tablet.
+
+**Qué se hizo:**
+- “Sabemos lo que está enfrentando”, “¿Por qué AAA?” y “Casos de éxito” pasan a carruseles horizontales únicamente hasta `640px`.
+- Navegación táctil nativa con `scroll-snap`, vista parcial de la siguiente card como señal de continuidad y scrollbar fino.
+- Los tres contenedores son enfocables y admiten navegación horizontal por teclado; el foco utiliza el tratamiento accesible del Design Language.
+- Las cards de situaciones mantienen `174px` de altura mínima, las de atributos `210px` y los videos conservan proporción `16:9`.
+- No se añadió JavaScript ni una dependencia: se reutiliza el contenido y la estructura existente con CSS progresivo.
+
+**Integridad:** no se modificaron copys, cards, videos, orden de contenido, desktop, tablet ni otras secciones.
+
+**Estado:** ✅ Candidato a revisión de Product Lead — cambio local posterior a la baseline publicada; **no publicado / no desplegado**.
+
+### Iteración 33 — iconografía de atributos “¿Por qué AAA?” (2026-08-05, candidato a revisión)
+
+**Motivo:** la Product Lead pidió reemplazar la numeración utilitaria de las cinco cards por símbolos que comuniquen la intención de cada atributo.
+
+**Qué se hizo:**
+- `01` → escudo con confirmación para representación exclusiva del acreedor.
+- `02` → dispositivo conectado para tecnología propia (ADY).
+- `03` → ubicación conectada para cobertura nacional.
+- `04` → equipo de personas para equipo especializado.
+- `05` → candado para seguridad de la información.
+- SVG individuales de trazo regular, `aria-hidden` porque el título de cada card ya comunica el significado; colores adaptados a las superficies blanca, azul AAA y azul claro.
+
+**Integridad:** no se modificaron títulos, orden, alturas, colores de superficie, retícula desktop ni carrusel mobile.
+
+**Estado:** ✅ Candidato a revisión de Product Lead — cambio local posterior a la baseline publicada; **no publicado / no desplegado**.
+
+### Iteración 34 — segunda baseline estable para continuidad del Producer (2026-08-05)
+
+**Decisión de Product Lead:** los carruseles móviles de situaciones, atributos y casos de éxito, junto con la nueva iconografía semántica de “¿Por qué AAA?”, quedan incorporados a la **baseline estable** que Óscar debe continuar desde `product-lead-ajustes-visuales`.
+
+**Estado consolidado:**
+- Homepage y Visual Language Lab permanecen como fuente de verdad visual y narrativa.
+- En mobile, los tres grupos de contenido extensos se navegan horizontalmente con scroll nativo y `scroll-snap`; desktop y tablet conservan sus retículas.
+- Las cinco razones para confiar sustituyen numeración por pictogramas de protección, tecnología, cobertura, equipo y seguridad.
+- No se añadieron dependencias, JavaScript nuevo, carpetas ni cambios de arquitectura.
+
+**Pendientes vigentes para Óscar:**
+1. Fotografía panorámica definitiva del equipo para IMG-03.
+2. Tres casos audiovisuales y logos reales autorizados por el cliente.
+3. URLs oficiales de LinkedIn e Instagram.
+4. URL externa definitiva de ADY.
+5. Validación final de Product Lead/cliente para Gate 1.
+
+**Alcance de sincronización:** GitHub únicamente. No incluye ni autoriza Cloudflare Pages/Workers, deploy, cambios de configuración, merge a `main` o force push.
+
+**Estado:** ✅ Baseline estable autorizada para sincronización con GitHub — Gate 1 continúa pendiente de aprobación explícita.
+
 ## Fase actual
 
 **Fase:** Cierre de C1 y preparación de **Gate 1 — Prototipo**.
