@@ -1,6 +1,6 @@
 # STATUS.md — Estado del proyecto y síntesis de insumos
 
-> Actualizado: 2026-08-05 · **C0 = APROBADO** · **C1 = APROBADO (narrativa + copy, v1 y v2)** · **C2 = CANDIDATO A REVISIÓN (iteración 12 — Visual Language Lab migrado a las 7 páginas del sitio; ver abajo)** · Decisiones vigentes hasta D26. La paleta reducida alineada con marca (D26) reemplaza D22/D23 y ya está aplicada en todo el prototipo, no solo en la Home.
+> Actualizado: 2026-08-05 · **C0 = APROBADO** · **C1 = APROBADO (narrativa + copy, v1 y v2)** · **C2 = CANDIDATO A REVISIÓN (iteración 27 — retícula uniforme de confianza; ver abajo)** · Decisiones vigentes hasta D26. La paleta reducida alineada con marca (D26) reemplaza D22/D23 y ya está aplicada en todo el prototipo; la Home incorpora además la traducción compositiva completa registrada en la iteración 15, la escala editorial refinada desde la iteración 16 y los ajustes de ritmo, iconografía, header y evidencia registrados hasta la iteración 27.
 
 ## C2 — Prototipo (candidato, 2026-07-29)
 
@@ -227,6 +227,276 @@ Por instrucción del Owner se recuperó, dentro del bloque “Dimensión humana�
 **QA ejecutado:** verificado en navegador (Home y Servicios) tras descubrir que esta herramienta de previsualización cachea agresivamente los archivos CSS de `file://` entre ediciones sucesivas — los cambios de radio no se reflejaban hasta forzar una recarga completa de la pestaña, no solo del stylesheet. Confirmado por lectura directa de disco (no solo del navegador) que las 3 hojas de estilo tienen los valores correctos: `--radius-sm:4px`, `--radius-md:8px` en tokens.css, y cada selector afectado referenciándolos. Verificado además, tras una recarga limpia, que los valores computados coinciden exactamente (botón 4px, header 4px, card 8px). Sin overflow horizontal.
 
 **Estado:** ✅ Candidato a revisión — **no aprobado**. Mismos pendientes que el resto del prototipo (QA de Content, consolidación de Product Lead, Gate 1).
+
+### Iteración 15 — fidelidad compositiva de Homepage al Visual Language Lab (2026-08-05, candidato a revisión)
+
+**Motivo:** la Product Lead detectó que las iteraciones 12–14 habían trasladado principalmente tokens (paleta, familias tipográficas, bordes y radios), pero conservaban buena parte de la gramática visual de D23: header flotante con vidrio, hero contenido en panel redondeado, texto degradado, halos repetidos, mosaico fotográfico y cards con elevación. Se autorizó completar la migración visual sobre la misma Homepage, con la condición explícita de no modificar ningún copy.
+
+**Qué se hizo:**
+- Se añadió una clase de alcance a `body` (`home-page`) para aplicar la nueva capa únicamente a Inicio, sin alterar visualmente las otras seis páginas ni crear archivos/componentes.
+- Header convertido en barra sólida azul AAA, sin blur, sombra ni tratamiento de isla; CTA en cobre mate, siguiendo el espécimen del Lab.
+- Hero llevado a una composición editorial full-bleed: escala tipográfica dominante, énfasis Playfair Italic en cobre sólido, fotografía desaturada y subordinada mediante scrim, y retícula de fondo sutil. Se conserva la fotografía y la estructura/acciones existentes.
+- Botones normalizados a peso 500, borde de 1px, altura de 50px y radios de 4px.
+- Fondos narrativos claros convertidos a marfil plano; se retiraron los tres halos animados. La profundidad atmosférica queda limitada al hero y al CTA final.
+- Cards claras convertidas a superficies blancas con borde gris, sin sombras, brillos ni desplazamiento. Servicios adopta las tres variantes del Lab (blanca, azul AAA y azul claro) sin cambiar sus títulos, descripciones ni destinos.
+- Encabezados de sección, cards de confianza/casos, bloque de equipo y footer recalibrados con la escala, ritmo y geometría editorial del Lab. Las pills animadas del equipo se conservaron.
+- CTA final conserva su composición de dos paneles, con degradado oscuro de bajo contraste y sin halo decorativo.
+
+**Integridad de contenido:** el texto visible completo de `prototype/index.html` antes/después produjo la misma huella SHA-256 (`b24a1415330be32520c0902d5b0ff59830caa1ea1408bcca0fd56d751789d97f`). El único cambio HTML fue `class="home-page"` en `<body>`; no cambió ningún copy, enlace, orden de sección ni componente narrativo.
+
+**QA ejecutado:** navegador limpio en 1440×1000 y 390×844; sin overflow horizontal; header desktop y menú móvil funcionales; grids de servicios 3→2→1 columnas; jerarquía calculada de 89.28px para H1 y 68px para H2 en desktop; cards blancas sin sombra; atmósferas repetidas anuladas; contraste del párrafo del CTA final corregido a blanco 72%; 9 secciones, 24 encabezados y 25 enlaces preservados; sin errores de consola. `git diff --check` sin errores.
+
+**Estado:** ✅ Candidato a revisión de Product Lead — **no aprobado / no publicado**. Gate 1 continúa pendiente.
+
+### Iteración 16 — recalibración tipográfica de Homepage (2026-08-05, candidato a revisión)
+
+**Motivo:** durante la revisión interna se identificó que los títulos dominaban en exceso la composición de la Home. La Product Lead pidió ajustar únicamente la escala de H1, H2 y H3, conservando la dirección visual, las familias tipográficas, el copy y los tamaños actuales de eyebrows y body.
+
+**Qué se hizo:**
+- H1 fijado en `48px` para escritorio y `35px` para móvil.
+- H2 fijado en `32px` para escritorio y `25px` para móvil, incluido el cierre narrativo.
+- H3 unificado en `24px` para escritorio y móvil; su relación jerárquica se sostiene mediante contexto, composición y espaciado, no mediante variaciones de escala entre cards.
+- No se modificaron familias, pesos, tamaños de body o eyebrows, copy, estructura, componentes ni comportamiento responsive.
+
+**QA ejecutado:** navegador local limpio en 1440×1000 y 390×844. Escala calculada: desktop H1 `48px`, H2 `32px`, H3 `24px`; móvil H1 `35px`, H2 `25px`, H3 `24px`. Eyebrows de sección permanecen en `12px` y body del hero en `18px`. Sin overflow horizontal; menú móvil funcional; `git diff --check` sin errores.
+
+**Estado:** ✅ Candidato a revisión de Product Lead — **no aprobado / no publicado**. Gate 1 continúa pendiente.
+
+### Iteración 17 — bloque de situaciones de Homepage (2026-08-05, candidato a revisión)
+
+**Motivo:** la Product Lead pidió reducir el bloque “Sabemos lo que está enfrentando” a tres situaciones y compactar visualmente sus cards para dar mayor protagonismo al texto.
+
+**Qué se hizo:**
+- Se retiró la cuarta situación: “Necesito visibilidad y seguimiento sobre cada caso”.
+- El bloque pasó de una retícula de dos columnas a tres columnas en escritorio, dos en tablet y una en móvil.
+- Las cards se redujeron a `160px` de alto en escritorio y `150px` en móvil, frente al mínimo previo de `220px/210px` (reducción aproximada de 27–29%).
+- Ícono y texto se alinearon horizontalmente con una separación de `12px`; el texto sube dentro de la card y gana protagonismo únicamente por composición. Conserva exactamente el comportamiento de body (`17px`, peso `400`, interlineado `27.2px`).
+- El título “Sabemos lo que está enfrentando” se conserva por ahora; su reemplazo semántico queda pendiente de aprobación de Product Lead.
+
+**QA ejecutado:** navegador local en 1440×1000 y 390×844; tres cards confirmadas, alturas `160px/150px`, retícula `3→2→1`, body copy verificado en `17px/400/27.2px`, sin overflow horizontal. `git diff --check` sin errores.
+
+**Estado:** ✅ Candidato a revisión de Product Lead — **no aprobado / no publicado**. Gate 1 continúa pendiente.
+
+### Iteración 18 — altura y ritmo editorial del Hero (2026-08-05, candidato a revisión)
+
+**Motivo:** la Product Lead pidió conservar la dirección visual del Hero, pero reducir su ocupación vertical para evitar una percepción de landing page y anticipar el contenido siguiente.
+
+**Qué se hizo:**
+- La altura mínima del Hero pasó de ocupar el viewport disponible a `clamp(600px, 72vh, 720px)` en escritorio y `72svh` en móvil.
+- Se eliminó el eyebrow “AAA Estudio Legal” del Hero.
+- No se modificaron el H1, subhead, CTAs, tratamiento fotográfico, paleta ni composición general.
+
+**QA ejecutado:** en 1440×1000 el Hero mide `720px` y deja aproximadamente `201px` de la sección siguiente visibles; en 390×844 mide `608px` y deja aproximadamente `167px` de continuidad. Acciones completas, eyebrow ausente y sin overflow horizontal en ambos tamaños. `git diff --check` sin errores.
+
+**Estado:** ✅ Candidato a revisión de Product Lead — **no aprobado / no publicado**. Gate 1 continúa pendiente.
+
+### Iteración 19 — incremento proporcional de H2 (2026-08-05, candidato a revisión)
+
+**Motivo:** la Product Lead pidió elevar un 15% los H2 de escritorio y un 10% los H2 de móvil, manteniendo intactos los demás niveles tipográficos.
+
+**Qué se hizo:** los ocho H2 narrativos de la Homepage, incluido el CTA final, pasaron de `32px` a `36.8px` en escritorio y de `25px` a `27.5px` en móvil. Los encabezados utilitarios del footer conservan su escala propia.
+
+**QA ejecutado:** valores calculados confirmados en 1440×1000 y 390×844; H1, H3, body y eyebrows sin cambios; sin overflow horizontal. `git diff --check` sin errores.
+
+**Estado:** ✅ Candidato a revisión de Product Lead — **no aprobado / no publicado**. Gate 1 continúa pendiente.
+
+### Iteración 20 — iconografía y composición de situaciones (2026-08-05, candidato a revisión)
+
+**Motivo:** la Product Lead pidió situar los íconos encima del texto en todos los breakpoints y revisar su correspondencia semántica con cada situación.
+
+**Qué se hizo:**
+- Las tres cards volvieron a composición vertical, con ícono arriba y body copy debajo, separados por `12px` tanto en escritorio como en móvil.
+- Se conserva Phosphor Icons mediante SVG individuales: documento para el crédito comprometido, objetivo para evaluar posibilidades reales de recuperación y acuerdo/representación para el acompañamiento integral de la firma.
+- No se cargó una librería completa ni se añadieron dependencias, archivos o procesos de compilación.
+- El body copy conserva `17px`, peso `400` e interlineado `27.2px`; las cards mantienen `160px` en escritorio y `150px` en móvil.
+
+**QA ejecutado:** posición del ícono sobre el texto y separación de `12px` confirmadas en 1440×1000 y 390×844; tres cards consistentes, sin overflow horizontal. `git diff --check` sin errores.
+
+**Estado:** ✅ Candidato a revisión de Product Lead — **no aprobado / no publicado**. Gate 1 continúa pendiente.
+
+### Iteración 21 — padding interno de cards de situaciones (2026-08-05, candidato a revisión)
+
+**Motivo:** la Product Lead detectó que íconos y textos quedaban pegados a los bordes de las tres cards.
+
+**Corrección:** la regla utilizaba `--space-5`, token inexistente en la escala, por lo que el navegador resolvía el padding en `0`. Se reemplazó por `--space-6` (`24px`) y la separación entre ícono y texto aumentó a `--space-4` (`16px`). Las tres cards mantienen una altura visual consistente de `174px` en escritorio y móvil.
+
+**QA ejecutado:** padding calculado de `24px` en los cuatro lados, ícono a `25px` del borde por el trazo de 1px, gap de `16px`, cards consistentes y sin overflow horizontal en 1440×1000 y 390×844. `git diff --check` sin errores.
+
+**Estado:** ✅ Candidato a revisión de Product Lead — **no aprobado / no publicado**. Gate 1 continúa pendiente.
+
+### Iteración 22 — refinamiento del header de Homepage (2026-08-05, candidato a revisión)
+
+**Motivo:** la Product Lead pidió equilibrar el header como franja de ancho completo, ampliar su ancho útil y organizar marca, navegación y acciones en tres zonas, sin alterar rutas, copy ni otras secciones.
+
+**Qué se hizo:**
+- Se incorporaron los maestros entregados por Product Lead en la carpeta existente `prototype/assets/img/`: isotipo, lettering blanco y lettering azul para un eventual fondo claro.
+- La marca del header combina isotipo y lettering blanco como una unidad; el estado futuro `data-header-theme="light"` deja preparado el intercambio al lettering azul sin afectar el estado actual.
+- El contenedor interno se amplió de `1200px` a `1440px`, con márgenes laterales fluidos; navegación centrada geométricamente y acciones alineadas al extremo derecho.
+- Los enlaces y destinos se conservaron íntegros; el activo mantiene una línea editorial fina.
+- El isotipo se revela en tres tiempos durante `1.15s`, una sola vez al cargar. Su caja permanece fija en `42×42px` (`34×34px` en móvil), no bloquea interacción, no responde al hover y `prefers-reduced-motion` muestra directamente el estado final.
+- La Home colapsa la navegación a `1180px`, antes de que las tres zonas se compriman; las demás páginas conservan su breakpoint previo de `1023px`. Mobile reutiliza el menú existente, oculta idioma según la regla previa y mantiene el CTA compacto.
+- Se añadió una versión de consulta al `src` de `main.js` en Inicio para evitar que el navegador reutilice la lógica responsive anterior durante la revisión local.
+
+**QA ejecutado:** SVGs cargados y verificados; desktop 1440×900 sin solapamientos, navegación centrada y acciones a la derecha; umbral abierto en 1181px y colapsado en 1100px; mobile 390×844 con header/hero sincronizados a `68px`, marca legible, menú funcional y panel a ancho completo. Animación confirmada con una iteración y caja estable; sin overflow horizontal; `git diff --check` sin errores.
+
+**Integridad:** Hero, narrativa, secciones, copy, enlaces y rutas no fueron modificados. Cambios limitados al header de `prototype/index.html`, su capa `.home-page`, la lógica responsive condicional y los tres assets de marca entregados.
+
+**Estado:** ✅ Candidato a revisión de Product Lead — **no aprobado / no publicado**. Gate 1 continúa pendiente.
+
+### Iteración 23 — encabezados apilados y casos audiovisuales (2026-08-05, candidato a revisión)
+
+**Motivo:** la Product Lead pidió corregir la composición desplazada de cuatro encabezados y convertir Casos de éxito en una estructura reconocible como evidencia audiovisual, con una franja independiente para logos autorizados.
+
+**Qué se hizo:**
+- Eyebrow directamente encima del H2, alineación izquierda y separación constante de `8px` en: Situaciones, Cómo intervenimos, ¿Por qué AAA? y Casos de éxito. Las demás secciones conservan su composición.
+- Las tres cards de casos se sustituyeron por cápsulas audiovisuales 16:9, con superficie temporal plana, botón de reproducción sobrio, etiqueta Caso 1–3 y nota breve de contenido pendiente.
+- Se eliminó por completo el bloque “Testimonio y cifra destacada / Evidencia pendiente de entrega y validación para publicación”.
+- Se creó una franja independiente de logos con seis slots circulares duplicados únicamente para continuidad visual. Cada slot queda preparado para sustituir el `<span>` temporal por un `<img>` real.
+- El carrusel usa CSS, recorrido lineal de `32s`, sin rebotes ni aceleración; pausa en hover o foco. Con `prefers-reduced-motion` se detiene, elimina la copia duplicada y presenta los seis slots estáticos.
+
+**QA ejecutado:** cuatro pares eyebrow/H2 alineados y separados `8px`; tres frames calculados en proporción `1.778` (16:9); tres botones de reproducción; 12 slots en movimiento (6 reales + 6 duplicados); pausa por foco confirmada; bloque eliminado; desktop 1440×1000 y mobile 390×844 sin overflow horizontal. `git diff --check` sin errores.
+
+**Estado:** ✅ Candidato a revisión de Product Lead — **no aprobado / no publicado**. Gate 1 continúa pendiente.
+
+### Iteración 24 — recurso visual de “¿Qué hace AAA?” (2026-08-05, candidato a revisión)
+
+**Motivo:** la Product Lead pidió compactar únicamente el placeholder de esta sección para evitar que alargara el bloque y recuperar un ritmo más institucional.
+
+**Qué se hizo:** se conserva la estructura de dos columnas y el recurso visual, pero su proporción cambia de `4:5` a `3:2`, con ancho máximo de `540px`, altura máxima de `360px` y alineación vertical centrada respecto al texto. Por debajo de `800px` ocupa el ancho disponible con altura limitada a `320px`.
+
+**QA ejecutado:** desktop 1440×1000: `540×360px`, proporción `1.5` y centros verticales coincidentes (`delta 0px`); mobile 390×844: `343×229px`, proporción `1.5`. Copy, colores y estructura preservados; sin overflow horizontal; `git diff --check` sin errores.
+
+**Estado:** ✅ Candidato a revisión de Product Lead — **no aprobado / no publicado**. Gate 1 continúa pendiente.
+
+### Iteración 25 — limpieza visual de Casos de éxito (2026-08-05, candidato a revisión)
+
+**Motivo:** la Product Lead pidió reducir el ruido editorial debajo de las cápsulas audiovisuales y simplificar la franja de logos.
+
+**Qué se hizo:** se eliminaron las etiquetas visibles Caso 1–3 y las tres notas de contenido pendiente; los botones conservan sus nombres accesibles. “Logos autorizados” se renombró a “Logos clientes”, se retiró la nota de autorización y se eliminaron las líneas superior e inferior de la franja.
+
+**QA ejecutado:** tres cápsulas 16:9 preservadas, cero bloques descriptivos visibles, nuevo heading confirmado, bordes superior/inferior calculados en `0px`, copy anterior ausente y sin overflow horizontal. `git diff --check` sin errores.
+
+**Estado:** ✅ Candidato a revisión de Product Lead — **no aprobado / no publicado**. Gate 1 continúa pendiente.
+
+### Iteración 26 — Servicios full width y traslado del sistema de cards (2026-08-05, candidato a revisión)
+
+**Motivo:** la Product Lead pidió transformar “Cómo intervenimos” en tres paneles editoriales con fondo visual y trasladar su lenguaje cromático anterior a una composición equilibrada en “¿Por qué AAA?”.
+
+**Cómo intervenimos:**
+- Tres paneles contiguos ocupan el ancho útil completo (`1136px` en la prueba de 1440px), sin gaps ni apariencia de slider.
+- Altura institucional fija de `420px`; la sección completa calcula `839px`, sin ocupar un viewport completo de 1000px.
+- Cada panel conserva número, título y descripción sobre placeholder visual reemplazable, con overlay azul AAA al 70% y texto estable.
+- En desktop con puntero fino: expansión relativa mínima (`1.04` frente a `0.98`), escala visual `1.03`, overlay al 60% y transición sobria de `700–900ms`; sin sombras, elevación, glow o rebote.
+- `prefers-reduced-motion` elimina transiciones, expansión y escala. Tablet apila paneles de `300px`; mobile, paneles de `260px`, siempre con contenido y overlay visibles.
+- El CTA “Conocer nuestros servicios” y su destino permanecen intactos.
+
+**¿Por qué AAA?:**
+- Una card principal ocupa dos columnas y dos filas; cuatro cards secundarias cierran un bloque 2×2 sin vacíos.
+- La principal mide `556×544px` en desktop y eleva la escala de su H3; las secundarias miden aproximadamente `266×260px`.
+- Sistema plano en blanco, azul AAA y azul claro; numeración sans, títulos Playfair, bordes discretos y sombras anuladas.
+- Tablet: principal a ancho completo y cuatro secundarias en 2×2. Mobile: cinco cards apiladas sin overflow.
+
+**QA ejecutado:** desktop 1440×1000, tablet 900×900 y mobile 390×844; overlays y legibilidad confirmados, placeholders activos, retículas sin vacíos y sin overflow horizontal. `git diff --check` sin errores.
+
+**Integridad:** no se modificaron copy, números, narrativa, rutas, header, Hero, Casos de éxito ni otras secciones; esta iteración afecta únicamente CSS de los dos bloques solicitados.
+
+**Estado:** ✅ Candidato a revisión de Product Lead — **no aprobado / no publicado**. Gate 1 continúa pendiente.
+
+### Iteración 27 — retícula uniforme de “¿Por qué AAA?” (2026-08-05, candidato a revisión)
+
+**Motivo:** la Product Lead aclaró que los cinco atributos tienen la misma importancia y pidió retirar la jerarquía dominante de la primera card.
+
+**Qué se hizo:**
+- Cinco cards con ancho, altura, padding, numeración y escala tipográfica equivalentes; altura uniforme de `220px`, frente a los `260/544px` anteriores.
+- Desktop amplio: cinco columnas de `208×220px` en la prueba de 1440px.
+- Anchos intermedios: composición 3 + 2 centrada mediante una retícula de seis unidades; las cinco cards calculan `258×220px` a 900px.
+- Tablet estrecha y mobile: dos columnas; la quinta card se centra manteniendo exactamente el ancho de una columna. En 390px, las cinco calculan `166×220px` y todo el contenido cabe sin recorte.
+- Se conserva la alternancia controlada blanco / azul AAA / azul claro, numeración pequeña, títulos Playfair, bordes discretos y sombras anuladas.
+
+**QA ejecutado:** 1440×1000, 900×900 y 390×844; igualdad dimensional confirmada en cada breakpoint, contenido completo y sin overflow horizontal. `git diff --check` sin errores.
+
+**Integridad:** no se añadió ni modificó copy; el cambio afecta únicamente la composición CSS del bloque solicitado.
+
+**Estado:** ✅ Candidato a revisión de Product Lead — **no aprobado / no publicado**. Gate 1 continúa pendiente.
+
+### Iteración 28 — footer institucional de Homepage (2026-08-05, candidato a revisión)
+
+**Motivo:** la Product Lead pidió trasladar al cierre de la Homepage el tratamiento B del Visual Language Lab —azul profundo con luz contenida— y ordenar los datos institucionales, comerciales, de talento y redes en una jerarquía más completa.
+
+**Qué se hizo:**
+- Footer de la Homepage reconstruido en cuatro bloques equilibrados: marca, contacto principal, contacto comercial/Talento AAA y redes sociales.
+- Tratamiento oscuro institucional con transición azul de bajo contraste, una única luz blanca contenida y un solo isotipo ampliado a baja opacidad como firma visual de fondo.
+- Logo oficial blanco incorporado; la variante full color queda disponible como activo para futuros estados claros.
+- Dirección, teléfono, WhatsApp y correos implementados con SVG individuales de trazo regular, enlaces `tel:`, `mailto:` y acceso directo a WhatsApp con prefijo colombiano.
+- LinkedIn e Instagram permanecen identificados como `URL pendiente`; no se inventaron destinos externos.
+- Línea inferior independiente con aviso legal, política de privacidad y copyright existente.
+- Responsive: cuatro columnas en desktop, dos en tablet y una en mobile; targets táctiles de 44px y foco visible sobre fondo oscuro.
+
+**Integridad:** el cambio se limita al footer de `prototype/index.html`, estilos acotados a `.home-page` y los dos logos entregados por la Product Lead. No se modificaron otras secciones, páginas, narrativa ni rutas existentes.
+
+**Estado:** ✅ Candidato a revisión de Product Lead — **no aprobado / no publicado**. Gate 1 continúa pendiente.
+
+### Iteración 29 — Sectores de experiencia y refinamiento editorial del footer (2026-08-05, candidato a revisión)
+
+**Motivo:** la Product Lead pidió retirar la lectura geográfica del bloque de sectores y convertirlo en una prueba de experiencia multisectorial; adicionalmente solicitó reducir el ruido tipográfico del footer aprobado.
+
+**Qué se hizo — Sectores:**
+- Eliminados el mapa de Latinoamérica, sus labels flotantes y la referencia “Dónde operamos”.
+- Nuevo encabezado editorial en dos columnas con eyebrow, título, descripción y CTA entregados por la Product Lead; el destino del CTA se conserva en `proximamente.html`.
+- Dos bandas horizontales con los seis sectores aprobados, sin fotografías ni logos ficticios: la superior avanza hacia la derecha y la inferior hacia la izquierda.
+- Fichas planas con borde fino, radio contenido y pictogramas SVG de trazo regular; sin sombras, símbolos jurídicos ni tratamiento de badge SaaS.
+- Movimiento CSS continuo de 34 segundos, pausa por hover/foco, duplicado visual oculto a lectores de pantalla y alternativa estática con scroll horizontal para `prefers-reduced-motion`.
+- Responsive: encabezado en dos columnas en desktop y apilado desde tablet; fichas compactas en mobile sin truncar nombres.
+
+**Qué se hizo — Footer:**
+- “Contacto” pasa a una escala utilitaria más contenida; se retiraron visualmente los encabezados Comercial, Talento y Redes, preservando sus bloques y etiquetas accesibles.
+- Redes se integra como una columna informativa plana, sin borde, fondo ni tratamiento de tarjeta.
+- Patrón del isotipo fijado en `5%` de opacidad y ritmo interno más silencioso; no se modificaron datos, enlaces ni información de contacto.
+
+**QA ejecutado:** estructura HTML analizada sin IDs duplicados; CSS con llaves balanceadas; `git diff --check` sin errores. La recarga automatizada de la vista `file://` fue bloqueada por la política del navegador local, por lo que la revisión visual final queda disponible para la Product Lead en la pestaña local ya abierta.
+
+**Integridad:** cambios limitados a la sección Sectores y al footer de la Homepage, más su registro. No se modificaron otras secciones, páginas, rutas ni datos de contacto.
+
+**Estado:** ✅ Candidato a revisión de Product Lead — **no aprobado / no publicado**. Gate 1 continúa pendiente.
+
+### Iteración 30 — footer de tres columnas y fotografía panorámica de equipo (2026-08-05, candidato a revisión)
+
+**Motivo:** la Product Lead pidió simplificar nuevamente el footer y dar a la fotografía colectiva del equipo la escala necesaria en desktop, sin alterar copy ni el marquee de integrantes.
+
+**Qué se hizo — Footer:**
+- Eliminados los dos bloques redundantes “Leads comerciales / info@…” y “Postulaciones / info@…”.
+- Retícula desktop reducida a tres columnas reales: logo, información principal de contacto y redes sociales.
+- Eliminado el título visible “Contacto”; el bloque conserva una etiqueta accesible y no se modificaron los datos ni enlaces restantes.
+
+**Qué se hizo — Dimensión humana:**
+- En desktop, el placeholder de IMG-03 pasa de imagen lateral compacta a fotografía panorámica de ancho completo con proporción `16:7`.
+- El texto se conserva completo en una franja editorial inmediatamente debajo de la fotografía, evitando cualquier superposición sobre futuros rostros.
+- La banda animada de nombres y cargos permanece intacta debajo del bloque.
+- Desde `800px` hacia abajo se recupera la composición apilada anterior, con imagen `4:3`, ancho máximo de `360px` y texto separado.
+
+**QA ejecutado:** los cuatro textos solicitados ya no existen en el footer; HTML sin IDs duplicados; CSS balanceado; `git diff --check` sin errores.
+
+**Integridad:** cambios limitados al footer y al bloque Dimensión humana de la Homepage. No se modificaron copy, integrantes, cargos, marquee ni otras secciones.
+
+**Estado:** ✅ Candidato a revisión de Product Lead — **no aprobado / no publicado**. Gate 1 continúa pendiente.
+
+### Iteración 31 — baseline estable para continuidad del Producer (2026-08-05)
+
+**Decisión de Product Lead:** la versión local consolidada de la Homepage y el Visual Language Lab queda definida como **baseline estable** para que Óscar continúe el trabajo desde la rama `product-lead-ajustes-visuales` en GitHub.
+
+**Estado incluido en la baseline:**
+- Visual Language Lab como referencia interna aprobada, con Playfair Display + Instrument Sans, paleta reducida, tratamientos atmosféricos y Phosphor SVG individual.
+- Homepage con narrativa exclusiva del acreedor y tres macroservicios, jerarquía tipográfica recalibrada, header institucional, situaciones compactas, servicios full width, atributos uniformes, casos audiovisuales, sectores de experiencia, equipo panorámico y footer institucional de tres columnas.
+- Responsive y alternativas para `prefers-reduced-motion` conservadas; arquitectura HTML/CSS/JavaScript nativo sin dependencias ni reorganización de carpetas.
+
+**Pendientes visibles para próximas iteraciones:**
+1. Sustituir IMG-03 por la fotografía panorámica definitiva del equipo.
+2. Recibir y autorizar los tres casos audiovisuales y logos reales de clientes.
+3. Confirmar URLs oficiales de LinkedIn e Instagram; permanecen como placeholders identificados.
+4. Confirmar la URL externa definitiva de ADY.
+5. Completar validación de Product Lead/cliente para Gate 1; esta baseline técnica no autoaprueba el gate.
+
+**Publicación:** esta sincronización corresponde únicamente a GitHub. No autoriza ni incluye deploy, Cloudflare Pages/Workers, cambios de configuración de Cloudflare o merge a `main`.
 
 ## Fase actual
 
