@@ -1,6 +1,6 @@
 # STATUS.md — Estado del proyecto y síntesis de insumos
 
-> Actualizado: 2026-08-05 · **C0 = APROBADO** · **C1 = APROBADO (narrativa + copy, v1 y v2)** · **C2 = CANDIDATO A REVISIÓN (iteración 27 — retícula uniforme de confianza; ver abajo)** · Decisiones vigentes hasta D26. La paleta reducida alineada con marca (D26) reemplaza D22/D23 y ya está aplicada en todo el prototipo; la Home incorpora además la traducción compositiva completa registrada en la iteración 15, la escala editorial refinada desde la iteración 16 y los ajustes de ritmo, iconografía, header y evidencia registrados hasta la iteración 27.
+> Actualizado: 2026-08-10 · **C0 = APROBADO** · **C1 = APROBADO (narrativa + copy, v1 y v2)** · **C2 = CANDIDATO A REVISIÓN (iteración 27 — retícula uniforme de confianza; + ronda de correcciones SEO, D27, ver abajo)** · Decisiones vigentes hasta D27. La paleta reducida alineada con marca (D26) reemplaza D22/D23 y ya está aplicada en todo el prototipo; la Home incorpora además la traducción compositiva completa registrada en la iteración 15, la escala editorial refinada desde la iteración 16, los ajustes de ritmo/iconografía/header/evidencia hasta la iteración 27, y el copy corregido por SEO (D27, 2026-08-10).
 
 ## C2 — Prototipo (candidato, 2026-07-29)
 
@@ -780,3 +780,19 @@ Adicionalmente, quedan agendadas para fases posteriores (no son preguntas abiert
 **✅ APROBADO (2026-07-23).** El Owner, en su rol de Producer/Product Lead, confirmó dar por buena la narrativa candidata de C1 (sitemap, narrativa global, matriz de referentes, marco técnico preliminar, D17–D20) sin correr una ronda separada de QA de Content — decisión explícita para poder avanzar a copywriting. Sitemap, narrativa y marco técnico quedan congelados como base; cambios posteriores se registran como nuevas decisiones, no como reapertura silenciosa de C1.
 
 **Copywriting (2026-07-23, misma tarde):** copy candidato redactado para Inicio, Capacidad Técnica, Nuestra Experiencia, Nuestro Equipo, Talento AAA, Captación de empresas y Noticias/Análisis (ver [/content/](content/) 01–07). Alineado a la narrativa global y a D17/D18. Página Legal sin copy (regla D2). Placeholders explícitos (no inventados) en: casos de éxito, biografía de founders en "Quiénes somos", y casi todo el contenido de Talento AAA — todos por falta de insumo del cliente, no por omisión. Pendiente de QA de Content sobre claridad/tono/repetición/afirmaciones sin evidencia en la práctica (no bloquea, ya que C1 quedó aprobado explícitamente sin esa ronda).
+
+### Sesión — ronda de correcciones SEO en Homepage (D27, 2026-08-10)
+
+**Insumo:** `REVISIÓN 2 COPYS HOME.docx` (área de SEO), copiado a `inputs/resources/REVISION-2-COPYS-HOME.docx`. El documento no traía un único texto final por bloque — para 3 de los 4 puntos presentaba dos opciones sin ganador marcado, y para el cuarto sugería una cifra sin evidencia. Se le presentaron las 4 decisiones al Owner explícitamente (AskUserQuestion) en vez de elegir por defecto.
+
+| Ítem | Estado | Nota |
+|---|---|---|
+| Hero H1 + párrafo | ✅ Cambiado (D27) | El H1 anterior ("Cuando un deudor entra en insolvencia...") abría con "deudor" — SEO señaló riesgo de confusión antes de que el lector entienda que representamos al acreedor. Owner eligió la "Propuesta inicial" del documento sobre "Opción 2" (tuteo) y sobre mantener el H1 anterior. |
+| H2 "Situaciones" | ✅ Cambiado (D27) | De "Sabemos lo que está enfrentando." a "¿Eres acreedor y te enfrentas a alguno de estos riesgos?" (Opción B elegida por el Owner). Nota: en STATUS.md (iteraciones previas) hay referencias históricas al título anterior — se conservan como registro, no se editan retroactivamente. |
+| Párrafo "Qué hace AAA" | ✅ Cambiado (D27) | Repetía la idea del párrafo del hero; reemplazado por el texto sugerido por SEO. No requirió elegir entre opciones. |
+| H2 "Cómo intervenimos" | ✅ Cambiado (D27) | De "Tres formas de acompañar a nuestros clientes" a "Soluciones jurídicas para proteger, normalizar y recuperar activos" (Opción A elegida por el Owner). Esta misma frase ya está en el meta-description de `captacion-b2b.html` (D24) — solapamiento leve de meta-description vs. H2 de otra página, no un H1/H2 duplicado; no bloqueante, queda anotado. |
+| H2 "Casos de éxito" | **Rechazado — sin cambio** | SEO sugería un titular con cifra de ejemplo ("+50 casos..."). Sin cifra real aprobada por el cliente, aplicarlo literalmente violaría la regla ya vigente de no inventar métricas/casos (AGENTS.md, REFERENTS.md). El Owner eligió mantener el H2 actual. |
+
+**Archivos tocados:** `prototype/index.html` (4 cambios de copy), `prototype/css/components.css` (comentario descriptivo actualizado para que siga identificando la sección correcta), `content/01-inicio.md` (nueva sección de registro), `PROJECT.md` (D27), `inputs/resources/REVISION-2-COPYS-HOME.docx` (insumo copiado para trazabilidad).
+
+**No se tocó:** `<title>` ni `<meta name="description">` de `index.html` — no estaban señalados en el documento de SEO; tocarlos habría sido ampliar el alcance de esta ronda sin pedido explícito.

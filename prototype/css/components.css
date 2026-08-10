@@ -418,7 +418,7 @@ section[data-surface="muted"] + .hero .curve-divider,
 .focus-card h3 { font-size: var(--text-md); margin-bottom: var(--space-2); }
 .focus-card p { font-size: var(--text-sm); }
 
-/* Ícono de situación (Inicio, "Sabemos lo que está enfrentando") — reemplaza los
+/* Ícono de situación (Inicio, "¿Eres acreedor y te enfrentas a alguno de estos riesgos?") — reemplaza los
    índices numéricos por iconografía Phosphor, mismo criterio del laboratorio
    (SVG inline individual, sin librería completa, un símbolo distinto y relevante
    por tarjeta, sin clichés jurídicos). */
