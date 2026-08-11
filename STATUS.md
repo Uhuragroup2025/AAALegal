@@ -1,6 +1,6 @@
 # STATUS.md — Estado del proyecto y síntesis de insumos
 
-> Actualizado: 2026-08-10 · **C0 = APROBADO** · **C1 = APROBADO (narrativa + copy, v1 y v2)** · **C2 = CANDIDATO A REVISIÓN (iteración 27 — retícula uniforme de confianza; + ronda de correcciones SEO, D27, ver abajo)** · Decisiones vigentes hasta D27. La paleta reducida alineada con marca (D26) reemplaza D22/D23 y ya está aplicada en todo el prototipo; la Home incorpora además la traducción compositiva completa registrada en la iteración 15, la escala editorial refinada desde la iteración 16, los ajustes de ritmo/iconografía/header/evidencia hasta la iteración 27, y el copy corregido por SEO (D27, 2026-08-10).
+> Actualizado: 2026-08-10 · **C0 = APROBADO** · **C1 = APROBADO (narrativa + copy, v1 y v2)** · **C2 = CANDIDATO A REVISIÓN (iteración 27 — retícula uniforme de confianza; + ronda de correcciones SEO, D27; + ajuste de eyebrow/registro tú-usted, D28, ver abajo)** · Decisiones vigentes hasta D28. La paleta reducida alineada con marca (D26) reemplaza D22/D23 y ya está aplicada en todo el prototipo; la Home incorpora además la traducción compositiva completa registrada en la iteración 15, la escala editorial refinada desde la iteración 16, los ajustes de ritmo/iconografía/header/evidencia hasta la iteración 27, y el copy corregido por SEO (D27, 2026-08-10).
 
 ## C2 — Prototipo (candidato, 2026-07-29)
 
@@ -796,3 +796,13 @@ Adicionalmente, quedan agendadas para fases posteriores (no son preguntas abiert
 **Archivos tocados:** `prototype/index.html` (4 cambios de copy), `prototype/css/components.css` (comentario descriptivo actualizado para que siga identificando la sección correcta), `content/01-inicio.md` (nueva sección de registro), `PROJECT.md` (D27), `inputs/resources/REVISION-2-COPYS-HOME.docx` (insumo copiado para trazabilidad).
 
 **No se tocó:** `<title>` ni `<meta name="description">` de `index.html` — no estaban señalados en el documento de SEO; tocarlos habría sido ampliar el alcance de esta ronda sin pedido explícito.
+
+### Sesión — ajuste de eyebrow y registro tú/usted en Situaciones (D28, 2026-08-10)
+
+**Motivo:** el Owner revisó el resultado de D27 en navegador y señaló dos cosas: (1) el eyebrow "¿Se identifica con alguna de estas situaciones?" quedaba justo encima del nuevo H2 (también pregunta, por D27) — dos preguntas seguidas; (2) mezcla de tuteo/usted en el copy de Home.
+
+**Aplicado en `prototype/index.html`:**
+- Eliminado el `<p class="eyebrow">` de la sección Situaciones (las demás secciones conservan su eyebrow — no se tocaron).
+- H2 de Situaciones de tuteo a usted: "¿Es acreedor y se enfrenta a alguno de estos riesgos?" (antes "¿Eres acreedor y te enfrentas...?", que era la Opción B recién elegida en D27).
+
+**Hallazgo al revisar el resto del sitio (informativo, no aplicado):** la mezcla de registro es más amplia que este H2. El CTA global "Consulta tu caso aquí" (D18, fijo, en el header de las 8 páginas) es tuteo, igual que partes de `servicios.html` ("¿Un deudor puso en riesgo tu crédito?"), `captacion-b2b.html` ("Cuéntanos tu caso...") y `nuestro-equipo.html` (sección Talento AAA — audiencia distinta, podría ser intencional). Homogeneizar el registro en todo el sitio tocaría el texto exacto de D18 y no se resolvió aquí — queda como punto abierto para que el Owner decida si quiere abordarlo como una ronda aparte.
