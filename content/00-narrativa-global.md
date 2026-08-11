@@ -8,7 +8,7 @@ AAA Estudio Legal representa exclusivamente al **acreedor** — no al deudor ins
 
 ## Jerarquía narrativa (D15) y de conversión (D17/D18 — actualizado 2026-07-23)
 
-El objetivo del *sitio* (D15) sigue siendo reconocimiento de marca + showcase de servicios. Pero la jerarquía de *conversión* quedó definida con más precisión por D17/D18: la acción principal es **captar empresas** que necesiten los servicios jurídicos de AAA, con **ADY ("Consulta tu caso aquí")** como su mecanismo destacado. El formulario de Talento AAA es secundario y estrictamente contextual — nunca CTA global, nunca equivalente al de empresas.
+El objetivo del *sitio* (D15) sigue siendo reconocimiento de marca + showcase de servicios. Pero la jerarquía de *conversión* quedó definida con más precisión por D17/D18: la acción principal es **captar empresas** que necesiten los servicios jurídicos de AAA, con **ADY ("Consulte su caso aquí")** como su mecanismo destacado. El formulario de Talento AAA es secundario y estrictamente contextual — nunca CTA global, nunca equivalente al de empresas.
 
 ## Tres pilares (brief, pregunta 3 — ya validados en C0)
 
@@ -22,7 +22,7 @@ El objetivo del *sitio* (D15) sigue siendo reconocimiento de marca + showcase de
 
 - **"Normalización de activos" debe sentirse premium**, nunca como cobranza o casa de cobro (brief ampliado, 2.1).
 - **Masividad vs. calidad**: "líderes por cantidad de procesos" no debe leerse como pérdida de calidad boutique (brief ampliado, 2.3).
-- **ADY se muestra, no se explica**: el CTA "Consulta tu caso aquí" dirige a una URL externa; la copy no debe describir qué es ADY ni cómo funciona — pero su comportamiento debe sentirse tan claro e inmediato como un botón de compra de e-commerce, sin ser una compra (D18).
+- **ADY se muestra, no se explica**: el CTA "Consulte su caso aquí" dirige a una URL externa; la copy no debe describir qué es ADY ni cómo funciona — pero su comportamiento debe sentirse tan claro e inmediato como un botón de compra de e-commerce, sin ser una compra (D18).
 
 ## Insumo no resuelto — no se usa todavía
 

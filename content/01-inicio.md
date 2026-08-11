@@ -2,9 +2,9 @@
 
 **Propósito:** primer contacto — comunicar en un vistazo que AAA Estudio Legal es una firma especializada, sólida y tecnológica; presentar de inmediato la conversión principal.
 
-**Actualizado (D17/D18, 2026-07-23):** el CTA principal ya no es de navegación genérica — es **"Consulta tu caso aquí"** (vía ADY, D18), dirigido a captar empresas (D17). El acceso a Capacidad Técnica sigue existiendo como navegación, pero no es el CTA protagonista.
+**Actualizado (D17/D18, 2026-07-23):** el CTA principal ya no es de navegación genérica — es **"Consulte su caso aquí"** (vía ADY, D18), dirigido a captar empresas (D17). El acceso a Capacidad Técnica sigue existiendo como navegación, pero no es el CTA protagonista.
 
-**CTA principal:** "Consulta tu caso aquí" (D18) → URL externa (a compartir).
+**CTA principal:** "Consulte su caso aquí" (D18) → URL externa (a compartir).
 **Navegación secundaria:** Capacidad Técnica, Nuestra Experiencia, Nuestro Equipo.
 **CTA de Talento AAA:** **no aparece en Inicio** (D17 — es estrictamente contextual a su propia página, nunca global).
 **Público:** transversal, con foco en el comprador de empresas (D17) como destinatario del CTA principal.
@@ -42,7 +42,7 @@ El copy implementado en `prototype/index.html` sigue literalmente el recorrido y
 
 Cambios aplicados en `prototype/index.html`:
 - **Hero (H1 + p):** el H1 anterior abría con "deudor", lo que SEO marcó como potencialmente confuso antes de que el lector entienda que representamos al acreedor. Reemplazado por "Insolvencia y derecho corporativo: somos la voz del acreedor." + párrafo nuevo. Se mantiene el registro "usted", consistente con el resto de CTAs del sitio.
-- **H2 "Situaciones":** de "Sabemos lo que está enfrentando." a "¿Eres acreedor y te enfrentas a alguno de estos riesgos?" (agrega la keyword "acreedor").
+- **H2 "Situaciones":** de "Sabemos lo que está enfrentando." a "¿Es acreedor y se enfrenta a alguno de estos riesgos?" (agrega la keyword "acreedor"; redacción en "usted" desde D28 — ver más abajo).
 - **Párrafo "Qué hace AAA":** reemplazado por no aportar información nueva frente al párrafo del hero (repetía la misma idea).
 - **H2 "Cómo intervenimos":** de "Tres formas de acompañar a nuestros clientes" a "Soluciones jurídicas para proteger, normalizar y recuperar activos" (coherente con los 3 servicios listados debajo).
 

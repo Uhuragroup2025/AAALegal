@@ -2,7 +2,7 @@
 
 **Propósito:** profundidad técnica en los 3 macroservicios acordados, desde el ángulo del acreedor. Es la página que sostiene con contenido a la conversión principal (D17: captar empresas).
 
-**Actualizado (D17/D18):** el CTA ya no es un enlace de navegación — es **"Consulta tu caso aquí"** (D18), el mismo CTA que en Inicio y que en ADY. Aquí puede ir acompañado del formulario nativo de empresas (D9/D12) además del enlace a la URL externa de ADY.
+**Actualizado (D17/D18):** el CTA ya no es un enlace de navegación — es **"Consulte su caso aquí"** (D18), el mismo CTA que en Inicio y que en ADY. Aquí puede ir acompañado del formulario nativo de empresas (D9/D12) además del enlace a la URL externa de ADY.
 **Público:** comprador B2B (gerente jurídico, director de cartera/riesgo/cobranza, CFO, representante legal — brief ampliado, audiencia comercial) + mercado general que investiga la firma.
 
 ## Outline de secciones
@@ -14,7 +14,7 @@
    - Derecho Corporativo.
 3. **Cómo trabajamos** — diagnóstico primero (*"Estudiarlo para definir un diagnóstico"*, brief ampliado); cobertura preventiva y reactiva; procesos individuales y masivos.
 4. **Objeciones resueltas con transparencia** — garantía de recaudo (sin comprometerse a recuperar), honorarios vs. deuda (brief ampliado, audiencia comercial). No se promete lo que no se puede sostener.
-5. **CTA de cierre** — "Consulta tu caso aquí" (D18) → URL externa de ADY, y/o formulario nativo de empresas (D9) si vive en esta misma página o en la dedicada (D11, pendiente).
+5. **CTA de cierre** — "Consulte su caso aquí" (D18) → URL externa de ADY, y/o formulario nativo de empresas (D9) si vive en esta misma página o en la dedicada (D11, pendiente).
 
 ## Insumo pendiente de aclarar (no se usa todavía)
 
@@ -33,7 +33,7 @@ El párrafo narrativo en primera persona del brief ampliado (cita Ley 550/1999, 
 > Soluciones para acreedores
 
 **H1 — D24:**
-> ¿Un deudor puso en riesgo tu crédito?
+> ¿Un deudor puso en riesgo su crédito?
 
 **Subhead (p) — D24:**
 > Representamos exclusivamente a acreedores en procesos de insolvencia y normalización de activos, combinando especialización jurídica, cobertura nacional y tecnología propia para respaldar decisiones críticas.
@@ -68,6 +68,6 @@ El párrafo narrativo en primera persona del brief ampliado (cita Ley 550/1999, 
 ---
 
 **Cierre:**
-> ¿Tu empresa tiene un crédito en riesgo o en proceso de insolvencia?
+> ¿Su empresa tiene un crédito en riesgo o en proceso de insolvencia?
 
-**CTA de cierre:** Consulta tu caso aquí
+**CTA de cierre:** Consulte su caso aquí

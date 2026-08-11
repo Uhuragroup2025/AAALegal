@@ -4,7 +4,7 @@
 
 **Actualizado (D17, 2026-07-23):** el formulario de esta página es **estrictamente secundario y contextual**. No es CTA global, no es objetivo central del sitio, y no equivale al formulario de empresas (D9). Su única función es recibir postulaciones y hojas de vida. **Debe aparecer únicamente aquí** — no en header, footer, Inicio, ni ninguna otra página.
 
-**CTA:** "Postúlate" (formulario de captación de talento, D8) → info@agudeloabogados.com. Distinto en forma y peso visual del CTA principal "Consulta tu caso aquí" (D18) — nunca debe competir con él.
+**CTA:** "Postúlese" (formulario de captación de talento, D8) → info@agudeloabogados.com. Distinto en forma y peso visual del CTA principal "Consulte su caso aquí" (D18) — nunca debe competir con él.
 **Público:** talento jurídico potencial.
 
 ## Outline de secciones
@@ -37,8 +37,8 @@ Esta es la página del sitio con menos insumo de contenido confirmado. El outlin
 ---
 
 **Formulario:**
-> ¿Ves tu carrera en AAA? Cuéntanos quién eres.
+> ¿Ve su carrera en AAA? Cuéntenos quién es usted.
 
-**CTA (solo en esta página, nunca global):** Postúlate
+**CTA (solo en esta página, nunca global):** Postúlese
 
 *(Campos: CV + campo adicional a definir — pendiente de respuesta del cliente sobre qué más solicitar.)*

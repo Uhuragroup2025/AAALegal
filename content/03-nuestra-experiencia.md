@@ -33,6 +33,6 @@ No hay casos estructurados (cliente/sector/problema/solución/resultado/¿public
 ---
 
 **Cierre:**
-> ¿Buscas resultados como estos para tu organización?
+> ¿Busca resultados como estos para su organización?
 
 **CTA de cierre (enlace suave, no repite el CTA principal textualmente):** Habla con nosotros →

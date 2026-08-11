@@ -3,7 +3,7 @@
 > **Nota de gobierno, léase antes que el outline:** esta página **no está contratada todavía** (Decisión D11) — es una 8ª página fuera de "hasta 6 secciones" y de la página legal (D2). El outline se prepara para no bloquear C1, pero la página no se construye ni se diseña hasta que Product Lead confirme su estatus contractual (Change Request probable) y su nombre final.
 
 **Propósito:** dirigirse directamente al comprador de empresas con sus objeciones resueltas. **Actualizado (D17): es la acción de conversión PRINCIPAL del sitio**, no terciaria.
-**CTA:** "Consulta tu caso aquí" (D18, mismo CTA que Inicio/Servicios/ADY) + formulario nativo de empresas (D9) → info@agudeloabogados.com. Ver [content/09-ady-cta-c2.md](09-ady-cta-c2.md) para la pregunta abierta sobre si ambos son el mismo flujo.
+**CTA:** "Consulte su caso aquí" (D18, mismo CTA que Inicio/Servicios/ADY) + formulario nativo de empresas (D9) → info@agudeloabogados.com. Ver [content/09-ady-cta-c2.md](09-ady-cta-c2.md) para la pregunta abierta sobre si ambos son el mismo flujo.
 **Público:** gerente jurídico, director de cartera/riesgo/cobranza, CFO, representante legal (brief ampliado, audiencia comercial).
 
 ## Outline de secciones
@@ -12,7 +12,7 @@
 2. **Por qué AAA** — especialización en representación de acreedores, cobertura nacional, tecnología como trasfondo (ADY, sin explicarla — D13).
 3. **Objeciones resueltas** — garantía de recaudo (transparencia sobre lo que sí y no se promete), honorarios vs. deuda.
 4. **Evidencia de confianza** — experiencia, cantidad de casos, capacidad de abogados — sin inventar cifras no aprobadas.
-5. **Formulario** — "Consulta tu caso aquí" / formulario nativo → info@agudeloabogados.com, sin integración CRM (D12).
+5. **Formulario** — "Consulte su caso aquí" / formulario nativo → info@agudeloabogados.com, sin integración CRM (D12).
 
 ## Preguntas de decisión abiertas
 
@@ -61,6 +61,6 @@
 ---
 
 **Formulario (sin cambios):**
-> Cuéntanos tu caso y te contactamos con un diagnóstico inicial.
+> Cuéntenos su caso y le contactamos con un diagnóstico inicial.
 
-**CTA:** Consulta tu caso aquí
+**CTA:** Consulte su caso aquí

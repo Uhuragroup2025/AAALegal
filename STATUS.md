@@ -1,6 +1,6 @@
 # STATUS.md — Estado del proyecto y síntesis de insumos
 
-> Actualizado: 2026-08-10 · **C0 = APROBADO** · **C1 = APROBADO (narrativa + copy, v1 y v2)** · **C2 = CANDIDATO A REVISIÓN (iteración 27 — retícula uniforme de confianza; + ronda de correcciones SEO, D27; + ajuste de eyebrow/registro tú-usted, D28, ver abajo)** · Decisiones vigentes hasta D28. La paleta reducida alineada con marca (D26) reemplaza D22/D23 y ya está aplicada en todo el prototipo; la Home incorpora además la traducción compositiva completa registrada en la iteración 15, la escala editorial refinada desde la iteración 16, los ajustes de ritmo/iconografía/header/evidencia hasta la iteración 27, y el copy corregido por SEO (D27, 2026-08-10).
+> Actualizado: 2026-08-10 · **C0 = APROBADO** · **C1 = APROBADO (narrativa + copy, v1 y v2)** · **C2 = CANDIDATO A REVISIÓN (iteración 27 — retícula uniforme de confianza; + ronda de correcciones SEO, D27; + ajuste de eyebrow/registro tú-usted en Situaciones, D28; + homogenización a "usted" en las 8 páginas, D29, ver abajo)** · Decisiones vigentes hasta D29. La paleta reducida alineada con marca (D26) reemplaza D22/D23 y ya está aplicada en todo el prototipo; la Home incorpora además la traducción compositiva completa registrada en la iteración 15, la escala editorial refinada desde la iteración 16, los ajustes de ritmo/iconografía/header/evidencia hasta la iteración 27, y el copy corregido por SEO (D27, 2026-08-10).
 
 ## C2 — Prototipo (candidato, 2026-07-29)
 
@@ -806,3 +806,20 @@ Adicionalmente, quedan agendadas para fases posteriores (no son preguntas abiert
 - H2 de Situaciones de tuteo a usted: "¿Es acreedor y se enfrenta a alguno de estos riesgos?" (antes "¿Eres acreedor y te enfrentas...?", que era la Opción B recién elegida en D27).
 
 **Hallazgo al revisar el resto del sitio (informativo, no aplicado):** la mezcla de registro es más amplia que este H2. El CTA global "Consulta tu caso aquí" (D18, fijo, en el header de las 8 páginas) es tuteo, igual que partes de `servicios.html` ("¿Un deudor puso en riesgo tu crédito?"), `captacion-b2b.html` ("Cuéntanos tu caso...") y `nuestro-equipo.html` (sección Talento AAA — audiencia distinta, podría ser intencional). Homogeneizar el registro en todo el sitio tocaría el texto exacto de D18 y no se resolvió aquí — queda como punto abierto para que el Owner decida si quiere abordarlo como una ronda aparte.
+
+### Sesión — homogenización de registro a "usted" en las 8 páginas (D29, 2026-08-10)
+
+**Motivo:** el Owner confirmó explícitamente extender a todo el sitio el ajuste que D28 había hecho solo en Situaciones.
+
+**Inventario y verificación:** se buscó tuteo en las 8 páginas HTML de `prototype/` con varias pasadas de grep (pronombres `tú/tu/tus/te`, verbos en 2.ª persona singular `eres/tienes/puedes/quieres/necesitas/ves`, imperativos `cuéntanos/postúlate`), incluyendo una pasada case-insensitive para no perder mayúsculas de inicio de frase (la primera pasada sí las perdió, corregido antes de editar). Verificación final tras los cambios: 0 coincidencias en `prototype/*.html`.
+
+**Aplicado en las 8 páginas de `prototype/`:**
+- CTA global de header: "Consulta tu caso aquí" → "Consulte su caso aquí" (index, servicios, captación B2B, nuestro equipo, noticias-análisis, y las 2 páginas de noticia individual).
+- `servicios.html`: hero "¿Un deudor puso en riesgo tu crédito?" → "...su crédito?"; cierre "¿Tu empresa tiene un crédito en riesgo...?" → "¿Su empresa...?"; CTA "Consulta tu caso con ADY" → "Consulte su caso con ADY".
+- `captacion-b2b.html`: CTA de hero/cierre (mismo cambio global) + comentario de desarrollo actualizado para citar el texto correcto; cierre "Cuéntanos tu caso y te contactamos..." → "Cuéntenos su caso y le contactamos...".
+- `nuestro-equipo.html` (incluye la sección de Postulación, antes Talento AAA): "¿Ves tu carrera en AAA? Cuéntanos quién eres." → "¿Ve su carrera en AAA? Cuéntenos quién es usted."; botón "Postúlate" → "Postúlese"; nota "Al postularte, tu información..." → "Al postularse, su información...". Se aplicó también aquí porque el Owner pidió "todo el sitio" explícitamente, no por inferencia.
+- Aviso de cookies ("Puedes conocer más...") → "Puede conocer más..." en las 8 páginas.
+
+**content/*.md actualizado en paralelo** (00, 01, 02, 03, 05, 06, 09) para que la documentación de copy no quede desincronizada de lo implementado. **No se tocó** la cita textual de Brigard Urrutia ("aquí empieza tu historia con nosotros") en `content/05-talento-aaa.md` — es una referencia externa citada, no copy propio.
+
+**No se reabrió ni contradijo:** D18 (función/comportamiento de ADY), D24 (posicionamiento de Servicios/Contacto) y D8/D17 (función del formulario de talento) — solo se actualizó la literalidad exacta del copy que esas decisiones citaban entre comillas. Registrado como D29, no como edición retroactiva de D18/D24/D8/D17.

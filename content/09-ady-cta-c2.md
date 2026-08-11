@@ -8,7 +8,7 @@ ADY representa la tecnología, innovación y robustez de AAA Estudio Legal. No s
 
 ## Función de conversión
 
-Es el **mecanismo destacado de la conversión principal** (D17: captar empresas). CTA: **"Consulta tu caso aquí"**.
+Es el **mecanismo destacado de la conversión principal** (D17: captar empresas). CTA: **"Consulte su caso aquí"**.
 
 Comportamiento esperado: la claridad e inmediatez de un botón de compra de e-commerce — **sin representar ni sugerir una compra, carrito o pago**. Dirige a una **URL externa** (a compartir más adelante) que inicia o continúa el flujo principal de consulta.
 
