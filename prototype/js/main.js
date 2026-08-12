@@ -138,6 +138,71 @@
   // por defecto (ver components.css `.stepper__step[data-stepper-ready]`) — no se
   // requiere fallback adicional.
 
+  // --- Botón flotante "volver arriba" (mejora de navegabilidad responsive) ---
+  // Enlace real a #contenido: sin JS ya funciona (salto instantáneo, operable por
+  // teclado y lector de pantalla). Con JS se oculta hasta que el usuario baja del
+  // viewport inicial, y el scroll pasa a ser suave (salvo prefers-reduced-motion,
+  // donde se deja el salto nativo del navegador sin interceptar el click).
+  var backToTop = document.querySelector('.fab--back-to-top');
+  if (backToTop) {
+    backToTop.setAttribute('data-scroll-ready', '');
+    var toggleBackToTop = function () {
+      backToTop.classList.toggle('is-visible', window.scrollY > window.innerHeight * 0.6);
+    };
+    var backToTopTicking = false;
+    window.addEventListener('scroll', function () {
+      if (!backToTopTicking) {
+        window.requestAnimationFrame(function () { toggleBackToTop(); backToTopTicking = false; });
+        backToTopTicking = true;
+      }
+    }, { passive: true });
+    toggleBackToTop();
+
+    if (!prefersReducedMotion) {
+      backToTop.addEventListener('click', function (e) {
+        e.preventDefault();
+        document.getElementById('contenido').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    }
+  }
+
+  // --- Botón flotante de chat — placeholder honesto: no hay integración de chat/CRM
+  // confirmada todavía (D12 solo cubre el formulario nativo de postulación, por
+  // correo, sin CRM). Sin JS es un mailto directo, nunca un botón muerto; con JS
+  // abre un panel que lo dice explícitamente y ofrece el mismo correo — nunca
+  // simula una conversación en vivo que no existe. ---
+  var chatToggle = document.getElementById('chatToggle');
+  var chatPanel = document.getElementById('chatPanel');
+  if (chatToggle && chatPanel) {
+    var closeChat = function () {
+      chatPanel.hidden = true;
+      chatToggle.setAttribute('aria-expanded', 'false');
+    };
+    chatToggle.addEventListener('click', function (e) {
+      e.preventDefault();
+      var willOpen = chatPanel.hidden;
+      chatPanel.hidden = !willOpen;
+      chatToggle.setAttribute('aria-expanded', String(willOpen));
+      if (willOpen) {
+        var closeBtn = chatPanel.querySelector('[data-chat-close]');
+        if (closeBtn) closeBtn.focus();
+      }
+    });
+    var chatCloseBtn = chatPanel.querySelector('[data-chat-close]');
+    if (chatCloseBtn) chatCloseBtn.addEventListener('click', closeChat);
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && !chatPanel.hidden) {
+        closeChat();
+        chatToggle.focus();
+      }
+    });
+    document.addEventListener('click', function (e) {
+      if (!chatPanel.hidden && !chatPanel.contains(e.target) && !chatToggle.contains(e.target)) {
+        closeChat();
+      }
+    });
+  }
+
   // --- Aviso de cookies (GA4 + GTM + Clarity, Decisión D20) ---
   var cookieBanner = document.querySelector('.cookie-banner');
   if (cookieBanner) {

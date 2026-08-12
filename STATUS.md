@@ -1,6 +1,6 @@
 # STATUS.md — Estado del proyecto y síntesis de insumos
 
-> Actualizado: 2026-08-05 · **C0 = APROBADO** · **C1 = APROBADO (narrativa + copy, v1 y v2)** · **C2 = CANDIDATO A REVISIÓN (iteración 12 — Visual Language Lab migrado a las 7 páginas del sitio; ver abajo)** · Decisiones vigentes hasta D26. La paleta reducida alineada con marca (D26) reemplaza D22/D23 y ya está aplicada en todo el prototipo, no solo en la Home.
+> Actualizado: 2026-08-12 · **C0 = APROBADO** · **C1 = APROBADO (narrativa + copy, v1 y v2)** · **C2 = CANDIDATO A REVISIÓN (iteración 15 — botones flotantes "volver arriba" y chat en las 7 páginas; ver abajo)** · Decisiones vigentes hasta D26. La paleta reducida alineada con marca (D26) reemplaza D22/D23 y ya está aplicada en todo el prototipo, no solo en la Home.
 
 ## C2 — Prototipo (candidato, 2026-07-29)
 
@@ -227,6 +227,24 @@ Por instrucción del Owner se recuperó, dentro del bloque “Dimensión humana�
 **QA ejecutado:** verificado en navegador (Home y Servicios) tras descubrir que esta herramienta de previsualización cachea agresivamente los archivos CSS de `file://` entre ediciones sucesivas — los cambios de radio no se reflejaban hasta forzar una recarga completa de la pestaña, no solo del stylesheet. Confirmado por lectura directa de disco (no solo del navegador) que las 3 hojas de estilo tienen los valores correctos: `--radius-sm:4px`, `--radius-md:8px` en tokens.css, y cada selector afectado referenciándolos. Verificado además, tras una recarga limpia, que los valores computados coinciden exactamente (botón 4px, header 4px, card 8px). Sin overflow horizontal.
 
 **Estado:** ✅ Candidato a revisión — **no aprobado**. Mismos pendientes que el resto del prototipo (QA de Content, consolidación de Product Lead, Gate 1).
+
+### Iteración 15 — botones flotantes "volver arriba" y chat (2026-08-12, candidato a revisión)
+
+**Motivo:** el Owner pidió mejorar la navegabilidad en responsive con dos botones flotantes persistentes: "volver arriba" en la esquina inferior izquierda y un botón de chat/chatbot en la esquina inferior derecha, manteniendo la estética del sitio.
+
+**Qué se hizo (las 7 páginas con contenido — no en `proximamente.html`, fuera de alcance del prototipo, ni en `type-lab.html`, laboratorio interno):**
+- **"Volver arriba"** (`.fab.fab--back-to-top`): es un `<a href="#contenido">` real — sin JS ya funciona (salto instantáneo, operable por teclado). Con JS se oculta hasta que el usuario baja más de ~60% de la altura del viewport, y el scroll pasa a ser suave (`prefers-reduced-motion` deja el salto nativo sin interceptar el click, mismo patrón que el resto del sitio).
+- **Chat** (`.fab.fab--chat`): **no existe integración de chat/CRM confirmada en el proyecto** (D12 solo cubre el formulario nativo de postulación por correo, sin CRM) — no se inventó un chatbot funcional. Es un `<a href="mailto:info@agudeloabogados.com">` real: sin JS abre el cliente de correo directamente (nunca un botón muerto). Con JS abre un panel (`.chat-panel`) que lo dice explícitamente ("Muy pronto podrá conversar con nosotros en tiempo real desde aquí") y ofrece el mismo correo — mismo principio que el resto del prototipo de no simular funcionalidad que no existe (ver `.ady-note` y el aviso del `lang-toggle`). Panel accesible: `role="dialog"`, cierra con el botón ×, con Escape (devuelve el foco al botón) o con click fuera.
+- **Estética:** reutiliza el lenguaje visual ya migrado a D26 — navy sólido, `--radius-sm` (radio discreto, nunca píldora), `--shadow-lg`, mismos breakpoints/tokens de espaciado que el resto de componentes flotantes del sitio (header, aviso de cookies).
+- **Conflicto con el aviso de cookies (D20):** a 375–430px de ancho el aviso ocupa casi todo el ancho de la pantalla y se superponía visualmente con ambos botones. Se resolvió con un selector CSS simple (`.cookie-banner:not([hidden]) ~ .fab`) que los oculta mientras el aviso esté visible, sin necesidad de calcular su altura variable — vuelven en cuanto el usuario acepta.
+
+**⚠️ Nota de entorno (no de código):** esta iteración se construyó desde un clon nuevo del repositorio (`C:\Users\ozkrm\AAALegal`), no desde la copia habitual sincronizada por OneDrive — esa carpeta apareció vacía en el entorno de esta sesión (`content/` y la mayoría de `prototype/` sin archivos, aunque `git status` la reporta como repositorio válido). Parece un problema de sincronización de OneDrive en este dispositivo/sesión, no una pérdida de datos: todo el contenido sigue íntegro en GitHub. Se recomienda que el Owner revise el estado de sincronización de OneDrive en su equipo antes de seguir trabajando desde esa ruta.
+
+**QA ejecutado:** verificado en 1440px y 390px en las 7 páginas (markup presente, sin errores de consola); comportamiento de scroll/click probado en Home (aparece/desaparece correctamente, `aria-expanded` y foco del panel de chat correctos, Escape cierra y devuelve el foco); aviso de cookies probado en mobile — sin superposición, ambos botones aparecen tras aceptar.
+
+**No se hizo commit ni se instaló ninguna dependencia** más allá de las herramientas de verificación local (no se agregó nada al sitio).
+
+**Estado:** ✅ Candidato a revisión — **no aprobado**. Mismos pendientes que el resto del prototipo (QA de Content, consolidación de Product Lead, Gate 1). Pendiente propio: definir con el cliente si el chat será un servicio real (y cuál) antes de que este botón deje de ser un placeholder.
 
 ## Fase actual
 
