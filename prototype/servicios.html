@@ -127,34 +127,46 @@
     </div>
   </section>
 
-  <!-- CÓMO TRABAJAMOS / METODOLOGÍA — rediseño 2026-07-31 según brief del Owner
-       ("Sección Metología - AAA Legal.docx"): stepper con scroll, columna izquierda
-       sticky + 3 pasos a la derecha que se activan según cruzan el centro del
-       viewport (lógica en js/main.js). Ya no usa fotografía (IMG-06 queda sin uso,
-       ver IMAGE-BRIEF.md) — el brief no contempla imagen para este diseño. -->
-  <section class="section stepper" data-surface="dark" aria-labelledby="proceso-heading">
-    <div class="container stepper__grid">
-      <div class="stepper__intro reveal">
+  <!-- CÓMO TRABAJAMOS / METODOLOGÍA — rediseño 2026-08-20 (D32) a pedido del cliente:
+       se retira el stepper con scroll de 2026-07-31 (columna sticky + 3 pasos que
+       reservaban 50vh cada uno y se activaban al cruzar el centro del viewport) y
+       se reemplaza por un flujograma compacto de 3 nodos conectados, visible entero
+       sin necesidad de hacer scroll. Clases nuevas y aditivas en components.css
+       (.stepper__flow/.stepper__node/.stepper__connector) — el stepper original
+       (.stepper__grid/.stepper__intro/.stepper__steps/.stepper__step) no se toca:
+       sigue en uso, sin cambios, en Captación B2B § "Nuestro proceso". -->
+  <section class="section" data-surface="dark" aria-labelledby="proceso-heading">
+    <div class="container">
+      <div class="section-head reveal">
         <p class="eyebrow">Nuestra metodología</p>
         <h2 id="proceso-heading">Convertimos cada caso en una estrategia jurídica de recuperación.</h2>
       </div>
-      <div class="stepper__steps">
-        <article class="stepper__step">
-          <span class="stepper__icon" aria-hidden="true">
+      <div class="stepper__flow" role="list" aria-label="Metodología de trabajo en 3 pasos">
+        <article class="stepper__node surface-solid reveal" style="--stagger-index:0" role="listitem">
+          <span class="stepper__node-index">01</span>
+          <span class="stepper__node-icon" aria-hidden="true">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="10" cy="10" r="6"/><path d="M15 15l5 5"/></svg>
           </span>
           <h3>Diagnóstico</h3>
           <p>Antes de actuar, entendemos el contexto completo. Estudiamos el expediente, identificamos riesgos y construimos un diagnóstico jurídico que define la estrategia más adecuada para proteger los intereses del acreedor.</p>
         </article>
-        <article class="stepper__step">
-          <span class="stepper__icon" aria-hidden="true">
+        <span class="stepper__connector" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+        <article class="stepper__node surface-solid reveal" style="--stagger-index:1" role="listitem">
+          <span class="stepper__node-index">02</span>
+          <span class="stepper__node-icon" aria-hidden="true">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M15 9l-2 6-6 2 2-6 6-2z"/></svg>
           </span>
           <h3>Estrategia</h3>
           <p>No aplicamos soluciones estándar. Definimos el camino legal según el estado del riesgo, ya sea en una etapa preventiva, durante un proceso de insolvencia o en la recuperación posterior del activo.</p>
         </article>
-        <article class="stepper__step">
-          <span class="stepper__icon" aria-hidden="true">
+        <span class="stepper__connector" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+        <article class="stepper__node surface-solid reveal" style="--stagger-index:2" role="listitem">
+          <span class="stepper__node-index">03</span>
+          <span class="stepper__node-icon" aria-hidden="true">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/></svg>
           </span>
           <h3>Representación</h3>
