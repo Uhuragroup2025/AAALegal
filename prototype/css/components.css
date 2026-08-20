@@ -80,6 +80,9 @@
   .site-header__inner { padding: 0.6rem 1.25rem; gap: var(--space-4); width: 94%; }
 }
 .brand {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
   font-family: var(--font-display);
   font-size: var(--text-md);
   color: var(--color-white);
@@ -93,20 +96,51 @@
 }
 .brand span { color: var(--color-accent-on-dark); }
 
+/* Logo real (isotipo + wordmark) — D34 (2026-08-20): unifica el header de las 6
+   páginas que hasta ahora mostraban "AAA Estudio Legal" en texto plano, para que
+   coincida con Home. A diferencia de Home (`.home-page .brand__mark`/`.home-page
+   .brand__wordmark`, ~42px, pensados para su barra de 78px de alto), estas medidas
+   son más compactas porque la píldora flotante del resto del sitio es más angosta.
+   Sin la animación de aparición del isotipo ni el swap claro/oscuro del wordmark de
+   Home — ninguna de las dos páginas activa `data-header-theme="light"` hoy (queda
+   dormido, ver comentario en la sección Home más abajo), así que aquí no se agrega
+   esa complejidad. Reglas sin scope `.home-page` — Home conserva su propio tamaño
+   porque `.home-page .brand__mark`/`.home-page .brand__wordmark` son más específicas
+   y ganan la cascada sobre estas. */
+.brand__mark {
+  width: 28px;
+  height: 28px;
+  display: grid;
+  place-items: center;
+  flex: 0 0 28px;
+  overflow: hidden;
+}
+.brand__isotype {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.brand__wordmark {
+  position: relative;
+  width: 62px;
+  height: 31px;
+  display: block;
+  flex: 0 0 62px;
+}
+.brand__wordmark img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
 .site-header__actions {
   display: flex;
   align-items: center;
   gap: var(--space-4);
   margin-left: auto;
-}
-
-.lang-toggle {
-  font-size: var(--text-xs);
-  color: var(--color-gold-100);
-  border: 1px solid var(--color-border-on-dark);
-  border-radius: var(--radius-sm);
-  padding: var(--space-1) var(--space-3);
-  cursor: default;
 }
 
 /* nav como <details>: sin JS queda expandida (fallback funcional); con JS se colapsa en mobile.
@@ -193,8 +227,9 @@
 }
 
 @media (max-width: 560px) {
-  .lang-toggle { display: none; }
-  .brand { font-size: var(--text-sm); }
+  .brand { font-size: var(--text-sm); gap: var(--space-1); }
+  .brand__mark { width: 24px; height: 24px; flex-basis: 24px; }
+  .brand__wordmark { width: 52px; height: 26px; flex-basis: 52px; }
 }
 
 @media (max-width: 480px) {
@@ -2003,11 +2038,6 @@ section[data-surface="muted"] .post-meta__badge { border-color: var(--color-bord
 .home-page .nav__panel a[aria-current="page"] {
   color: var(--color-white);
   border-color: var(--color-accent-main);
-}
-
-.home-page .lang-toggle {
-  color: var(--color-secondary, var(--color-accent-light));
-  border-color: rgba(255, 255, 255, 0.3);
 }
 
 .home-page .btn--header {

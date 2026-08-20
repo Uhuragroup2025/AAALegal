@@ -18,7 +18,14 @@
 
 <header class="site-header">
   <div class="container site-header__inner">
-    <a class="brand" href="index.html">AAA <span>Estudio Legal</span></a>
+    <a class="brand" href="index.html" aria-label="AAA Estudio Legal — Inicio">
+      <span class="brand__mark" aria-hidden="true">
+        <img class="brand__isotype" src="assets/img/isotipo-AAA-legal.svg" width="200" height="200" alt="">
+      </span>
+      <span class="brand__wordmark" aria-hidden="true">
+        <img src="assets/img/letras-blanco-logo-AAA-legal.svg" width="200" height="124" alt="">
+      </span>
+    </a>
 
     <details class="nav" open>
       <summary class="nav__toggle" aria-expanded="true">
@@ -40,9 +47,8 @@
     </details>
 
     <div class="site-header__actions">
-      <span class="lang-toggle" title="Traducción automática vía Polylang — no funcional en este prototipo">ES · EN</span>
       <a class="btn btn--primary btn--header" href="#nota-ady">
-        <span class="btn--header-label">Consulte su caso aquí</span>
+        <span class="btn--header-label">Mi caso</span>
         <svg class="btn--icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
       </a>
     </div>
