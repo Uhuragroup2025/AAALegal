@@ -2154,6 +2154,14 @@ section[data-surface="muted"] .post-meta__badge { border-color: var(--color-bord
   gap: var(--space-6);
 }
 
+/* D44 (2026-08-20): el espacio entre el título y las cards de esta sección se veía muy
+   grande (hereda `.home-page .section-head { margin-bottom: var(--space-16) }`, 64px,
+   la misma regla base compartida por el resto de secciones de Home) — se reduce solo
+   aquí, sin tocar la regla compartida, para no afectar las demás secciones. */
+section[aria-labelledby="situaciones-heading"] .section-head {
+  margin-bottom: var(--space-8);
+}
+
 .home-page .situations-grid > .surface-solid {
   min-height: 160px;
   flex-direction: column;
