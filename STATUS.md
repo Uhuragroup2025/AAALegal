@@ -823,3 +823,17 @@ Adicionalmente, quedan agendadas para fases posteriores (no son preguntas abiert
 **content/*.md actualizado en paralelo** (00, 01, 02, 03, 05, 06, 09) para que la documentación de copy no quede desincronizada de lo implementado. **No se tocó** la cita textual de Brigard Urrutia ("aquí empieza tu historia con nosotros") en `content/05-talento-aaa.md` — es una referencia externa citada, no copy propio.
 
 **No se reabrió ni contradijo:** D18 (función/comportamiento de ADY), D24 (posicionamiento de Servicios/Contacto) y D8/D17 (función del formulario de talento) — solo se actualizó la literalidad exacta del copy que esas decisiones citaban entre comillas. Registrado como D29, no como edición retroactiva de D18/D24/D8/D17.
+
+### Sesión — centralización de ramas: `main` alineado a producción (2026-08-12)
+
+**Hallazgo:** `main` y `product-lead-ajustes-visuales` habían divergido. `main` tenía un commit propio ("feat: agregar botones flotantes 'volver arriba' y chat (responsive)", `02846de`) que **no** estaba en `product-lead-ajustes-visuales` ni en producción. La rama de trabajo tenía 5 commits (incluyendo D27–D29) que no estaban en `main`. Se verificó directamente contra la URL en vivo (`https://aaalegal.design-505.workers.dev/`, vía inspección del DOM, no solo por fecha de build) que **el sitio en producción refleja `product-lead-ajustes-visuales`, no `main`** — confirmado: header CTA "Consulte su caso aquí" y H2 "¿Es acreedor y se enfrenta a alguno de estos riesgos?" presentes en vivo; los botones flotantes de `main` **no** están en vivo. Conclusión: el proyecto de Cloudflare Workers Builds ("aaalegal") despliega a producción desde `product-lead-ajustes-visuales`, no desde `main` — a pesar de que ambas ramas generan un check-run que apunta a la misma ruta `/production/` en el dashboard de Cloudflare (causaba confusión sobre cuál era la fuente real).
+
+**Acción (Owner, 2026-08-12):** se le presentaron dos rutas — (a) dejar `main` exactamente igual a lo que está en vivo, o (b) mergear ambas ramas sin perder el commit de botones flotantes. El Owner eligió (a) explícitamente, sabiendo que implicaba mover el commit de botones flotantes fuera de la punta de `main`.
+
+**Ejecutado con salvaguarda:**
+1. Se creó el tag `backup/main-botones-flotantes-2026-08-12` apuntando al commit `02846de` (botones flotantes) y se subió a origin — el commit no se pierde, queda accesible por ese tag.
+2. `git push origin product-lead-ajustes-visuales:main --force-with-lease=main:02846de` — reescribe `origin/main` para que apunte exactamente a `986ad36` (mismo commit que `product-lead-ajustes-visuales`), con `force-with-lease` para no pisar ningún push ajeno que hubiera llegado entre el diagnóstico y la ejecución.
+3. `main` local actualizado con `git reset --hard product-lead-ajustes-visuales`.
+4. Verificado: `git diff main product-lead-ajustes-visuales` vacío (idénticas); ambas ramas apuntan a `986ad36`; el sitio en vivo se re-verificó después de la operación y no cambió (la operación no tocó producción, solo alineó el historial de `main`).
+
+**Pendiente / no resuelto por esta acción:** la funcionalidad de "botones flotantes" (volver arriba / chat) sigue existiendo solo en el tag de respaldo, no en ninguna rama activa ni en producción. Si se quiere recuperar, se puede hacer `cherry-pick` o `merge` de `backup/main-botones-flotantes-2026-08-12` sobre `main` cuando el Owner lo autorice — no se hizo aquí porque no estaba en el pedido explícito ("dejar main justo como está la URL en vivo").
