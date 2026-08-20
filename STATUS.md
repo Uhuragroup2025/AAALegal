@@ -1,6 +1,6 @@
 # STATUS.md — Estado del proyecto y síntesis de insumos
 
-> Actualizado: 2026-08-13 · **C0 = APROBADO** · **C1 = APROBADO (narrativa + copy, v1 y v2)** · **C2 = CANDIDATO A REVISIÓN (iteración 27 — retícula uniforme de confianza; + ronda de correcciones SEO, D27; + ajuste de eyebrow/registro tú-usted en Situaciones, D28; + homogenización a "usted" en las 8 páginas, D29; + tipografía Big Caslon/Krub del manual de marca, D30, ver abajo)** · Decisiones vigentes hasta D30. La paleta reducida alineada con marca (D26) reemplaza D22/D23 y sigue aplicada en todo el prototipo; **la tipografía de D26 (Playfair Display/Instrument Sans) fue reemplazada por D30** (Libre Caslon Display/Text + Krub, fiel al manual de marca). La Home incorpora además la traducción compositiva completa registrada en la iteración 15, la escala editorial refinada desde la iteración 16, los ajustes de ritmo/iconografía/header/evidencia hasta la iteración 27, y el copy corregido por SEO (D27–D29, 2026-08-10).
+> Actualizado: 2026-08-20 · **C0 = APROBADO** · **C1 = APROBADO (narrativa + copy, v1 y v2)** · **C2 = CANDIDATO A REVISIÓN (iteración 27 — retícula uniforme de confianza; + ronda de correcciones SEO, D27; + ajuste de eyebrow/registro tú-usted en Situaciones, D28; + homogenización a "usted" en las 8 páginas, D29; + tipografía Big Caslon/Krub del manual de marca, D30; + se retira CTA redundante en Situaciones, D31, ver abajo)** · Decisiones vigentes hasta D31. La paleta reducida alineada con marca (D26) reemplaza D22/D23 y sigue aplicada en todo el prototipo; **la tipografía de D26 (Playfair Display/Instrument Sans) fue reemplazada por D30** (Libre Caslon Display/Text + Krub, fiel al manual de marca). La Home incorpora además la traducción compositiva completa registrada en la iteración 15, la escala editorial refinada desde la iteración 16, los ajustes de ritmo/iconografía/header/evidencia hasta la iteración 27, y el copy corregido por SEO (D27–D29, 2026-08-10).
 
 ## C2 — Prototipo (candidato, 2026-07-29)
 
@@ -856,3 +856,9 @@ Adicionalmente, quedan agendadas para fases posteriores (no son preguntas abiert
 **No se tocó:** `prototype/type-lab.html` — es el laboratorio histórico que sirvió para aprobar D26; se deja cargando Playfair Display/Instrument Sans a propósito, como registro de esa exploración pasada, no como parte de la tipografía vigente del sitio.
 
 **Siguiente paso sugerido, no ejecutado:** confirmar con Product Lead/cliente si el tracking normal (sin negativo) y el uso de Libre Caslon Display/Text como sustituto de Big Caslon quedan como criterio definitivo, o si el cliente puede proveer una licencia web real de Big Caslon (Adobe Fonts u otra) para una fidelidad de marca más estricta.
+
+### Sesión — se retira CTA redundante en Situaciones (D31, 2026-08-20)
+
+**Pedido:** el Owner señaló, con captura de pantalla, el CTA de texto "Si alguna de estas situaciones le resulta familiar, podemos ayudarle." al final de la sección Situaciones en Inicio, y pidió retirarlo.
+
+**Aplicado:** eliminado el bloque `<p class="reveal">` con ese enlace (apuntaba a `captacion-b2b.html`) en `prototype/index.html`. La sección Situaciones ahora cierra directamente después de las 3 tarjetas. Verificado que no deja la página sin acceso a Captación B2B — el CTA primario del hero ("Hablemos de su caso") ya enlaza ahí. Verificado visualmente con servidor estático local: espaciado correcto, sin markup roto.
