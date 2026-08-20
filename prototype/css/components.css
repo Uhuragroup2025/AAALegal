@@ -596,10 +596,11 @@ section[data-surface="muted"] + .hero .curve-divider,
   color: var(--color-accent-main-strong);
 }
 
+/* D45 (2026-08-20): pasa de la serif de display a Krub bold — a pedido del Owner. */
 .sector-card__name {
-  font-family: var(--font-display);
+  font-family: var(--font-sans);
   font-size: clamp(1.15rem, 1.6vw, 1.5rem);
-  font-weight: 400; /* D30: Libre Caslon Display solo trae peso 400 */
+  font-weight: 700;
   line-height: 1.08;
   letter-spacing: -0.02em;
 }
@@ -2356,10 +2357,14 @@ section[aria-labelledby="situaciones-heading"] .section-head {
   flex: 0 0 32px;
 }
 
+/* D45 (2026-08-20): los títulos de estas 5 tarjetas pasan de la serif de display
+   (Libre Caslon Display) a Krub bold — a pedido del Owner. */
 .home-page .focus-grid h3 {
   max-width: 13ch;
   margin-bottom: var(--space-4);
+  font-family: var(--font-sans);
   font-size: 1.5rem;
+  font-weight: 700;
   line-height: 1.08;
   letter-spacing: -0.02em;
 }
