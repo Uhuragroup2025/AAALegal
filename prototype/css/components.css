@@ -2314,7 +2314,23 @@ section[aria-labelledby="situaciones-heading"] .section-head {
   line-height: 1.55;
 }
 
+/* D47 (2026-08-20): la descripción solo aparece con hover, a pedido del Owner —
+   complementa el efecto de flex-grow/zoom que ya tenía el mosaico. Solo en
+   dispositivos con hover real de mouse (mismo guard que el resto del efecto):
+   en touch/mobile no hay forma de "hacer hover", así que la descripción se queda
+   siempre visible ahí (accesible sin depender de un gesto que no existe). */
 @media (hover: hover) and (pointer: fine) and (min-width: 1024px) {
+  .home-page .focus-mosaic .surface-visual__caption p {
+    opacity: 0;
+    transform: translateY(6px);
+    transition: opacity 400ms var(--motion-ease), transform 400ms var(--motion-ease);
+  }
+  .home-page .focus-mosaic .surface-visual:hover .surface-visual__caption p,
+  .home-page .focus-mosaic .surface-visual:focus-within .surface-visual__caption p {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
   .home-page .focus-mosaic:hover .surface-visual { flex-grow: 0.98; opacity: 0.9; }
   .home-page .focus-mosaic .surface-visual:hover { flex-grow: 1.04; opacity: 1; }
   .home-page .focus-mosaic .surface-visual:hover .media-placeholder { transform: scale(1.03); }
@@ -2331,6 +2347,11 @@ section[aria-labelledby="situaciones-heading"] .section-head {
   }
   .home-page .focus-mosaic:hover .surface-visual,
   .home-page .focus-mosaic .surface-visual:hover { flex-grow: 1; opacity: 1; }
+  .home-page .focus-mosaic .surface-visual__caption p {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
   .home-page .focus-mosaic .surface-visual:hover .media-placeholder { transform: none; }
 }
 
