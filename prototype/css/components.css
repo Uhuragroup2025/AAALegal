@@ -1741,12 +1741,29 @@ section[data-surface="dark"] .stepper__step.is-active .stepper__icon { color: va
   position: relative;
   min-height: 0;
   padding-block: var(--space-6);
+  border-top: none;
 }
 .stepper--flowchart .stepper__step[data-stepper-ready]:not(.is-active) {
   opacity: 1;
   transform: none;
 }
-.stepper--flowchart .stepper__connector { display: none; }
+/* D50 (2026-08-20): en mobile/tablet, la línea divisoria horizontal entre pasos (del
+   componente base) rompía la lectura de "flujograma" — a pedido del Owner, se quita
+   esa línea y se muestra la misma flecha del conector de desktop, rotada 90° (apunta
+   hacia abajo en vez de hacia la derecha), para que la sensación de flujo continúe
+   verticalmente en la lista apilada. */
+.stepper--flowchart .stepper__connector {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-block: var(--space-1);
+  color: var(--color-border-on-dark);
+}
+.stepper--flowchart .stepper__connector svg {
+  width: 1.25rem;
+  height: 1.25rem;
+  transform: rotate(90deg);
+}
 
 /* D49 (2026-08-20): en mobile/tablet (≤800px, el flujograma cae a lista vertical) el
    ícono quedaba encima del título, ocupando una línea completa cada uno — a pedido
@@ -1814,7 +1831,7 @@ section[data-surface="dark"] .stepper__step.is-active .stepper__icon { color: va
     margin-inline: -0.5rem;
     color: var(--color-border-on-dark);
   }
-  .stepper--flowchart .stepper__connector svg { width: 60%; height: 60%; }
+  .stepper--flowchart .stepper__connector svg { width: 60%; height: 60%; transform: none; }
 }
 
 @media (min-width: 801px) and (hover: hover) and (pointer: fine) {
