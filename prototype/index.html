@@ -213,8 +213,14 @@
          (ícono+nombre+logos), un marquee en movimiento habría sido más difícil de leer.
          Los logos son placeholders explícitos ("Logo 01"/"Logo 02"): no hay clientes
          reales aprobados todavía para asociar a cada sector — mismo criterio que
-         Casos de éxito, no se inventan nombres ni logos. -->
-    <div class="sector-grid reveal" role="list" aria-label="Sectores de experiencia de AAA Estudio Legal">
+         Casos de éxito, no se inventan nombres ni logos.
+         D39 (2026-08-20): envuelta en `.container` (antes era hijo directo de
+         `<section>`, por eso se extendía hasta el borde total de la página en vez de
+         respetar el margen — bug reportado por el Owner). También se agrega
+         `mobile-card-carousel` para que en móvil use el mismo slide horizontal que
+         Situaciones y Casos de éxito, en vez de apilarse en una sola columna. -->
+    <div class="container">
+    <div class="sector-grid mobile-card-carousel reveal" role="list" tabindex="0" aria-label="Sectores de experiencia de AAA Estudio Legal">
       <article class="sector-card" role="listitem">
         <div class="sector-card__header">
           <svg class="sector-card__icon" viewBox="0 0 256 256" fill="none" stroke="currentColor" stroke-width="14" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M24 104h208M40 104V88l88-48 88 48v16M48 104v80M88 104v80M128 104v80M168 104v80M208 104v80M24 184h208M16 216h224"/></svg>
@@ -275,6 +281,43 @@
           <span class="sector-card__logo">Logo 02</span>
         </div>
       </article>
+    </div>
+    </div>
+  </section>
+
+  <!-- 6b. CIFRAS — contador animado (D41, 2026-08-20), a pedido del Owner, con la
+       referencia visual del sitio "Meléndez" (solo el efecto de conteo ascendente —
+       los números de esa referencia son de otra empresa y no se copian). AAA no tiene
+       todavía cifras propias aprobadas para casos gestionados / clientes / cartera
+       recuperada, así que los tres valores son placeholders explícitos, redondos a
+       propósito para no parecer datos reales, con una leyenda visible bajo cada uno
+       ("cifra de ejemplo — pendiente de dato aprobado"). El mecanismo de conteo
+       (`data-count-to`, ver js/main.js) ya queda listo: cuando el Owner entregue las
+       cifras reales, basta reemplazar `data-count-to`/el texto y la leyenda para que
+       la animación funcione igual sobre el dato real. -->
+  <section class="section stats-counter" data-surface="dark" aria-labelledby="cifras-heading">
+    <div class="container">
+      <div class="section-head reveal">
+        <p class="eyebrow">En cifras</p>
+        <h2 id="cifras-heading">Resultados que respaldan nuestro trabajo.</h2>
+      </div>
+      <div class="stats-grid reveal" role="list" aria-label="Cifras de AAA Estudio Legal, pendientes de dato aprobado por el cliente">
+        <div class="stat-card" role="listitem">
+          <p class="stat-card__number" data-count-to="100" aria-hidden="true">0</p>
+          <p class="stat-card__label">Casos gestionados</p>
+          <p class="stat-card__pending">Cifra de ejemplo — pendiente de dato aprobado por el cliente</p>
+        </div>
+        <div class="stat-card" role="listitem">
+          <p class="stat-card__number" data-count-to="50" aria-hidden="true">0</p>
+          <p class="stat-card__label">Clientes atendidos</p>
+          <p class="stat-card__pending">Cifra de ejemplo — pendiente de dato aprobado por el cliente</p>
+        </div>
+        <div class="stat-card" role="listitem">
+          <p class="stat-card__number" data-count-to="100" data-count-prefix="$" data-count-suffix=" M" aria-hidden="true">$0 M</p>
+          <p class="stat-card__label">Cartera recuperada</p>
+          <p class="stat-card__pending">Cifra de ejemplo — pendiente de dato aprobado por el cliente</p>
+        </div>
+      </div>
     </div>
   </section>
 

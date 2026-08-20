@@ -139,6 +139,46 @@
   // por defecto (ver components.css `.stepper__step[data-stepper-ready]`) — no se
   // requiere fallback adicional.
 
+  // --- Contador animado ("En cifras", Decisión D41): cuenta de forma ascendente
+  // desde 0 hasta `data-count-to` cuando la tarjeta entra en viewport. Con
+  // prefers-reduced-motion, salta directo al valor final sin animar.
+  var countEls = document.querySelectorAll('.stat-card__number[data-count-to]');
+  if (countEls.length) {
+    var renderCount = function (el, value) {
+      var prefix = el.getAttribute('data-count-prefix') || '';
+      var suffix = el.getAttribute('data-count-suffix') || '';
+      el.textContent = prefix + Math.round(value) + suffix;
+    };
+
+    var animateCount = function (el) {
+      var target = parseFloat(el.getAttribute('data-count-to')) || 0;
+      var duration = 1400;
+      var start = null;
+      var step = function (timestamp) {
+        if (start === null) start = timestamp;
+        var progress = Math.min((timestamp - start) / duration, 1);
+        var eased = 1 - Math.pow(1 - progress, 3); // ease-out cúbico
+        renderCount(el, target * eased);
+        if (progress < 1) window.requestAnimationFrame(step);
+      };
+      window.requestAnimationFrame(step);
+    };
+
+    if ('IntersectionObserver' in window && !prefersReducedMotion) {
+      var countObserver = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            animateCount(entry.target);
+            countObserver.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.4 });
+      countEls.forEach(function (el) { countObserver.observe(el); });
+    } else {
+      countEls.forEach(function (el) { renderCount(el, parseFloat(el.getAttribute('data-count-to')) || 0); });
+    }
+  }
+
   // --- Aviso de cookies (GA4 + GTM + Clarity, Decisión D20) ---
   var cookieBanner = document.querySelector('.cookie-banner');
   if (cookieBanner) {
