@@ -939,93 +939,25 @@ section[data-surface="muted"] + .hero .curve-divider,
 @media (max-width: 800px) { .people-intro { grid-template-columns: 1fr; } }
 
 /* ---------- Tarjeta de equipo — un solo contenedor redondeado (2026-07-31) ----------
-   Corrección pedida por el Owner tras la primera versión: la intro (imagen+texto) y la
-   banda de "pills" vivían en dos bloques separados, cada uno con su propio fondo — el
-   referente (firma alemana Kümmerlein) usa UN solo contenedor grande de esquinas
-   redondeadas que envuelve todo, con las píldoras recortándose contra ese mismo borde
-   redondeado inferior. Ahora `.people-card` es ese contenedor único: fondo
-   `--color-surface-muted` (se distingue del blanco cálido de la página alrededor, ya
-   que la sección ya no lleva `data-surface="muted"` — el color vive aquí, no en toda
-   la sección), `overflow:hidden` para que el recorrido infinito de `.team-marquee` se
-   recorte limpiamente contra las esquinas redondeadas en vez de necesitar su propio
-   fondo/máscara de difuminado. */
+   `.people-card` envuelve texto+foto en un único contenedor de esquinas redondeadas:
+   fondo `--color-surface-muted` (se distingue del blanco cálido de la página alrededor,
+   ya que la sección ya no lleva `data-surface="muted"` — el color vive aquí, no en toda
+   la sección). La banda de "pills" que este contenedor recortaba con `overflow:hidden`
+   se quitó (D37, 2026-08-20); la propiedad se conserva por las esquinas redondeadas de
+   la foto/tarjeta. */
 .people-card {
   border-radius: var(--radius-xl);
   overflow: hidden;
   background: var(--color-surface-muted);
 }
 
-/* ---------- Banda de equipo — "pills" con desplazamiento continuo ----------
-   Vive dentro de `.people-card` (arriba) — ya no tiene fondo ni bordes propios, solo
-   el recorrido horizontal; el recorte contra las esquinas redondeadas lo aporta el
-   `overflow:hidden` del contenedor padre.
-   Estructura anti-duplicado-para-lectores-de-pantalla: `.team-marquee__track` contiene
-   DOS copias del set de píldoras (necesario para el loop visual sin salto), pero solo
-   la primera copia lleva `role="list"`/`role="listitem"` — la segunda es `aria-hidden`,
-   así un lector de pantalla nunca anuncia los 4 nombres dos veces. */
-.team-marquee {
-  padding-block: var(--space-8);
-}
-.team-marquee__track {
-  display: flex;
-  width: max-content;
-}
-.team-marquee__set {
-  display: flex;
-  gap: var(--space-4);
-  padding-inline: var(--space-4);
-  flex-shrink: 0;
-}
-@media (prefers-reduced-motion: no-preference) {
-  .team-marquee__track { animation: team-marquee-scroll 24s linear infinite; }
-  /* Pausa al pasar el mouse o al enfocar cualquier elemento dentro con teclado —
-     requisito de accesibilidad (WCAG 2.2.2) para contenido que se mueve solo más
-     de 5s: el usuario debe poder detenerlo sin perder la fila de vista. */
-  .team-marquee:hover .team-marquee__track,
-  .team-marquee:focus-within .team-marquee__track { animation-play-state: paused; }
-}
-@keyframes team-marquee-scroll {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
-}
-.team-pill {
-  display: flex;
-  align-items: center;
-  gap: var(--space-3);
-  background: var(--color-white);
-  border-radius: var(--radius-pill);
-  padding: var(--space-2) var(--space-6) var(--space-2) var(--space-2);
-  box-shadow: var(--shadow-sm);
-  white-space: nowrap;
-}
-.team-pill__avatar {
-  width: 3rem;
-  height: 3rem;
-  flex-shrink: 0;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: var(--avatar-bg, var(--color-navy-deep));
-  color: var(--color-white);
-  font-family: var(--font-display);
-  font-weight: 400; /* D30: Libre Caslon Display solo trae peso 400 */
-  font-size: var(--text-sm);
-}
-.team-pill__info { display: flex; flex-direction: column; gap: 0.125rem; }
-.team-pill__name { font-weight: 600; font-size: var(--text-sm); color: var(--color-ink-dark); }
-.team-pill__role {
-  font-size: var(--text-xs);
-  color: var(--color-ink-dark);
-  opacity: 0.6;
-  text-transform: uppercase;
-  letter-spacing: 0.03em;
-}
+/* D37 (2026-08-20): la banda de "pills" del equipo (.team-marquee/.team-pill) se quitó
+   de Home a pedido del Owner — las reglas correspondientes se eliminaron por completo
+   de aquí (quedaban sin ningún uso en el HTML). `.people-card` arriba se conserva: el
+   contenedor único de esquinas redondeadas sigue envolviendo texto+foto. */
 @media (max-width: 640px) {
   .people-card { border-radius: var(--radius-md); }
   .people-intro { padding: var(--space-8) var(--space-6) var(--space-6); }
-  .team-pill { padding: var(--space-2) var(--space-4) var(--space-2) var(--space-2); }
-  .team-pill__avatar { width: 2.5rem; height: 2.5rem; }
 }
 
 /* =====================================================================
@@ -2557,88 +2489,11 @@ section[data-surface="muted"] .post-meta__badge { border-color: var(--color-bord
   fill: currentColor;
 }
 
-/* Franja de logos: movimiento lineal y contenido reemplazable por <img>. */
-.home-page .client-logo-strip {
-  margin-top: var(--space-16);
-  padding-block: var(--space-8);
-}
+/* D37 (2026-08-20): la franja "Logos clientes" (.client-logo-strip y afines) se quitó
+   de Casos de éxito a pedido del Owner — reglas eliminadas por completo, sin ningún
+   uso en el HTML. */
 
-.home-page .client-logo-strip__heading {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: var(--space-6);
-  margin-bottom: var(--space-8);
-}
-
-.home-page .client-logo-strip__heading h3 {
-  margin: 0;
-}
-
-.home-page .client-logo-marquee {
-  overflow: hidden;
-  outline-offset: var(--space-2);
-}
-
-.home-page .client-logo-track {
-  display: flex;
-  width: max-content;
-  animation: client-logo-scroll 32s linear infinite;
-  will-change: transform;
-}
-
-.home-page .client-logo-group {
-  display: flex;
-  align-items: center;
-  gap: var(--space-8);
-  padding-right: var(--space-8);
-}
-
-.home-page .client-logo-slot {
-  width: 96px;
-  height: 96px;
-  display: grid;
-  place-items: center;
-  flex: 0 0 96px;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.035);
-}
-
-.home-page .client-logo-slot span {
-  color: rgba(255, 255, 255, 0.58);
-  font-size: 0.6875rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
-.home-page .client-logo-marquee:hover .client-logo-track,
-.home-page .client-logo-marquee:focus .client-logo-track,
-.home-page .client-logo-marquee:focus-within .client-logo-track {
-  animation-play-state: paused;
-}
-
-@keyframes client-logo-scroll {
-  to { transform: translateX(-50%); }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .home-page .client-logo-marquee { overflow: visible; }
-  .home-page .client-logo-track {
-    width: 100%;
-    animation: none;
-    will-change: auto;
-  }
-  .home-page .client-logo-group:first-child {
-    width: 100%;
-    flex-wrap: wrap;
-    justify-content: center;
-    padding-right: 0;
-  }
-  .home-page .client-logo-group[aria-hidden="true"] { display: none; }
-}
-
-/* Equipo: se conserva el marquee, dentro de una superficie plana y precisa. */
+/* Equipo: superficie plana y precisa. */
 .home-page .people-card {
   background: var(--color-white);
   border: 1px solid var(--color-border-flat);
@@ -2682,16 +2537,6 @@ section[data-surface="muted"] .post-meta__badge { border-color: var(--color-bord
     max-width: none;
     padding-top: 0;
   }
-}
-
-.home-page .team-marquee {
-  border-top: 1px solid var(--color-border-flat);
-}
-
-.home-page .team-pill {
-  background: var(--color-surface-soft);
-  border: 1px solid var(--color-border-flat);
-  box-shadow: none;
 }
 
 /* Cierre: único segundo momento atmosférico; sin halo decorativo. */
@@ -3123,18 +2968,6 @@ section[data-surface="muted"] .post-meta__badge { border-color: var(--color-bord
 
   .home-page .case-video {
     width: var(--mobile-card-width);
-  }
-
-  .home-page .client-logo-strip__heading {
-    align-items: flex-start;
-    flex-direction: column;
-    gap: var(--space-2);
-  }
-
-  .home-page .client-logo-slot {
-    width: 80px;
-    height: 80px;
-    flex-basis: 80px;
   }
 
   .home-page .focus-grid > .surface-solid,
