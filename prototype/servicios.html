@@ -132,16 +132,21 @@
     </div>
   </section>
 
-  <!-- CÓMO TRABAJAMOS / METODOLOGÍA — D33 (2026-08-20): el Owner pidió revertir D32
-       (el flujograma de nodos conectados no se quería) y en su lugar conservar el
-       diseño original de 2026-07-31 (columna sticky + 3 pasos con icono/título/
-       párrafo), pero quitando la activación por scroll (los pasos ya no se atenúan
-       fuera de foco) y reduciendo el espacio que cada paso reservaba. Modificador
-       `.stepper--compact` (nuevo, scoped a esta sección) — .stepper__grid/
-       .stepper__intro/.stepper__steps/.stepper__step vuelven a ser exactamente las
-       clases originales, sin cambios, así que Captación B2B § "Nuestro proceso"
-       (mismo componente, sin el modificador) no se ve afectada. -->
-  <section class="section stepper stepper--compact" data-surface="dark" aria-labelledby="proceso-heading">
+  <!-- CÓMO TRABAJAMOS / METODOLOGÍA — D48 (2026-08-20): a pedido del cliente (vía el
+       Owner), rediseño a flujograma horizontal de 3 nodos conectados para que quepa
+       en una sola pantalla sin scroll. Nota de trazabilidad: en 2026-08-20 (D32) ya
+       se había probado un flujograma de nodos conectados aquí mismo y el Owner pidió
+       revertirlo (D33, mismo día) porque no era lo que quería en ese momento — este
+       es un pedido nuevo y explícito del cliente, confirmado con el Owner antes de
+       tocar código (no una repetición de D32 por error). Reemplaza el modificador
+       `.stepper--compact` (D33) por `.stepper--flowchart`, scoped a esta sección —
+       .stepper__grid/.stepper__intro/.stepper__steps/.stepper__step base y Captación
+       B2B § "Nuestro proceso" (mismo componente, sin este modificador) no se ven
+       afectados. La descripción de cada paso ya no va siempre visible (no cabría sin
+       scroll junto a los otros 2 pasos) — aparece solo con hover/focus del nodo,
+       mismo patrón aprobado en D47 (Home § "Cómo intervenimos"); en touch/mobile,
+       donde no existe hover, se ve siempre visible, apilada verticalmente. -->
+  <section class="section stepper stepper--flowchart" data-surface="dark" aria-labelledby="proceso-heading">
     <div class="container stepper__grid">
       <div class="stepper__intro reveal">
         <p class="eyebrow">Nuestra metodología</p>
@@ -155,6 +160,9 @@
           <h3>Diagnóstico</h3>
           <p>Antes de actuar, entendemos el contexto completo. Estudiamos el expediente, identificamos riesgos y construimos un diagnóstico jurídico que define la estrategia más adecuada para proteger los intereses del acreedor.</p>
         </article>
+        <span class="stepper__connector" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 12h14M13 6l6 6-6 6"/></svg>
+        </span>
         <article class="stepper__step">
           <span class="stepper__icon" aria-hidden="true">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M15 9l-2 6-6 2 2-6 6-2z"/></svg>
@@ -162,6 +170,9 @@
           <h3>Estrategia</h3>
           <p>No aplicamos soluciones estándar. Definimos el camino legal según el estado del riesgo, ya sea en una etapa preventiva, durante un proceso de insolvencia o en la recuperación posterior del activo.</p>
         </article>
+        <span class="stepper__connector" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 12h14M13 6l6 6-6 6"/></svg>
+        </span>
         <article class="stepper__step">
           <span class="stepper__icon" aria-hidden="true">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/></svg>
