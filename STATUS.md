@@ -1,6 +1,6 @@
 # STATUS.md — Estado del proyecto y síntesis de insumos
 
-> Actualizado: 2026-08-10 · **C0 = APROBADO** · **C1 = APROBADO (narrativa + copy, v1 y v2)** · **C2 = CANDIDATO A REVISIÓN (iteración 27 — retícula uniforme de confianza; + ronda de correcciones SEO, D27; + ajuste de eyebrow/registro tú-usted en Situaciones, D28; + homogenización a "usted" en las 8 páginas, D29, ver abajo)** · Decisiones vigentes hasta D29. La paleta reducida alineada con marca (D26) reemplaza D22/D23 y ya está aplicada en todo el prototipo; la Home incorpora además la traducción compositiva completa registrada en la iteración 15, la escala editorial refinada desde la iteración 16, los ajustes de ritmo/iconografía/header/evidencia hasta la iteración 27, y el copy corregido por SEO (D27, 2026-08-10).
+> Actualizado: 2026-08-13 · **C0 = APROBADO** · **C1 = APROBADO (narrativa + copy, v1 y v2)** · **C2 = CANDIDATO A REVISIÓN (iteración 27 — retícula uniforme de confianza; + ronda de correcciones SEO, D27; + ajuste de eyebrow/registro tú-usted en Situaciones, D28; + homogenización a "usted" en las 8 páginas, D29; + tipografía Big Caslon/Krub del manual de marca, D30, ver abajo)** · Decisiones vigentes hasta D30. La paleta reducida alineada con marca (D26) reemplaza D22/D23 y sigue aplicada en todo el prototipo; **la tipografía de D26 (Playfair Display/Instrument Sans) fue reemplazada por D30** (Libre Caslon Display/Text + Krub, fiel al manual de marca). La Home incorpora además la traducción compositiva completa registrada en la iteración 15, la escala editorial refinada desde la iteración 16, los ajustes de ritmo/iconografía/header/evidencia hasta la iteración 27, y el copy corregido por SEO (D27–D29, 2026-08-10).
 
 ## C2 — Prototipo (candidato, 2026-07-29)
 
@@ -837,3 +837,22 @@ Adicionalmente, quedan agendadas para fases posteriores (no son preguntas abiert
 4. Verificado: `git diff main product-lead-ajustes-visuales` vacío (idénticas); ambas ramas apuntan a `986ad36`; el sitio en vivo se re-verificó después de la operación y no cambió (la operación no tocó producción, solo alineó el historial de `main`).
 
 **Pendiente / no resuelto por esta acción:** la funcionalidad de "botones flotantes" (volver arriba / chat) sigue existiendo solo en el tag de respaldo, no en ninguna rama activa ni en producción. Si se quiere recuperar, se puede hacer `cherry-pick` o `merge` de `backup/main-botones-flotantes-2026-08-12` sobre `main` cuando el Owner lo autorice — no se hizo aquí porque no estaba en el pedido explícito ("dejar main justo como está la URL en vivo").
+
+### Sesión — tipografía Big Caslon/Krub del manual de marca (D30, 2026-08-13)
+
+**Pedido:** el Owner instruyó implementar Big Caslon (títulos) y "CRU" (descripciones) según el manual de marca.
+
+**Aclaraciones resueltas antes de tocar código (AskUserQuestion):**
+- "CRU" se confirmó como **Krub** — ya usada en este proyecto antes de D22/D26, es la tipografía secundaria del manual de marca.
+- Big Caslon **no existe como webfont libre** (es una fuente de sistema de macOS/iOS; nunca se llegó a cargar realmente en este proyecto — se verificó contra el primer commit del repositorio). El Owner eligió **Libre Caslon Display** (Google Fonts, misma familia Caslon, gratuita, render idéntico en el 100% de navegadores) en vez de declarar "Big Caslon" con fallback a Georgia (solo se vería correcto en Mac/iPhone) o de licenciar la fuente original.
+
+**Complicaciones técnicas encontradas y resueltas (verificadas contra la API de Google Fonts antes de implementar, no supuestas):**
+- Libre Caslon Display solo trae el corte **400** (sin negrita real, sin itálica real). Pedir peso 500/600 (heredado de D26) habría producido negrita sintética — se bajaron esas declaraciones a 400 en `base.css` y `components.css`.
+- `.text-gradient` (el énfasis en degradado dentro del H1 del hero) heredaba `font-style: italic` de `--font-display` — sin itálica real en Libre Caslon Display, el navegador la habría inclinado algorítmicamente (itálica sintética, se ve distorsionada en un serif). Se resolvió declarando `font-family: 'Libre Caslon Text'` (itálica real, misma familia tipográfica) específicamente para esa clase.
+- Se quitó el tracking negativo de H1/H2 (`-0.02em`/`-0.03em`), calibrado en D26 para Playfair Display — un serif de época como Caslon se lee mejor sin tracking apretado. Marcado como criterio candidato, sujeto a QA visual.
+
+**Verificación:** se sirvió el prototipo con un servidor estático local temporal y se revisaron las 8 secciones de Inicio con capturas de pantalla — hero (H1 + itálica en degradado), Situaciones, Qué hace AAA, Cómo intervenimos (cards), Por qué AAA, Casos de éxito, Sectores, Equipo (círculos de iniciales JA/AC/JM en Libre Caslon Display 400), cierre y footer. Sin negrita sintética visible, sin itálica distorsionada, sin regresión de contenido (verificado también por `get_page_text`, que coincide con lo que ya estaba en producción). Herramientas de verificación (script de servidor temporal, `launch.json` de esta sesión) no se commitearon — no son parte del entregable.
+
+**No se tocó:** `prototype/type-lab.html` — es el laboratorio histórico que sirvió para aprobar D26; se deja cargando Playfair Display/Instrument Sans a propósito, como registro de esa exploración pasada, no como parte de la tipografía vigente del sitio.
+
+**Siguiente paso sugerido, no ejecutado:** confirmar con Product Lead/cliente si el tracking normal (sin negativo) y el uso de Libre Caslon Display/Text como sustituto de Big Caslon quedan como criterio definitivo, o si el cliente puede proveer una licencia web real de Big Caslon (Adobe Fonts u otra) para una fidelidad de marca más estricta.

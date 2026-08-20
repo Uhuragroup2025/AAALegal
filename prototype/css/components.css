@@ -579,7 +579,7 @@ section[data-surface="muted"] + .hero .curve-divider,
 .sector-tile span {
   font-family: var(--font-display);
   font-size: clamp(1.25rem, 1.8vw, 1.625rem);
-  font-weight: 500;
+  font-weight: 400; /* D30: Libre Caslon Display solo trae peso 400 */
   line-height: 1.08;
   letter-spacing: -0.02em;
 }
@@ -974,7 +974,7 @@ section[data-surface="muted"] + .hero .curve-divider,
   background: var(--avatar-bg, var(--color-navy-deep));
   color: var(--color-white);
   font-family: var(--font-display);
-  font-weight: 600;
+  font-weight: 400; /* D30: Libre Caslon Display solo trae peso 400 */
   font-size: var(--text-sm);
 }
 .team-pill__info { display: flex; flex-direction: column; gap: 0.125rem; }
@@ -1071,9 +1071,14 @@ section[data-surface="muted"] + .hero .curve-divider,
 
 /* ---------- Texto en degradado — reservado a 1–2 mensajes narrativos (§ 7) ---------- */
 .text-gradient {
-  /* D26: itálica, igual que el tratamiento de énfasis (<em>) del Visual Language Lab
-     — el degradado por sí solo (color) ya no basta para replicar el lab, que combina
-     color + cursiva en Playfair Display. */
+  /* D26: itálica como tratamiento de énfasis — el degradado por sí solo (color) no
+     basta. D30: Libre Caslon Display (--font-display) no tiene corte itálico real;
+     usar font-style:italic sobre ella produciría itálica sintética (inclinada
+     algorítmicamente), que en un serif se ve distorsionada. En su lugar se usa
+     'Libre Caslon Text' aquí específicamente, que sí trae itálica real de la misma
+     familia Caslon — visualmente compatible con Libre Caslon Display en el texto
+     upright de alrededor. */
+  font-family: 'Libre Caslon Text', Georgia, 'Times New Roman', serif;
   font-style: italic;
   /* --color-gold-100 y --color-accent-cool-100 son ambos alias de --color-accent-light
      en la paleta D26 (a diferencia de la teal de D23, donde eran tonos distintos) — un

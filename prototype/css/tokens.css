@@ -114,14 +114,21 @@
   --glass-shadow: 0 8px 32px rgba(var(--color-navy-deep-rgb), 0.18);
   --glass-highlight: inset 0 1px 0 rgba(255, 255, 255, 0.45);
 
-  /* Tipografía — familias. Decisión D26 (Product Lead, 2026-08-05): reemplaza Space
-     Grotesk/Krub (D22) por el par tipográfico del Visual Language Lab.
-     --font-display: Playfair Display — encabezados y énfasis, nunca cuerpo de texto.
-     --font-sans: Instrument Sans — cuerpo de texto y UI. Ambas Google Fonts de uso
-     libre, cargadas vía <link> (ver prototype/README.md § 1.3 y § 7 — mismo riesgo de
-     dependencia externa ya registrado para Krub/Space Grotesk, sin cambios). */
-  --font-display: 'Playfair Display', Georgia, 'Times New Roman', serif;
-  --font-sans: 'Instrument Sans', 'Segoe UI', system-ui, -apple-system, sans-serif;
+  /* Tipografía — familias. Decisión D30 (Owner, 2026-08-13): reemplaza Playfair
+     Display/Instrument Sans (D26) por la tipografía del manual de marca — Big
+     Caslon (títulos) y Krub (descripciones/cuerpo).
+     --font-display: Big Caslon no está disponible como webfont libre (es una fuente
+     de sistema de macOS/iOS, no existe en Google Fonts). Se usa 'Libre Caslon
+     Display' como sustituto gratuito de la misma familia Caslon, con render
+     idéntico en el 100% de navegadores — decisión explícita del Owner, no una
+     aproximación silenciosa. Solo trae el corte regular (peso 400, sin itálica real):
+     ver .text-gradient más abajo, que usa 'Libre Caslon Text' (itálica real) para el
+     énfasis en degradado en vez de la itálica sintética de Libre Caslon Display.
+     --font-sans: Krub — ya se había usado en este proyecto antes de D22/D26, es la
+     tipografía secundaria del manual de marca. Ambas Google Fonts de uso libre,
+     cargadas vía <link> (ver prototype/README.md § 1.3 y § 7). */
+  --font-display: 'Libre Caslon Display', Georgia, 'Times New Roman', serif;
+  --font-sans: 'Krub', 'Segoe UI', system-ui, -apple-system, sans-serif;
 
   /* Tipografía — escala (mapeable a settings.typography.fontSizes) */
   --text-xs: 0.8125rem;
