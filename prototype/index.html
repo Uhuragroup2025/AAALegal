@@ -44,14 +44,20 @@
         <span class="visually-hidden">Menú de navegación</span>
       </summary>
       <div class="nav__panel wp-block-navigation__container">
+        <!-- D36 (2026-08-20): Servicios se etiqueta "Metodología" y Nuestro Equipo se
+             etiqueta "Quiénes somos" (mismas páginas, solo cambia el texto del menú).
+             "Trabaja con nosotros" apunta a la sección de postulación que ya existe
+             dentro de Nuestro Equipo (ancla, no es página nueva). Nuestra Experiencia y
+             Contacto se quitan de esta lista — Contacto sigue accesible vía el botón
+             destacado del header. Blog queda fuera del menú por ahora (oculto, no
+             eliminado: noticias-analisis.html y sus artículos siguen existiendo,
+             accesibles por URL directa). -->
         <nav aria-label="Navegación principal">
           <ul>
             <li><a href="index.html" aria-current="page">Inicio</a></li>
-            <li><a href="servicios.html">Servicios</a></li>
-            <li><a href="proximamente.html">Nuestra Experiencia</a></li>
-            <li><a href="nuestro-equipo.html">Nuestro Equipo</a></li>
-            <li><a href="noticias-analisis.html">Blog</a></li>
-            <li><a href="captacion-b2b.html">Contacto</a></li>
+            <li><a href="servicios.html">Metodología</a></li>
+            <li><a href="nuestro-equipo.html">Quiénes somos</a></li>
+            <li><a href="nuestro-equipo.html#postulacion-heading">Trabaja con nosotros</a></li>
           </ul>
         </nav>
       </div>
@@ -60,7 +66,7 @@
     <div class="site-header__actions wp-block-buttons">
       <div class="wp-block-button">
         <a class="btn btn--primary btn--header wp-block-button__link" href="captacion-b2b.html">
-          <span class="btn--header-label">Mi caso</span>
+          <span class="btn--header-label">Contacto</span>
           <svg class="btn--icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
         </a>
       </div>
@@ -185,65 +191,8 @@
     </div>
   </section>
 
-  <!-- 6. CASOS DE ÉXITO — estructura real, contenido pendiente del cliente -->
-  <section class="section" data-surface="dark" aria-labelledby="casos-heading">
-    <div class="container">
-      <div class="section-head section-head--split section-head--stacked reveal">
-        <p class="eyebrow">Casos de éxito</p>
-        <h2 id="casos-heading">La confianza se construye con resultados.</h2>
-      </div>
-      <div class="case-video-grid mobile-card-carousel" role="list" tabindex="0" aria-label="Casos de éxito audiovisuales pendientes de contenido">
-        <article class="case-video reveal" style="--stagger-index:0" role="listitem">
-          <div class="case-video__frame">
-            <button class="case-video__play" type="button" disabled aria-label="Caso 1: video pendiente de entrega por el cliente">
-              <svg viewBox="0 0 256 256" aria-hidden="true"><path d="M240,128a15.74,15.74,0,0,1-7.9,13.66l-144,88A16,16,0,0,1,64,216V40A16,16,0,0,1,88.1,26.34l144,88A15.74,15.74,0,0,1,240,128Z"/></svg>
-            </button>
-          </div>
-        </article>
-        <article class="case-video reveal" style="--stagger-index:1" role="listitem">
-          <div class="case-video__frame">
-            <button class="case-video__play" type="button" disabled aria-label="Caso 2: video pendiente de entrega por el cliente">
-              <svg viewBox="0 0 256 256" aria-hidden="true"><path d="M240,128a15.74,15.74,0,0,1-7.9,13.66l-144,88A16,16,0,0,1,64,216V40A16,16,0,0,1,88.1,26.34l144,88A15.74,15.74,0,0,1,240,128Z"/></svg>
-            </button>
-          </div>
-        </article>
-        <article class="case-video reveal" style="--stagger-index:2" role="listitem">
-          <div class="case-video__frame">
-            <button class="case-video__play" type="button" disabled aria-label="Caso 3: video pendiente de entrega por el cliente">
-              <svg viewBox="0 0 256 256" aria-hidden="true"><path d="M240,128a15.74,15.74,0,0,1-7.9,13.66l-144,88A16,16,0,0,1,64,216V40A16,16,0,0,1,88.1,26.34l144,88A15.74,15.74,0,0,1,240,128Z"/></svg>
-            </button>
-          </div>
-        </article>
-      </div>
-      <section class="client-logo-strip reveal" aria-labelledby="logos-clientes-heading">
-        <div class="client-logo-strip__heading">
-          <h3 id="logos-clientes-heading">Logos clientes</h3>
-        </div>
-        <div class="client-logo-marquee" tabindex="0" aria-label="Espacios reservados para logos de clientes autorizados">
-          <div class="client-logo-track">
-            <div class="client-logo-group" role="list">
-              <div class="client-logo-slot" role="listitem"><span>Logo 01</span></div>
-              <div class="client-logo-slot" role="listitem"><span>Logo 02</span></div>
-              <div class="client-logo-slot" role="listitem"><span>Logo 03</span></div>
-              <div class="client-logo-slot" role="listitem"><span>Logo 04</span></div>
-              <div class="client-logo-slot" role="listitem"><span>Logo 05</span></div>
-              <div class="client-logo-slot" role="listitem"><span>Logo 06</span></div>
-            </div>
-            <div class="client-logo-group" aria-hidden="true">
-              <div class="client-logo-slot"><span>Logo 01</span></div>
-              <div class="client-logo-slot"><span>Logo 02</span></div>
-              <div class="client-logo-slot"><span>Logo 03</span></div>
-              <div class="client-logo-slot"><span>Logo 04</span></div>
-              <div class="client-logo-slot"><span>Logo 05</span></div>
-              <div class="client-logo-slot"><span>Logo 06</span></div>
-            </div>
-          </div>
-        </div>
-      </section>
-    </div>
-  </section>
-
-  <!-- 7. SECTORES — experiencia multisectorial, sin lectura geográfica -->
+  <!-- 6. SECTORES — experiencia multisectorial, sin lectura geográfica. Reubicada
+       antes de Casos de éxito (D35, 2026-08-20, pedido del Owner). -->
   <section class="section sector-experience" data-surface="light" aria-labelledby="sectores-heading">
     <div class="container sector-experience__header reveal">
       <div>
@@ -304,6 +253,65 @@
           </div>
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- 7. CASOS DE ÉXITO — estructura real, contenido pendiente del cliente. Reubicada
+       después de Sectores (D35, 2026-08-20, pedido del Owner). -->
+  <section class="section" data-surface="dark" aria-labelledby="casos-heading">
+    <div class="container">
+      <div class="section-head section-head--split section-head--stacked reveal">
+        <p class="eyebrow">Casos de éxito</p>
+        <h2 id="casos-heading">La confianza se construye con resultados.</h2>
+      </div>
+      <div class="case-video-grid mobile-card-carousel" role="list" tabindex="0" aria-label="Casos de éxito audiovisuales pendientes de contenido">
+        <article class="case-video reveal" style="--stagger-index:0" role="listitem">
+          <div class="case-video__frame">
+            <button class="case-video__play" type="button" disabled aria-label="Caso 1: video pendiente de entrega por el cliente">
+              <svg viewBox="0 0 256 256" aria-hidden="true"><path d="M240,128a15.74,15.74,0,0,1-7.9,13.66l-144,88A16,16,0,0,1,64,216V40A16,16,0,0,1,88.1,26.34l144,88A15.74,15.74,0,0,1,240,128Z"/></svg>
+            </button>
+          </div>
+        </article>
+        <article class="case-video reveal" style="--stagger-index:1" role="listitem">
+          <div class="case-video__frame">
+            <button class="case-video__play" type="button" disabled aria-label="Caso 2: video pendiente de entrega por el cliente">
+              <svg viewBox="0 0 256 256" aria-hidden="true"><path d="M240,128a15.74,15.74,0,0,1-7.9,13.66l-144,88A16,16,0,0,1,64,216V40A16,16,0,0,1,88.1,26.34l144,88A15.74,15.74,0,0,1,240,128Z"/></svg>
+            </button>
+          </div>
+        </article>
+        <article class="case-video reveal" style="--stagger-index:2" role="listitem">
+          <div class="case-video__frame">
+            <button class="case-video__play" type="button" disabled aria-label="Caso 3: video pendiente de entrega por el cliente">
+              <svg viewBox="0 0 256 256" aria-hidden="true"><path d="M240,128a15.74,15.74,0,0,1-7.9,13.66l-144,88A16,16,0,0,1,64,216V40A16,16,0,0,1,88.1,26.34l144,88A15.74,15.74,0,0,1,240,128Z"/></svg>
+            </button>
+          </div>
+        </article>
+      </div>
+      <section class="client-logo-strip reveal" aria-labelledby="logos-clientes-heading">
+        <div class="client-logo-strip__heading">
+          <h3 id="logos-clientes-heading">Logos clientes</h3>
+        </div>
+        <div class="client-logo-marquee" tabindex="0" aria-label="Espacios reservados para logos de clientes autorizados">
+          <div class="client-logo-track">
+            <div class="client-logo-group" role="list">
+              <div class="client-logo-slot" role="listitem"><span>Logo 01</span></div>
+              <div class="client-logo-slot" role="listitem"><span>Logo 02</span></div>
+              <div class="client-logo-slot" role="listitem"><span>Logo 03</span></div>
+              <div class="client-logo-slot" role="listitem"><span>Logo 04</span></div>
+              <div class="client-logo-slot" role="listitem"><span>Logo 05</span></div>
+              <div class="client-logo-slot" role="listitem"><span>Logo 06</span></div>
+            </div>
+            <div class="client-logo-group" aria-hidden="true">
+              <div class="client-logo-slot"><span>Logo 01</span></div>
+              <div class="client-logo-slot"><span>Logo 02</span></div>
+              <div class="client-logo-slot"><span>Logo 03</span></div>
+              <div class="client-logo-slot"><span>Logo 04</span></div>
+              <div class="client-logo-slot"><span>Logo 05</span></div>
+              <div class="client-logo-slot"><span>Logo 06</span></div>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
   </section>
 
