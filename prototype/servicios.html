@@ -127,46 +127,38 @@
     </div>
   </section>
 
-  <!-- CÓMO TRABAJAMOS / METODOLOGÍA — rediseño 2026-08-20 (D32) a pedido del cliente:
-       se retira el stepper con scroll de 2026-07-31 (columna sticky + 3 pasos que
-       reservaban 50vh cada uno y se activaban al cruzar el centro del viewport) y
-       se reemplaza por un flujograma compacto de 3 nodos conectados, visible entero
-       sin necesidad de hacer scroll. Clases nuevas y aditivas en components.css
-       (.stepper__flow/.stepper__node/.stepper__connector) — el stepper original
-       (.stepper__grid/.stepper__intro/.stepper__steps/.stepper__step) no se toca:
-       sigue en uso, sin cambios, en Captación B2B § "Nuestro proceso". -->
-  <section class="section" data-surface="dark" aria-labelledby="proceso-heading">
-    <div class="container">
-      <div class="section-head reveal">
+  <!-- CÓMO TRABAJAMOS / METODOLOGÍA — D33 (2026-08-20): el Owner pidió revertir D32
+       (el flujograma de nodos conectados no se quería) y en su lugar conservar el
+       diseño original de 2026-07-31 (columna sticky + 3 pasos con icono/título/
+       párrafo), pero quitando la activación por scroll (los pasos ya no se atenúan
+       fuera de foco) y reduciendo el espacio que cada paso reservaba. Modificador
+       `.stepper--compact` (nuevo, scoped a esta sección) — .stepper__grid/
+       .stepper__intro/.stepper__steps/.stepper__step vuelven a ser exactamente las
+       clases originales, sin cambios, así que Captación B2B § "Nuestro proceso"
+       (mismo componente, sin el modificador) no se ve afectada. -->
+  <section class="section stepper stepper--compact" data-surface="dark" aria-labelledby="proceso-heading">
+    <div class="container stepper__grid">
+      <div class="stepper__intro reveal">
         <p class="eyebrow">Nuestra metodología</p>
         <h2 id="proceso-heading">Convertimos cada caso en una estrategia jurídica de recuperación.</h2>
       </div>
-      <div class="stepper__flow" role="list" aria-label="Metodología de trabajo en 3 pasos">
-        <article class="stepper__node surface-solid reveal" style="--stagger-index:0" role="listitem">
-          <span class="stepper__node-index">01</span>
-          <span class="stepper__node-icon" aria-hidden="true">
+      <div class="stepper__steps">
+        <article class="stepper__step">
+          <span class="stepper__icon" aria-hidden="true">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="10" cy="10" r="6"/><path d="M15 15l5 5"/></svg>
           </span>
           <h3>Diagnóstico</h3>
           <p>Antes de actuar, entendemos el contexto completo. Estudiamos el expediente, identificamos riesgos y construimos un diagnóstico jurídico que define la estrategia más adecuada para proteger los intereses del acreedor.</p>
         </article>
-        <span class="stepper__connector" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-        </span>
-        <article class="stepper__node surface-solid reveal" style="--stagger-index:1" role="listitem">
-          <span class="stepper__node-index">02</span>
-          <span class="stepper__node-icon" aria-hidden="true">
+        <article class="stepper__step">
+          <span class="stepper__icon" aria-hidden="true">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M15 9l-2 6-6 2 2-6 6-2z"/></svg>
           </span>
           <h3>Estrategia</h3>
           <p>No aplicamos soluciones estándar. Definimos el camino legal según el estado del riesgo, ya sea en una etapa preventiva, durante un proceso de insolvencia o en la recuperación posterior del activo.</p>
         </article>
-        <span class="stepper__connector" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-        </span>
-        <article class="stepper__node surface-solid reveal" style="--stagger-index:2" role="listitem">
-          <span class="stepper__node-index">03</span>
-          <span class="stepper__node-icon" aria-hidden="true">
+        <article class="stepper__step">
+          <span class="stepper__icon" aria-hidden="true">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/></svg>
           </span>
           <h3>Representación</h3>
