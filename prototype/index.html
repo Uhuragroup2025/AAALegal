@@ -205,54 +205,76 @@
       </div>
     </div>
 
-    <div class="sector-marquees reveal" aria-label="Sectores de experiencia de AAA Estudio Legal">
-      <div class="sector-marquee sector-marquee--right" tabindex="0" aria-label="Financiero, Fintech y Solidario">
-        <div class="sector-marquee__track">
-          <div class="sector-marquee__set" role="list">
-            <div class="sector-tile" role="listitem">
-              <svg class="sector-tile__icon" viewBox="0 0 256 256" fill="none" stroke="currentColor" stroke-width="14" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M24 104h208M40 104V88l88-48 88 48v16M48 104v80M88 104v80M128 104v80M168 104v80M208 104v80M24 184h208M16 216h224"/></svg>
-              <span>Financiero</span>
-            </div>
-            <div class="sector-tile" role="listitem">
-              <svg class="sector-tile__icon" viewBox="0 0 256 256" fill="none" stroke="currentColor" stroke-width="14" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="72" y="24" width="112" height="208" rx="18"/><path d="M104 56h48M112 200h32M40 96h32M184 96h32M40 136h32M184 136h32"/><circle cx="40" cy="96" r="6" fill="currentColor" stroke="none"/><circle cx="216" cy="96" r="6" fill="currentColor" stroke="none"/><circle cx="40" cy="136" r="6" fill="currentColor" stroke="none"/><circle cx="216" cy="136" r="6" fill="currentColor" stroke="none"/></svg>
-              <span>Fintech</span>
-            </div>
-            <div class="sector-tile" role="listitem">
-              <svg class="sector-tile__icon" viewBox="0 0 256 256" fill="none" stroke="currentColor" stroke-width="14" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m88 104 32-32a24 24 0 0 1 34 0l14 14M56 152l42 42a24 24 0 0 0 34 0l68-68M24 112l32-32 32 24-40 48ZM232 112l-32-32-32 24 40 48Z"/><path d="m112 144 24 24M136 120l32 32"/></svg>
-              <span>Solidario</span>
-            </div>
-          </div>
-          <div class="sector-marquee__set" aria-hidden="true">
-            <div class="sector-tile"><svg class="sector-tile__icon" viewBox="0 0 256 256" fill="none" stroke="currentColor" stroke-width="14" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M24 104h208M40 104V88l88-48 88 48v16M48 104v80M88 104v80M128 104v80M168 104v80M208 104v80M24 184h208M16 216h224"/></svg><span>Financiero</span></div>
-            <div class="sector-tile"><svg class="sector-tile__icon" viewBox="0 0 256 256" fill="none" stroke="currentColor" stroke-width="14" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="72" y="24" width="112" height="208" rx="18"/><path d="M104 56h48M112 200h32M40 96h32M184 96h32M40 136h32M184 136h32"/><circle cx="40" cy="96" r="6" fill="currentColor" stroke="none"/><circle cx="216" cy="96" r="6" fill="currentColor" stroke="none"/><circle cx="40" cy="136" r="6" fill="currentColor" stroke="none"/><circle cx="216" cy="136" r="6" fill="currentColor" stroke="none"/></svg><span>Fintech</span></div>
-            <div class="sector-tile"><svg class="sector-tile__icon" viewBox="0 0 256 256" fill="none" stroke="currentColor" stroke-width="14" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m88 104 32-32a24 24 0 0 1 34 0l14 14M56 152l42 42a24 24 0 0 0 34 0l68-68M24 112l32-32 32 24-40 48ZM232 112l-32-32-32 24 40 48Z"/><path d="m112 144 24 24M136 120l32 32"/></svg><span>Solidario</span></div>
-          </div>
+    <!-- D38 (2026-08-20): rediseño a pedido del Owner — cada sector muestra, en la
+         misma caja, el ícono/nombre y los logos de los clientes de ese sector (antes
+         eran dos filas de "marquee" con solo ícono+nombre, sin logos). Grilla estática
+         de 6 tarjetas (mismo patrón responsive que `.focus-grid`: 3 columnas → 2 → 1),
+         reemplaza el desplazamiento continuo — con contenido más denso por tarjeta
+         (ícono+nombre+logos), un marquee en movimiento habría sido más difícil de leer.
+         Los logos son placeholders explícitos ("Logo 01"/"Logo 02"): no hay clientes
+         reales aprobados todavía para asociar a cada sector — mismo criterio que
+         Casos de éxito, no se inventan nombres ni logos. -->
+    <div class="sector-grid reveal" role="list" aria-label="Sectores de experiencia de AAA Estudio Legal">
+      <article class="sector-card" role="listitem">
+        <div class="sector-card__header">
+          <svg class="sector-card__icon" viewBox="0 0 256 256" fill="none" stroke="currentColor" stroke-width="14" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M24 104h208M40 104V88l88-48 88 48v16M48 104v80M88 104v80M128 104v80M168 104v80M208 104v80M24 184h208M16 216h224"/></svg>
+          <span class="sector-card__name">Financiero</span>
         </div>
-      </div>
-
-      <div class="sector-marquee sector-marquee--left" tabindex="0" aria-label="Sector público, Salud y Cajas de compensación">
-        <div class="sector-marquee__track">
-          <div class="sector-marquee__set" role="list">
-            <div class="sector-tile" role="listitem">
-              <svg class="sector-tile__icon" viewBox="0 0 256 256" fill="none" stroke="currentColor" stroke-width="14" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M32 216h192M48 216V88h64v128M112 216V40h96v176M72 120h16M72 152h16M136 72h16M168 72h16M136 104h16M168 104h16M136 136h16M168 136h16"/></svg>
-              <span>Sector público</span>
-            </div>
-            <div class="sector-tile" role="listitem">
-              <svg class="sector-tile__icon" viewBox="0 0 256 256" fill="none" stroke="currentColor" stroke-width="14" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M128 216S40 168 40 96a48 48 0 0 1 88-26 48 48 0 0 1 88 26c0 72-88 120-88 120Z"/><path d="M72 128h32l16-32 24 64 16-32h24"/></svg>
-              <span>Salud</span>
-            </div>
-            <div class="sector-tile" role="listitem">
-              <svg class="sector-tile__icon" viewBox="0 0 256 256" fill="none" stroke="currentColor" stroke-width="14" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="96" cy="88" r="32"/><circle cx="176" cy="104" r="24"/><path d="M32 208a64 64 0 0 1 128 0M152 152a52 52 0 0 1 72 48"/></svg>
-              <span>Cajas de compensación</span>
-            </div>
-          </div>
-          <div class="sector-marquee__set" aria-hidden="true">
-            <div class="sector-tile"><svg class="sector-tile__icon" viewBox="0 0 256 256" fill="none" stroke="currentColor" stroke-width="14" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M32 216h192M48 216V88h64v128M112 216V40h96v176M72 120h16M72 152h16M136 72h16M168 72h16M136 104h16M168 104h16M136 136h16M168 136h16"/></svg><span>Sector público</span></div>
-            <div class="sector-tile"><svg class="sector-tile__icon" viewBox="0 0 256 256" fill="none" stroke="currentColor" stroke-width="14" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M128 216S40 168 40 96a48 48 0 0 1 88-26 48 48 0 0 1 88 26c0 72-88 120-88 120Z"/><path d="M72 128h32l16-32 24 64 16-32h24"/></svg><span>Salud</span></div>
-            <div class="sector-tile"><svg class="sector-tile__icon" viewBox="0 0 256 256" fill="none" stroke="currentColor" stroke-width="14" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="96" cy="88" r="32"/><circle cx="176" cy="104" r="24"/><path d="M32 208a64 64 0 0 1 128 0M152 152a52 52 0 0 1 72 48"/></svg><span>Cajas de compensación</span></div>
-          </div>
+        <div class="sector-card__logos" aria-label="Espacios reservados para logos de clientes del sector Financiero, pendientes de aprobación">
+          <span class="sector-card__logo">Logo 01</span>
+          <span class="sector-card__logo">Logo 02</span>
         </div>
-      </div>
+      </article>
+      <article class="sector-card" role="listitem">
+        <div class="sector-card__header">
+          <svg class="sector-card__icon" viewBox="0 0 256 256" fill="none" stroke="currentColor" stroke-width="14" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="72" y="24" width="112" height="208" rx="18"/><path d="M104 56h48M112 200h32M40 96h32M184 96h32M40 136h32M184 136h32"/><circle cx="40" cy="96" r="6" fill="currentColor" stroke="none"/><circle cx="216" cy="96" r="6" fill="currentColor" stroke="none"/><circle cx="40" cy="136" r="6" fill="currentColor" stroke="none"/><circle cx="216" cy="136" r="6" fill="currentColor" stroke="none"/></svg>
+          <span class="sector-card__name">Fintech</span>
+        </div>
+        <div class="sector-card__logos" aria-label="Espacios reservados para logos de clientes del sector Fintech, pendientes de aprobación">
+          <span class="sector-card__logo">Logo 01</span>
+          <span class="sector-card__logo">Logo 02</span>
+        </div>
+      </article>
+      <article class="sector-card" role="listitem">
+        <div class="sector-card__header">
+          <svg class="sector-card__icon" viewBox="0 0 256 256" fill="none" stroke="currentColor" stroke-width="14" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m88 104 32-32a24 24 0 0 1 34 0l14 14M56 152l42 42a24 24 0 0 0 34 0l68-68M24 112l32-32 32 24-40 48ZM232 112l-32-32-32 24 40 48Z"/><path d="m112 144 24 24M136 120l32 32"/></svg>
+          <span class="sector-card__name">Solidario</span>
+        </div>
+        <div class="sector-card__logos" aria-label="Espacios reservados para logos de clientes del sector Solidario, pendientes de aprobación">
+          <span class="sector-card__logo">Logo 01</span>
+          <span class="sector-card__logo">Logo 02</span>
+        </div>
+      </article>
+      <article class="sector-card" role="listitem">
+        <div class="sector-card__header">
+          <svg class="sector-card__icon" viewBox="0 0 256 256" fill="none" stroke="currentColor" stroke-width="14" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M32 216h192M48 216V88h64v128M112 216V40h96v176M72 120h16M72 152h16M136 72h16M168 72h16M136 104h16M168 104h16M136 136h16M168 136h16"/></svg>
+          <span class="sector-card__name">Sector público</span>
+        </div>
+        <div class="sector-card__logos" aria-label="Espacios reservados para logos de clientes del Sector público, pendientes de aprobación">
+          <span class="sector-card__logo">Logo 01</span>
+          <span class="sector-card__logo">Logo 02</span>
+        </div>
+      </article>
+      <article class="sector-card" role="listitem">
+        <div class="sector-card__header">
+          <svg class="sector-card__icon" viewBox="0 0 256 256" fill="none" stroke="currentColor" stroke-width="14" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M128 216S40 168 40 96a48 48 0 0 1 88-26 48 48 0 0 1 88 26c0 72-88 120-88 120Z"/><path d="M72 128h32l16-32 24 64 16-32h24"/></svg>
+          <span class="sector-card__name">Salud</span>
+        </div>
+        <div class="sector-card__logos" aria-label="Espacios reservados para logos de clientes del sector Salud, pendientes de aprobación">
+          <span class="sector-card__logo">Logo 01</span>
+          <span class="sector-card__logo">Logo 02</span>
+        </div>
+      </article>
+      <article class="sector-card" role="listitem">
+        <div class="sector-card__header">
+          <svg class="sector-card__icon" viewBox="0 0 256 256" fill="none" stroke="currentColor" stroke-width="14" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="96" cy="88" r="32"/><circle cx="176" cy="104" r="24"/><path d="M32 208a64 64 0 0 1 128 0M152 152a52 52 0 0 1 72 48"/></svg>
+          <span class="sector-card__name">Cajas de compensación</span>
+        </div>
+        <div class="sector-card__logos" aria-label="Espacios reservados para logos de clientes de Cajas de compensación, pendientes de aprobación">
+          <span class="sector-card__logo">Logo 01</span>
+          <span class="sector-card__logo">Logo 02</span>
+        </div>
+      </article>
     </div>
   </section>
 
