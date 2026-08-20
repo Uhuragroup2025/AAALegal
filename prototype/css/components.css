@@ -1872,6 +1872,15 @@ section[data-surface="muted"] .post-meta__badge { border-color: var(--color-bord
   pointer-events: auto;
 }
 
+/* D43 (2026-08-20): el CTA del hero ahora hace scroll a este título — como el header
+   de Home es `position: fixed` (78px de alto), sin este margen el salto lo dejaría
+   tapado bajo la barra. Margen holgado (78px + space-12) para que también quede
+   visible el eyebrow "Cómo intervenimos" que va justo encima del título, no solo el
+   título mismo. */
+.home-page #servicios-home-heading {
+  scroll-margin-top: calc(78px + var(--space-12));
+}
+
 .home-page .site-header__inner {
   width: 100%;
   max-width: 1440px;
@@ -2855,6 +2864,10 @@ section[data-surface="muted"] .post-meta__badge { border-color: var(--color-bord
 
 @media (max-width: 640px) {
   .home-page .section { padding-block: var(--space-16); }
+
+  .home-page #servicios-home-heading {
+    scroll-margin-top: calc(68px + var(--space-16));
+  }
 
   .home-page .site-header {
     top: 0;
