@@ -618,10 +618,16 @@ section[data-surface="muted"] + .hero .curve-divider,
   border-top: 1px solid var(--color-border-flat);
 }
 
+/* D56 (2026-08-21): cada chip pasa a llevar una marca abstracta genérica (sin
+   ninguna marca real) junto al texto "Logo 01"/"Logo 02" — a pedido del Owner, para
+   ilustrar al cliente cómo se vería el espacio con logos, sin inventar clientes
+   (mismo criterio que D38). Dos formas distintas (una por posición) para que las 12
+   ocurrencias no se vean todas idénticas. */
 .sector-card__logo {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  gap: var(--space-2);
   height: 40px;
   padding-inline: var(--space-4);
   border: 1px solid var(--color-border-flat);
@@ -631,6 +637,12 @@ section[data-surface="muted"] + .hero .curve-divider,
   font-size: var(--text-xs);
   letter-spacing: 0.03em;
   opacity: 0.7;
+}
+
+.sector-card__logo-mark {
+  width: 15px;
+  height: 15px;
+  flex: 0 0 15px;
 }
 
 /* D41 (2026-08-20): contador animado ("En cifras"), valores placeholder — ver nota en
