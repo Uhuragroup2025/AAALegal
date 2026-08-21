@@ -120,34 +120,74 @@
 
 </main>
 
-<footer class="site-footer">
-  <div class="container footer-grid">
-    <div>
-      <p class="brand" style="margin-bottom: var(--space-4);">AAA <span>Estudio Legal</span></p>
-      <p style="font-size: var(--text-sm); opacity: .85;">Calle 28 Norte # 6BIS-26, Barrio San Vicente, Cali, Valle.</p>
-      <p style="font-size: var(--text-sm);"><a href="mailto:info@agudeloabogados.com">info@agudeloabogados.com</a></p>
+<!-- D67 (2026-08-21): footer full-width unificado con Home en las 7 páginas —
+     agrega la columna "Sitio" (rescatada de este mismo footer simple, ahora
+     retirado) entre Contacto y Redes sociales. Nota completa en index.html. Este
+     bloque debe mantenerse idéntico al de las otras 6 páginas — duplicación real de
+     HTML/CSS (prototipo estático, sin plantillas), mismo criterio que D55. -->
+<footer class="site-footer site-footer--global" id="contacto-footer">
+  <img class="home-footer__pattern" src="assets/img/isotipo-AAA-legal.svg" width="200" height="200" alt="" aria-hidden="true">
+
+  <div class="container home-footer__grid">
+    <div class="home-footer__brand-block">
+      <a class="home-footer__logo" href="index.html" aria-label="AAA Estudio Legal — Inicio">
+        <img src="assets/img/logo-completo-AAA-legal-blanco.png" width="317" height="168" alt="AAA Estudio Legal">
+      </a>
     </div>
-    <div>
-      <h2>Sitio</h2>
-      <nav class="footer-links" aria-label="Mapa del sitio">
+
+    <section class="home-footer__section home-footer__contact" aria-label="Información de contacto">
+      <address class="home-footer__contact-list">
+        <div class="home-footer__contact-item">
+          <svg class="home-footer__icon" viewBox="0 0 256 256" fill="none" stroke="currentColor" stroke-width="14" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="128" cy="104" r="32"/><path d="M200 104c0 64-72 112-72 112S56 168 56 104a72 72 0 0 1 144 0Z"/></svg>
+          <span><strong>Dirección</strong>Calle 28 Norte # 6BIS - 26, Barrio San Vicente, Cali, Valle del Cauca</span>
+        </div>
+        <a class="home-footer__contact-item" href="tel:+573176551931">
+          <svg class="home-footer__icon" viewBox="0 0 256 256" fill="none" stroke="currentColor" stroke-width="14" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M92 48 64 24 32 40c0 101.6 82.4 184 184 184l16-32-24-28-36 12a144 144 0 0 1-92-92Z"/></svg>
+          <span><strong>Teléfono principal</strong>317 655 1931</span>
+        </a>
+        <a class="home-footer__contact-item" href="https://wa.me/573176551931" target="_blank" rel="noopener noreferrer">
+          <svg class="home-footer__icon" viewBox="0 0 256 256" fill="none" stroke="currentColor" stroke-width="14" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M88 72c8 48 48 88 96 96l16-24-32-16-16 16c-16-8-32-24-40-40l16-16-16-32Z"/><path d="M48 208 56 176a88 88 0 1 1 32 24Z"/></svg>
+          <span><strong>WhatsApp</strong>317 655 1931</span>
+        </a>
+        <a class="home-footer__contact-item" href="mailto:info@agudeloabogados.com">
+          <svg class="home-footer__icon" viewBox="0 0 256 256" fill="none" stroke="currentColor" stroke-width="14" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="24" y="48" width="208" height="160" rx="16"/><path d="m24 72 104 72L232 72"/></svg>
+          <span><strong>Correo general</strong>info@agudeloabogados.com</span>
+        </a>
+      </address>
+    </section>
+
+    <section class="home-footer__section home-footer__sitemap" aria-label="Mapa del sitio">
+      <h2 class="home-footer__heading">Sitio</h2>
+      <nav class="home-footer__sitemap-list" aria-label="Mapa del sitio">
         <a href="index.html">Inicio</a>
-        <a href="servicios.html">Servicios</a>
-        <a href="proximamente.html">Nuestra Experiencia</a>
-        <a href="nuestro-equipo.html">Nuestro Equipo</a>
+        <a href="servicios.html">Metodología</a>
+        <a href="nuestro-equipo.html">Quiénes somos</a>
+        <a href="nuestro-equipo.html#postulacion-heading">Trabaja con nosotros</a>
         <a href="noticias-analisis.html">Blog</a>
         <a href="captacion-b2b.html">Contacto</a>
       </nav>
-    </div>
-    <div>
-      <h2>Legal</h2>
-      <nav class="footer-links" aria-label="Legal">
-        <a href="proximamente.html">Aviso legal y de privacidad</a>
-      </nav>
-    </div>
+    </section>
+
+    <section class="home-footer__section home-footer__social" aria-label="Redes sociales">
+      <div class="home-footer__social-list">
+        <a class="home-footer__social-link" href="#url-linkedin-pendiente" aria-label="LinkedIn — URL pendiente de confirmar">
+          <svg class="home-footer__icon" viewBox="0 0 256 256" fill="none" stroke="currentColor" stroke-width="14" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="28" y="28" width="200" height="200" rx="24"/><circle cx="80" cy="84" r="10" fill="currentColor" stroke="none"/><path d="M80 120v64M120 184v-64M120 148c8-20 48-28 56 8v28"/></svg>
+          <span><strong>LinkedIn</strong><small>URL pendiente</small></span>
+        </a>
+        <a class="home-footer__social-link" href="#url-instagram-pendiente" aria-label="Instagram — URL pendiente de confirmar">
+          <svg class="home-footer__icon" viewBox="0 0 256 256" fill="none" stroke="currentColor" stroke-width="14" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="32" y="32" width="192" height="192" rx="48"/><circle cx="128" cy="128" r="44"/><circle cx="180" cy="76" r="8" fill="currentColor" stroke="none"/></svg>
+          <span><strong>Instagram</strong><small>URL pendiente</small></span>
+        </a>
+      </div>
+    </section>
   </div>
-  <div class="container footer-bottom">
+
+  <div class="container home-footer__bottom">
+    <nav class="home-footer__legal-links" aria-label="Información legal">
+      <a href="proximamente.html">Aviso legal</a>
+      <a href="proximamente.html">Política de privacidad</a>
+    </nav>
     <span>© 2026 Agudelo Abogados Asociados SAS — AAA Estudio Legal.</span>
-    <span>Prototipo C2 · No es el sitio final.</span>
   </div>
 </footer>
 

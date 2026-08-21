@@ -2896,8 +2896,12 @@ section[aria-labelledby="situaciones-heading"] .section-head {
   border-color: var(--color-accent-main);
 }
 
-/* Footer Homepage · tratamiento B del Visual Language Lab. */
-.home-page .site-footer {
+/* Footer · tratamiento B del Visual Language Lab.
+   D67 (2026-08-21): antes exclusivo de Home (`.home-page .site-footer`) — pasa a
+   `.site-footer--global`, mismo patrón que `.site-header--global` de D55, para
+   replicarse idéntico en las 7 páginas reales. La grilla pasa de 3 a 4 columnas
+   (brand / contacto / sitio / social) con la nueva columna "Sitio". */
+.site-footer--global {
   position: relative;
   isolation: isolate;
   overflow: hidden;
@@ -2907,7 +2911,7 @@ section[aria-labelledby="situaciones-heading"] .section-head {
     linear-gradient(138deg, var(--color-navy-deep) 0%, var(--color-navy-hover) 100%);
 }
 
-.home-page .home-footer__pattern {
+.site-footer--global .home-footer__pattern {
   position: absolute;
   z-index: -1;
   right: clamp(-7rem, -3vw, -2rem);
@@ -2919,36 +2923,36 @@ section[aria-labelledby="situaciones-heading"] .section-head {
   pointer-events: none;
 }
 
-.home-page .home-footer__grid {
+.site-footer--global .home-footer__grid {
   position: relative;
   display: grid;
-  grid-template-columns: minmax(190px, 0.85fr) minmax(320px, 1.4fr) minmax(150px, 0.55fr);
+  grid-template-columns: minmax(180px, 0.8fr) minmax(240px, 1.1fr) minmax(150px, 0.65fr) minmax(140px, 0.55fr);
   gap: clamp(var(--space-8), 3.25vw, var(--space-12));
   align-items: start;
   padding-bottom: var(--space-16);
 }
 
-.home-page .home-footer__logo {
+.site-footer--global .home-footer__logo {
   display: inline-block;
   width: min(100%, 220px);
   border-radius: 2px;
 }
 
-.home-page .home-footer__logo img {
+.site-footer--global .home-footer__logo img {
   display: block;
   width: 100%;
   height: auto;
 }
 
-.home-page .home-footer__contact-list {
+.site-footer--global .home-footer__contact-list {
   display: grid;
   gap: var(--space-5);
   margin: 0;
   font-style: normal;
 }
 
-.home-page .home-footer__contact-item,
-.home-page .home-footer__social-link {
+.site-footer--global .home-footer__contact-item,
+.site-footer--global .home-footer__social-link {
   display: grid;
   grid-template-columns: 20px minmax(0, 1fr);
   gap: var(--space-3);
@@ -2958,13 +2962,13 @@ section[aria-labelledby="situaciones-heading"] .section-head {
   line-height: 1.5;
 }
 
-.home-page a.home-footer__contact-item,
-.home-page a.home-footer__social-link {
+.site-footer--global a.home-footer__contact-item,
+.site-footer--global a.home-footer__social-link {
   width: fit-content;
   max-width: 100%;
 }
 
-.home-page .home-footer__icon {
+.site-footer--global .home-footer__icon {
   width: 20px;
   height: 20px;
   margin-top: 2px;
@@ -2972,8 +2976,8 @@ section[aria-labelledby="situaciones-heading"] .section-head {
   color: var(--color-accent-main);
 }
 
-.home-page .home-footer__contact-item strong,
-.home-page .home-footer__social-link strong {
+.site-footer--global .home-footer__contact-item strong,
+.site-footer--global .home-footer__social-link strong {
   display: block;
   margin-bottom: 1px;
   color: var(--color-white);
@@ -2981,43 +2985,72 @@ section[aria-labelledby="situaciones-heading"] .section-head {
   font-weight: 500;
 }
 
-.home-page .home-footer__social-list {
+.site-footer--global .home-footer__social-list {
   display: grid;
   gap: var(--space-4);
 }
 
-.home-page .home-footer__social {
+.site-footer--global .home-footer__social {
   padding: 0;
   border: 0;
   background: transparent;
 }
 
-.home-page .home-footer__social-link small {
+.site-footer--global .home-footer__social-link small {
   display: block;
   color: rgba(255, 255, 255, 0.56);
   font-size: 11px;
   letter-spacing: 0.025em;
 }
 
-.home-page .home-footer__contact-item:hover,
-.home-page .home-footer__social-link:hover {
+.site-footer--global .home-footer__contact-item:hover,
+.site-footer--global .home-footer__social-link:hover {
   color: var(--color-white);
 }
 
-.home-page .home-footer__contact-item:hover .home-footer__icon,
-.home-page .home-footer__social-link:hover .home-footer__icon {
+.site-footer--global .home-footer__contact-item:hover .home-footer__icon,
+.site-footer--global .home-footer__social-link:hover .home-footer__icon {
   color: var(--color-accent-light);
 }
 
-.home-page .home-footer__logo:focus-visible,
-.home-page .home-footer__contact-item:focus-visible,
-.home-page .home-footer__social-link:focus-visible,
-.home-page .home-footer__legal-links a:focus-visible {
+/* D67 (2026-08-21): columna "Sitio" — mismo tratamiento de heading que `.footer-grid
+   h2` del footer simple que ya tenían las 6 páginas interiores (mayúsculas, gold-100,
+   letter-spacing), para que la etiqueta se vea igual de familiar en el footer nuevo. */
+.site-footer--global .home-footer__heading {
+  font-family: var(--font-sans);
+  font-size: var(--text-xs);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-gold-100);
+  margin-bottom: var(--space-4);
+}
+
+.site-footer--global .home-footer__sitemap-list {
+  display: grid;
+  gap: var(--space-3);
+  font-size: var(--text-sm);
+}
+
+.site-footer--global .home-footer__sitemap-list a {
+  width: fit-content;
+  max-width: 100%;
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.site-footer--global .home-footer__sitemap-list a:hover {
+  color: var(--color-white);
+}
+
+.site-footer--global .home-footer__logo:focus-visible,
+.site-footer--global .home-footer__contact-item:focus-visible,
+.site-footer--global .home-footer__sitemap-list a:focus-visible,
+.site-footer--global .home-footer__social-link:focus-visible,
+.site-footer--global .home-footer__legal-links a:focus-visible {
   outline: 2px solid var(--color-focus-ring-on-dark);
   outline-offset: 5px;
 }
 
-.home-page .home-footer__bottom {
+.site-footer--global .home-footer__bottom {
   position: relative;
   display: flex;
   justify-content: space-between;
@@ -3028,63 +3061,64 @@ section[aria-labelledby="situaciones-heading"] .section-head {
   font-size: var(--text-xs);
 }
 
-.home-page .home-footer__legal-links {
+.site-footer--global .home-footer__legal-links {
   display: flex;
   flex-wrap: wrap;
   gap: var(--space-6);
 }
 
-.home-page .home-footer__legal-links a {
+.site-footer--global .home-footer__legal-links a {
   color: rgba(255, 255, 255, 0.72);
 }
 
-.home-page .home-footer__legal-links a:hover {
+.site-footer--global .home-footer__legal-links a:hover {
   color: var(--color-white);
 }
 
 @media (max-width: 1040px) {
-  .home-page .home-footer__grid {
+  .site-footer--global .home-footer__grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     row-gap: var(--space-12);
   }
 
-  .home-page .home-footer__brand-block {
+  .site-footer--global .home-footer__brand-block {
     min-height: 168px;
   }
 }
 
 @media (max-width: 640px) {
-  .home-page .site-footer {
+  .site-footer--global {
     padding-block: var(--space-12) var(--space-8);
   }
 
-  .home-page .home-footer__pattern {
+  .site-footer--global .home-footer__pattern {
     right: -7rem;
     bottom: 1rem;
     width: 300px;
     opacity: 0.05;
   }
 
-  .home-page .home-footer__grid {
+  .site-footer--global .home-footer__grid {
     grid-template-columns: 1fr;
     gap: var(--space-10);
     padding-bottom: var(--space-12);
   }
 
-  .home-page .home-footer__brand-block {
+  .site-footer--global .home-footer__brand-block {
     min-height: 0;
   }
 
-  .home-page .home-footer__logo {
+  .site-footer--global .home-footer__logo {
     width: 205px;
   }
 
-  .home-page .home-footer__contact-item,
-  .home-page .home-footer__social-link {
+  .site-footer--global .home-footer__contact-item,
+  .site-footer--global .home-footer__sitemap-list a,
+  .site-footer--global .home-footer__social-link {
     min-height: 44px;
   }
 
-  .home-page .home-footer__bottom {
+  .site-footer--global .home-footer__bottom {
     flex-direction: column;
     gap: var(--space-4);
   }

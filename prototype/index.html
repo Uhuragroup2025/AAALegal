@@ -458,7 +458,18 @@
 
 </main>
 
-<footer class="site-footer home-footer" id="contacto-footer">
+<!-- D67 (2026-08-21): se agrega la columna "Sitio" (rescatada del footer simple que
+     ya tenían las 6 páginas interiores, ver `.footer-grid`/`.footer-links` en este
+     mismo archivo CSS) entre Contacto y Redes sociales — footer pasa de 3 a 4
+     columnas. Nombres actualizados a la nomenclatura vigente del menú (D36):
+     "Servicios"→"Metodología", "Nuestro Equipo"→"Quiénes somos"; se agrega "Trabaja
+     con nosotros" (4º ítem del menú de header) y se quita "Nuestra Experiencia" (no
+     es una página real, redirige al stub proximamente.html); Blog y Contacto se
+     mantienen porque no están en el menú de header pero sí son páginas reales.
+     El footer entero (antes exclusivo de Home vía `.home-page`) pasa a
+     `.site-footer--global`, mismo patrón que `.site-header--global` de D55, para
+     replicarse idéntico en las 7 páginas reales. -->
+<footer class="site-footer site-footer--global" id="contacto-footer">
   <img class="home-footer__pattern" src="assets/img/isotipo-AAA-legal.svg" width="200" height="200" alt="" aria-hidden="true">
 
   <div class="container home-footer__grid">
@@ -487,6 +498,18 @@
           <span><strong>Correo general</strong>info@agudeloabogados.com</span>
         </a>
       </address>
+    </section>
+
+    <section class="home-footer__section home-footer__sitemap" aria-label="Mapa del sitio">
+      <h2 class="home-footer__heading">Sitio</h2>
+      <nav class="home-footer__sitemap-list" aria-label="Mapa del sitio">
+        <a href="index.html">Inicio</a>
+        <a href="servicios.html">Metodología</a>
+        <a href="nuestro-equipo.html">Quiénes somos</a>
+        <a href="nuestro-equipo.html#postulacion-heading">Trabaja con nosotros</a>
+        <a href="noticias-analisis.html">Blog</a>
+        <a href="captacion-b2b.html">Contacto</a>
+      </nav>
     </section>
 
     <section class="home-footer__section home-footer__social" aria-label="Redes sociales">
