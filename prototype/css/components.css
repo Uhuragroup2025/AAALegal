@@ -2639,10 +2639,15 @@ section[aria-labelledby="situaciones-heading"] .section-head {
    D53 (2026-08-21): el alto de card (220px) sobraba de espacio vacío una vez que el
    contenido (ícono + título, sin párrafo) dejó de estirarse con `space-between` — se
    reduce junto con el cambio de la card de arriba, para que el módulo no domine el
-   viewport con tanto espacio en blanco. */
+   viewport con tanto espacio en blanco.
+   D64 (2026-08-21): el Owner pidió que las cards se vean "casi cuadradas" en vez de
+   muy anchas y bajas — revierte parcialmente D53 (sube el alto), pero por una razón
+   distinta (forma, no espaciado) y con cuidado explícito de dejar aire de sobra para
+   el título más largo ("Infraestructura para atención masiva."), que ya venía
+   ajustado en D45/D46. */
 .home-page .focus-grid {
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  grid-auto-rows: 160px;
+  grid-auto-rows: 260px;
   gap: var(--space-6);
 }
 
@@ -2656,43 +2661,77 @@ section[aria-labelledby="situaciones-heading"] .section-head {
   box-shadow: none;
 }
 
-.home-page .focus-grid > :nth-child(3n+2) {
+/* D64 (2026-08-21): la fila de abajo (posiciones 4-6) deja de repetir el mismo ciclo
+   de color que la fila de arriba (1-3) — a pedido del Owner, para que no se vean
+   "iguales" — así que el ciclo automático de D51 (`:nth-child(3n+2)`/`:nth-child(3n)`,
+   pensado para que un reorden futuro mantuviera el ritmo solo) ya no aplica: ahora
+   cada una de las 6 posiciones tiene su color fijo, explícito. */
+.home-page .focus-grid > :nth-child(2) {
   color: var(--color-white);
   background: var(--color-navy-deep);
   border-color: var(--color-navy-deep);
 }
 
-.home-page .focus-grid > :nth-child(3n+2) h3 { color: var(--color-white); }
+.home-page .focus-grid > :nth-child(2) h3 { color: var(--color-white); }
 
-.home-page .focus-grid > :nth-child(3n+2) .focus-card__index,
-.home-page .focus-grid > :nth-child(3n+2) .focus-card__icon { color: var(--color-accent-main); }
+.home-page .focus-grid > :nth-child(2) .focus-card__index,
+.home-page .focus-grid > :nth-child(2) .focus-card__icon { color: var(--color-accent-main); }
 
-.home-page .focus-grid > :nth-child(3n) {
+.home-page .focus-grid > :nth-child(3) {
   color: var(--color-navy-hover);
   background: var(--color-accent-light);
   border-color: var(--color-accent-light);
 }
 
-.home-page .focus-grid > :nth-child(3n) h3 { color: var(--color-navy-hover); }
-.home-page .focus-grid > :nth-child(3n) .focus-card__index,
-.home-page .focus-grid > :nth-child(3n) .focus-card__icon { color: var(--color-navy-deep); }
+.home-page .focus-grid > :nth-child(3) h3 { color: var(--color-navy-hover); }
+.home-page .focus-grid > :nth-child(3) .focus-card__index,
+.home-page .focus-grid > :nth-child(3) .focus-card__icon { color: var(--color-navy-deep); }
 
-.home-page .focus-grid > :nth-child(3n+1) .focus-card__index,
-.home-page .focus-grid > :nth-child(3n+1) .focus-card__icon {
+.home-page .focus-grid > :nth-child(1) .focus-card__index,
+.home-page .focus-grid > :nth-child(1) .focus-card__icon {
+  color: var(--color-accent-main-strong);
+}
+
+/* Fila de abajo: Seguridad de la información (4) = azul oscuro, Compliance (5) =
+   azul claro, Cobertura nacional (6) = blanco — orden invertido respecto a la fila
+   de arriba (blanco/azul oscuro/azul claro), a pedido explícito del Owner. */
+.home-page .focus-grid > :nth-child(4) {
+  color: var(--color-white);
+  background: var(--color-navy-deep);
+  border-color: var(--color-navy-deep);
+}
+
+.home-page .focus-grid > :nth-child(4) h3 { color: var(--color-white); }
+
+.home-page .focus-grid > :nth-child(4) .focus-card__index,
+.home-page .focus-grid > :nth-child(4) .focus-card__icon { color: var(--color-accent-main); }
+
+.home-page .focus-grid > :nth-child(5) {
+  color: var(--color-navy-hover);
+  background: var(--color-accent-light);
+  border-color: var(--color-accent-light);
+}
+
+.home-page .focus-grid > :nth-child(5) h3 { color: var(--color-navy-hover); }
+.home-page .focus-grid > :nth-child(5) .focus-card__index,
+.home-page .focus-grid > :nth-child(5) .focus-card__icon { color: var(--color-navy-deep); }
+
+.home-page .focus-grid > :nth-child(6) .focus-card__index,
+.home-page .focus-grid > :nth-child(6) .focus-card__icon {
   color: var(--color-accent-main-strong);
 }
 
 @media (max-width: 800px) {
   .home-page .focus-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    grid-auto-rows: 160px;
+    grid-auto-rows: 240px;
   }
 }
 
 @media (max-width: 560px) {
   .home-page .focus-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    grid-auto-rows: 160px;
+    grid-auto-rows: 220px;
     gap: var(--space-3);
   }
   .home-page .focus-grid > .surface-solid {
@@ -3225,8 +3264,8 @@ section[aria-labelledby="situaciones-heading"] .section-head {
 
   .home-page .focus-grid > .surface-solid {
     width: var(--mobile-card-width);
-    height: 160px;
-    min-height: 160px;
+    height: 230px;
+    min-height: 230px;
     grid-column: auto;
   }
 
