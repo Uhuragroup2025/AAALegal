@@ -344,33 +344,37 @@
        referencia visual del sitio "Meléndez" (solo el efecto de conteo ascendente —
        los números de esa referencia son de otra empresa y no se copian). AAA no tiene
        todavía cifras propias aprobadas para casos gestionados / clientes / cartera
-       recuperada, así que los tres valores son placeholders explícitos, redondos a
-       propósito para no parecer datos reales, con una leyenda visible bajo cada uno
-       ("cifra de ejemplo — pendiente de dato aprobado"). El mecanismo de conteo
+       recuperada, así que los tres valores son placeholders. El mecanismo de conteo
        (`data-count-to`, ver js/main.js) ya queda listo: cuando el Owner entregue las
-       cifras reales, basta reemplazar `data-count-to`/el texto y la leyenda para que
-       la animación funcione igual sobre el dato real. -->
+       cifras reales, basta reemplazar `data-count-to`/el texto para que la animación
+       funcione igual sobre el dato real.
+       D66 (2026-08-21): a pedido explícito del Owner (confirmado que entiende que los
+       3 valores siguen siendo de ejemplo, sin dato real aprobado — ver Decisiones) se
+       quita la leyenda visible "Cifra de ejemplo — pendiente de dato aprobado por el
+       cliente" que estaba bajo cada número desde D41, y se agrega un ícono por
+       tarjeta, encima del número, relacionado con lo que mide (casos/documentos,
+       personas, cartera/crecimiento). -->
   <section class="section stats-counter" data-surface="dark" aria-labelledby="cifras-heading">
     <div class="container">
       <div class="section-head reveal">
         <p class="eyebrow">En cifras</p>
         <h2 id="cifras-heading">Resultados que respaldan nuestro trabajo.</h2>
       </div>
-      <div class="stats-grid reveal" role="list" aria-label="Cifras de AAA Estudio Legal, pendientes de dato aprobado por el cliente">
+      <div class="stats-grid reveal" role="list" aria-label="Cifras de AAA Estudio Legal">
         <div class="stat-card" role="listitem">
+          <svg class="stat-card__icon" viewBox="0 0 256 256" fill="none" stroke="currentColor" stroke-width="14" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M32 96V72a16 16 0 0 1 16-16h48l24 24h88a16 16 0 0 1 16 16v104a16 16 0 0 1-16 16H48a16 16 0 0 1-16-16Z"/></svg>
           <p class="stat-card__number" data-count-to="100" aria-hidden="true">0</p>
           <p class="stat-card__label">Casos gestionados</p>
-          <p class="stat-card__pending">Cifra de ejemplo — pendiente de dato aprobado por el cliente</p>
         </div>
         <div class="stat-card" role="listitem">
+          <svg class="stat-card__icon" viewBox="0 0 256 256" fill="none" stroke="currentColor" stroke-width="14" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="128" cy="84" r="44"/><path d="M40 216c0-56 40-88 88-88s88 32 88 88"/></svg>
           <p class="stat-card__number" data-count-to="50" aria-hidden="true">0</p>
           <p class="stat-card__label">Clientes atendidos</p>
-          <p class="stat-card__pending">Cifra de ejemplo — pendiente de dato aprobado por el cliente</p>
         </div>
         <div class="stat-card" role="listitem">
+          <svg class="stat-card__icon" viewBox="0 0 256 256" fill="none" stroke="currentColor" stroke-width="14" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M32 176l64-64 40 40 88-88"/><path d="M184 64h40v40"/></svg>
           <p class="stat-card__number" data-count-to="100" data-count-prefix="$" data-count-suffix=" M" aria-hidden="true">$0 M</p>
           <p class="stat-card__label">Cartera recuperada</p>
-          <p class="stat-card__pending">Cifra de ejemplo — pendiente de dato aprobado por el cliente</p>
         </div>
       </div>
     </div>
