@@ -1162,9 +1162,20 @@ section:not([data-surface="dark"]) .text-gradient {
    con el mismo margen mínimo `--hero-inset` (arriba y a los costados) en vez del gutter
    estándar de `--container-padding` — un marco parejo y casi imperceptible, como en
    REF-BIOFARMA, no un padding grande de sección de contenido normal. */
+/* D57 (2026-08-21): a pedido del Owner, se limita el ancho máximo de este hero a
+   `--container-max` (centrado) — antes crecía sin límite con el viewport (a propósito,
+   ver nota de arriba, REF-BIOFARMA), lo que en monitores anchos (~1920px) dejaba el
+   título del hero ~350px más a la izquierda que el logo del header (el header sí
+   respeta `--container-max`). Confirmado explícitamente con el Owner: se prioriza que
+   el texto quede siempre alineado con el header, aceptando que la foto deje de llegar
+   a los bordes del todo en pantallas muy anchas (queda con el mismo margen que el
+   resto del sitio ahí). En viewports típicos (hasta ~1200px de contenido) el
+   comportamiento no cambia — sigue sintiéndose "a pantalla casi completa". */
 .hero-shell {
   position: relative;
-  margin-inline: var(--hero-inset);
+  width: calc(100% - var(--hero-inset) * 2);
+  max-width: var(--container-max);
+  margin-inline: auto;
   border-radius: var(--radius-xl);
   overflow: hidden;
   min-height: clamp(460px, 58vh, 640px);
@@ -1228,15 +1239,32 @@ section:not([data-surface="dark"]) .text-gradient {
      (~12px) para el hero de ancho completo, el título quedó tapado por la píldora flotante
      del header (position:fixed, se superpone en vez de empujar el layout). El padding-top
      de este bloque es lo único que puede compensarlo — clamp calibrado para despejar la
-     altura real del header (~78px en desktop) más un respiro de aire visual. */
-  padding: clamp(6.5rem, 9vw, 7.25rem) var(--space-8) var(--space-16);
-  max-width: 64ch; /* antes 56ch — insuficiente para los 2 CTA uno al lado del otro sin partir el texto */
+     altura real del header (~78px en desktop) más un respiro de aire visual.
+     D57 (2026-08-21): mismo mecanismo que ya usa `.home-page .hero-shell__content`
+     (ver más abajo) para que el texto quede siempre alineado con el header, sin
+     importar si `.hero-shell` (el marco de la foto) está en su modo "casi full-bleed"
+     (viewport angosto) o ya topó su `max-width` y quedó centrado (viewport ancho) —
+     un solo `padding` fijo no puede servir para ambos casos a la vez porque la
+     cantidad de margen que ya aporta `.hero-shell` cambia de un caso al otro. En vez
+     de eso, esta caja también se autocentra a `--container-max` (`width: min(...)` +
+     `margin-inline: auto`) dentro de `.hero-shell` — si `.hero-shell` ya está capado
+     al mismo ancho, esto no mueve nada (ya coincide); si `.hero-shell` es más ancho
+     (el modo full-bleed), esto agrega el margen que falta. El límite de ancho previo
+     (`max-width: 64ch`, pensado para el texto) se retira de esta caja contenedora y
+     pasa al párrafo específicamente (ver regla `> p` más abajo) — el título ya tenía
+     su propio ancho acotado y no lo necesitaba aquí. */
+  width: min(100%, var(--container-max));
+  margin-inline: auto;
+  padding: clamp(6.5rem, 9vw, 7.25rem) var(--container-padding) var(--space-16);
 }
 /* Título: ancho acotado para que envuelva en ~3 líneas organizadas (pedido explícito),
    en vez de depender de un <br> manual que un editor de Gutenberg no podría ajustar. */
 .hero-shell__content .hero__title {
   max-width: 23ch;
   font-size: var(--text-2xl);
+}
+.hero-shell__content > p {
+  max-width: 64ch; /* mismo ancho de lectura que tenía la caja completa antes de D57 */
 }
 /* Los dos CTA uno al lado del otro. `flex-shrink:0` en cada botón es la parte que
    realmente evita que el texto se parta en 2 líneas: sin esto, flexbox encoge los
@@ -2067,14 +2095,27 @@ section[data-surface="muted"] .post-meta__badge { border-color: var(--color-bord
   scroll-margin-top: calc(78px + var(--space-12));
 }
 
+/* D57 (2026-08-21): el padding horizontal del header pasa de un clamp propio
+   (mayor que el resto del sitio) a `var(--container-padding)` — el mismo token que ya
+   usa `.container` y el hero de Home — para que el logo/menú del header y el texto
+   del contenido debajo (hero, títulos de página) queden siempre alineados al mismo
+   margen izquierdo, en todas las páginas. Antes había un desfase perceptible (~19px
+   a 1280px de ancho, más a anchos mayores) porque el header usaba una escala propia
+   más generosa. También se ajusta `max-width` de 1440px a `var(--container-max)`
+   (1200px, la misma que usa `.container`) — igualar solo el padding no bastaba: entre
+   ~1200-1440px de viewport el header (más ancho) no tenía margen de centrado propio
+   mientras el contenido (más angosto) sí lo tenía, así que aunque ambos padding
+   fueran iguales, sus bordes izquierdos quedaban en puntos distintos. No se detectó
+   ningún recorte del menú de 4 ítems al angostar el header (el menú ya colapsa a
+   hamburguesa desde 1180px, por debajo de este nuevo máximo). */
 .site-header--global .site-header__inner {
   width: 100%;
-  max-width: 1440px;
+  max-width: var(--container-max);
   min-height: 78px;
   display: grid;
   grid-template-columns: minmax(190px, 1fr) auto minmax(250px, 1fr);
   column-gap: clamp(var(--space-6), 3vw, var(--space-12));
-  padding: 0 clamp(var(--space-6), 4vw, var(--space-16));
+  padding: 0 var(--container-padding);
   border: 0;
   border-radius: 0;
   background: var(--color-navy-deep);
@@ -2211,6 +2252,13 @@ section[data-surface="muted"] .post-meta__badge { border-color: var(--color-bord
 }
 
 .home-page .hero-shell {
+  /* D57 (2026-08-21): Home no se ve afectada por el tope de ancho que se agregó a la
+     regla base de `.hero-shell` (para Servicios/Contacto) — aquí se restauran
+     explícitamente `width`/`max-width` sin límite, el mismo comportamiento full-bleed
+     que ya tenía Home antes de ese cambio (el texto de Home ya se alinea con el header
+     por su propio mecanismo, `.home-page .hero-shell__content`, sin depender de esto). */
+  width: 100%;
+  max-width: none;
   min-height: clamp(600px, 72vh, 720px);
   margin-inline: 0;
   border-radius: 0;
@@ -3090,7 +3138,6 @@ section[aria-labelledby="situaciones-heading"] .section-head {
     min-height: 68px;
     grid-template-columns: minmax(0, 1fr) auto auto;
     column-gap: var(--space-3);
-    padding: 0 var(--space-4);
   }
 
   .site-header--global .brand {
