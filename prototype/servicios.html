@@ -152,10 +152,14 @@
        `.stepper--compact` (D33) por `.stepper--flowchart`, scoped a esta sección —
        .stepper__grid/.stepper__intro/.stepper__steps/.stepper__step base y Captación
        B2B § "Nuestro proceso" (mismo componente, sin este modificador) no se ven
-       afectados. La descripción de cada paso ya no va siempre visible (no cabría sin
-       scroll junto a los otros 2 pasos) — aparece solo con hover/focus del nodo,
-       mismo patrón aprobado en D47 (Home § "Cómo intervenimos"); en touch/mobile,
-       donde no existe hover, se ve siempre visible, apilada verticalmente. -->
+       afectados.
+       D69 (2026-08-21): el cliente pidió (vía el Owner) que la descripción de cada
+       paso esté siempre visible en desktop también, sin necesidad de hover/foco —
+       revierte esa parte de D48/D47 solo en esta sección. También pidió alinear los
+       3 nodos con el margen izquierdo del eyebrow/título en vez de centrarlos
+       distribuidos por todo el ancho — icono+título+descripción pasan de
+       `text-align:center` a `left`, mismo patrón de fila (ícono junto al título) que
+       ya usa la vista mobile/tablet (D49), ahora también en desktop. -->
   <section class="section stepper stepper--flowchart" data-surface="dark" aria-labelledby="proceso-heading">
     <div class="container stepper__grid">
       <div class="stepper__intro reveal">
