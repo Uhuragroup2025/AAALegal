@@ -622,12 +622,12 @@ section[data-surface="muted"] + .hero .curve-divider,
 /* D58 (2026-08-21): reemplaza los chips-placeholder de D56 (marca abstracta +
    texto "Logo 01"/"Logo 02") por los logos reales de clientes — ya sin caja/borde
    propios, solo la imagen a tamaño consistente, como una pared de logos estándar.
-   Altura subida de 40px a 64px (D58) y luego a 76px (D60, otro ajuste fino a
-   pedido del Owner tras D59). */
+   Altura subida de 40px a 64px (D58), luego a 76px (D60) y ajustada a 75px
+   (D61, corrección de un valor de más). */
 .sector-card__logo {
   display: inline-flex;
   align-items: center;
-  height: 76px;
+  height: 75px;
 }
 
 .sector-card__logo img {
