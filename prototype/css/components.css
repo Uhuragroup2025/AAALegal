@@ -2557,12 +2557,16 @@ section[aria-labelledby="situaciones-heading"] .section-head {
 
 /* Por qué AAA (D51, 2026-08-20): 6 atributos equivalentes, compactos y escaneables —
    reemplaza el mosaico asimétrico de 5 (D24), ya no hacía falta con un número par de
-   tarjetas. Grilla regular 6 → 3 → 2 columnas, sin spans/offsets especiales. Color
-   alternado en ciclo de 3 (blanco / navy-deep / azul claro) vía :nth-child(3n+2) y
-   :nth-child(3n) — antes hardcodeado a las posiciones 2/3/5 de la lista de 5; con el
-   ciclo, cualquier reorden futuro de tarjetas conserva el mismo ritmo visual. */
+   tarjetas. Color alternado en ciclo de 3 (blanco / navy-deep / azul claro) vía
+   :nth-child(3n+2) y :nth-child(3n) — antes hardcodeado a las posiciones 2/3/5 de la
+   lista de 5; con el ciclo, cualquier reorden futuro de tarjetas conserva el mismo
+   ritmo visual.
+   D52 (2026-08-21): en una sola fila de 6 (desktop ≥1200px) el título más largo,
+   "Infraestructura para atención masiva.", no cabía dentro de la card sin desbordarse
+   — a pedido del Owner, 3 arriba + 3 abajo pasa a ser el layout por defecto en vez de
+   solo activarse ≤1199px (tarjetas más anchas, más aire para el texto). */
 .home-page .focus-grid {
-  grid-template-columns: repeat(6, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   grid-auto-rows: 220px;
   gap: var(--space-6);
 }
@@ -2601,12 +2605,6 @@ section[aria-labelledby="situaciones-heading"] .section-head {
 .home-page .focus-grid > :nth-child(3n+1) .focus-card__index,
 .home-page .focus-grid > :nth-child(3n+1) .focus-card__icon {
   color: var(--color-accent-main-strong);
-}
-
-@media (max-width: 1199px) {
-  .home-page .focus-grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
 }
 
 @media (max-width: 800px) {
