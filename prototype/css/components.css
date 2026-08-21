@@ -2031,8 +2031,15 @@ section[data-surface="muted"] .post-meta__badge { border-color: var(--color-bord
   gap: var(--space-12);
 }
 
+/* D68 (2026-08-21): se excluye `.home-footer__section` de este selector — el h2
+   "Sitio" del footer (D67, replicado en las 7 páginas vía `.site-footer--global`)
+   quedaba atrapado por esta regla genérica de "cualquier h2 dentro de una section en
+   Home" y se veía gigante solo en Home (2.3rem) en vez del tamaño pequeño de
+   `.home-footer__heading` que sí se aplicaba correctamente en las 6 páginas
+   interiores (sin la clase `.home-page` en el `<body>`, esta regla nunca las
+   afectó). */
 .home-page .section-head h2,
-.home-page section:not(.hero-immersive) h2 {
+.home-page section:not(.hero-immersive):not(.home-footer__section) h2 {
   font-size: 2.3rem;
   line-height: 1;
   letter-spacing: -0.035em;
@@ -3252,7 +3259,7 @@ section[aria-labelledby="situaciones-heading"] .section-head {
   }
 
   .home-page .section-head h2,
-  .home-page section:not(.hero-immersive) h2,
+  .home-page section:not(.hero-immersive):not(.home-footer__section) h2,
   .home-page .cierre-card__content h2 {
     font-size: 1.71875rem;
   }
