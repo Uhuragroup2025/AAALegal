@@ -608,28 +608,31 @@ section[data-surface="muted"] + .hero .curve-divider,
   letter-spacing: -0.02em;
 }
 
-/* Fila de logos de clientes del sector. */
+/* Fila de logos de clientes del sector. D58: perdía la línea divisoria bajo el
+   ícono/nombre (a pedido del Owner, con una captura marcando la línea) — el
+   padding-top se conserva como único separador de aire entre header y logos. */
 .sector-card__logos {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   gap: var(--space-5);
   padding-top: var(--space-4);
-  border-top: 1px solid var(--color-border-flat);
 }
 
 /* D58 (2026-08-21): reemplaza los chips-placeholder de D56 (marca abstracta +
    texto "Logo 01"/"Logo 02") por los logos reales de clientes — ya sin caja/borde
-   propios, solo la imagen a tamaño consistente, como una pared de logos estándar. */
+   propios, solo la imagen a tamaño consistente, como una pared de logos estándar.
+   Altura subida de 40px a 64px (el Owner señaló que se veían muy pequeños incluso
+   en desktop). */
 .sector-card__logo {
   display: inline-flex;
   align-items: center;
-  height: 40px;
+  height: 64px;
 }
 
 .sector-card__logo img {
   max-height: 100%;
-  max-width: 120px;
+  max-width: 160px;
   width: auto;
   object-fit: contain;
 }
