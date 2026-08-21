@@ -14,10 +14,10 @@
   var navDetails = document.querySelector('.nav');
   if (navDetails) {
     var summary = navDetails.querySelector('summary');
-    // Debe coincidir con el breakpoint del menú en components.css. La Home colapsa
-    // antes (1180px) por su header de tres zonas; las demás páginas conservan 1023px.
-    var isHomeHeader = document.body.classList.contains('home-page');
-    var mobileQuery = window.matchMedia(isHomeHeader ? '(max-width: 1180px)' : '(max-width: 1023px)');
+    // Debe coincidir con el breakpoint del menú en components.css. D55: header
+    // full-width (`.site-header--global`) unificado en las 7 páginas — todas colapsan
+    // en el mismo punto (1180px, por su header de tres zonas).
+    var mobileQuery = window.matchMedia('(max-width: 1180px)');
 
     // Re-sincroniza al cruzar el breakpoint (resize, rotación, zoom) — no solo al cargar,
     // para que el menú nunca quede inaccesible si el viewport cambia de mobile a desktop o viceversa.

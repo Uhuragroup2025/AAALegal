@@ -583,9 +583,12 @@ section[data-surface="muted"] + .hero .curve-divider,
   color: var(--color-navy-deep);
 }
 
+/* D54 (2026-08-21): ícono + nombre del sector centrados dentro de la card, a pedido
+   del Owner (antes quedaban alineados a la izquierda). */
 .sector-card__header {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: var(--space-5);
 }
 
@@ -2024,8 +2027,18 @@ section[data-surface="muted"] .post-meta__badge { border-color: var(--color-bord
   letter-spacing: 0.095em;
 }
 
-/* Header: barra sólida y silenciosa, sin isla flotante ni glassmorphism. */
-.home-page .site-header {
+/* Header: barra sólida y silenciosa, sin isla flotante ni glassmorphism.
+   D55 (2026-08-21): a pedido del Owner, este header (antes exclusivo de Home vía la
+   clase `.home-page` en el `<body>`) se replica idéntico en las 7 páginas reales.
+   Se introduce el modificador `.site-header--global` (en el propio `<header>`, no en
+   `<body>`) para no arrastrar el resto de overrides de `.home-page` (hero, secciones,
+   stepper, focus-grid, etc., que siguen siendo exclusivos de Home) — selectores
+   migrados de `.home-page .X` a `.site-header--global X`, mismas reglas, sin cambios
+   de valores. Es una duplicación real de HTML/CSS en cada página (este prototipo es
+   HTML estático, sin sistema de plantillas): un cambio futuro en este componente hay
+   que aplicarlo a mano en las 7 páginas hasta que exista el template part real de
+   WordPress (`header.html`, ya previsto en README.md). */
+.site-header--global {
   top: 0;
   min-height: 78px;
   background: var(--color-navy-deep);
@@ -2042,7 +2055,7 @@ section[data-surface="muted"] .post-meta__badge { border-color: var(--color-bord
   scroll-margin-top: calc(78px + var(--space-12));
 }
 
-.home-page .site-header__inner {
+.site-header--global .site-header__inner {
   width: 100%;
   max-width: 1440px;
   min-height: 78px;
@@ -2058,7 +2071,7 @@ section[data-surface="muted"] .post-meta__badge { border-color: var(--color-bord
   -webkit-backdrop-filter: none;
 }
 
-.home-page .brand {
+.site-header--global .brand {
   display: inline-flex;
   align-items: center;
   justify-self: start;
@@ -2067,7 +2080,7 @@ section[data-surface="muted"] .post-meta__badge { border-color: var(--color-bord
   overflow: visible;
 }
 
-.home-page .brand__mark {
+.site-header--global .brand__mark {
   width: 42px;
   height: 42px;
   display: grid;
@@ -2076,7 +2089,7 @@ section[data-surface="muted"] .post-meta__badge { border-color: var(--color-bord
   overflow: hidden;
 }
 
-.home-page .brand__isotype {
+.site-header--global .brand__isotype {
   display: block;
   width: 100%;
   height: 100%;
@@ -2085,7 +2098,7 @@ section[data-surface="muted"] .post-meta__badge { border-color: var(--color-bord
   animation: header-isotype-reveal 1.15s var(--motion-ease) 1 forwards;
 }
 
-.home-page .brand__wordmark {
+.site-header--global .brand__wordmark {
   position: relative;
   width: 92px;
   height: 46px;
@@ -2093,7 +2106,7 @@ section[data-surface="muted"] .post-meta__badge { border-color: var(--color-bord
   flex: 0 0 92px;
 }
 
-.home-page .brand__wordmark img {
+.site-header--global .brand__wordmark img {
   position: absolute;
   inset: 0;
   width: 100%;
@@ -2101,11 +2114,11 @@ section[data-surface="muted"] .post-meta__badge { border-color: var(--color-bord
   object-fit: contain;
 }
 
-.home-page .brand__wordmark-dark { display: none; }
+.site-header--global .brand__wordmark-dark { display: none; }
 
 /* Estado preparado para un futuro header claro, sin alterar el tema actual. */
-.home-page .site-header[data-header-theme="light"] .brand__wordmark-light { display: none; }
-.home-page .site-header[data-header-theme="light"] .brand__wordmark-dark { display: block; }
+.site-header--global[data-header-theme="light"] .brand__wordmark-light { display: none; }
+.site-header--global[data-header-theme="light"] .brand__wordmark-dark { display: block; }
 
 @keyframes header-isotype-reveal {
   0% { clip-path: inset(0 100% 0 0); opacity: 0.25; }
@@ -2115,39 +2128,39 @@ section[data-surface="muted"] .post-meta__badge { border-color: var(--color-bord
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .home-page .brand__isotype {
+  .site-header--global .brand__isotype {
     animation: none;
     clip-path: inset(0);
     opacity: 1;
   }
 }
 
-.home-page .nav {
+.site-header--global .nav {
   justify-self: center;
 }
 
-.home-page .nav__panel ul {
+.site-header--global .nav__panel ul {
   gap: clamp(var(--space-4), 1.65vw, var(--space-8));
 }
 
-.home-page .site-header__actions {
+.site-header--global .site-header__actions {
   justify-self: end;
   margin-left: 0;
 }
 
-.home-page .nav__panel a {
+.site-header--global .nav__panel a {
   font-weight: 500;
   color: rgba(255, 255, 255, 0.78);
   border-bottom-width: 1px;
 }
 
-.home-page .nav__panel a:hover,
-.home-page .nav__panel a[aria-current="page"] {
+.site-header--global .nav__panel a:hover,
+.site-header--global .nav__panel a[aria-current="page"] {
   color: var(--color-white);
   border-color: var(--color-accent-main);
 }
 
-.home-page .btn--header {
+.site-header--global .btn--header {
   min-height: 42px;
   padding: 9px 16px;
   color: var(--color-navy-hover);
@@ -2155,7 +2168,7 @@ section[data-surface="muted"] .post-meta__badge { border-color: var(--color-bord
   border-color: var(--color-accent-main);
 }
 
-.home-page .btn--header:hover {
+.site-header--global .btn--header:hover {
   color: var(--color-white);
   background: transparent;
   border-color: var(--color-accent-main);
@@ -2974,21 +2987,21 @@ section[aria-labelledby="situaciones-heading"] .section-head {
 }
 
 @media (max-width: 1180px) {
-  .home-page .site-header__inner {
+  .site-header--global .site-header__inner {
     grid-template-columns: minmax(180px, 1fr) auto auto;
     column-gap: var(--space-6);
   }
 
-  .home-page .nav {
+  .site-header--global .nav {
     justify-self: end;
   }
 
-  .home-page .nav__toggle {
+  .site-header--global .nav__toggle {
     display: flex;
     align-items: center;
   }
 
-  .home-page .nav__panel {
+  .site-header--global .nav__panel {
     position: absolute;
     inset-inline: 0;
     top: 100%;
@@ -3002,7 +3015,7 @@ section[aria-labelledby="situaciones-heading"] .section-head {
     -webkit-backdrop-filter: none;
   }
 
-  .home-page .nav__panel ul {
+  .site-header--global .nav__panel ul {
     flex-direction: column;
     align-items: flex-start;
     gap: var(--space-2);
@@ -3010,7 +3023,7 @@ section[aria-labelledby="situaciones-heading"] .section-head {
 }
 
 @media (max-width: 1023px) {
-  .home-page .nav__panel {
+  .site-header--global .nav__panel {
     top: 100%;
     background: var(--color-navy-deep);
     border: 0;
@@ -3056,11 +3069,11 @@ section[aria-labelledby="situaciones-heading"] .section-head {
     scroll-margin-top: calc(68px + var(--space-16));
   }
 
-  .home-page .site-header {
+  .site-header--global {
     top: 0;
     min-height: 68px;
   }
-  .home-page .site-header__inner {
+  .site-header--global .site-header__inner {
     width: 100%;
     min-height: 68px;
     grid-template-columns: minmax(0, 1fr) auto auto;
@@ -3068,23 +3081,23 @@ section[aria-labelledby="situaciones-heading"] .section-head {
     padding: 0 var(--space-4);
   }
 
-  .home-page .brand {
+  .site-header--global .brand {
     gap: var(--space-2);
   }
 
-  .home-page .brand__mark {
+  .site-header--global .brand__mark {
     width: 34px;
     height: 34px;
     flex-basis: 34px;
   }
 
-  .home-page .brand__wordmark {
+  .site-header--global .brand__wordmark {
     width: 74px;
     height: 40px;
     flex-basis: 74px;
   }
 
-  .home-page .btn--header { border-radius: var(--radius-sm); }
+  .site-header--global .btn--header { border-radius: var(--radius-sm); }
 
   .home-page .hero-immersive { padding-top: 68px; }
   .home-page .hero-shell {

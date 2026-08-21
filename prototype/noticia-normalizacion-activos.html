@@ -17,23 +17,31 @@
 
 <a class="skip-link" href="#contenido">Saltar al contenido</a>
 
-<header class="site-header">
-  <div class="container site-header__inner">
-    <a class="brand" href="index.html" aria-label="AAA Estudio Legal — Inicio">
+<!-- D55 (2026-08-21): header full-width unificado con Home en las 7 páginas — a
+     pedido del Owner (revierte la parte de D34 que mantenía la píldora flotante en
+     las páginas interiores). Nota de mapeo WordPress completa en index.html. Este
+     bloque debe mantenerse idéntico al de las otras 6 páginas — es una duplicación
+     real de HTML/CSS (prototipo estático, sin plantillas): cualquier cambio futuro
+     hay que replicarlo a mano en las 7, hasta que exista el template part de
+     WordPress (`header.html`, ya previsto en README.md). -->
+<header class="site-header site-header--global">
+  <div class="container site-header__inner wp-block-group">
+    <a class="brand wp-block-site-title" href="index.html" aria-label="AAA Estudio Legal — Inicio">
       <span class="brand__mark" aria-hidden="true">
         <img class="brand__isotype" src="assets/img/isotipo-AAA-legal.svg" width="200" height="200" alt="">
       </span>
       <span class="brand__wordmark" aria-hidden="true">
-        <img src="assets/img/letras-blanco-logo-AAA-legal.svg" width="200" height="124" alt="">
+        <img class="brand__wordmark-light" src="assets/img/letras-blanco-logo-AAA-legal.svg" width="200" height="124" alt="">
+        <img class="brand__wordmark-dark" src="assets/img/letras-logo-AAA-legal.svg" width="200" height="124" alt="">
       </span>
     </a>
 
-    <details class="nav" open>
+    <details class="nav wp-block-navigation" open>
       <summary class="nav__toggle" aria-expanded="true">
         <svg class="nav__toggle-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
         <span class="visually-hidden">Menú de navegación</span>
       </summary>
-      <div class="nav__panel">
+      <div class="nav__panel wp-block-navigation__container">
         <!-- D36 (2026-08-20): ver nota completa en index.html — mismo menú en las 7 páginas. -->
         <nav aria-label="Navegación principal">
           <ul>
@@ -46,11 +54,13 @@
       </div>
     </details>
 
-    <div class="site-header__actions">
-      <a class="btn btn--primary btn--header" href="#nota-ady">
-        <span class="btn--header-label">Mi caso</span>
-        <svg class="btn--icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-      </a>
+    <div class="site-header__actions wp-block-buttons">
+      <div class="wp-block-button">
+        <a class="btn btn--primary btn--header wp-block-button__link" href="#nota-ady">
+          <span class="btn--header-label">Mi caso</span>
+          <svg class="btn--icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+      </div>
     </div>
   </div>
 </header>
