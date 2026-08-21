@@ -608,41 +608,30 @@ section[data-surface="muted"] + .hero .curve-divider,
   letter-spacing: -0.02em;
 }
 
-/* Fila de logos de clientes del sector — placeholders explícitos (D38), mismo
-   criterio de "no inventar" que el resto del sitio hasta tener contenido real. */
+/* Fila de logos de clientes del sector. */
 .sector-card__logos {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--space-3);
+  align-items: center;
+  gap: var(--space-5);
   padding-top: var(--space-4);
   border-top: 1px solid var(--color-border-flat);
 }
 
-/* D56 (2026-08-21): cada chip pasa a llevar una marca abstracta genérica (sin
-   ninguna marca real) junto al texto "Logo 01"/"Logo 02" — a pedido del Owner, para
-   ilustrar al cliente cómo se vería el espacio con logos, sin inventar clientes
-   (mismo criterio que D38). Dos formas distintas (una por posición) para que las 12
-   ocurrencias no se vean todas idénticas. */
+/* D58 (2026-08-21): reemplaza los chips-placeholder de D56 (marca abstracta +
+   texto "Logo 01"/"Logo 02") por los logos reales de clientes — ya sin caja/borde
+   propios, solo la imagen a tamaño consistente, como una pared de logos estándar. */
 .sector-card__logo {
   display: inline-flex;
   align-items: center;
-  justify-content: center;
-  gap: var(--space-2);
   height: 40px;
-  padding-inline: var(--space-4);
-  border: 1px solid var(--color-border-flat);
-  border-radius: var(--radius-sm);
-  background: var(--color-surface-muted);
-  color: var(--color-ink-dark);
-  font-size: var(--text-xs);
-  letter-spacing: 0.03em;
-  opacity: 0.7;
 }
 
-.sector-card__logo-mark {
-  width: 15px;
-  height: 15px;
-  flex: 0 0 15px;
+.sector-card__logo img {
+  max-height: 100%;
+  max-width: 120px;
+  width: auto;
+  object-fit: contain;
 }
 
 /* D41 (2026-08-20): contador animado ("En cifras"), valores placeholder — ver nota en

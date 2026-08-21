@@ -227,14 +227,23 @@
          de 6 tarjetas (mismo patrón responsive que `.focus-grid`: 3 columnas → 2 → 1),
          reemplaza el desplazamiento continuo — con contenido más denso por tarjeta
          (ícono+nombre+logos), un marquee en movimiento habría sido más difícil de leer.
-         Los logos son placeholders explícitos ("Logo 01"/"Logo 02"): no hay clientes
-         reales aprobados todavía para asociar a cada sector — mismo criterio que
-         Casos de éxito, no se inventan nombres ni logos.
          D39 (2026-08-20): envuelta en `.container` (antes era hijo directo de
          `<section>`, por eso se extendía hasta el borde total de la página en vez de
          respetar el margen — bug reportado por el Owner). También se agrega
          `mobile-card-carousel` para que en móvil use el mismo slide horizontal que
-         Situaciones y Casos de éxito, en vez de apilarse en una sola columna. -->
+         Situaciones y Casos de éxito, en vez de apilarse en una sola columna.
+         D58 (2026-08-21): reemplaza los placeholders de D56 ("Logo 01"/"Logo 02" +
+         marca abstracta) por los logos reales de clientes actuales de AAA, ahora que
+         el Owner los aportó. Mapeo sector↔cliente confirmado por el Owner para BBVA,
+         Comfandi, Coopunidos, Fetrabuv, Fonalianza, Promédico, Gobernación del Valle
+         del Cauca y MetroCali; para Femcristar (fondo de empleados → Solidario),
+         Nuestro Fondo, Neat, K-Listo, Ma. Isabel, El Gran Langostino y Constructora
+         Meléndez el Owner delegó la ubicación final a nuestro criterio (no son bancos/
+         fondos/entidades públicas propiamente dichos, pero el Owner pidió repartirlos
+         igual entre los 6 sectores existentes en vez de excluirlos o crear un séptimo).
+         Las tarjetas ya no muestran exactamente 2 logos cada una: Solidario queda con
+         4 (más fondos de empleados que el resto) y el resto con 2-3, siguiendo el
+         conteo real de clientes por sector en vez de forzar simetría. -->
     <div class="container">
     <div class="sector-grid mobile-card-carousel reveal" role="list" tabindex="0" aria-label="Sectores de experiencia de AAA Estudio Legal">
       <article class="sector-card" role="listitem">
@@ -242,9 +251,9 @@
           <svg class="sector-card__icon" viewBox="0 0 256 256" fill="none" stroke="currentColor" stroke-width="14" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M24 104h208M40 104V88l88-48 88 48v16M48 104v80M88 104v80M128 104v80M168 104v80M208 104v80M24 184h208M16 216h224"/></svg>
           <span class="sector-card__name">Financiero</span>
         </div>
-        <div class="sector-card__logos" aria-label="Espacios reservados para logos de clientes del sector Financiero, pendientes de aprobación">
-          <span class="sector-card__logo"><svg class="sector-card__logo-mark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2l8 4.5v9L12 20l-8-4.5v-9L12 2z"/></svg>Logo 01</span>
-          <span class="sector-card__logo"><svg class="sector-card__logo-mark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="12" r="6"/><circle cx="17" cy="9" r="3"/></svg>Logo 02</span>
+        <div class="sector-card__logos" aria-label="Logos de clientes de AAA Estudio Legal del sector Financiero">
+          <span class="sector-card__logo"><img src="assets/img/logo-bbva.png" alt="Logo de BBVA" loading="lazy"></span>
+          <span class="sector-card__logo"><img src="assets/img/logo-elgranlangostino.png" alt="Logo de El Gran Langostino" loading="lazy"></span>
         </div>
       </article>
       <article class="sector-card" role="listitem">
@@ -252,9 +261,9 @@
           <svg class="sector-card__icon" viewBox="0 0 256 256" fill="none" stroke="currentColor" stroke-width="14" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="72" y="24" width="112" height="208" rx="18"/><path d="M104 56h48M112 200h32M40 96h32M184 96h32M40 136h32M184 136h32"/><circle cx="40" cy="96" r="6" fill="currentColor" stroke="none"/><circle cx="216" cy="96" r="6" fill="currentColor" stroke="none"/><circle cx="40" cy="136" r="6" fill="currentColor" stroke="none"/><circle cx="216" cy="136" r="6" fill="currentColor" stroke="none"/></svg>
           <span class="sector-card__name">Fintech</span>
         </div>
-        <div class="sector-card__logos" aria-label="Espacios reservados para logos de clientes del sector Fintech, pendientes de aprobación">
-          <span class="sector-card__logo"><svg class="sector-card__logo-mark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2l8 4.5v9L12 20l-8-4.5v-9L12 2z"/></svg>Logo 01</span>
-          <span class="sector-card__logo"><svg class="sector-card__logo-mark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="12" r="6"/><circle cx="17" cy="9" r="3"/></svg>Logo 02</span>
+        <div class="sector-card__logos" aria-label="Logos de clientes de AAA Estudio Legal del sector Fintech">
+          <span class="sector-card__logo"><img src="assets/img/logo-neat.png" alt="Logo de Neat" loading="lazy"></span>
+          <span class="sector-card__logo"><img src="assets/img/logo-nuestro-fondo.png" alt="Logo de Nuestro Fondo" loading="lazy"></span>
         </div>
       </article>
       <article class="sector-card" role="listitem">
@@ -262,9 +271,11 @@
           <svg class="sector-card__icon" viewBox="0 0 256 256" fill="none" stroke="currentColor" stroke-width="14" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m88 104 32-32a24 24 0 0 1 34 0l14 14M56 152l42 42a24 24 0 0 0 34 0l68-68M24 112l32-32 32 24-40 48ZM232 112l-32-32-32 24 40 48Z"/><path d="m112 144 24 24M136 120l32 32"/></svg>
           <span class="sector-card__name">Solidario</span>
         </div>
-        <div class="sector-card__logos" aria-label="Espacios reservados para logos de clientes del sector Solidario, pendientes de aprobación">
-          <span class="sector-card__logo"><svg class="sector-card__logo-mark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2l8 4.5v9L12 20l-8-4.5v-9L12 2z"/></svg>Logo 01</span>
-          <span class="sector-card__logo"><svg class="sector-card__logo-mark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="12" r="6"/><circle cx="17" cy="9" r="3"/></svg>Logo 02</span>
+        <div class="sector-card__logos" aria-label="Logos de clientes de AAA Estudio Legal del sector Solidario">
+          <span class="sector-card__logo"><img src="assets/img/logo-coopunidos.png" alt="Logo de Coopunidos" loading="lazy"></span>
+          <span class="sector-card__logo"><img src="assets/img/logo-fetrabuv.png" alt="Logo de Fetrabuv" loading="lazy"></span>
+          <span class="sector-card__logo"><img src="assets/img/logo-fonalianza.png" alt="Logo de Fonalianza" loading="lazy"></span>
+          <span class="sector-card__logo"><img src="assets/img/logo-femcristar.png" alt="Logo de Femcristar" loading="lazy"></span>
         </div>
       </article>
       <article class="sector-card" role="listitem">
@@ -272,9 +283,10 @@
           <svg class="sector-card__icon" viewBox="0 0 256 256" fill="none" stroke="currentColor" stroke-width="14" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M32 216h192M48 216V88h64v128M112 216V40h96v176M72 120h16M72 152h16M136 72h16M168 72h16M136 104h16M168 104h16M136 136h16M168 136h16"/></svg>
           <span class="sector-card__name">Sector público</span>
         </div>
-        <div class="sector-card__logos" aria-label="Espacios reservados para logos de clientes del Sector público, pendientes de aprobación">
-          <span class="sector-card__logo"><svg class="sector-card__logo-mark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2l8 4.5v9L12 20l-8-4.5v-9L12 2z"/></svg>Logo 01</span>
-          <span class="sector-card__logo"><svg class="sector-card__logo-mark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="12" r="6"/><circle cx="17" cy="9" r="3"/></svg>Logo 02</span>
+        <div class="sector-card__logos" aria-label="Logos de clientes de AAA Estudio Legal del Sector público">
+          <span class="sector-card__logo"><img src="assets/img/logo-gobernacion-valle-del-cauca.png" alt="Logo de la Gobernación del Valle del Cauca" loading="lazy"></span>
+          <span class="sector-card__logo"><img src="assets/img/logo-metrocali.png" alt="Logo de MetroCali" loading="lazy"></span>
+          <span class="sector-card__logo"><img src="assets/img/logo-constructora-melendez.png" alt="Logo de Constructora Meléndez" loading="lazy"></span>
         </div>
       </article>
       <article class="sector-card" role="listitem">
@@ -282,9 +294,9 @@
           <svg class="sector-card__icon" viewBox="0 0 256 256" fill="none" stroke="currentColor" stroke-width="14" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M128 216S40 168 40 96a48 48 0 0 1 88-26 48 48 0 0 1 88 26c0 72-88 120-88 120Z"/><path d="M72 128h32l16-32 24 64 16-32h24"/></svg>
           <span class="sector-card__name">Salud</span>
         </div>
-        <div class="sector-card__logos" aria-label="Espacios reservados para logos de clientes del sector Salud, pendientes de aprobación">
-          <span class="sector-card__logo"><svg class="sector-card__logo-mark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2l8 4.5v9L12 20l-8-4.5v-9L12 2z"/></svg>Logo 01</span>
-          <span class="sector-card__logo"><svg class="sector-card__logo-mark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="12" r="6"/><circle cx="17" cy="9" r="3"/></svg>Logo 02</span>
+        <div class="sector-card__logos" aria-label="Logos de clientes de AAA Estudio Legal del sector Salud">
+          <span class="sector-card__logo"><img src="assets/img/logo-promedico.png" alt="Logo de Promédico" loading="lazy"></span>
+          <span class="sector-card__logo"><img src="assets/img/logo-ma-isabel.png" alt="Logo de Ma. Isabel" loading="lazy"></span>
         </div>
       </article>
       <article class="sector-card" role="listitem">
@@ -292,9 +304,9 @@
           <svg class="sector-card__icon" viewBox="0 0 256 256" fill="none" stroke="currentColor" stroke-width="14" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="96" cy="88" r="32"/><circle cx="176" cy="104" r="24"/><path d="M32 208a64 64 0 0 1 128 0M152 152a52 52 0 0 1 72 48"/></svg>
           <span class="sector-card__name">Cajas de compensación</span>
         </div>
-        <div class="sector-card__logos" aria-label="Espacios reservados para logos de clientes de Cajas de compensación, pendientes de aprobación">
-          <span class="sector-card__logo"><svg class="sector-card__logo-mark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2l8 4.5v9L12 20l-8-4.5v-9L12 2z"/></svg>Logo 01</span>
-          <span class="sector-card__logo"><svg class="sector-card__logo-mark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="12" r="6"/><circle cx="17" cy="9" r="3"/></svg>Logo 02</span>
+        <div class="sector-card__logos" aria-label="Logos de clientes de AAA Estudio Legal de Cajas de compensación">
+          <span class="sector-card__logo"><img src="assets/img/logo-comfandi.png" alt="Logo de Comfandi" loading="lazy"></span>
+          <span class="sector-card__logo"><img src="assets/img/logo-k-listo.png" alt="Logo de K-Listo" loading="lazy"></span>
         </div>
       </article>
     </div>
