@@ -507,9 +507,17 @@ section[data-surface="muted"] + .hero .curve-divider,
 /* D70 (2026-08-21): el Owner señaló con una captura que el recuadro de imagen se veía
    demasiado alto en los 3 bloques de "Nuestros servicios", desperdiciando viewport —
    pidió reducir el alto, aceptando que quede cuadrado en vez de más ancho que alto.
-   Baja de 280px a 220px (el extremo angosto de `minmax(220px, 320px)` de la columna),
-   quedando cuadrado o casi cuadrado según el ancho real que tome la columna. */
-.service-block__media { min-height: 220px; }
+   D71 (2026-08-21): el `min-height: 220px` de D70 no tenía ningún efecto visible — la
+   clase base `.media-placeholder` (que `.service-block__media` también lleva en el
+   HTML) fija `aspect-ratio: 4 / 5` con más peso que un min-height más chico (con
+   ancho de columna 320px, 4/5 da 400px de alto, muy por encima de los 220px, así que
+   el aspect-ratio ganaba siempre). El fix real es sobreescribir el aspect-ratio, no
+   el min-height — se fija `aspect-ratio: 1 / 1` (cuadrado, tal como pidió el Owner),
+   que sí tiene más especificidad que la regla base y por fin controla el alto real. */
+.service-block__media {
+  aspect-ratio: 1 / 1;
+  min-height: 220px;
+}
 @media (max-width: 800px) {
   .service-block--media,
   .service-block--media-reverse { grid-template-columns: 1fr; }
