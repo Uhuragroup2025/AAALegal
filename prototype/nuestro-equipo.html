@@ -42,15 +42,15 @@
       </summary>
       <div class="nav__panel wp-block-navigation__container">
         <!-- D36 (2026-08-20): ver nota completa en index.html — mismo menú en las 7 páginas.
-             "Quiénes somos" lleva aria-current en esta página; "Trabaja con nosotros" no,
-             aunque apunte aquí también (es un ancla a una sección, no la identidad de la
-             página). -->
+             "Quiénes somos" lleva aria-current en esta página.
+             D72 (2026-08-21): "Trabaja con nosotros" deja de apuntar aquí (era un ancla
+             a la sección de Postulación) — ahora es su propia página real. -->
         <nav aria-label="Navegación principal">
           <ul>
             <li><a href="index.html">Inicio</a></li>
             <li><a href="servicios.html">Metodología</a></li>
             <li><a href="nuestro-equipo.html" aria-current="page">Quiénes somos</a></li>
-            <li><a href="nuestro-equipo.html#postulacion-heading">Trabaja con nosotros</a></li>
+            <li><a href="trabaja-con-nosotros.html">Trabaja con nosotros</a></li>
           </ul>
         </nav>
       </div>
@@ -114,56 +114,10 @@
     </div>
   </section>
 
-  <!-- NUESTRO EQUIPO — copy real v2 SEO; fotos agrupadas por área y el perfil de
-       Jaime Marmolejo siguen como placeholder explícito (assets/ubicación pendientes
-       del cliente). -->
-  <section class="section" data-surface="light" aria-labelledby="equipo-heading">
-    <div class="container" style="max-width: 68ch;">
-      <div class="reveal">
-        <p class="eyebrow">Nuestro equipo</p>
-        <h2 id="equipo-heading">Nuestro equipo</h2>
-        <p>En AAA Estudio Legal hemos conformado un equipo multidisciplinario donde el conocimiento jurídico, la tecnología y la gestión estratégica se integran para ofrecer soluciones sólidas, oportunas y orientadas a resultados.</p>
-      </div>
-      <div class="ady-note reveal" style="margin-top: var(--space-8);">
-        <strong>Contenido pendiente del cliente</strong>
-        Fotos y nombres agrupados por área todavía no se han recibido — el cliente confirmó que no existe organigrama, y las fotografías del equipo están confirmadas como disponibles pero no entregadas. El perfil de Jaime Marmolejo (director) también sigue pendiente de ubicación final (¿grupo de dirección? ¿perfil individual?).
-      </div>
-    </div>
-  </section>
-
-  <!-- FORMULARIO DE POSTULACIÓN — movido aquí desde Talento AAA a pedido del Owner
-       (2026-07-31); la página Talento AAA se eliminó. El CTA "Postúlese" (D17) sigue
-       siendo secundario y estrictamente contextual — solo aparece en esta página,
-       nunca en header, footer, Inicio, ni ninguna otra. -->
-  <section class="section" data-surface="dark" aria-labelledby="postulacion-heading">
-    <div class="container" style="max-width: 60ch;">
-      <p class="eyebrow">Postulación</p>
-      <h2 id="postulacion-heading">¿Ve su carrera en AAA? Cuéntenos quién es usted.</h2>
-      <form class="talent-form reveal" aria-describedby="postulacion-nota" onsubmit="return false">
-        <div class="talent-form__field">
-          <label for="tf-nombre">Nombre completo</label>
-          <input type="text" id="tf-nombre" name="nombre" required>
-        </div>
-        <div class="talent-form__field">
-          <label for="tf-email">Correo electrónico</label>
-          <input type="email" id="tf-email" name="email" required>
-        </div>
-        <div class="talent-form__field">
-          <label for="tf-cv">Hoja de vida (CV)</label>
-          <input type="file" id="tf-cv" name="cv" accept=".pdf,.doc,.docx" required>
-        </div>
-        <div class="talent-form__field">
-          <label for="tf-extra">Campo adicional — pendiente de definir con el cliente</label>
-          <textarea id="tf-extra" name="extra" rows="3"></textarea>
-        </div>
-        <button class="btn btn--primary talent-form__submit" type="submit">
-          Postúlese
-          <svg class="btn--icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-        </button>
-        <p id="postulacion-nota" class="talent-form__note">Al postularse, su información se envía a <a href="mailto:info@agudeloabogados.com">info@agudeloabogados.com</a> — sin integración a un CRM (Decisión D12). Sin envío real en este prototipo.</p>
-      </form>
-    </div>
-  </section>
+  <!-- D72 (2026-08-21): "Nuestro equipo" y "Postulación" se mueven a la nueva página
+       trabaja-con-nosotros.html — a pedido del Owner. Esta página (Quiénes somos)
+       conserva Hero/Quiénes somos/Filosofía/Cierre. Ver trabaja-con-nosotros.html
+       para el contenido movido, sin cambios de copy. -->
 
   <!-- CIERRE — enlaces a redes, sin CTA comercial (outline explícito de esta página). -->
   <section class="section" data-surface="atmosphere" aria-label="Redes sociales">
@@ -217,7 +171,7 @@
         <a href="index.html">Inicio</a>
         <a href="servicios.html">Metodología</a>
         <a href="nuestro-equipo.html">Quiénes somos</a>
-        <a href="nuestro-equipo.html#postulacion-heading">Trabaja con nosotros</a>
+        <a href="trabaja-con-nosotros.html">Trabaja con nosotros</a>
         <a href="noticias-analisis.html">Blog</a>
         <a href="captacion-b2b.html">Contacto</a>
       </nav>

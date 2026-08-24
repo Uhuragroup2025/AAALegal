@@ -3,9 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Qué debe saber un acreedor antes de participar en un proceso de insolvencia — AAA Estudio Legal</title>
-<meta name="description" content="Contenido de ejemplo (prototipo) — single page de artículo de Blog.">
-<meta name="robots" content="noindex">
+<title>Trabaja con nosotros: AAA Estudio Legal</title>
+<meta name="description" content="Conozca al equipo de AAA Estudio Legal y postúlese si quiere ser parte de la firma.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Krub:wght@400;500;600;700&family=Libre+Caslon+Display&family=Libre+Caslon+Text:ital@1&display=swap" rel="stylesheet">
@@ -42,13 +41,15 @@
         <span class="visually-hidden">Menú de navegación</span>
       </summary>
       <div class="nav__panel wp-block-navigation__container">
-        <!-- D36 (2026-08-20): ver nota completa en index.html — mismo menú en las 7 páginas. -->
+        <!-- D36 (2026-08-20): ver nota completa en index.html — mismo menú en las 7 páginas.
+             D72 (2026-08-21): "Trabaja con nosotros" lleva aria-current en esta página —
+             ya es su propia página real, no un ancla dentro de Quiénes somos. -->
         <nav aria-label="Navegación principal">
           <ul>
             <li><a href="index.html">Inicio</a></li>
             <li><a href="servicios.html">Metodología</a></li>
             <li><a href="nuestro-equipo.html">Quiénes somos</a></li>
-            <li><a href="trabaja-con-nosotros.html">Trabaja con nosotros</a></li>
+            <li><a href="trabaja-con-nosotros.html" aria-current="page">Trabaja con nosotros</a></li>
           </ul>
         </nav>
       </div>
@@ -67,41 +68,77 @@
 
 <main id="contenido">
 
-  <!-- ENCABEZADO DEL ARTÍCULO -->
-  <section class="section" data-surface="dark" style="padding-bottom: var(--space-12);">
-    <div class="container" style="max-width: 70ch;">
-      <p class="eyebrow">Defensa de acreedores en insolvencia</p>
-      <h1>Qué debe saber un acreedor antes de participar en un proceso de insolvencia</h1>
-      <p class="post-meta">
-        <span>Equipo AAA Estudio Legal</span>
-        <span aria-hidden="true">·</span>
-        <span class="post-meta__badge">Contenido de ejemplo — prototipo</span>
-      </p>
+  <!-- D72 (2026-08-21): página nueva — a pedido del Owner, "Nuestro equipo" y
+       "Postulación" se mueven aquí desde nuestro-equipo.html (Quiénes somos), que
+       hasta ahora las contenía. El menú de header ya traía "Trabaja con nosotros"
+       como 4º ítem desde D36 (apuntando a un ancla dentro de Quiénes somos); ahora
+       apunta a esta página real. Sin CTA comercial propio — mismo criterio que la
+       página de origen (outline de content/05-talento-aaa.md: el formulario de
+       postulación es secundario y estrictamente contextual, D17, nunca compite con
+       el CTA principal "Consulte su caso aquí"). HERO: eyebrow/h1 nuevos para esta
+       página; el h1 reutiliza la línea de apertura ya aprobada en C1
+       (content/05-talento-aaa.md) para la extinta página "Talento AAA" — no se
+       inventa copy nuevo de cultura/beneficios, que sigue pendiente de insumo del
+       cliente (mismo vacío documentado en ese archivo). -->
+  <section class="section" data-surface="dark" aria-label="Presentación de Trabaja con nosotros" style="padding-bottom: var(--space-16);">
+    <div class="container">
+      <div style="max-width: 68ch;">
+        <p class="eyebrow">Trabaja con nosotros</p>
+        <h1>Un lugar donde el rigor técnico se construye entre personas, no solo entre procesos.</h1>
+        <p style="font-size: var(--text-md);">Conozca al equipo de AAA Estudio Legal y postúlese si quiere ser parte de la firma.</p>
+      </div>
     </div>
   </section>
 
-  <!-- CUERPO DEL ARTÍCULO — contenido de ejemplo (no editorial final): construido
-       para prototipar la plantilla de single page (D19/outline C1), no para publicar.
-       content/07-noticias-analisis.md marca la autoría/redacción real como pendiente;
-       este texto es genérico, dentro de los 3 macroservicios, sin citar normas específicas ni
-       cifras, y sin atribuirse a una persona real (ver REFERENTS.md → principios). -->
-  <section class="section" data-surface="light">
-    <div class="container" style="max-width: 70ch;">
-      <div class="media-placeholder media-placeholder--wide reveal" data-img-id="IMG-17" role="img" aria-label="Espacio reservado para imagen del artículo (IMG-17) — ver IMAGE-BRIEF.md">
-        <span class="media-placeholder__label">IMG-17 — pendiente de material del cliente</span>
+  <!-- NUESTRO EQUIPO — movida desde nuestro-equipo.html (D72), sin cambios de copy.
+       Copy real v2 SEO; fotos agrupadas por área y el perfil de Jaime Marmolejo
+       siguen como placeholder explícito (assets/ubicación pendientes del cliente). -->
+  <section class="section" data-surface="light" aria-labelledby="equipo-heading">
+    <div class="container" style="max-width: 68ch;">
+      <div class="reveal">
+        <p class="eyebrow">Nuestro equipo</p>
+        <h2 id="equipo-heading">Nuestro equipo</h2>
+        <p>En AAA Estudio Legal hemos conformado un equipo multidisciplinario donde el conocimiento jurídico, la tecnología y la gestión estratégica se integran para ofrecer soluciones sólidas, oportunas y orientadas a resultados.</p>
       </div>
+      <div class="ady-note reveal" style="margin-top: var(--space-8);">
+        <strong>Contenido pendiente del cliente</strong>
+        Fotos y nombres agrupados por área todavía no se han recibido — el cliente confirmó que no existe organigrama, y las fotografías del equipo están confirmadas como disponibles pero no entregadas. El perfil de Jaime Marmolejo (director) también sigue pendiente de ubicación final (¿grupo de dirección? ¿perfil individual?).
+      </div>
+    </div>
+  </section>
 
-      <article class="post-body reveal" style="margin-top: var(--space-8);">
-        <p>Cuando un deudor entra en un proceso de insolvencia, el acreedor deja de tener el control unilateral que tendría en una cobranza tradicional — pasa a competir, en un marco jurídico definido, con el resto de acreedores por la misma masa de bienes. Entender esa dinámica desde el primer momento es lo que separa una posición bien defendida de una oportunidad perdida.</p>
-
-        <p>Lo primero es la verificación oportuna del crédito: si un acreedor no se presenta en los términos y con el soporte documental adecuado, corre el riesgo de quedar excluido de la calificación y graduación de créditos, o de ver reconocido su crédito en una categoría de prelación menos favorable de la que le correspondería.</p>
-
-        <p>Lo segundo es la estrategia. No todos los créditos ni todos los deudores admiten el mismo tipo de actuación: hay escenarios donde conviene una postura activa y de negociación temprana, y otros donde el criterio técnico aconseja esperar a etapas posteriores del proceso. Esa decisión depende del estado real del deudor, no de una fórmula genérica.</p>
-
-        <p>Por último, está el seguimiento. Un proceso de insolvencia se extiende en el tiempo y atraviesa varias etapas — la ausencia de un acompañamiento permanente es, en la práctica, una de las causas más comunes de pérdida de valor para el acreedor.</p>
-      </article>
-
-      <p style="margin-top: var(--space-12);"><a href="noticias-analisis.html">← Volver a Blog</a></p>
+  <!-- FORMULARIO DE POSTULACIÓN — movida desde nuestro-equipo.html (D72), sin cambios
+       de copy. Originalmente movida ahí desde Talento AAA a pedido del Owner
+       (2026-07-31); la página Talento AAA se eliminó. El CTA "Postúlese" (D17) sigue
+       siendo secundario y estrictamente contextual — solo aparece en esta página,
+       nunca en header, footer, Inicio, ni ninguna otra. -->
+  <section class="section" data-surface="dark" aria-labelledby="postulacion-heading">
+    <div class="container" style="max-width: 60ch;">
+      <p class="eyebrow">Postulación</p>
+      <h2 id="postulacion-heading">¿Ve su carrera en AAA? Cuéntenos quién es usted.</h2>
+      <form class="talent-form reveal" aria-describedby="postulacion-nota" onsubmit="return false">
+        <div class="talent-form__field">
+          <label for="tf-nombre">Nombre completo</label>
+          <input type="text" id="tf-nombre" name="nombre" required>
+        </div>
+        <div class="talent-form__field">
+          <label for="tf-email">Correo electrónico</label>
+          <input type="email" id="tf-email" name="email" required>
+        </div>
+        <div class="talent-form__field">
+          <label for="tf-cv">Hoja de vida (CV)</label>
+          <input type="file" id="tf-cv" name="cv" accept=".pdf,.doc,.docx" required>
+        </div>
+        <div class="talent-form__field">
+          <label for="tf-extra">Campo adicional — pendiente de definir con el cliente</label>
+          <textarea id="tf-extra" name="extra" rows="3"></textarea>
+        </div>
+        <button class="btn btn--primary talent-form__submit" type="submit">
+          Postúlese
+          <svg class="btn--icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </button>
+        <p id="postulacion-nota" class="talent-form__note">Al postularse, su información se envía a <a href="mailto:info@agudeloabogados.com">info@agudeloabogados.com</a> — sin integración a un CRM (Decisión D12). Sin envío real en este prototipo.</p>
+      </form>
     </div>
   </section>
 
