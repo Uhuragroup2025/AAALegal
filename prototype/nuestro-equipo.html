@@ -82,50 +82,74 @@
     </div>
   </section>
 
-  <!-- QUIÉNES SOMOS — apertura y origen ya son copy real (v2 SEO); la biografía de
-       los founders sigue como placeholder explícito por Decisión D19 — no se inventa
-       biografía, motivación ni anécdota fundacional sin insumo del cliente. -->
-  <section class="section" data-surface="atmosphere" aria-labelledby="quienes-somos-heading">
-    <div class="atmosphere" aria-hidden="true"></div>
-    <div class="container" style="max-width: 68ch;">
+  <!-- QUIÉNES SOMOS — D75 (2026-08-21): a pedido del Owner, recicla el diseño y
+       estructura de Home § "¿Qué hace AAA?"/Servicios § "Transparencia"
+       (`.grid-2.what-we-do-grid` + `.media-placeholder.what-we-do-visual`, ya
+       generalizado en D73/D74) — el `max-width: 68ch` que tenía antes hacía que el
+       margen izquierdo del contenido no coincidiera con el de Inicio/Metodología
+       (contenedor angosto centrado en vez del contenedor estándar del sitio).
+       Apertura y origen ya son copy real (v2 SEO); la biografía de los founders
+       sigue como placeholder explícito por Decisión D19 — no se inventa biografía,
+       motivación ni anécdota fundacional sin insumo del cliente. -->
+  <section class="section" data-surface="dark" aria-labelledby="quienes-somos-heading">
+    <div class="container grid-2 what-we-do-grid">
       <div class="reveal">
         <p class="eyebrow">Quiénes somos</p>
         <h2 id="quienes-somos-heading">¿Quiénes somos?</h2>
         <p>Nacimos en 2020 con un propósito claro: la representación técnica y estratégica de acreedores en procesos de insolvencia.</p>
         <p>Desde nuestra fundación, decidimos construir una firma altamente especializada, enfocando toda nuestra experiencia en quienes necesitan proteger sus derechos crediticios y tomar decisiones con información, respaldo jurídico y visión de negocio.</p>
         <p>Hoy acompañamos organizaciones de múltiples sectores económicos en todo el territorio nacional, desarrollando estrategias que combinan conocimiento jurídico, cobertura operativa y tecnología para afrontar los desafíos del riesgo crediticio.</p>
+        <div class="ady-note" style="margin-top: var(--space-6);">
+          <strong>Founders — contenido pendiente del cliente</strong>
+          Julián Agudelo y Angélica Chamorro fundaron la firma juntos — su historia, motivación y anécdota fundacional siguen pendientes de que el cliente las comparta (Decisión D19). No se inventa biografía.
+        </div>
       </div>
-      <div class="ady-note reveal" style="margin-top: var(--space-8);">
-        <strong>Founders — contenido pendiente del cliente</strong>
-        Julián Agudelo y Angélica Chamorro fundaron la firma juntos — su historia, motivación y anécdota fundacional siguen pendientes de que el cliente las comparta (Decisión D19). No se inventa biografía.
+      <div class="media-placeholder what-we-do-visual reveal" role="img" aria-label="Espacio reservado para fotografía de los founders, pendiente de material del cliente">
+        <span class="media-placeholder__label">Fotografía de los founders — pendiente de material del cliente</span>
       </div>
     </div>
   </section>
 
-  <!-- FILOSOFÍA — mismos 3 pilares ya validados en C0 (brief, pregunta 3), aplicados
-       en el resto del sitio. -->
-  <section class="section" data-surface="muted" aria-labelledby="filosofia-heading">
-    <div class="container" style="max-width: 68ch;">
+  <!-- FILOSOFÍA — D75 (2026-08-21): rediseño a pedido del Owner ("muy plana", con el
+       mismo problema de márgenes que "¿Quiénes somos?") — mismos 3 pilares ya
+       validados en C0 (brief, pregunta 3), sin cambios de copy, ahora como 3 tarjetas
+       en vez de una sola línea de texto corrida. Nueva clase `.philosophy-grid`
+       (no exclusiva de ninguna página), mismo lenguaje visual ya usado en el resto
+       del sitio para tarjetas de atributo (borde, `--radius-md`, ícono + título Krub
+       bold — ver `.sector-card`) en vez de reutilizar/generalizar `.focus-grid` de
+       Home (pensado para 6 tarjetas con ciclo de color, no 3). Contenedor estándar
+       (`.container`, sin `max-width` propio) — resuelve el mismo problema de margen
+       que "¿Quiénes somos?". -->
+  <section class="section" data-surface="light" aria-labelledby="filosofia-heading">
+    <div class="container">
       <div class="reveal">
         <p class="eyebrow">Filosofía</p>
-        <h3 id="filosofia-heading">Filosofía AAA Estudio Legal</h3>
-        <p>Innovación con rigor. Solidez con tecnología. Dimensión humana. Tres principios que sostienen cada decisión de la firma.</p>
+        <h2 id="filosofia-heading">Filosofía AAA Estudio Legal</h2>
+      </div>
+      <div class="philosophy-grid reveal" role="list" aria-label="Principios de AAA Estudio Legal">
+        <article class="philosophy-card" role="listitem">
+          <svg class="philosophy-card__icon" viewBox="0 0 256 256" fill="none" stroke="currentColor" stroke-width="14" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M128 40a64 64 0 0 1 40 114c-10 8-16 18-16 30h-48c0-12-6-22-16-30A64 64 0 0 1 128 40Z"/><path d="M104 216h48"/></svg>
+          <h3>Innovación con rigor</h3>
+        </article>
+        <article class="philosophy-card" role="listitem">
+          <svg class="philosophy-card__icon" viewBox="0 0 256 256" fill="none" stroke="currentColor" stroke-width="14" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M40 216h176M56 216V100l72-44 72 44v116M96 216V116M160 216V116"/></svg>
+          <h3>Solidez con tecnología</h3>
+        </article>
+        <article class="philosophy-card" role="listitem">
+          <svg class="philosophy-card__icon" viewBox="0 0 256 256" fill="none" stroke="currentColor" stroke-width="14" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M128 208S48 160 48 104a40 40 0 0 1 80-8 40 40 0 0 1 80 8c0 56-80 104-80 104Z"/></svg>
+          <h3>Dimensión humana</h3>
+        </article>
       </div>
     </div>
   </section>
 
   <!-- D72 (2026-08-21): "Nuestro equipo" y "Postulación" se mueven a la nueva página
        trabaja-con-nosotros.html — a pedido del Owner. Esta página (Quiénes somos)
-       conserva Hero/Quiénes somos/Filosofía/Cierre. Ver trabaja-con-nosotros.html
-       para el contenido movido, sin cambios de copy. -->
-
-  <!-- CIERRE — enlaces a redes, sin CTA comercial (outline explícito de esta página). -->
-  <section class="section" data-surface="atmosphere" aria-label="Redes sociales">
-    <div class="atmosphere" aria-hidden="true"></div>
-    <div class="container" style="max-width: 60ch;">
-      <p class="reveal">Conócenos también en <a href="proximamente.html">LinkedIn</a> e <a href="proximamente.html">Instagram</a>.</p>
-    </div>
-  </section>
+       conserva Hero/Quiénes somos/Filosofía. Ver trabaja-con-nosotros.html para el
+       contenido movido, sin cambios de copy.
+       D75 (2026-08-21): se retira el cierre "Conócenos también en LinkedIn e
+       Instagram." — a pedido del Owner, ya no es necesario. La página termina en
+       Filosofía. -->
 
 </main>
 
