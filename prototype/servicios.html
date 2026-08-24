@@ -80,7 +80,11 @@
       </div>
       <div class="hero-shell__content">
         <p class="eyebrow">Soluciones para acreedores</p>
-        <h1 class="hero__title">¿Un deudor puso en riesgo <span class="text-gradient">su crédito?</span></h1>
+        <!-- D77 (2026-08-21): "su" y "crédito?" unidos con nbsp — a pedido del Owner,
+             para que las dos palabras del texto dorado queden siempre en el mismo
+             renglón ("su" ya no se separaba de "crédito?" al hacer wrap, quedando
+             suelta al final de la primera línea junto al texto blanco). -->
+        <h1 class="hero__title">¿Un deudor puso en riesgo <span class="text-gradient">su&nbsp;crédito?</span></h1>
         <p>Representamos exclusivamente a acreedores en procesos de insolvencia y normalización de activos, combinando especialización jurídica, cobertura nacional y tecnología propia para respaldar decisiones críticas.</p>
       </div>
     </div>
