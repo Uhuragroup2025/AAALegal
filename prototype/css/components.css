@@ -2401,12 +2401,15 @@ section[aria-labelledby="situaciones-heading"] .section-head {
   margin: 0;
 }
 
-/* Qué hace AAA: visual horizontal, contenido y altura subordinados al texto. */
-.home-page .what-we-do-grid {
+/* Qué hace AAA (Home): visual horizontal, contenido y altura subordinados al texto.
+   D73 (2026-08-21): deja de ser exclusivo de Home (`.home-page`) — el Owner pidió
+   reutilizar este mismo diseño para Servicios § "Transparencia", mismo patrón de
+   generalización que D55/D67 (header/footer). */
+.what-we-do-grid {
   align-items: center;
 }
 
-.home-page .what-we-do-visual {
+.what-we-do-visual {
   width: min(100%, 540px);
   max-height: 360px;
   aspect-ratio: 3 / 2;
@@ -2416,7 +2419,7 @@ section[aria-labelledby="situaciones-heading"] .section-head {
 }
 
 @media (max-width: 800px) {
-  .home-page .what-we-do-visual {
+  .what-we-do-visual {
     width: 100%;
     max-height: 320px;
     justify-self: stretch;

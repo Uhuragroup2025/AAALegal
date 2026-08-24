@@ -204,50 +204,45 @@
     </div>
   </section>
 
-  <!-- OBJECIONES RESUELTAS / TRANSPARENCIA — ajuste 2026-07-31 a pedido del Owner:
-       fondo blanco (antes "atmósfera") y el placeholder de imagen (en vez de la foto
-       reutilizada de Inicio) para dejar explícito ante el cliente que aquí falta
-       material propio — mismo tratamiento `.media-placeholder` usado en el resto del
-       sitio, no una fotografía real. -->
-  <section class="section" data-surface="light" aria-labelledby="objeciones-heading">
-    <div class="container">
-      <div class="cierre-grid reveal">
-        <div class="cierre-card cierre-card--image">
-          <div class="media-placeholder" data-img-id="IMG-13" role="img" aria-label="Espacio reservado para fotografía o recurso visual de Transparencia (IMG-13) — ver IMAGE-BRIEF.md">
-            <span class="media-placeholder__label">IMG-13 — pendiente de material del cliente</span>
-          </div>
-        </div>
-        <div class="cierre-card cierre-card--cta">
-          <span class="cierre-card__halo" aria-hidden="true"></span>
-          <div class="cierre-card__content cierre-card__content--statement">
-            <p class="eyebrow" style="color: var(--color-accent-light);">Transparencia</p>
-            <h2 id="objeciones-heading">Sin promesas que no podemos sostener</h2>
-            <p style="color: rgba(255,255,255,0.85);">No garantizamos el recaudo — nuestro compromiso es la defensa técnica más rigurosa del crédito. Los honorarios se definen caso a caso, siempre en proporción a lo que está en juego.</p>
-          </div>
-        </div>
+  <!-- OBJECIONES RESUELTAS / TRANSPARENCIA — D73 (2026-08-21): a pedido del Owner,
+       reusa el mismo diseño de Home § "¿Qué hace AAA?" (`.grid-2.what-we-do-grid` +
+       `.media-placeholder.what-we-do-visual`, ahora generalizado en components.css)
+       en vez del bloque de dos tarjetas con halo que tenía antes. Mismo copy y mismo
+       `data-img-id="IMG-13"` de siempre, solo cambia la estructura visual. -->
+  <section class="section" data-surface="dark" aria-labelledby="objeciones-heading">
+    <div class="container grid-2 what-we-do-grid">
+      <div class="reveal">
+        <p class="eyebrow">Transparencia</p>
+        <h2 id="objeciones-heading">Sin promesas que no podemos sostener</h2>
+        <p>No garantizamos el recaudo — nuestro compromiso es la defensa técnica más rigurosa del crédito. Los honorarios se definen caso a caso, siempre en proporción a lo que está en juego.</p>
+      </div>
+      <div class="media-placeholder what-we-do-visual reveal" data-img-id="IMG-13" role="img" aria-label="Espacio reservado para fotografía o recurso visual de Transparencia (IMG-13) — ver IMAGE-BRIEF.md">
+        <span class="media-placeholder__label">IMG-13 — pendiente de material del cliente</span>
       </div>
     </div>
   </section>
 
-  <!-- CIERRE — mismo bloque de dos tarjetas que Transparencia (2026-07-31), invertido:
-       texto+CTA a la izquierda, imagen a la derecha. Reutiliza `hero-inicio.webp`
-       como relleno temporal, igual que en el bloque anterior. -->
+  <!-- CIERRE — D73 (2026-08-21): a pedido del Owner, se quita "¿Su empresa tiene un
+       crédito en riesgo o en proceso de insolvencia?" y se reemplaza por el mismo
+       bloque de cierre de Home ("Conversemos sobre su caso."), sin cambios de copy
+       ni de href — mismo destino (Captación B2B) que en Home. -->
   <section class="section" data-surface="atmosphere" aria-labelledby="cierre-heading">
-    <div class="atmosphere" aria-hidden="true"></div>
+    <div class="atmosphere" aria-hidden="true"><div class="atmosphere__halo" aria-hidden="true"></div></div>
     <div class="container">
       <div class="cierre-grid reveal">
+        <div class="cierre-card cierre-card--image">
+          <img class="cierre-card__img" src="assets/img/hero-inicio.webp" alt="Equipo de AAA Estudio Legal trabajando en sala de reuniones" data-img-id="IMG-07">
+        </div>
         <div class="cierre-card cierre-card--cta">
           <span class="cierre-card__halo" aria-hidden="true"></span>
           <div class="cierre-card__content">
-            <h2 id="cierre-heading">¿Su empresa tiene un crédito en riesgo o en proceso de insolvencia?</h2>
-            <a class="btn cierre-card__btn" href="#nota-ady">
-              Consulte su caso con ADY
+            <h2 id="cierre-heading">Conversemos sobre su caso.</h2>
+            <p>Si enfrenta un proceso de insolvencia o necesita fortalecer la protección de su cartera, nuestro equipo está listo para acompañarlo.</p>
+            <a class="btn cierre-card__btn" href="captacion-b2b.html">
+              Hablemos de su caso
               <svg class="btn--icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
             </a>
           </div>
-        </div>
-        <div class="cierre-card cierre-card--image">
-          <img class="cierre-card__img" src="assets/img/hero-inicio.webp" alt="Equipo de AAA Estudio Legal trabajando en sala de reuniones" data-img-id="IMG-14">
         </div>
       </div>
     </div>
