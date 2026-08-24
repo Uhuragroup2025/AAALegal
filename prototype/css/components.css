@@ -1110,37 +1110,28 @@ section[data-surface="muted"] + .hero .curve-divider,
    por encima de los halos. */
 [data-surface="atmosphere"] > .container { position: relative; z-index: 1; }
 
-/* ---------- Texto en degradado — reservado a 1–2 mensajes narrativos (§ 7) ---------- */
+/* ---------- Texto con énfasis en cursiva — reservado a 1–2 mensajes narrativos (§ 7) ----------
+   D76 (2026-08-21): se quita el degradado — el Owner señaló que el estilo de este
+   texto en Home (color dorado sólido, vía `.home-page .text-gradient`) no coincidía
+   con el de las demás páginas (que caían en el degradado de esta regla base, nunca
+   aprobado por el cliente) y pidió normalizar todo el sitio al tratamiento de Home:
+   mismo color dorado sólido en todas partes, sin degradado. La clase conserva su
+   nombre (`.text-gradient`) para no tocar el HTML de las 3 páginas que la usan. */
 .text-gradient {
-  /* D26: itálica como tratamiento de énfasis — el degradado por sí solo (color) no
-     basta. D30: Libre Caslon Display (--font-display) no tiene corte itálico real;
-     usar font-style:italic sobre ella produciría itálica sintética (inclinada
-     algorítmicamente), que en un serif se ve distorsionada. En su lugar se usa
-     'Libre Caslon Text' aquí específicamente, que sí trae itálica real de la misma
-     familia Caslon — visualmente compatible con Libre Caslon Display en el texto
-     upright de alrededor. */
+  /* D26: itálica como tratamiento de énfasis. D30: Libre Caslon Display
+     (--font-display) no tiene corte itálico real; usar font-style:italic sobre ella
+     produciría itálica sintética (inclinada algorítmicamente), que en un serif se ve
+     distorsionada. En su lugar se usa 'Libre Caslon Text' aquí específicamente, que
+     sí trae itálica real de la misma familia Caslon — visualmente compatible con
+     Libre Caslon Display en el texto upright de alrededor. */
   font-family: 'Libre Caslon Text', Georgia, 'Times New Roman', serif;
   font-style: italic;
-  /* --color-gold-100 y --color-accent-cool-100 son ambos alias de --color-accent-light
-     en la paleta D26 (a diferencia de la teal de D23, donde eran tonos distintos) — un
-     degradado entre el mismo color dos veces se ve como color plano, no como degradado.
-     Se usa aquí el par azul claro → cobre (accent-on-dark / accent-main) para que el
-     degradado siga siendo visible sobre fondo oscuro. */
-  background: linear-gradient(100deg, var(--color-accent-on-dark), var(--color-accent-main));
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: var(--color-accent-on-dark); /* respaldo sólido si el navegador no soporta background-clip:text */
-  -webkit-text-fill-color: transparent;
+  color: var(--color-accent-main);
 }
-@supports not (background-clip: text) {
-  .text-gradient { -webkit-text-fill-color: unset; color: var(--color-accent-on-dark); }
-}
-/* Sobre fondo claro (atmósfera), el degradado corre entre navy y cobre — ambos con
-   contraste adecuado sobre blanco/marfil (ver tokens.css para las razones de cada tono) */
+/* Sobre fondo claro (atmósfera): el dorado sólido no tiene contraste suficiente
+   sobre blanco/marfil — se usa navy, mismo criterio de contraste que ya regía la
+   variante clara del degradado que reemplaza. */
 section:not([data-surface="dark"]) .text-gradient {
-  background: linear-gradient(100deg, var(--color-navy-900), var(--color-gold-200));
-  -webkit-background-clip: text;
-  background-clip: text;
   color: var(--color-navy-900);
 }
 
@@ -2344,14 +2335,6 @@ section[data-surface="muted"] .post-meta__badge { border-color: var(--color-bord
   color: rgba(255, 255, 255, 0.78);
   font-size: 1.125rem;
   letter-spacing: -0.012em;
-}
-
-.home-page .text-gradient {
-  color: var(--color-accent-main);
-  background: none;
-  -webkit-background-clip: initial;
-  background-clip: initial;
-  -webkit-text-fill-color: currentColor;
 }
 
 .home-page .hero__actions { margin-top: var(--space-8); }
