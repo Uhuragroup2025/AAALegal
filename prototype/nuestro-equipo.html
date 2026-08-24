@@ -114,35 +114,34 @@
     </div>
   </section>
 
-  <!-- FILOSOFÍA — D75 (2026-08-21): rediseño a pedido del Owner ("muy plana", con el
-       mismo problema de márgenes que "¿Quiénes somos?") — mismos 3 pilares ya
-       validados en C0 (brief, pregunta 3), sin cambios de copy, ahora como 3 tarjetas
-       en vez de una sola línea de texto corrida. Nueva clase `.philosophy-grid`
-       (no exclusiva de ninguna página), mismo lenguaje visual ya usado en el resto
-       del sitio para tarjetas de atributo (borde, `--radius-md`, ícono + título Krub
-       bold — ver `.sector-card`) en vez de reutilizar/generalizar `.focus-grid` de
-       Home (pensado para 6 tarjetas con ciclo de color, no 3). Contenedor estándar
-       (`.container`, sin `max-width` propio) — resuelve el mismo problema de margen
-       que "¿Quiénes somos?". -->
+  <!-- FILOSOFÍA — D78 (2026-08-21): segundo rediseño a pedido del Owner — el de D75
+       (3 tarjetas de atributo) no convenció; el Owner adjuntó una referencia (foto de
+       fondo + tarjeta sólida flotante con ícono/título/texto) y pidió recrear esa
+       composición con nuestra propia paleta y tipografía, no las de la referencia.
+       Se reutiliza el patrón ya construido `.cierre-grid`/`.cierre-card--image`
+       (`.media-placeholder`) + `.cierre-card--cta` (tarjeta sólida navy, mismo
+       tratamiento que tenía "Transparencia" en Servicios antes de D73) en vez de
+       inventar un componente nuevo de foto+tarjeta superpuesta. Vuelve el copy
+       original en un solo párrafo (sin cambios) en vez de las 3 tarjetas separadas
+       de D75; se agrega un ícono de brújula (referencia visual a "principios/
+       dirección") arriba del título, como en la imagen de referencia. -->
   <section class="section" data-surface="light" aria-labelledby="filosofia-heading">
     <div class="container">
-      <div class="reveal">
-        <p class="eyebrow">Filosofía</p>
-        <h2 id="filosofia-heading">Filosofía AAA Estudio Legal</h2>
-      </div>
-      <div class="philosophy-grid reveal" role="list" aria-label="Principios de AAA Estudio Legal">
-        <article class="philosophy-card" role="listitem">
-          <svg class="philosophy-card__icon" viewBox="0 0 256 256" fill="none" stroke="currentColor" stroke-width="14" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M128 40a64 64 0 0 1 40 114c-10 8-16 18-16 30h-48c0-12-6-22-16-30A64 64 0 0 1 128 40Z"/><path d="M104 216h48"/></svg>
-          <h3>Innovación con rigor</h3>
-        </article>
-        <article class="philosophy-card" role="listitem">
-          <svg class="philosophy-card__icon" viewBox="0 0 256 256" fill="none" stroke="currentColor" stroke-width="14" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M40 216h176M56 216V100l72-44 72 44v116M96 216V116M160 216V116"/></svg>
-          <h3>Solidez con tecnología</h3>
-        </article>
-        <article class="philosophy-card" role="listitem">
-          <svg class="philosophy-card__icon" viewBox="0 0 256 256" fill="none" stroke="currentColor" stroke-width="14" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M128 208S48 160 48 104a40 40 0 0 1 80-8 40 40 0 0 1 80 8c0 56-80 104-80 104Z"/></svg>
-          <h3>Dimensión humana</h3>
-        </article>
+      <div class="cierre-grid reveal">
+        <div class="cierre-card cierre-card--image">
+          <div class="media-placeholder" role="img" aria-label="Espacio reservado para fotografía institucional, pendiente de material del cliente">
+            <span class="media-placeholder__label">Fotografía institucional — pendiente de material del cliente</span>
+          </div>
+        </div>
+        <div class="cierre-card cierre-card--cta">
+          <span class="cierre-card__halo" aria-hidden="true"></span>
+          <div class="cierre-card__content cierre-card__content--statement">
+            <svg width="38" height="38" viewBox="0 0 256 256" fill="none" stroke="currentColor" stroke-width="14" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="color: var(--color-accent-light);"><circle cx="128" cy="128" r="96"/><path d="m168 88-30 50-50 30 30-50Z"/></svg>
+            <p class="eyebrow" style="color: var(--color-accent-light);">Filosofía</p>
+            <h2 id="filosofia-heading">Filosofía AAA Estudio Legal</h2>
+            <p style="color: rgba(255,255,255,0.85);">Innovación con rigor. Solidez con tecnología. Dimensión humana. Tres principios que sostienen cada decisión de la firma.</p>
+          </div>
+        </div>
       </div>
     </div>
   </section>
