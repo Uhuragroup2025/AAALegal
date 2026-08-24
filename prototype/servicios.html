@@ -225,11 +225,14 @@
   <!-- CIERRE — D73 (2026-08-21): a pedido del Owner, se quita "¿Su empresa tiene un
        crédito en riesgo o en proceso de insolvencia?" y se reemplaza por el mismo
        bloque de cierre de Home ("Conversemos sobre su caso."), sin cambios de copy
-       ni de href — mismo destino (Captación B2B) que en Home. -->
+       ni de href — mismo destino (Captación B2B) que en Home.
+       D74 (2026-08-21): se agrega `cierre-grid--global` — el Owner señaló que el
+       cierre no coincidía visualmente con el de Home (degradado, halo oculto, botón
+       dorado, h2 más grande); con esta clase, ahora sí. -->
   <section class="section" data-surface="atmosphere" aria-labelledby="cierre-heading">
     <div class="atmosphere" aria-hidden="true"><div class="atmosphere__halo" aria-hidden="true"></div></div>
     <div class="container">
-      <div class="cierre-grid reveal">
+      <div class="cierre-grid cierre-grid--global reveal">
         <div class="cierre-card cierre-card--image">
           <img class="cierre-card__img" src="assets/img/hero-inicio.webp" alt="Equipo de AAA Estudio Legal trabajando en sala de reuniones" data-img-id="IMG-07">
         </div>

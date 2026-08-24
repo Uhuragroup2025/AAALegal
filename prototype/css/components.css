@@ -2852,39 +2852,51 @@ section[aria-labelledby="situaciones-heading"] .section-head {
   }
 }
 
-/* Cierre: único segundo momento atmosférico; sin halo decorativo. */
-.home-page .cierre-grid { gap: var(--space-6); }
+/* Cierre: único segundo momento atmosférico; sin halo decorativo.
+   D74 (2026-08-21): el Owner señaló que el cierre "Conversemos sobre su caso."
+   reusado en Servicios (D73) no coincidía visualmente con el de Home (color sólido
+   en vez de degradado, halo visible, botón blanco en vez de dorado, h2 más chico).
+   Este tratamiento era exclusivo de Home vía `.home-page` — en vez de generalizarlo
+   sin más (como D55/D67/D73), aquí se usa un modificador dedicado,
+   `.cierre-grid--global`, porque `.cierre-card` también lo usa Captación B2B para su
+   propia tarjeta de cierre (encabezado mucho más largo, "Cuéntenos su caso y le
+   contactamos con un diagnóstico inicial") — generalizar sin más habría forzado ese
+   encabezado a `max-width:12ch`/`font-size:2.3rem`, rompiéndolo. El `.home-page
+   .cierre-grid` original se reemplaza por este modificador; se agrega la clase
+   `cierre-grid--global` al `.cierre-grid` de Home y al de Servicios (ambos comparten
+   el mismo bloque "Conversemos sobre su caso."), no a Captación B2B. */
+.cierre-grid--global { gap: var(--space-6); }
 
-.home-page .cierre-card {
+.cierre-grid--global .cierre-card {
   min-height: 420px;
   border-radius: var(--radius-md);
 }
 
-.home-page .cierre-card--cta {
+.cierre-grid--global .cierre-card--cta {
   background:
     radial-gradient(circle at 82% 14%, rgba(255, 255, 255, 0.085), transparent 31%),
     linear-gradient(138deg, var(--color-navy-deep) 0%, var(--color-navy-hover) 100%);
 }
 
-.home-page .cierre-card__halo { display: none; }
+.cierre-grid--global .cierre-card__halo { display: none; }
 
-.home-page .cierre-card__content h2 {
+.cierre-grid--global .cierre-card__content h2 {
   max-width: 12ch;
   font-size: 2.3rem;
   line-height: 1.02;
 }
 
-.home-page .cierre-card__content p {
+.cierre-grid--global .cierre-card__content p {
   color: rgba(255, 255, 255, 0.72);
 }
 
-.home-page .cierre-card__btn {
+.cierre-grid--global .cierre-card__btn {
   color: var(--color-navy-hover);
   background: var(--color-accent-main);
   border-color: var(--color-accent-main);
 }
 
-.home-page .cierre-card__btn:hover {
+.cierre-grid--global .cierre-card__btn:hover {
   color: var(--color-white);
   background: transparent;
   border-color: var(--color-accent-main);
@@ -3246,8 +3258,13 @@ section[aria-labelledby="situaciones-heading"] .section-head {
   }
 
   .home-page .section-head h2,
-  .home-page section:not(.hero-immersive):not(.home-footer__section) h2,
-  .home-page .cierre-card__content h2 {
+  .home-page section:not(.hero-immersive):not(.home-footer__section) h2 {
+    font-size: 1.71875rem;
+  }
+
+  /* D74 (2026-08-21): separado del selector combinado de arriba — ya no es exclusivo
+     de Home, ver nota junto a `.cierre-grid--global` más arriba en este archivo. */
+  .cierre-grid--global .cierre-card__content h2 {
     font-size: 1.71875rem;
   }
 
@@ -3325,5 +3342,5 @@ section[aria-labelledby="situaciones-heading"] .section-head {
 
   .home-page .people-intro { padding: var(--space-8) var(--space-6); }
 
-  .home-page .cierre-card { min-height: 300px; }
+  .cierre-grid--global .cierre-card { min-height: 300px; }
 }
