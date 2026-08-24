@@ -504,7 +504,12 @@ section[data-surface="muted"] + .hero .curve-divider,
   align-items: center;
 }
 .service-block--media-reverse { grid-template-columns: minmax(220px, 320px) 1fr; }
-.service-block__media { min-height: 280px; }
+/* D70 (2026-08-21): el Owner señaló con una captura que el recuadro de imagen se veía
+   demasiado alto en los 3 bloques de "Nuestros servicios", desperdiciando viewport —
+   pidió reducir el alto, aceptando que quede cuadrado en vez de más ancho que alto.
+   Baja de 280px a 220px (el extremo angosto de `minmax(220px, 320px)` de la columna),
+   quedando cuadrado o casi cuadrado según el ancho real que tome la columna. */
+.service-block__media { min-height: 220px; }
 @media (max-width: 800px) {
   .service-block--media,
   .service-block--media-reverse { grid-template-columns: 1fr; }
