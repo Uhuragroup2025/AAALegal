@@ -547,9 +547,16 @@ section[data-surface="muted"] + .hero .curve-divider,
 
 /* ---------- Sectores de experiencia — bandas editoriales sin lectura geográfica ---------- */
 
+/* D79 (2026-08-21): el Owner señaló que el párrafo de la derecha (más alto que el
+   título/eyebrow de la izquierda, `align-items:end` dejaba un vacío visible arriba
+   del eyebrow) quedaba desalineado — la columna derecha era demasiado angosta para
+   su propio texto, forzándolo a envolver en más líneas de las necesarias. Se ensancha
+   la columna derecha (de 0.7fr/280px a 0.95fr/340px) y su `max-width` (de 42ch a
+   50ch), así el párrafo envuelve en menos líneas y ambas columnas quedan más parejas
+   en alto. */
 .sector-experience__header {
   display: grid;
-  grid-template-columns: minmax(0, 1.45fr) minmax(280px, 0.7fr);
+  grid-template-columns: minmax(0, 1.2fr) minmax(340px, 0.95fr);
   gap: clamp(var(--space-10), 7vw, var(--space-24));
   align-items: end;
 }
@@ -560,7 +567,7 @@ section[data-surface="muted"] + .hero .curve-divider,
 }
 
 .sector-experience__intro {
-  max-width: 42ch;
+  max-width: 50ch;
   padding-bottom: 0.2em;
 }
 
