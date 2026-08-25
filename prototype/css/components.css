@@ -541,6 +541,23 @@ section[data-surface="muted"] + .hero .curve-divider,
   margin-bottom: var(--space-3);
 }
 .service-card p { font-size: var(--text-sm); }
+/* D85 (2026-08-25): el Owner pidió quitar el cambio de color del hover en estas
+   tarjetas (el brillo radial azul de `.surface-solid::before`, efecto 2, y el borde
+   que pasa a azul claro), conservando el desplazamiento hacia arriba (efecto 1) y la
+   sombra. Selector de 3 clases (`.service-card.surface-solid:hover`) para ganar por
+   especificidad sobre `.surface-solid:hover`/`::before` (arquitectura de hover en
+   "Superficies", más abajo en este archivo) sin tocar esas reglas globales — el resto
+   del sitio (blog, foco, etc.) conserva el brillo/borde de siempre. */
+@media (hover: hover) and (pointer: fine) {
+  .service-card.surface-solid:hover,
+  .service-card.surface-solid:focus-within {
+    border-color: var(--color-border-subtle);
+  }
+  .service-card.surface-solid:hover::before,
+  .service-card.surface-solid:focus-within::before {
+    opacity: 0;
+  }
+}
 
 /* ---------- Franja de sectores (prueba social sin logos/cifras) ---------- */
 .sector-strip {
