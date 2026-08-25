@@ -2070,7 +2070,20 @@ section[data-surface="dark"] .stepper__step.is-active .stepper__icon { color: va
    depender de un hover real que el touch no tiene. La TRANSICIÓN se anima solo
    bajo `prefers-reduced-motion:no-preference`. El disparo automático por hover
    real de mouse (sin necesidad de click) vive aparte, bajo
-   `(hover:hover) and (pointer:fine)`. */
+   `(hover:hover) and (pointer:fine)`.
+
+   D93 (2026-08-25): el Owner reportó texto en espejo en el reverso al hacer
+   flip — el reverso nunca tuvo nombre/cargo en el marcado (solo la descripción,
+   ver HTML), así que lo que se veía era la cara FRONTAL asomando "por detrás":
+   un bug conocido de `backface-visibility` en algunos navegadores/GPU (sin ella
+   funcionando, un elemento rotado 180° se sigue pintando, pero en espejo). En
+   vez de depender solo de esa propiedad, se agrega `visibility` como mecanismo
+   de respaldo independiente: cada cara alterna `visibility:hidden/visible`
+   exactamente en el cruce de los 90° del giro (`transition-delay: 350ms` sobre
+   un giro de 700ms, con `ease-in-out` para que ese cruce quede realmente a la
+   mitad del tiempo) — así la cara no activa nunca se pinta, sin importar si el
+   navegador soporta bien el backface-visibility nativo. Sin esta explicación
+   nadie adivinaría por qué un simple `visibility` convive con el 3D flip. */
 .team-flip-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -2078,6 +2091,12 @@ section[data-surface="dark"] .stepper__step.is-active .stepper__icon { color: va
 }
 @media (max-width: 1023px) { .team-flip-grid { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 560px) { .team-flip-grid { grid-template-columns: 1fr; } }
+/* Bloques de fotografía simple (D93) — mismos 4 espacios de la grilla, sin
+   `.team-flip-card`: solo `.media-placeholder` suelto, sin flip ni interacción. */
+.team-flip-grid > .media-placeholder {
+  aspect-ratio: 3 / 4;
+  margin: 0;
+}
 
 .team-flip-card {
   perspective: 1200px;
@@ -2096,7 +2115,7 @@ section[data-surface="dark"] .stepper__step.is-active .stepper__icon { color: va
   transform-style: preserve-3d;
 }
 @media (prefers-reduced-motion: no-preference) {
-  .team-flip-card__inner { transition: transform 700ms var(--motion-ease-entrance); }
+  .team-flip-card__inner { transition: transform 700ms ease-in-out; }
 }
 .team-flip-card.is-flipped .team-flip-card__inner { transform: rotateY(180deg); }
 @media (hover: hover) and (pointer: fine) {
@@ -2110,6 +2129,17 @@ section[data-surface="dark"] .stepper__step.is-active .stepper__icon { color: va
   -webkit-backface-visibility: hidden;
   border-radius: var(--radius-md);
   overflow: hidden;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .team-flip-card__face { transition: visibility 0s linear 350ms; }
+}
+.team-flip-card__front { visibility: visible; }
+.team-flip-card__back { visibility: hidden; }
+.team-flip-card.is-flipped .team-flip-card__front { visibility: hidden; }
+.team-flip-card.is-flipped .team-flip-card__back { visibility: visible; }
+@media (hover: hover) and (pointer: fine) {
+  .team-flip-card:hover .team-flip-card__front { visibility: hidden; }
+  .team-flip-card:hover .team-flip-card__back { visibility: visible; }
 }
 .team-flip-card__front.media-placeholder {
   aspect-ratio: auto; /* la proporción ya la fija `.team-flip-card` (3/4) */
