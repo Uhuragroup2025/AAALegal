@@ -1944,6 +1944,72 @@ section[data-surface="dark"] .stepper__step.is-active .stepper__icon { color: va
   .stepper--flowchart .stepper__connector svg { width: 60%; height: 60%; transform: none; }
 }
 
+/* D86 (2026-08-25): el cliente sugirió (vía el Owner) un efecto de entrada al llegar
+   a "Nuestra metodología", o un efecto hover en los nodos — se agregan ambos, scoped
+   a `.stepper--flowchart` (Captación B2B § "Nuestro proceso" usa el mismo componente
+   sin este modificador y no se ve afectado). */
+
+/* Entrada: los 3 nodos ahora llevan también la clase `.reveal` (ver servicios.html),
+   el sistema de entrada ya usado en todo el sitio. Problema: `.stepper__step` YA tiene
+   una regla D69 que fuerza `opacity:1; transform:none;` sobre `[data-stepper-ready]`
+   (para que la descripción esté siempre visible sin depender del scroll-alternado de
+   `.is-active`) — con igual especificidad que la regla base de `.reveal` y definida
+   más abajo en el archivo, esa regla D69 ganaría la cascada y anularía el fade-in de
+   entrada. Este selector de 5 clases/atributos (uno más que el de D69) gana por
+   especificidad sin tener que tocar la regla D69 ni el sistema `is-active` del que
+   sigue dependiendo Captación B2B. */
+.stepper--flowchart .stepper__step.reveal[data-reveal-ready]:not(.is-visible) {
+  opacity: 0;
+  transform: translateY(var(--reveal-distance));
+}
+.stepper--flowchart .stepper__step.reveal[data-reveal-ready] {
+  transition: opacity var(--motion-entrance) var(--motion-ease-entrance),
+              transform var(--motion-entrance) var(--motion-ease-entrance);
+  transition-delay: calc(var(--stagger-index, 0) * var(--motion-stagger-step));
+}
+
+/* Hover: borde, ícono y título del nodo pasan al acento claro sobre fondo oscuro
+   (`--color-accent-on-dark`, el mismo tono que ya usa el eyebrow de la sección) y el
+   nodo completo se eleva un poco — gateado a hover real (mouse) y al layout de fila
+   de escritorio (≥801px, donde el ícono es el círculo con borde de D69; en mobile/
+   tablet el flujograma es una lista vertical simple, sin hover). */
+@media (min-width: 801px) {
+  @media (prefers-reduced-motion: no-preference) {
+    .stepper--flowchart .stepper__step {
+      transition: transform var(--motion-base) var(--motion-ease);
+    }
+    .stepper--flowchart .stepper__icon {
+      transition: border-color var(--motion-base) var(--motion-ease),
+                  background-color var(--motion-base) var(--motion-ease),
+                  color var(--motion-base) var(--motion-ease);
+    }
+    .stepper--flowchart .stepper__step h3 {
+      transition: color var(--motion-base) var(--motion-ease);
+    }
+  }
+  @media (hover: hover) and (pointer: fine) {
+    /* Selector de 5 clases/atributos (uno más que la regla D69,
+       `.stepper--flowchart .stepper__step[data-stepper-ready]:not(.is-active)`, que
+       fuerza `transform:none` en los nodos no activos del scroll-alternado) — sin
+       esto, el nodo perdería la elevación de hover cada vez que `.is-active` se
+       mueve a otro paso mientras el usuario tiene el mouse encima. */
+    .stepper--flowchart .stepper__step.reveal[data-reveal-ready]:hover,
+    .stepper--flowchart .stepper__step.reveal[data-reveal-ready]:focus-within {
+      transform: translateY(-6px);
+    }
+    .stepper--flowchart .stepper__step:hover .stepper__icon,
+    .stepper--flowchart .stepper__step:focus-within .stepper__icon {
+      border-color: var(--color-accent-on-dark);
+      background: rgba(var(--color-accent-light-rgb), 0.14);
+      color: var(--color-accent-on-dark);
+    }
+    .stepper--flowchart .stepper__step:hover h3,
+    .stepper--flowchart .stepper__step:focus-within h3 {
+      color: var(--color-accent-on-dark);
+    }
+  }
+}
+
 /* =====================================================================
    FORMULARIO DE POSTULACIÓN — Talento AAA (2026-07-31)
    Único formulario real del prototipo; vive sobre fondo oscuro (mismo tono que el

@@ -151,7 +151,18 @@
        3 nodos con el margen izquierdo del eyebrow/título en vez de centrarlos
        distribuidos por todo el ancho — icono+título+descripción pasan de
        `text-align:center` a `left`, mismo patrón de fila (ícono junto al título) que
-       ya usa la vista mobile/tablet (D49), ahora también en desktop. -->
+       ya usa la vista mobile/tablet (D49), ahora también en desktop.
+       D86 (2026-08-25): el cliente señaló (vía el Owner) que la sección se sentía
+       "muy plana" y sugirió un efecto de entrada al llegar, o un efecto hover en los
+       nodos — se agregan ambos. Los 3 `<article class="stepper__step">` ganan la clase
+       `reveal` (el sistema de entrada ya usado en todo el sitio) con `--stagger-index`
+       0/1/2 para que aparezcan uno detrás de otro, no los 3 a la vez; esto no toca el
+       sistema de scroll `data-stepper-ready`/`is-active` (que sigue existiendo para
+       Captación B2B § "Nuestro proceso", el otro consumidor de `.stepper__step` sin
+       `--flowchart`) — ver el override de especificidad en components.css que hace que
+       la entrada `.reveal` gane sobre la regla D69 de "siempre opacity:1". El hover de
+       nodo (borde+ícono+título en acento, elevación) vive en components.css, gateado a
+       desktop con hover real. -->
   <section class="section stepper stepper--flowchart" data-surface="dark" aria-labelledby="proceso-heading">
     <div class="container stepper__grid">
       <div class="stepper__intro reveal">
@@ -159,7 +170,7 @@
         <h2 id="proceso-heading">Convertimos cada caso en una estrategia jurídica de recuperación.</h2>
       </div>
       <div class="stepper__steps">
-        <article class="stepper__step">
+        <article class="stepper__step reveal" style="--stagger-index:0">
           <div class="stepper__step-head">
             <span class="stepper__icon" aria-hidden="true">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="10" cy="10" r="6"/><path d="M15 15l5 5"/></svg>
@@ -171,7 +182,7 @@
         <span class="stepper__connector" aria-hidden="true">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 12h14M13 6l6 6-6 6"/></svg>
         </span>
-        <article class="stepper__step">
+        <article class="stepper__step reveal" style="--stagger-index:1">
           <div class="stepper__step-head">
             <span class="stepper__icon" aria-hidden="true">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M15 9l-2 6-6 2 2-6 6-2z"/></svg>
@@ -183,7 +194,7 @@
         <span class="stepper__connector" aria-hidden="true">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 12h14M13 6l6 6-6 6"/></svg>
         </span>
-        <article class="stepper__step">
+        <article class="stepper__step reveal" style="--stagger-index:2">
           <div class="stepper__step-head">
             <span class="stepper__icon" aria-hidden="true">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/></svg>
