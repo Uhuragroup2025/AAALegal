@@ -113,8 +113,17 @@
        "Nuestro equipo") — mismo tipo de ajuste que D88 hizo en "Origen". Se cambia a
        "Equipo por función", retomando el nombre que ya usa la estructura narrativa
        aprobada para este mismo bloque (content/04-nuestro-equipo.md, punto 2 del
-       outline: "Equipo por grupos/función"). -->
-  <section class="section" data-surface="light" aria-labelledby="equipo-heading">
+       outline: "Equipo por grupos/función").
+       D97 (2026-08-25): a pedido del Owner, se reduce el `padding-bottom` de esta
+       sección (mismo criterio que ya usa el hero de esta página, arriba, con su
+       propio `padding-bottom: var(--space-16)`) — sin el override, esta sección y
+       "Personas, no procesos" (ambas `data-surface="light"`, sin ningún divisor
+       visual entre sí) sumaban el `padding-block` completo de `.section`
+       (`--space-section`, hasta 10rem/160px) por cada lado, dejando un vacío de
+       hasta ~320px entre el párrafo de "Nuestro equipo" y el eyebrow de "Personas,
+       no procesos" — mucho más de lo que aporta como respiro visual entre dos
+       bloques del mismo tema. -->
+  <section class="section" data-surface="light" aria-labelledby="equipo-heading" style="padding-bottom: var(--space-16);">
     <div class="container grid-2 what-we-do-grid what-we-do-grid--reverse">
       <div class="media-placeholder what-we-do-visual reveal" role="img" aria-label="Espacio reservado para fotografía del equipo, pendiente de material del cliente">
         <span class="media-placeholder__label">Fotografía del equipo — pendiente de material del cliente</span>
@@ -255,32 +264,34 @@
        siendo secundario y estrictamente contextual — solo aparece en esta página,
        nunca en header, footer, Inicio, ni ninguna otra. -->
   <section class="section" data-surface="dark" aria-labelledby="postulacion-heading">
-    <div class="container" style="max-width: 60ch;">
-      <p class="eyebrow">Postulación</p>
-      <h2 id="postulacion-heading">¿Ve su carrera en AAA? Cuéntenos quién es usted.</h2>
-      <form class="talent-form reveal" aria-describedby="postulacion-nota" onsubmit="return false">
-        <div class="talent-form__field">
-          <label for="tf-nombre">Nombre completo</label>
-          <input type="text" id="tf-nombre" name="nombre" required>
-        </div>
-        <div class="talent-form__field">
-          <label for="tf-email">Correo electrónico</label>
-          <input type="email" id="tf-email" name="email" required>
-        </div>
-        <div class="talent-form__field">
-          <label for="tf-cv">Hoja de vida (CV)</label>
-          <input type="file" id="tf-cv" name="cv" accept=".pdf,.doc,.docx" required>
-        </div>
-        <div class="talent-form__field">
-          <label for="tf-extra">Campo adicional — pendiente de definir con el cliente</label>
-          <textarea id="tf-extra" name="extra" rows="3"></textarea>
-        </div>
-        <button class="btn btn--primary talent-form__submit" type="submit">
-          Postúlese
-          <svg class="btn--icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-        </button>
-        <p id="postulacion-nota" class="talent-form__note">Al postularse, su información se envía a <a href="mailto:info@agudeloabogados.com">info@agudeloabogados.com</a> — sin integración a un CRM (Decisión D12). Sin envío real en este prototipo.</p>
-      </form>
+    <div class="container">
+      <div style="max-width: 60ch;">
+        <p class="eyebrow">Postulación</p>
+        <h2 id="postulacion-heading">¿Ve su carrera en AAA? Cuéntenos quién es usted.</h2>
+        <form class="talent-form reveal" aria-describedby="postulacion-nota" onsubmit="return false">
+          <div class="talent-form__field">
+            <label for="tf-nombre">Nombre completo</label>
+            <input type="text" id="tf-nombre" name="nombre" required>
+          </div>
+          <div class="talent-form__field">
+            <label for="tf-email">Correo electrónico</label>
+            <input type="email" id="tf-email" name="email" required>
+          </div>
+          <div class="talent-form__field">
+            <label for="tf-cv">Hoja de vida (CV)</label>
+            <input type="file" id="tf-cv" name="cv" accept=".pdf,.doc,.docx" required>
+          </div>
+          <div class="talent-form__field">
+            <label for="tf-extra">Campo adicional — pendiente de definir con el cliente</label>
+            <textarea id="tf-extra" name="extra" rows="3"></textarea>
+          </div>
+          <button class="btn btn--primary talent-form__submit" type="submit">
+            Postúlese
+            <svg class="btn--icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </button>
+          <p id="postulacion-nota" class="talent-form__note">Al postularse, su información se envía a <a href="mailto:info@agudeloabogados.com">info@agudeloabogados.com</a> — sin integración a un CRM (Decisión D12). Sin envío real en este prototipo.</p>
+        </form>
+      </div>
     </div>
   </section>
 
