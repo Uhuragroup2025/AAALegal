@@ -147,6 +147,15 @@
        director Jaime Marmolejo, D19). Las 4 fotografías (personas) y los 4
        bloques de imagen simple siguen el mismo criterio de placeholder honesto de
        siempre (`.media-placeholder`) — no se inventan fotos.
+       D96 (2026-08-25): a pedido del Owner, se invierte el orden de la 2ª fila
+       para que quede en damero respecto a la 1ª — la 1ª fila va persona/imagen/
+       persona/imagen (Mariana, imagen, Andrés, imagen); la 2ª ahora va imagen/
+       persona/imagen/persona (imagen, Camila, imagen, Santiago), en vez de
+       repetir el mismo orden que la 1ª — cada columna de la grilla queda con un
+       bloque de persona arriba y uno de imagen abajo, o viceversa, nunca los dos
+       iguales. Solo cambia el orden en el HTML (y los `--stagger-index` para que
+       la entrada en cascada siga el nuevo orden visual); ninguna tarjeta ni su
+       contenido cambia.
        Además D93: el Owner reportó texto en espejo en el reverso de las tarjetas
        al hacer flip — el reverso nunca tuvo nombre/cargo en el marcado (solo la
        descripción), así que era `backface-visibility` fallando en renderizar
@@ -200,7 +209,10 @@
         <div class="media-placeholder reveal" style="--stagger-index:3" role="img" aria-label="Espacio reservado para fotografía institucional, pendiente de material del cliente">
           <span class="media-placeholder__label">Fotografía institucional — pendiente de material del cliente</span>
         </div>
-        <article class="team-flip-card reveal" style="--stagger-index:0" tabindex="0" role="button" aria-pressed="false" aria-label="Ver funciones de Camila Ortiz, Coordinadora de Normalización de Activos">
+        <div class="media-placeholder reveal" style="--stagger-index:0" role="img" aria-label="Espacio reservado para fotografía institucional, pendiente de material del cliente">
+          <span class="media-placeholder__label">Fotografía institucional — pendiente de material del cliente</span>
+        </div>
+        <article class="team-flip-card reveal" style="--stagger-index:1" tabindex="0" role="button" aria-pressed="false" aria-label="Ver funciones de Camila Ortiz, Coordinadora de Normalización de Activos">
           <div class="team-flip-card__inner">
             <div class="team-flip-card__face team-flip-card__front" aria-hidden="true">
               <img class="team-flip-card__logo" src="assets/img/isotipo-AAA-legal.svg" alt="" aria-hidden="true">
@@ -215,10 +227,10 @@
             </div>
           </div>
         </article>
-        <div class="media-placeholder reveal" style="--stagger-index:1" role="img" aria-label="Espacio reservado para fotografía institucional, pendiente de material del cliente">
+        <div class="media-placeholder reveal" style="--stagger-index:2" role="img" aria-label="Espacio reservado para fotografía institucional, pendiente de material del cliente">
           <span class="media-placeholder__label">Fotografía institucional — pendiente de material del cliente</span>
         </div>
-        <article class="team-flip-card reveal" style="--stagger-index:2" tabindex="0" role="button" aria-pressed="false" aria-label="Ver funciones de Santiago Vélez, Líder de Tecnología ADY">
+        <article class="team-flip-card reveal" style="--stagger-index:3" tabindex="0" role="button" aria-pressed="false" aria-label="Ver funciones de Santiago Vélez, Líder de Tecnología ADY">
           <div class="team-flip-card__inner">
             <div class="team-flip-card__face team-flip-card__front" aria-hidden="true">
               <img class="team-flip-card__logo" src="assets/img/isotipo-AAA-legal.svg" alt="" aria-hidden="true">
@@ -233,9 +245,6 @@
             </div>
           </div>
         </article>
-        <div class="media-placeholder reveal" style="--stagger-index:3" role="img" aria-label="Espacio reservado para fotografía institucional, pendiente de material del cliente">
-          <span class="media-placeholder__label">Fotografía institucional — pendiente de material del cliente</span>
-        </div>
       </div>
     </div>
   </section>
