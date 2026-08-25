@@ -2088,7 +2088,22 @@ section[data-surface="dark"] .stepper__step.is-active .stepper__icon { color: va
    D94 (2026-08-25): a pedido del Owner, el flip se siente más ágil (giro de
    700ms → 350ms — el delay de `visibility` baja a la mitad exacta, 175ms, para
    seguir cruzando justo a los 90°) y las tarjetas pasan de proporción vertical
-   (3:4) a cuadradas (1:1), para ahorrar alto de viewport. */
+   (3:4) a cuadradas (1:1), para ahorrar alto de viewport.
+   D95 (2026-08-25): a pedido del Owner — las tarjetas con flip (las 4 personas)
+   nunca van a tener fotografía real en ninguna de sus dos caras (a diferencia
+   de los 4 bloques de foto simple de D93, que sí la tendrán), así que ya no
+   deben llevar el mismo patrón rayado de `.media-placeholder` (ese patrón
+   significa "aquí va una foto pendiente", y aquí nunca va una). Frente y
+   reverso pasan a un azul mate plano (`--color-navy-deep`, sin degradado ni
+   líneas) con el isotipo de la firma en la esquina superior izquierda, al
+   mismo tratamiento semitransparente que ya usa el watermark del footer
+   (`.home-footer__pattern`: escala de grises + brillo para que el isotipo se
+   lea como una marca de agua clara sobre el navy) — mismo logo, mismo efecto,
+   reescalado para una tarjeta mucho más chica que el footer (así que la
+   opacidad sube un poco respecto al 0.05 del footer, o el isotipo se perdería
+   por completo a este tamaño). También se pareja el radio de esquina de los 4
+   bloques de foto simple (heredaban `--radius-xl` de `.media-placeholder`, que
+   no coincidía con el `--radius-md` de las tarjetas flip). */
 .team-flip-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -2097,10 +2112,13 @@ section[data-surface="dark"] .stepper__step.is-active .stepper__icon { color: va
 @media (max-width: 1023px) { .team-flip-grid { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 560px) { .team-flip-grid { grid-template-columns: 1fr; } }
 /* Bloques de fotografía simple (D93) — mismos 4 espacios de la grilla, sin
-   `.team-flip-card`: solo `.media-placeholder` suelto, sin flip ni interacción. */
+   `.team-flip-card`: solo `.media-placeholder` suelto, sin flip ni interacción.
+   `border-radius` explícito (D95): mismo `--radius-md` que las tarjetas flip,
+   en vez del `--radius-xl` que traía por defecto `.media-placeholder`. */
 .team-flip-grid > .media-placeholder {
   aspect-ratio: 1 / 1;
   margin: 0;
+  border-radius: var(--radius-md);
 }
 
 .team-flip-card {
@@ -2146,9 +2164,25 @@ section[data-surface="dark"] .stepper__step.is-active .stepper__icon { color: va
   .team-flip-card:hover .team-flip-card__front { visibility: hidden; }
   .team-flip-card:hover .team-flip-card__back { visibility: visible; }
 }
-.team-flip-card__front.media-placeholder {
-  aspect-ratio: auto; /* la proporción ya la fija `.team-flip-card` (3/4) */
-  margin: 0;
+.team-flip-card__front,
+.team-flip-card__back {
+  background: var(--color-navy-deep);
+  border: 1px solid var(--color-border-on-dark);
+}
+.team-flip-card__front {
+  display: flex;
+  align-items: flex-end;
+  padding: var(--space-6);
+}
+.team-flip-card__logo {
+  position: absolute;
+  top: var(--space-4);
+  left: var(--space-4);
+  width: 40px;
+  height: 40px;
+  opacity: 0.22;
+  filter: grayscale(1) brightness(2.8);
+  pointer-events: none;
 }
 .team-flip-card__caption {
   position: relative;
@@ -2169,9 +2203,6 @@ section[data-surface="dark"] .stepper__step.is-active .stepper__icon { color: va
 }
 .team-flip-card__back {
   transform: rotateY(180deg);
-  background:
-    radial-gradient(circle at 82% 14%, rgba(255, 255, 255, 0.085), transparent 31%),
-    linear-gradient(138deg, var(--color-navy-deep) 0%, var(--color-navy-hover) 100%);
   display: flex;
   align-items: center;
   padding: var(--space-6);
