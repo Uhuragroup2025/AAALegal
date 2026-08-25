@@ -179,6 +179,25 @@
     }
   }
 
+  // --- Equipo: tarjetas flip (Decisión D92, Trabaja con nosotros) ---
+  // El hover real (mouse) ya dispara el flip solo con CSS ((hover:hover) and
+  // (pointer:fine), ver components.css). Este toggle por click/tecla es lo que
+  // hace el flip alcanzable también en touch (que no tiene hover real) y por
+  // teclado — nunca depende únicamente del hover para mostrar la descripción.
+  document.querySelectorAll('.team-flip-card').forEach(function (card) {
+    var toggle = function () {
+      var flipped = card.classList.toggle('is-flipped');
+      card.setAttribute('aria-pressed', String(flipped));
+    };
+    card.addEventListener('click', toggle);
+    card.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        toggle();
+      }
+    });
+  });
+
   // --- Aviso de cookies (GA4 + GTM + Clarity, Decisión D20) ---
   var cookieBanner = document.querySelector('.cookie-banner');
   if (cookieBanner) {

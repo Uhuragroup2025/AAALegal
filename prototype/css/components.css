@@ -2054,6 +2054,100 @@ section[data-surface="dark"] .stepper__step.is-active .stepper__icon { color: va
 .talent-form__note a { color: inherit; text-decoration: underline; }
 
 /* =====================================================================
+   EQUIPO — TARJETAS FLIP (D92, 2026-08-25, Trabaja con nosotros)
+   Referente: sección de equipo de ngds.ai (grilla de tarjetas foto+flip) —
+   solo se toma el patrón de interacción (grilla + flip al hover), con nuestra
+   propia tipografía (Krub/Libre Caslon) y paleta (navy/dorado/crema), sin nada
+   del estilo visual oscuro/neón del referente. Cara frontal reutiliza
+   `.media-placeholder` (mismo placeholder honesto del resto del sitio — no hay
+   fotografía real de las 8 personas todavía); cara trasera reutiliza el mismo
+   degradado navy que `.cierre-grid--global .cierre-card--cta`.
+
+   Arquitectura de movimiento (mismo criterio documentado junto a "Superficies"
+   más arriba en este archivo): el ESTADO (`rotateY(180deg)` al flip) se aplica
+   siempre, sin media query, vía `.is-flipped` (activado por click/tecla en
+   js/main.js) — así funciona en cualquier dispositivo, incluido táctil, sin
+   depender de un hover real que el touch no tiene. La TRANSICIÓN se anima solo
+   bajo `prefers-reduced-motion:no-preference`. El disparo automático por hover
+   real de mouse (sin necesidad de click) vive aparte, bajo
+   `(hover:hover) and (pointer:fine)`. */
+.team-flip-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-6);
+}
+@media (max-width: 1023px) { .team-flip-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 560px) { .team-flip-grid { grid-template-columns: 1fr; } }
+
+.team-flip-card {
+  perspective: 1200px;
+  aspect-ratio: 3 / 4;
+  cursor: pointer;
+  border-radius: var(--radius-md);
+}
+.team-flip-card:focus-visible {
+  outline: 2px solid var(--color-gold-200);
+  outline-offset: 4px;
+}
+.team-flip-card__inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .team-flip-card__inner { transition: transform 700ms var(--motion-ease-entrance); }
+}
+.team-flip-card.is-flipped .team-flip-card__inner { transform: rotateY(180deg); }
+@media (hover: hover) and (pointer: fine) {
+  .team-flip-card:hover .team-flip-card__inner { transform: rotateY(180deg); }
+}
+
+.team-flip-card__face {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+.team-flip-card__front.media-placeholder {
+  aspect-ratio: auto; /* la proporción ya la fija `.team-flip-card` (3/4) */
+  margin: 0;
+}
+.team-flip-card__caption {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.team-flip-card__name {
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: var(--text-sm);
+  color: var(--color-white);
+}
+.team-flip-card__role {
+  font-size: var(--text-xs);
+  color: var(--color-accent-on-dark);
+}
+.team-flip-card__back {
+  transform: rotateY(180deg);
+  background:
+    radial-gradient(circle at 82% 14%, rgba(255, 255, 255, 0.085), transparent 31%),
+    linear-gradient(138deg, var(--color-navy-deep) 0%, var(--color-navy-hover) 100%);
+  display: flex;
+  align-items: center;
+  padding: var(--space-6);
+}
+.team-flip-card__desc {
+  margin: 0;
+  font-size: var(--text-sm);
+  color: rgba(255, 255, 255, 0.85);
+}
+
+/* =====================================================================
    BLOG — Noticias y Análisis (2026-07-31)
    Listado + single page. Reutiliza `.surface-solid`/`.card-cta`/`.media-placeholder`
    ya existentes — la única pieza nueva es el grid de tarjetas y la miniatura 16:10.

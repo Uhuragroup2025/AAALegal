@@ -108,16 +108,150 @@
        que D76 (founders en Quiénes somos): la Decisión D19/el vacío documentado en
        content/04-nuestro-equipo.md (fotos y nombres por área, perfil de Jaime
        Marmolejo pendientes del cliente) sigue vigente — solo se quita el aviso
-       visible, no se inventa contenido para llenar el vacío. -->
+       visible, no se inventa contenido para llenar el vacío.
+       D91 (2026-08-25): el eyebrow repetía el texto del H2 ("Nuestro equipo" /
+       "Nuestro equipo") — mismo tipo de ajuste que D88 hizo en "Origen". Se cambia a
+       "Equipo por función", retomando el nombre que ya usa la estructura narrativa
+       aprobada para este mismo bloque (content/04-nuestro-equipo.md, punto 2 del
+       outline: "Equipo por grupos/función"). -->
   <section class="section" data-surface="light" aria-labelledby="equipo-heading">
     <div class="container grid-2 what-we-do-grid what-we-do-grid--reverse">
       <div class="media-placeholder what-we-do-visual reveal" role="img" aria-label="Espacio reservado para fotografía del equipo, pendiente de material del cliente">
         <span class="media-placeholder__label">Fotografía del equipo — pendiente de material del cliente</span>
       </div>
       <div class="reveal">
-        <p class="eyebrow">Nuestro equipo</p>
+        <p class="eyebrow">Equipo por función</p>
         <h2 id="equipo-heading">Nuestro equipo</h2>
         <p>En AAA Estudio Legal hemos conformado un equipo multidisciplinario donde el conocimiento jurídico, la tecnología y la gestión estratégica se integran para ofrecer soluciones sólidas, oportunas y orientadas a resultados.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- EQUIPO — TARJETAS FLIP — D92 (2026-08-25): sección nueva, a pedido del Owner,
+       usando como referente la grilla de tarjetas de ngds.ai/es (solo el patrón de
+       interacción — grilla + flip al hover — con nuestra propia tipografía y
+       paleta, ver components.css). Eyebrow/H2 son copy original de AAA, no una
+       traducción del referente (nunca se reproduce el copy de otro sitio).
+       Los 8 perfiles (nombre, cargo y descripción de funciones) son EJEMPLO/
+       PLACEHOLDER inventado con autorización explícita del Owner en el chat
+       ("por ahora puedes inventar eso") — pendientes de reemplazo por el equipo
+       real cuando el cliente lo confirme. Deliberadamente NO se reutilizan los
+       nombres reales ya documentados en el sitio (founders Julián Agudelo/
+       Angélica Chamorro, director Jaime Marmolejo, D19) para no atribuirles
+       funciones inventadas — los 8 nombres de aquí son ficticios y distintos.
+       La fotografía de cada tarjeta sigue el mismo criterio de placeholder
+       honesto de siempre (`.media-placeholder`) — no se inventan fotos. -->
+  <section class="section" data-surface="light" aria-labelledby="equipo-flip-heading">
+    <div class="container">
+      <div class="section-head reveal">
+        <p class="eyebrow">Personas, no procesos</p>
+        <h2 id="equipo-flip-heading">Quiénes hacen posible cada caso.</h2>
+      </div>
+      <div class="team-flip-grid">
+        <article class="team-flip-card reveal" style="--stagger-index:0" tabindex="0" role="button" aria-pressed="false" aria-label="Ver funciones de Mariana Restrepo, Directora Jurídica de Insolvencia">
+          <div class="team-flip-card__inner">
+            <div class="team-flip-card__face team-flip-card__front media-placeholder" aria-hidden="true">
+              <div class="team-flip-card__caption">
+                <span class="team-flip-card__name">Mariana Restrepo</span>
+                <span class="team-flip-card__role">Directora Jurídica de Insolvencia</span>
+              </div>
+            </div>
+            <div class="team-flip-card__face team-flip-card__back">
+              <p class="team-flip-card__desc">Lidera la estrategia de defensa de acreedores en cada proceso concursal, desde el diagnóstico hasta el cierre.</p>
+            </div>
+          </div>
+        </article>
+        <article class="team-flip-card reveal" style="--stagger-index:1" tabindex="0" role="button" aria-pressed="false" aria-label="Ver funciones de Andrés Salazar, Abogado Senior de Derecho Corporativo">
+          <div class="team-flip-card__inner">
+            <div class="team-flip-card__face team-flip-card__front media-placeholder" aria-hidden="true">
+              <div class="team-flip-card__caption">
+                <span class="team-flip-card__name">Andrés Salazar</span>
+                <span class="team-flip-card__role">Abogado Senior, Derecho Corporativo</span>
+              </div>
+            </div>
+            <div class="team-flip-card__face team-flip-card__back">
+              <p class="team-flip-card__desc">Estructura relaciones comerciales sólidas y anticipa riesgos legales antes de que se conviertan en contingencias.</p>
+            </div>
+          </div>
+        </article>
+        <article class="team-flip-card reveal" style="--stagger-index:2" tabindex="0" role="button" aria-pressed="false" aria-label="Ver funciones de Camila Ortiz, Coordinadora de Normalización de Activos">
+          <div class="team-flip-card__inner">
+            <div class="team-flip-card__face team-flip-card__front media-placeholder" aria-hidden="true">
+              <div class="team-flip-card__caption">
+                <span class="team-flip-card__name">Camila Ortiz</span>
+                <span class="team-flip-card__role">Coordinadora de Normalización de Activos</span>
+              </div>
+            </div>
+            <div class="team-flip-card__face team-flip-card__back">
+              <p class="team-flip-card__desc">Diseña estrategias preventivas y reactivas para maximizar la recuperación del crédito en cada caso.</p>
+            </div>
+          </div>
+        </article>
+        <article class="team-flip-card reveal" style="--stagger-index:3" tabindex="0" role="button" aria-pressed="false" aria-label="Ver funciones de Santiago Vélez, Líder de Tecnología ADY">
+          <div class="team-flip-card__inner">
+            <div class="team-flip-card__face team-flip-card__front media-placeholder" aria-hidden="true">
+              <div class="team-flip-card__caption">
+                <span class="team-flip-card__name">Santiago Vélez</span>
+                <span class="team-flip-card__role">Líder de Tecnología (ADY)</span>
+              </div>
+            </div>
+            <div class="team-flip-card__face team-flip-card__back">
+              <p class="team-flip-card__desc">Desarrolla las herramientas tecnológicas que dan seguimiento en tiempo real a cada proceso.</p>
+            </div>
+          </div>
+        </article>
+        <article class="team-flip-card reveal" style="--stagger-index:0" tabindex="0" role="button" aria-pressed="false" aria-label="Ver funciones de Valentina Gómez, Abogada de Litigios Concursales">
+          <div class="team-flip-card__inner">
+            <div class="team-flip-card__face team-flip-card__front media-placeholder" aria-hidden="true">
+              <div class="team-flip-card__caption">
+                <span class="team-flip-card__name">Valentina Gómez</span>
+                <span class="team-flip-card__role">Abogada, Litigios Concursales</span>
+              </div>
+            </div>
+            <div class="team-flip-card__face team-flip-card__back">
+              <p class="team-flip-card__desc">Representa a los acreedores en audiencias y trámites dentro de cada proceso de insolvencia.</p>
+            </div>
+          </div>
+        </article>
+        <article class="team-flip-card reveal" style="--stagger-index:1" tabindex="0" role="button" aria-pressed="false" aria-label="Ver funciones de Felipe Cárdenas, Analista de Riesgo Crediticio">
+          <div class="team-flip-card__inner">
+            <div class="team-flip-card__face team-flip-card__front media-placeholder" aria-hidden="true">
+              <div class="team-flip-card__caption">
+                <span class="team-flip-card__name">Felipe Cárdenas</span>
+                <span class="team-flip-card__role">Analista de Riesgo Crediticio</span>
+              </div>
+            </div>
+            <div class="team-flip-card__face team-flip-card__back">
+              <p class="team-flip-card__desc">Evalúa el comportamiento del deudor y la viabilidad jurídica de cada estrategia de recuperación.</p>
+            </div>
+          </div>
+        </article>
+        <article class="team-flip-card reveal" style="--stagger-index:2" tabindex="0" role="button" aria-pressed="false" aria-label="Ver funciones de Laura Méndez, Gestora de Cuentas y Cobertura Nacional">
+          <div class="team-flip-card__inner">
+            <div class="team-flip-card__face team-flip-card__front media-placeholder" aria-hidden="true">
+              <div class="team-flip-card__caption">
+                <span class="team-flip-card__name">Laura Méndez</span>
+                <span class="team-flip-card__role">Gestora de Cuentas, Cobertura Nacional</span>
+              </div>
+            </div>
+            <div class="team-flip-card__face team-flip-card__back">
+              <p class="team-flip-card__desc">Coordina la atención de clientes en todo el territorio nacional, de la mano de cada equipo local.</p>
+            </div>
+          </div>
+        </article>
+        <article class="team-flip-card reveal" style="--stagger-index:3" tabindex="0" role="button" aria-pressed="false" aria-label="Ver funciones de Daniel Rojas, Especialista en Compliance">
+          <div class="team-flip-card__inner">
+            <div class="team-flip-card__face team-flip-card__front media-placeholder" aria-hidden="true">
+              <div class="team-flip-card__caption">
+                <span class="team-flip-card__name">Daniel Rojas</span>
+                <span class="team-flip-card__role">Especialista en Compliance</span>
+              </div>
+            </div>
+            <div class="team-flip-card__face team-flip-card__back">
+              <p class="team-flip-card__desc">Vela porque cada proceso cumpla los más altos estándares de seguridad de la información.</p>
+            </div>
+          </div>
+        </article>
       </div>
     </div>
   </section>
