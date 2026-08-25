@@ -525,7 +525,22 @@ section[data-surface="muted"] + .hero .curve-divider,
   margin-bottom: var(--space-4);
 }
 .service-card .service-block__tag { margin-bottom: var(--space-2); }
-.service-card h3 { font-size: var(--text-md); margin-bottom: var(--space-3); }
+/* D84 (2026-08-25): el Owner señaló que el párrafo se veía más grande que el título
+   de cada tarjeta — el título hereda `--font-display` (Libre Caslon Display, D30: solo
+   trae el corte 400, pedirle negrita produciría negrita sintética, ver nota en
+   base.css junto a `h1, h2, h3, h4`), así que a igual tamaño se lee más liviano que el
+   párrafo en Krub. Mismo criterio que D45/D46 (títulos de "Sectores de experiencia" y
+   "¿Por qué AAA?"): el título pasa de la serif de display a Krub bold (`--font-sans`,
+   `font-weight: 700`, real, no sintética) en vez de forzar negrita sobre el serif; el
+   párrafo baja de `--text-base` (17px) a `--text-sm` (15px), mismo tamaño que ya usa
+   `.blog-card p`. */
+.service-card h3 {
+  font-family: var(--font-sans);
+  font-size: var(--text-md);
+  font-weight: 700;
+  margin-bottom: var(--space-3);
+}
+.service-card p { font-size: var(--text-sm); }
 
 /* ---------- Franja de sectores (prueba social sin logos/cifras) ---------- */
 .sector-strip {
