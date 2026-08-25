@@ -98,11 +98,21 @@
        D76 (2026-08-21): se retira el aviso `.ady-note` de "Founders — contenido
        pendiente del cliente" — a pedido del Owner, ya no es necesario. La
        Decisión D19 (no inventar biografía sin insumo del cliente) sigue vigente,
-       solo se quita el aviso visible en pantalla. -->
-  <section class="section" data-surface="dark" aria-labelledby="quienes-somos-heading">
+       solo se quita el aviso visible en pantalla.
+       D88 (2026-08-25): a pedido del Owner, la sección pasa de `data-surface="dark"`
+       a `"light"` (fondo #F5F3EE, igual que el resto del sitio) para diferenciarse
+       del hero oscuro justo encima — títulos/párrafo/eyebrow no necesitan ningún
+       color a mano: caen solos en los valores por defecto para superficie clara
+       (mismo mecanismo de base.css/tokens.css que usa cualquier otra sección clara
+       del sitio). El eyebrow, que repetía el texto del H2 ("Quiénes somos" /
+       "¿Quiénes somos?"), cambia a "Origen" — retomando el nombre que ya usa esta
+       misma sección en la estructura narrativa del contenido aprobado
+       (content/04-nuestro-equipo.md § "Origen — hechos confirmados como anclaje"),
+       sin inventar un rótulo nuevo. -->
+  <section class="section" data-surface="light" aria-labelledby="quienes-somos-heading">
     <div class="container grid-2 what-we-do-grid">
       <div class="reveal">
-        <p class="eyebrow">Quiénes somos</p>
+        <p class="eyebrow">Origen</p>
         <h2 id="quienes-somos-heading">¿Quiénes somos?</h2>
         <p>Nacimos en 2020 con un propósito claro: la representación técnica y estratégica de acreedores en procesos de insolvencia.</p>
         <p>Desde nuestra fundación, decidimos construir una firma altamente especializada, enfocando toda nuestra experiencia en quienes necesitan proteger sus derechos crediticios y tomar decisiones con información, respaldo jurídico y visión de negocio.</p>
@@ -118,30 +128,28 @@
        (3 tarjetas de atributo) no convenció; el Owner adjuntó una referencia (foto de
        fondo + tarjeta sólida flotante con ícono/título/texto) y pidió recrear esa
        composición con nuestra propia paleta y tipografía, no las de la referencia.
-       Se reutiliza el patrón ya construido `.cierre-grid`/`.cierre-card--image`
-       (`.media-placeholder`) + `.cierre-card--cta` (tarjeta sólida navy, mismo
-       tratamiento que tenía "Transparencia" en Servicios antes de D73) en vez de
-       inventar un componente nuevo de foto+tarjeta superpuesta. Vuelve el copy
-       original en un solo párrafo (sin cambios) en vez de las 3 tarjetas separadas
-       de D75; se agrega un ícono de brújula (referencia visual a "principios/
-       dirección") arriba del título, como en la imagen de referencia. -->
+       D88 (2026-08-25): tercer rediseño a pedido del Owner — se retira el patrón
+       `.cierre-grid`/`.cierre-card` de D78 y se reutiliza en su lugar el mismo
+       elemento de "¿Quiénes somos?" arriba (`.grid-2.what-we-do-grid`), pero
+       invertido: la fotografía queda a la izquierda y el texto a la derecha (nuevo
+       modificador `.what-we-do-grid--reverse`, ver components.css — solo cambia qué
+       columna hereda `justify-self:start` en vez de `:end`, mismo componente, mismo
+       ancho de imagen). Se agrega un CTA que no existía antes ("Hablemos de su
+       caso"), mismo texto/ícono/destino (`captacion-b2b.html`) que usan los demás
+       bloques de cierre del sitio. Copy sin cambios respecto a D78. -->
   <section class="section" data-surface="light" aria-labelledby="filosofia-heading">
-    <div class="container">
-      <div class="cierre-grid reveal">
-        <div class="cierre-card cierre-card--image">
-          <div class="media-placeholder" role="img" aria-label="Espacio reservado para fotografía institucional, pendiente de material del cliente">
-            <span class="media-placeholder__label">Fotografía institucional — pendiente de material del cliente</span>
-          </div>
-        </div>
-        <div class="cierre-card cierre-card--cta">
-          <span class="cierre-card__halo" aria-hidden="true"></span>
-          <div class="cierre-card__content cierre-card__content--statement">
-            <svg width="38" height="38" viewBox="0 0 256 256" fill="none" stroke="currentColor" stroke-width="14" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="color: var(--color-accent-light);"><circle cx="128" cy="128" r="96"/><path d="m168 88-30 50-50 30 30-50Z"/></svg>
-            <p class="eyebrow" style="color: var(--color-accent-light);">Filosofía</p>
-            <h2 id="filosofia-heading">Filosofía AAA Estudio Legal</h2>
-            <p style="color: rgba(255,255,255,0.85);">Innovación con rigor. Solidez con tecnología. Dimensión humana. Tres principios que sostienen cada decisión de la firma.</p>
-          </div>
-        </div>
+    <div class="container grid-2 what-we-do-grid what-we-do-grid--reverse">
+      <div class="media-placeholder what-we-do-visual reveal" role="img" aria-label="Espacio reservado para fotografía institucional, pendiente de material del cliente">
+        <span class="media-placeholder__label">Fotografía institucional — pendiente de material del cliente</span>
+      </div>
+      <div class="reveal">
+        <p class="eyebrow">Filosofía</p>
+        <h2 id="filosofia-heading">Filosofía AAA Estudio Legal</h2>
+        <p>Innovación con rigor. Solidez con tecnología. Dimensión humana. Tres principios que sostienen cada decisión de la firma.</p>
+        <a class="btn btn--primary" href="captacion-b2b.html" style="margin-top: var(--space-6);">
+          Hablemos de su caso
+          <svg class="btn--icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
       </div>
     </div>
   </section>

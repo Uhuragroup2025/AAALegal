@@ -2529,6 +2529,18 @@ section[aria-labelledby="situaciones-heading"] .section-head {
   }
 }
 
+/* D88 (2026-08-25): Filosofía (nuestro-equipo.html) reutiliza este mismo componente
+   pero con la foto primero en el DOM (columna izquierda) y el texto después — sin
+   este modificador, `.what-we-do-visual` seguiría con `justify-self:end` (pensado
+   para cuando la foto es la SEGUNDA columna, para que quede pegada al borde derecho
+   del contenedor) y quedaría pegada al centro (borde derecho de la columna
+   izquierda) en vez del borde izquierdo del contenedor. Solo desktop: en mobile
+   (≤800px) `.what-we-do-visual` ya fuerza `width:100%`/`justify-self:stretch` sin
+   importar el orden, así que no hace falta gatear esta regla ahí. */
+@media (min-width: 801px) {
+  .what-we-do-grid--reverse .what-we-do-visual { justify-self: start; }
+}
+
 /* Servicios: tres paneles editoriales full width con placeholder visual reemplazable. */
 .home-page .focus-mosaic {
   display: flex;
