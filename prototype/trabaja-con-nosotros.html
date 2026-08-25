@@ -95,17 +95,30 @@
 
   <!-- NUESTRO EQUIPO — movida desde nuestro-equipo.html (D72), sin cambios de copy.
        Copy real v2 SEO; fotos agrupadas por área y el perfil de Jaime Marmolejo
-       siguen como placeholder explícito (assets/ubicación pendientes del cliente). -->
+       siguen como placeholder explícito (assets/ubicación pendientes del cliente).
+       D89 (2026-08-25): a pedido del Owner, reutiliza el mismo bloque "Origen" de
+       Quiénes somos (`.grid-2.what-we-do-grid`, D88) para organizar mejor la
+       sección — antes era una sola columna angosta (`max-width:68ch`) sin
+       fotografía. Invertido respecto a "Origen" (que tiene texto a la izquierda,
+       foto a la derecha): aquí la foto va a la izquierda y el contenido del equipo
+       a la derecha — mismo modificador `.what-we-do-grid--reverse` que ya usa
+       Filosofía en Quiénes somos, sin CSS nuevo. Encabezados sin cambios de
+       alineación: `.what-we-do-grid` ya alinea el texto a la izquierda por
+       defecto, igual que "Origen"/Filosofía. `.ady-note` (aviso de contenido
+       pendiente) se mueve dentro de la columna de texto, mismo copy. -->
   <section class="section" data-surface="light" aria-labelledby="equipo-heading">
-    <div class="container" style="max-width: 68ch;">
+    <div class="container grid-2 what-we-do-grid what-we-do-grid--reverse">
+      <div class="media-placeholder what-we-do-visual reveal" role="img" aria-label="Espacio reservado para fotografía del equipo, pendiente de material del cliente">
+        <span class="media-placeholder__label">Fotografía del equipo — pendiente de material del cliente</span>
+      </div>
       <div class="reveal">
         <p class="eyebrow">Nuestro equipo</p>
         <h2 id="equipo-heading">Nuestro equipo</h2>
         <p>En AAA Estudio Legal hemos conformado un equipo multidisciplinario donde el conocimiento jurídico, la tecnología y la gestión estratégica se integran para ofrecer soluciones sólidas, oportunas y orientadas a resultados.</p>
-      </div>
-      <div class="ady-note reveal" style="margin-top: var(--space-8);">
-        <strong>Contenido pendiente del cliente</strong>
-        Fotos y nombres agrupados por área todavía no se han recibido — el cliente confirmó que no existe organigrama, y las fotografías del equipo están confirmadas como disponibles pero no entregadas. El perfil de Jaime Marmolejo (director) también sigue pendiente de ubicación final (¿grupo de dirección? ¿perfil individual?).
+        <div class="ady-note reveal" style="margin-top: var(--space-8);">
+          <strong>Contenido pendiente del cliente</strong>
+          Fotos y nombres agrupados por área todavía no se han recibido — el cliente confirmó que no existe organigrama, y las fotografías del equipo están confirmadas como disponibles pero no entregadas. El perfil de Jaime Marmolejo (director) también sigue pendiente de ubicación final (¿grupo de dirección? ¿perfil individual?).
+        </div>
       </div>
     </div>
   </section>
