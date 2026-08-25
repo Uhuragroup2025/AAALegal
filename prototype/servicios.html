@@ -231,9 +231,14 @@
        ni de href — mismo destino (Captación B2B) que en Home.
        D74 (2026-08-21): se agrega `cierre-grid--global` — el Owner señaló que el
        cierre no coincidía visualmente con el de Home (degradado, halo oculto, botón
-       dorado, h2 más grande); con esta clase, ahora sí. -->
-  <section class="section" data-surface="atmosphere" aria-labelledby="cierre-heading">
-    <div class="atmosphere" aria-hidden="true"><div class="atmosphere__halo" aria-hidden="true"></div></div>
+       dorado, h2 más grande); con esta clase, ahora sí.
+       D87 (2026-08-25): se quita `data-surface="atmosphere"` y su `<div class="atmosphere">`
+       (halos difuminados de color) — mismo fix de D83 aplicado a "Nuestros servicios",
+       ahora en esta sección: el Owner pidió un fondo sólido #F5F3EE. El degradado navy
+       de la tarjeta `.cierre-card--cta` (D74, ver `.cierre-grid--global` en
+       components.css) NO se toca — ese es el fondo propio e intencional de la tarjeta
+       oscura, igual que en Home, no lo que se pidió quitar. -->
+  <section class="section" aria-labelledby="cierre-heading">
     <div class="container">
       <div class="cierre-grid cierre-grid--global reveal">
         <div class="cierre-card cierre-card--image">
