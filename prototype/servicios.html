@@ -94,9 +94,13 @@
        (imagen → eyebrow → título → texto), reemplaza el layout horizontal anterior
        (historial de ese layout: D70/D71) para reducir el viewport y scroll que
        gastaba. `.surface-solid` conserva el mismo efecto hover establecido en el
-       resto del sitio (ver "Superficies" en components.css). -->
-  <section class="section" data-surface="atmosphere" aria-labelledby="servicios-heading">
-    <div class="atmosphere" aria-hidden="true"></div>
+       resto del sitio (ver "Superficies" en components.css).
+       D83 (2026-08-25): se quita `data-surface="atmosphere"` y su `<div class="atmosphere">`
+       (halos difuminados de color) — el Owner pidió un fondo sólido #F5F3EE sin
+       degradado. No hace falta fijar el color explícitamente: sin `data-surface`,
+       la sección cae al fondo por defecto del `<body>` (`--color-surface-light`,
+       ya definido como #F5F3EE en tokens.css), que es exactamente ese valor. -->
+  <section class="section" aria-labelledby="servicios-heading">
     <div class="container">
       <div class="section-head reveal">
         <h2 id="servicios-heading">Nuestros servicios</h2>
