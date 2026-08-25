@@ -655,15 +655,18 @@ section[data-surface="muted"] + .hero .curve-divider,
    propios, solo la imagen a tamaño consistente, como una pared de logos estándar.
    Altura subida de 40px a 64px (D58), luego a 76px (D60) y ajustada a 75px
    (D61, corrección de un valor de más). */
+/* D81 (2026-08-21): sube un poco más el tamaño de los logos de cliente, a pedido
+   del Owner, para darles más énfasis — de 75px/190px a 85px/210px de alto/ancho
+   máximo. */
 .sector-card__logo {
   display: inline-flex;
   align-items: center;
-  height: 75px;
+  height: 85px;
 }
 
 .sector-card__logo img {
   max-height: 100%;
-  max-width: 190px;
+  max-width: 210px;
   width: auto;
   object-fit: contain;
 }
