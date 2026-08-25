@@ -629,9 +629,11 @@ section[data-surface="muted"] + .hero .curve-divider,
 }
 
 /* D45 (2026-08-20): pasa de la serif de display a Krub bold — a pedido del Owner. */
+/* D80 (2026-08-21): baja un punto de tamaño a pedido del Owner — de
+   clamp(1.15rem, 1.6vw, 1.5rem) (tope 1.5rem) a 1.3rem fijo. */
 .sector-card__name {
   font-family: var(--font-sans);
-  font-size: clamp(1.15rem, 1.6vw, 1.5rem);
+  font-size: 1.3rem;
   font-weight: 700;
   line-height: 1.08;
   letter-spacing: -0.02em;
