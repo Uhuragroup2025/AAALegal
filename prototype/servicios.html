@@ -85,7 +85,12 @@
              renglón ("su" ya no se separaba de "crédito?" al hacer wrap, quedando
              suelta al final de la primera línea junto al texto blanco). -->
         <h1 class="hero__title">¿Un deudor puso en riesgo <span class="text-gradient">su&nbsp;crédito?</span></h1>
-        <p>Representamos exclusivamente a acreedores en procesos de insolvencia y normalización de activos, combinando especialización jurídica, cobertura nacional y tecnología propia para respaldar decisiones críticas.</p>
+        <!-- D98 (2026-08-25): tamaño explícito a pedido del Owner, para normalizar
+             con el mismo párrafo de hero en Quiénes somos/Trabaja con nosotros — este
+             párrafo ya caía en `var(--text-base)` por defecto (sin estilo propio), pero
+             ahora queda explícito para que los 3 headers se lean como una misma
+             decisión de diseño, no una coincidencia. -->
+        <p style="font-size: var(--text-base);">Representamos exclusivamente a acreedores en procesos de insolvencia y normalización de activos, combinando especialización jurídica, cobertura nacional y tecnología propia para respaldar decisiones críticas.</p>
       </div>
     </div>
   </section>

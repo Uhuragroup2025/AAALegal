@@ -81,7 +81,13 @@
       <div style="max-width: 68ch;">
         <p class="eyebrow">Nuestro Equipo</p>
         <h1 class="hero__title">Sobre nosotros: <span class="text-gradient">AAA Estudio Legal</span></h1>
-        <p style="font-size: var(--text-md);">Creemos que la insolvencia no debe entenderse como el final del camino, sino como el inicio de una estrategia jurídica capaz de proteger, preservar y maximizar el valor de los activos.</p>
+        <!-- D98 (2026-08-25): a pedido del Owner, este párrafo baja de
+             `var(--text-md)` (1.25rem) a `var(--text-base)` (1.0625rem) — no
+             coincidía con el de Metodología, que nunca tuvo este override y ya caía
+             en `--text-base` por defecto. Normaliza el tamaño del párrafo de hero
+             en las 3 páginas con hero simple (Metodología/Quiénes somos/Trabaja con
+             nosotros). -->
+        <p style="font-size: var(--text-base);">Creemos que la insolvencia no debe entenderse como el final del camino, sino como el inicio de una estrategia jurídica capaz de proteger, preservar y maximizar el valor de los activos.</p>
       </div>
     </div>
   </section>
