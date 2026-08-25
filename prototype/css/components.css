@@ -499,38 +499,33 @@ section[data-surface="muted"] + .hero .curve-divider,
   color: var(--color-navy-900);
   opacity: 0.6;
 }
-/* Los 3 bloques de "Nuestros servicios" comparten esta misma clase (2026-07-31,
-   ronda 2 — antes cada uno tenía su propia estructura y su propio min-height de
-   imagen, por eso los recuadros se veían de tamaños distintos). El bloque 01·02
-   además lleva `.surface-glass` (es el único destacado con tratamiento de vidrio);
-   `--media-reverse` solo cambia qué columna va primero (imagen a la izquierda en
-   vez de a la derecha), nunca el tamaño — ambas comparten exactamente el mismo
-   `grid-template-columns` y el mismo `.service-block__media { min-height }`. */
-.service-block--media {
+/* D82 (2026-08-25): "Nuestros servicios" pasa de 3 bloques horizontales alternados
+   (imagen+texto, ver historial D70/D71 arriba) a una grilla de 3 columnas tipo
+   blog card — el Owner señaló que el layout horizontal gastaba mucho viewport y
+   generaba demasiado scroll. Orden vertical: imagen → eyebrow → título → texto.
+   Reutiliza `.surface-solid` (mismo sistema de "Superficies" que blog/foco/etc.)
+   para conservar el efecto hover ya establecido en el resto del sitio (elevación +
+   brillo + borde dorado) en vez de inventar uno nuevo. `.service-block__tag` (arriba)
+   se conserva tal cual como eyebrow. */
+.service-grid {
   display: grid;
-  grid-template-columns: 1fr minmax(220px, 320px);
-  gap: var(--space-8);
-  align-items: center;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-6);
 }
-.service-block--media-reverse { grid-template-columns: minmax(220px, 320px) 1fr; }
-/* D70 (2026-08-21): el Owner señaló con una captura que el recuadro de imagen se veía
-   demasiado alto en los 3 bloques de "Nuestros servicios", desperdiciando viewport —
-   pidió reducir el alto, aceptando que quede cuadrado en vez de más ancho que alto.
-   D71 (2026-08-21): el `min-height: 220px` de D70 no tenía ningún efecto visible — la
-   clase base `.media-placeholder` (que `.service-block__media` también lleva en el
-   HTML) fija `aspect-ratio: 4 / 5` con más peso que un min-height más chico (con
-   ancho de columna 320px, 4/5 da 400px de alto, muy por encima de los 220px, así que
-   el aspect-ratio ganaba siempre). El fix real es sobreescribir el aspect-ratio, no
-   el min-height — se fija `aspect-ratio: 1 / 1` (cuadrado, tal como pidió el Owner),
-   que sí tiene más especificidad que la regla base y por fin controla el alto real. */
-.service-block__media {
-  aspect-ratio: 1 / 1;
-  min-height: 220px;
+@media (max-width: 900px) {
+  .service-grid { grid-template-columns: 1fr; }
 }
-@media (max-width: 800px) {
-  .service-block--media,
-  .service-block--media-reverse { grid-template-columns: 1fr; }
+.service-card {
+  padding: var(--space-6);
+  display: flex;
+  flex-direction: column;
 }
+.service-card__media {
+  aspect-ratio: 16 / 10;
+  margin-bottom: var(--space-4);
+}
+.service-card .service-block__tag { margin-bottom: var(--space-2); }
+.service-card h3 { font-size: var(--text-md); margin-bottom: var(--space-3); }
 
 /* ---------- Franja de sectores (prueba social sin logos/cifras) ---------- */
 .sector-strip {

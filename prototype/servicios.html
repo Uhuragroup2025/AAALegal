@@ -90,7 +90,11 @@
     </div>
   </section>
 
-  <!-- NUESTROS SERVICIOS — 3 tratamientos distintos (vidrio destacado / texto+visual / editorial simple) -->
+  <!-- NUESTROS SERVICIOS — D82 (2026-08-25): grilla de 3 columnas tipo blog card
+       (imagen → eyebrow → título → texto), reemplaza el layout horizontal anterior
+       (historial de ese layout: D70/D71) para reducir el viewport y scroll que
+       gastaba. `.surface-solid` conserva el mismo efecto hover establecido en el
+       resto del sitio (ver "Superficies" en components.css). -->
   <section class="section" data-surface="atmosphere" aria-labelledby="servicios-heading">
     <div class="atmosphere" aria-hidden="true"></div>
     <div class="container">
@@ -98,51 +102,31 @@
         <h2 id="servicios-heading">Nuestros servicios</h2>
       </div>
 
-      <!-- Bug corregido (2026-07-31): el "eyebrow" (.service-block__tag) repetía el
-           mismo texto del título de abajo — ahora es un abrebocas distinto, tomado del
-           contenido real de cada bloque (no una afirmación nueva). También se agregó el
-           recuadro de imagen que faltaba en los bloques 01·02 y 04 (el 03 ya lo tenía) —
-           mismo tratamiento `.media-placeholder`, alternando el lado de la imagen para
-           que el mosaico completo (imagen-derecha / imagen-izquierda / imagen-derecha)
-           no se sienta repetitivo.
-           Ajuste (2026-07-31, ronda 2): los 3 bloques usaban 3 estructuras distintas
-           (vidrio+grid propio / surface-visual con título superpuesto / grid-2 plano),
-           cada una con su propio min-height para la imagen — de ahí que los recuadros
-           se vieran de tamaños distintos. Ahora los 3 comparten la misma clase
-           `.service-block--media` (misma proporción de columnas, mismo min-height de
-           imagen vía `.service-block__media`); el bloque 02 pierde el título superpuesto
-           sobre la imagen y pasa a un <h3> normal debajo del eyebrow, igual que los
-           otros dos. Solo cambia el lado de la imagen (`--media-reverse` para
-           alternar imagen-izquierda), nunca el tamaño. -->
-      <article class="surface-glass reveal service-block--media" style="padding: var(--space-8); margin-bottom: var(--space-8);">
-        <div>
+      <div class="service-grid">
+        <article class="surface-solid service-card reveal">
+          <div class="media-placeholder service-card__media" data-img-id="IMG-11" role="img" aria-label="Espacio reservado para fotografía o recurso visual de Defensa de acreedores en procesos de insolvencia (IMG-11) — ver IMAGE-BRIEF.md"></div>
           <div class="service-block__tag">Perspectiva técnica y estratégica</div>
           <h3>Defensa de acreedores en procesos de insolvencia</h3>
-          <p class="text-wide" style="max-width: 60ch;">Representamos a personas y organizaciones cuyos créditos están comprometidos por procesos de insolvencia. Aplicamos el derecho concursal desde una perspectiva técnica y estratégica para proteger sus derechos y maximizar las posibilidades de recuperación.</p>
-          <p class="text-wide" style="max-width: 60ch;"><strong>Nuestra práctica está dedicada exclusivamente al acreedor:</strong> no asesoramos ni representamos al deudor insolvente.</p>
-        </div>
-        <div class="media-placeholder service-block__media" data-img-id="IMG-11" role="img" aria-label="Espacio reservado para fotografía o recurso visual de Defensa de acreedores en procesos de insolvencia (IMG-11) — ver IMAGE-BRIEF.md"></div>
-      </article>
+          <p>Representamos a personas y organizaciones cuyos créditos están comprometidos por procesos de insolvencia. Aplicamos el derecho concursal desde una perspectiva técnica y estratégica para proteger sus derechos y maximizar las posibilidades de recuperación.</p>
+          <p><strong>Nuestra práctica está dedicada exclusivamente al acreedor:</strong> no asesoramos ni representamos al deudor insolvente.</p>
+        </article>
 
-      <article class="reveal service-block--media service-block--media-reverse" style="margin-bottom: var(--space-8);">
-        <div class="media-placeholder service-block__media" data-img-id="IMG-05" role="img" aria-label="Espacio reservado para fotografía o recurso visual de Normalización de Activos (IMG-05) — ver IMAGE-BRIEF.md"></div>
-        <div>
+        <article class="surface-solid service-card reveal">
+          <div class="media-placeholder service-card__media" data-img-id="IMG-05" role="img" aria-label="Espacio reservado para fotografía o recurso visual de Normalización de Activos (IMG-05) — ver IMAGE-BRIEF.md"></div>
           <div class="service-block__tag">Preventivo, reactivo y a la medida</div>
           <h3>Normalización de activos</h3>
-          <p style="margin-top: var(--space-3);">Desarrollamos procesos integrales que analizan el comportamiento del deudor, la viabilidad jurídica y las alternativas más eficientes para maximizar la recuperación.</p>
+          <p>Desarrollamos procesos integrales que analizan el comportamiento del deudor, la viabilidad jurídica y las alternativas más eficientes para maximizar la recuperación.</p>
           <p>Intervenimos tanto en escenarios preventivos como reactivos, antes, durante y después de un proceso de insolvencia.</p>
-        </div>
-      </article>
+        </article>
 
-      <article class="surface-glass reveal service-block--media" style="padding: var(--space-8); margin-bottom: var(--space-8);">
-        <div>
+        <article class="surface-solid service-card reveal">
+          <div class="media-placeholder service-card__media" data-img-id="IMG-12" role="img" aria-label="Espacio reservado para fotografía o recurso visual de Derecho Corporativo (IMG-12) — ver IMAGE-BRIEF.md"></div>
           <div class="service-block__tag">Prevención antes que contingencia</div>
           <h3>Derecho corporativo</h3>
           <p>Acompañamos a empresas en la estructuración de relaciones comerciales sólidas, mitigando riesgos legales antes de que se conviertan en contingencias.</p>
           <p>Convertimos el derecho en una herramienta para fortalecer la operación de su negocio.</p>
-        </div>
-        <div class="media-placeholder service-block__media" data-img-id="IMG-12" role="img" aria-label="Espacio reservado para fotografía o recurso visual de Derecho Corporativo (IMG-12) — ver IMAGE-BRIEF.md"></div>
-      </article>
+        </article>
+      </div>
     </div>
   </section>
 
