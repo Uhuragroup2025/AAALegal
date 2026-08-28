@@ -1663,3 +1663,73 @@ Los colores de D64 (fila de abajo invertida respecto a la de arriba) no se tocan
 **Aplicado en `prototype/nuestro-equipo.html` y `prototype/trabaja-con-nosotros.html`:** el `font-size` de ese párrafo baja de `var(--text-md)` a `var(--text-base)` en ambas páginas. **Aplicado también en `prototype/servicios.html`:** aunque el valor ya coincidía por defecto, se agrega el mismo `style="font-size: var(--text-base)"` explícito, para que las 3 páginas queden documentadas con la misma decisión de diseño en vez de que una de ellas dependa de una coincidencia de que nunca se haya tocado. No se tocaron Inicio ni Captación B2B — usan su propio hero de dos columnas (`.hero-shell`), distinto del hero simple de estas 3 páginas, y no fueron parte de este pedido.
 
 **Verificación:** servidor estático local (`:4187`). Con `getComputedStyle` sobre el párrafo inmediatamente después del `<h1>` en cada una de las 3 páginas: `17px` (1.0625rem) exacto en Metodología, Quiénes somos y Trabaja con nosotros. Sin errores de consola.
+
+### Sesión — Home: primera fase de motion con GSAP (D99, 2026-08-28)
+
+**Alcance autorizado por el Owner:** únicamente Inicio: entrada editorial del hero, parallax fotográfico sutil solo en desktop, reveal secuencial de los H2 (regular y luego énfasis italic/cobre), entrada coordinada de los tres paneles de Servicios y entrada/conteo de las tres métricas. No se implementaron SplitText, pinning, smooth scroll ni scroll-jacking, y no se modificaron páginas internas.
+
+**Arquitectura aplicada:** GSAP 3.15.0 y ScrollTrigger 3.15.0 se sirven como dos archivos oficiales minificados locales desde `prototype/js/gsap/`, sin npm, build ni plugins adicionales. Toda la orquestación de Inicio queda aislada en `prototype/js/home-motion.js` y se conecta al HTML mediante atributos `data-motion`. `prototype/js/main.js` conserva las interacciones generales y deja de duplicar el parallax/conteo que ahora pertenecen a la capa de Home. Para la futura migración al Block Theme, GSAP y ScrollTrigger podrán registrarse como scripts del tema y `home-motion.js` encolarse condicionalmente solo en la plantilla de Inicio.
+
+**Progressive enhancement y accesibilidad:** HTML y CSS muestran el estado final por defecto; si cualquiera de los scripts falla, el contenido sigue visible y funcional. `gsap.matchMedia()` separa desktop/tablet-mobile y `prefers-reduced-motion`; con reducción de movimiento no se crean timelines, el parallax queda desactivado y las cifras muestran directamente su valor final. Las animaciones usan solo `opacity` y `transform`, sin propiedades de layout ni saltos intencionales de geometría.
+
+**Verificación:** sintaxis válida en `home-motion.js` y `main.js`; referencias de los cuatro scripts comprobadas; HTML revisado sin atributos `data-motion` duplicados o targets ausentes; `git diff --check` sin errores. Se verificaron por código las tres rutas de `gsap.matchMedia()` (desktop, mobile y reduced-motion) y el fallback de cifras. La recarga visual automatizada del documento `file://` no está disponible en el navegador de verificación por su política de seguridad; queda pendiente el gut-check visual final en el navegador local abierto por la Product Lead, sin afectar la validación técnica ni el fallback.
+
+### Sesión — Home: prueba fotográfica temporal de prototipo (D100, 2026-08-28)
+
+**Alcance autorizado por la Product Lead:** se reemplazan únicamente los placeholders principales de Inicio con siete fotografías de banco suministradas para validar dirección visual, narrativa y crops. Asignación: Hero (equipo con espacio negativo), Qué hace AAA (profesional revisando documentos), Servicios — acreedores (mano/libro), normalización (detalle de libro), corporativo (dos profesionales), Dimensión humana (grupo reunido) y CTA final (equipo en oficina). No se modifican layout, copy, spacing, motion ni componentes.
+
+**Carácter temporal:** los archivos se nombran `temp-prototype-home-*`, los elementos HTML llevan `data-asset-status="temporary-prototype"` y los textos alternativos no presentan a las personas fotografiadas como integrantes de AAA. Los tres paneles de Servicios conservan además su `data-original-img-id` para facilitar el reemplazo posterior por los activos definitivos. La fotografía arquitectónica de Londres queda deliberadamente fuera por el riesgo de asociación geográfica y estética tradicional detectado en la auditoría.
+
+**Crops:** cada destino usa una clase local `temp-home-photo--*` con `object-fit: cover` y `object-position` diferenciado para desktop/mobile. El CTA conserva su estructura y recibe la imagen como última capa del fondo bajo overlays navy de contraste. Los archivos originales entregados no se alteraron.
+
+**Verificación:** siete referencias y siete archivos presentes; siete marcadores temporales; tres imágenes de Servicios conservan la clase `.media-placeholder` requerida por la animación GSAP existente; sintaxis JS y `git diff --check` sin errores. No se modificaron páginas internas.
+
+### Sesión — Home: refinamiento de crops y previews temporales (D101, 2026-08-28)
+
+**Pedido:** ajustar únicamente comportamiento fotográfico en Inicio: encuadre y overlay del Hero; full-bleed real de Qué hace AAA en desktop con retorno a retícula en mobile; mayor visibilidad de las fotografías de Servicios y fondo institucional de la sección; una preview temporal repetida en los tres reels de Casos; y altura controlada de Dimensión humana.
+
+**Aplicado:** el Hero conserva `cover`, mueve el foco vertical para proteger los rostros y reduce la combinación de opacidad/scrim sin retirar el tratamiento azul. Qué hace AAA refuerza la imagen como mitad derecha full-bleed desde 641px y vuelve a 4:3 dentro del container en mobile. Servicios usa el azul institucional ya existente, overlay 0.56 por defecto y 0.38 en hover/focus, manteniendo expansión y captions. Los tres reels 9:16 reciben la misma fotografía temporal `temp-prototype-home-case-preview.jpg`, con play y carrusel intactos. Dimensión humana fuerza una altura panorámica acotada en desktop y cercana a 4:3 en mobile, siempre con `object-fit:cover`, en lugar de heredar la proporción intrínseca.
+
+**Carácter temporal:** la nueva preview de Casos se identifica mediante `data-asset-status="temporary-prototype"` y texto alternativo vacío por ser un recurso visual repetido cuyo estado pendiente ya está anunciado por cada control de reproducción. No se presenta como un caso real de AAA.
+
+**Verificación:** todas las referencias temporales existen; los tres reels conservan 9:16, controles y estructura; los breakpoints de Qué hace AAA y Dimensión humana mantienen anchos dentro del viewport; las capas de overlay conservan contraste de texto y permiten reconocer la fotografía; sintaxis JS y `git diff --check` sin errores. No se modificaron copy, tipografía, motion ni páginas internas.
+
+### Sesión — Home: foco del Hero, orden de evidencia y peso de títulos (D102, 2026-08-28)
+
+**Pedido:** ajustar solo en desktop el encuadre y la visibilidad de la fotografía temporal del Hero; situar En cifras después de Casos de éxito; y usar semibold en los nombres de Sectores y en los seis atributos de ¿Por qué AAA?.
+
+**Aplicado:** desde 1024px el Hero conserva dimensiones, layout y gradiente, pero desplaza el punto focal de la fotografía hacia arriba para proteger las cabezas y reduce de forma contenida la densidad del scrim azul. Casos de éxito precede ahora a En cifras, moviendo ambos bloques completos sin alterar su contenido, motion ni estructura interna. `.sector-card__name` y los H3 de `.focus-grid` usan `font-weight: 600`, sin afectar otros encabezados ni la tipografía display.
+
+**Verificación:** el HTML contiene una única instancia de Casos, Cifras y Dimensión humana, en ese orden; mobile conserva sus reglas previas de crop y overlay; sintaxis de `home-motion.js` y `main.js` válida; `git diff --check` sin errores. La política del navegador integrado bloquea la recarga automatizada de documentos `file://`, por lo que el encuadre final queda preparado para revisión visual en la pestaña local de la Product Lead.
+
+**Ajustes posteriores:** a solicitud de la Product Lead, el Hero de Inicio aumenta su altura únicamente desde 1024px (`600–720px / 72vh` pasa a `690–820px / 82.8vh`). Casos de éxito y En cifras adoptan la misma separación de 32px entre encabezado y contenido usada por Nuestros servicios; en mobile, el énfasis cobre de ambos títulos comienza en una línea nueva. No cambian tablet, contenido, crop, overlay ni componentes compartidos.
+
+**Motion y reels:** los contenedores 9:16 de Casos usan el radio discreto de card del sistema (`--radius-md`, 8px). En los H2 animados, el fragmento italic/cobre deja de esperar una segunda fase y aparece dentro del mismo reveal del título regular, evitando vacíos temporales en composiciones regular–italic–regular. El fallback sin JS y `prefers-reduced-motion` permanecen intactos.
+
+**Footer global:** se elimina el rótulo visual “Sitio” en todas las páginas que comparten el footer, conservando íntegros el mapa de navegación, sus destinos y su `aria-label`. No se aplican todavía otros cambios responsive mientras la Product Lead revisa la propuesta de compactación mobile.
+
+**Compactación mobile aprobada:** hasta 640px el footer reduce logo, padding y gaps; organiza contactos en dos columnas con dirección y correo a ancho completo; presenta el mapa del sitio en dos columnas y LinkedIn/Instagram en una fila; compacta la franja legal sin reducir los targets táctiles de 44px. El patrón decorativo también baja de escala. Adicionalmente, los tres paneles de Servicios eliminan todos sus bordes en desktop, tablet y mobile, conservando hover, foco, tamaño y contenido.
+
+### Sesión — Home: carrusel responsive de ¿Por qué AAA? (D103, 2026-08-28)
+
+**Aplicado:** desde 1024px los seis atributos se muestran completos en una sola fila, con seis columnas iguales, altura común y gap uniforme. Entre 641px y 1023px se conserva la retícula responsive previa. Hasta 640px el bloque se convierte en un carrusel nativo sin autoplay: dos cards completas por vista, tres páginas, swipe, `scroll-snap`, scrollbar oculto, indicador “n de 3” y flechas anterior/siguiente con estado `disabled` real en los extremos.
+
+**Progressive enhancement:** sin JavaScript las cards siguen siendo desplazables mediante scroll táctil; los controles solo aparecen cuando JS está disponible. El script compartido se activa únicamente al encontrar `data-why-carousel` en Inicio, respeta `prefers-reduced-motion` para el desplazamiento programático y no modifica otros carruseles ni páginas internas.
+
+**Iconografía y escala:** se verifica que las seis cards tienen icono asignado: Infraestructura, Equipo especializado, Tecnología propia, Seguridad de la información y Compliance usan los SVG entregados por la Product Lead —idénticos byte a byte a los ya incorporados— y Cobertura nacional conserva su SVG correspondiente. Los seis títulos se normalizan a 17px con interlínea 1.2 mediante una regla específica del carrusel, válida en desktop, tablet y mobile.
+
+### Sesión — Servicios: introducción editorial (D104, 2026-08-28)
+
+**Aplicado:** la Product Lead aprueba sustituir el encabezado genérico “Nuestros servicios” por una introducción que explicita el enfoque diferencial de AAA. El bloque conserva su posición y las tres cards existentes, e incorpora eyebrow “Servicios”, el H2 “Cada crédito en riesgo exige una estrategia jurídica propia.” con énfasis italic/cobre en la segunda frase, y un párrafo que conecta defensa en insolvencia, normalización de activos y derecho corporativo desde la representación exclusiva del acreedor.
+
+**Alcance:** no se renombra todavía el enlace “Metodología” del menú, no se reordena la página y no se modifica el copy ni la estructura de las tres cards. El cambio queda limitado a la introducción de la sección y su tratamiento tipográfico local.
+
+### Hito — Homepage: baseline visual aprobado internamente (D105, 2026-08-28)
+
+**Estado:** la Homepage alcanza el baseline visual aprobado internamente por la Product Lead. La composición completa, su comportamiento responsive y la primera capa de motion con GSAP están implementados en el prototipo y constituyen la nueva referencia visual para la siguiente etapa del sitio.
+
+**Activos temporales:** las fotografías actualmente incorporadas en Inicio son imágenes de banco usadas exclusivamente para validar dirección visual, encuadres y comportamiento de los componentes. Permanecen identificadas como activos temporales de prototipo y no se consideran fotografías finales de AAA.
+
+**Gates y siguiente fase:** esta aprobación es interna y no equivale a la aprobación del cliente; Gate 1 continúa pendiente. La siguiente fase será la propagación controlada del sistema visual aprobado hacia Metodología, Quiénes somos y Trabaja con nosotros, validando una página a la vez.
+
+**WordPress:** no se ha iniciado implementación WordPress, construcción de theme, integración con Gutenberg ni instalación de plugins. El trabajo permanece en la fase de prototipo HTML/CSS/JS.

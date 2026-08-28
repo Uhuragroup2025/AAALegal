@@ -10,7 +10,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Krub:wght@400;500;600;700&family=Libre+Caslon+Display&family=Libre+Caslon+Text:ital@1&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/tokens.css">
 <link rel="stylesheet" href="css/base.css">
-<link rel="stylesheet" href="css/components.css">
+<link rel="stylesheet" href="css/components.css?v=20260828-why-cards-desktop">
 </head>
 <body class="home-page">
 
@@ -79,10 +79,11 @@
 <main id="contenido">
 
   <!-- 1. HERO — reconocimiento inmediato del problema -->
-  <section class="hero-immersive section" data-surface="dark" aria-label="Presentación" style="padding-bottom: 0;">
+  <section class="hero-immersive section" data-surface="dark" data-motion="hero" aria-label="Presentación" style="padding-bottom: 0;">
     <div class="hero-shell">
       <div class="hero-shell__media">
-        <img class="hero-shell__img" src="assets/img/banner-AAA-abogados.jpg" alt="Equipo de AAA Estudio Legal trabajando en sala de reuniones" data-img-id="IMG-01" fetchpriority="high">
+        <!-- Fotografía de banco temporal para validar dirección visual; no es un activo final de AAA. -->
+        <img class="hero-shell__img temp-home-photo temp-home-photo--hero" src="assets/img/temp-prototype-home-hero.jpg" alt="Imagen temporal de prototipo: tres profesionales revisando documentos" data-img-id="TEMP-HOME-HERO" data-asset-status="temporary-prototype" width="1500" height="1000" fetchpriority="high">
         <div class="hero-shell__scrim" aria-hidden="true"></div>
       </div>
       <div class="hero-shell__content">
@@ -105,12 +106,55 @@
     </div>
   </section>
 
+  <!-- Cinta de clientes: reutiliza exclusivamente los logos ya presentes en
+       Sectores de experiencia. El segundo grupo es una copia visual para dar
+       continuidad al recorrido; queda oculto a tecnologías de asistencia. -->
+  <div class="home-logo-ribbon" role="region" aria-label="Clientes de AAA Estudio Legal">
+    <p class="home-logo-ribbon__title">Empresas que ya confiaron</p>
+    <div class="home-logo-ribbon__track">
+      <div class="home-logo-ribbon__set">
+        <span class="home-logo-ribbon__item"><img src="assets/img/logo-bbva.png" alt="BBVA"></span>
+        <span class="home-logo-ribbon__item"><img src="assets/img/logo-femcristar.png" alt="Femcristar"></span>
+        <span class="home-logo-ribbon__item"><img src="assets/img/logo-nuestro-fondo.png" alt="Nuestro Fondo"></span>
+        <span class="home-logo-ribbon__item"><img src="assets/img/logo-coopunidos.png" alt="Coopunidos"></span>
+        <span class="home-logo-ribbon__item"><img src="assets/img/logo-fetrabuv.png" alt="Fetrabuv"></span>
+        <span class="home-logo-ribbon__item"><img src="assets/img/logo-fonalianza.png" alt="Fonalianza"></span>
+        <span class="home-logo-ribbon__item"><img src="assets/img/logo-gobernacion-valle-del-cauca-ribbon.png" alt="Gobernación del Valle del Cauca"></span>
+        <span class="home-logo-ribbon__item"><img src="assets/img/logo-metrocali.png" alt="MetroCali"></span>
+        <span class="home-logo-ribbon__item"><img src="assets/img/logo-promedico.png" alt="Promédico"></span>
+        <span class="home-logo-ribbon__item"><img src="assets/img/logo-comfandi.png" alt="Comfandi"></span>
+        <span class="home-logo-ribbon__item"><img src="assets/img/logo-constructora-melendez-ribbon.jpeg" alt="Constructora Meléndez"></span>
+        <span class="home-logo-ribbon__item"><img src="assets/img/logo-neat.png" alt="Neat"></span>
+        <span class="home-logo-ribbon__item"><img src="assets/img/logo-elgranlangostino.png" alt="El Gran Langostino"></span>
+        <span class="home-logo-ribbon__item"><img src="assets/img/logo-ma-isabel.png" alt="Ma. Isabel"></span>
+        <span class="home-logo-ribbon__item"><img src="assets/img/logo-k-listo.png" alt="K-Listo"></span>
+      </div>
+      <div class="home-logo-ribbon__set" aria-hidden="true">
+        <span class="home-logo-ribbon__item"><img src="assets/img/logo-bbva.png" alt=""></span>
+        <span class="home-logo-ribbon__item"><img src="assets/img/logo-femcristar.png" alt=""></span>
+        <span class="home-logo-ribbon__item"><img src="assets/img/logo-nuestro-fondo.png" alt=""></span>
+        <span class="home-logo-ribbon__item"><img src="assets/img/logo-coopunidos.png" alt=""></span>
+        <span class="home-logo-ribbon__item"><img src="assets/img/logo-fetrabuv.png" alt=""></span>
+        <span class="home-logo-ribbon__item"><img src="assets/img/logo-fonalianza.png" alt=""></span>
+        <span class="home-logo-ribbon__item"><img src="assets/img/logo-gobernacion-valle-del-cauca-ribbon.png" alt=""></span>
+        <span class="home-logo-ribbon__item"><img src="assets/img/logo-metrocali.png" alt=""></span>
+        <span class="home-logo-ribbon__item"><img src="assets/img/logo-promedico.png" alt=""></span>
+        <span class="home-logo-ribbon__item"><img src="assets/img/logo-comfandi.png" alt=""></span>
+        <span class="home-logo-ribbon__item"><img src="assets/img/logo-constructora-melendez-ribbon.jpeg" alt=""></span>
+        <span class="home-logo-ribbon__item"><img src="assets/img/logo-neat.png" alt=""></span>
+        <span class="home-logo-ribbon__item"><img src="assets/img/logo-elgranlangostino.png" alt=""></span>
+        <span class="home-logo-ribbon__item"><img src="assets/img/logo-ma-isabel.png" alt=""></span>
+        <span class="home-logo-ribbon__item"><img src="assets/img/logo-k-listo.png" alt=""></span>
+      </div>
+    </div>
+  </div>
+
   <!-- 2. SITUACIONES — el usuario reconoce su problema -->
   <section class="section" data-surface="atmosphere" aria-labelledby="situaciones-heading">
     <div class="atmosphere" aria-hidden="true"><div class="atmosphere__halo" aria-hidden="true"></div></div>
     <div class="container">
-      <div class="section-head section-head--split section-head--stacked reveal">
-        <h2 id="situaciones-heading">¿Es acreedor y se enfrenta a alguno de estos riesgos?</h2>
+      <div class="section-head section-head--split section-head--stacked" data-motion="section-title">
+        <h2 id="situaciones-heading">¿Es acreedor y se enfrenta a <span class="section-title__emphasis">alguno de estos riesgos?</span></h2>
       </div>
       <div class="grid-2 grid-2--stretch situations-grid mobile-card-carousel" role="list" tabindex="0" aria-label="Situaciones frecuentes de nuestros clientes">
         <article class="surface-solid reveal" style="padding: var(--space-8); --stagger-index:0" role="listitem">
@@ -126,58 +170,62 @@
           <p>Busco una firma que represente mis intereses durante todo el proceso.</p>
         </article>
       </div>
+      <div class="situations-cta reveal">
+        <a class="btn btn--primary" href="captacion-b2b.html">
+          Hablar con especialista
+          <svg class="btn--icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+      </div>
     </div>
   </section>
 
   <!-- 3. QUÉ HACE AAA — definición inequívoca del posicionamiento -->
-  <section class="section" data-surface="dark" aria-labelledby="que-hacemos-heading">
+  <section class="section home-about-summary" data-surface="light" aria-labelledby="que-hacemos-heading">
     <div class="container grid-2 what-we-do-grid">
-      <div class="reveal">
+      <div data-motion="section-title">
         <p class="eyebrow">¿Qué hace AAA?</p>
-        <h2 id="que-hacemos-heading">Defendemos exclusivamente los intereses del acreedor.</h2>
+        <h2 id="que-hacemos-heading">Defendemos exclusivamente <span class="section-title__emphasis section-title__emphasis--block">los intereses del acreedor.</span></h2>
         <p style="font-size: var(--text-md);"><strong>No representamos al deudor.</strong></p>
         <p>Anticipamos riesgos, protegemos el crédito del acreedor y maximizamos las posibilidades de recuperación, incluso en los escenarios más complejos y en diferentes sectores de la economía.</p>
+        <p class="home-about-summary__action"><a class="btn btn--primary" href="nuestro-equipo.html">Conócenos →</a></p>
       </div>
-      <div class="media-placeholder what-we-do-visual reveal" role="img" aria-label="Espacio reservado para una ilustración del proceso de intervención de AAA">
-        <span class="media-placeholder__label">Ilustración del proceso — pendiente de definición</span>
-      </div>
+      <img class="what-we-do-visual temp-home-photo temp-home-photo--about reveal" src="assets/img/temp-prototype-home-que-hace-aaa.jpg" alt="Imagen temporal de prototipo: profesional revisando documentos" data-img-id="TEMP-HOME-ABOUT" data-asset-status="temporary-prototype" width="1500" height="1000" loading="lazy" decoding="async">
     </div>
   </section>
 
   <!-- 4. CÓMO INTERVENIMOS — los tres macroservicios aprobados por D24 -->
   <section class="section" data-surface="light" aria-labelledby="servicios-home-heading">
     <div class="container">
-      <div class="section-head section-head--split section-head--stacked reveal">
-        <p class="eyebrow">Cómo intervenimos</p>
-        <h2 id="servicios-home-heading">Soluciones jurídicas para proteger, normalizar y recuperar activos</h2>
+      <div class="section-head section-head--split section-head--stacked" data-motion="section-title">
+        <p class="eyebrow">Nuestros servicios</p>
+        <h2 id="servicios-home-heading">Soluciones jurídicas para <span class="section-title__emphasis section-title__emphasis--block">proteger, normalizar y recuperar activos.</span></h2>
       </div>
-      <div class="focus-mosaic" aria-labelledby="servicios-home-heading">
-        <article class="surface-visual reveal" style="--stagger-index:0" data-img-id="IMG-08">
-          <div class="media-placeholder" role="img" aria-label="Espacio reservado para fotografía o recurso visual de Defensa de acreedores en insolvencia (IMG-08) — ver IMAGE-BRIEF.md"></div>
+      <div class="focus-mosaic" data-motion="service-panels" aria-labelledby="servicios-home-heading">
+        <a class="surface-visual" style="--stagger-index:0" data-img-id="TEMP-HOME-SERVICE-CREDITORS" data-original-img-id="IMG-08" href="servicios.html#proceso-heading">
+          <img class="media-placeholder temp-home-photo temp-home-photo--service-creditors" src="assets/img/temp-prototype-home-servicio-acreedores.jpg" alt="" data-asset-status="temporary-prototype" width="1500" height="1001" loading="lazy" decoding="async">
           <div class="surface-visual__caption">
             <span class="focus-card__index">01</span>
             <h3>Defensa de acreedores en insolvencia</h3>
             <p>Protegemos los derechos del acreedor durante procesos de insolvencia empresarial y de persona natural.</p>
           </div>
-        </article>
-        <article class="surface-visual reveal" style="--stagger-index:1" data-img-id="IMG-02">
-          <div class="media-placeholder" role="img" aria-label="Espacio reservado para fotografía o recurso visual de Normalización de activos (IMG-02) — ver IMAGE-BRIEF.md"></div>
+        </a>
+        <a class="surface-visual" style="--stagger-index:1" data-img-id="TEMP-HOME-SERVICE-ASSETS" data-original-img-id="IMG-02" href="servicios.html#proceso-heading">
+          <img class="media-placeholder temp-home-photo temp-home-photo--service-assets" src="assets/img/temp-prototype-home-servicio-normalizacion.jpg" alt="" data-asset-status="temporary-prototype" width="1500" height="2250" loading="lazy" decoding="async">
           <div class="surface-visual__caption">
             <span class="focus-card__index">02</span>
             <h3>Normalización de activos</h3>
             <p>Diseñamos estrategias jurídicas para proteger y recuperar activos.</p>
           </div>
-        </article>
-        <article class="surface-visual reveal" style="--stagger-index:2" data-img-id="IMG-10">
-          <div class="media-placeholder" role="img" aria-label="Espacio reservado para fotografía o recurso visual de Derecho corporativo (IMG-10) — ver IMAGE-BRIEF.md"></div>
+        </a>
+        <a class="surface-visual" style="--stagger-index:2" data-img-id="TEMP-HOME-SERVICE-CORPORATE" data-original-img-id="IMG-10" href="servicios.html#proceso-heading">
+          <img class="media-placeholder temp-home-photo temp-home-photo--service-corporate" src="assets/img/temp-prototype-home-servicio-corporativo.jpg" alt="" data-asset-status="temporary-prototype" width="2000" height="2997" loading="lazy" decoding="async">
           <div class="surface-visual__caption">
             <span class="focus-card__index">03</span>
             <h3>Derecho corporativo</h3>
             <p>Acompañamos decisiones jurídicas que fortalecen la continuidad y estabilidad empresarial.</p>
           </div>
-        </article>
+        </a>
       </div>
-      <p class="reveal" style="margin-top: var(--space-8);"><a class="btn btn--ghost" href="servicios.html">Conocer nuestros servicios →</a></p>
     </div>
   </section>
 
@@ -185,9 +233,9 @@
   <section class="section" data-surface="atmosphere" aria-labelledby="confianza-heading">
     <div class="atmosphere" aria-hidden="true"><div class="atmosphere__halo" aria-hidden="true"></div></div>
     <div class="container">
-      <div class="section-head section-head--split section-head--stacked reveal">
+      <div class="section-head section-head--split section-head--stacked" data-motion="section-title">
         <p class="eyebrow">¿Por qué AAA?</p>
-        <h2 id="confianza-heading">Más que asesoría jurídica, construimos confianza durante todo el proceso.</h2>
+        <h2 id="confianza-heading"><span class="section-title__line">Más que asesoría jurídica,</span><span class="section-title__emphasis section-title__emphasis--block">construimos confianza</span><span class="section-title__line">durante todo el proceso.</span></h2>
       </div>
       <!-- D51 (2026-08-20): reorden completo a pedido del Owner (izq→der: Infraestructura,
            Equipo, Tecnología, Seguridad, Compliance, Cobertura) — de 5 a 6 tarjetas.
@@ -198,13 +246,24 @@
            nuevo es "Infraestructura para atención masiva" (texto acordado con el Owner,
            ver PROJECT.md D51) — ícono de rack/servidores, ya que no había ninguno
            existente que representara infraestructura+capacidad de atención. -->
-      <div class="focus-grid mobile-card-carousel" role="list" tabindex="0" aria-label="Razones para confiar en AAA Estudio Legal">
-        <div class="surface-solid reveal" style="padding: var(--space-6); --stagger-index:0" role="listitem"><svg class="focus-card__icon" viewBox="0 0 256 256" fill="none" stroke="currentColor" stroke-width="14" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="48" y="40" width="160" height="48" rx="10"/><rect x="48" y="104" width="160" height="48" rx="10"/><rect x="48" y="168" width="160" height="48" rx="10"/><circle cx="176" cy="64" r="6" fill="currentColor" stroke="none"/><circle cx="176" cy="128" r="6" fill="currentColor" stroke="none"/><circle cx="176" cy="192" r="6" fill="currentColor" stroke="none"/></svg><h3>Infraestructura para atención masiva.</h3></div>
-        <div class="surface-solid reveal" style="padding: var(--space-6); --stagger-index:1" role="listitem"><svg class="focus-card__icon" viewBox="0 0 256 256" fill="none" stroke="currentColor" stroke-width="14" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="96" cy="88" r="32"/><circle cx="176" cy="104" r="24"/><path d="M32 208a64 64 0 0 1 128 0M152 152a52 52 0 0 1 72 48"/></svg><h3>Equipo especializado.</h3></div>
-        <div class="surface-solid reveal" style="padding: var(--space-6); --stagger-index:2" role="listitem"><svg class="focus-card__icon" viewBox="0 0 256 256" fill="none" stroke="currentColor" stroke-width="14" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="72" y="24" width="112" height="208" rx="18"/><path d="M104 56h48M112 200h32M40 96h32M184 96h32M40 136h32M184 136h32"/><circle cx="40" cy="96" r="6" fill="currentColor" stroke="none"/><circle cx="216" cy="96" r="6" fill="currentColor" stroke="none"/><circle cx="40" cy="136" r="6" fill="currentColor" stroke="none"/><circle cx="216" cy="136" r="6" fill="currentColor" stroke="none"/></svg><h3>Tecnología propia (ADY).</h3></div>
-        <div class="surface-solid reveal" style="padding: var(--space-6); --stagger-index:3" role="listitem"><svg class="focus-card__icon" viewBox="0 0 256 256" fill="none" stroke="currentColor" stroke-width="14" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="48" y="104" width="160" height="120" rx="16"/><path d="M80 104V72a48 48 0 0 1 96 0v32"/><circle cx="128" cy="160" r="12"/><path d="M128 172v20"/></svg><h3>Seguridad de la información.</h3></div>
-        <div class="surface-solid reveal" style="padding: var(--space-6); --stagger-index:4" role="listitem"><svg class="focus-card__icon" viewBox="0 0 256 256" fill="none" stroke="currentColor" stroke-width="14" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M128 24 40 56v64c0 61 37 96 88 112 51-16 88-51 88-112V56Z"/><path d="m88 128 24 24 56-56"/></svg><h3>Compliance.</h3></div>
-        <div class="surface-solid reveal" style="padding: var(--space-6); --stagger-index:5" role="listitem"><svg class="focus-card__icon" viewBox="0 0 256 256" fill="none" stroke="currentColor" stroke-width="14" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="128" cy="112" r="28"/><path d="M192 112c0 56-64 104-64 104S64 168 64 112a64 64 0 0 1 128 0Z"/><path d="M32 72h24M200 72h24M40 176h32M184 176h32"/><circle cx="24" cy="72" r="6" fill="currentColor" stroke="none"/><circle cx="232" cy="72" r="6" fill="currentColor" stroke="none"/><circle cx="32" cy="176" r="6" fill="currentColor" stroke="none"/><circle cx="224" cy="176" r="6" fill="currentColor" stroke="none"/></svg><h3>Cobertura nacional.</h3></div>
+      <div class="focus-grid mobile-card-carousel why-carousel" id="why-aaa-carousel" data-why-carousel role="list" tabindex="0" aria-label="Razones para confiar en AAA Estudio Legal">
+        <div class="surface-solid reveal" style="padding: var(--space-6); --stagger-index:0" role="listitem"><span class="focus-card__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M4 6V12C4 12 4 15 11 15C18 15 18 12 18 12V6M11 3C18 3 18 6 18 6C18 6 18 9 11 9C4 9 4 6 4 6C4 6 4 3 11 3ZM11 21C4 21 4 18 4 18V12M19 22V16M19 16L22 19M19 16L16 19"/></svg></span><h3>Infraestructura para atención masiva.</h3></div>
+        <div class="surface-solid reveal" style="padding: var(--space-6); --stagger-index:1" role="listitem"><span class="focus-card__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M7 18V17C7 14.2386 9.23858 12 12 12C14.7614 12 17 14.2386 17 17V18M1 18V17C1 15.3431 2.34315 14 4 14M23 18V17C23 15.3431 21.6569 14 20 14M12 12C13.6569 12 15 10.6569 15 9C15 7.34315 13.6569 6 12 6C10.3431 6 9 7.34315 9 9C9 10.6569 10.3431 12 12 12ZM4 14C5.10457 14 6 13.1046 6 12C6 10.8954 5.10457 10 4 10C2.89543 10 2 10.8954 2 12C2 13.1046 2.89543 14 4 14ZM20 14C21.1046 14 22 13.1046 22 12C22 10.8954 21.1046 10 20 10C18.8954 10 18 10.8954 18 12C18 13.1046 18.8954 14 20 14Z"/></svg></span><h3>Equipo especializado.</h3></div>
+        <div class="surface-solid reveal" style="padding: var(--space-6); --stagger-index:2" role="listitem"><span class="focus-card__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M3 23C1.89543 23 1 22.1046 1 21C1 19.8954 1.89543 19 3 19C4.10457 19 5 19.8954 5 21C5 22.1046 4.10457 23 3 23ZM21 23C19.8954 23 19 22.1046 19 21C19 19.8954 19.8954 19 21 19C22.1046 19 23 19.8954 23 21C23 22.1046 22.1046 23 21 23ZM3 5C1.89543 5 1 4.10457 1 3C1 1.89543 1.89543 1 3 1C4.10457 1 5 1.89543 5 3C5 4.10457 4.10457 5 3 5ZM21 5C19.8954 5 19 4.10457 19 3C19 1.89543 19.8954 1 21 1C22.1046 1 23 1.89543 23 3C23 4.10457 22.1046 5 21 5ZM13 12.0002C13 10.7536 11.8415 9.5 10.4285 9.5H9.5715C8.1515 9.5 7 10.6196 7 12.0002C7 13.1898 7.855 14.1853 9 14.438C9.18769 14.4793 9.37932 14.5001 9.5715 14.5M11 12.0003C11 13.2464 12.1585 14.5 13.5715 14.5H14.4285C15.8485 14.5 17 13.3809 17 12.0003C17 10.8102 16.145 9.81416 15 9.56203C14.8123 9.5207 14.6207 9.4999 14.4285 9.5M21 19V5M3 19V5M5 3H19M5 21H19"/></svg></span><h3>Tecnología propia (ADY).</h3></div>
+        <div class="surface-solid reveal" style="padding: var(--space-6); --stagger-index:3" role="listitem"><span class="focus-card__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M22 9V7C22 5.89543 21.1046 5 20 5H4C2.89543 5 2 5.89543 2 7V17C2 18.1046 2.89543 19 4 19H12M22 9H6M22 9V11M18.9923 14.125L21.5477 14.774C21.8137 14.8416 22.0013 15.0833 21.9931 15.3576C21.8214 21.1159 18.5 22 18.5 22C18.5 22 15.1786 21.1159 15.0069 15.3576C14.9987 15.0833 15.1863 14.8416 15.4523 14.774L18.0077 14.125C18.3308 14.043 18.6692 14.043 18.9923 14.125Z"/></svg></span><h3>Seguridad de la información.</h3></div>
+        <div class="surface-solid reveal" style="padding: var(--space-6); --stagger-index:4" role="listitem"><span class="focus-card__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M8.5 11.5L11.5 14.5L16.5 9.5M5 18L3.13036 4.91253C3.05646 4.39524 3.39389 3.91247 3.90398 3.79912L11.5661 2.09641C11.8519 2.03291 12.1481 2.03291 12.4339 2.09641L20.096 3.79912C20.6061 3.91247 20.9435 4.39524 20.8696 4.91252L19 18C18.9293 18.495 18.5 21.5 12 21.5C5.5 21.5 5.07071 18.495 5 18Z"/></svg></span><h3>Compliance.</h3></div>
+        <div class="surface-solid reveal" style="padding: var(--space-6); --stagger-index:5" role="listitem"><span class="focus-card__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M3 20.4V3.6C3 3.26863 3.26863 3 3.6 3H20.4C20.7314 3 21 3.26863 21 3.6V20.4C21 20.7314 20.7314 21 20.4 21H3.6C3.26863 21 3 20.7314 3 20.4ZM3 4C3.55228 4 4 3.55228 4 3C4 2.44772 3.55228 2 3 2C2.44772 2 2 2.44772 2 3C2 3.55228 2.44772 4 3 4ZM21 22C21.5523 22 22 21.5523 22 21C22 20.4477 21.5523 20 21 20C20.4477 20 20 20.4477 20 21C20 21.5523 20.4477 22 21 22Z"/></svg></span><h3>Cobertura nacional.</h3></div>
+      </div>
+      <div class="why-carousel__controls" data-why-carousel-controls aria-label="Navegación del carrusel ¿Por qué AAA?">
+        <p class="why-carousel__status" aria-live="polite"><span data-why-carousel-current>1</span> de <span data-why-carousel-total>3</span></p>
+        <div class="why-carousel__actions">
+          <button class="why-carousel__arrow" type="button" data-why-carousel-prev aria-controls="why-aaa-carousel" aria-label="Ver las dos razones anteriores" disabled>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>
+          </button>
+          <button class="why-carousel__arrow" type="button" data-why-carousel-next aria-controls="why-aaa-carousel" aria-label="Ver las dos razones siguientes">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+          </button>
+        </div>
       </div>
     </div>
   </section>
@@ -212,14 +271,13 @@
   <!-- 6. SECTORES — experiencia multisectorial, sin lectura geográfica. Reubicada
        antes de Casos de éxito (D35, 2026-08-20, pedido del Owner). -->
   <section class="section sector-experience" data-surface="light" aria-labelledby="sectores-heading">
-    <div class="container sector-experience__header reveal">
+    <div class="container sector-experience__header" data-motion="section-title">
       <div>
         <p class="eyebrow">Sectores de experiencia</p>
-        <h2 id="sectores-heading">Experiencia especializada en los sectores donde la recuperación del crédito exige mayor conocimiento técnico.</h2>
+        <h2 id="sectores-heading">Experiencia especializada en los sectores donde <span class="section-title__emphasis">la recuperación del crédito exige mayor conocimiento técnico.</span></h2>
       </div>
       <div class="sector-experience__intro">
         <p>Trabajamos con organizaciones de los sectores financiero, fintech, solidario, público, salud, cajas de compensación, construcción e inmobiliario, y comercio y consumo, comprendiendo sus retos jurídicos y operativos.</p>
-        <a class="sector-experience__cta" href="proximamente.html">Ver nuestra experiencia →</a>
       </div>
     </div>
 
@@ -293,7 +351,7 @@
           <span class="sector-card__name">Sector público</span>
         </div>
         <div class="sector-card__logos" aria-label="Logos de clientes de AAA Estudio Legal del Sector público">
-          <span class="sector-card__logo"><img src="assets/img/logo-gobernacion-valle-del-cauca.png" alt="Logo de la Gobernación del Valle del Cauca" loading="lazy"></span>
+          <span class="sector-card__logo"><img src="assets/img/logo-gobernacion-valle-del-cauca-ribbon.png" alt="Logo de la Gobernación del Valle del Cauca" loading="lazy"></span>
           <span class="sector-card__logo"><img src="assets/img/logo-metrocali.png" alt="Logo de MetroCali" loading="lazy"></span>
         </div>
       </article>
@@ -319,7 +377,7 @@
       </article>
       <article class="sector-card" role="listitem">
         <div class="sector-card__header">
-          <svg class="sector-card__icon" viewBox="0 0 256 256" fill="none" stroke="currentColor" stroke-width="14" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M64 96V72a64 64 0 0 1 128 0v24M40 96h176l-16 128H56L40 96Z"/></svg>
+          <span class="sector-card__icon icon-mask" style="--icon-mask: url('assets/img/icon-comercio-consumo.svg')" aria-hidden="true"></span>
           <span class="sector-card__name">Comercio y consumo</span>
         </div>
         <div class="sector-card__logos" aria-label="Logos de clientes de AAA Estudio Legal del sector Comercio y consumo">
@@ -332,57 +390,18 @@
     </div>
   </section>
 
-  <!-- 6b. CIFRAS — contador animado (D41, 2026-08-20), a pedido del Owner, con la
-       referencia visual del sitio "Meléndez" (solo el efecto de conteo ascendente —
-       los números de esa referencia son de otra empresa y no se copian). AAA no tiene
-       todavía cifras propias aprobadas para casos gestionados / clientes / cartera
-       recuperada, así que los tres valores son placeholders. El mecanismo de conteo
-       (`data-count-to`, ver js/main.js) ya queda listo: cuando el Owner entregue las
-       cifras reales, basta reemplazar `data-count-to`/el texto para que la animación
-       funcione igual sobre el dato real.
-       D66 (2026-08-21): a pedido explícito del Owner (confirmado que entiende que los
-       3 valores siguen siendo de ejemplo, sin dato real aprobado — ver Decisiones) se
-       quita la leyenda visible "Cifra de ejemplo — pendiente de dato aprobado por el
-       cliente" que estaba bajo cada número desde D41, y se agrega un ícono por
-       tarjeta, encima del número, relacionado con lo que mide (casos/documentos,
-       personas, cartera/crecimiento). -->
-  <section class="section stats-counter" data-surface="dark" aria-labelledby="cifras-heading">
-    <div class="container">
-      <div class="section-head reveal">
-        <p class="eyebrow">En cifras</p>
-        <h2 id="cifras-heading">Resultados que respaldan nuestro trabajo.</h2>
-      </div>
-      <div class="stats-grid reveal" role="list" aria-label="Cifras de AAA Estudio Legal">
-        <div class="stat-card" role="listitem">
-          <svg class="stat-card__icon" viewBox="0 0 256 256" fill="none" stroke="currentColor" stroke-width="14" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M32 96V72a16 16 0 0 1 16-16h48l24 24h88a16 16 0 0 1 16 16v104a16 16 0 0 1-16 16H48a16 16 0 0 1-16-16Z"/></svg>
-          <p class="stat-card__number" data-count-to="100" aria-hidden="true">0</p>
-          <p class="stat-card__label">Casos gestionados</p>
-        </div>
-        <div class="stat-card" role="listitem">
-          <svg class="stat-card__icon" viewBox="0 0 256 256" fill="none" stroke="currentColor" stroke-width="14" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="128" cy="84" r="44"/><path d="M40 216c0-56 40-88 88-88s88 32 88 88"/></svg>
-          <p class="stat-card__number" data-count-to="50" aria-hidden="true">0</p>
-          <p class="stat-card__label">Clientes atendidos</p>
-        </div>
-        <div class="stat-card" role="listitem">
-          <svg class="stat-card__icon" viewBox="0 0 256 256" fill="none" stroke="currentColor" stroke-width="14" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M32 176l64-64 40 40 88-88"/><path d="M184 64h40v40"/></svg>
-          <p class="stat-card__number" data-count-to="100" data-count-prefix="$" data-count-suffix=" M" aria-hidden="true">$0 M</p>
-          <p class="stat-card__label">Cartera recuperada</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- 7. CASOS DE ÉXITO — estructura real, contenido pendiente del cliente. Reubicada
        después de Sectores (D35, 2026-08-20, pedido del Owner). -->
   <section class="section" data-surface="dark" aria-labelledby="casos-heading">
     <div class="container">
-      <div class="section-head section-head--split section-head--stacked reveal">
+      <div class="section-head section-head--split section-head--stacked" data-motion="section-title">
         <p class="eyebrow">Casos de éxito</p>
-        <h2 id="casos-heading">La confianza se construye con resultados.</h2>
+        <h2 id="casos-heading">La confianza se construye <span class="section-title__emphasis">con resultados.</span></h2>
       </div>
       <div class="case-video-grid mobile-card-carousel" role="list" tabindex="0" aria-label="Casos de éxito audiovisuales pendientes de contenido">
         <article class="case-video reveal" style="--stagger-index:0" role="listitem">
           <div class="case-video__frame">
+            <img class="case-video__preview temp-home-photo" src="assets/img/temp-prototype-home-case-preview.jpg" alt="" data-asset-status="temporary-prototype" width="1500" height="2250" loading="lazy" decoding="async">
             <button class="case-video__play" type="button" disabled aria-label="Caso 1: video pendiente de entrega por el cliente">
               <svg viewBox="0 0 256 256" aria-hidden="true"><path d="M240,128a15.74,15.74,0,0,1-7.9,13.66l-144,88A16,16,0,0,1,64,216V40A16,16,0,0,1,88.1,26.34l144,88A15.74,15.74,0,0,1,240,128Z"/></svg>
             </button>
@@ -390,6 +409,7 @@
         </article>
         <article class="case-video reveal" style="--stagger-index:1" role="listitem">
           <div class="case-video__frame">
+            <img class="case-video__preview temp-home-photo" src="assets/img/temp-prototype-home-case-preview.jpg" alt="" data-asset-status="temporary-prototype" width="1500" height="2250" loading="lazy" decoding="async">
             <button class="case-video__play" type="button" disabled aria-label="Caso 2: video pendiente de entrega por el cliente">
               <svg viewBox="0 0 256 256" aria-hidden="true"><path d="M240,128a15.74,15.74,0,0,1-7.9,13.66l-144,88A16,16,0,0,1,64,216V40A16,16,0,0,1,88.1,26.34l144,88A15.74,15.74,0,0,1,240,128Z"/></svg>
             </button>
@@ -397,6 +417,7 @@
         </article>
         <article class="case-video reveal" style="--stagger-index:2" role="listitem">
           <div class="case-video__frame">
+            <img class="case-video__preview temp-home-photo" src="assets/img/temp-prototype-home-case-preview.jpg" alt="" data-asset-status="temporary-prototype" width="1500" height="2250" loading="lazy" decoding="async">
             <button class="case-video__play" type="button" disabled aria-label="Caso 3: video pendiente de entrega por el cliente">
               <svg viewBox="0 0 256 256" aria-hidden="true"><path d="M240,128a15.74,15.74,0,0,1-7.9,13.66l-144,88A16,16,0,0,1,64,216V40A16,16,0,0,1,88.1,26.34l144,88A15.74,15.74,0,0,1,240,128Z"/></svg>
             </button>
@@ -406,47 +427,72 @@
     </div>
   </section>
 
+  <!-- 6b. CIFRAS — contador animado (D41, 2026-08-20), a pedido del Owner, con la
+       referencia visual del sitio "Meléndez" (solo el efecto de conteo ascendente —
+       los números de esa referencia son de otra empresa y no se copian). AAA no tiene
+       todavía cifras propias aprobadas para casos gestionados / clientes / cartera
+       recuperada, así que los tres valores son placeholders. El mecanismo de conteo
+       (`data-count-to`, ver js/home-motion.js) ya queda listo: cuando el Owner entregue las
+       cifras reales, basta reemplazar `data-count-to`/el texto para que la animación
+       funcione igual sobre el dato real.
+       Los tres valores siguen siendo de ejemplo, sin dato real aprobado — ver
+       Decisiones. La presentación actual elimina iconos y contenedores individuales
+       para tratar las métricas como una declaración editorial abierta. -->
+  <section class="section stats-counter" data-surface="dark" data-motion="stats" aria-labelledby="cifras-heading">
+    <div class="container">
+      <div class="section-head" data-motion="section-title">
+        <p class="eyebrow">En cifras</p>
+        <h2 id="cifras-heading">Resultados que respaldan <span class="section-title__emphasis">nuestro trabajo.</span></h2>
+      </div>
+      <div class="stats-grid" role="list" aria-label="Cifras de AAA Estudio Legal">
+        <div class="stat-card" role="listitem">
+          <p class="stat-card__number" data-count-to="100" data-count-prefix="+">+100</p>
+          <p class="stat-card__label">Casos gestionados</p>
+        </div>
+        <div class="stat-card" role="listitem">
+          <p class="stat-card__number" data-count-to="50" data-count-prefix="+">+50</p>
+          <p class="stat-card__label">Clientes atendidos</p>
+        </div>
+        <div class="stat-card" role="listitem">
+          <p class="stat-card__number" data-count-to="100" data-count-prefix="+$" data-count-suffix=" M">+$100 M</p>
+          <p class="stat-card__label">Cartera recuperada</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- 8. EQUIPO — una imagen potente, texto breve y CTA; sin perfiles inventados -->
   <section class="section" aria-labelledby="equipo-heading">
     <div class="container">
-      <div class="people-card reveal">
+      <div class="people-card">
         <div class="grid-2 people-intro">
-          <div class="people-intro__copy">
+          <img class="media-placeholder people-intro__media temp-home-photo temp-home-photo--people" src="assets/img/temp-prototype-home-dimension-humana.jpg" alt="Imagen temporal de prototipo: grupo de profesionales conversando en una reunión" data-img-id="TEMP-HOME-PEOPLE" data-asset-status="temporary-prototype" width="1500" height="1001" loading="lazy" decoding="async">
+          <div class="people-intro__copy" data-motion="section-title">
             <p class="eyebrow">Dimensión humana</p>
-            <h2 id="equipo-heading">Detrás de cada proceso hay un equipo especializado.</h2>
-            <p>Trabajamos con rigor técnico y cercanía real.</p>
+            <h2 id="equipo-heading">Detrás de cada proceso hay <span class="section-title__emphasis section-title__emphasis--block">un equipo especializado.</span></h2>
+            <p>Combinamos experiencia jurídica, conocimiento sectorial y tecnología propia con una atención cercana que permite comprender cada caso y acompañar decisiones críticas con criterio.</p>
             <p><a href="nuestro-equipo.html">Conozca nuestra experiencia →</a></p>
-          </div>
-          <div class="media-placeholder people-intro__media" data-img-id="IMG-03" role="img" aria-label="Espacio reservado para fotografía potente del equipo (IMG-03), pendiente de entrega del cliente — ver IMAGE-BRIEF.md">
-            <span class="media-placeholder__label">IMG-03 — pendiente de material del cliente</span>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- 9. CIERRE — contacto
-       D74 (2026-08-21): `cierre-grid--global` (nuevo modificador) marca este bloque
-       como el que se reutiliza en otras páginas (ver Servicios) — separa su
-       tratamiento visual del de Captación B2B, que usa `.cierre-card` con su propio
-       estilo y no debe verse afectado. -->
+  <!-- 9. CIERRE — contacto. Variante editorial exclusiva de Home: un único panel
+       institucional, sin modificar el componente compartido ni el footer global. -->
   <section class="section" data-surface="atmosphere" aria-labelledby="cierre-heading">
     <div class="atmosphere" aria-hidden="true"><div class="atmosphere__halo" aria-hidden="true"></div></div>
     <div class="container">
-      <div class="cierre-grid cierre-grid--global reveal">
-        <div class="cierre-card cierre-card--image">
-          <img class="cierre-card__img" src="assets/img/hero-inicio.webp" alt="Equipo de AAA Estudio Legal trabajando en sala de reuniones" data-img-id="IMG-07">
-        </div>
-        <div class="cierre-card cierre-card--cta">
-          <span class="cierre-card__halo" aria-hidden="true"></span>
-          <div class="cierre-card__content">
-            <h2 id="cierre-heading">Conversemos sobre su caso.</h2>
-            <p>Si enfrenta un proceso de insolvencia o necesita fortalecer la protección de su cartera, nuestro equipo está listo para acompañarlo.</p>
-            <a class="btn cierre-card__btn" href="captacion-b2b.html">
-              Hablemos de su caso
-              <svg class="btn--icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-            </a>
-          </div>
+      <div class="home-closing-cta home-closing-cta--temp-photo" data-asset-status="temporary-prototype">
+        <img class="home-closing-cta__pattern" src="assets/img/isotipo-AAA-legal.svg" width="200" height="200" alt="" aria-hidden="true">
+        <div class="home-closing-cta__content" data-motion="section-title">
+          <p class="eyebrow">Conversemos</p>
+          <h2 id="cierre-heading">Su caso merece <span class="section-title__emphasis section-title__emphasis--block">una defensa con criterio.</span></h2>
+          <p class="home-closing-cta__text">Si enfrenta un proceso de insolvencia o necesita fortalecer la protección de su cartera, nuestro equipo está listo para acompañarlo.</p>
+          <a class="btn home-closing-cta__button" href="captacion-b2b.html">
+            Hablemos de su caso
+            <svg class="btn--icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
         </div>
       </div>
     </div>
@@ -497,7 +543,6 @@
     </section>
 
     <section class="home-footer__section home-footer__sitemap" aria-label="Mapa del sitio">
-      <h2 class="home-footer__heading">Sitio</h2>
       <nav class="home-footer__sitemap-list" aria-label="Mapa del sitio">
         <a href="index.html">Inicio</a>
         <a href="servicios.html">Metodología</a>
@@ -537,6 +582,9 @@
   <button class="btn btn--primary" type="button" data-cookie-accept>Aceptar</button>
 </div>
 
-<script src="js/main.js?v=20260805-header"></script>
+<script defer src="js/gsap/gsap-3.15.0.min.js"></script>
+<script defer src="js/gsap/ScrollTrigger-3.15.0.min.js"></script>
+<script defer src="js/home-motion.js?v=20260828-motion-phase-1"></script>
+<script defer src="js/main.js?v=20260828-why-carousel"></script>
 </body>
 </html>

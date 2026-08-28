@@ -10,7 +10,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Krub:wght@400;500;600;700&family=Libre+Caslon+Display&family=Libre+Caslon+Text:ital@1&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/tokens.css">
 <link rel="stylesheet" href="css/base.css">
-<link rel="stylesheet" href="css/components.css">
+<link rel="stylesheet" href="css/components.css?v=20260828-services-intro">
 </head>
 <body>
 
@@ -105,10 +105,12 @@
        degradado. No hace falta fijar el color explícitamente: sin `data-surface`,
        la sección cae al fondo por defecto del `<body>` (`--color-surface-light`,
        ya definido como #F5F3EE en tokens.css), que es exactamente ese valor. -->
-  <section class="section" aria-labelledby="servicios-heading">
+  <section class="section services-intro" aria-labelledby="servicios-heading">
     <div class="container">
       <div class="section-head reveal">
-        <h2 id="servicios-heading">Nuestros servicios</h2>
+        <p class="eyebrow">Servicios</p>
+        <h2 id="servicios-heading">Cada crédito en riesgo exige <span class="services-intro__emphasis">una estrategia jurídica propia.</span></h2>
+        <p class="services-intro__copy">Representamos exclusivamente los intereses del acreedor. Integramos defensa en procesos de insolvencia, normalización de activos y derecho corporativo para anticipar riesgos, proteger el crédito y maximizar sus posibilidades de recuperación.</p>
       </div>
 
       <div class="service-grid">
@@ -303,7 +305,6 @@
     </section>
 
     <section class="home-footer__section home-footer__sitemap" aria-label="Mapa del sitio">
-      <h2 class="home-footer__heading">Sitio</h2>
       <nav class="home-footer__sitemap-list" aria-label="Mapa del sitio">
         <a href="index.html">Inicio</a>
         <a href="servicios.html">Metodología</a>

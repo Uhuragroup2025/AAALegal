@@ -49,30 +49,6 @@
     });
   }
 
-  // --- Parallax muy sutil del hero (solo mientras el hero está en pantalla) ---
-  var heroMedia = document.querySelector('.hero-shell__media');
-  if (heroMedia && !prefersReducedMotion) {
-    var heroShell = document.querySelector('.hero-shell');
-    var parallaxTicking = false;
-    var applyParallax = function () {
-      var rect = heroShell.getBoundingClientRect();
-      if (rect.bottom > 0 && rect.top < window.innerHeight) {
-        var progress = 1 - (rect.bottom / (window.innerHeight + rect.height));
-        var distance = getComputedStyle(document.documentElement).getPropertyValue('--parallax-distance');
-        var maxPx = parseFloat(distance) || 0;
-        heroMedia.style.transform = 'translateY(' + (progress * maxPx).toFixed(1) + 'px)';
-      }
-      parallaxTicking = false;
-    };
-    window.addEventListener('scroll', function () {
-      if (!parallaxTicking) {
-        window.requestAnimationFrame(applyParallax);
-        parallaxTicking = true;
-      }
-    }, { passive: true });
-    applyParallax();
-  }
-
   // --- Rail horizontal: mejora de arrastre con puntero (el scroll nativo ya funciona sin esto) ---
   document.querySelectorAll('.rail').forEach(function (rail) {
     rail.setAttribute('tabindex', '0');
@@ -139,46 +115,6 @@
   // por defecto (ver components.css `.stepper__step[data-stepper-ready]`) — no se
   // requiere fallback adicional.
 
-  // --- Contador animado ("En cifras", Decisión D41): cuenta de forma ascendente
-  // desde 0 hasta `data-count-to` cuando la tarjeta entra en viewport. Con
-  // prefers-reduced-motion, salta directo al valor final sin animar.
-  var countEls = document.querySelectorAll('.stat-card__number[data-count-to]');
-  if (countEls.length) {
-    var renderCount = function (el, value) {
-      var prefix = el.getAttribute('data-count-prefix') || '';
-      var suffix = el.getAttribute('data-count-suffix') || '';
-      el.textContent = prefix + Math.round(value) + suffix;
-    };
-
-    var animateCount = function (el) {
-      var target = parseFloat(el.getAttribute('data-count-to')) || 0;
-      var duration = 1400;
-      var start = null;
-      var step = function (timestamp) {
-        if (start === null) start = timestamp;
-        var progress = Math.min((timestamp - start) / duration, 1);
-        var eased = 1 - Math.pow(1 - progress, 3); // ease-out cúbico
-        renderCount(el, target * eased);
-        if (progress < 1) window.requestAnimationFrame(step);
-      };
-      window.requestAnimationFrame(step);
-    };
-
-    if ('IntersectionObserver' in window && !prefersReducedMotion) {
-      var countObserver = new IntersectionObserver(function (entries) {
-        entries.forEach(function (entry) {
-          if (entry.isIntersecting) {
-            animateCount(entry.target);
-            countObserver.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.4 });
-      countEls.forEach(function (el) { countObserver.observe(el); });
-    } else {
-      countEls.forEach(function (el) { renderCount(el, parseFloat(el.getAttribute('data-count-to')) || 0); });
-    }
-  }
-
   // --- Equipo: tarjetas flip (Decisión D92, Trabaja con nosotros) ---
   // El hover real (mouse) ya dispara el flip solo con CSS ((hover:hover) and
   // (pointer:fine), ver components.css). Este toggle por click/tecla es lo que
@@ -197,6 +133,73 @@
       }
     });
   });
+
+  // --- Home · ¿Por qué AAA?: carrusel móvil paginado de dos cards ---
+  // El scroll táctil y scroll-snap funcionan sin JS. Esta capa añade únicamente
+  // indicador, flechas y sincronización accesible con las tres páginas.
+  var whyCarousel = document.querySelector('[data-why-carousel]');
+  var whyControls = document.querySelector('[data-why-carousel-controls]');
+  if (whyCarousel && whyControls) {
+    var whyCards = Array.prototype.slice.call(whyCarousel.children);
+    var whyPageStarts = whyCards.filter(function (_card, index) { return index % 2 === 0; });
+    var whyCurrent = whyControls.querySelector('[data-why-carousel-current]');
+    var whyTotal = whyControls.querySelector('[data-why-carousel-total]');
+    var whyPrev = whyControls.querySelector('[data-why-carousel-prev]');
+    var whyNext = whyControls.querySelector('[data-why-carousel-next]');
+    var whyMobileQuery = window.matchMedia('(max-width: 640px)');
+    var whyPageIndex = 0;
+    var whyFrame = null;
+
+    if (whyTotal) whyTotal.textContent = String(whyPageStarts.length);
+
+    var updateWhyCarousel = function () {
+      if (!whyMobileQuery.matches || !whyPageStarts.length) return;
+
+      var nextWhyPageIndex = whyPageStarts.reduce(function (nearest, card, index) {
+        var currentDistance = Math.abs(whyPageStarts[nearest].offsetLeft - whyCarousel.scrollLeft);
+        var nextDistance = Math.abs(card.offsetLeft - whyCarousel.scrollLeft);
+        return nextDistance < currentDistance ? index : nearest;
+      }, 0);
+
+      whyPageIndex = nextWhyPageIndex;
+      if (whyCurrent && whyCurrent.textContent !== String(whyPageIndex + 1)) {
+        whyCurrent.textContent = String(whyPageIndex + 1);
+      }
+      if (whyPrev) whyPrev.disabled = whyPageIndex === 0;
+      if (whyNext) whyNext.disabled = whyPageIndex === whyPageStarts.length - 1;
+    };
+
+    var goToWhyPage = function (index) {
+      if (!whyMobileQuery.matches || !whyPageStarts.length) return;
+      var targetIndex = Math.max(0, Math.min(index, whyPageStarts.length - 1));
+      whyCarousel.scrollTo({
+        left: whyPageStarts[targetIndex].offsetLeft,
+        behavior: prefersReducedMotion ? 'auto' : 'smooth'
+      });
+    };
+
+    whyCarousel.addEventListener('scroll', function () {
+      if (whyFrame) window.cancelAnimationFrame(whyFrame);
+      whyFrame = window.requestAnimationFrame(updateWhyCarousel);
+    }, { passive: true });
+
+    if (whyPrev) whyPrev.addEventListener('click', function () { goToWhyPage(whyPageIndex - 1); });
+    if (whyNext) whyNext.addEventListener('click', function () { goToWhyPage(whyPageIndex + 1); });
+
+    var resetWhyCarousel = function () {
+      if (whyMobileQuery.matches) whyCarousel.scrollLeft = 0;
+      whyPageIndex = 0;
+      updateWhyCarousel();
+    };
+
+    if (whyMobileQuery.addEventListener) {
+      whyMobileQuery.addEventListener('change', resetWhyCarousel);
+    } else if (whyMobileQuery.addListener) {
+      whyMobileQuery.addListener(resetWhyCarousel);
+    }
+    window.addEventListener('resize', updateWhyCarousel);
+    updateWhyCarousel();
+  }
 
   // --- Aviso de cookies (GA4 + GTM + Clarity, Decisión D20) ---
   var cookieBanner = document.querySelector('.cookie-banner');

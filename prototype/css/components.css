@@ -512,6 +512,25 @@ section[data-surface="muted"] + .hero .curve-divider,
   grid-template-columns: repeat(3, 1fr);
   gap: var(--space-6);
 }
+
+.services-intro .section-head {
+  max-width: 900px;
+}
+
+.services-intro__emphasis {
+  display: block;
+  font-family: 'Libre Caslon Text', Georgia, 'Times New Roman', serif;
+  font-size: 0.96em;
+  font-style: italic;
+  color: var(--color-accent-main);
+}
+
+.services-intro__copy {
+  max-width: 72ch;
+  margin-top: var(--space-6);
+  color: var(--color-text-on-light);
+}
+
 @media (max-width: 900px) {
   .service-grid { grid-template-columns: 1fr; }
 }
@@ -2295,9 +2314,45 @@ section[data-surface="muted"] .post-meta__badge { border-color: var(--color-bord
    afectó). */
 .home-page .section-head h2,
 .home-page section:not(.hero-immersive):not(.home-footer__section) h2 {
-  font-size: 2.3rem;
+  font-size: 2.625rem;
   line-height: 1;
   letter-spacing: -0.035em;
+}
+
+/* H2 narrativos: mismo gesto editorial del Hero, sin heredar su escala. Libre
+   Caslon Text aporta la itálica real que Libre Caslon Display no incluye. */
+.home-page .section-title__emphasis {
+  font-family: 'Libre Caslon Text', Georgia, 'Times New Roman', serif;
+  font-size: 0.96em;
+  font-style: italic;
+  font-weight: 400;
+  line-height: inherit;
+  color: var(--color-accent-main);
+}
+
+.home-page .section-title__line,
+.home-page .section-title__emphasis--block {
+  display: block;
+}
+
+.home-page section[aria-labelledby="situaciones-heading"] .section-head {
+  align-items: center;
+  text-align: center;
+}
+
+/* SVG entregados por el Owner: máscara monocroma para heredar exactamente el color
+   de cada tarjeta sin editar los archivos originales. */
+.home-page .icon-mask {
+  display: block;
+  background-color: currentColor;
+  -webkit-mask-image: var(--icon-mask);
+  -webkit-mask-position: center;
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-size: contain;
+  mask-image: var(--icon-mask);
+  mask-position: center;
+  mask-repeat: no-repeat;
+  mask-size: contain;
 }
 
 .home-page section h3 {
@@ -2880,6 +2935,17 @@ section[aria-labelledby="situaciones-heading"] .section-head {
   flex: 0 0 32px;
 }
 
+.home-page .focus-grid .focus-card__icon svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  stroke: currentColor;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+}
+
 /* D45 (2026-08-20): los títulos de estas 5 tarjetas pasan de la serif de display
    (Libre Caslon Display) a Krub bold — a pedido del Owner.
    D46 (2026-08-20): Krub bold es más ancha por carácter que la serif que reemplazó —
@@ -3369,20 +3435,20 @@ section[aria-labelledby="situaciones-heading"] .section-head {
 
 @media (max-width: 640px) {
   .site-footer--global {
-    padding-block: var(--space-12) var(--space-8);
+    padding-block: var(--space-8) var(--space-6);
   }
 
   .site-footer--global .home-footer__pattern {
     right: -7rem;
     bottom: 1rem;
-    width: 300px;
+    width: 240px;
     opacity: 0.05;
   }
 
   .site-footer--global .home-footer__grid {
     grid-template-columns: 1fr;
-    gap: var(--space-10);
-    padding-bottom: var(--space-12);
+    gap: var(--space-6);
+    padding-bottom: var(--space-8);
   }
 
   .site-footer--global .home-footer__brand-block {
@@ -3390,7 +3456,27 @@ section[aria-labelledby="situaciones-heading"] .section-head {
   }
 
   .site-footer--global .home-footer__logo {
-    width: 205px;
+    width: 160px;
+  }
+
+  .site-footer--global .home-footer__contact-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-3) var(--space-5);
+  }
+
+  .site-footer--global .home-footer__contact-list > :first-child,
+  .site-footer--global .home-footer__contact-list > :last-child {
+    grid-column: 1 / -1;
+  }
+
+  .site-footer--global .home-footer__sitemap-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0 var(--space-6);
+  }
+
+  .site-footer--global .home-footer__social-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-5);
   }
 
   .site-footer--global .home-footer__contact-item,
@@ -3401,7 +3487,12 @@ section[aria-labelledby="situaciones-heading"] .section-head {
 
   .site-footer--global .home-footer__bottom {
     flex-direction: column;
-    gap: var(--space-4);
+    gap: var(--space-2);
+    padding-top: var(--space-4);
+  }
+
+  .site-footer--global .home-footer__legal-links {
+    gap: var(--space-5);
   }
 }
 
@@ -3534,7 +3625,7 @@ section[aria-labelledby="situaciones-heading"] .section-head {
 
   .home-page .section-head h2,
   .home-page section:not(.hero-immersive):not(.home-footer__section) h2 {
-    font-size: 1.71875rem;
+    font-size: 1.9375rem;
   }
 
   /* D74 (2026-08-21): separado del selector combinado de arriba — ya no es exclusivo
@@ -3618,4 +3709,1355 @@ section[aria-labelledby="situaciones-heading"] .section-head {
   .home-page .people-intro { padding: var(--space-8) var(--space-6); }
 
   .cierre-grid--global .cierre-card { min-height: 300px; }
+}
+
+/* =====================================================================
+   REFINEMENT V2 · HOME
+   Tres ajustes locales sobre el baseline 6456a00. No altera componentes
+   compartidos ni páginas internas.
+   ===================================================================== */
+
+/* Cinta de logos posterior al hero. La caja óptica sube a 85px y reduce el
+   intersticio para leerse como una secuencia continua de credenciales. */
+.home-page .home-logo-ribbon {
+  overflow: hidden;
+  padding-block: var(--space-8);
+  background: var(--color-surface-light);
+}
+
+.home-page .home-logo-ribbon__track {
+  display: flex;
+  width: max-content;
+  animation: home-logo-ribbon-scroll 68s linear infinite;
+  will-change: transform;
+}
+
+.home-page .home-logo-ribbon:hover .home-logo-ribbon__track,
+.home-page .home-logo-ribbon:focus-within .home-logo-ribbon__track {
+  animation-play-state: paused;
+}
+
+.home-page .home-logo-ribbon__set {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: clamp(var(--space-4), 2vw, var(--space-8));
+  padding-right: clamp(var(--space-4), 2vw, var(--space-8));
+}
+
+.home-page .home-logo-ribbon__item {
+  display: grid;
+  place-items: center;
+  width: clamp(152px, 12.5vw, 207px);
+  height: 90px;
+}
+
+.home-page .home-logo-ribbon__item img {
+  display: block;
+  width: 100%;
+  height: 85px;
+  max-width: 100%;
+  object-fit: contain;
+  filter: grayscale(1);
+  opacity: 0.62;
+  transition: filter 320ms var(--motion-ease), opacity 320ms var(--motion-ease), transform 320ms var(--motion-ease);
+}
+
+.home-page .home-logo-ribbon__item:hover img {
+  filter: grayscale(0);
+  opacity: 1;
+  transform: translateY(-2px);
+}
+
+@keyframes home-logo-ribbon-scroll {
+  to { transform: translateX(-50%); }
+}
+
+/* Cierre centrado del bloque de riesgos, sin alterar sus tres cards. */
+.home-page .situations-cta {
+  display: flex;
+  justify-content: center;
+  padding-top: var(--space-8);
+  text-align: center;
+}
+
+/* El mosaico conserva exactamente la interacción de Óscar; solo gana escala. */
+@media (min-width: 1024px) {
+  .home-page section[aria-labelledby="servicios-home-heading"] .focus-mosaic {
+    width: min(calc(100vw - (2 * var(--container-padding))), 1600px);
+    margin-left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .home-page section[aria-labelledby="servicios-home-heading"] .focus-mosaic .surface-visual {
+    min-height: clamp(600px, 70svh, 780px);
+  }
+}
+
+@media (max-width: 640px) {
+  .home-page .home-logo-ribbon {
+    padding-block: var(--space-6);
+  }
+
+  .home-page .home-logo-ribbon__set {
+    gap: var(--space-4);
+    padding-right: var(--space-4);
+  }
+
+  .home-page .home-logo-ribbon__item {
+    width: 152px;
+    height: 78px;
+  }
+
+  .home-page .home-logo-ribbon__item img {
+    height: 74px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-page .home-logo-ribbon {
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .home-page .home-logo-ribbon__track {
+    animation: none;
+    will-change: auto;
+  }
+
+  .home-page .home-logo-ribbon__set[aria-hidden="true"] {
+    display: none;
+  }
+
+  .home-page .home-logo-ribbon__item img {
+    transition: none;
+    transform: none;
+  }
+}
+
+/* Ritmo tonal de Home: variante cálida derivada del marfil aprobado. Se mantiene
+   local al prototipo de Inicio para no ampliar la paleta ni alterar internas. */
+.home-page {
+  --home-surface-warm-deep: #EEEAE3;
+}
+
+/* Capítulos claros: asignación narrativa, no alternancia automática. */
+.home-page section[aria-labelledby="confianza-heading"],
+.home-page section[aria-labelledby="cierre-heading"] {
+  background: var(--home-surface-warm-deep);
+}
+
+.home-page section[aria-labelledby="situaciones-heading"],
+.home-page section[aria-labelledby="servicios-home-heading"],
+.home-page section[aria-labelledby="sectores-heading"],
+.home-page section[aria-labelledby="equipo-heading"] {
+  background: var(--color-surface-light);
+}
+
+.home-page section[aria-labelledby="situaciones-heading"] {
+  padding-top: var(--space-16);
+}
+
+/* Las superficies que eran blancas pasan al beige cálido secundario. Las variantes
+   navy/azul de la retícula de confianza conservan sus reglas de mayor especificidad. */
+.home-page .surface-solid,
+.home-page .sector-card,
+.home-page .people-card {
+  background: var(--home-surface-warm-deep);
+}
+
+/* Ritmo del tramo oscuro existente en el baseline de Óscar. */
+.home-page section.stats-counter[aria-labelledby="cifras-heading"] {
+  background: var(--color-navy-hover);
+}
+
+.home-page section[aria-labelledby="casos-heading"] {
+  background: var(--color-navy-deep);
+}
+
+/* Ajustes locales de contenido solicitados para Home. */
+.home-page .home-about-summary {
+  color: var(--color-text-on-light);
+  background: #EEEAE3;
+}
+
+.home-page .home-about-summary .eyebrow {
+  color: var(--color-accent-main-strong);
+}
+
+.home-page .home-about-summary h2,
+.home-page .home-about-summary strong {
+  color: var(--color-navy-deep);
+}
+
+.home-page .home-about-summary p {
+  color: var(--color-text-on-light);
+}
+
+.home-page .home-about-summary__action {
+  margin-top: var(--space-6);
+  margin-bottom: 0;
+}
+
+.home-page section[aria-labelledby="servicios-home-heading"] .section-head--stacked {
+  align-items: center;
+  width: 100%;
+  max-width: 920px;
+  margin-inline: auto;
+  text-align: center;
+}
+
+.home-page section[aria-labelledby="servicios-home-heading"] .section-head h2 {
+  max-width: 23ch;
+}
+
+/* Los CTA principales de contenido comparten el mismo acabado cobre del Hero. */
+.home-page .situations-cta .btn--primary,
+.home-page .home-about-summary__action .btn--primary {
+  color: var(--color-navy-hover);
+  background: var(--color-accent-main);
+  border-color: var(--color-accent-main);
+}
+
+.home-page .situations-cta .btn--primary:hover,
+.home-page .home-about-summary__action .btn--primary:hover {
+  color: var(--color-white);
+  background: var(--color-navy-hover);
+  border-color: var(--color-navy-hover);
+}
+
+/* Botones cobre: texto e icono heredan el tono de la superficie que los contiene. */
+.home-page .hero__actions .btn--primary,
+.home-page .site-header--global .btn--header {
+  color: var(--color-navy-deep);
+}
+
+.home-page .cierre-grid--global .cierre-card__btn {
+  color: var(--color-navy-elevated);
+}
+
+.home-page .situations-cta .btn--primary {
+  color: var(--color-surface-light);
+}
+
+.home-page .home-about-summary__action .btn--primary {
+  color: var(--home-surface-warm-deep);
+}
+
+/* Superficies limpias: se anulan también los bordes de la sección anterior que
+   visualmente aparecían como línea superior del capítulo solicitado. */
+.home-page section[aria-labelledby="situaciones-heading"],
+.home-page .home-about-summary,
+.home-page section.stats-counter[aria-labelledby="cifras-heading"],
+.home-page section[aria-labelledby="casos-heading"] {
+  border-top: 0;
+  border-bottom: 0;
+}
+
+.home-page .home-about-summary::before,
+.home-page .home-about-summary::after,
+.home-page section[aria-labelledby="casos-heading"]::before,
+.home-page section[aria-labelledby="casos-heading"]::after {
+  border: 0;
+}
+
+/* En cifras · declaración editorial abierta, sin lenguaje de card. */
+.home-page .stats-counter .stats-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0;
+  align-items: stretch;
+}
+
+.home-page .stats-counter .stat-card {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: var(--space-6) clamp(var(--space-6), 2vw, var(--space-8));
+  text-align: left;
+  border: 0;
+  border-radius: 0;
+}
+
+.home-page .stats-counter .stat-card:first-child {
+  padding-left: 0;
+}
+
+.home-page .stats-counter .stat-card:last-child {
+  padding-right: 0;
+}
+
+.home-page .stats-counter .stat-card + .stat-card {
+  border-left: 1px solid rgba(185, 206, 237, 0.22);
+}
+
+.home-page .stats-counter .stat-card__number {
+  margin: 0 0 var(--space-4);
+  font-family: var(--font-display);
+  font-size: clamp(4rem, 6vw, 6rem);
+  font-weight: 400;
+  line-height: 0.9;
+  letter-spacing: -0.055em;
+  white-space: nowrap;
+  color: var(--color-accent-on-dark);
+}
+
+.home-page .stats-counter .stat-card__label {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: var(--text-md);
+  line-height: 1.4;
+  color: var(--color-white);
+}
+
+@media (max-width: 720px) {
+  .home-page .stats-counter .stats-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0;
+    width: 100%;
+  }
+
+  .home-page .stats-counter .stat-card,
+  .home-page .stats-counter .stat-card:first-child,
+  .home-page .stats-counter .stat-card:last-child {
+    width: 100%;
+    padding: var(--space-8) 0;
+  }
+
+  .home-page .stats-counter .stat-card:first-child {
+    padding-top: var(--space-4);
+  }
+
+  .home-page .stats-counter .stat-card + .stat-card {
+    border-left: 0;
+    border-top: 1px solid rgba(185, 206, 237, 0.22);
+  }
+
+  .home-page .stats-counter .stat-card__number {
+    font-size: clamp(3.75rem, 18vw, 5.5rem);
+  }
+}
+
+/* Servicios de Home: el panel completo es el enlace, sin alterar su interacción. */
+.home-page .focus-mosaic > a.surface-visual {
+  color: inherit;
+  text-decoration: none;
+}
+
+.home-page .focus-mosaic > a.surface-visual:focus-visible {
+  z-index: 3;
+  outline: 2px solid var(--color-accent-main);
+  outline-offset: -4px;
+}
+
+/* En los paneles altos, el bloque descriptivo asciende hacia el tercio inferior. */
+@media (min-width: 1024px) {
+  .home-page .focus-mosaic .surface-visual__caption {
+    inset: 0 0 20%;
+    height: auto;
+  }
+}
+
+/* Casos: tres reels verticales y una transición continua hacia Dimensión humana. */
+.home-page section[aria-labelledby="casos-heading"] {
+  padding-bottom: calc(var(--space-24) + var(--space-8));
+  overflow: visible;
+}
+
+.home-page .case-video__frame {
+  aspect-ratio: 9 / 16;
+  border-radius: var(--radius-md);
+}
+
+.home-page section[aria-labelledby="equipo-heading"] {
+  position: relative;
+  z-index: 2;
+  padding-top: 0;
+  border-top: 0;
+  background:
+    linear-gradient(
+      to bottom,
+      var(--color-navy-deep) 0 9rem,
+      var(--color-surface-light) 9rem 100%
+    );
+}
+
+.home-page section[aria-labelledby="equipo-heading"] > .container {
+  position: relative;
+  z-index: 1;
+  margin-bottom: -4rem;
+  transform: translateY(-4rem);
+}
+
+@media (max-width: 640px) {
+  .home-page section[aria-labelledby="casos-heading"] {
+    padding-bottom: calc(var(--space-16) + var(--space-4));
+  }
+
+  .home-page section[aria-labelledby="equipo-heading"] {
+    background:
+      linear-gradient(
+        to bottom,
+        var(--color-navy-deep) 0 5rem,
+        var(--color-surface-light) 5rem 100%
+      );
+  }
+
+  .home-page section[aria-labelledby="equipo-heading"] > .container {
+    margin-bottom: -2rem;
+    transform: translateY(-2rem);
+  }
+}
+
+/* Dimensión humana: fotografía full-bleed primero, contenido editorial después. */
+.home-page section[aria-labelledby="equipo-heading"] .people-card {
+  border: 0;
+  box-shadow: none;
+}
+
+.home-page section[aria-labelledby="equipo-heading"] .people-intro {
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0;
+  padding: 0;
+}
+
+.home-page section[aria-labelledby="equipo-heading"] .people-intro__media {
+  width: 100%;
+  max-width: none;
+  aspect-ratio: 16 / 7;
+  padding: var(--space-4);
+  border: 0;
+  border-radius: 0;
+}
+
+.home-page section[aria-labelledby="equipo-heading"] .people-intro__copy {
+  max-width: 820px;
+  padding: var(--space-12);
+}
+
+@media (max-width: 800px) {
+  .home-page section[aria-labelledby="equipo-heading"] .people-intro {
+    gap: 0;
+    padding: 0;
+  }
+
+  .home-page section[aria-labelledby="equipo-heading"] .people-intro__media {
+    width: 100%;
+    max-width: none;
+    aspect-ratio: 16 / 9;
+  }
+
+  .home-page section[aria-labelledby="equipo-heading"] .people-intro__copy {
+    max-width: none;
+    padding: var(--space-8) var(--space-6);
+  }
+}
+
+/* Por qué AAA: se conservan las superficies cromáticas, sin strokes de card/sección. */
+.home-page section[aria-labelledby="confianza-heading"],
+.home-page section[aria-labelledby="confianza-heading"] .surface-solid {
+  border: 0;
+}
+
+/* Dimensión humana se integra a la superficie de la página, sin caja visible. */
+.home-page section[aria-labelledby="equipo-heading"] .people-card {
+  background: transparent;
+}
+
+/* Cierre de Home: una sola pieza visual, sin separación entre fotografía y mensaje. */
+.home-page section[aria-labelledby="cierre-heading"] {
+  border: 0;
+}
+
+.home-page .cierre-grid--global {
+  gap: 0;
+  overflow: hidden;
+  background: var(--color-navy-deep);
+  border: 0;
+  border-radius: var(--radius-md);
+  box-shadow: none;
+}
+
+.home-page .cierre-grid--global .cierre-card {
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+/* Ajustes de continuidad solicitados para Home. */
+.home-page .home-logo-ribbon__set {
+  gap: 5px;
+  padding-right: 5px;
+}
+
+.home-page .home-logo-ribbon__title {
+  max-width: var(--container-max);
+  margin: 0 auto var(--space-2);
+  padding-inline: var(--container-padding);
+  font-family: var(--font-sans);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: 0.14em;
+  text-align: center;
+  text-transform: uppercase;
+  color: var(--color-navy-deep);
+  opacity: 0.62;
+}
+
+.home-page .home-logo-ribbon__track {
+  animation-duration: 58s;
+}
+
+.home-page .home-about-summary .what-we-do-grid {
+  align-items: stretch;
+}
+
+.home-page .home-about-summary .what-we-do-visual {
+  align-self: stretch;
+  justify-self: stretch;
+  width: calc(100% + var(--container-padding));
+  height: 100%;
+  max-height: none;
+  margin-right: calc(-1 * var(--container-padding));
+  aspect-ratio: auto;
+}
+
+.home-page section[aria-labelledby="servicios-home-heading"] .focus-mosaic {
+  width: 100vw;
+  max-width: none;
+  margin-left: 50%;
+  transform: translateX(-50%);
+}
+
+.home-page section[aria-labelledby="equipo-heading"] .people-intro__copy {
+  padding-inline: 0;
+}
+
+.home-page section[aria-labelledby="cierre-heading"] {
+  background: #F5F3EE;
+}
+
+@media (max-width: 640px) {
+  .home-page .home-logo-ribbon__set {
+    gap: 5px;
+    padding-right: 5px;
+  }
+
+  .home-page section[aria-labelledby="equipo-heading"] .people-intro__copy {
+    padding-inline: 0;
+  }
+}
+
+/* Ajuste de ritmo entre Servicios y Por qué AAA. */
+.home-page .section {
+  border-top: 0;
+  border-bottom: 0;
+}
+
+.home-page section[aria-labelledby="servicios-home-heading"] .section-head {
+  margin-bottom: var(--space-8);
+}
+
+/* Los paneles de servicios cierran directamente contra el capítulo siguiente. */
+.home-page section[aria-labelledby="servicios-home-heading"] {
+  padding-bottom: 0;
+}
+
+/* Continuidad del cierre: Dimensión humana es una composición abierta, no una card.
+   Se evita acumular el espaciado vertical completo de dos secciones consecutivas. */
+.home-page section[aria-labelledby="equipo-heading"] {
+  padding-bottom: var(--space-6);
+}
+
+.home-page section[aria-labelledby="cierre-heading"] {
+  padding-top: var(--space-8);
+}
+
+@media (max-width: 640px) {
+  .home-page section[aria-labelledby="equipo-heading"] {
+    padding-bottom: var(--space-6);
+  }
+
+  .home-page section[aria-labelledby="cierre-heading"] {
+    padding-top: var(--space-6);
+  }
+}
+
+@media (min-width: 1024px) {
+  .home-page .focus-mosaic .surface-visual__caption {
+    inset: 0 0 12%;
+  }
+}
+
+/* Header de Home: 78→90px en desktop y 68→78px en mobile (+15% aprox.). */
+.home-page .site-header--global,
+.home-page .site-header--global .site-header__inner {
+  min-height: 90px;
+}
+
+.home-page .hero-immersive {
+  padding-top: 90px;
+}
+
+.home-page #servicios-home-heading {
+  scroll-margin-top: calc(90px + var(--space-12));
+}
+
+@media (max-width: 640px) {
+  .home-page .site-header--global,
+  .home-page .site-header--global .site-header__inner {
+    min-height: 78px;
+  }
+
+  .home-page .hero-immersive {
+    padding-top: 78px;
+  }
+
+  .home-page #servicios-home-heading {
+    scroll-margin-top: calc(78px + var(--space-16));
+  }
+}
+
+/* Cintillo: normalización óptica según el área útil de cada archivo, sin deformar. */
+.home-page .home-logo-ribbon__item img {
+  --logo-scale: 1;
+  transform: scale(var(--logo-scale));
+  transform-origin: center;
+}
+
+.home-page .home-logo-ribbon__item:hover img {
+  transform: translateY(-2px) scale(var(--logo-scale));
+}
+
+.home-page .home-logo-ribbon__item img[src$="logo-bbva.png"] { --logo-scale: 1.93; }
+.home-page .home-logo-ribbon__item img[src$="logo-comfandi.png"] { --logo-scale: 1.68; }
+.home-page .home-logo-ribbon__item img[src$="logo-coopunidos.png"] { --logo-scale: 1.04; }
+.home-page .home-logo-ribbon__item img[src$="logo-elgranlangostino.png"] { --logo-scale: 1.64; }
+.home-page .home-logo-ribbon__item img[src$="logo-femcristar.png"] { --logo-scale: 1.3; }
+.home-page .home-logo-ribbon__item img[src$="logo-fetrabuv.png"] { --logo-scale: 1.65; }
+.home-page .home-logo-ribbon__item img[src$="logo-fonalianza.png"] { --logo-scale: 1.61; }
+.home-page .home-logo-ribbon__item img[src$="logo-k-listo.png"] { --logo-scale: 1.06; }
+.home-page .home-logo-ribbon__item img[src$="logo-ma-isabel.png"] { --logo-scale: 1.32; }
+.home-page .home-logo-ribbon__item img[src$="logo-metrocali.png"] { --logo-scale: 1.09; }
+.home-page .home-logo-ribbon__item img[src$="logo-neat.png"] { --logo-scale: 1.86; }
+.home-page .home-logo-ribbon__item img[src$="logo-nuestro-fondo.png"] { --logo-scale: 2.15; }
+.home-page .home-logo-ribbon__item img[src$="logo-promedico.png"] { --logo-scale: 1.29; }
+.home-page .home-logo-ribbon__item img[src$="logo-gobernacion-valle-del-cauca-ribbon.png"] { --logo-scale: 0.76; }
+.home-page .home-logo-ribbon__item img[src$="logo-constructora-melendez-ribbon.jpeg"] { --logo-scale: 0.65; }
+
+@media (prefers-reduced-motion: reduce) {
+  .home-page .home-logo-ribbon__item:hover img {
+    transform: scale(var(--logo-scale));
+  }
+}
+
+/* El CTA final replica exactamente el hover del CTA principal del Hero. */
+.home-page .cierre-grid--global .cierre-card__btn:hover {
+  color: var(--color-white);
+  background: transparent;
+  border-color: var(--color-accent-main);
+}
+
+/* Sectores: jerarquía vertical y slots ópticos consistentes para la evidencia. */
+.home-page .sector-card {
+  gap: 0;
+}
+
+.home-page .sector-card__header {
+  min-height: 108px;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: var(--space-3);
+}
+
+.home-page .sector-card__icon {
+  width: 42px;
+  height: 42px;
+  flex-basis: 42px;
+}
+
+.home-page .sector-card__logos {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(0, 1fr);
+  align-items: center;
+  gap: var(--space-4);
+  width: 100%;
+  padding-top: var(--space-8);
+}
+
+.home-page .sector-card__logo {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 72px;
+  min-width: 0;
+  overflow: visible;
+}
+
+.home-page .sector-card__logo img {
+  --sector-logo-scale: 1.55;
+  width: 100%;
+  height: 100%;
+  max-width: 140px;
+  max-height: 58px;
+  object-fit: contain;
+  transform: scale(var(--sector-logo-scale));
+  transform-origin: center;
+}
+
+/* Tres variantes ópticas: la caja es común y solo cambia la compensación necesaria
+   por la geometría o el aire interno propio de cada archivo. */
+.home-page .sector-card__logo img:is(
+  [src$="logo-coopunidos.png"],
+  [src$="logo-k-listo.png"],
+  [src$="logo-metrocali.png"],
+  [src$="logo-gobernacion-valle-del-cauca-ribbon.png"],
+  [src$="logo-constructora-melendez.png"]
+) { --sector-logo-scale: 1.15; }
+
+.home-page .sector-card__logo img:is(
+  [src$="logo-femcristar.png"],
+  [src$="logo-ma-isabel.png"],
+  [src$="logo-promedico.png"]
+) { --sector-logo-scale: 1.55; }
+
+.home-page .sector-card__logo img:is(
+  [src$="logo-bbva.png"],
+  [src$="logo-comfandi.png"],
+  [src$="logo-elgranlangostino.png"],
+  [src$="logo-fetrabuv.png"],
+  [src$="logo-fonalianza.png"],
+  [src$="logo-neat.png"],
+  [src$="logo-nuestro-fondo.png"]
+) { --sector-logo-scale: 2.05; }
+
+/* Tablet y mobile: reserva un cierre real dentro de cada tarjeta. La evidencia
+   permanece en una única fila y los ajustes ópticos pueden respirar sin quedar
+   recortados por el slot. */
+@media (max-width: 1023px) {
+  .home-page .sector-card {
+    padding-bottom: var(--space-8);
+  }
+
+  .home-page .sector-card__logos {
+    padding-bottom: var(--space-2);
+  }
+}
+
+@media (max-width: 560px) {
+  .home-page .sector-card {
+    padding: 28px 28px var(--space-8);
+  }
+
+  .home-page .sector-grid.mobile-card-carousel {
+    --mobile-card-width: min(88%, 340px);
+    align-items: stretch;
+    scrollbar-width: none;
+  }
+
+  .home-page .sector-grid.mobile-card-carousel::-webkit-scrollbar {
+    display: none;
+  }
+
+  .home-page .sector-card__header {
+    min-height: 82px;
+    gap: var(--space-2);
+  }
+
+  .home-page .sector-card__logos {
+    gap: var(--space-3);
+    padding-top: var(--space-4);
+    padding-bottom: var(--space-2);
+  }
+
+  .home-page .sector-card__logo {
+    height: 52px;
+  }
+
+  .home-page .sector-card__logo img {
+    max-width: 92px;
+    max-height: 40px;
+    --sector-logo-scale: 1.15;
+  }
+
+  .home-page .sector-card__logo img:is(
+    [src$="logo-coopunidos.png"],
+    [src$="logo-k-listo.png"],
+    [src$="logo-metrocali.png"],
+    [src$="logo-gobernacion-valle-del-cauca-ribbon.png"],
+    [src$="logo-constructora-melendez.png"]
+  ) { --sector-logo-scale: 0.88; }
+
+  .home-page .sector-card__logo img:is(
+    [src$="logo-femcristar.png"],
+    [src$="logo-ma-isabel.png"],
+    [src$="logo-promedico.png"]
+  ) { --sector-logo-scale: 1.15; }
+
+  .home-page .sector-card__logo img:is(
+    [src$="logo-bbva.png"],
+    [src$="logo-comfandi.png"],
+    [src$="logo-elgranlangostino.png"],
+    [src$="logo-fetrabuv.png"],
+    [src$="logo-fonalianza.png"],
+    [src$="logo-neat.png"],
+    [src$="logo-nuestro-fondo.png"]
+  ) { --sector-logo-scale: 1.45; }
+
+  .home-page .cierre-grid--global .cierre-card__content h2 {
+    font-size: 1.9375rem;
+  }
+}
+
+/* Qué hace AAA: full-bleed únicamente en la mitad derecha desde tablet; en mobile
+   vuelve a la retícula, después del texto y del CTA, sin desbordar el viewport. */
+@media (min-width: 641px) {
+  .home-page .home-about-summary {
+    padding-block: 0;
+  }
+
+  .home-page .home-about-summary .what-we-do-grid {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    align-items: stretch;
+  }
+
+  .home-page .home-about-summary .what-we-do-grid > :first-child {
+    padding-block: var(--space-24);
+  }
+
+  .home-page .home-about-summary .what-we-do-visual {
+    --about-right-bleed: max(
+      var(--container-padding),
+      calc(50vw - 600px + var(--container-padding))
+    );
+    width: calc(100% + var(--about-right-bleed));
+    height: 100%;
+    min-height: 100%;
+    max-height: none;
+    margin: 0 calc(-1 * var(--about-right-bleed)) 0 0;
+    padding: 0;
+    aspect-ratio: auto;
+    border: 0;
+    border-radius: 0;
+    object-fit: cover;
+  }
+
+  .home-page .home-about-summary .what-we-do-visual > img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+/* Cierre editorial de Home: una sola superficie institucional antes del footer. */
+.home-page .home-closing-cta {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  width: 100%;
+  padding: clamp(var(--space-16), 8vw, var(--space-24)) clamp(var(--space-8), 7vw, var(--space-24));
+  color: var(--color-white);
+  background:
+    radial-gradient(circle at 50% 0%, rgba(185, 206, 237, 0.13), transparent 42%),
+    linear-gradient(138deg, var(--color-navy-deep) 0%, var(--color-navy-hover) 100%);
+  border: 0;
+  border-radius: var(--radius-md);
+  box-shadow: none;
+}
+
+.home-page .home-closing-cta__pattern {
+  position: absolute;
+  z-index: -1;
+  right: clamp(-7rem, -3vw, -2rem);
+  bottom: clamp(-7rem, -4vw, -2rem);
+  width: clamp(280px, 34vw, 500px);
+  height: auto;
+  opacity: 0.04;
+  filter: grayscale(1) brightness(2.8);
+  pointer-events: none;
+}
+
+.home-page .home-closing-cta__content {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 820px;
+  margin-inline: auto;
+  text-align: center;
+}
+
+.home-page .home-closing-cta .eyebrow {
+  margin-bottom: var(--space-6);
+  color: var(--color-accent-main);
+}
+
+.home-page .home-closing-cta h2 {
+  max-width: 20ch;
+  margin-bottom: var(--space-6);
+  color: var(--color-white);
+}
+
+.home-page .home-closing-cta__text {
+  max-width: 62ch;
+  margin: 0 0 var(--space-8);
+  color: rgba(255, 255, 255, 0.74);
+}
+
+.home-page .home-closing-cta__button {
+  color: var(--color-navy-deep);
+  background: var(--color-accent-main);
+  border-color: var(--color-accent-main);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.home-page .home-closing-cta__button:hover {
+  color: var(--color-white);
+  background: transparent;
+  border-color: var(--color-accent-main);
+}
+
+@media (max-width: 640px) {
+  .home-page .home-closing-cta {
+    padding: var(--space-12) var(--space-6);
+  }
+
+  .home-page .home-closing-cta__pattern {
+    right: -7rem;
+    bottom: -2rem;
+    width: 300px;
+  }
+
+  .home-page .home-closing-cta .eyebrow {
+    margin-bottom: var(--space-4);
+  }
+
+  .home-page .home-closing-cta h2 {
+    margin-bottom: var(--space-6);
+  }
+
+  .home-page .home-closing-cta__text {
+    margin-bottom: var(--space-6);
+  }
+
+  .home-page .home-closing-cta__button {
+    width: 100%;
+    max-width: 320px;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 640px) {
+  .home-page .home-about-summary {
+    padding-block: var(--space-16);
+  }
+
+  .home-page .home-about-summary .what-we-do-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-8);
+  }
+
+  .home-page .home-about-summary .what-we-do-grid > :first-child {
+    padding-block: 0;
+  }
+
+  .home-page .home-about-summary .what-we-do-visual {
+    width: 100%;
+    height: auto;
+    min-height: 0;
+    max-height: none;
+    margin: 0;
+    padding: 0;
+    aspect-ratio: 4 / 3;
+    justify-self: stretch;
+    overflow: hidden;
+    object-fit: cover;
+  }
+
+  .home-page .home-about-summary .what-we-do-visual > img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+/* Fotografías temporales de banco para validar la dirección visual de Home.
+   No son activos finales de AAA; las clases de crop permiten sustituir cada
+   archivo sin alterar el layout, los componentes o la capa de motion. */
+.home-page .temp-home-photo {
+  display: block;
+  object-fit: cover;
+}
+
+.home-page .temp-home-photo--hero {
+  object-position: 72% 50%;
+}
+
+.home-page .temp-home-photo--about {
+  object-position: 38% 50%;
+}
+
+.home-page .focus-mosaic .temp-home-photo--service-creditors {
+  object-position: 62% 50%;
+}
+
+.home-page .focus-mosaic .temp-home-photo--service-assets {
+  object-position: 50% 68%;
+}
+
+.home-page .focus-mosaic .temp-home-photo--service-corporate {
+  object-position: 50% 74%;
+}
+
+.home-page .temp-home-photo--people {
+  object-position: 50% 42%;
+}
+
+.home-page .home-closing-cta--temp-photo {
+  background:
+    radial-gradient(circle at 50% 0%, rgba(185, 206, 237, 0.12), transparent 42%),
+    linear-gradient(138deg, rgba(var(--color-navy-deep-rgb), 0.94), rgba(var(--color-navy-deep-rgb), 0.84)),
+    url("../assets/img/temp-prototype-home-cta.jpg") center 52% / cover no-repeat;
+}
+
+@media (max-width: 640px) {
+  .home-page .temp-home-photo--hero {
+    object-position: 74% 50%;
+  }
+
+  .home-page .temp-home-photo--about {
+    object-position: 34% 50%;
+  }
+
+  .home-page .focus-mosaic .temp-home-photo--service-creditors {
+    object-position: 60% 50%;
+  }
+
+  .home-page .focus-mosaic .temp-home-photo--service-assets {
+    object-position: 50% 70%;
+  }
+
+  .home-page .focus-mosaic .temp-home-photo--service-corporate {
+    object-position: 50% 76%;
+  }
+
+  .home-page .temp-home-photo--people {
+    object-position: 50% 44%;
+  }
+
+  .home-page .home-closing-cta--temp-photo {
+    background-position: center, center, 52% 50%;
+  }
+}
+
+/* Ajuste fotográfico puntual — Home. La fotografía se adapta a los componentes
+   existentes; no modifica su geometría, contenido ni capa de motion. */
+.home-page .hero-shell__img.temp-home-photo--hero {
+  opacity: 0.78;
+  filter: saturate(0.72) contrast(1.02);
+  object-position: 68% 26%;
+}
+
+.home-page .hero-shell__scrim {
+  background:
+    linear-gradient(90deg,
+      rgba(var(--color-navy-deep-rgb), 0.92) 0%,
+      rgba(var(--color-navy-deep-rgb), 0.84) 42%,
+      rgba(var(--color-navy-deep-rgb), 0.52) 72%,
+      rgba(var(--color-navy-deep-rgb), 0.3) 100%);
+}
+
+@media (max-width: 640px) {
+  .home-page .hero-shell__img.temp-home-photo--hero {
+    object-position: 72% 50%;
+  }
+
+  .home-page .hero-shell__scrim {
+    background:
+      linear-gradient(90deg,
+        rgba(var(--color-navy-deep-rgb), 0.9) 0%,
+        rgba(var(--color-navy-deep-rgb), 0.76) 58%,
+        rgba(var(--color-navy-deep-rgb), 0.48) 100%);
+  }
+}
+
+/* Refinamiento fotográfico exclusivo de desktop: conserva la geometría y el
+   gradiente del Hero, corrige el punto focal y deja respirar mejor la fotografía. */
+@media (min-width: 1024px) {
+  .home-page .hero-shell {
+    min-height: clamp(690px, 82.8vh, 820px);
+  }
+
+  .home-page .hero-shell__img.temp-home-photo--hero {
+    opacity: 0.86;
+    object-position: 68% 12%;
+  }
+
+  .home-page .hero-shell__scrim {
+    background:
+      linear-gradient(90deg,
+        rgba(var(--color-navy-deep-rgb), 0.86) 0%,
+        rgba(var(--color-navy-deep-rgb), 0.76) 42%,
+        rgba(var(--color-navy-deep-rgb), 0.44) 72%,
+        rgba(var(--color-navy-deep-rgb), 0.24) 100%);
+  }
+}
+
+/* Los nombres de sector y atributos usan la sans secundaria en semibold. */
+.home-page .sector-card__name,
+.home-page .focus-grid h3 {
+  font-weight: 600;
+}
+
+/* Los tres paneles de Servicios se leen como una galería continua, sin stroke. */
+.home-page .focus-mosaic .surface-visual,
+.home-page .focus-mosaic .surface-visual:last-child {
+  border: 0;
+}
+
+/* Ritmo de evidencia: Casos y Cifras usan la misma distancia entre encabezado
+   y contenido que el capítulo de Nuestros servicios. */
+.home-page section[aria-labelledby="casos-heading"] .section-head,
+.home-page .stats-counter[aria-labelledby="cifras-heading"] .section-head {
+  margin-bottom: var(--space-8);
+}
+
+@media (max-width: 640px) {
+  .home-page #casos-heading .section-title__emphasis,
+  .home-page #cifras-heading .section-title__emphasis {
+    display: block;
+  }
+}
+
+@media (min-width: 641px) {
+  .home-page .home-about-summary .what-we-do-visual.temp-home-photo--about {
+    display: block;
+    align-self: stretch;
+    justify-self: stretch;
+    min-width: 0;
+    max-width: none;
+    height: 100%;
+    min-height: 100%;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    object-fit: cover;
+    object-position: 38% 50%;
+  }
+}
+
+@media (max-width: 640px) {
+  .home-page .home-about-summary .what-we-do-visual.temp-home-photo--about {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    margin-inline: 0;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    object-position: 34% 50%;
+  }
+}
+
+.home-page section[aria-labelledby="servicios-home-heading"] {
+  background: var(--color-navy-deep);
+}
+
+.home-page section[aria-labelledby="servicios-home-heading"] .eyebrow {
+  color: var(--color-accent-main);
+}
+
+.home-page section[aria-labelledby="servicios-home-heading"] .section-head h2 {
+  color: var(--color-white);
+}
+
+.home-page section[aria-labelledby="servicios-home-heading"] .section-title__emphasis {
+  color: var(--color-accent-main);
+}
+
+.home-page .focus-mosaic .surface-visual::after {
+  background: rgba(var(--color-navy-deep-rgb), 0.56);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .home-page .focus-mosaic .surface-visual:hover::after,
+  .home-page .focus-mosaic .surface-visual:focus-within::after {
+    background: rgba(var(--color-navy-deep-rgb), 0.38);
+  }
+}
+
+.home-page .case-video__preview {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 35%;
+  filter: saturate(0.78) contrast(0.98);
+}
+
+.home-page .case-video__frame::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(180deg, rgba(var(--color-navy-deep-rgb), 0.08), rgba(var(--color-navy-deep-rgb), 0.32));
+}
+
+.home-page .case-video__frame::before {
+  z-index: 2;
+}
+
+.home-page .case-video__play {
+  z-index: 3;
+}
+
+@media (min-width: 801px) {
+  .home-page section[aria-labelledby="equipo-heading"] .people-intro__media.temp-home-photo--people {
+    width: 100%;
+    height: clamp(300px, 31.25vw, 525px);
+    max-height: 525px;
+    padding: 0;
+    aspect-ratio: auto;
+    object-fit: cover;
+    object-position: 50% 42%;
+  }
+}
+
+@media (max-width: 800px) {
+  .home-page section[aria-labelledby="equipo-heading"] .people-intro__media.temp-home-photo--people {
+    width: 100%;
+    max-width: 100%;
+    height: min(75vw, 420px);
+    padding: 0;
+    aspect-ratio: auto;
+    object-fit: cover;
+    object-position: 50% 44%;
+  }
+}
+
+/* ¿Por qué AAA? · seis atributos equivalentes. Desktop muestra una única fila;
+   mobile presenta tres páginas nativas de dos cards sin alterar su lenguaje visual. */
+.home-page .why-carousel__controls {
+  display: none;
+}
+
+.home-page .focus-grid.why-carousel h3 {
+  font-size: 17px;
+  line-height: 1.2;
+}
+
+@media (min-width: 1024px) {
+  .home-page .focus-grid.why-carousel {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    grid-auto-rows: 210px;
+    gap: var(--space-4);
+  }
+
+  .home-page .focus-grid.why-carousel > .surface-solid {
+    min-height: 210px;
+  }
+}
+
+@media (max-width: 640px) {
+  .home-page .focus-grid.why-carousel {
+    --why-carousel-gap: var(--space-3);
+    display: flex;
+    width: 100%;
+    gap: var(--why-carousel-gap);
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding: 2px 0 var(--space-2);
+    scroll-padding-inline: 0;
+    scroll-snap-type: x mandatory;
+    overscroll-behavior-inline: contain;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .home-page .focus-grid.why-carousel::-webkit-scrollbar {
+    display: none;
+  }
+
+  .home-page .focus-grid.why-carousel > .surface-solid {
+    flex: 0 0 calc((100% - var(--why-carousel-gap)) / 2);
+    width: calc((100% - var(--why-carousel-gap)) / 2);
+    height: 190px;
+    min-height: 190px;
+    padding: var(--space-4) !important;
+  }
+
+  .home-page .focus-grid.why-carousel > .surface-solid:nth-child(odd) {
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+  }
+
+  .home-page .focus-grid.why-carousel > .surface-solid:nth-child(even) {
+    scroll-snap-align: none;
+    scroll-snap-stop: normal;
+  }
+
+  .js .home-page .why-carousel__controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-6);
+    margin-top: var(--space-4);
+  }
+
+  .home-page .why-carousel__status {
+    margin: 0;
+    color: var(--color-text-on-light);
+    font-family: var(--font-sans);
+    font-size: var(--text-sm);
+    font-weight: 600;
+  }
+
+  .home-page .why-carousel__actions {
+    display: flex;
+    gap: var(--space-2);
+  }
+
+  .home-page .why-carousel__arrow {
+    display: grid;
+    width: 44px;
+    height: 44px;
+    place-items: center;
+    padding: 0;
+    color: var(--color-navy-deep);
+    background: transparent;
+    border: 1px solid var(--color-navy-deep);
+    border-radius: var(--radius-sm);
+  }
+
+  .home-page .why-carousel__arrow svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .home-page .why-carousel__arrow:not(:disabled):hover,
+  .home-page .why-carousel__arrow:not(:disabled):focus-visible {
+    color: var(--color-white);
+    background: var(--color-navy-deep);
+  }
+
+  .home-page .why-carousel__arrow:focus-visible {
+    outline: 2px solid var(--color-focus-ring);
+    outline-offset: 3px;
+  }
+
+  .home-page .why-carousel__arrow:disabled {
+    cursor: not-allowed;
+    opacity: 0.32;
+  }
 }
