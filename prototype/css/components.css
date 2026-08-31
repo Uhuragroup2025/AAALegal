@@ -43,6 +43,12 @@
   text-wrap: balance;
 }
 
+/* Metodología: conserva en todos sus capítulos la misma relación eyebrow → título
+   aprobada en Home, sin alterar el ritmo posterior del body o de cada módulo. */
+.services-page .section-heading--editorial > .eyebrow {
+  margin-bottom: var(--space-4);
+}
+
 .section-title__regular { display: inline; }
 
 .section-title__emphasis {
@@ -922,6 +928,28 @@ section[data-surface="muted"] + .hero .curve-divider,
   height: 38px;
   flex: 0 0 38px;
   color: var(--color-accent-main-strong);
+}
+
+/* Microinteracción breve para iconografía de contenido. Se limita a Sectores,
+   ¿Por qué AAA? y los nodos editoriales de Metodología; navegación, botones,
+   logos e iconos utilitarios quedan fuera. */
+@media (hover: hover) and (pointer: fine) {
+  @media (prefers-reduced-motion: no-preference) {
+    .home-page .sector-card__icon,
+    .home-page .why-carousel .focus-card__icon {
+      transition: transform var(--motion-fast) var(--motion-ease),
+                  filter var(--motion-fast) var(--motion-ease);
+      transform-origin: center;
+    }
+
+    .home-page .sector-card:hover .sector-card__icon,
+    .home-page .sector-card:focus-within .sector-card__icon,
+    .home-page .why-carousel .surface-solid:hover .focus-card__icon,
+    .home-page .why-carousel .surface-solid:focus-within .focus-card__icon {
+      transform: translateY(-2px) scale(1.04);
+      filter: brightness(0.84);
+    }
+  }
 }
 
 /* D45 (2026-08-20): pasa de la serif de display a Krub bold — a pedido del Owner. */
@@ -2515,7 +2543,7 @@ section[data-surface="dark"] .stepper__step.is-active .stepper__icon { color: va
 
 .contact-intake__content { min-width: 0; }
 
-.contact-intake .section-heading--editorial h2 { max-width: 18ch; }
+.contact-intake .section-heading--editorial h2 { max-width: none; }
 
 .contact-intake__intro {
   max-width: 58ch;
@@ -5760,4 +5788,24 @@ section[aria-labelledby="situaciones-heading"] .section-head {
 .section-heading--editorial h2 { font-size: 42px; }
 @media (max-width: 640px) {
   .section-heading--editorial h2 { font-size: 31px; }
+}
+
+/* Metodología ya tenía transiciones propias de borde/color. Esta capa final las
+   conserva y suma el gesto breve del ícono sin competir con el reveal del nodo.
+   Sobre azul profundo el tono se ilumina ligeramente para mantener contraste. */
+@media (min-width: 801px) and (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .services-page .stepper--flowchart .stepper__icon {
+    transform-origin: center;
+    transition: transform var(--motion-fast) var(--motion-ease),
+                filter var(--motion-fast) var(--motion-ease),
+                border-color var(--motion-base) var(--motion-ease),
+                background-color var(--motion-base) var(--motion-ease),
+                color var(--motion-base) var(--motion-ease);
+  }
+
+  .services-page .stepper--flowchart .stepper__step:hover .stepper__icon,
+  .services-page .stepper--flowchart .stepper__step:focus-within .stepper__icon {
+    transform: translateY(-2px) scale(1.04);
+    filter: brightness(1.12);
+  }
 }
