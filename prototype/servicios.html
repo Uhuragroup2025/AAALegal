@@ -12,7 +12,7 @@
 <link rel="stylesheet" href="css/base.css">
 <link rel="stylesheet" href="css/components.css?v=20260828-services-intro">
 </head>
-<body>
+<body class="services-page">
 
 <a class="skip-link" href="#contenido">Saltar al contenido</a>
 
@@ -70,12 +70,10 @@
        Inicio (2026-07-31: alineado explícitamente a pedido del Owner). Sin foto propia
        todavía (sigue en placeholder, IMG-04) y sin CTA — a diferencia de Inicio, este
        hero es solo presentación, el CTA de conversión vive en el cierre de la página. -->
-  <section class="hero-immersive section" data-surface="dark" aria-label="Presentación de Servicios" style="padding-bottom: 0;">
+  <section class="hero-immersive hero--editorial hero--editorial--services" data-surface="dark" aria-label="Presentación de Servicios">
     <div class="hero-shell">
       <div class="hero-shell__media">
-        <div class="media-placeholder" data-img-id="IMG-04" role="img" aria-label="Espacio reservado para fotografía o recurso visual de Servicios (IMG-04) — ver IMAGE-BRIEF.md">
-          <span class="media-placeholder__label">IMG-04 — pendiente de material del cliente</span>
-        </div>
+        <img src="assets/img/temp-prototype-home-servicio-acreedores.jpg" alt="" data-img-id="IMG-04" data-asset-status="temporary-prototype" width="1500" height="1001" decoding="async">
         <div class="hero-shell__scrim" aria-hidden="true"></div>
       </div>
       <div class="hero-shell__content">
@@ -84,13 +82,7 @@
              para que las dos palabras del texto dorado queden siempre en el mismo
              renglón ("su" ya no se separaba de "crédito?" al hacer wrap, quedando
              suelta al final de la primera línea junto al texto blanco). -->
-        <h1 class="hero__title">¿Un deudor puso en riesgo <span class="text-gradient">su&nbsp;crédito?</span></h1>
-        <!-- D98 (2026-08-25): tamaño explícito a pedido del Owner, para normalizar
-             con el mismo párrafo de hero en Quiénes somos/Trabaja con nosotros — este
-             párrafo ya caía en `var(--text-base)` por defecto (sin estilo propio), pero
-             ahora queda explícito para que los 3 headers se lean como una misma
-             decisión de diseño, no una coincidencia. -->
-        <p style="font-size: var(--text-base);">Representamos exclusivamente a acreedores en procesos de insolvencia y normalización de activos, combinando especialización jurídica, cobertura nacional y tecnología propia para respaldar decisiones críticas.</p>
+        <h1 class="hero__title">Cuando la insolvencia compromete un crédito, <span class="text-gradient">la estrategia jurídica es determinante.</span></h1>
       </div>
     </div>
   </section>
@@ -105,37 +97,43 @@
        degradado. No hace falta fijar el color explícitamente: sin `data-surface`,
        la sección cae al fondo por defecto del `<body>` (`--color-surface-light`,
        ya definido como #F5F3EE en tokens.css), que es exactamente ese valor. -->
-  <section class="section services-intro" aria-labelledby="servicios-heading">
+  <section class="section chapter surface-theme--light-base services-intro" aria-labelledby="servicios-heading">
     <div class="container">
-      <div class="section-head reveal">
-        <p class="eyebrow">Servicios</p>
-        <h2 id="servicios-heading">Cada crédito en riesgo exige <span class="services-intro__emphasis">una estrategia jurídica propia.</span></h2>
+      <div class="section-head section-heading--editorial" data-motion="section-title">
+        <p class="eyebrow">Representación especializada para acreedores</p>
+        <h2 id="servicios-heading"><span class="section-title__regular">Cada crédito en riesgo exige</span> <span class="section-title__emphasis section-title__emphasis--block">una estrategia jurídica propia.</span></h2>
         <p class="services-intro__copy">Representamos exclusivamente los intereses del acreedor. Integramos defensa en procesos de insolvencia, normalización de activos y derecho corporativo para anticipar riesgos, proteger el crédito y maximizar sus posibilidades de recuperación.</p>
       </div>
 
-      <div class="service-grid">
-        <article class="surface-solid service-card reveal">
-          <div class="media-placeholder service-card__media" data-img-id="IMG-11" role="img" aria-label="Espacio reservado para fotografía o recurso visual de Defensa de acreedores en procesos de insolvencia (IMG-11) — ver IMAGE-BRIEF.md"></div>
-          <div class="service-block__tag">Perspectiva técnica y estratégica</div>
-          <h3>Defensa de acreedores en procesos de insolvencia</h3>
-          <p>Representamos a personas y organizaciones cuyos créditos están comprometidos por procesos de insolvencia. Aplicamos el derecho concursal desde una perspectiva técnica y estratégica para proteger sus derechos y maximizar las posibilidades de recuperación.</p>
-          <p><strong>Nuestra práctica está dedicada exclusivamente al acreedor:</strong> no asesoramos ni representamos al deudor insolvente.</p>
+      <div class="service-grid service-grid--editorial">
+        <article class="service-card service-card--editorial surface-theme--light-alt reveal">
+          <div class="service-card__media"><img src="assets/img/temp-prototype-home-servicio-acreedores.jpg" alt="" data-img-id="IMG-11" data-asset-status="temporary-prototype" width="1500" height="1001" loading="lazy" decoding="async"></div>
+          <div class="service-card__body">
+            <div class="service-block__tag">Perspectiva técnica y estratégica</div>
+            <h3>Defensa de acreedores en procesos de insolvencia</h3>
+            <p>Representamos a personas y organizaciones cuyos créditos están comprometidos por procesos de insolvencia. Aplicamos el derecho concursal desde una perspectiva técnica y estratégica para proteger sus derechos y ampliar las alternativas reales de recuperación.</p>
+            <p><strong>Nuestra práctica está dedicada exclusivamente al acreedor:</strong> no asesoramos ni representamos al deudor insolvente.</p>
+          </div>
         </article>
 
-        <article class="surface-solid service-card reveal">
-          <div class="media-placeholder service-card__media" data-img-id="IMG-05" role="img" aria-label="Espacio reservado para fotografía o recurso visual de Normalización de Activos (IMG-05) — ver IMAGE-BRIEF.md"></div>
-          <div class="service-block__tag">Preventivo, reactivo y a la medida</div>
-          <h3>Normalización de activos</h3>
-          <p>Desarrollamos procesos integrales que analizan el comportamiento del deudor, la viabilidad jurídica y las alternativas más eficientes para maximizar la recuperación.</p>
-          <p>Intervenimos tanto en escenarios preventivos como reactivos, antes, durante y después de un proceso de insolvencia.</p>
+        <article class="service-card service-card--editorial surface-theme--light-alt reveal">
+          <div class="service-card__media"><img src="assets/img/temp-prototype-home-servicio-normalizacion.jpg" alt="" data-img-id="IMG-05" data-asset-status="temporary-prototype" width="1500" height="2250" loading="lazy" decoding="async"></div>
+          <div class="service-card__body">
+            <div class="service-block__tag">Preventivo, reactivo y a la medida</div>
+            <h3>Normalización de activos</h3>
+            <p>Desarrollamos procesos integrales que analizan el comportamiento del deudor, la viabilidad jurídica y las alternativas jurídicamente viables y proporcionales al riesgo para maximizar la recuperación.</p>
+            <p>Intervenimos tanto en escenarios preventivos como reactivos, antes, durante y después de un proceso de insolvencia.</p>
+          </div>
         </article>
 
-        <article class="surface-solid service-card reveal">
-          <div class="media-placeholder service-card__media" data-img-id="IMG-12" role="img" aria-label="Espacio reservado para fotografía o recurso visual de Derecho Corporativo (IMG-12) — ver IMAGE-BRIEF.md"></div>
-          <div class="service-block__tag">Prevención antes que contingencia</div>
-          <h3>Derecho corporativo</h3>
-          <p>Acompañamos a empresas en la estructuración de relaciones comerciales sólidas, mitigando riesgos legales antes de que se conviertan en contingencias.</p>
-          <p>Convertimos el derecho en una herramienta para fortalecer la operación de su negocio.</p>
+        <article class="service-card service-card--editorial surface-theme--light-alt reveal">
+          <div class="service-card__media"><img src="assets/img/temp-prototype-home-servicio-corporativo.jpg" alt="" data-img-id="IMG-12" data-asset-status="temporary-prototype" width="1500" height="1000" loading="lazy" decoding="async"></div>
+          <div class="service-card__body">
+            <div class="service-block__tag">Prevención antes que contingencia</div>
+            <h3>Derecho corporativo</h3>
+            <p>Acompañamos a empresas en la estructuración jurídica de relaciones comerciales, mitigando riesgos legales antes de que se conviertan en contingencias.</p>
+            <p>Estructuramos decisiones y relaciones jurídicas orientadas a proteger la continuidad de la operación.</p>
+          </div>
         </article>
       </div>
     </div>
@@ -170,11 +168,11 @@
        la entrada `.reveal` gane sobre la regla D69 de "siempre opacity:1". El hover de
        nodo (borde+ícono+título en acento, elevación) vive en components.css, gateado a
        desktop con hover real. -->
-  <section class="section stepper stepper--flowchart" data-surface="dark" aria-labelledby="proceso-heading">
+  <section class="section chapter surface-theme--dark-primary stepper stepper--flowchart" data-surface="dark" aria-labelledby="proceso-heading">
     <div class="container stepper__grid">
-      <div class="stepper__intro reveal">
+      <div class="stepper__intro section-heading--editorial" data-motion="section-title">
         <p class="eyebrow">Nuestra metodología</p>
-        <h2 id="proceso-heading">Convertimos cada caso en una estrategia jurídica de recuperación.</h2>
+        <h2 id="proceso-heading"><span class="section-title__regular">Convertimos cada caso en</span> <span class="section-title__emphasis">una estrategia jurídica de recuperación.</span></h2>
       </div>
       <div class="stepper__steps">
         <article class="stepper__step reveal" style="--stagger-index:0">
@@ -184,7 +182,7 @@
             </span>
             <h3>Diagnóstico</h3>
           </div>
-          <p>Antes de actuar, entendemos el contexto completo. Estudiamos el expediente, identificamos riesgos y construimos un diagnóstico jurídico que define la estrategia más adecuada para proteger los intereses del acreedor.</p>
+          <p>Antes de actuar, entendemos el contexto completo. Estudiamos el expediente, identificamos riesgos y construimos un diagnóstico jurídico que define una estrategia jurídicamente viable y proporcional al escenario identificado para proteger los intereses del acreedor.</p>
         </article>
         <span class="stepper__connector" aria-hidden="true">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 12h14M13 6l6 6-6 6"/></svg>
@@ -196,7 +194,7 @@
             </span>
             <h3>Estrategia</h3>
           </div>
-          <p>No aplicamos soluciones estándar. Definimos el camino legal según el estado del riesgo, ya sea en una etapa preventiva, durante un proceso de insolvencia o en la recuperación posterior del activo.</p>
+          <p>No aplicamos estrategias estándar. Definimos la ruta jurídica según el estado del riesgo, ya sea en una etapa preventiva, durante un proceso de insolvencia o en la recuperación posterior del activo.</p>
         </article>
         <span class="stepper__connector" aria-hidden="true">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 12h14M13 6l6 6-6 6"/></svg>
@@ -219,15 +217,15 @@
        `.media-placeholder.what-we-do-visual`, ahora generalizado en components.css)
        en vez del bloque de dos tarjetas con halo que tenía antes. Mismo copy y mismo
        `data-img-id="IMG-13"` de siempre, solo cambia la estructura visual. -->
-  <section class="section" data-surface="dark" aria-labelledby="objeciones-heading">
+  <section class="section chapter surface-theme--dark-deep transparency-block" data-surface="dark" aria-labelledby="objeciones-heading">
     <div class="container grid-2 what-we-do-grid">
-      <div class="reveal">
+      <div class="section-heading--editorial" data-motion="section-title">
         <p class="eyebrow">Transparencia</p>
-        <h2 id="objeciones-heading">Sin promesas que no podemos sostener</h2>
+        <h2 id="objeciones-heading"><span class="section-title__regular">Expectativas claras,</span> <span class="section-title__emphasis">decisiones sustentadas.</span></h2>
         <p>No garantizamos el recaudo — nuestro compromiso es la defensa técnica más rigurosa del crédito. Los honorarios se definen caso a caso, siempre en proporción a lo que está en juego.</p>
       </div>
-      <div class="media-placeholder what-we-do-visual reveal" data-img-id="IMG-13" role="img" aria-label="Espacio reservado para fotografía o recurso visual de Transparencia (IMG-13) — ver IMAGE-BRIEF.md">
-        <span class="media-placeholder__label">IMG-13 — pendiente de material del cliente</span>
+      <div class="what-we-do-visual transparency-block__visual reveal">
+        <img src="assets/img/temp-prototype-home-que-hace-aaa.jpg" alt="Profesional revisando documentación jurídica" data-img-id="IMG-13" data-asset-status="temporary-prototype" width="1500" height="1001" loading="lazy" decoding="async">
       </div>
     </div>
   </section>
@@ -245,22 +243,19 @@
        de la tarjeta `.cierre-card--cta` (D74, ver `.cierre-grid--global` en
        components.css) NO se toca — ese es el fondo propio e intencional de la tarjeta
        oscura, igual que en Home, no lo que se pidió quitar. -->
-  <section class="section" aria-labelledby="cierre-heading">
+  <section class="section chapter site-closing-cta site-closing-cta--internal surface-theme--light-alt" aria-labelledby="cierre-heading">
     <div class="container">
-      <div class="cierre-grid cierre-grid--global reveal">
-        <div class="cierre-card cierre-card--image">
-          <img class="cierre-card__img" src="assets/img/hero-inicio.webp" alt="Equipo de AAA Estudio Legal trabajando en sala de reuniones" data-img-id="IMG-07">
+      <div class="site-closing-cta__panel">
+        <div class="site-closing-cta__heading" data-motion="section-title">
+          <p class="eyebrow">Conversemos</p>
+          <h2 id="cierre-heading"><span class="section-title__regular">Su crédito merece</span> <span class="section-title__emphasis section-title__emphasis--block">una estrategia antes de convertirse en pérdida.</span></h2>
         </div>
-        <div class="cierre-card cierre-card--cta">
-          <span class="cierre-card__halo" aria-hidden="true"></span>
-          <div class="cierre-card__content">
-            <h2 id="cierre-heading">Conversemos sobre su caso.</h2>
-            <p>Si enfrenta un proceso de insolvencia o necesita fortalecer la protección de su cartera, nuestro equipo está listo para acompañarlo.</p>
-            <a class="btn cierre-card__btn" href="captacion-b2b.html">
-              Hablemos de su caso
-              <svg class="btn--icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-            </a>
-          </div>
+        <div class="site-closing-cta__content">
+          <p class="site-closing-cta__text">Si su organización enfrenta un proceso de insolvencia o necesita fortalecer la protección de su cartera, evaluamos el caso y definimos una ruta jurídica con criterio técnico y visión de recuperación.</p>
+          <a class="btn site-closing-cta__button" href="captacion-b2b.html">
+            Solicitar evaluación jurídica inicial
+            <svg class="btn--icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
         </div>
       </div>
     </div>
@@ -340,10 +335,13 @@
 
 <div class="cookie-banner" role="region" aria-label="Aviso de cookies" hidden>
   <p>Usamos cookies propias y de terceros (GA4, GTM, Microsoft Clarity) para medir el uso del sitio. Puede conocer más en nuestro aviso de privacidad.</p>
-  <a class="btn btn--ghost" href="proximamente.html" style="color:var(--color-white); border-color: var(--color-border-on-dark);">Más información</a>
+  <a class="btn btn--ghost" href="proximamente.html" style="color:var(--color-white); border-color: var(--color-border-on-dark);">Consultar aviso de privacidad</a>
   <button class="btn btn--primary" type="button" data-cookie-accept>Aceptar</button>
 </div>
 
-<script src="js/main.js"></script>
+<script defer src="js/gsap/gsap-3.15.0.min.js"></script>
+<script defer src="js/gsap/ScrollTrigger-3.15.0.min.js"></script>
+<script defer src="js/home-motion.js?v=20260830-internal-headings"></script>
+<script defer src="js/main.js"></script>
 </body>
 </html>

@@ -22,6 +22,7 @@
   --color-surface-soft: #F5F3EE;  /* "Background" del lab — marfil/calidez editorial */
   --color-ink-dark: #111820;      /* "Text" del lab — tinta, no negro puro */
   --color-surface-light: #F5F3EE; /* fondo general — mismo marfil que surface-soft (D26 no distingue ambos roles) */
+  --color-surface-light-alt: #EEEAE3;
   --color-white: #FFFFFF;          /* "Surface" del lab — claridad funcional */
 
   /* Tripletes RGB — para componer rgba() en sombras/scrims sin duplicar el valor hex */

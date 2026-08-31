@@ -1,12 +1,14 @@
 /*
-  Motion exclusivo de Home — GSAP 3.15.0 + ScrollTrigger.
+  Motion editorial compartido — GSAP 3.15.0 + ScrollTrigger.
+  Home conserva Hero/parallax/paneles; las internas reutilizan únicamente los
+  encabezados editoriales y, cuando existe, el componente de cifras.
   Progressive enhancement: el HTML y CSS muestran todo el contenido por defecto.
   Si GSAP no carga, la página conserva su estado final y toda su funcionalidad.
 */
 (function () {
   'use strict';
 
-  if (!document.body.classList.contains('home-page')) return;
+  var isHome = document.body.classList.contains('home-page');
 
   var gsap = window.gsap;
   var ScrollTrigger = window.ScrollTrigger;
@@ -94,7 +96,10 @@
     var title = group.querySelector('h2');
     if (!title) return;
 
-    var animated = [eyebrow, title].filter(Boolean);
+    var regularParts = Array.prototype.slice.call(title.querySelectorAll('.section-title__regular'));
+    var emphasisParts = Array.prototype.slice.call(title.querySelectorAll('.section-title__emphasis'));
+    var hasEditorialParts = regularParts.length > 0;
+    var animated = [eyebrow].concat(hasEditorialParts ? regularParts.concat(emphasisParts) : [title]).filter(Boolean);
     var timeline = gsap.timeline({
       paused: true,
       defaults: { ease: 'power3.out' },
@@ -111,11 +116,26 @@
       );
     }
 
-    timeline.fromTo(title,
-      { opacity: 0.5, y: isMobile ? 10 : 14 },
-      { opacity: 1, y: 0, duration: isMobile ? 0.62 : 0.76 },
-      eyebrow ? '-=0.2' : 0
-    );
+    if (hasEditorialParts) {
+      timeline.fromTo(regularParts,
+        { opacity: 0.5, y: isMobile ? 8 : 11 },
+        { opacity: 1, y: 0, duration: isMobile ? 0.52 : 0.62, stagger: 0.025 },
+        eyebrow ? '-=0.18' : 0
+      );
+      if (emphasisParts.length) {
+        timeline.fromTo(emphasisParts,
+          { opacity: 0.5, y: isMobile ? 8 : 11 },
+          { opacity: 1, y: 0, duration: isMobile ? 0.5 : 0.6, stagger: 0.025 },
+          '-=0.42'
+        );
+      }
+    } else {
+      timeline.fromTo(title,
+        { opacity: 0.5, y: isMobile ? 10 : 14 },
+        { opacity: 1, y: 0, duration: isMobile ? 0.62 : 0.76 },
+        eyebrow ? '-=0.2' : 0
+      );
+    }
 
     ScrollTrigger.create({
       trigger: group,
@@ -231,21 +251,23 @@
     reduceMotion: '(prefers-reduced-motion: reduce)'
   }, function (context) {
     var conditions = context.conditions;
-    var hero = document.querySelector('[data-motion="hero"]');
+    var hero = isHome ? document.querySelector('[data-motion="hero"]') : null;
 
     if (conditions.reduceMotion) {
       finalizeReducedMotion();
       return;
     }
 
-    revealHero(hero);
+    if (isHome) revealHero(hero);
     document.querySelectorAll('[data-motion="section-title"]').forEach(function (group) {
       revealSectionTitle(group, conditions.isMobile);
     });
-    revealServicePanels(document.querySelector('[data-motion="service-panels"]'), conditions.isMobile);
-    revealStats(document.querySelector('[data-motion="stats"]'), conditions.isMobile);
+    if (isHome) revealServicePanels(document.querySelector('[data-motion="service-panels"]'), conditions.isMobile);
+    document.querySelectorAll('[data-motion="stats"]').forEach(function (section) {
+      revealStats(section, conditions.isMobile);
+    });
 
-    if (conditions.isDesktop) addHeroParallax(hero);
+    if (isHome && conditions.isDesktop) addHeroParallax(hero);
   });
 
   window.addEventListener('load', function () {

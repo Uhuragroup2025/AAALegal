@@ -108,6 +108,20 @@ section[data-surface="dark"] h3 { color: var(--color-white); }
 .section {
   padding-block: var(--space-section);
 }
+
+/* Primitives compartidos promovidos desde la baseline visual de Home. */
+.surface-theme--light-base { background: var(--color-surface-light); color: var(--color-text-on-light); }
+.surface-theme--light-alt { background: var(--color-surface-light-alt); color: var(--color-text-on-light); }
+section.surface-theme--dark-primary { background: var(--color-navy-deep); color: var(--color-text-on-dark); }
+section.surface-theme--dark-deep { background: var(--color-navy-hover); color: var(--color-text-on-dark); }
+.surface-theme--dark-primary h1,
+.surface-theme--dark-primary h2,
+.surface-theme--dark-primary h3,
+.surface-theme--dark-deep h1,
+.surface-theme--dark-deep h2,
+.surface-theme--dark-deep h3 { color: var(--color-white); }
+
+.chapter { padding-block: var(--space-section); }
 @media (max-width: 640px) {
   .section { padding-block: var(--space-section-mobile); }
 }

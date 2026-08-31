@@ -115,24 +115,94 @@
   // por defecto (ver components.css `.stepper__step[data-stepper-ready]`) — no se
   // requiere fallback adicional.
 
-  // --- Equipo: tarjetas flip (Decisión D92, Trabaja con nosotros) ---
-  // El hover real (mouse) ya dispara el flip solo con CSS ((hover:hover) and
-  // (pointer:fine), ver components.css). Este toggle por click/tecla es lo que
-  // hace el flip alcanzable también en touch (que no tiene hover real) y por
-  // teclado — nunca depende únicamente del hover para mostrar la descripción.
+  // --- Equipo: tarjetas flip accesibles (Trabaja con nosotros) ---
+  // El control explícito evita que un swipe táctil active el giro por accidente.
+  // Sin JS, CSS presenta ambas caras en flujo para que el contenido siga disponible.
   document.querySelectorAll('.team-flip-card').forEach(function (card) {
-    var toggle = function () {
-      var flipped = card.classList.toggle('is-flipped');
-      card.setAttribute('aria-pressed', String(flipped));
-    };
-    card.addEventListener('click', toggle);
-    card.addEventListener('keydown', function (e) {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        toggle();
+    var toggles = Array.prototype.slice.call(card.querySelectorAll('[data-team-flip-toggle]'));
+    var setFlipped = function (flipped, focusIndex) {
+      card.classList.toggle('is-flipped', flipped);
+      toggles.forEach(function (button) {
+        button.setAttribute('aria-expanded', String(flipped));
+      });
+      if (typeof focusIndex === 'number' && toggles[focusIndex]) {
+        window.setTimeout(function () {
+          toggles[focusIndex].focus();
+        }, prefersReducedMotion ? 0 : 360);
       }
+    };
+
+    toggles.forEach(function (button, index) {
+      button.addEventListener('click', function () {
+        var showBack = index === 0;
+        setFlipped(showBack, showBack ? 1 : 0);
+      });
     });
   });
+
+  // --- Equipo: carrusel móvil, una pareja foto + rol por slide ---
+  // El swipe y scroll-snap funcionan sin JS. Esta capa añade indicador y flechas.
+  var teamCarousel = document.querySelector('[data-team-carousel]');
+  var teamControls = document.querySelector('[data-team-carousel-controls]');
+  if (teamCarousel && teamControls) {
+    var teamPairs = Array.prototype.slice.call(teamCarousel.children).filter(function (item) {
+      return item.hasAttribute('data-team-profile-pair');
+    });
+    var teamCurrent = teamControls.querySelector('[data-team-carousel-current]');
+    var teamTotal = teamControls.querySelector('[data-team-carousel-total]');
+    var teamPrev = teamControls.querySelector('[data-team-carousel-prev]');
+    var teamNext = teamControls.querySelector('[data-team-carousel-next]');
+    var teamMobileQuery = window.matchMedia('(max-width: 640px)');
+    var teamPageIndex = 0;
+    var teamFrame = null;
+
+    if (teamTotal) teamTotal.textContent = String(teamPairs.length);
+
+    var updateTeamCarousel = function () {
+      if (!teamMobileQuery.matches || !teamPairs.length) return;
+
+      teamPageIndex = teamPairs.reduce(function (nearest, pair, index) {
+        var currentDistance = Math.abs(teamPairs[nearest].offsetLeft - teamCarousel.scrollLeft);
+        var nextDistance = Math.abs(pair.offsetLeft - teamCarousel.scrollLeft);
+        return nextDistance < currentDistance ? index : nearest;
+      }, 0);
+
+      if (teamCurrent) teamCurrent.textContent = String(teamPageIndex + 1);
+      if (teamPrev) teamPrev.disabled = teamPageIndex === 0;
+      if (teamNext) teamNext.disabled = teamPageIndex === teamPairs.length - 1;
+    };
+
+    var goToTeamPage = function (index) {
+      if (!teamMobileQuery.matches || !teamPairs.length) return;
+      var targetIndex = Math.max(0, Math.min(index, teamPairs.length - 1));
+      teamCarousel.scrollTo({
+        left: teamPairs[targetIndex].offsetLeft,
+        behavior: prefersReducedMotion ? 'auto' : 'smooth'
+      });
+    };
+
+    teamCarousel.addEventListener('scroll', function () {
+      if (teamFrame) window.cancelAnimationFrame(teamFrame);
+      teamFrame = window.requestAnimationFrame(updateTeamCarousel);
+    }, { passive: true });
+
+    if (teamPrev) teamPrev.addEventListener('click', function () { goToTeamPage(teamPageIndex - 1); });
+    if (teamNext) teamNext.addEventListener('click', function () { goToTeamPage(teamPageIndex + 1); });
+
+    var resetTeamCarousel = function () {
+      if (teamMobileQuery.matches) teamCarousel.scrollLeft = 0;
+      teamPageIndex = 0;
+      updateTeamCarousel();
+    };
+
+    if (teamMobileQuery.addEventListener) {
+      teamMobileQuery.addEventListener('change', resetTeamCarousel);
+    } else if (teamMobileQuery.addListener) {
+      teamMobileQuery.addListener(resetTeamCarousel);
+    }
+    window.addEventListener('resize', updateTeamCarousel);
+    updateTeamCarousel();
+  }
 
   // --- Home · ¿Por qué AAA?: carrusel móvil paginado de dos cards ---
   // El scroll táctil y scroll-snap funcionan sin JS. Esta capa añade únicamente

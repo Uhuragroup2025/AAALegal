@@ -83,17 +83,15 @@
        D77 (2026-08-21): a pedido del Owner, el H1 gana la misma clase `hero__title`
        y el mismo énfasis en cursiva dorada (`.text-gradient`) que usan los demás
        heroes del sitio — hasta ahora esta página no tenía ninguno de los dos. -->
-  <section class="section" data-surface="dark" aria-label="Presentación de Trabaja con nosotros" style="padding-bottom: var(--space-16);">
-    <div class="container">
-      <div style="max-width: 68ch;">
+  <section class="hero-immersive hero--editorial hero--editorial--careers" data-surface="dark" aria-label="Presentación de Trabaja con nosotros">
+    <div class="hero-shell">
+      <div class="hero-shell__media">
+        <img src="assets/img/temp-prototype-home-cta.jpg" alt="" data-asset-status="temporary-prototype" width="1500" height="1000" decoding="async">
+        <div class="hero-shell__scrim" aria-hidden="true"></div>
+      </div>
+      <div class="hero-shell__content">
         <p class="eyebrow">Trabaja con nosotros</p>
         <h1 class="hero__title">Un lugar donde el rigor técnico se construye <span class="text-gradient">entre personas, no solo entre procesos.</span></h1>
-        <!-- D98 (2026-08-25): a pedido del Owner, este párrafo baja de
-             `var(--text-md)` (1.25rem) a `var(--text-base)` (1.0625rem) — mismo
-             ajuste que Quiénes somos, para normalizar el tamaño del párrafo de hero
-             en las 3 páginas con hero simple (Metodología/Quiénes somos/Trabaja con
-             nosotros). -->
-        <p style="font-size: var(--text-base);">Conozca al equipo de AAA Estudio Legal y postúlese si quiere ser parte de la firma.</p>
       </div>
     </div>
   </section>
@@ -128,15 +126,15 @@
        hasta ~320px entre el párrafo de "Nuestro equipo" y el eyebrow de "Personas,
        no procesos" — mucho más de lo que aporta como respiro visual entre dos
        bloques del mismo tema. -->
-  <section class="section" data-surface="light" aria-labelledby="equipo-heading" style="padding-bottom: var(--space-16);">
+  <section class="section surface-theme--light-base" data-surface="light" aria-labelledby="equipo-heading" style="padding-bottom: var(--space-16);">
     <div class="container grid-2 what-we-do-grid what-we-do-grid--reverse">
       <div class="media-placeholder what-we-do-visual reveal" role="img" aria-label="Espacio reservado para fotografía del equipo, pendiente de material del cliente">
         <span class="media-placeholder__label">Fotografía del equipo — pendiente de material del cliente</span>
       </div>
-      <div class="reveal">
-        <p class="eyebrow">Equipo por función</p>
-        <h2 id="equipo-heading">Nuestro equipo</h2>
-        <p>En AAA Estudio Legal hemos conformado un equipo multidisciplinario donde el conocimiento jurídico, la tecnología y la gestión estratégica se integran para ofrecer soluciones sólidas, oportunas y orientadas a resultados.</p>
+      <div class="section-heading--editorial" data-motion="section-title">
+        <p class="eyebrow">Capacidades integradas</p>
+        <h2 id="equipo-heading"><span class="section-title__regular">Nuestro</span> <span class="section-title__emphasis">equipo</span></h2>
+        <p>En AAA Estudio Legal hemos conformado un equipo multidisciplinario que integra criterio jurídico, gestión operativa y tecnología.</p>
       </div>
     </div>
   </section>
@@ -180,85 +178,108 @@
        para no aparecer/desaparecer antes de tiempo) — un mecanismo independiente
        de respaldo que garantiza que la cara no activa nunca se pinte, más allá de
        si el navegador soporta bien backface-visibility. -->
-  <section class="section" data-surface="light" aria-labelledby="equipo-flip-heading">
+  <section class="section surface-theme--light-alt" data-surface="light" aria-labelledby="equipo-flip-heading">
     <div class="container">
-      <div class="section-head reveal">
-        <p class="eyebrow">Personas, no procesos</p>
-        <h2 id="equipo-flip-heading">Quiénes hacen posible cada caso.</h2>
+      <div class="section-head section-heading--editorial" data-motion="section-title">
+        <p class="eyebrow">Personas detrás de cada proceso</p>
+        <h2 id="equipo-flip-heading"><span class="section-title__regular">Quiénes hacen posible</span> <span class="section-title__emphasis">cada caso.</span></h2>
       </div>
-      <div class="team-flip-grid">
-        <article class="team-flip-card reveal" style="--stagger-index:0" tabindex="0" role="button" aria-pressed="false" aria-label="Ver funciones de Mariana Restrepo, Directora Jurídica de Insolvencia">
+      <div class="team-flip-grid" data-team-carousel tabindex="0" aria-label="Perfiles del equipo">
+        <div class="team-profile-pair" data-team-profile-pair>
+        <article class="team-flip-card team-profile-pair__card reveal" style="--stagger-index:0">
           <div class="team-flip-card__inner">
-            <div class="team-flip-card__face team-flip-card__front" aria-hidden="true">
+            <div class="team-flip-card__face team-flip-card__front">
               <img class="team-flip-card__logo" src="assets/img/isotipo-AAA-legal.svg" alt="" aria-hidden="true">
               <div class="team-flip-card__caption">
                 <span class="team-flip-card__name">Mariana Restrepo</span>
                 <span class="team-flip-card__role">Directora Jurídica de Insolvencia</span>
+                <button class="team-flip-card__toggle" type="button" data-team-flip-toggle aria-expanded="false" aria-label="Ver funciones de Mariana Restrepo">Ver funciones</button>
               </div>
             </div>
             <div class="team-flip-card__face team-flip-card__back">
               <img class="team-flip-card__logo" src="assets/img/isotipo-AAA-legal.svg" alt="" aria-hidden="true">
               <p class="team-flip-card__desc">Lidera la estrategia de defensa de acreedores en cada proceso concursal, desde el diagnóstico hasta el cierre.</p>
+              <button class="team-flip-card__toggle" type="button" data-team-flip-toggle aria-expanded="false" aria-label="Volver al perfil de Mariana Restrepo">Volver</button>
             </div>
           </div>
         </article>
-        <div class="media-placeholder reveal" style="--stagger-index:1" role="img" aria-label="Espacio reservado para fotografía institucional, pendiente de material del cliente">
+        <div class="media-placeholder team-profile-pair__photo reveal" style="--stagger-index:1" role="img" aria-label="Espacio reservado para fotografía institucional, pendiente de material del cliente">
           <span class="media-placeholder__label">Fotografía institucional — pendiente de material del cliente</span>
         </div>
-        <article class="team-flip-card reveal" style="--stagger-index:2" tabindex="0" role="button" aria-pressed="false" aria-label="Ver funciones de Andrés Salazar, Abogado Senior de Derecho Corporativo">
+        </div>
+        <div class="team-profile-pair" data-team-profile-pair>
+        <article class="team-flip-card team-profile-pair__card reveal" style="--stagger-index:2">
           <div class="team-flip-card__inner">
-            <div class="team-flip-card__face team-flip-card__front" aria-hidden="true">
+            <div class="team-flip-card__face team-flip-card__front">
               <img class="team-flip-card__logo" src="assets/img/isotipo-AAA-legal.svg" alt="" aria-hidden="true">
               <div class="team-flip-card__caption">
                 <span class="team-flip-card__name">Andrés Salazar</span>
                 <span class="team-flip-card__role">Abogado Senior, Derecho Corporativo</span>
+                <button class="team-flip-card__toggle" type="button" data-team-flip-toggle aria-expanded="false" aria-label="Ver funciones de Andrés Salazar">Ver funciones</button>
               </div>
             </div>
             <div class="team-flip-card__face team-flip-card__back">
               <img class="team-flip-card__logo" src="assets/img/isotipo-AAA-legal.svg" alt="" aria-hidden="true">
               <p class="team-flip-card__desc">Estructura relaciones comerciales sólidas y anticipa riesgos legales antes de que se conviertan en contingencias.</p>
+              <button class="team-flip-card__toggle" type="button" data-team-flip-toggle aria-expanded="false" aria-label="Volver al perfil de Andrés Salazar">Volver</button>
             </div>
           </div>
         </article>
-        <div class="media-placeholder reveal" style="--stagger-index:3" role="img" aria-label="Espacio reservado para fotografía institucional, pendiente de material del cliente">
+        <div class="media-placeholder team-profile-pair__photo reveal" style="--stagger-index:3" role="img" aria-label="Espacio reservado para fotografía institucional, pendiente de material del cliente">
           <span class="media-placeholder__label">Fotografía institucional — pendiente de material del cliente</span>
         </div>
-        <div class="media-placeholder reveal" style="--stagger-index:0" role="img" aria-label="Espacio reservado para fotografía institucional, pendiente de material del cliente">
+        </div>
+        <div class="team-profile-pair" data-team-profile-pair>
+        <div class="media-placeholder team-profile-pair__photo reveal" style="--stagger-index:0" role="img" aria-label="Espacio reservado para fotografía institucional, pendiente de material del cliente">
           <span class="media-placeholder__label">Fotografía institucional — pendiente de material del cliente</span>
         </div>
-        <article class="team-flip-card reveal" style="--stagger-index:1" tabindex="0" role="button" aria-pressed="false" aria-label="Ver funciones de Camila Ortiz, Coordinadora de Normalización de Activos">
+        <article class="team-flip-card team-profile-pair__card reveal" style="--stagger-index:1">
           <div class="team-flip-card__inner">
-            <div class="team-flip-card__face team-flip-card__front" aria-hidden="true">
+            <div class="team-flip-card__face team-flip-card__front">
               <img class="team-flip-card__logo" src="assets/img/isotipo-AAA-legal.svg" alt="" aria-hidden="true">
               <div class="team-flip-card__caption">
                 <span class="team-flip-card__name">Camila Ortiz</span>
                 <span class="team-flip-card__role">Coordinadora de Normalización de Activos</span>
+                <button class="team-flip-card__toggle" type="button" data-team-flip-toggle aria-expanded="false" aria-label="Ver funciones de Camila Ortiz">Ver funciones</button>
               </div>
             </div>
             <div class="team-flip-card__face team-flip-card__back">
               <img class="team-flip-card__logo" src="assets/img/isotipo-AAA-legal.svg" alt="" aria-hidden="true">
               <p class="team-flip-card__desc">Diseña estrategias preventivas y reactivas para maximizar la recuperación del crédito en cada caso.</p>
+              <button class="team-flip-card__toggle" type="button" data-team-flip-toggle aria-expanded="false" aria-label="Volver al perfil de Camila Ortiz">Volver</button>
             </div>
           </div>
         </article>
-        <div class="media-placeholder reveal" style="--stagger-index:2" role="img" aria-label="Espacio reservado para fotografía institucional, pendiente de material del cliente">
+        </div>
+        <div class="team-profile-pair" data-team-profile-pair>
+        <div class="media-placeholder team-profile-pair__photo reveal" style="--stagger-index:2" role="img" aria-label="Espacio reservado para fotografía institucional, pendiente de material del cliente">
           <span class="media-placeholder__label">Fotografía institucional — pendiente de material del cliente</span>
         </div>
-        <article class="team-flip-card reveal" style="--stagger-index:3" tabindex="0" role="button" aria-pressed="false" aria-label="Ver funciones de Santiago Vélez, Líder de Tecnología ADY">
+        <article class="team-flip-card team-profile-pair__card reveal" style="--stagger-index:3">
           <div class="team-flip-card__inner">
-            <div class="team-flip-card__face team-flip-card__front" aria-hidden="true">
+            <div class="team-flip-card__face team-flip-card__front">
               <img class="team-flip-card__logo" src="assets/img/isotipo-AAA-legal.svg" alt="" aria-hidden="true">
               <div class="team-flip-card__caption">
                 <span class="team-flip-card__name">Santiago Vélez</span>
                 <span class="team-flip-card__role">Líder de Tecnología (ADY)</span>
+                <button class="team-flip-card__toggle" type="button" data-team-flip-toggle aria-expanded="false" aria-label="Ver funciones de Santiago Vélez">Ver funciones</button>
               </div>
             </div>
             <div class="team-flip-card__face team-flip-card__back">
               <img class="team-flip-card__logo" src="assets/img/isotipo-AAA-legal.svg" alt="" aria-hidden="true">
               <p class="team-flip-card__desc">Desarrolla las herramientas tecnológicas que dan seguimiento en tiempo real a cada proceso.</p>
+              <button class="team-flip-card__toggle" type="button" data-team-flip-toggle aria-expanded="false" aria-label="Volver al perfil de Santiago Vélez">Volver</button>
             </div>
           </div>
         </article>
+        </div>
+      </div>
+      <div class="team-carousel__controls" data-team-carousel-controls aria-label="Navegación de perfiles">
+        <p class="team-carousel__status" aria-live="polite"><span data-team-carousel-current>1</span> de <span data-team-carousel-total>4</span></p>
+        <div class="team-carousel__actions">
+          <button class="team-carousel__arrow" type="button" data-team-carousel-prev aria-label="Perfil anterior" disabled><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg></button>
+          <button class="team-carousel__arrow" type="button" data-team-carousel-next aria-label="Perfil siguiente"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></button>
+        </div>
       </div>
     </div>
   </section>
@@ -268,35 +289,31 @@
        (2026-07-31); la página Talento AAA se eliminó. El CTA "Postúlese" (D17) sigue
        siendo secundario y estrictamente contextual — solo aparece en esta página,
        nunca en header, footer, Inicio, ni ninguna otra. -->
-  <section class="section" data-surface="dark" aria-labelledby="postulacion-heading">
-    <div class="container">
-      <div style="max-width: 60ch;">
+  <section class="section chapter talent-application surface-theme--light-base" data-surface="light" aria-labelledby="postulacion-heading">
+    <div class="container talent-application__inner">
+      <div class="section-heading--editorial talent-application__heading" data-motion="section-title">
         <p class="eyebrow">Postulación</p>
-        <h2 id="postulacion-heading">¿Ve su carrera en AAA? Cuéntenos quién es usted.</h2>
-        <form class="talent-form reveal" aria-describedby="postulacion-nota" onsubmit="return false">
-          <div class="talent-form__field">
-            <label for="tf-nombre">Nombre completo</label>
-            <input type="text" id="tf-nombre" name="nombre" required>
-          </div>
-          <div class="talent-form__field">
-            <label for="tf-email">Correo electrónico</label>
-            <input type="email" id="tf-email" name="email" required>
-          </div>
-          <div class="talent-form__field">
-            <label for="tf-cv">Hoja de vida (CV)</label>
-            <input type="file" id="tf-cv" name="cv" accept=".pdf,.doc,.docx" required>
-          </div>
-          <div class="talent-form__field">
-            <label for="tf-extra">Campo adicional — pendiente de definir con el cliente</label>
-            <textarea id="tf-extra" name="extra" rows="3"></textarea>
-          </div>
-          <button class="btn btn--primary talent-form__submit" type="submit">
-            Postúlese
-            <svg class="btn--icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-          </button>
-          <p id="postulacion-nota" class="talent-form__note">Al postularse, su información se envía a <a href="mailto:info@agudeloabogados.com">info@agudeloabogados.com</a> — sin integración a un CRM (Decisión D12). Sin envío real en este prototipo.</p>
-        </form>
+        <h2 id="postulacion-heading"><span class="section-title__regular">Donde el talento se convierte en trayectoria.</span> <span class="section-title__emphasis">Conozca lo que significa ser parte de AAA.</span></h2>
+        <p class="talent-application__intro">Crezca junto a un equipo que entiende el rigor, el criterio y la excelencia como parte de cada desafío.</p>
       </div>
+      <form class="talent-form talent-form--open reveal" onsubmit="return false">
+        <div class="talent-form__field">
+          <label for="tf-nombre">Nombre completo</label>
+          <input type="text" id="tf-nombre" name="nombre" required>
+        </div>
+        <div class="talent-form__field">
+          <label for="tf-email">Correo electrónico</label>
+          <input type="email" id="tf-email" name="email" required>
+        </div>
+        <div class="talent-form__field talent-form__field--wide">
+          <label for="tf-cv">Hoja de vida</label>
+          <input type="file" id="tf-cv" name="cv" accept=".pdf,.doc,.docx" required>
+        </div>
+        <button class="btn btn--primary talent-form__submit" type="submit">
+          Enviar postulación
+          <svg class="btn--icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </button>
+      </form>
     </div>
   </section>
 
@@ -374,10 +391,13 @@
 
 <div class="cookie-banner" role="region" aria-label="Aviso de cookies" hidden>
   <p>Usamos cookies propias y de terceros (GA4, GTM, Microsoft Clarity) para medir el uso del sitio. Puede conocer más en nuestro aviso de privacidad.</p>
-  <a class="btn btn--ghost" href="proximamente.html" style="color:var(--color-white); border-color: var(--color-border-on-dark);">Más información</a>
+  <a class="btn btn--ghost" href="proximamente.html" style="color:var(--color-white); border-color: var(--color-border-on-dark);">Consultar aviso de privacidad</a>
   <button class="btn btn--primary" type="button" data-cookie-accept>Aceptar</button>
 </div>
 
-<script src="js/main.js"></script>
+<script defer src="js/gsap/gsap-3.15.0.min.js"></script>
+<script defer src="js/gsap/ScrollTrigger-3.15.0.min.js"></script>
+<script defer src="js/home-motion.js?v=20260830-internal-headings"></script>
+<script defer src="js/main.js"></script>
 </body>
 </html>

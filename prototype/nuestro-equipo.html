@@ -76,18 +76,15 @@
        y el mismo énfasis en cursiva dorada (`.text-gradient`, ya normalizado a color
        sólido en D76) que usan los demás heroes del sitio (Inicio, Metodología,
        Captación B2B) — hasta ahora esta página no tenía ninguno de los dos. -->
-  <section class="section" data-surface="dark" aria-label="Presentación de Nuestro Equipo" style="padding-bottom: var(--space-16);">
-    <div class="container">
-      <div style="max-width: 68ch;">
+  <section class="hero-immersive hero--editorial hero--editorial--about" data-surface="dark" aria-label="Presentación de Nuestro Equipo">
+    <div class="hero-shell">
+      <div class="hero-shell__media">
+        <img src="assets/img/temp-prototype-home-dimension-humana.jpg" alt="" data-asset-status="temporary-prototype" width="1500" height="1001" decoding="async">
+        <div class="hero-shell__scrim" aria-hidden="true"></div>
+      </div>
+      <div class="hero-shell__content">
         <p class="eyebrow">Nuestro Equipo</p>
         <h1 class="hero__title">Sobre nosotros: <span class="text-gradient">AAA Estudio Legal</span></h1>
-        <!-- D98 (2026-08-25): a pedido del Owner, este párrafo baja de
-             `var(--text-md)` (1.25rem) a `var(--text-base)` (1.0625rem) — no
-             coincidía con el de Metodología, que nunca tuvo este override y ya caía
-             en `--text-base` por defecto. Normaliza el tamaño del párrafo de hero
-             en las 3 páginas con hero simple (Metodología/Quiénes somos/Trabaja con
-             nosotros). -->
-        <p style="font-size: var(--text-base);">Creemos que la insolvencia no debe entenderse como el final del camino, sino como el inicio de una estrategia jurídica capaz de proteger, preservar y maximizar el valor de los activos.</p>
       </div>
     </div>
   </section>
@@ -115,17 +112,40 @@
        misma sección en la estructura narrativa del contenido aprobado
        (content/04-nuestro-equipo.md § "Origen — hechos confirmados como anclaje"),
        sin inventar un rótulo nuevo. -->
-  <section class="section" data-surface="light" aria-labelledby="quienes-somos-heading">
+  <section class="section surface-theme--light-base" data-surface="light" aria-labelledby="quienes-somos-heading">
     <div class="container grid-2 what-we-do-grid">
-      <div class="reveal">
+      <div class="section-heading--editorial" data-motion="section-title">
         <p class="eyebrow">Origen</p>
-        <h2 id="quienes-somos-heading">¿Quiénes somos?</h2>
+        <h2 id="quienes-somos-heading"><span class="section-title__regular">Origen y</span> <span class="section-title__emphasis">especialización</span></h2>
         <p>Nacimos en 2020 con un propósito claro: la representación técnica y estratégica de acreedores en procesos de insolvencia.</p>
-        <p>Desde nuestra fundación, decidimos construir una firma altamente especializada, enfocando toda nuestra experiencia en quienes necesitan proteger sus derechos crediticios y tomar decisiones con información, respaldo jurídico y visión de negocio.</p>
-        <p>Hoy acompañamos organizaciones de múltiples sectores económicos en todo el territorio nacional, desarrollando estrategias que combinan conocimiento jurídico, cobertura operativa y tecnología para afrontar los desafíos del riesgo crediticio.</p>
+        <p>Desde nuestra fundación, decidimos construir una firma altamente especializada, enfocando toda nuestra experiencia en organizaciones que requieren proteger sus derechos crediticios y tomar decisiones con información, respaldo jurídico y visión de negocio.</p>
+        <p>Hoy acompañamos a organizaciones de múltiples sectores económicos en todo el territorio nacional, desarrollando estrategias que combinan conocimiento jurídico, cobertura operativa y tecnología para afrontar los desafíos del riesgo crediticio.</p>
       </div>
       <div class="media-placeholder what-we-do-visual reveal" role="img" aria-label="Espacio reservado para fotografía de los founders, pendiente de material del cliente">
         <span class="media-placeholder__label">Fotografía de los founders — pendiente de material del cliente</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="section stats-counter stats-counter--editorial surface-theme--dark-primary" data-surface="dark" data-motion="stats" aria-labelledby="cifras-equipo-heading">
+    <div class="container">
+      <div class="section-head section-heading--editorial" data-motion="section-title">
+        <p class="eyebrow">En cifras</p>
+        <h2 id="cifras-equipo-heading"><span class="section-title__regular">Resultados que respaldan</span> <span class="section-title__emphasis">nuestro trabajo.</span></h2>
+      </div>
+      <div class="stats-grid" role="list" aria-label="Cifras de AAA Estudio Legal">
+        <div class="stat-card" role="listitem">
+          <p class="stat-card__number" data-count-to="100" data-count-prefix="+">+100</p>
+          <p class="stat-card__label">Casos gestionados</p>
+        </div>
+        <div class="stat-card" role="listitem">
+          <p class="stat-card__number" data-count-to="50" data-count-prefix="+">+50</p>
+          <p class="stat-card__label">Clientes atendidos</p>
+        </div>
+        <div class="stat-card" role="listitem">
+          <p class="stat-card__number" data-count-to="100" data-count-prefix="+$" data-count-suffix=" M">+$100 M</p>
+          <p class="stat-card__label">Cartera recuperada</p>
+        </div>
       </div>
     </div>
   </section>
@@ -143,17 +163,20 @@
        ancho de imagen). Se agrega un CTA que no existía antes ("Hablemos de su
        caso"), mismo texto/ícono/destino (`captacion-b2b.html`) que usan los demás
        bloques de cierre del sitio. Copy sin cambios respecto a D78. -->
-  <section class="section" data-surface="light" aria-labelledby="filosofia-heading">
+  <section class="section philosophy-section surface-theme--light-alt" data-surface="light" aria-labelledby="filosofia-heading">
     <div class="container grid-2 what-we-do-grid what-we-do-grid--reverse">
       <div class="media-placeholder what-we-do-visual reveal" role="img" aria-label="Espacio reservado para fotografía institucional, pendiente de material del cliente">
         <span class="media-placeholder__label">Fotografía institucional — pendiente de material del cliente</span>
       </div>
-      <div class="reveal">
+      <div class="section-heading--editorial" data-motion="section-title">
         <p class="eyebrow">Filosofía</p>
-        <h2 id="filosofia-heading">Filosofía AAA Estudio Legal</h2>
-        <p>Innovación con rigor. Solidez con tecnología. Dimensión humana. Tres principios que sostienen cada decisión de la firma.</p>
+        <h2 id="filosofia-heading">AAA Estudio Legal</h2>
+        <blockquote class="philosophy-quote">
+          <p>Innovación con rigor. Solidez con tecnología. Dimensión humana. Tres principios que orientan la práctica de la firma.</p>
+        </blockquote>
+        <p class="philosophy-description">En AAA Estudio Legal actuamos con total transparencia: no prometemos resultados que ninguna firma seria puede garantizar, sino una representación jurídica especializada, una estrategia construida sobre un diagnóstico técnico y honorarios proporcionales a la naturaleza del caso. Nuestro compromiso es brindar a cada cliente el criterio, la experiencia y el acompañamiento necesarios para tomar decisiones informadas y proteger el valor de sus activos.</p>
         <a class="btn btn--primary" href="captacion-b2b.html" style="margin-top: var(--space-6);">
-          Hablemos de su caso
+          Solicitar evaluación jurídica
           <svg class="btn--icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
         </a>
       </div>
@@ -167,6 +190,21 @@
        D75 (2026-08-21): se retira el cierre "Conócenos también en LinkedIn e
        Instagram." — a pedido del Owner, ya no es necesario. La página termina en
        Filosofía. -->
+
+  <section class="section chapter site-closing-cta site-closing-cta--internal surface-theme--light-base" aria-labelledby="cierre-heading">
+    <div class="container">
+      <div class="site-closing-cta__panel">
+        <div class="site-closing-cta__heading" data-motion="section-title">
+          <p class="eyebrow">Conversemos</p>
+          <h2 id="cierre-heading"><span class="section-title__regular">Su crédito merece</span> <span class="section-title__emphasis section-title__emphasis--block">una estrategia antes de convertirse en pérdida.</span></h2>
+        </div>
+        <div class="site-closing-cta__content">
+          <p class="site-closing-cta__text">Si su organización enfrenta un proceso de insolvencia o necesita fortalecer la protección de su cartera, evaluamos el asunto y definimos una ruta jurídica con criterio técnico y visión de recuperación.</p>
+          <a class="btn site-closing-cta__button" href="captacion-b2b.html">Solicitar evaluación jurídica inicial<svg class="btn--icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        </div>
+      </div>
+    </div>
+  </section>
 
 </main>
 
@@ -242,10 +280,13 @@
 
 <div class="cookie-banner" role="region" aria-label="Aviso de cookies" hidden>
   <p>Usamos cookies propias y de terceros (GA4, GTM, Microsoft Clarity) para medir el uso del sitio. Puede conocer más en nuestro aviso de privacidad.</p>
-  <a class="btn btn--ghost" href="proximamente.html" style="color:var(--color-white); border-color: var(--color-border-on-dark);">Más información</a>
+  <a class="btn btn--ghost" href="proximamente.html" style="color:var(--color-white); border-color: var(--color-border-on-dark);">Consultar aviso de privacidad</a>
   <button class="btn btn--primary" type="button" data-cookie-accept>Aceptar</button>
 </div>
 
-<script src="js/main.js"></script>
+<script defer src="js/gsap/gsap-3.15.0.min.js"></script>
+<script defer src="js/gsap/ScrollTrigger-3.15.0.min.js"></script>
+<script defer src="js/home-motion.js?v=20260830-internal-headings"></script>
+<script defer src="js/main.js"></script>
 </body>
 </html>

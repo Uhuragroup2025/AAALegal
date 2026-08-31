@@ -1733,3 +1733,39 @@ Los colores de D64 (fila de abajo invertida respecto a la de arriba) no se tocan
 **Gates y siguiente fase:** esta aprobación es interna y no equivale a la aprobación del cliente; Gate 1 continúa pendiente. La siguiente fase será la propagación controlada del sistema visual aprobado hacia Metodología, Quiénes somos y Trabaja con nosotros, validando una página a la vez.
 
 **WordPress:** no se ha iniciado implementación WordPress, construcción de theme, integración con Gutenberg ni instalación de plugins. El trabajo permanece en la fase de prototipo HTML/CSS/JS.
+
+### Sesión — coherencia editorial y motion en páginas internas (D106, 2026-08-30)
+
+**Aplicado:** Metodología, Quiénes somos y Trabaja con nosotros adoptan el encabezado editorial compartido para sus H2 principales: eyebrow, escala de 42px en desktop / 31px en mobile y énfasis semántico italic/cobre. Los títulos de cards, labels y elementos de formulario permanecen fuera del alcance. En Metodología, el primer eyebrow cambia de “Servicios” a “En AAA Legal te acompañamos”, sin modificar el título ni el contenido restante.
+
+**Motion reutilizado:** `prototype/js/home-motion.js` deja de ser una implementación exclusiva de Inicio para promover únicamente el reveal `eyebrow → regular → énfasis` como comportamiento compartido mediante `data-motion="section-title"`. El Hero, parallax y entrada de paneles continúan limitados a Home. Se conservan contenido visible por defecto, fallback sin GSAP, `prefers-reduced-motion` y animación exclusiva de `opacity`/`transform`.
+
+**Contenido y evidencia:** en Inicio, las tres situaciones del acreedor pasan de primera persona individual a voz corporativa plural, sin alterar su componente. En Quiénes somos se reutiliza, inmediatamente después de Origen, el mismo componente de cifras de Home —estructura, métricas, jerarquía, responsive y conteo— bajo el mismo modificador compartido, sin duplicar reglas.
+
+**Pendiente deliberado:** la compactación mobile de “Personas, no procesos” y la recomposición visual del formulario de postulación quedan en fase de recomendación; no se modificaron todavía sus cards, campos, lógica ni layout.
+
+**Verificación:** `git diff --check` y sintaxis de `home-motion.js`/`main.js` sin errores. En las tres páginas internas, los H2 computan 42px en desktop y 31px en mobile; no existe overflow horizontal en los breakpoints revisados; el contenido permanece visible cuando GSAP no está disponible y los activos referenciados cargan correctamente.
+
+### Ajuste — banner de cookies compacto (D107, 2026-08-30)
+
+El aviso global de cookies conserva texto, enlaces, consentimiento y contraste, pero adopta una composición horizontal discreta en desktop: párrafo y dos acciones en una sola línea, padding reducido y controles de 40px. En mobile mantiene el texto en la primera fila y presenta las dos acciones completas debajo, evitando desbordes y preservando áreas táctiles adecuadas.
+
+### Ajuste — formulario de postulación abierto y claro (D108, 2026-08-30)
+
+En Trabaja con nosotros, la postulación adopta la alternativa visual clara aprobada: `light-base`, encabezado editorial centrado y formulario abierto dentro del container, sin card exterior. Desktop distribuye nombre/correo en dos columnas y conserva el CV a ancho completo; mobile vuelve a una columna. El selector nativo de archivo conserva accesibilidad y recibe únicamente tratamiento visual consistente con el sistema.
+
+**Ajuste posterior:** el Owner reemplaza el encabezado por “Donde el talento se convierte en trayectoria. Conozca lo que significa ser parte de AAA.” e incorpora una descripción breve sobre crecimiento, rigor, criterio y excelencia. Se eliminan explícitamente el campo adicional pendiente y la nota técnica sobre correo/CRM/prototipo. En mobile, el CTA recibe separación adicional respecto al campo de carga de CV.
+
+**Ajuste de proporción:** el encabezado deja de estar limitado a una columna tipográfica angosta y adopta el mismo ancho máximo de 1080px del formulario. En desktop, frase regular y énfasis italic forman dos líneas editoriales completas, reduciendo sensiblemente el alto del capítulo; mobile conserva el ajuste natural dentro de la retícula.
+
+### Sesión — Contacto: propagación del sistema interno y formulario B2B (D109, 2026-08-31)
+
+**Dirección aprobada:** Contacto se simplifica deliberadamente a tres capítulos: Hero editorial oscuro, contacto/formulario sobre `light-base` y footer azul profundo existente. Se retiran de esta página los bloques intermedios “Por qué AAA”, “Nuestro proceso”, “Objeciones resueltas”, “Evidencia de confianza” y el cierre anterior de dos cards; no se trasladan ni se reescriben en otro lugar.
+
+**Hero:** adopta `.hero--editorial`, conserva únicamente eyebrow + título y mantiene la misma alineación, escala tipográfica, altura compacta y scrim de las páginas internas. Por instrucción de la Product Lead no se asigna fotografía: la superficie usa exclusivamente el azul institucional y una luz contenida construida con los tonos existentes.
+
+**Contacto B2B:** el formulario queda a la izquierda y la fotografía que ya usaba el cierre de la página pasa a la derecha. Los campos responden al contexto organizacional de AAA: nombre, organización, cargo, correo corporativo, teléfono, tipo de organización, asunto de interés y contexto de la consulta. El prototipo no transmite datos (`onsubmit="return false"`) y no incorpora redacción legal nueva; la conexión real y la URL externa de ADY continúan pendientes de definición del cliente.
+
+**Sistema compartido:** el bloque reutiliza `light-base`, `.chapter`, `.section-heading--editorial`, la presentación clara del formulario de postulación y el motion compartido mediante `data-motion="section-title"`. Desktop usa formulario/fotografía en dos columnas; tablet y mobile pasan a una columna con imagen 4:3 y campos de ancho completo. El footer no cambia.
+
+**Verificación:** `git diff --check` y sintaxis de `main.js`/`home-motion.js` sin errores; el `<main>` contiene únicamente Hero y contacto/formulario antes del footer. La revisión automatizada `file://` sigue limitada por la política del navegador integrado, por lo que el QA visual final se realiza en la pestaña local de la Product Lead.

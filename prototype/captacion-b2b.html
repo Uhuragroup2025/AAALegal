@@ -12,7 +12,7 @@
 <link rel="stylesheet" href="css/base.css">
 <link rel="stylesheet" href="css/components.css">
 </head>
-<body>
+<body class="contact-page">
 
 <a class="skip-link" href="#contenido">Saltar al contenido</a>
 
@@ -66,122 +66,86 @@
 
 <main id="contenido">
 
-  <!-- HERO — mismo sistema de hero inmersivo que Inicio/Servicios. Esta es la única
-       página donde el CTA "Consulte su caso aquí" vive en el hero mismo: es la
-       acción de conversión PRINCIPAL del sitio (D17), dirigida directamente al
-       evento que activa la necesidad (la deuda), no al público general de Inicio. -->
-  <section class="hero-immersive section" data-surface="dark" aria-label="Presentación" style="padding-bottom: 0;">
+  <!-- HERO INTERNO — mismo sistema editorial compacto de las páginas internas.
+       Contacto conserva una superficie abstracta de marca: no lleva fotografía. -->
+  <section class="hero-immersive hero--editorial hero--editorial--contact surface-theme--dark-primary" data-surface="dark" aria-label="Presentación de Contacto">
     <div class="hero-shell">
-      <div class="hero-shell__media">
-        <div class="media-placeholder" data-img-id="IMG-15" role="img" aria-label="Espacio reservado para fotografía o recurso visual de Contacto (IMG-15) — ver IMAGE-BRIEF.md">
-          <span class="media-placeholder__label">IMG-15 — pendiente de material del cliente</span>
-        </div>
+      <div class="hero-shell__media hero-shell__media--abstract" aria-hidden="true">
         <div class="hero-shell__scrim" aria-hidden="true"></div>
       </div>
       <div class="hero-shell__content">
         <p class="eyebrow">Contacto</p>
         <h1 class="hero__title">Soluciones jurídicas para <span class="text-gradient">proteger, normalizar y recuperar activos</span></h1>
-        <p>Anticipamos riesgos, protegemos el crédito y maximizamos las posibilidades de recuperación, incluso en los escenarios más complejos.</p>
-        <div class="hero__actions">
-          <a class="btn btn--primary" href="#nota-ady">
-            Consulte su caso aquí
-            <svg class="btn--icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-          </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACTO B2B — formulario abierto a la izquierda y fotografía a la derecha. -->
+  <section class="section chapter contact-intake surface-theme--light-base" data-surface="light" aria-labelledby="contact-form-heading">
+    <div class="container contact-intake__grid">
+      <div class="contact-intake__content">
+        <div class="section-heading--editorial" data-motion="section-title">
+          <p class="eyebrow">Conversemos</p>
+          <h2 id="contact-form-heading"><span class="section-title__regular">Cuéntenos el contexto de su organización.</span> <span class="section-title__emphasis section-title__emphasis--block">Nuestro equipo revisará su solicitud.</span></h2>
+          <p class="contact-intake__intro">Comparta la información inicial necesaria para que podamos comprender el asunto y establecer el canal de contacto adecuado.</p>
         </div>
-      </div>
-    </div>
-  </section>
 
-  <!-- POR QUÉ ELEGIR AAA -->
-  <section class="section" data-surface="atmosphere" aria-labelledby="por-que-heading">
-    <div class="atmosphere" aria-hidden="true"></div>
-    <div class="container" style="max-width: 72ch;">
-      <div class="reveal">
-        <p class="eyebrow">Por qué AAA</p>
-        <h2 id="por-que-heading">Por qué elegir AAA Estudio Legal</h2>
-        <p>En AAA Estudio Legal representamos exclusivamente a acreedores, una especialización que nos permite diseñar estrategias jurídicas enfocadas en la protección del crédito y la recuperación de activos en escenarios de alta complejidad.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- NUESTRO PROCESO — mismo componente stepper con scroll que Servicios § Metodología
-       (reutilizado a pedido explícito del Owner), con el copy propio de esta página. -->
-  <section class="section stepper" data-surface="muted" aria-labelledby="proceso-b2b-heading">
-    <div class="container stepper__grid">
-      <div class="stepper__intro reveal">
-        <p class="eyebrow">Proceso</p>
-        <h2 id="proceso-b2b-heading">Nuestro proceso</h2>
-      </div>
-      <div class="stepper__steps">
-        <article class="stepper__step">
-          <span class="stepper__icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="10" cy="10" r="6"/><path d="M15 15l5 5"/></svg>
-          </span>
-          <h3>Diagnóstico del caso</h3>
-          <p>Analizamos el estado jurídico del crédito, la situación del deudor y las alternativas legales disponibles.</p>
-        </article>
-        <article class="stepper__step">
-          <span class="stepper__icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M15 9l-2 6-6 2 2-6 6-2z"/></svg>
-          </span>
-          <h3>Definición de estrategia</h3>
-          <p>Diseñamos una ruta de actuación ajustada a los objetivos del cliente, el tipo de proceso y las posibilidades reales de recuperación.</p>
-        </article>
-        <article class="stepper__step">
-          <span class="stepper__icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/></svg>
-          </span>
-          <h3>Representación y seguimiento</h3>
-          <p>Ejecutamos la estrategia con acompañamiento permanente, comunicación continua y acceso a información relevante durante todo el proceso a través de nuestra tecnología.</p>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <!-- OBJECIONES RESUELTAS -->
-  <section class="section" data-surface="atmosphere" aria-labelledby="objeciones-b2b-heading">
-    <div class="atmosphere" aria-hidden="true"></div>
-    <div class="container" style="max-width: 72ch;">
-      <div class="surface-glass reveal" style="padding: var(--space-8);">
-        <p class="eyebrow">Transparencia</p>
-        <h2 id="objeciones-b2b-heading">Objeciones resueltas</h2>
-        <p>En AAA Estudio Legal actuamos con total transparencia: no prometemos resultados que ninguna firma seria puede garantizar, sino una representación jurídica especializada, una estrategia construida sobre un diagnóstico técnico y honorarios proporcionales a la naturaleza del caso. Nuestro compromiso es brindar a cada cliente el criterio, la experiencia y el acompañamiento necesarios para tomar decisiones informadas y proteger el valor de sus activos.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- EVIDENCIA DE CONFIANZA — placeholder explícito: cifras reales pendientes de
-       aprobación del cliente, no se inventan (content/06-captacion-b2b.md). -->
-  <section class="section" data-surface="muted" aria-labelledby="evidencia-heading">
-    <div class="container" style="max-width: 68ch;">
-      <p class="eyebrow">Evidencia de confianza</p>
-      <h2 id="evidencia-heading">Evidencia de confianza</h2>
-      <div class="ady-note reveal">
-        <strong>Contenido pendiente del cliente</strong>
-        Esta sección reserva espacio para cifras de experiencia, cantidad de casos y capacidad del equipo — solo se publican si son reales y están aprobadas por el cliente. No se inventan cifras.
-      </div>
-    </div>
-  </section>
-
-  <!-- CIERRE / FORMULARIO — mismo bloque de dos tarjetas usado en Inicio y en
-       Transparencia/Cierre de Servicios. -->
-  <section class="section" data-surface="atmosphere" aria-labelledby="cierre-b2b-heading">
-    <div class="atmosphere" aria-hidden="true"></div>
-    <div class="container">
-      <div class="cierre-grid reveal">
-        <div class="cierre-card cierre-card--image">
-          <img class="cierre-card__img" src="assets/img/hero-inicio.webp" alt="Equipo de AAA Estudio Legal trabajando en sala de reuniones" data-img-id="IMG-16">
-        </div>
-        <div class="cierre-card cierre-card--cta">
-          <span class="cierre-card__halo" aria-hidden="true"></span>
-          <div class="cierre-card__content cierre-card__content--statement">
-            <h2 id="cierre-b2b-heading">Cuéntenos su caso y le contactamos con un diagnóstico inicial</h2>
-            <a class="btn cierre-card__btn" href="#nota-ady">
-              Consulte su caso aquí
-              <svg class="btn--icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-            </a>
+        <form class="talent-form talent-form--open contact-form reveal" onsubmit="return false">
+          <div class="talent-form__field">
+            <label for="contact-name">Nombre completo</label>
+            <input type="text" id="contact-name" name="nombre" autocomplete="name" required>
           </div>
-        </div>
+          <div class="talent-form__field">
+            <label for="contact-company">Empresa u organización</label>
+            <input type="text" id="contact-company" name="organizacion" autocomplete="organization" required>
+          </div>
+          <div class="talent-form__field">
+            <label for="contact-role">Cargo</label>
+            <input type="text" id="contact-role" name="cargo" autocomplete="organization-title" required>
+          </div>
+          <div class="talent-form__field">
+            <label for="contact-email">Correo corporativo</label>
+            <input type="email" id="contact-email" name="correo" autocomplete="email" required>
+          </div>
+          <div class="talent-form__field">
+            <label for="contact-phone">Teléfono de contacto</label>
+            <input type="tel" id="contact-phone" name="telefono" autocomplete="tel" required>
+          </div>
+          <div class="talent-form__field">
+            <label for="contact-organization-type">Tipo de organización</label>
+            <select id="contact-organization-type" name="tipo-organizacion" required>
+              <option value="">Seleccione una opción</option>
+              <option>Entidad financiera</option>
+              <option>Fintech</option>
+              <option>Empresa</option>
+              <option>Sector salud o caja de compensación</option>
+              <option>Entidad pública</option>
+              <option>Otra organización</option>
+            </select>
+          </div>
+          <div class="talent-form__field talent-form__field--wide">
+            <label for="contact-interest">Asunto de interés</label>
+            <select id="contact-interest" name="asunto" required>
+              <option value="">Seleccione una opción</option>
+              <option>Defensa de acreedores en procesos de insolvencia</option>
+              <option>Normalización de activos</option>
+              <option>Derecho corporativo</option>
+              <option>Otra consulta</option>
+            </select>
+          </div>
+          <div class="talent-form__field talent-form__field--wide">
+            <label for="contact-context">Contexto general del asunto</label>
+            <textarea id="contact-context" name="contexto" rows="5" required></textarea>
+          </div>
+          <button class="btn btn--primary talent-form__submit" type="submit">
+            Solicitar contacto
+            <svg class="btn--icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </button>
+        </form>
+      </div>
+
+      <div class="contact-intake__media reveal">
+        <img src="assets/img/hero-inicio.webp" alt="Equipo de AAA Estudio Legal trabajando en una sala de reuniones" data-img-id="IMG-16" loading="lazy" decoding="async">
       </div>
     </div>
   </section>
@@ -265,5 +229,8 @@
 </div>
 
 <script src="js/main.js"></script>
+<script defer src="js/gsap/gsap-3.15.0.min.js"></script>
+<script defer src="js/gsap/ScrollTrigger-3.15.0.min.js"></script>
+<script defer src="js/home-motion.js?v=20260831-contact-headings"></script>
 </body>
 </html>
