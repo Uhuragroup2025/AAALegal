@@ -10,7 +10,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Krub:wght@400;500;600;700&family=Libre+Caslon+Display&family=Libre+Caslon+Text:ital@1&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/tokens.css">
 <link rel="stylesheet" href="css/base.css">
-<link rel="stylesheet" href="css/components.css">
+<link rel="stylesheet" href="css/components.css?v=20260831-contact-whatsapp-title">
 </head>
 <body class="contact-page">
 
@@ -50,6 +50,15 @@
             <li><a href="trabaja-con-nosotros.html">Trabaja con nosotros</a></li>
           </ul>
         </nav>
+        <div class="nav__mobile-contact" aria-label="Contacto de AAA Estudio Legal">
+          <p class="nav__mobile-contact-label">Contacto</p>
+          <address>
+            <span>Calle 28 Norte # 6BIS - 26<br>Barrio San Vicente, Cali</span>
+            <a href="https://wa.link/g02tqj" target="_blank" rel="noopener noreferrer">+57 317 655 1931</a>
+            <a href="mailto:info@agudeloabogados.com">info@agudeloabogados.com</a>
+          </address>
+          <a class="nav__mobile-contact-cta" href="captacion-b2b.html">Hablemos de su caso <span aria-hidden="true">→</span></a>
+        </div>
       </div>
     </details>
 
@@ -65,53 +74,50 @@
 </header>
 
 <main id="contenido">
-
-  <!-- HERO INTERNO — mismo sistema editorial compacto de las páginas internas.
-       Contacto conserva una superficie abstracta de marca: no lleva fotografía. -->
-  <section class="hero-immersive hero--editorial hero--editorial--contact surface-theme--dark-primary" data-surface="dark" aria-label="Presentación de Contacto">
-    <div class="hero-shell">
-      <div class="hero-shell__media hero-shell__media--abstract" aria-hidden="true">
-        <div class="hero-shell__scrim" aria-hidden="true"></div>
-      </div>
-      <div class="hero-shell__content">
-        <p class="eyebrow">Contacto</p>
-        <h1 class="hero__title">Soluciones jurídicas para <span class="text-gradient">proteger, normalizar y recuperar activos</span></h1>
-      </div>
-    </div>
-  </section>
-
-  <!-- CONTACTO B2B — formulario abierto a la izquierda y fotografía a la derecha. -->
+  <!-- CONTACTO B2B — contexto y datos a la izquierda; formulario a la derecha. -->
   <section class="section chapter contact-intake surface-theme--light-base" data-surface="light" aria-labelledby="contact-form-heading">
     <div class="container contact-intake__grid">
       <div class="contact-intake__content">
         <div class="section-heading--editorial" data-motion="section-title">
-          <p class="eyebrow">Conversemos</p>
-          <h2 id="contact-form-heading"><span class="section-title__regular">Cuéntenos el contexto de su organización.</span> <span class="section-title__emphasis">Nuestro equipo revisará su solicitud.</span></h2>
+          <h1 id="contact-form-heading" class="contact-intake__title"><span class="section-title__regular">Cuéntenos el contexto de su organización.</span> <span class="section-title__emphasis">Nuestro equipo revisará su solicitud.</span></h1>
           <p class="contact-intake__intro">Comparta la información inicial necesaria para que podamos comprender el asunto y establecer el canal de contacto adecuado.</p>
         </div>
 
-        <form class="talent-form talent-form--open contact-form reveal" onsubmit="return false">
-          <div class="talent-form__field">
+        <address class="contact-intake__details" aria-label="Datos de contacto de AAA Estudio Legal">
+          <div class="contact-intake__detail">
+            <span>Dirección</span>
+            <p>Calle 28 Norte # 6BIS - 26<br>Barrio San Vicente, Cali, Valle del Cauca</p>
+          </div>
+          <div class="contact-intake__detail">
+            <span>Contacto directo</span>
+            <a href="https://wa.link/g02tqj" target="_blank" rel="noopener noreferrer">+57 317 655 1931</a>
+            <a href="mailto:info@agudeloabogados.com">info@agudeloabogados.com</a>
+          </div>
+        </address>
+      </div>
+
+      <form class="talent-form talent-form--open contact-form reveal" onsubmit="return false">
+        <div class="talent-form__field">
             <label for="contact-name">Nombre completo</label>
             <input type="text" id="contact-name" name="nombre" autocomplete="name" required>
-          </div>
-          <div class="talent-form__field">
+        </div>
+        <div class="talent-form__field">
             <label for="contact-company">Empresa u organización</label>
             <input type="text" id="contact-company" name="organizacion" autocomplete="organization" required>
-          </div>
-          <div class="talent-form__field">
+        </div>
+        <div class="talent-form__field">
             <label for="contact-role">Cargo</label>
             <input type="text" id="contact-role" name="cargo" autocomplete="organization-title" required>
-          </div>
-          <div class="talent-form__field">
+        </div>
+        <div class="talent-form__field">
             <label for="contact-email">Correo corporativo</label>
             <input type="email" id="contact-email" name="correo" autocomplete="email" required>
-          </div>
-          <div class="talent-form__field">
+        </div>
+        <div class="talent-form__field">
             <label for="contact-phone">Teléfono de contacto</label>
             <input type="tel" id="contact-phone" name="telefono" autocomplete="tel" required>
-          </div>
-          <div class="talent-form__field">
+        </div>
+        <div class="talent-form__field">
             <label for="contact-organization-type">Tipo de organización</label>
             <select id="contact-organization-type" name="tipo-organizacion" required>
               <option value="">Seleccione una opción</option>
@@ -122,8 +128,8 @@
               <option>Entidad pública</option>
               <option>Otra organización</option>
             </select>
-          </div>
-          <div class="talent-form__field talent-form__field--wide">
+        </div>
+        <div class="talent-form__field talent-form__field--wide">
             <label for="contact-interest">Asunto de interés</label>
             <select id="contact-interest" name="asunto" required>
               <option value="">Seleccione una opción</option>
@@ -132,21 +138,16 @@
               <option>Derecho corporativo</option>
               <option>Otra consulta</option>
             </select>
-          </div>
-          <div class="talent-form__field talent-form__field--wide">
+        </div>
+        <div class="talent-form__field talent-form__field--wide">
             <label for="contact-context">Contexto general del asunto</label>
             <textarea id="contact-context" name="contexto" rows="5" required></textarea>
-          </div>
-          <button class="btn btn--primary talent-form__submit" type="submit">
-            Solicitar contacto
-            <svg class="btn--icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-          </button>
-        </form>
-      </div>
-
-      <div class="contact-intake__media reveal">
-        <img src="assets/img/hero-inicio.webp" alt="Equipo de AAA Estudio Legal trabajando en una sala de reuniones" data-img-id="IMG-16" loading="lazy" decoding="async">
-      </div>
+        </div>
+        <button class="btn btn--primary talent-form__submit" type="submit">
+          Solicitar contacto
+          <svg class="btn--icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </button>
+      </form>
     </div>
   </section>
 
@@ -177,7 +178,7 @@
           <svg class="home-footer__icon" viewBox="0 0 256 256" fill="none" stroke="currentColor" stroke-width="14" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M92 48 64 24 32 40c0 101.6 82.4 184 184 184l16-32-24-28-36 12a144 144 0 0 1-92-92Z"/></svg>
           <span><strong>Teléfono principal</strong>317 655 1931</span>
         </a>
-        <a class="home-footer__contact-item" href="https://wa.me/573176551931" target="_blank" rel="noopener noreferrer">
+        <a class="home-footer__contact-item" href="https://wa.link/g02tqj" target="_blank" rel="noopener noreferrer">
           <svg class="home-footer__icon" viewBox="0 0 256 256" fill="none" stroke="currentColor" stroke-width="14" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M88 72c8 48 48 88 96 96l16-24-32-16-16 16c-16-8-32-24-40-40l16-16-16-32Z"/><path d="M48 208 56 176a88 88 0 1 1 32 24Z"/></svg>
           <span><strong>WhatsApp</strong>317 655 1931</span>
         </a>
@@ -228,9 +229,9 @@
   <button class="btn btn--primary" type="button" data-cookie-accept>Aceptar</button>
 </div>
 
-<script src="js/main.js"></script>
+<script src="js/main.js?v=20260831-mobile-menu"></script>
 <script defer src="js/gsap/gsap-3.15.0.min.js"></script>
 <script defer src="js/gsap/ScrollTrigger-3.15.0.min.js"></script>
-<script defer src="js/home-motion.js?v=20260831-contact-headings"></script>
+<script defer src="js/home-motion.js?v=20260831-contact-layout"></script>
 </body>
 </html>

@@ -14,8 +14,8 @@
   var navDetails = document.querySelector('.nav');
   if (navDetails) {
     var summary = navDetails.querySelector('summary');
-    // Debe coincidir con el breakpoint del menú en components.css. D55: header
-    // full-width (`.site-header--global`) unificado en las 7 páginas — todas colapsan
+    // Debe coincidir con el breakpoint del menú en components.css. El header
+    // full-width (`.site-header--global`) compartido colapsa en todas las páginas
     // en el mismo punto (1180px, por su header de tres zonas).
     var mobileQuery = window.matchMedia('(max-width: 1180px)');
 
@@ -37,6 +37,7 @@
 
     var syncAria = function () {
       if (summary) summary.setAttribute('aria-expanded', String(navDetails.open));
+      document.documentElement.classList.toggle('nav-open', mobileQuery.matches && navDetails.open);
     };
     syncAria();
     navDetails.addEventListener('toggle', syncAria);
@@ -46,6 +47,44 @@
       link.addEventListener('click', function () {
         if (mobileQuery.matches) navDetails.removeAttribute('open');
       });
+    });
+
+    // El drawer se puede cerrar desde la franja exterior o con Escape. El foco
+    // regresa al botón para mantener un recorrido de teclado predecible.
+    document.addEventListener('click', function (event) {
+      if (!mobileQuery.matches || !navDetails.open) return;
+      var panel = navDetails.querySelector('.nav__panel');
+      if (panel && !panel.contains(event.target) && summary && !summary.contains(event.target)) {
+        navDetails.removeAttribute('open');
+      }
+    });
+
+    document.addEventListener('keydown', function (event) {
+      if (!mobileQuery.matches || !navDetails.open) return;
+
+      if (event.key === 'Escape') {
+        navDetails.removeAttribute('open');
+        if (summary) summary.focus();
+        return;
+      }
+
+      // Mantiene el recorrido de teclado dentro del drawer mientras está abierto.
+      if (event.key === 'Tab') {
+        var panel = navDetails.querySelector('.nav__panel');
+        var panelLinks = panel ? Array.prototype.slice.call(panel.querySelectorAll('a[href]')) : [];
+        var focusable = summary ? [summary].concat(panelLinks) : panelLinks;
+        if (!focusable.length) return;
+
+        var first = focusable[0];
+        var last = focusable[focusable.length - 1];
+        if (event.shiftKey && document.activeElement === first) {
+          event.preventDefault();
+          last.focus();
+        } else if (!event.shiftKey && document.activeElement === last) {
+          event.preventDefault();
+          first.focus();
+        }
+      }
     });
   }
 

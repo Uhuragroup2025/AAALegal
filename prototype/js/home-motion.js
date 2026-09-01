@@ -93,7 +93,7 @@
     if (!group || group.dataset.motionPlayed === 'true') return;
 
     var eyebrow = group.querySelector('.eyebrow');
-    var title = group.querySelector('h2');
+    var title = group.querySelector('h1, h2');
     if (!title) return;
 
     var regularParts = Array.prototype.slice.call(title.querySelectorAll('.section-title__regular'));
@@ -143,6 +143,80 @@
       once: true,
       animation: timeline
     });
+  };
+
+  /* Capítulos editoriales con fotografía: el heading conserva su propia secuencia,
+     mientras body, CTA e imagen entran como una sola composición. No se oculta
+     contenido antes de que GSAP confirme que puede ejecutar la mejora. */
+  var revealChapter = function (chapter, isMobile) {
+    if (!chapter || chapter.dataset.motionPlayed === 'true') return;
+
+    var heading = chapter.querySelector('[data-motion="section-title"]');
+    var mediaShell = chapter.querySelector('[data-motion-media]');
+    var copy = heading ? Array.prototype.slice.call(heading.children).filter(function (element) {
+      return !element.matches('.eyebrow, h1, h2');
+    }) : [];
+    var animated = copy.concat(mediaShell ? [mediaShell] : []);
+    if (!animated.length) return;
+
+    var timeline = gsap.timeline({
+      paused: true,
+      defaults: { ease: 'power3.out' },
+      onComplete: function () {
+        chapter.dataset.motionPlayed = 'true';
+        if (copy.length) gsap.set(copy, { clearProps: 'opacity,transform' });
+        if (mediaShell) gsap.set(mediaShell, { clearProps: 'opacity,clipPath' });
+      }
+    });
+
+    if (mediaShell) {
+      timeline.fromTo(mediaShell,
+        { opacity: 0.72, clipPath: isMobile ? 'inset(2% 0 2% 0)' : 'inset(3% 0 3% 0)' },
+        { opacity: 1, clipPath: 'inset(0% 0 0% 0)', duration: isMobile ? 0.72 : 0.92 },
+        0
+      );
+    }
+
+    if (copy.length) {
+      timeline.fromTo(copy,
+        { opacity: 0.58, y: isMobile ? 9 : 13 },
+        { opacity: 1, y: 0, duration: isMobile ? 0.56 : 0.68, stagger: isMobile ? 0.045 : 0.065 },
+        mediaShell ? 0.18 : 0
+      );
+    }
+
+    ScrollTrigger.create({
+      trigger: chapter,
+      start: isMobile ? 'top 90%' : 'top 84%',
+      once: true,
+      animation: timeline
+    });
+  };
+
+  /* Deriva ambiental reservada a fotografías protagonistas. Se limita a desktop,
+     usa transformaciones compositor-friendly y nunca cambia dimensiones del layout. */
+  var addMediaDrift = function (chapter) {
+    if (!chapter) return;
+    var mediaShell = chapter.querySelector('[data-motion-media]');
+    if (!mediaShell) return;
+    var media = mediaShell.matches('img') ? mediaShell : mediaShell.querySelector('img');
+    if (!media) return;
+
+    gsap.fromTo(media,
+      { yPercent: -1.2, scale: 1.025, transformOrigin: '50% 50%' },
+      {
+        yPercent: 1.2,
+        scale: 1.045,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: chapter,
+          start: 'top bottom',
+          end: 'bottom top',
+          scrub: 1.05,
+          invalidateOnRefresh: true
+        }
+      }
+    );
   };
 
   var revealServicePanels = function (container, isMobile) {
@@ -261,6 +335,10 @@
     if (isHome) revealHero(hero);
     document.querySelectorAll('[data-motion="section-title"]').forEach(function (group) {
       revealSectionTitle(group, conditions.isMobile);
+    });
+    document.querySelectorAll('[data-motion="chapter"]').forEach(function (chapter) {
+      revealChapter(chapter, conditions.isMobile);
+      if (conditions.isDesktop) addMediaDrift(chapter);
     });
     if (isHome) revealServicePanels(document.querySelector('[data-motion="service-panels"]'), conditions.isMobile);
     document.querySelectorAll('[data-motion="stats"]').forEach(function (section) {
