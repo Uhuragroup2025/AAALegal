@@ -18,9 +18,9 @@
 - El prototipo estático (`/prototype/`) sigue siendo la fuente de verdad del diseño
   aprobado — cada pattern/template part que se construya en WordPress debe verse
   igual que su equivalente en `/prototype/`, no reinventarse.
-- Checkpoint de seguridad ya guardado: tag `checkpoint-prototype-estable-2026-09-07`
-  sobre el commit `6456a00` (D98), en `origin`. Si algo sale mal en esta fase, ese
-  punto de retorno existe.
+- Checkpoint de seguridad vigente: tag `checkpoint-mvp-unificado-2026-09-07`
+  sobre el commit `1335235` (D111, unificación de ramas), en `origin`. Si algo sale
+  mal en esta fase, ese punto de retorno existe.
 - Nada de esto toca `/prototype/` ni la rama `product-lead-ajustes-visuales`
   (la que despliega a Cloudflare Workers Builds) — son pistas de trabajo separadas.
 

@@ -112,7 +112,7 @@ Mapeo directo a `theme.json` cuando se implemente el block theme:
 | `--glass-bg`, `--glass-border`, `--glass-blur` | No tiene equivalente en theme.json — vive en el CSS del tema | Superficies translúcidas (§ 8 del encargo) — ver riesgo de soporte de navegador en § 7 |
 | `--motion-*`, `--motion-entrance`, `--motion-stagger-step`, `--reveal-distance`, `--parallax-distance` | No tiene equivalente directo en theme.json — vive en el JS/CSS del tema | Hovers/estados 200–600ms, entradas 550–900ms. Se anula completamente bajo `prefers-reduced-motion` (ver § 5) |
 
-No se usó ninguna clase utilitaria tipo Tailwind — todo el CSS lee de estas variables, consistente con la restricción ya vigente (AGENTS.md, Marco técnico). No se instaló ninguna dependencia nueva (GSAP, AOS, Lenis, etc.) — todo el movimiento es CSS + `IntersectionObserver` nativo.
+No se usó ninguna clase utilitaria tipo Tailwind — todo el CSS lee de estas variables, consistente con la restricción ya vigente (AGENTS.md, Marco técnico). La mayor parte del movimiento sigue siendo CSS + `IntersectionObserver` nativo; la única excepción autorizada es GSAP + ScrollTrigger, exclusivo del motion editorial de Home (Decisión D112, 2026-09-07 — ver § 5 y PROJECT.md). Ninguna otra dependencia de animación (AOS, Lenis, etc.) está autorizada.
 
 ---
 
@@ -188,6 +188,8 @@ Decisión de esta fase: **no implementar scrollytelling, sticky-crossfade, pinni
 | Deriva ambiental de los halos (`.atmosphere`) | Dar una sensación de "vida" extremadamente sutil al fondo — puramente decorativo | Automático, en bucle, solo si `prefers-reduced-motion: no-preference` | Traslado de 3–4% del tamaño del halo, 42–54s por ciclo — deliberadamente lento e imperceptible como movimiento discreto | Sin JS, los halos simplemente quedan estáticos — visualmente idénticos, sin la deriva | Se desactiva por completo vía `@media (prefers-reduced-motion: no-preference)` — nunca se anima si el usuario pidió reducir movimiento |
 
 JS progresivo: `js/main.js` conserva navegación, rails, revelados genéricos, stepper y aviso de cookies. El motion exclusivo de Inicio vive aislado en `js/home-motion.js`, con GSAP 3.15.0 y ScrollTrigger servidos localmente desde `js/gsap/`; no hay npm, bundler ni carga de una librería completa de plugins. En WordPress estos tres scripts pueden encolarse solo para la plantilla de Inicio, manteniendo GSAP/ScrollTrigger como dependencias explícitas de `home-motion.js`. Ninguna funcionalidad depende de que esta capa cargue.
+
+**Nota de cierre (Decisión D112, 2026-09-07):** GSAP + ScrollTrigger quedan formalmente autorizados como la única excepción a "sin dependencias de animación nuevas" — el Owner confirmó que el prototipo actual, con este motion editorial ya implementado en Home, es la versión aprobada. Ver PROJECT.md y STATUS.md § Nota de unificación de ramas para el detalle de por qué esto era, hasta esta decisión, una pregunta abierta.
 
 ---
 
