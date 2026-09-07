@@ -1,0 +1,32 @@
+/*
+Theme Name: AAA Estudio Legal
+Theme URI: https://aaalegal.design-505.workers.dev/
+Author: Uhura Group
+Author URI: https://uhuragroup.com
+Description: Block theme propio para AAA Estudio Legal — traduce 1:1 el sistema de diseño ya aprobado del prototipo estático (prototype/, decisiones D1–D98) a theme.json y patterns nativos de Gutenberg. Sin Elementor ni plugins de constructor de página (Decisión D99, 03A — Arquitectura WordPress).
+Version: 0.1.0
+Requires at least: 6.6
+Requires PHP: 8.0
+Tested up to: 6.6
+Text Domain: aaa-estudio-legal
+
+El diseño vive en theme.json (paleta, tipografía, espaciado — traducidos de
+prototype/css/tokens.css) y en los patterns (traducidos de prototype/css/components.css).
+Este archivo solo trae ajustes que theme.json no puede expresar todavía
+(ver componentes.css — halos, glass, hover de tarjetas) y algo de CSS de
+impresión/editor. No se usa como hoja de estilos principal del tema.
+*/
+
+/* ---------- Impresión: oculta elementos decorativos, igual criterio que el sitio original ---------- */
+@media print {
+  .wp-block-navigation,
+  .aaa-cookie-banner {
+    display: none !important;
+  }
+}
+
+/* ---------- Fallback de foco visible — nunca se suprime (mismo criterio que prototype/css/base.css) ---------- */
+:focus-visible {
+  outline: 3px solid var(--wp--preset--color--accent-light);
+  outline-offset: 2px;
+}

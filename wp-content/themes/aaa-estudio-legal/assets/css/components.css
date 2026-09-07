@@ -1,0 +1,233 @@
+/*
+  Componentes compartidos — puerto inicial desde prototype/css/{base,components}.css.
+  Decisión D99: solo se traen aquí los patrones que theme.json no puede expresar
+  (pseudo-clases, ::before, keyframes, combinadores). Los valores de color/
+  espaciado/radio se leen siempre de las variables --wp--preset--*/--wp--custom--*
+  que genera theme.json — nunca un valor suelto — para que theme.json siga siendo
+  la única fuente de verdad del sistema de diseño (igual principio que tokens.css
+  tenía en el prototipo).
+
+  Estado de este puerto (ver WORDPRESS-SETUP.md § Patterns pendientes para el resto):
+  hecho — header sticky-glass, footer, botones, media-placeholder (D58 etc.),
+  superficies sólida/vidrio + coreografía de hover (D26), revelado en scroll (.reveal),
+  eyebrow, hero simple (D98).
+  pendiente — atmósfera/halos decorativos, mosaico asimétrico de focos, stepper/
+  flujograma de metodología, tarjetas flip de equipo (D92–D95), carrusel móvil (rail).
+*/
+
+/* ---------- Base tipográfica que theme.json no cubre ---------- */
+.aaa-eyebrow {
+  display: block;
+  font-family: var(--wp--preset--font-family--sans);
+  font-size: var(--wp--preset--font-size--xs);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--wp--preset--color--accent-main-strong);
+  margin-bottom: var(--wp--preset--spacing--4);
+}
+[data-surface="dark"] .aaa-eyebrow {
+  color: var(--wp--preset--color--accent-light);
+}
+
+.aaa-text-emphasis {
+  font-family: var(--wp--preset--font-family--display-italic);
+  font-style: italic;
+  color: var(--wp--preset--color--accent-main-strong);
+}
+section:not([data-surface="dark"]) .aaa-text-emphasis {
+  color: var(--wp--preset--color--navy-deep);
+}
+
+/* ---------- Header — sticky con glass (D55/D57) ---------- */
+.aaa-site-header {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  background: var(--wp--preset--color--navy-deep);
+  color: var(--wp--preset--color--white);
+}
+.aaa-site-header .wp-block-navigation a {
+  color: var(--wp--preset--color--white);
+  font-family: var(--wp--preset--font-family--sans);
+}
+
+/* ---------- Footer (D67) ---------- */
+.aaa-site-footer {
+  position: relative;
+  overflow: hidden;
+  background: var(--wp--preset--gradient--footer);
+  color: var(--wp--preset--color--white);
+}
+.aaa-site-footer a {
+  color: var(--wp--preset--color--white);
+  text-decoration: none;
+}
+.aaa-site-footer a:hover {
+  color: var(--wp--preset--color--accent-light);
+}
+.aaa-site-footer__watermark {
+  position: absolute;
+  z-index: 0;
+  right: clamp(-7rem, -3vw, -2rem);
+  bottom: clamp(-6rem, -4vw, -2rem);
+  width: clamp(280px, 31vw, 520px);
+  height: auto;
+  opacity: 0.05;
+  filter: grayscale(1) brightness(2.8);
+  pointer-events: none;
+}
+
+/* ---------- Botones (D18, D23/D26) ---------- */
+.wp-block-button__link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--wp--preset--spacing--2);
+  font-family: var(--wp--preset--font-family--sans);
+  font-weight: 600;
+  font-size: var(--wp--preset--font-size--sm);
+  border-radius: var(--wp--custom--radius--sm);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .wp-block-button__link {
+    transition: transform var(--wp--custom--motion--fast) var(--wp--custom--motion--ease),
+                box-shadow var(--wp--custom--motion--fast) var(--wp--custom--motion--ease);
+  }
+}
+.wp-block-button__link:active {
+  transform: scale(0.97);
+}
+
+/* ---------- Placeholder de fotografía (D58 y siguientes — honesto, nunca stock) ---------- */
+.is-style-media-placeholder {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  border-radius: var(--wp--custom--radius--xl);
+  background:
+    repeating-linear-gradient(135deg, rgba(185, 206, 237, 0.14) 0 2px, transparent 2px 18px),
+    linear-gradient(160deg, var(--wp--preset--color--navy-elevated), var(--wp--preset--color--navy-deep));
+  border: 1px solid rgba(185, 206, 237, 0.35);
+  display: flex;
+  align-items: flex-end;
+  padding: var(--wp--preset--spacing--6);
+}
+
+/* ---------- Superficies — sólida / vidrio + coreografía de hover (D26) ----------
+   Arquitectura de movimiento (se conserva del prototipo, ver README § 5): el
+   ESTADO final se declara siempre; la TRANSICIÓN solo se anima bajo
+   prefers-reduced-motion:no-preference; los efectos que dependen de :hover real
+   (no solo :focus) van dentro de (hover:hover) and (pointer:fine) para no dejar
+   un estado "pegado" en táctil. */
+.is-style-surface-solid,
+.is-style-surface-glass {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--wp--custom--radius--md);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .is-style-surface-solid,
+  .is-style-surface-glass {
+    transition: transform var(--wp--custom--motion--base) var(--wp--custom--motion--ease),
+                box-shadow var(--wp--custom--motion--base) var(--wp--custom--motion--ease),
+                border-color var(--wp--custom--motion--base) var(--wp--custom--motion--ease);
+  }
+}
+.is-style-surface-solid {
+  background: var(--wp--preset--color--white);
+  border: 1px solid var(--wp--preset--color--border-flat);
+  box-shadow: 0 1px 2px rgba(6, 59, 89, 0.06);
+}
+.is-style-surface-glass {
+  background: rgba(255, 255, 255, 0.16);
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .is-style-surface-glass {
+    background: rgba(255, 255, 255, 0.92);
+  }
+}
+.is-style-surface-solid::before,
+.is-style-surface-glass::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: radial-gradient(circle at 22% 15%, rgba(185, 206, 237, 0.28), transparent 62%);
+  opacity: 0;
+  pointer-events: none;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .is-style-surface-solid::before,
+  .is-style-surface-glass::before {
+    transition: opacity var(--wp--custom--motion--base) var(--wp--custom--motion--ease);
+  }
+}
+.is-style-surface-solid > *,
+.is-style-surface-glass > * {
+  position: relative;
+  z-index: 1;
+}
+@media (hover: hover) and (pointer: fine) {
+  .is-style-surface-solid:hover,
+  .is-style-surface-solid:focus-within,
+  .is-style-surface-glass:hover,
+  .is-style-surface-glass:focus-within {
+    transform: translateY(-4px);
+    border-color: rgba(185, 206, 237, 0.5);
+  }
+  .is-style-surface-solid:hover,
+  .is-style-surface-solid:focus-within {
+    box-shadow: 0 8px 24px rgba(6, 59, 89, 0.10);
+  }
+  .is-style-surface-solid:hover::before,
+  .is-style-surface-solid:focus-within::before,
+  .is-style-surface-glass:hover::before,
+  .is-style-surface-glass:focus-within::before {
+    opacity: 1;
+  }
+}
+.is-style-surface-solid:active,
+.is-style-surface-glass:active {
+  transform: translateY(0) scale(0.98);
+}
+
+/* ---------- Revelado en scroll (main.js agrega/observa .aaa-reveal) ---------- */
+.aaa-reveal {
+  opacity: 1;
+  transform: none;
+}
+.js .aaa-reveal[data-reveal-ready]:not(.is-visible) {
+  opacity: 0;
+  transform: translateY(20px);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .js .aaa-reveal[data-reveal-ready]:not(.is-visible) {
+    transition: opacity var(--wp--custom--motion--entrance) var(--wp--custom--motion--ease-entrance),
+                transform var(--wp--custom--motion--entrance) var(--wp--custom--motion--ease-entrance);
+    transition-delay: calc(var(--stagger-index, 0) * var(--wp--custom--motion--stagger-step));
+  }
+}
+
+/* ---------- Aviso de cookies (D20 — sin plugin, mismo criterio del prototipo) ---------- */
+.aaa-cookie-banner {
+  position: fixed;
+  inset: auto 0 0 0;
+  z-index: 50;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--wp--preset--spacing--4);
+  padding: var(--wp--preset--spacing--6);
+  background: var(--wp--preset--color--navy-deep);
+  color: var(--wp--preset--color--white);
+}
+.aaa-cookie-banner[hidden] {
+  display: none;
+}
+.aaa-cookie-banner p {
+  margin: 0;
+  flex: 1 1 320px;
+  font-size: var(--wp--preset--font-size--sm);
+}

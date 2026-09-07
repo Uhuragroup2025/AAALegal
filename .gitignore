@@ -15,6 +15,16 @@ credentials/
 /db-backup/
 /database/
 
+# WordPress core y plugins — no se versionan en este repo (D99, 2026-09-07):
+# solo se versiona el tema propio, wp-content/themes/aaa-estudio-legal/.
+# Núcleo y plugins se instalan vía WP admin siguiendo WORDPRESS-SETUP.md.
+/wp-admin/
+/wp-includes/
+/wp-*.php
+wp-content/plugins/
+wp-content/themes/*/
+!wp-content/themes/aaa-estudio-legal/
+
 # Uploads (contenido subido por el CMS, no versionado)
 wp-content/uploads/
 
