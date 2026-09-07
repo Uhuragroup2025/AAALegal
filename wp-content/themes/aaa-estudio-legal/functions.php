@@ -34,18 +34,23 @@ add_action( 'after_setup_theme', 'aaa_theme_setup' );
 /**
  * Encolado de fuentes y CSS de componentes.
  *
- * Krub + Libre Caslon Display/Text ya se auto-hospedan vía `file:./assets/fonts/`
- * en theme.json (settings.typography.fontFamilies[].fontFace) — WordPress genera
- * el @font-face automáticamente, no hace falta un <link> a Google Fonts como en
- * el prototipo (README.md § 7 ya señalaba esto como mejora pendiente: elimina la
- * dependencia externa a fonts.googleapis.com). Los .woff2 reales todavía no están
- * en assets/fonts/ — ver WORDPRESS-SETUP.md § Fuentes para dónde conseguirlos.
+ * Fuentes vía Google Fonts (mismo mecanismo que usa hoy prototype/*.html —
+ * README.md § 7 registra el auto-hospedaje como mejora futura, no como
+ * bloqueante de Gate 1). theme.json solo declara los fontFamily/fallback;
+ * no hay archivos .woff2 reales en el repo todavía, así que fontFace no se usa.
  */
 function aaa_theme_assets() {
 	wp_enqueue_style(
+		'aaa-google-fonts',
+		'https://fonts.googleapis.com/css2?family=Krub:wght@400;500;600;700&family=Libre+Caslon+Display&family=Libre+Caslon+Text:ital@1&display=swap',
+		array(),
+		null
+	);
+
+	wp_enqueue_style(
 		'aaa-components',
 		get_theme_file_uri( 'assets/css/components.css' ),
-		array(),
+		array( 'aaa-google-fonts' ),
 		AAA_THEME_VERSION
 	);
 
@@ -56,6 +61,36 @@ function aaa_theme_assets() {
 		AAA_THEME_VERSION,
 		array( 'strategy' => 'defer', 'in_footer' => true )
 	);
+
+	// Motion editorial (GSAP + ScrollTrigger + home-motion.js) — Decisión D112
+	// autoriza esta única excepción a "sin dependencias nuevas". En el prototipo
+	// carga en 5 páginas (Home, Metodología, Quiénes somos, Trabaja con nosotros,
+	// Contacto), no solo en Home — aquí se encola en portada + en cualquier página
+	// que use la plantilla `page-motion.html` (ver templates/page-motion.html).
+	$is_motion_page = is_front_page() || is_page_template( 'templates/page-motion.html' );
+	if ( $is_motion_page ) {
+		wp_enqueue_script(
+			'aaa-gsap',
+			get_theme_file_uri( 'assets/js/gsap/gsap-3.15.0.min.js' ),
+			array(),
+			'3.15.0',
+			array( 'in_footer' => true )
+		);
+		wp_enqueue_script(
+			'aaa-gsap-scrolltrigger',
+			get_theme_file_uri( 'assets/js/gsap/ScrollTrigger-3.15.0.min.js' ),
+			array( 'aaa-gsap' ),
+			'3.15.0',
+			array( 'in_footer' => true )
+		);
+		wp_enqueue_script(
+			'aaa-home-motion',
+			get_theme_file_uri( 'assets/js/home-motion.js' ),
+			array( 'aaa-gsap', 'aaa-gsap-scrolltrigger' ),
+			AAA_THEME_VERSION,
+			array( 'in_footer' => true )
+		);
+	}
 }
 add_action( 'wp_enqueue_scripts', 'aaa_theme_assets' );
 

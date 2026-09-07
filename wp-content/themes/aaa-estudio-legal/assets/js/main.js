@@ -36,6 +36,30 @@
     revealEls.forEach(function (el) { observer.observe(el); });
   }
 
+  // --- Equipo: tarjetas flip accesibles ("Personas, no procesos") ---
+  // El control explícito evita que un swipe táctil active el giro por accidente.
+  // Sin JS, CSS presenta ambas caras en flujo para que el contenido siga disponible.
+  document.querySelectorAll('.team-flip-card').forEach(function (card) {
+    var toggles = Array.prototype.slice.call(card.querySelectorAll('[data-team-flip-toggle]'));
+    var setFlipped = function (flipped, focusIndex) {
+      card.classList.toggle('is-flipped', flipped);
+      toggles.forEach(function (button) {
+        button.setAttribute('aria-expanded', String(flipped));
+      });
+      if (typeof focusIndex === 'number' && toggles[focusIndex]) {
+        window.setTimeout(function () {
+          toggles[focusIndex].focus();
+        }, prefersReducedMotion ? 0 : 360);
+      }
+    };
+    toggles.forEach(function (button, index) {
+      button.addEventListener('click', function () {
+        var showBack = index === 0;
+        setFlipped(showBack, showBack ? 1 : 0);
+      });
+    });
+  });
+
   // --- Aviso de cookies (D20) ---
   var cookieBanner = document.querySelector('.aaa-cookie-banner');
   if (cookieBanner) {
