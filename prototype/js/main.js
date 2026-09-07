@@ -14,8 +14,8 @@
   var navDetails = document.querySelector('.nav');
   if (navDetails) {
     var summary = navDetails.querySelector('summary');
-    // Debe coincidir con el breakpoint del menú en components.css. D55: header
-    // full-width (`.site-header--global`) unificado en las 7 páginas — todas colapsan
+    // Debe coincidir con el breakpoint del menú en components.css. El header
+    // full-width (`.site-header--global`) compartido colapsa en todas las páginas
     // en el mismo punto (1180px, por su header de tres zonas).
     var mobileQuery = window.matchMedia('(max-width: 1180px)');
 
@@ -37,6 +37,7 @@
 
     var syncAria = function () {
       if (summary) summary.setAttribute('aria-expanded', String(navDetails.open));
+      document.documentElement.classList.toggle('nav-open', mobileQuery.matches && navDetails.open);
     };
     syncAria();
     navDetails.addEventListener('toggle', syncAria);
@@ -47,30 +48,44 @@
         if (mobileQuery.matches) navDetails.removeAttribute('open');
       });
     });
-  }
 
-  // --- Parallax muy sutil del hero (solo mientras el hero está en pantalla) ---
-  var heroMedia = document.querySelector('.hero-shell__media');
-  if (heroMedia && !prefersReducedMotion) {
-    var heroShell = document.querySelector('.hero-shell');
-    var parallaxTicking = false;
-    var applyParallax = function () {
-      var rect = heroShell.getBoundingClientRect();
-      if (rect.bottom > 0 && rect.top < window.innerHeight) {
-        var progress = 1 - (rect.bottom / (window.innerHeight + rect.height));
-        var distance = getComputedStyle(document.documentElement).getPropertyValue('--parallax-distance');
-        var maxPx = parseFloat(distance) || 0;
-        heroMedia.style.transform = 'translateY(' + (progress * maxPx).toFixed(1) + 'px)';
+    // El drawer se puede cerrar desde la franja exterior o con Escape. El foco
+    // regresa al botón para mantener un recorrido de teclado predecible.
+    document.addEventListener('click', function (event) {
+      if (!mobileQuery.matches || !navDetails.open) return;
+      var panel = navDetails.querySelector('.nav__panel');
+      if (panel && !panel.contains(event.target) && summary && !summary.contains(event.target)) {
+        navDetails.removeAttribute('open');
       }
-      parallaxTicking = false;
-    };
-    window.addEventListener('scroll', function () {
-      if (!parallaxTicking) {
-        window.requestAnimationFrame(applyParallax);
-        parallaxTicking = true;
+    });
+
+    document.addEventListener('keydown', function (event) {
+      if (!mobileQuery.matches || !navDetails.open) return;
+
+      if (event.key === 'Escape') {
+        navDetails.removeAttribute('open');
+        if (summary) summary.focus();
+        return;
       }
-    }, { passive: true });
-    applyParallax();
+
+      // Mantiene el recorrido de teclado dentro del drawer mientras está abierto.
+      if (event.key === 'Tab') {
+        var panel = navDetails.querySelector('.nav__panel');
+        var panelLinks = panel ? Array.prototype.slice.call(panel.querySelectorAll('a[href]')) : [];
+        var focusable = summary ? [summary].concat(panelLinks) : panelLinks;
+        if (!focusable.length) return;
+
+        var first = focusable[0];
+        var last = focusable[focusable.length - 1];
+        if (event.shiftKey && document.activeElement === first) {
+          event.preventDefault();
+          last.focus();
+        } else if (!event.shiftKey && document.activeElement === last) {
+          event.preventDefault();
+          first.focus();
+        }
+      }
+    });
   }
 
   // --- Rail horizontal: mejora de arrastre con puntero (el scroll nativo ya funciona sin esto) ---
@@ -139,64 +154,161 @@
   // por defecto (ver components.css `.stepper__step[data-stepper-ready]`) — no se
   // requiere fallback adicional.
 
-  // --- Contador animado ("En cifras", Decisión D41): cuenta de forma ascendente
-  // desde 0 hasta `data-count-to` cuando la tarjeta entra en viewport. Con
-  // prefers-reduced-motion, salta directo al valor final sin animar.
-  var countEls = document.querySelectorAll('.stat-card__number[data-count-to]');
-  if (countEls.length) {
-    var renderCount = function (el, value) {
-      var prefix = el.getAttribute('data-count-prefix') || '';
-      var suffix = el.getAttribute('data-count-suffix') || '';
-      el.textContent = prefix + Math.round(value) + suffix;
-    };
-
-    var animateCount = function (el) {
-      var target = parseFloat(el.getAttribute('data-count-to')) || 0;
-      var duration = 1400;
-      var start = null;
-      var step = function (timestamp) {
-        if (start === null) start = timestamp;
-        var progress = Math.min((timestamp - start) / duration, 1);
-        var eased = 1 - Math.pow(1 - progress, 3); // ease-out cúbico
-        renderCount(el, target * eased);
-        if (progress < 1) window.requestAnimationFrame(step);
-      };
-      window.requestAnimationFrame(step);
-    };
-
-    if ('IntersectionObserver' in window && !prefersReducedMotion) {
-      var countObserver = new IntersectionObserver(function (entries) {
-        entries.forEach(function (entry) {
-          if (entry.isIntersecting) {
-            animateCount(entry.target);
-            countObserver.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.4 });
-      countEls.forEach(function (el) { countObserver.observe(el); });
-    } else {
-      countEls.forEach(function (el) { renderCount(el, parseFloat(el.getAttribute('data-count-to')) || 0); });
-    }
-  }
-
-  // --- Equipo: tarjetas flip (Decisión D92, Trabaja con nosotros) ---
-  // El hover real (mouse) ya dispara el flip solo con CSS ((hover:hover) and
-  // (pointer:fine), ver components.css). Este toggle por click/tecla es lo que
-  // hace el flip alcanzable también en touch (que no tiene hover real) y por
-  // teclado — nunca depende únicamente del hover para mostrar la descripción.
+  // --- Equipo: tarjetas flip accesibles (Trabaja con nosotros) ---
+  // El control explícito evita que un swipe táctil active el giro por accidente.
+  // Sin JS, CSS presenta ambas caras en flujo para que el contenido siga disponible.
   document.querySelectorAll('.team-flip-card').forEach(function (card) {
-    var toggle = function () {
-      var flipped = card.classList.toggle('is-flipped');
-      card.setAttribute('aria-pressed', String(flipped));
-    };
-    card.addEventListener('click', toggle);
-    card.addEventListener('keydown', function (e) {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        toggle();
+    var toggles = Array.prototype.slice.call(card.querySelectorAll('[data-team-flip-toggle]'));
+    var setFlipped = function (flipped, focusIndex) {
+      card.classList.toggle('is-flipped', flipped);
+      toggles.forEach(function (button) {
+        button.setAttribute('aria-expanded', String(flipped));
+      });
+      if (typeof focusIndex === 'number' && toggles[focusIndex]) {
+        window.setTimeout(function () {
+          toggles[focusIndex].focus();
+        }, prefersReducedMotion ? 0 : 360);
       }
+    };
+
+    toggles.forEach(function (button, index) {
+      button.addEventListener('click', function () {
+        var showBack = index === 0;
+        setFlipped(showBack, showBack ? 1 : 0);
+      });
     });
   });
+
+  // --- Equipo: carrusel móvil, una pareja foto + rol por slide ---
+  // El swipe y scroll-snap funcionan sin JS. Esta capa añade indicador y flechas.
+  var teamCarousel = document.querySelector('[data-team-carousel]');
+  var teamControls = document.querySelector('[data-team-carousel-controls]');
+  if (teamCarousel && teamControls) {
+    var teamPairs = Array.prototype.slice.call(teamCarousel.children).filter(function (item) {
+      return item.hasAttribute('data-team-profile-pair');
+    });
+    var teamCurrent = teamControls.querySelector('[data-team-carousel-current]');
+    var teamTotal = teamControls.querySelector('[data-team-carousel-total]');
+    var teamPrev = teamControls.querySelector('[data-team-carousel-prev]');
+    var teamNext = teamControls.querySelector('[data-team-carousel-next]');
+    var teamMobileQuery = window.matchMedia('(max-width: 640px)');
+    var teamPageIndex = 0;
+    var teamFrame = null;
+
+    if (teamTotal) teamTotal.textContent = String(teamPairs.length);
+
+    var updateTeamCarousel = function () {
+      if (!teamMobileQuery.matches || !teamPairs.length) return;
+
+      teamPageIndex = teamPairs.reduce(function (nearest, pair, index) {
+        var currentDistance = Math.abs(teamPairs[nearest].offsetLeft - teamCarousel.scrollLeft);
+        var nextDistance = Math.abs(pair.offsetLeft - teamCarousel.scrollLeft);
+        return nextDistance < currentDistance ? index : nearest;
+      }, 0);
+
+      if (teamCurrent) teamCurrent.textContent = String(teamPageIndex + 1);
+      if (teamPrev) teamPrev.disabled = teamPageIndex === 0;
+      if (teamNext) teamNext.disabled = teamPageIndex === teamPairs.length - 1;
+    };
+
+    var goToTeamPage = function (index) {
+      if (!teamMobileQuery.matches || !teamPairs.length) return;
+      var targetIndex = Math.max(0, Math.min(index, teamPairs.length - 1));
+      teamCarousel.scrollTo({
+        left: teamPairs[targetIndex].offsetLeft,
+        behavior: prefersReducedMotion ? 'auto' : 'smooth'
+      });
+    };
+
+    teamCarousel.addEventListener('scroll', function () {
+      if (teamFrame) window.cancelAnimationFrame(teamFrame);
+      teamFrame = window.requestAnimationFrame(updateTeamCarousel);
+    }, { passive: true });
+
+    if (teamPrev) teamPrev.addEventListener('click', function () { goToTeamPage(teamPageIndex - 1); });
+    if (teamNext) teamNext.addEventListener('click', function () { goToTeamPage(teamPageIndex + 1); });
+
+    var resetTeamCarousel = function () {
+      if (teamMobileQuery.matches) teamCarousel.scrollLeft = 0;
+      teamPageIndex = 0;
+      updateTeamCarousel();
+    };
+
+    if (teamMobileQuery.addEventListener) {
+      teamMobileQuery.addEventListener('change', resetTeamCarousel);
+    } else if (teamMobileQuery.addListener) {
+      teamMobileQuery.addListener(resetTeamCarousel);
+    }
+    window.addEventListener('resize', updateTeamCarousel);
+    updateTeamCarousel();
+  }
+
+  // --- Home · ¿Por qué AAA?: carrusel móvil paginado de dos cards ---
+  // El scroll táctil y scroll-snap funcionan sin JS. Esta capa añade únicamente
+  // indicador, flechas y sincronización accesible con las tres páginas.
+  var whyCarousel = document.querySelector('[data-why-carousel]');
+  var whyControls = document.querySelector('[data-why-carousel-controls]');
+  if (whyCarousel && whyControls) {
+    var whyCards = Array.prototype.slice.call(whyCarousel.children);
+    var whyPageStarts = whyCards.filter(function (_card, index) { return index % 2 === 0; });
+    var whyCurrent = whyControls.querySelector('[data-why-carousel-current]');
+    var whyTotal = whyControls.querySelector('[data-why-carousel-total]');
+    var whyPrev = whyControls.querySelector('[data-why-carousel-prev]');
+    var whyNext = whyControls.querySelector('[data-why-carousel-next]');
+    var whyMobileQuery = window.matchMedia('(max-width: 640px)');
+    var whyPageIndex = 0;
+    var whyFrame = null;
+
+    if (whyTotal) whyTotal.textContent = String(whyPageStarts.length);
+
+    var updateWhyCarousel = function () {
+      if (!whyMobileQuery.matches || !whyPageStarts.length) return;
+
+      var nextWhyPageIndex = whyPageStarts.reduce(function (nearest, card, index) {
+        var currentDistance = Math.abs(whyPageStarts[nearest].offsetLeft - whyCarousel.scrollLeft);
+        var nextDistance = Math.abs(card.offsetLeft - whyCarousel.scrollLeft);
+        return nextDistance < currentDistance ? index : nearest;
+      }, 0);
+
+      whyPageIndex = nextWhyPageIndex;
+      if (whyCurrent && whyCurrent.textContent !== String(whyPageIndex + 1)) {
+        whyCurrent.textContent = String(whyPageIndex + 1);
+      }
+      if (whyPrev) whyPrev.disabled = whyPageIndex === 0;
+      if (whyNext) whyNext.disabled = whyPageIndex === whyPageStarts.length - 1;
+    };
+
+    var goToWhyPage = function (index) {
+      if (!whyMobileQuery.matches || !whyPageStarts.length) return;
+      var targetIndex = Math.max(0, Math.min(index, whyPageStarts.length - 1));
+      whyCarousel.scrollTo({
+        left: whyPageStarts[targetIndex].offsetLeft,
+        behavior: prefersReducedMotion ? 'auto' : 'smooth'
+      });
+    };
+
+    whyCarousel.addEventListener('scroll', function () {
+      if (whyFrame) window.cancelAnimationFrame(whyFrame);
+      whyFrame = window.requestAnimationFrame(updateWhyCarousel);
+    }, { passive: true });
+
+    if (whyPrev) whyPrev.addEventListener('click', function () { goToWhyPage(whyPageIndex - 1); });
+    if (whyNext) whyNext.addEventListener('click', function () { goToWhyPage(whyPageIndex + 1); });
+
+    var resetWhyCarousel = function () {
+      if (whyMobileQuery.matches) whyCarousel.scrollLeft = 0;
+      whyPageIndex = 0;
+      updateWhyCarousel();
+    };
+
+    if (whyMobileQuery.addEventListener) {
+      whyMobileQuery.addEventListener('change', resetWhyCarousel);
+    } else if (whyMobileQuery.addListener) {
+      whyMobileQuery.addListener(resetWhyCarousel);
+    }
+    window.addEventListener('resize', updateWhyCarousel);
+    updateWhyCarousel();
+  }
 
   // --- Aviso de cookies (GA4 + GTM + Clarity, Decisión D20) ---
   var cookieBanner = document.querySelector('.cookie-banner');
