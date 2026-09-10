@@ -218,6 +218,59 @@ exactamente dónde). Aplicar la clase `talent-form`/`contact-form` al contenedor
 del formulario de CF7 (**Contact → Integration** o editando el HTML del bloque)
 para que herede el estilo ya construido en `assets/css/components.css`.
 
+## 7bis-2. Fotografía temporal del prototipo (para que Home se vea como el MVP)
+
+No hace falta descargar ni copiar nada — estos archivos ya existen en tu
+computador, en `prototype/assets/img/` (dentro de este mismo repositorio,
+ruta completa: `C:\Users\ozkrm\Desktop\AAA Estudio Legal\prototype\assets\img\`).
+Al subir cada imagen en el editor de bloques (botón **Subir**), simplemente
+navega a esa carpeta y elige el archivo indicado. Son las mismas fotos de
+banco que usa hoy el prototipo — temporales, no material final del cliente,
+pero dan una vista fiel del layout terminado.
+
+**Tip:** en vez de subir una por una, puedes ir primero a **Medios → Añadir
+nuevo**, seleccionar TODOS los archivos de `prototype/assets/img/` de una
+sola vez (arrastrar la carpeta completa o Ctrl+clic para elegir varios) y
+subirlos todos juntos — después, en cada bloque de imagen, los eliges desde
+la Biblioteca de medios en vez de subir de nuevo.
+
+**Home** (`home-full`):
+
+| Bloque/sección | Archivo |
+|---|---|
+| Hero | `temp-prototype-home-hero.jpg` |
+| "¿Qué hace AAA?" | `temp-prototype-home-que-hace-aaa.jpg` |
+| Cómo intervenimos — panel 1 (Defensa de acreedores) | `temp-prototype-home-servicio-acreedores.jpg` |
+| Cómo intervenimos — panel 2 (Normalización de activos) | `temp-prototype-home-servicio-normalizacion.jpg` |
+| Cómo intervenimos — panel 3 (Derecho corporativo) | `temp-prototype-home-servicio-corporativo.jpg` |
+| Casos de éxito — las 3 tarjetas (mismo archivo repetido) | `temp-prototype-home-case-preview.jpg` |
+| Dimensión humana (equipo) | `temp-prototype-home-dimension-humana.jpg` |
+| Cierre — marca de agua decorativa | `isotipo-AAA-legal.svg` |
+
+**Cinta de logos ("Empresas que ya confiaron")** — 15 imágenes, en este orden:
+`logo-bbva.png`, `logo-femcristar.png`, `logo-nuestro-fondo.png`,
+`logo-coopunidos.png`, `logo-fetrabuv.png`, `logo-fonalianza.png`,
+`logo-gobernacion-valle-del-cauca-ribbon.png`, `logo-metrocali.png`,
+`logo-promedico.png`, `logo-comfandi.png`,
+`logo-constructora-melendez-ribbon.jpeg`, `logo-neat.png`,
+`logo-elgranlangostino.png`, `logo-ma-isabel.png`, `logo-k-listo.png`.
+
+**Logos de "Sectores de experiencia"** (por tarjeta — nota: algunos archivos
+son distintos a los de la cinta de arriba, sin el sufijo `-ribbon`):
+
+| Sector | Logos |
+|---|---|
+| Financiero y Fintech | `logo-bbva.png`, `logo-femcristar.png`, `logo-nuestro-fondo.png` |
+| Solidario | `logo-coopunidos.png`, `logo-fetrabuv.png`, `logo-fonalianza.png` |
+| Sector público | `logo-gobernacion-valle-del-cauca-ribbon.png`, `logo-metrocali.png` |
+| Salud y cajas de compensación | `logo-promedico.png`, `logo-comfandi.png` |
+| Construcción e inmobiliario | `logo-constructora-melendez.png` (sin `-ribbon`), `logo-neat.png` |
+| Comercio y consumo | `logo-elgranlangostino.png`, `logo-ma-isabel.png`, `logo-k-listo.png` |
+
+Las otras 4 páginas (Metodología, Quiénes somos, Trabaja con nosotros,
+Contacto) también reutilizan fotos de este mismo banco temporal — si quieres
+esa tabla también, dímelo y la agrego aquí antes de que las construyas.
+
 ## 7ter. Menús
 
 `parts/header.html` y `parts/footer.html` ya traen el bloque **Navigation**
