@@ -9,7 +9,7 @@
  */
 ?>
 <!-- wp:group {"tagName":"section","className":"hero-immersive hero--editorial hero--editorial--services"} -->
-<section class="wp-block-group hero-immersive hero--editorial hero--editorial--services">
+<section class="wp-block-group hero-immersive hero--editorial hero--editorial--services" data-surface="dark">
 	<!-- wp:group {"className":"hero-shell"} -->
 	<div class="wp-block-group hero-shell">
 		<!-- wp:group {"className":"hero-shell__media"} -->
@@ -105,7 +105,7 @@
 <!-- /wp:group -->
 
 <!-- wp:group {"tagName":"section","className":"stepper stepper--flowchart surface-theme--dark-primary","backgroundColor":"navy-deep","textColor":"white"} -->
-<section class="wp-block-group stepper stepper--flowchart surface-theme--dark-primary has-white-color has-navy-deep-background-color has-has-text-color has-background">
+<section class="wp-block-group stepper stepper--flowchart surface-theme--dark-primary has-white-color has-navy-deep-background-color has-text-color has-background" data-surface="dark">
 	<!-- wp:group {"className":"stepper__intro section-heading--editorial"} -->
 	<div class="wp-block-group stepper__intro section-heading--editorial">
 		<!-- wp:paragraph {"className":"aaa-eyebrow"} --><p class="aaa-eyebrow">Nuestra metodología</p><!-- /wp:paragraph -->
@@ -155,7 +155,7 @@
 <!-- /wp:group -->
 
 <!-- wp:group {"tagName":"section","className":"transparency-block surface-theme--dark-deep","backgroundColor":"navy-hover","textColor":"white"} -->
-<section class="wp-block-group transparency-block surface-theme--dark-deep has-white-color has-navy-hover-background-color has-text-color has-background">
+<section class="wp-block-group transparency-block surface-theme--dark-deep has-white-color has-navy-hover-background-color has-text-color has-background" data-surface="dark">
 	<!-- wp:columns {"className":"what-we-do-grid"} -->
 	<div class="wp-block-columns what-we-do-grid">
 		<!-- wp:column -->

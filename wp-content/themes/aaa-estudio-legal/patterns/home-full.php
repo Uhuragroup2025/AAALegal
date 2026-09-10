@@ -9,7 +9,7 @@
  */
 ?>
 <!-- wp:group {"tagName":"section","className":"hero-immersive"} -->
-<section class="wp-block-group hero-immersive">
+<section class="wp-block-group hero-immersive" data-surface="dark">
 	<!-- wp:group {"className":"hero-shell"} -->
 	<div class="wp-block-group hero-shell">
 		<!-- wp:group {"className":"hero-shell__media"} -->
@@ -249,7 +249,7 @@
 <!-- /wp:group -->
 
 <!-- wp:group {"tagName":"section","backgroundColor":"navy-deep","textColor":"white"} -->
-<section class="wp-block-group has-white-color has-navy-deep-background-color has-text-color has-background">
+<section class="wp-block-group has-white-color has-navy-deep-background-color has-text-color has-background" data-surface="dark">
 	<!-- wp:paragraph {"className":"aaa-eyebrow"} --><p class="aaa-eyebrow">Casos de éxito</p><!-- /wp:paragraph -->
 	<!-- wp:heading {"level":2} -->
 	<h2 class="wp-block-heading">La confianza se construye <em class="aaa-text-emphasis">con resultados.</em></h2>
@@ -265,7 +265,7 @@
 <!-- /wp:group -->
 
 <!-- wp:group {"tagName":"section","className":"stats-counter stats-counter--editorial","backgroundColor":"navy-hover","textColor":"white"} -->
-<section class="wp-block-group stats-counter stats-counter--editorial has-white-color has-navy-hover-background-color has-text-color has-background">
+<section class="wp-block-group stats-counter stats-counter--editorial has-white-color has-navy-hover-background-color has-text-color has-background" data-surface="dark">
 	<!-- wp:paragraph {"className":"aaa-eyebrow"} --><p class="aaa-eyebrow">En cifras</p><!-- /wp:paragraph -->
 	<!-- wp:heading {"level":2} -->
 	<h2 class="wp-block-heading">Resultados que respaldan <em class="aaa-text-emphasis">nuestro trabajo.</em></h2>
