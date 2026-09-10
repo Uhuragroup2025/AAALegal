@@ -525,6 +525,7 @@ section:not(.is-dark-surface) .aaa-text-emphasis {
   overflow: hidden;
   border-radius: var(--wp--custom--radius--md);
   min-height: 260px;
+  background: linear-gradient(160deg, var(--wp--preset--color--navy-elevated), var(--wp--preset--color--navy-hover));
   display: flex;
   align-items: flex-end;
   color: var(--wp--preset--color--white);
