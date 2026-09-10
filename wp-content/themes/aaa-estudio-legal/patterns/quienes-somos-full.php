@@ -8,8 +8,8 @@
  * @package aaa-estudio-legal
  */
 ?>
-<!-- wp:group {"tagName":"section","className":"hero-immersive hero--editorial hero--editorial--about"} -->
-<section class="wp-block-group hero-immersive hero--editorial hero--editorial--about" data-surface="dark">
+<!-- wp:group {"tagName":"section","className":"hero-immersive hero--editorial hero--editorial--about is-dark-surface"} -->
+<section class="wp-block-group hero-immersive hero--editorial hero--editorial--about is-dark-surface">
 	<!-- wp:group {"className":"hero-shell"} -->
 	<div class="wp-block-group hero-shell">
 		<!-- wp:group {"className":"hero-shell__media"} -->
@@ -63,8 +63,8 @@
 </section>
 <!-- /wp:group -->
 
-<!-- wp:group {"tagName":"section","className":"stats-counter stats-counter--editorial surface-theme--dark-primary","backgroundColor":"navy-deep","textColor":"white"} -->
-<section class="wp-block-group stats-counter stats-counter--editorial surface-theme--dark-primary has-white-color has-navy-deep-background-color has-text-color has-background" data-surface="dark">
+<!-- wp:group {"tagName":"section","className":"stats-counter stats-counter--editorial surface-theme--dark-primary is-dark-surface","backgroundColor":"navy-deep","textColor":"white"} -->
+<section class="wp-block-group stats-counter stats-counter--editorial surface-theme--dark-primary is-dark-surface has-white-color has-navy-deep-background-color has-text-color has-background">
 	<!-- wp:group {"className":"section-heading--editorial"} -->
 	<div class="wp-block-group section-heading--editorial">
 		<!-- wp:paragraph {"className":"aaa-eyebrow"} --><p class="aaa-eyebrow">En cifras</p><!-- /wp:paragraph -->

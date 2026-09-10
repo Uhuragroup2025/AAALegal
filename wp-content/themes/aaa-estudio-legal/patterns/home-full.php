@@ -8,8 +8,8 @@
  * @package aaa-estudio-legal
  */
 ?>
-<!-- wp:group {"tagName":"section","className":"hero-immersive"} -->
-<section class="wp-block-group hero-immersive" data-surface="dark">
+<!-- wp:group {"tagName":"section","className":"hero-immersive is-dark-surface"} -->
+<section class="wp-block-group hero-immersive is-dark-surface">
 	<!-- wp:group {"className":"hero-shell"} -->
 	<div class="wp-block-group hero-shell">
 		<!-- wp:group {"className":"hero-shell__media"} -->
@@ -57,8 +57,8 @@
 </div>
 <!-- /wp:group -->
 
-<!-- wp:group {"tagName":"section","layout":{"type":"constrained"}} -->
-<section class="wp-block-group" data-surface="atmosphere">
+<!-- wp:group {"tagName":"section","className":"is-atmosphere-surface","layout":{"type":"constrained"}} -->
+<section class="wp-block-group is-atmosphere-surface">
 	<!-- wp:group {"className":"atmosphere"} --><div class="wp-block-group atmosphere"></div><!-- /wp:group -->
 	<!-- wp:heading {"level":2,"align":"center"} -->
 	<h2 class="wp-block-heading has-text-align-center">¿Es acreedor y se enfrenta a <em class="aaa-text-emphasis">alguno de estos riesgos?</em></h2>
@@ -158,8 +158,8 @@
 </section>
 <!-- /wp:group -->
 
-<!-- wp:group {"tagName":"section"} -->
-<section class="wp-block-group" data-surface="atmosphere">
+<!-- wp:group {"tagName":"section","className":"is-atmosphere-surface"} -->
+<section class="wp-block-group is-atmosphere-surface">
 	<!-- wp:group {"className":"atmosphere"} --><div class="wp-block-group atmosphere"></div><!-- /wp:group -->
 	<!-- wp:paragraph {"className":"aaa-eyebrow"} --><p class="aaa-eyebrow">¿Por qué AAA?</p><!-- /wp:paragraph -->
 	<!-- wp:heading {"level":2} -->
@@ -248,8 +248,8 @@
 </section>
 <!-- /wp:group -->
 
-<!-- wp:group {"tagName":"section","backgroundColor":"navy-deep","textColor":"white"} -->
-<section class="wp-block-group has-white-color has-navy-deep-background-color has-text-color has-background" data-surface="dark">
+<!-- wp:group {"tagName":"section","className":"is-dark-surface","backgroundColor":"navy-deep","textColor":"white"} -->
+<section class="wp-block-group is-dark-surface has-white-color has-navy-deep-background-color has-text-color has-background">
 	<!-- wp:paragraph {"className":"aaa-eyebrow"} --><p class="aaa-eyebrow">Casos de éxito</p><!-- /wp:paragraph -->
 	<!-- wp:heading {"level":2} -->
 	<h2 class="wp-block-heading">La confianza se construye <em class="aaa-text-emphasis">con resultados.</em></h2>
@@ -264,8 +264,8 @@
 </section>
 <!-- /wp:group -->
 
-<!-- wp:group {"tagName":"section","className":"stats-counter stats-counter--editorial","backgroundColor":"navy-hover","textColor":"white"} -->
-<section class="wp-block-group stats-counter stats-counter--editorial has-white-color has-navy-hover-background-color has-text-color has-background" data-surface="dark">
+<!-- wp:group {"tagName":"section","className":"stats-counter stats-counter--editorial is-dark-surface","backgroundColor":"navy-hover","textColor":"white"} -->
+<section class="wp-block-group stats-counter stats-counter--editorial is-dark-surface has-white-color has-navy-hover-background-color has-text-color has-background">
 	<!-- wp:paragraph {"className":"aaa-eyebrow"} --><p class="aaa-eyebrow">En cifras</p><!-- /wp:paragraph -->
 	<!-- wp:heading {"level":2} -->
 	<h2 class="wp-block-heading">Resultados que respaldan <em class="aaa-text-emphasis">nuestro trabajo.</em></h2>

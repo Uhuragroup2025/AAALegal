@@ -3,8 +3,8 @@
 <!-- wp:group {"tagName":"main","className":"blog-index"} -->
 <main class="wp-block-group blog-index">
 
-	<!-- wp:group {"tagName":"section","layout":{"type":"constrained"}} -->
-	<section class="wp-block-group" data-surface="dark">
+	<!-- wp:group {"tagName":"section","className":"is-dark-surface","backgroundColor":"navy-deep","textColor":"white","layout":{"type":"constrained"}} -->
+	<section class="wp-block-group is-dark-surface has-white-color has-navy-deep-background-color has-text-color has-background">
 		<!-- wp:paragraph {"className":"aaa-eyebrow"} --><p class="aaa-eyebrow">Blog</p><!-- /wp:paragraph -->
 		<!-- wp:heading {"level":1} --><h1 class="wp-block-heading">Blog</h1><!-- /wp:heading -->
 		<!-- wp:paragraph --><p>Análisis jurídico y actualidad sobre insolvencia, normalización de activos y derecho corporativo desde la perspectiva del acreedor.</p><!-- /wp:paragraph -->
@@ -12,7 +12,7 @@
 	<!-- /wp:group -->
 
 	<!-- wp:group {"tagName":"section","layout":{"type":"constrained"}} -->
-	<section class="wp-block-group" data-surface="light" aria-label="Listado de publicaciones">
+	<section class="wp-block-group">
 		<!-- wp:query {"query":{"perPage":10,"pages":0,"offset":0,"postType":"post","order":"desc","orderBy":"date"},"className":"blog-grid"} -->
 		<div class="wp-block-query blog-grid">
 			<!-- wp:post-template -->

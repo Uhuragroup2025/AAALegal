@@ -26,7 +26,7 @@
   color: var(--wp--preset--color--accent-main-strong);
   margin-bottom: var(--wp--preset--spacing--4);
 }
-[data-surface="dark"] .aaa-eyebrow {
+.is-dark-surface .aaa-eyebrow {
   color: var(--wp--preset--color--accent-light);
 }
 
@@ -35,7 +35,7 @@
   font-style: italic;
   color: var(--wp--preset--color--accent-main-strong);
 }
-section:not([data-surface="dark"]) .aaa-text-emphasis {
+section:not(.is-dark-surface) .aaa-text-emphasis {
   color: var(--wp--preset--color--navy-deep);
 }
 
@@ -607,7 +607,7 @@ section:not([data-surface="dark"]) .aaa-text-emphasis {
 .stepper__step p { max-width: 46ch; margin-bottom: 0; }
 .stepper__icon { display: inline-flex; width: 2.25rem; height: 2.25rem; margin-bottom: var(--wp--preset--spacing--4); color: var(--wp--preset--color--accent-light); }
 .stepper__icon svg { width: 100%; height: 100%; }
-section[data-surface="dark"] .stepper__step { border-top-color: rgba(185, 206, 237, 0.35); }
+section.is-dark-surface .stepper__step { border-top-color: rgba(185, 206, 237, 0.35); }
 /* Flujograma horizontal (D48/D69): 3 nodos conectados, descripción siempre visible */
 .stepper--flowchart .stepper__grid { grid-template-columns: 1fr; }
 .stepper--flowchart .stepper__intro { margin-bottom: var(--wp--preset--spacing--12); max-width: 60ch; }
@@ -646,7 +646,7 @@ section[data-surface="dark"] .stepper__step { border-top-color: rgba(185, 206, 2
 .philosophy-description { max-width: 62ch; margin: 0; }
 
 /* ---------- Atmósfera de fondo — halos difuminados ---------- */
-[data-surface="atmosphere"] { position: relative; background: var(--wp--preset--color--surface-light); overflow: hidden; isolation: isolate; }
+.is-atmosphere-surface { position: relative; background: var(--wp--preset--color--surface-light); overflow: hidden; isolation: isolate; }
 .atmosphere { position: absolute; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
 .atmosphere::before,
 .atmosphere::after {
@@ -661,7 +661,7 @@ section[data-surface="dark"] .stepper__step { border-top-color: rgba(185, 206, 2
 }
 @keyframes aaa-atmosphere-drift-a { from { transform: translate(0, 0); } to { transform: translate(-3%, 4%); } }
 @keyframes aaa-atmosphere-drift-b { from { transform: translate(0, 0); } to { transform: translate(4%, -3%); } }
-[data-surface="atmosphere"] > .wp-block-group { position: relative; z-index: 1; }
+.is-atmosphere-surface > .wp-block-group { position: relative; z-index: 1; }
 
 /* =====================================================================
    FORMULARIOS — Postulación (D72) y Contacto B2B (D109), vía Contact Form 7

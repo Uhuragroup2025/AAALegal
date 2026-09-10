@@ -8,8 +8,8 @@
  * @package aaa-estudio-legal
  */
 ?>
-<!-- wp:group {"tagName":"section","className":"hero-immersive hero--editorial hero--editorial--careers"} -->
-<section class="wp-block-group hero-immersive hero--editorial hero--editorial--careers" data-surface="dark">
+<!-- wp:group {"tagName":"section","className":"hero-immersive hero--editorial hero--editorial--careers is-dark-surface"} -->
+<section class="wp-block-group hero-immersive hero--editorial hero--editorial--careers is-dark-surface">
 	<!-- wp:group {"className":"hero-shell"} -->
 	<div class="wp-block-group hero-shell">
 
