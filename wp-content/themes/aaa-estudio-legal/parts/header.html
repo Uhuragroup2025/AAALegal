@@ -1,18 +1,25 @@
-<!-- wp:group {"tagName":"header","className":"aaa-site-header","style":{"spacing":{"padding":{"top":"var:preset|spacing|4","bottom":"var:preset|spacing|4"}}},"layout":{"type":"constrained","contentSize":"1200px"}} -->
+<!-- wp:group {"tagName":"header","className":"aaa-site-header","layout":{"type":"constrained","contentSize":"1200px"}} -->
 <header class="wp-block-group aaa-site-header">
 
-	<!-- wp:group {"layout":{"type":"flex","flexWrap":"nowrap","justifyContent":"space-between","verticalAlignment":"center"}} -->
-	<div class="wp-block-group">
+	<!-- wp:group {"className":"aaa-site-header__inner","layout":{"type":"flex","flexWrap":"nowrap","justifyContent":"space-between","verticalAlignment":"center"}} -->
+	<div class="wp-block-group aaa-site-header__inner">
 
-		<!-- wp:site-logo {"width":48,"shouldSyncIcon":false} /-->
+		<!-- wp:group {"className":"aaa-brand-lockup"} -->
+		<div class="wp-block-group aaa-brand-lockup"></div>
+		<!-- /wp:group -->
 
-		<!-- wp:navigation {"overlayMenu":"mobile","layout":{"type":"flex","justifyContent":"right"},"style":{"typography":{"fontSize":"0.9375rem"}}} /-->
+		<!-- wp:navigation {"overlayMenu":"mobile","overlayBackgroundColor":"navy-deep","overlayTextColor":"white","layout":{"type":"flex","justifyContent":"right"},"style":{"typography":{"fontSize":"0.9375rem"}}} -->
+			<!-- wp:home-link {"label":"Inicio"} /-->
+			<!-- wp:navigation-link {"label":"Metodología","url":"/metodologia/","kind":"custom"} /-->
+			<!-- wp:navigation-link {"label":"Quiénes somos","url":"/quienes-somos/","kind":"custom"} /-->
+			<!-- wp:navigation-link {"label":"Trabaja con nosotros","url":"/trabaja-con-nosotros/","kind":"custom"} /-->
+		<!-- /wp:navigation -->
 
 		<!-- wp:buttons -->
 		<div class="wp-block-buttons">
 			<!-- wp:button {"className":"aaa-cta-header"} -->
 			<div class="wp-block-button aaa-cta-header">
-				<a class="wp-block-button__link wp-element-button" href="/contacto/">Mi caso →</a>
+				<a class="wp-block-button__link wp-element-button" href="#mi-caso">Mi caso →</a>
 			</div>
 			<!-- /wp:button -->
 		</div>

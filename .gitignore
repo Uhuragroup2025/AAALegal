@@ -28,6 +28,10 @@ wp-content/themes/*/
 # Uploads (contenido subido por el CMS, no versionado)
 wp-content/uploads/
 
+# Fotos originales aprobadas por el cliente (~300 MB, sin optimizar): el sitio
+# sirve las versiones WebP de assets/img/home/ (D122).
+wp-content/themes/aaa-estudio-legal/assets/img/aprobadas-web/
+
 # Cachés
 wp-content/cache/
 wp-content/cache-*/

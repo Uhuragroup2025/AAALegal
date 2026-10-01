@@ -1825,3 +1825,766 @@ Ambas preguntas quedan cerradas — ver PROJECT.md, filas D112 y D113.
 **No verificado en vivo:** este entorno de trabajo no tiene PHP/MySQL/WordPress — no hay forma de instalar y ejecutar el sitio aquí. Se verificó: `theme.json` es JSON válido (`node -e "JSON.parse(...)"`), cada `.php` nuevo tiene exactamente un par `<?php`/`?>` (sin binario `php` para lint completo), y cada pattern se escribió comparando contra el HTML real del prototipo, no contra resúmenes. La verificación funcional (que el sitio se vea y funcione igual que https://aaalegal.design-505.workers.dev/) queda pendiente de que el Owner siga `WORDPRESS-SETUP.md` en Local — es el paso siguiente natural, no ejecutado en esta sesión.
 
 **Pendiente de decisión del Owner/Product Lead (no resuelto aquí):** ~~si el uso de GSAP/ScrollTrigger sigue siendo aceptable frente a la restricción ya documentada de "sin dependencias nuevas"~~ — **resuelto por D112 (2026-09-07):** el Owner confirmó que sí, quedan autorizados. Sigue pendiente si el andamiaje de WordPress (D110) debe rehacerse contra el sistema editorial/motion de D99–D109 antes de seguir avanzando.
+
+## Home — copy de hero actualizado y CTA secundario retirado (D115, 2026-09-29)
+
+**Pedido (Owner, origen: cliente):** "vamos a continuar en el Home con una serie de cambios que ha requerido nuestro cliente. Vamos a cambiar el texto del main hero banner... eliminemos el CTA 'conozca como lo hacemos' y subamos un poco ese bloque de título + párrafo hacia arriba."
+
+**Aplicado en `wp-content/themes/aaa-estudio-legal/`:**
+- `patterns/home-full.php` — el H1 del hero pasa de "Insolvencia y derecho corporativo: *somos la voz del acreedor.*" a **"Soluciones legales estratégicas"** (texto plano, sin énfasis — el cliente no indicó qué fragmento destacar, no se inventó uno); el párrafo pasa a **"Acompañamos a empresas, empresarios y acreedores en asuntos concursales y corporativos, anticipando riesgos y diseñando soluciones integrales que protegen sus intereses."**; se elimina por completo el bloque `hero__actions` (botón "Conozca cómo lo hacemos", que hacía scroll a `#servicios-home-heading`).
+- `assets/css/components.css` — `.hero-immersive .hero-shell__content` reduce su `padding-top` de `clamp(8rem,13vh,10rem)` a `clamp(6rem,10vh,7.5rem)` para subir el bloque; se agrega `.hero-immersive .hero__actions{display:none}` como respaldo inmediato sobre la página ya insertada (el texto nuevo sí exige reinsertar el pattern — CSS no cambia contenido).
+
+**Pendiente:** el botón se retira "por ahora" (palabras del Owner) — no se interpreta como retiro definitivo; si vuelve, falta decidir destino (¿sigue siendo ancla a `#servicios-home-heading`, o cambia?).
+
+**Seguimiento — D116 (2026-09-29):** el Owner respondió a la nota anterior: "cambia de color el título a dorado... para darle énfasis" — el H1 completo (no un fragmento) pasa a `accent-main` (el mismo dorado de `.aaa-text-emphasis`), sin cursiva. `.hero-immersive .hero-shell__content .hero__title` gana `color: var(--wp--preset--color--accent-main)`. Solo CSS — ya visible en la página insertada sin reinsertar el pattern.
+
+## Home — ajustes del cliente según "Estructura y Copies del Sitio WEB" (D117, 2026-09-29)
+
+**Pedido (Owner, origen: cliente vía PPTX `Estructura y Copies del Sitio WEB (1).pptx`, 24 slides):** "vas a realizar los cambios que ahí se proponen. Debes excluir por ahora los cambios relacionados con las imágenes... solo implementa los cambios que estén orientados al home... Primero, ajustemos todo lo que el documento dice para el inicio." Luego: "Sí, dale con el resto. Se muy preciso por favor". Alcance: slides 1–12 (Home + footer). Slides 13–24 (Metodología, Quiénes somos, Trabaja con nosotros) quedan fuera por instrucción explícita.
+
+**Aplicado — `patterns/home-full.php`** (texto: exige reinsertar el pattern "Home — página completa"):
+- Slide 2: se eliminan la cinta de logos "Empresas que ya confiaron" ("este slider de logos no debería ir acá") y la sección "¿Es acreedor y se enfrenta a alguno de estos riesgos?" ("ELIMINAR ESTA SECCION, porque es algo que se repite más abajo").
+- Slide 3: eyebrow "Enfoque de la firma" → **"Nuestro enfoque"**; el CTA deja de ir a `/quienes-somos/` ("Conozca la firma →") y va al formulario: **"Solicitar evaluación jurídica"** → `/contacto/` (mismo texto/ícono que el CTA de cierre).
+- Slide 4: H2 "Estrategias jurídicas *para proteger, normalizar y recuperar activos.*" → **"Estrategias jurídicas."** (se quita la frase, como pide el cliente); tarjetas → **"Derecho concursal"**, **"Normalización de Activos"** (mayúscula tal cual el documento), **"Línea corporativa y litigios"**. Descripciones de cada tarjeta sin cambio (el documento no trae reemplazo).
+- Slide 6: eyebrow "¿Por qué AAA?" → **"¿Por qué confiar en nosotros?"**; "Infraestructura para atención masiva." → **"Manejo de gran número de casos."** (se corrige la tilde que el documento traía sin ella); "Tecnología propia (ADY)." → **"Trabajo respaldado en tecnología propia (ADY)."**. Las otras 4 tarjetas quedan igual (el cliente dice "el texto está OK" y no trae reemplazo para ellas).
+- Slide 7: eyebrow "Sectores de experiencia" → **"Empresas que ya confiaron en nosotros"**. El cliente separa "el texto introductorio" (que da a entender que todo es insolvencia) de "el texto de Trabajamos con organizaciones…" (el de la alineación): el que habla de recuperación de crédito es el H2, así que solo se cambia su frase final: "donde *la recuperación del crédito exige…*" → "donde *cada decisión exige conocimiento jurídico y sectorial.*" — **propuesta del agente, pendiente de validación del cliente** (no trajo texto).
+- Slide 8: bajo cada video de "Casos de éxito" se agrega un espacio de texto (`.case-video__caption`): línea "Empresa — Cargo" + 2–3 líneas, con placeholder honesto ("Texto pendiente de entrega por el cliente").
+- Slide 9: cifras → **8754** casos gestionados, **30** clientes atendidos, **+10 mil millones** cartera recuperada. Se respeta el formato del cliente: el "+" solo va en la tercera (en cifras exactas diría "más de 30"); "8754" sin separador de miles porque así lo escribió el cliente y así lo pinta el contador animado.
+- Slide 10: se elimina la sección "Dimensión humana" completa.
+- Slide 11: H2 "Cada crédito comprometido exige…" → **"Cada caso requiere *una defensa con criterio.*"** (redacción del propio cliente en el comentario); párrafo → "Si su organización enfrenta un proceso concursal, necesita normalizar sus activos o requiere acompañamiento corporativo y en litigios, nuestro equipo puede evaluar la situación y definir una ruta de actuación." (las 3 líneas de negocio del slide 4) — **propuesta del agente, pendiente de validación del cliente**. El botón ya iba al formulario; sin cambio.
+
+**Aplicado — ya visible sin reinsertar:**
+- `functions.php` (`aaa_inject_motion_attributes()`): los `data-count-to` del contador pasan a 8754 / 30 / 10 (+ prefijo "+" y sufijo " mil millones" solo en la tercera).
+- `assets/js/home-motion.js` (`renderCount()`): el sufijo se pinta dentro de `<span class="stat-card__unit">` en vez de texto plano. Motivo: "+10 mil millones" a tamaño de cifra (86px) medía 444px en una tarjeta de 400px, sin poder partir línea. Con la unidad a 0.4em mide 204px (desktop) / 160px en 343px (móvil, 375px). El pattern trae el mismo `<span>` como respaldo sin JS.
+- `assets/css/components.css`: (a) Slide 7 — el párrafo intro de Sectores ahora arranca a la altura del H2, no del eyebrow (≥901px, `display:contents` en el wrapper del título; verificado: misma coordenada superior, diferencia de altura de mayúsculas <1px; en ≤900px queda el apilado de siempre); (b) Slide 7 — "logos más grandes y rotando al interior de cada tarjeta": rotador solo CSS, un logo a la vez (entra desde la derecha, sale a la izquierda), 3 s por logo, tarjetas desfasadas 0.5 s entre sí vía el `--stagger-index` que ya traía cada tarjeta, pausa al pasar el mouse; con `prefers-reduced-motion: reduce` se conserva la fila estática anterior (D7). Tamaño visible de logos: de ~96px máx. a 56–149px de ancho, todos dentro de la tarjeta (medido por píxeles no transparentes de cada archivo); (c) estilos de `.case-video__caption` y `.stat-card__unit`.
+- `parts/footer.html` (Slide 12): Instagram → **@aaaestudio**, enlace real `https://www.instagram.com/aaaestudio/` (nueva pestaña); LinkedIn → etiqueta **"AAA Estudio Legal"**, pero el enlace sigue en `#url-linkedin-pendiente` — la URL de una página de empresa en LinkedIn no se deduce del nombre y el cliente no la envió.
+- `WORDPRESS-SETUP.md` § 7 (Slide 12, "dentro de la estructura debemos eliminar el BLOG"): el menú del footer pasa de 6 a 5 enlaces, sin Blog. El menú principal ya no lo tenía. Hoy en Local no hay menú creado (el Navigation muestra el listado de páginas por defecto), así que no había ningún enlace "Blog" que quitar en vivo.
+
+**Hallazgo (no causado por este cambio):** la página Home insertada en Local es una copia anterior del pattern — su sección "En cifras" no trae la clase `aaa-motion-stats`, así que el contador nunca animaba ahí. Se corrige solo al reinsertar el pattern.
+
+**No aplicado / pendiente:**
+- Todo lo relacionado con fotografía (slides 1, 3, 4, 9: "selección de fotos en la carpeta adjunta") — el Owner las cargará después. También el "logo actualizado de AAA" (slide 1) — es un archivo de imagen, cae en el mismo grupo.
+- Slide 3, campos a eliminar del formulario (Tipo de organización, Asunto de interés, Contexto general del asunto): es el formulario de Contacto (Contact Form 7 / `patterns/contacto-full.php`), no Home — queda para cuando se trabaje esa página.
+- Slide 4, "cuando ingrese a cada una, que se desglose una por una": exige páginas/vistas de detalle por línea de negocio (contenido de slide 5) que no existen — fuera del alcance de Home y posible cambio de alcance frente a la propuesta; las tarjetas siguen enlazando a `/metodologia/`.
+- Slide 6, "cambiar el diseño para que genere más impacto" y "profundizar compliance": pedido abierto, sin dirección concreta ni texto — requiere propuesta de diseño/copy aparte.
+- Slide 7 y 11: los textos marcados arriba como "propuesta del agente" deben validarlos cliente/Product Lead.
+- Slide 12: URL real de LinkedIn. Y si "eliminar el BLOG" significa solo sacarlo del menú (lo aplicado) o retirarlo del alcance del sitio (las plantillas `templates/home.html`/`single.html` siguen en el tema, y el Blog está en el alcance de D114) — decisión de Product Lead frente a la propuesta comercial, no se resolvió aquí.
+- Limpieza de CSS huérfano (`.home-logo-ribbon*`, `.situations-*`, `.people-card`/`.people-intro` en `components.css`, solo usados por las secciones retiradas): se deja hasta que el Owner reinserte el pattern, porque la página hoy insertada todavía los usa. **→ Hecha en D118.**
+
+## Home — segunda revisión del PPTX: Áreas de práctica y "¿Por qué confiar en nosotros?" (D118, 2026-09-29)
+
+**Pedido (Owner):** "vuelvas a revisar el archivo completamente y exhaustivamente… en la sección de áreas de práctica… los textos que aparecen sobre los cuadros no son los correctos… en la diapositiva 4 y 5 están todos estos datos… Utiliza cuatro o cinco de cada uno… no modificaste la sección porque confiar en nosotros la cual claramente dice que rediseñemos esa sección en la diapositiva número 6 para mostrar la información de una forma más intuitiva… puedes investigar sobre estructuras en otras páginas… de una firma de abogados". Corrige dos puntos que D117 había dejado como "pendiente" (slide 4 desglose, slide 6 rediseño).
+
+**Revisión del PPTX:** además del texto, se revisaron las imágenes de las slides 1–12 (capturas del prototipo, sin anotaciones adicionales) y las notas del orador (vacías). Slide 5 = slide 16 (lista detallada de servicios por línea, pensada también para Metodología).
+
+**Aplicado — Áreas de práctica (slides 4-5):**
+- `patterns/home-full.php`: la descripción de cada panel se reemplaza por un bloque Lista nativo (`surface-visual__list`, editable desde el editor) con 4 ítems, priorizando los de slide 4 y completando con slide 5:
+  - Derecho concursal: Insolvencia de persona natural · Insolvencia empresarial · **Ley 1116** · Ley 550 (los 4 de slide 4).
+  - Normalización de activos: Diagnóstico jurídico y documental (s5) · Análisis de viabilidad de riesgo (s4) · Recuperación de cartera (s4) · Estructuración y constitución de garantías (s5).
+  - Línea corporativa y litigios: Derecho societario y gobierno corporativo (s5) · Estructuración de negocios y operaciones contractuales (s5) · Acompañamiento en riesgo legal, comercial y laboral (s4) · Litigios y resolución de controversias (s5).
+- "Ley 116" (así en el documento) se publica como **Ley 1116**: el propio brief ampliado del cliente cita "1116/2006" (régimen de insolvencia empresarial) — es error de digitación. Se retoman citas legales en el copy a pedido explícito del cliente (ver cautela en `content/02-capacidad-tecnica.md`).
+- "Viabilidad" (slide 4, línea corporativa) no se usó: suelto no se entiende. Mayúsculas normalizadas a oración ("Insolvencia Empresarial" → "Insolvencia empresarial"); "Acompañamiento riesgo Legal, comercial y Laboral" → "Acompañamiento en riesgo legal, comercial y laboral".
+- Título "Normalización de Activos" (D117) vuelve a "Normalización de activos": slide 5 lo escribe así y los otros dos títulos van en minúscula.
+- `components.css`: en desktop con puntero la lista se despliega ítem por ítem al entrar el cursor al panel (80 ms entre ítems) y empuja el título hacia arriba ("que se desglose una por una"); en táctil/≤1023px siempre visible, y el caption pasa a flujo para que el panel crezca con su contenido (antes, `absolute` en 300px, la lista se salía). `prefers-reduced-motion` sin transición. Se retira el `min-height:6.2em` que reservaba alto para la descripción.
+
+**Aplicado — "¿Por qué confiar en nosotros?" (slide 6), rediseño:**
+- Investigación: en los referentes del propio cliente (REFERENCES.md) — Ávila Toro ("¿Por qué nosotros?": ícono + título + explicación de 30-40 palabras), Brigard Urrutia (pilares con título + descripción corta), Olarte Moure y Hurtado Gandini (narrativo) — y guías de sitios de firmas de abogados, cada razón se explica en términos de beneficio para el cliente. En AAA cada razón era solo un título de 1-5 palabras: ese era el faltante de "impacto".
+- Estructura nueva (`why-trust`): la pregunta a la izquierda (sticky en ≥1024px) y las 6 razones a la derecha en 2 columnas; cada una con ícono en disco navy/dorado (se invierte al hover), título en Krub bold (como fijó D45 — en WordPress salían en la serif) y una línea explicativa. En móvil: ícono a la izquierda, texto a la derecha, 1 columna. Sin numeración (decisión previa: estas razones usan pictogramas). Mismos íconos que entregó la Product Lead.
+- Títulos en lenguaje menos técnico (slide 6: "decir lo mismo con palabras menos técnicas… Etc."): "Seguridad de la información" → **"Su información, protegida."**; "Compliance" → **"Cumplimiento normativo (compliance)."**; "Cobertura nacional" → **"Presencia en todo el país."**. Se mantienen los 2 que dio el cliente y "Equipo especializado.".
+- Descripciones, todas con fuente: casos → "procesos individuales y masivos" (D51/`content/02`); equipo → copy aprobado de "Dimensión humana"; ADY → copy aprobado del hero anterior ("anticipa, agiliza y permite recuperar activos con precisión"), sin explicar qué es ADY (D13/D18); seguridad → brochure (servidores propios, firewall→"seguridad digital", CCTV→"videovigilancia", plan de continuidad **alineado con** ISO 27001 — el brief dice que no hay certificaciones); presencia → copy aprobado de `content/04`. **Compliance es la única sin dato de respaldo**: "Cada actuación se ajusta a la normativa vigente y a estándares de ética y transparencia." — propuesta para "profundizar", a validar con el cliente (idealmente con el detalle real de su programa de cumplimiento).
+- `components.css`: se retiran las reglas de las 6 tarjetas de colores (D64) y la grilla de 6 columnas de Home; `#confianza-heading` pasa a `overflow:clip` para que funcione el sticky.
+
+**Aplicado — errores encontrados en la revisión exhaustiva:**
+- **El contador de "En cifras" nunca animaba, ni siquiera tras reinsertar** (D117 decía que se arreglaba reinsertando — era incorrecto). Causa real: en el pattern, el JSON del bloque traía `className: "... aaa-motion-stats"` pero el `class` del `<section>` no; al abrir la página, Gutenberg reconstruye `className` desde el HTML guardado y la clase se perdía, así que el filtro nunca inyectaba `data-motion="stats"`. Se agrega la clase al HTML. Auditoría con script de los 113 bloques de `home-full.php` (JSON vs. clases/id del HTML): 0 discrepancias. En los demás patterns: 1 falso positivo (`cierre-conversemos.php`, el botón lleva los colores en el `<a>`) y `hero-simple.php` sin `has-text-color` — fuera de alcance, pendiente.
+- Scroll horizontal en desktop (visible en Windows): la foto a sangre de "Nuestro enfoque" (+49px) y el mosaico de Áreas (+8px) se calculan con `vw`, que incluye la barra de scroll. `body.home-page { overflow-x: clip }` (no crea contenedor de scroll, no rompe sticky/fixed). Verificado: sin barra horizontal.
+- Mosaico de Áreas en ≤1023px: el `width:100%` de `.home-page .focus-mosaic` anulaba el full-bleed y dejaba 32px sin foto a la derecha. `width:auto` en ≤1023px: ahora 0–375px en móvil, 0–761px en tablet.
+- "mil millones" se veía apretado: heredaba el `letter-spacing` negativo del número (-3.5px). `letter-spacing:0` en `.stat-card__unit`.
+- Limpieza (el Owner ya reinsertó el pattern): se eliminan del CSS las reglas de la cinta de logos, "¿Es acreedor…?" y "Dimensión humana" (conservando las compartidas con "Nuestro enfoque" y "En cifras"), el `display:none` provisional de `.hero__actions` de D115 (si el cliente pide volver a poner el botón del hero, esa regla lo escondería) y comentarios que describían secciones ya retiradas.
+
+**Verificación:** marcado nuevo inyectado en el DOM de Local (sin tocar el contenido de WordPress) y medido/capturado en 1440, 1024, 768 y 375px: despliegue ítem por ítem al hover, colapso completo en reposo (0px), sticky, sin desborde horizontal, listas siempre visibles en móvil. `php -l` sin errores; CSS con llaves balanceadas.
+
+**Requiere reinsertar el pattern "Home — página completa"** para ver: las listas de Áreas, el rediseño de "¿Por qué confiar?" y la animación del contador. Lo demás ya está en vivo.
+
+**Pendiente:**
+- Validación del cliente: "Ley 1116" (en vez de "Ley 116"), la selección de 4 ítems por línea, los 3 títulos reformulados y las 6 descripciones de "¿Por qué confiar?" — en especial la de compliance.
+- `hero-simple.php`: revisar `has-text-color` (fuera de Home).
+
+## Home — ajustes sobre D118: paneles de Áreas más bajos y carrusel de logos con 2-3 a la vez (D119, 2026-09-29)
+
+**Pedido (Owner):** "en la sección de áreas de práctica… los tres elementos están demasiado altos… la animación se ve un poco rara y además el viewport se rompe un poquito, se mueve demasiado. Solo colócalo un poco menos alto"; "en la sección empresas que ya confiaron en nosotros te quedó súper el slider… sin embargo me parece mejor mostrar de a tres o dos elementos ya que se ve extraño cuando hay un solo logo"; sobre "¿Por qué confiar en nosotros?": "veo mucho texto, dejémoslo para después, ya te anexo un referente… por ahora modifiquemos lo ya mencionado" → **esa sección no se toca en D119**; queda a la espera del referente del Owner.
+
+**Aplicado:**
+- `components.css` — paneles de "Áreas de práctica" en ≥1024px: `min-height` de `clamp(600px, 70svh, 780px)` a `clamp(460px, 60svh, 600px)` (900px de alto: 630 → 540px; 760px: 600 → 460px). Con el panel más alto que el viewport útil, parte del despliegue al hover quedaba fuera de pantalla. Peor caso medido (lista de 4 ítems desplegada a 1024px): 84px libres entre el índice y el título; el panel entero cabe bajo el header.
+- `components.css` + `main.js` — "Empresas que ya confiaron": el rotador de un logo a la vez (D117, solo CSS) se reemplaza por una cinta continua por tarjeta que muestra ~2¼ logos a la vez (2 completos + parte del siguiente, con fundido en los bordes), pausa al hover y desfase entre tarjetas. `main.js` mete los logos en una pista y duplica el set las veces necesarias para que el loop no deje huecos (2 sets para tarjetas de 3 logos, 3 para las de 2), con `aria-hidden` y `alt` vacío en las copias — así el cliente edita cada logo una sola vez. Sin JS o con `prefers-reduced-motion`: la fila estática de siempre.
+- Los logos son archivos cuadrados de 601×601 con la marca en una franja: el ancho visible lo manda el alto × la escala óptica (hasta 2.05). El alto se ata al ancho de la tarjeta (`min(56px, 18cqw)`) para que los logos anchos no se toquen en tarjetas angostas (a 1024px: de 0 a ≥26px de separación). La reducción de logos en móvil (pensada para 3 en fila) ya no aplica en modo carrusel.
+
+**Verificación (Local, 1440/1024/768/375px):** separación mínima entre logos medida por píxeles de cada archivo: 37 / 26 / 29 / 32px; sin scroll horizontal; pista, copias y duración correctas en las 6 tarjetas; `node --check` de `main.js` y CSS balanceado.
+
+**Pendiente:** referente del Owner para "¿Por qué confiar en nosotros?" (considera que el rediseño de D118 tiene mucho texto). **→ Resuelto en D120.**
+
+## Home — "¿Por qué confiar en nosotros?" rediseñada sobre el referente del Owner (D120, 2026-09-29)
+
+**Pedido (Owner):** "me parece que ya tiene demasiado texto. Vamos a utilizar los títulos y a rediseñar esta sección con el ejemplo que te anexo… seis elementos de imagen seguidos de un título. No es necesario que uses el leer más… sería prudente conservar los textos pero tratar de colocarlos más cortos de ser posible. De igual forma lo dejo a tu consideración." Referente: https://fidacta.ai/praktijkvoorbeelden (encabezado centrado + grilla 3×2 de imagen + título).
+
+**Aplicado:**
+- `patterns/home-full.php`: 6 tarjetas = bloque Image nativo (5:3) + título (los de D118, sin cambio) + una línea corta: "Procesos individuales y masivos, con infraestructura propia." / "Experiencia jurídica y conocimiento sectorial." / "Soluciones más ágiles y precisas en cada proceso." / "Servidores propios y continuidad alineada con ISO 27001." / "Ética y transparencia en cada actuación." / "Acompañamos organizaciones en todo el territorio nacional." Sin enlace "leer más". Se retiran los íconos sueltos (quedan dentro de las ilustraciones).
+- Imágenes (temporales, reemplazables con "Reemplazar" en el editor): solo había 2 fotos libres en la Biblioteca que no se repiten en Home — `temp-prototype-home-dimension-humana.jpg` (Equipo) y `banner-AAA-abogados.jpg` (Tecnología/ADY, encuadrada con `object-position` sobre las personas). Para las otras 4 se crearon ilustraciones de marca en `assets/img/why-trust/` (casos, seguridad, cumplimiento, presencia): degradado navy, motivo por concepto y el ícono aprobado en dorado — mismo criterio del referente, que mezcla fotos con imágenes abstractas.
+- `components.css`: encabezado centrado; grilla 3/2/1 columnas (≥1024 / ≥601 / móvil), 24px entre columnas y 48px entre filas; imagen 5:3 con zoom suave al hover (sin él con `prefers-reduced-motion`); título Krub bold. Fondo claro a propósito: "Áreas de práctica", justo arriba, ya es navy con fotos. Se retira el CSS de D118 (sticky, discos, filetes) y las reglas huérfanas `.focus-grid`/`.focus-card__icon` (sin marcado en ningún pattern).
+
+**Hallazgo:** `hero-inicio.webp` (en la Biblioteca de medios y en `prototype/assets/img/`) muestra en una pantalla la marca de **otra firma** ("Ávila Arias & Asociados"). No se usa en ningún archivo del tema ni del prototipo; se agregó la advertencia en `WORDPRESS-SETUP.md` § 7bis-2 (que indicaba subir toda la carpeta). Conviene borrarla de la Biblioteca.
+
+**Verificación:** marcado inyectado en Local a 1440/1024/375px: tarjetas de 384×230 a 1440 (referente: 381×232), sin scroll horizontal; auditoría de bloques (119, sin discrepancias), `php -l` y CSS balanceado. **Requiere reinsertar el pattern.**
+
+**Pendiente:** fotografía del cliente para las 6 tarjetas; validación de las líneas cortas.
+
+## Menús del sitio definidos en el tema (D121, 2026-09-29)
+
+**Pedido (Owner):** "vamos a ir creando el main menú, no veo la opcion para crearlo de forma manual en wordpress, desde apariencia -> menus".
+
+**Causa:** el tema es de bloques; WordPress no muestra Apariencia → Menús en temas de bloques (los menús se editan en Apariencia → Editor → Navegación). `WORDPRESS-SETUP.md` § 7ter indicaba esa pantalla. Sin menú creado, los dos bloques Navigation mostraban la lista automática de páginas ("Inicio, Sample Page, Test1").
+
+**Aplicado:**
+- `parts/header.html`: el bloque Navigation trae el menú principal dentro del tema (Inicio como `core/home-link` —se marca solo como página actual en la portada— + Metodología, Quiénes somos, Trabaja con nosotros como enlaces a `/metodologia/`, `/quienes-somos/`, `/trabaja-con-nosotros/`, los slugs de la § 7 de la guía). Panel del menú con los colores del bloque (`overlayBackgroundColor: navy-deep`, `overlayTextColor: white`): antes el panel móvil de WordPress era blanco y "Inicio" (blanco por ser la página actual) no se veía.
+- `parts/footer.html`: menú de sitio con 5 enlaces (+ Contacto, sin Blog por D117) y `overlayMenu: "never"`: en móvil los enlaces del footer estaban escondidos detrás de un botón hamburguesa.
+- `components.css`: mismo corte que el prototipo (`prototype/css/components.css:4272`): por debajo de 1181px el menú pasa a botón (el bloque de WordPress solo lo hacía por debajo de 600px; a 1024px "Trabaja con nosotros" se partía en una segunda línea); columnas del header `minmax(180px,1fr) auto auto` en ese rango; espaciado del menú `clamp(1rem, 1.65vw, 2rem)` como el prototipo; panel abierto alineado a la izquierda con enlaces de 22px. En ≤560px el botón "Mi caso" queda solo con la flecha (como el prototipo, `components.css:496`): antes, la grilla lo empujaba fuera de pantalla; con la nueva grilla aparecía partido en dos líneas. Su nombre accesible sigue siendo "Mi caso →".
+- `WORDPRESS-SETUP.md` § 7ter reescrita (menús ya vienen en el tema; cómo editarlos en el Editor del sitio y qué implica guardarlos ahí) y § 7bis-2 actualizada (tabla de fotos con los nombres actuales de las secciones, sin la cinta de logos ni "Dimensión humana", con las imágenes de "¿Por qué confiar?").
+
+**Verificación (Local):** 1440 y 1181px menú completo en una línea; 1180, 768 y 375px botón de menú + "Mi caso"; panel abierto navy en 768 y 375px con los 4 enlaces visibles; cierre con Escape; footer con sus 5 enlaces en móvil; sin scroll horizontal. Ya en vivo (partes de plantilla, no requiere reinsertar nada).
+
+**Pendiente:** crear las páginas Metodología, Quiénes somos, Trabaja con nosotros y Contacto con esos slugs — hasta entonces sus enlaces dan "página no encontrada".
+
+## Home — fotografía aprobada por el cliente, optimizada en WebP (D122, 2026-09-29)
+
+**Pedido (Owner):** "ya he cargado las imágenes que están aprobadas por Studio AAA Legal. Vamos a reemplazar estas imágenes teniendo en cuenta la PPTX en donde son necesarias… debes comprimir dichas imágenes o de plano convertirlas en formato WebP… debes revisarlas todas y elegir cuáles son las que mejor se adaptan a dicha sección". Carpeta: `assets/img/aprobadas-web/` (21 fotos de 26 MP, 302 MB en total).
+
+**Revisión:** se vieron las 21 fotos (hojas de contacto generadas fuera del proyecto). Se descartan para Home las fotos con diadema (IMG_9108, IMG_9127: leen como call center, y el brief pide que normalización de activos "se sienta premium, no como cobranza") y "ORIGEN Y ESPECIALIZACION.jpg" (retrato de los fundadores: por su nombre es para Quiénes somos, slide 20).
+
+**Corrección de D117:** la slide 10 ("ELIMINAR ESTA PARTE") muestra solo el **texto** de "Dimensión humana"; la slide 9 ("En cifras") muestra las cifras **con la foto del equipo debajo** y pide fotos de la carpeta. En D117 se había retirado la sección completa (foto incluida). Se restituye la foto bajo "En cifras", sin el texto.
+
+**Aplicado:**
+- Asignación (una foto distinta por espacio, sin repetir en la página): hero ← IMG_9118 (recortada a la izquierda 84% para dejar el rostro fuera del texto: 65px de separación a 1440px); "Nuestro enfoque" ← IMG_9102; Áreas de práctica ← IMG_9091 (Derecho concursal), IMG_9086 (Normalización de activos), IMG_9119 (Línea corporativa y litigios); foto bajo "En cifras" ← 2.jpg; "¿Por qué confiar en nosotros?" ← IMG_9071 (casos), IMG_9073 (equipo), IMG_9116 (tecnología/ADY), IMG_9063 (seguridad), IMG_9095 (cumplimiento: vidrio/transparencia), IMG_9051 (presencia) — reemplazan las 2 fotos temporales y las 4 ilustraciones de D120.
+- Optimización con PHP GD de Local (extensión ya incluida, cargada solo para el proceso; nada instalado): redimensionado al tamaño que usa cada espacio con margen para pantallas de alta densidad (2200px hero, 2000px cifras, 1800px paneles, 1300px enfoque, 1000px tarjetas) y WebP calidad 70-72. 12 fotos: **184,7 MB → ~700 KB**; revisadas a 100%, sin artefactos visibles. Salida en `assets/img/home/`; los originales no se tocan.
+- `patterns/home-full.php`: 12 bloques Image apuntan a `get_theme_file_uri( 'assets/img/home/…webp' )` con `alt` descriptivo (los paneles de Áreas siguen con `alt=""`: el texto encima ya da el significado); nueva sección `stats-photo` después de "En cifras".
+- `components.css`: encuadres por foto (`object-position`) con los nombres nuevos; sección `stats-photo` (misma técnica del prototipo: arriba el navy de "En cifras", la foto montada entre los dos fondos; 16:7 en desktop, 3:2 en móvil); "En cifras" baja su padding inferior a 48px.
+- Se borran las 4 ilustraciones SVG de D120 (`assets/img/why-trust/`, ya sin uso).
+- `.gitignore`: se excluye `assets/img/aprobadas-web/` (302 MB de originales; el sitio sirve los WebP).
+- `WORDPRESS-SETUP.md` § 7bis-2: tabla de fotos de Home con los archivos nuevos y su origen.
+
+**Verificación (Local, marcado inyectado en el DOM):** las 12 imágenes cargan; encuadres revisados en 1440/1024/375px (hero, enfoque, 3 paneles, foto de cifras, 6 tarjetas); auditoría de bloques (121, sin discrepancias), `php -l`, CSS balanceado. **Requiere reinsertar el pattern** — también para ver el rediseño de "¿Por qué confiar?" de D120, que la página de Local todavía no tiene (hoy muestra esa sección sin estilos, porque su CSS anterior ya se retiró).
+
+**Pendiente:** "Casos de éxito" (3 miniaturas) y el fondo del panel "Conversemos" siguen con fotos temporales — la PPTX no pide cambiarlas (las miniaturas se reemplazan con los videos). "Logo actualizado de AAA" (slide 1): no viene en la carpeta. "ORIGEN Y ESPECIALIZACION.jpg" queda para Quiénes somos.
+
+## Metodología reconstruida sobre el prototipo + PPTX + salvedad del cliente; Áreas de Inicio según la salvedad (D123, 2026-09-29)
+
+**Pedido (Owner):** "vamos a pasar a la siguiente página, que es la página de metodología. Debes basarte en el prototipo… y arreglar o modificar la respectiva pattern… ten muy en cuenta la estructura del prototipo y por supuesto el contenido. Necesito que vuelvas a revisar la PPTX para que agregues… las nuevas modificaciones pedidas por cliente. También te estoy agregando una salvedad que hizo el cliente de última hora…". Fuentes: https://aaalegal.design-505.workers.dev/servicios, `prototype/servicios.html`, PPTX "Estructura y Copies del Sitio WEB" láminas 13–18 y el PDF "Pagina WEB AAA - SALVEDAD NUEVA DE CLIENTE" (correo de Francisco García, 23-sep).
+
+**Qué pide cada fuente:**
+- Lámina 13 (hero): "texto introductorio a lo que hacemos, de manera general que cobije Insolvencia y corporativo"; debajo, el texto exacto "Representamos exclusivamente los intereses del acreedor. Integramos defensa en procesos concursales, normalización de activos y línea corporativa y litigios…".
+- Lámina 14 (Nuestra metodología): textos transversales, no solo de insolvencia (ejemplo del cliente: "Convertimos cada caso en una estrategia jurídica"), y "algo más dinámico en diseño".
+- Lámina 15 (Representación especializada): aprueba la estructura "porque ya hablamos de la metodología y ahora sí profundizamos en los servicios"; textos simples y transversales.
+- Lámina 16 + PDF: en Metodología, reemplazar los párrafos de cada tarjeta por los puntos de cada línea de servicio. En Inicio, solo los titulares de la lámina 4, desplegados al pasar el mouse.
+- Lámina 17 (Transparencia): texto transversal y otra imagen de la carpeta de fotos aprobadas. Lámina 18: "El conversemos debe ser el mismo para todas las páginas, con el cambio en el CTA".
+
+**Aplicado — `patterns/metodologia-full.php` (reescrito):**
+- **Orden de la PPTX, no del prototipo:** hero → Nuestra metodología → Representación especializada → Transparencia → Conversemos. El prototipo tiene los servicios antes que la metodología; la PPTX ("Estructura y Copies") los presenta al revés y el cliente aprobó esa estructura en la lámina 15 con ese argumento. Si se prefiere el orden del prototipo, basta mover el bloque en el editor.
+- **Hero:** eyebrow "Soluciones para acreedores"; H1 nuevo, general: "Ante la insolvencia o una decisión corporativa, *la estrategia jurídica es determinante.*" (propuesta, pendiente de validar por el cliente). Foto aprobada 1.jpg (B/N).
+- **Nuestra metodología:** H2 del ejemplo del cliente, "Convertimos cada caso en *una estrategia jurídica.*" Pasos Diagnóstico / Estrategia / Representación con los textos del prototipo reescritos en tono transversal (sin "expediente", "proceso de insolvencia" ni "recuperación del crédito"; propuesta, pendiente de validar). Diseño "más dinámico": línea de tiempo con los mismos íconos del prototipo sobre un riel. Al entrar la sección, una línea cobre recorre el riel de nodo en nodo y cada nodo se enciende cuando la línea llega; en móvil el riel es vertical. Solo CSS sobre el revelado existente (`.aaa-reveal`); sin JS o con movimiento reducido queda en su estado final. Los íconos van como máscara CSS sobre Grupos vacíos, sin SVG en HTML crudo.
+- **Representación especializada:** H2 transversal "Tres áreas de práctica, *un mismo criterio.*" (propuesta; "Cada caso exige…" repetía el H2 de la sección anterior). Párrafo EXACTO de la lámina 13. Tarjetas con los mismos títulos de Inicio (Derecho concursal / Normalización de activos / Línea corporativa y litigios) y las etiquetas del prototipo. Los párrafos se reemplazan por los 6 puntos de cada línea (lámina 16 = PDF, pasados a mayúscula inicial), en lista con separadores. Fotos: las mismas de cada área en Inicio, como hacía el prototipo, en versión de 1000px.
+- **Transparencia:** "Nuestro compromiso es la defensa técnica más rigurosa de sus intereses…" (antes "del crédito"). Foto nueva aprobada (IMG_9074), a sangre hasta el borde derecho desde 641px, como el prototipo.
+- **Conversemos:** mismo bloque que Inicio (panel navy con foto y marca de agua, "Cada caso requiere *una defensa con criterio.*", mismo texto, CTA "Solicitar evaluación jurídica →" a `/contacto/`).
+- Fotos optimizadas con PHP GD de Local (nada instalado): 5 fotos, **77 MB → 242 KB** en `assets/img/metodologia/`.
+
+**Aplicado — `components.css`:**
+- Se reemplazan las reglas de Metodología del primer port (D114), que nunca aplicaban: colgaban de `body.services-page` (clase que WordPress no genera) o de `.hero-shell__media > img` (el `<img>` real está dentro de un `<figure>`). Nuevo bloque "METODOLOGÍA (D123)" al final del archivo, por clase de sección. Incluye el ritmo de secciones del prototipo (`clamp(6rem, 9vw, 10rem)`) y el énfasis en cobre de la sección clara, como el prototipo.
+- El cierre de Inicio se generaliza con `:is(.home-page, .site-closing-cta--global)`, sin cambiar la especificidad. Inicio queda igual y la clase `site-closing-cta--global` se agregó también a su pattern.
+- Las reglas del hero de Inicio (padding 90px, alto 690px+, foto al 50%, H1 dorado de 16ch) no tenían prefijo y también alcanzaban al hero interno. `:where(:not(.hero--editorial))` las limita a Inicio sin cambiar su especificidad: el hero de Inicio se midió igual antes y después.
+
+**Aplicado — Inicio (salvedad del PDF):** las listas de Áreas quedan solo con los puntos de la lámina 4: Derecho concursal = Insolvencia de persona natural, Insolvencia empresarial, Ley 1116, Ley 550 (sin cambio); Normalización de activos = Análisis de viabilidad de riesgo, Recuperación de cartera; Línea corporativa y litigios = Viabilidad, Acompañamiento en riesgo legal, comercial y laboral.
+
+**Corrección de D120/D122:** en el front, `aaa_move_image_class_to_img()` (functions.php) deja la clase del bloque Image en el `<img>`, no en el `<figure>`. Las reglas `.why-trust__media img` y `.stats-photo__media img` de D120/D122 nunca habrían aplicado: al reinsertar Inicio, las fotos de "¿Por qué confiar?" se habrían estirado y la de "En cifras" habría salido sin recorte. D120/D122 se verificaron inyectando el HTML guardado del pattern, no el renderizado. Se corrigieron los selectores (`img.why-trust__media`, `img.stats-photo__media` y el marco en `.wp-block-image`). Desde D123 la verificación se hace con el **render real de WordPress**: script de solo lectura con el PHP de Local, `do_blocks()` con los filtros del tema, inyectado en el sitio; los temporales se borraron.
+
+**Verificación (Local, render real):** Metodología a 1280, 768 y 620px. Hero 432px, igual al prototipo; eyebrow→H1 16px; H2 42px; tarjetas 16:10 del mismo alto; foto de Transparencia a sangre; sin scroll horizontal. Secuencia del riel medida: tramo 1 350–1100ms, nodo 2 a 1100ms, tramo 2 hasta ~1850ms, nodo 3 al final. Inicio con su render real: hero sin cambios, fotos de "¿Por qué confiar?" 384×230 (5:3, `cover`), foto de cifras 16:7, listas nuevas, cierre con la clase global. Auditoría de bloques sin discrepancias (Metodología 88, Inicio 117), `php -l` y CSS balanceado.
+
+**Pendiente:** crear la página Metodología (slug `metodologia`, plantilla "Página con motion editorial (GSAP)") e insertar el pattern; **reinsertar el pattern de Inicio** (acumula D120, D122 y D123); validación del cliente de los textos propuestos (H1 del hero, 3 pasos, H2 de servicios, frase de Transparencia) y del orden metodología → servicios.
+
+## Quiénes somos y Trabaja con nosotros reconstruidas sobre el prototipo + PPTX (D124, 2026-09-29)
+
+**Pedido (Owner):** "pasemos a las dos paginas faltantes 'quienes somos' y 'trabaja con nosotros'. Construye de forma correcta y lo mas fiel posible al prototipo sus respectivos patterns y agrega las imagenes y las correciones establecidas en la pptx de ser necesarias". Fuentes: `prototype/nuestro-equipo.html` y `prototype/trabaja-con-nosotros.html` (iguales a https://aaalegal.design-505.workers.dev/nuestro-equipo y /trabaja-con-nosotros), PPTX láminas 19–24.
+
+**Qué pide la PPTX:**
+- 19 (hero Quiénes somos): "la foto general de todos los colaboradores (foto del collage pendiente)".
+- 20 (Origen): "Ver foto de la carpeta"; debajo, "los equipos de trabajo… administrativos, jurídicos, etc.", según el referente https://www.ngds.ai/es/#team.
+- 21 ("Quiénes hacen posible cada caso"): "proponer una división para tener 2 o 3 agrupaciones, con su respectivo título y copie… (collage por cada uno de los equipos áreas pendientes). Este módulo ya está diseñado y está en trabaja con nosotros, creo que debemos traerlo a esta sección".
+- 22 (Filosofía): texto OK; "Quitaría el CTA porque igual cerramos con el módulo de Conversemos"; foto de la carpeta.
+- 23–24 (Trabaja con nosotros): estructura "1. ¿Por qué trabajar con nosotros?, 2. Vacantes disponibles, 3. Formulario (solo nombre, teléfono y adjuntar hoja de vida, cargo de interés)", con referentes. La lámina 24 trae el texto de "¿Por qué…?" y 4 vacantes (Abogado junior, Abogado senior, Dependiente judicial, Auxiliar jurídico).
+
+**Aplicado — `patterns/quienes-somos-full.php`:** hero → Origen y especialización → Quiénes hacen posible cada caso → Filosofía → Conversemos.
+- Hero: copy del prototipo. Foto: 2.jpg (toda la oficina), **temporal** hasta el collage.
+- Origen: copy del prototipo y foto de los fundadores ("ORIGEN Y ESPECIALIZACION.jpg").
+- Equipos: el módulo de tarjetas flip (D92–D96) pasa de Trabaja con nosotros a esta página. Los 4 perfiles ficticios se reemplazan por 3 equipos (tarjeta + foto por equipo, en damero como D96/ngds): **Equipo jurídico** / Estrategia y representación; **Equipo administrativo** / Gestión operativa y seguimiento; **Equipo de tecnología** / Herramientas propias (ADY). El intro es el párrafo aprobado de "Nuestro equipo" ("…integra criterio jurídico, gestión operativa y tecnología"), que da las tres áreas. Títulos, subtítulos y reversos son **propuesta pendiente de validar**; el reverso de tecnología reutiliza el copy del prototipo. Fotos aprobadas temporales (IMG_9095, IMG_9128, IMG_9123) hasta los collages por equipo.
+- Filosofía: sin CTA; foto IMG_9049 (bolso con el logo).
+- Conversemos: el mismo bloque global de Inicio/Metodología.
+- **Sale "En cifras"**: no está en la estructura de la PPTX (19–22 pasan de Origen a equipos) y sus cifras eran de ejemplo (+100/+50/+$100 M, distintas de las aprobadas en Inicio).
+
+**Aplicado — `patterns/trabaja-con-nosotros-full.php`:** hero → ¿Por qué trabajar con nosotros? → Vacantes disponibles → Postulación.
+- Hero: copy del prototipo, foto IMG_9071.
+- "¿Por qué…?": copy **textual** de la lámina 24, con eyebrow "Talento AAA". Galería como el referente: una foto grande y dos pequeñas (IMG_9073, IMG_9051, IMG_9108).
+- Vacantes: 4 cargos con los datos de la lámina 24, en un tablero blanco sobre banda navy (referente de la lámina 23), íconos por dato y enlace "Postularme →" a `#postulacion`; eyebrow "Oportunidades".
+- Postulación: encabezado del prototipo. Formulario **real** de Contact Form 7 vía `[contact-form-7 title="Postulación" …]`, que CF7 6.1.7 resuelve por título: campos nombre, teléfono, cargo de interés (los 4 cargos + "Otro") y hoja de vida; sale el correo, porque la lámina no lo lista.
+- Salen "Nuestro equipo" y las tarjetas de perfiles (van a Quiénes somos). No lleva "Conversemos": la lámina 23 fija las 3 secciones y la página termina en la postulación, como el prototipo.
+
+**Aplicado — tema:**
+- `functions.php`: filtro `wpcf7_autop_or_not` que apaga el `autop` de CF7 solo en formularios (los correos quedan igual); insertaba `<p>`/`<br>` en la grilla del formulario.
+- `components.css`, bloque D124: Origen, equipos, Filosofía, "¿Por qué…?", Vacantes y Postulación, con grilla del formulario, select con flecha, botón de archivo y respuesta de CF7.
+  - Tarjetas flip: el botón "Ver funciones" solo se oculta con mouse. El prototipo lo ocultaba desde 641px aunque no hubiera hover, así que en tablets táctiles el reverso quedaba inaccesible.
+  - Movimiento reducido respetado.
+  - Correcciones: selectores del hero de estas páginas (`> img` no llegaba al `<img>`); `.philosophy-quote` usaba `--wp--preset--spacing--5`, que no existe, y perdía todo su padding; ahora tiene los 20px del prototipo.
+- Fotos: 10 WebP en `assets/img/nosotros/` y `assets/img/trabaja/` (**134 MB → 450 KB**), recortadas donde el espacio lo pide.
+- `WORDPRESS-SETUP.md`: § 7bis con la plantilla exacta del formulario "Postulación" (y adjuntar `[cv]` en el correo), § 7bis-2 con las fotos de ambas páginas y § 8.
+
+**Verificación (Local, render real con `do_blocks()` + shortcodes; formulario CF7 armado en memoria sin crearlo en la BD):**
+- Quiénes somos:
+  - Desktop, 1280px: equipos 384×384 en damero; reversos de las tarjetas sin recorte a 1280, 1024, 910 y 375px.
+  - Móvil: carril horizontal ≤900px.
+  - Tarjetas: el volteo con el botón funciona y el foco pasa a "Volver".
+- Trabaja con nosotros:
+  - Galería 410×426 + 2×205.
+  - Vacantes en 4/2/1 columnas con los CTA alineados.
+  - Formulario 2×2 + botón (en móvil, una columna).
+- Ambas páginas:
+  - Sin scroll horizontal.
+  - Énfasis en cobre como el prototipo.
+- Auditoría de bloques sin discrepancias (Quiénes 47; Trabaja 62 + el bloque shortcode, que es texto plano), `php -l` y CSS balanceado.
+
+**Pendiente:**
+- Crear las páginas **Quiénes somos** (`/quienes-somos/`) y **Trabaja con nosotros** (`/trabaja-con-nosotros/`) con la plantilla "Página con motion editorial (GSAP)" e insertar los patterns; crear el formulario CF7 **Postulación** (WORDPRESS-SETUP § 7bis).
+- En Local, la página Metodología (#97) quedó con la plantilla por defecto (sin GSAP) y el título "Metodologia", sin tilde.
+- Del cliente: collage general (hero) y por equipo, validación de los textos de los equipos, buzón de destino de las postulaciones y confirmar "Abogado senior — con o sin experiencia" (lámina 24; parece contradictorio con "senior"). El texto de "¿Por qué…?" tutea ("Haz parte…") y el resto del sitio usa "usted": se dejó textual por ser copy del cliente.
+
+## Ajustes del Owner: hero de Inicio, viñetas de Metodología, foto de Filosofía y formulario de Postulación en CF7 (D125, 2026-09-29)
+
+**Pedido (Owner):**
+- Hero de Inicio: "deberíamos mostrar una imagen más general y no solamente la de la chica… uses la imagen que se llama dos".
+- Metodología, tarjetas de servicios: "las líneas que separan los bullets… sobra… elimina esas líneas".
+- Filosofía (Quiénes somos): la foto del bolso "no es tan bonita… La idea es… que tampoco se repita más con otras imágenes que están dentro del sitio".
+- Trabaja con nosotros: "crea el formulario usando… Contact Form 7. Ya está instalado, así que puedes utilizarlo".
+
+**Aplicado — fotos:** 2.jpg ya estaba en la foto bajo "En cifras" de Inicio y en el hero de Quiénes somos. Para que no quedaran dos veces en Inicio ni dos heroes iguales, se reasignaron 6 fotos (mismas rutas, así que las páginas ya insertadas se actualizan sin reinsertar):
+
+| Espacio | Antes | Ahora |
+|---|---|---|
+| Inicio — hero | IMG_9118 | 2.jpg |
+| Inicio — foto bajo "En cifras" | 2.jpg | 1.jpg |
+| Metodología — hero | 1.jpg | IMG_9128 |
+| Quiénes somos — hero (provisional) | 2.jpg | IMG_9119 |
+| Quiénes somos — equipo administrativo | IMG_9128 | IMG_9127 |
+| Quiénes somos — Filosofía | IMG_9049 | IMG_9118 |
+
+- IMG_9118 queda **solo** en Filosofía.
+- Encuadres ajustados: rostros de 1.jpg en el tercio superior del banner de cifras; hero de Quiénes somos con el rostro principal debajo del header fijo; hero de Metodología corrido a la derecha en móvil.
+- Alt actualizados en los patterns: hero de Inicio y Filosofía.
+- Siguen repitiéndose entre páginas algunas fotos pequeñas (las fotos aprobadas son menos que los espacios): por ejemplo, IMG_9071, IMG_9073 e IMG_9051 en tarjetas de Inicio y en Trabaja con nosotros.
+
+**Aplicado — Metodología:** listas de las tarjetas sin filetes, 10px entre puntos (se conserva el guion cobre).
+
+**Aplicado — formulario:**
+- Creado en el sitio Local el formulario CF7 **"Postulación" (#106)**, con autorización explícita del Owner y un script que no toca formularios existentes. Campos: nombre, teléfono, cargo de interés y hoja de vida (plantilla de WORDPRESS-SETUP § 7bis).
+- Correo: a `[_site_admin_email]` hasta que el cliente defina el buzón de talento humano; asunto "Nueva postulación: [cargo] — [nombre]"; hoja de vida adjunta (`[cv]`); sin el `Reply-To: [your-email]` de la plantilla por defecto (el formulario no pide correo). El validador de CF7 queda sin errores.
+- La página Trabaja con nosotros (#104) ya muestra el formulario real.
+- En móvil, el indicador de envío de CF7 desplazaba el botón 36px: ahora va superpuesto dentro del botón.
+
+**Corrección — motion de las páginas internas:** `functions.php` encolaba GSAP/ScrollTrigger/home-motion.js solo si `is_page_template( 'templates/page-motion.html' )`. En un tema de bloques WordPress guarda la plantilla como slug (`page-motion`; verificado en la BD en las páginas #97, #101 y #104), así que el motion **nunca cargaba** en Metodología, Quiénes somos ni Trabaja con nosotros. Ahora se aceptan ambas formas; verificado en vivo que GSAP y ScrollTrigger cargan.
+
+**Verificación (Local, páginas reales creadas por el Owner):**
+- Inicio: hero con 2.jpg y foto de cifras nueva.
+- Metodología: sin filetes y hero nuevo.
+- Quiénes somos: hero y Filosofía nuevos.
+- Trabaja con nosotros: formulario #106 con los 4 campos, los cargos, solo PDF/Word y el botón alineado en móvil.
+- Técnica: `php -l` y CSS balanceado.
+- **No se envió ninguna postulación de prueba** (el formulario tiene datos personales y el sitio `.local` no está en la lista de hosts de prueba). Queda para que el Owner lo pruebe (en Local el correo lo captura Mailpit).
+
+**Pendiente:** reinsertar el pattern de Inicio y de Quiénes somos solo si se quieren los textos alternativos nuevos (las fotos ya cambiaron); buzón real de postulaciones.
+
+## Logo nuevo de la firma en todo el sitio (D126, 2026-09-30)
+
+**Pedido (Owner, por solicitud del cliente):** "te estoy anexando el nuevo logo de la firma. Vamos a reemplazar este logo tanto en el header como en el footer de todo el sitio web. Y en donde se haga énfasis en ese logo… solo se elimina… el recuadro… Analiza el sitio y reemplaza el logo donde sea necesario". Insumos: `AAA_EstudioLegal LOGO NVO.pdf` y `AAA_EstudioLegal.ai` (3 mesas de trabajo: horizontal, isotipo solo y vertical, cada una en versión clara, navy y oscura).
+
+**Dónde estaba el logo:** header (isotipo con recuadro + wordmark, desde la Biblioteca de medios), footer (logo completo PNG con recuadro + isotipo grande de marca de agua), marca de agua del panel "Conversemos" (Inicio, Metodología, Quiénes somos) y tarjetas de equipo de Quiénes somos. El sitio no tenía favicon ni ícono de sitio.
+
+**Aplicado:**
+- **SVG vectoriales extraídos del `.ai`**, sin rasterizar. El `.ai` es compatible con PDF; los trazados se leyeron con un script de node en el scratchpad, sin instalar nada. Quedan en `assets/img/brand/`:
+  - `isotipo.svg` (cobre);
+  - `isotipo-blanco.svg`;
+  - `wordmark-blanco.svg` ("Estudio Legal");
+  - `logo-horizontal-claro.svg` (isotipo cobre + texto blanco, la versión del cliente sobre navy);
+  - `favicon.svg` (isotipo en caja cuadrada).
+- Colores: navy CMYK 100/71/40/34 → #063B59 (el del manual); cobre CMYK 11/35/53/2 → **#DCA97E**. El logo nuevo es de tinta plana, sin el degradado #ECBC8A→#CB9270 del anterior.
+- `functions.php`:
+  - Header, logo del footer y marca de agua del footer salen del tema (nueva `aaa_brand_url()`) y no de la Biblioteca de medios; viajan con el tema a staging/producción.
+  - Nuevo filtro `aaa_swap_legacy_isotype()`: cambia al vuelo la URL del isotipo viejo que guardaron las páginas ya insertadas, así que no hay que reinsertar nada.
+  - Favicon con el isotipo nuevo, solo si no hay ícono de sitio configurado.
+- Patterns (Inicio, Metodología, Quiénes somos): 9 referencias al isotipo viejo → `brand/isotipo-blanco.svg`.
+- `components.css`:
+  - El header toma las proporciones exactas del logo horizontal del cliente: isotipo 89,7% del alto, wordmark 82% desde el 18%, separación 12,9%. Queda en 138×48px (antes 146px de ancho); se conserva la animación de aparición del isotipo.
+  - El isotipo de las tarjetas pasa de un cuadrado forzado a ancho fijo con alto proporcional (el nuevo es apaisado y se habría deformado).
+- `WORDPRESS-SETUP.md`: tabla de archivos del logo y usos.
+
+**Verificación (Local):**
+- Inicio, Metodología, Quiénes somos, Trabaja con nosotros, una entrada del blog y la 404: **0 referencias** a los archivos del logo viejo y todas las imágenes de marca cargan.
+- Header con el isotipo cobre sin recuadro y "Estudio Legal" en blanco; footer con el logo horizontal nuevo (220×77); marcas de agua nuevas; favicon presente.
+- Técnica: `php -l` y CSS balanceado.
+
+**Pendiente:** los archivos viejos del logo siguen en la Biblioteca de medios (ya sin uso); se pueden borrar desde WordPress cuando el Owner quiera. No los borré: AGENTS.md no permite tocar `uploads` sin respaldo y autorización.
+
+## Inicio — "Nuestro enfoque" sin foto y centrado (D127, 2026-09-30)
+
+**Pedido (Owner, por solicitud del cliente):** "eliminemos la imagen de la señora que está hablando por teléfono. Y que el contenido que va a la izquierda aparezca centrado… el fondo debe ser beige como lo tiene… ese cuadro de texto".
+
+**Aplicado:**
+- `patterns/home-full.php`: la grilla de 2 columnas (texto + foto IMG_9102 a sangre) pasa a un solo grupo `home-about-summary__content`. Mismo eyebrow, título, "No representamos al deudor.", párrafo y botón "Solicitar evaluación jurídica"; conserva la entrada animada del título.
+- `components.css` (bloque D127):
+  - Fondo beige de la sección (#EEEAE3, el mismo del cuadro de texto).
+  - Contenido centrado a 760px de ancho, título a 22ch, párrafo a 60ch, botón centrado; título y énfasis con los colores de antes.
+  - Las reglas cubren también el Inicio insertado antes de D127 (esconden la columna de la foto y centran la de texto), así que el cambio ya se ve sin reinsertar.
+
+**Verificación (Local, 1280px y ancho del panel):** Inicio actual y pattern nuevo renderizado quedan idénticos: bloque centrado (253–1013px en un viewport de 1265), fondo beige, sin foto, sección de 552px. Auditoría de bloques (114, sin discrepancias), `php -l` y CSS balanceado.
+
+**Pendiente:** al reinsertar el pattern de Inicio, la foto desaparece también del HTML (hoy solo está oculta) y `assets/img/home/nuestro-enfoque.webp` quedará sin uso.
+
+## Inicio — "Áreas de práctica" en beige y espacio eyebrow→título uniforme (D128, 2026-09-30)
+
+**Pedido (Owner, por solicitud del cliente):** eyebrow y título más juntos, como en "Nuestro enfoque", en todas las secciones de Inicio y con un espaciado uniforme en todo el sitio; franja de "Áreas de práctica" en el beige de la sección anterior y título "Estrategias jurídicas" en negro; las tres tarjetas "un poquitín más" altas; "Derecho concursal" a dos líneas; títulos de las tarjetas "en el medio o un poquito más abajito del medio"; "Ley 1116" → "Ley 116".
+
+**Aplicado:**
+- `components.css` (regla global D128 al final): el título que sigue a un eyebrow ya no recibe el margen de 24px que WordPress pone a los bloques. El espacio lo fija el eyebrow: 16px en todo el sitio. Antes, en Inicio, era de 24px en Áreas, Empresas, Casos de éxito y En cifras, y de 40px en "¿Por qué confiar?". El encabezado de Sectores (grilla) pasa de 24px a 16px de separación.
+- `components.css` (Áreas de práctica):
+  - Fondo: de navy-deep a beige #EEEAE3.
+  - Colores: título en negro (ink-dark #111820) y eyebrow en cobre oscuro.
+  - Separación con "Nuestro enfoque": como ahora comparten fondo, se quita el padding superior de Áreas. Quedan 96px entre el botón y el eyebrow, no 192px de beige vacío.
+  - Tarjetas más altas: en escritorio `clamp(540px, 70svh, 680px)` en vez de `clamp(460px, 60svh, 600px)`, o sea 560px en lugar de 480px en una pantalla de 800px de alto; en móvil 340px en vez de 300px.
+  - Posición del título: arranca justo a la mitad de la tarjeta (antes, al ~74%). Al pasar el cursor, la lista se despliega hacia abajo y el título ya no se mueve.
+  - "Derecho concursal" en dos líneas, igual que los otros dos títulos.
+- `patterns/home-full.php`: "Ley 1116" → "Ley 116".
+
+**Verificación (Local):**
+- Espacio eyebrow→título de 16px en las 7 secciones de Inicio y en Metodología, Quiénes somos y Trabaja con nosotros, a 1280px y 390px.
+- Tarjetas a 1280px: 560px de alto, título al 50% y en 2 líneas en las tres. Con la lista desplegada el título sigue en su lugar y sobran 161–220px de tarjeta (a 680px).
+- El pattern renderizado da lo mismo que la página actual.
+- Auditoría de bloques (114, sin discrepancias), `php -l` y CSS balanceado.
+
+**Pendiente:**
+- ~~El cambio a "Ley 116" solo se ve al reinsertar el pattern de Inicio~~ — **resuelto el mismo día**, a pedido explícito del Owner. Se corrigió directamente en la página Inicio de Local (ID 82): era la única que contenía "Ley 1116" y se cambió solo ese ítem de la lista, tras guardar respaldo del contenido previo (fuera del repo) y con revisión nativa de WordPress. Verificado en el HTML servido: "Ley 116" aparece 1 vez y "Ley 1116", 0.
+- **Para confirmar con el cliente:** el régimen de insolvencia empresarial en Colombia es la **Ley 1116 de 2006**; no encuentro una "Ley 116" relacionada con derecho concursal. Se aplicó el cambio por instrucción explícita del Owner, pero conviene confirmarlo antes de publicar, para no corregir un dato que quizá era correcto.
+
+## Inicio — "Áreas de práctica": títulos e índices más grandes (D129, 2026-09-30)
+
+**Pedido (Owner):** subir 2px los títulos de las tarjetas ("Derecho concursal", "Normalización de activos", "Línea corporativa y litigios") y los números "01/02/03", porque con las tarjetas más altas de D128 se veían pequeños.
+
+**Aplicado (`components.css`, solo en esta sección):**
+- Títulos: de 24px a 26px (1.625rem).
+- Índices: de 13px a 15px (0.9375rem).
+- El ancho máximo y el alto reservado del título están en ch/em, así que escalan con la letra.
+
+**Verificación (Local, 1280px y 390px):** los tres títulos siguen en 2 líneas; en escritorio arrancan al 50% de la tarjeta de 560px. CSS balanceado. Aplica sin reinsertar el pattern.
+
+## Inicio — foto de "En cifras" = foto del hero en blanco y negro (D130, 2026-09-30)
+
+**Pedido (Owner):** la foto en blanco y negro bajo "En cifras" era "muy random" y no representaba las cifras. Se pidió usar la misma imagen del hero, conservando el blanco y negro "para darle un toque más artístico".
+
+**Aplicado:**
+- `patterns/home-full.php`: la imagen pasa de `home/cifras-equipo.webp` (1.jpg, con el gris ya aplicado en el archivo) a `home/hero.webp` (2.jpg, la oficina con el equipo completo).
+- `components.css`:
+  - `filter: grayscale(1)`: el gris va por CSS para reutilizar la foto que el navegador ya descargó para el hero.
+  - `object-position: 50% 60%`: el recorte 16/7 centra al equipo en sus puestos, con poco techo y poco piso.
+- Página Inicio en Local (ID 82): se cambió solo el `src` de esa imagen (1 referencia), por pedido explícito del Owner. Antes se guardó respaldo del contenido (fuera del repo) y quedó la revisión nativa de WordPress.
+- `WORDPRESS-SETUP.md`: tabla de fotos de Inicio actualizada.
+
+**Verificación (Local):**
+- La página servida carga `hero.webp` con `grayscale(1)`.
+- A 1280px se ve el equipo completo en la franja panorámica.
+- A 620px (formato 3/2) se ve la foto entera.
+
+**Pendiente:** `assets/img/home/cifras-equipo.webp` queda sin uso en el tema; se puede borrar en un commit posterior si el Owner lo confirma.
+
+## LinkedIn del footer y textos de Sectores, "Conversemos" y banner de Metodología (D131, 2026-09-30)
+
+**Pedido (Owner):** URL de LinkedIn en el footer y tres textos nuevos, dictados literalmente.
+
+**Aplicado:**
+- `parts/footer.html`: LinkedIn → `https://www.linkedin.com/company/agudelo-abogados-asociados/` (nueva pestaña, `rel="noopener noreferrer"`). **Cierra el pendiente de la Slide 12** (URL real de LinkedIn). Aplica en todas las páginas.
+- Inicio, párrafo de "Empresas que ya confiaron": se agrega "en asuntos de insolvencia, normalización de activos, derecho corporativo y litigios" antes de "con estrategias ajustadas…".
+- Cierre "Conversemos": "Si su organización enfrenta un reto jurídico, necesita proteger sus activos, gestionar riesgos o tomar decisiones corporativas, nuestro equipo puede evaluar la situación y definir una estrategia jurídica." Es el mismo bloque en Inicio, Metodología y Quiénes somos (Trabaja con nosotros no lo tiene), así que se cambió en los tres para que no difieran.
+- Banner de Metodología: el H1 pasa a "Insolvencia, normalización de activos y línea corporativa, *con una estrategia clara.*". El banner no tiene párrafo, así que el texto reemplaza al título. El remate en cursiva sigue el mismo recurso que el resto de títulos del sitio.
+- Patterns `home-full.php`, `metodologia-full.php`, `quienes-somos-full.php` y páginas ya insertadas en Local (Inicio 82, Metodología 97, Quiénes somos 101):
+  - Se cambiaron solo esos textos, por pedido explícito del Owner.
+  - Antes se guardó respaldo de cada página (fuera del repo) y quedó la revisión nativa de WordPress.
+
+**Verificación (Local, HTML servido):**
+- LinkedIn con la URL nueva en las 4 páginas.
+- Los textos nuevos aparecen en las 3 páginas y no queda ninguno de los viejos.
+- No hay copia del footer en la BD que tape el archivo del tema.
+- `php -l` y auditoría de bloques sin discrepancias (114/88/47).
+
+## Viñetas con balanza en Inicio y Metodología (D132, 2026-09-30)
+
+**Pedido (Owner, por solicitud del cliente):** reemplazar las rayitas de las viñetas de Inicio y Metodología por "un bullet un poco más intuitivo… un martillo o la balanza… lo dejo a tu criterio".
+
+**Decisión (a criterio delegado por el Owner):** balanza de la justicia.
+- Es el símbolo jurídico más reconocible y se lee mejor que un martillo a 15–16px.
+- Se dibujó en trazo fino, el mismo lenguaje de línea que los íconos de la línea de tiempo de Metodología.
+- Mantiene el cobre de cada contexto: accent-main (#CAA181) sobre las fotos oscuras de Inicio y accent-main-strong (#9A6D4D) sobre las tarjetas claras de Metodología.
+
+**Aplicado (`components.css`, bloque D132 al final):**
+- SVG propio como máscara CSS (`--aaa-bullet-scale`) sobre el `::before` que ya dibujaba la rayita.
+- El ícono mide 1.1em (16.5px) y va centrado en la primera línea de cada ítem; sangría de 1.6em.
+- Aplica a `.surface-visual__list` (Áreas de práctica, Inicio) y `.service-card__list` (Representación especializada, Metodología).
+- No hay SVG en el HTML, así que no hace falta reinsertar patterns.
+
+**Verificación (Local):**
+- Inicio a 620px y 1280px: al desplegar la lista (hover/foco) los ítems aparecen uno a uno como antes y ninguno recorta el ícono.
+- Metodología a 620px.
+- CSS balanceado.
+
+## Quiénes somos — foto de "Origen y especialización" más alta (D133, 2026-09-30)
+
+**Pedido (Owner):** la foto de los fundadores "en el archivo original… es un poco más grande y cuadrada… aprovecharla mejor… que sea un poco más alta".
+
+**Aplicado:**
+- `assets/img/nosotros/origen.webp` regenerado desde el original aprobado (`assets/img/aprobadas-web/`, no versionado) **sin recorte**.
+  - Antes: 1200×800, con el 23% inferior cortado.
+  - Ahora: 1200×1041, 41 KB, con los dos fundadores de cuerpo entero hasta las manos.
+  - Mismo script de optimización (PHP GD de Local); el original no se toca.
+- `components.css`: la foto se muestra en su proporción natural (`aspect-ratio: 1200 / 1041`, anclada arriba) en vez de 3/2 con tope de 360px.
+  - Escritorio: 540×468px (antes 540×360).
+  - Móvil (≤800px): tope de 460px (antes 320); si la pantalla la haría más alta, se recorta por abajo y los rostros siguen a la vista.
+- Mismo archivo y misma ruta, así que no hace falta reinsertar el pattern. `WORDPRESS-SETUP.md` actualizado.
+
+**Verificación (Local):**
+- 1280px: 540×468px, el texto queda centrado a su lado.
+- 620px: 555×460px.
+- CSS balanceado.
+
+## Quiénes somos — foto de "Origen y especialización" siempre completa (D134, 2026-09-30)
+
+**Pedido (Owner):** "el alto está bien pero la imagen no está completa… estás recortando un poco abajo a las dos personas, necesito que uses la imagen completa".
+
+**Diagnóstico:** el archivo de D133 ya estaba completo: el original mide 4160×3609 y la versión web 1200×1041, misma proporción. El recorte venía de tres lados:
+1. La deriva de scroll de GSAP (`addMediaDrift` en `home-motion.js`, solo en escritorio) ampliaba la foto un 2,5–4,5% y la desplazaba verticalmente dentro de un marco con `overflow:hidden`.
+2. En móvil, el tope de 460px de alto recortaba abajo.
+3. Con el mismo nombre de archivo, el navegador podía seguir mostrando la versión 3/2 anterior (sin la parte de abajo) desde caché.
+
+**Aplicado:**
+- `components.css`:
+  - Sin deriva en esta foto (`transform: none !important`); la entrada con clip-path del capítulo sigue igual.
+  - En ≤800px la foto va entera en su proporción natural, sin tope de alto; el ancho se limita a 560px para que no crezca de más en tablet.
+- Archivo renombrado a `assets/img/nosotros/origen-fundadores.webp` (evita la caché); se eliminó `origen.webp`, que no está versionado.
+  - Actualizados el pattern `quienes-somos-full.php` y la página Quiénes somos en Local (ID 101): solo ese `src`, tras guardar respaldo fuera del repo y con revisión nativa.
+- `WORDPRESS-SETUP.md` actualizado.
+
+**Verificación (Local):**
+- 1280px con GSAP activo y después de hacer scroll: foto 540×468, marco 540×468, `transform: none`, sin clip-path → se ve la foto entera.
+- 620px: 555×482, proporción 1.151 (original 1.153).
+- CSS balanceado.
+
+## Página de Contacto con formulario CF7 conectada a los CTA (D135, 2026-09-30)
+
+**Pedido (Owner):** revisar el prototipo, decir qué páginas faltan y construir ya la de Contacto, "con el respectivo formulario", conectada "a los CTA que corresponden", según la documentación y los cambios hechos.
+
+**Revisión prototipo ↔ WordPress (Local):**
+
+| Prototipo | WordPress |
+|---|---|
+| Inicio, Metodología (`servicios.html`), Quiénes somos (`nuestro-equipo.html`), Trabaja con nosotros | Creadas (82, 97, 101, 104) |
+| Contacto (`captacion-b2b.html`) | **Creada en esta sesión (#116)** |
+| Aviso legal / Política de privacidad (`proximamente.html`) | **No creadas**: el footer enlaza a `/aviso-legal/` y `/politica-de-privacidad/` (404). Pendiente del texto del cliente (D2: la IA no redacta contenido legal) |
+| Blog (`noticias-analisis.html` + 2 artículos) | Plantillas `home.html`/`single.html` listas, sin página ni entradas. El cliente pidió sacarlo del menú; su alcance sigue abierto (ver Slide 12 más arriba) |
+| `type-lab.html` | Referencia interna, no es página del sitio |
+
+**Aplicado:**
+- `patterns/contacto-full.php` reescrito según la última versión de `captacion-b2b.html`:
+  - Sin hero. Una sola sección: título "Cuéntenos el contexto de su organización. *Nuestro equipo revisará su solicitud.*", introducción y datos de contacto (dirección; WhatsApp y correo) a la izquierda, formulario a la derecha.
+  - La grilla pasa de Columnas a Grupo, porque el `is-layout-flex` de Columnas anulaba el `display:grid`.
+  - El formulario de muestra en HTML se reemplaza por `[contact-form-7 title="Contacto B2B" …]`.
+  - Motion: título con `aaa-motion-section-title`, formulario con `aaa-reveal`.
+- Contact Form 7: creado **"Contacto B2B" (#115)**, validador sin errores. Pedido explícito del Owner.
+  - Los 8 campos del prototipo, todos obligatorios, con `<label for>`; los desplegables arrancan en "Seleccione una opción".
+  - Botón "Solicitar contacto →".
+  - Correo a `info@agudeloabogados.com` (destino provisional de WORDPRESS-SETUP § 5), con `Reply-To: [correo]`. En Local, todo correo queda en Mailpit.
+- Página **Contacto (#116)** creada en `/contacto/` con el pattern y la plantilla "Página con motion editorial (GSAP)".
+- `components.css`, bloque "Contacto (D135)" portado de `prototype/css/components.css:2542-2648`:
+  - Padding superior para librar el header fijo; alto mínimo de pantalla en escritorio.
+  - Datos de contacto con etiqueta cobre; `address` sin cursiva; formulario sobre beige.
+  - Ajustes propios para que "Seleccione una opción" nunca se corte:
+    - columnas 1fr/1fr (el prototipo usa 1.25/0.95);
+    - flecha del desplegable a 12px del borde;
+    - relleno lateral del formulario con tope de 36px;
+    - entre 901 y 1279px, un campo por fila.
+- CTA: `patterns/cierre-conversemos.php` (pattern suelto, sin uso en páginas) apuntaba a `/captacion-b2b/` → `/contacto/`. Los demás ya apuntaban a `/contacto/`.
+- `WORDPRESS-SETUP.md`: plantilla exacta y correo del formulario (§ 7bis) y estado de las páginas en Local (§ 7).
+
+**Verificación (Local):**
+- Las 5 páginas responden 200. Llegan a `/contacto/` 10 enlaces:
+  - "Mi caso" del header en todas;
+  - "Solicitar evaluación jurídica" ×2 en Inicio y ×1 en Metodología y en Quiénes somos;
+  - "Contacto" del footer en todas.
+- Ningún enlace a `captacion`/`#nota-ady`.
+- Formulario renderizado con los 8 campos y sus etiquetas asociadas. A 1280px: 2 columnas, título a 136px del borde (header de 79px).
+- Sin scroll horizontal a 1920/1440/1280/1100/900/768/390px; el texto de los desplegables cabe en todos.
+- `php -l`, CSS balanceado. La auditoría de bloques solo marca el shortcode (sin etiqueta, esperado).
+- **No se envió el formulario**: la prueba de envío (que llegue a Mailpit) queda para el Owner.
+
+**Pendiente:**
+- "Mi caso" sigue en `/contacto/` de forma provisional: según D42, su destino es la plataforma ADY, sin URL todavía.
+- Correo de destino definitivo del formulario: a confirmar por el cliente.
+- **Autorización de tratamiento de datos (Ley 1581 de 2012)** en Contacto y Postulación: ninguno la pide todavía. Se agrega como casilla `[acceptance]` cuando exista la Política de privacidad con texto del cliente (D2).
+- Aviso legal y Política de privacidad: sin crear hasta tener el texto del cliente.
+
+## Contacto con 5 campos, "Mi caso" provisional y nuevo aviso de cookies (D136, 2026-09-30)
+
+**Pedido (Owner):**
+1. Aplicar la lámina 3 de la PPTX: eliminar campos del formulario de Contacto, y revisar si la PPTX pide otros cambios de formularios.
+2. "Mi caso" (header) no debe ir a Contacto: "deja un enlace dummy por ahora".
+3. Aviso de cookies: solo el botón "Aceptar", con el enlace a la Política de privacidad integrado en el texto, y revisar su diseño, que "se ve un poco extraño".
+
+**Revisión de la PPTX** ("Estructura y Copies del Sitio WEB (1).pptx": 24 láminas, más comentarios y notas):
+- **Lámina 3:** "Eliminar del formulario: Tipo de organización, Asunto de interés, Contexto general del asunto". Son **3 campos**; el pedido decía "cuatro", pero la lámina y la lista del Owner nombran estos tres.
+- Láminas 3, 11 y 18 (CTA al formulario, mismo "Conversemos" en todas) y lámina 22 (sin CTA en Filosofía): ya aplicadas.
+- Lámina 23 (Postulación: nombre, teléfono, hoja de vida y cargo de interés): aplicada en D124.
+- El único comentario de la PPTX (lámina 4) trata del despliegue de Áreas. **No hay más cambios de formularios.**
+
+**Aplicado:**
+- CF7 "Contacto B2B" (#115), tras guardar respaldo de su configuración (fuera del repo):
+  - Quedan 5 campos: Nombre (a lo ancho), Empresa | Cargo, Correo | Teléfono.
+  - Asunto y cuerpo del correo sin los campos eliminados.
+  - Validador sin errores. El pattern no cambia: el shortcode busca el formulario por su título.
+- `components.css` (Contacto): sin desplegables ya no hacen falta los ajustes de D135 para "Seleccione una opción". Se retiran y vuelven las proporciones del prototipo: columnas 1.25fr/0.95fr, relleno 3vw sin tope, dos campos por fila también entre 901 y 1279px.
+- `parts/header.html`: "Mi caso" → `#mi-caso`. Es un ancla inexistente: no navega ni hace saltar la página, y es fácil de ubicar cuando llegue la URL de ADY (D42).
+- `parts/footer.html` + `components.css`, aviso de cookies rediseñado:
+  - **Texto:** "Usamos cookies propias y de terceros (Google Analytics, Google Tag Manager y Microsoft Clarity) para medir el uso del sitio y mejorar su experiencia. Conozca más en nuestra [Política de privacidad](/politica-de-privacidad/)." Es el mismo aviso informativo de D20 con los nombres de las herramientas completos y el enlace dentro de la frase; no agrega redacción legal (D2).
+  - **Botón:** solo "Aceptar", cobre sobre navy como "Mi caso", de 44px de alto (área táctil). La lógica de `main.js` (`data-cookie-accept`, `localStorage`) no cambia.
+  - **Diseño:** tarjeta navy de 760px máximo centrada abajo, con texto y botón en una fila en escritorio y apilados con botón a lo ancho en móvil. Entrada suave, respetando `prefers-reduced-motion`.
+  - **Defectos corregidos:**
+    - se salía por la derecha en móvil (`width` + `inset-inline` sobredimensionados);
+    - "Consultar aviso de privacidad" quedaba navy sobre navy;
+    - "Aceptar" aparecía sin estilo (sin radio, 17px), apilado debajo;
+    - el enlace iba a `/aviso-legal/` en vez de a la política de privacidad.
+- `WORDPRESS-SETUP.md` actualizado: plantilla de 5 campos, "Mi caso" provisional, destino del aviso.
+
+**Verificación (Local):**
+- Formulario con 5 campos: Nombre 421px; 2×2 de 198px a 1280px.
+- "Mi caso" = `#mi-caso` en la página servida.
+- Aviso de cookies:
+  - móvil (605px útiles): 12px de margen a cada lado, botón de 547×44;
+  - escritorio (1280px): 760×97 centrado;
+  - "Aceptar" lo oculta, guarda `aaa-cookie-ack` y no vuelve a salir en otra página.
+- CSS balanceado. No se envió ningún formulario.
+
+**Pendiente:** el enlace del aviso lleva a `/politica-de-privacidad/`, que da 404 hasta tener el texto del cliente (D2). Sigue pendiente la casilla de autorización de datos en ambos formularios (D135).
+
+## Autorización de tratamiento de datos en los formularios (D137, 2026-09-30)
+
+**Pedido (Owner):** "agrega a todos los formularios ese acceptance… Un checkbox con un mensaje similar al de las cookies, pero basado en la protección de datos de la firma".
+
+**Aplicado (Contact Form 7, en Local, tras guardar respaldo de cada formulario fuera del repo):**
+- **Contacto B2B (#115) y Postulación (#106):** casilla obligatoria `[acceptance autorizacion-datos]`, a lo ancho y justo antes del botón.
+  - Texto de Contacto: "Autorizo a Agudelo Abogados Asociados SAS — AAA Estudio Legal a tratar mis datos personales para atender esta solicitud, conforme a la Ley 1581 de 2012 y a su [Política de privacidad]."
+  - En Postulación dice "mis datos personales y mi hoja de vida para gestionar esta postulación".
+  - El enlace abre `/politica-de-privacidad/` en otra pestaña, para no perder lo ya escrito.
+- `acceptance_as_validation: on`: el botón no se deshabilita. Si falta la casilla, CF7 avisa junto a ella al enviar ("Para enviar el formulario, autorice el tratamiento de sus datos personales.", en usted como el resto del sitio; el mensaje por defecto era en tuteo y hablaba de "términos y condiciones").
+- El correo que recibe la firma deja constancia: "Autorización de tratamiento de datos personales: aceptada en el formulario."
+- Validador de CF7 sin errores en ambos.
+- `components.css` (bloque D137):
+  - La casilla no usa `.talent-form__field`, cuyo estilo estiraba el checkbox a 100% × 52px.
+  - Checkbox de 18px en navy, alineado con la primera línea.
+  - Texto de 14px en gris (contraste 4.9:1 sobre el beige) con el enlace subrayado.
+  - Aviso de error alineado con el texto.
+- `WORDPRESS-SETUP.md`: plantillas de los 2 formularios con la casilla, más la configuración adicional, el mensaje y el correo.
+
+**Verificación (Local, 1280 y 390px, las 2 páginas):**
+- Casilla a lo ancho del formulario, antes del botón (24px); checkbox de 18×18 alineado con el texto.
+- Enlace a `/politica-de-privacidad/` en pestaña nueva; botón habilitado.
+- Sin scroll horizontal. CSS balanceado. No se envió ningún formulario.
+
+**Pendiente — validación del cliente:** el texto de la casilla es una **propuesta provisional**: es texto de cumplimiento, y en una firma de abogados debe aprobarlo el cliente (espíritu de D2). Debe validarse junto con la Política de privacidad a la que enlaza, que sigue sin existir (404) hasta tener su texto.
+
+## Metodología — "Nuestra metodología" rediseñada según referencia del cliente (D138, 2026-09-30)
+
+**Pedido (Owner, por solicitud del cliente; tercera vuelta sobre esta sección):** rediseñar la sección "Convertimos cada caso en una estrategia jurídica" exactamente como la imagen de referencia que envió el Owner. Pedidos concretos:
+- Conservar el efecto de la línea que pasa "de un paso de la metodología a otro" al hacer scroll.
+- Reemplazar las 3 fotos stock de la referencia (balanza, ajedrez, apretón de manos) por otras más adecuadas para la firma.
+
+**Aplicado:**
+- `patterns/metodologia-full.php`, nueva estructura:
+  - Grupo `stepper__layout` de dos columnas: a la izquierda el encabezado, a la derecha 3 tarjetas apiladas.
+  - Cada tarjeta (`stepper__step`) lleva un nodo (`stepper__node`), la foto (bloque Imagen `stepper__photo`) y un cuerpo con número, título y texto. El copy no cambia.
+  - Se retiran los íconos en máscara CSS de la versión anterior.
+- `components.css`, bloque "Nuestra metodología — tarjetas con conector (D138)", que reemplaza por completo la línea de tiempo horizontal:
+  - Eyebrow con espaciado 0.2em y filete cobre de 48px debajo, como en la referencia.
+  - Título grande (64px a 1280px) con el énfasis en bloque: "Convertimos / cada caso en / *una estrategia / jurídica.*" (4 líneas).
+  - Tarjetas translúcidas con borde tenue y radio de 16px.
+  - Foto circular de 158px a 1280px con aro cobre de 2px.
+  - Número espaciado y título en cobre, texto en blanco al 86%.
+  - Nodos (aro y punto cobre) montados sobre el borde izquierdo de cada tarjeta.
+  - Conector con esquinas redondeadas en un riel a la izquierda.
+  - Fondo navy con dos halos suaves, como en la referencia.
+  - Hover: borde cobre y leve acercamiento de la foto.
+- **Efecto conservado y reforzado:** la línea cobre recorre el conector de un paso al siguiente y cada nodo se enciende al llegar.
+  - La secuencia pasa a `main.js` (bloque "Metodología"): el tramo hacia el paso N se dibuja (750ms, recorte de arriba abajo) solo cuando ese paso está en pantalla y el anterior ya se encendió.
+  - Funciona en orden tanto si las 3 tarjetas aparecen juntas como si entran una a una al hacer scroll.
+  - Sin JS o con movimiento reducido, todo queda en su estado final.
+  - Las tarjetas entran con un fundido escalonado, sin el desplazamiento de 20px de `.aaa-reveal`, que corría el conector unos 19px durante la entrada.
+- **Responsive:**
+  - ≤900px: encabezado arriba y tarjetas a todo el ancho.
+  - ≤640px: riel de 28px, nodos de 22px, foto de 88px arriba del texto y contenido centrado en la tarjeta.
+- **Fotos (stock, Licencia de Unsplash: uso comercial sin atribución obligatoria):** el Owner aprobó Diagnóstico y Estrategia y pidió cambiar Representación; aprobó la descarga de las 3 finales, con archivo, fuente y tamaño informados.
+  - 01 `ZH4FUYiaczY` (Dimitri Karastelev): manos revisando documentos con cifras, en tono oscuro.
+  - 02 `RbYg6fKSfcY` (Vitaly Gariev): equipo de traje analizando documentos.
+  - 03 `MYbhN8KaaEc` (Hunters Race): abogado de traje azul marino abrochándose el saco.
+  - Recortadas en cuadrado y optimizadas a WebP de 480×480 (8–18 KB) en `assets/img/metodologia/paso-*.webp`. Los originales quedan fuera del repo.
+- Página Metodología en Local (#97): se reemplazó solo esa sección, tras guardar respaldo del contenido completo (fuera del repo) y con revisión nativa. El resto de la página no cambia.
+- `WORDPRESS-SETUP.md`: filas de las 3 fotos con fuente y licencia.
+
+**Verificación (Local):**
+- **Geometría:** el conector cae exactamente en el centro de ambos nodos (desfase 0.0px en las dos puntas de cada tramo) a 1440, 1280, 1024, 768 y 390px, también durante la entrada.
+- **Secuencia en scroll real:** paso 1 → tramo → paso 2 → tramo → paso 3, a 1280, 620 y 375px.
+- **Sin desbordes:** sin scroll horizontal en ningún ancho. Título en 4 líneas a 1280px.
+- **Técnica:** auditoría de bloques (95, sin discrepancias), `php -l`, `node --check main.js` y CSS balanceado.
+
+**Nota:** son las primeras fotos de banco del sitio, por pedido explícito del Owner (el criterio candidato de D6 era "nunca banco genérico"). Si el cliente entrega fotos propias para estos pasos, basta con reemplazar los 3 archivos `paso-*.webp` con el mismo nombre.
+
+## Metodología — ajuste de proporciones de "Nuestra metodología" (D139, 2026-09-30)
+
+**Pedido (Owner):** el título de la izquierda era "demasiado grande, demasiadísimo": bajarlo considerablemente para que se vea uniforme. Aprovechar mejor el espacio de las tarjetas: número a la izquierda del título (no encima) y fotos más pequeñas, para que las 3 tarjetas se vean completas sin salirse de la pantalla.
+
+**Aplicado (`components.css`, bloque D138; el pattern no cambia):**
+- **Título:** usa el tamaño estándar de los títulos de sección del sitio (42px; 31px en móvil), en vez de 64–72px, con el énfasis aún en su propia línea. Eyebrow y filete cobre más ajustados (16px y 24px).
+- **Columnas:** 0.75fr / 1.25fr (antes 0.82 / 1.18): más ancho para las tarjetas, texto en menos líneas.
+- **Tarjetas:**
+  - Número a la izquierda del título, alineado a su línea base ("01 Diagnóstico"), de 15px; el texto va debajo a todo el ancho.
+  - Título de la tarjeta a 26px (como las tarjetas de Áreas en Inicio).
+  - Fotos de ~113–120px (antes ~158–172px); 72px en móvil.
+  - Relleno más ajustado y 20px entre tarjetas.
+
+**Verificación (Local):**
+- Las 3 tarjetas miden en total 594–638px, contra 689–1001px disponibles bajo el header, en 1024×768, 1280×800, 1366×768, 1440×900, 1536×864 y 1920×1080 (antes ~800px, no cabían).
+- A 1280×800 la sección completa queda en pantalla.
+- Conector alineado al centro de los nodos (desfase 0.0px); la secuencia de la línea sigue igual.
+- Móvil (375px): título de 31px y sin scroll horizontal. CSS balanceado.
+
+## Metodología — banner con la foto IMG_9102 (D140, 2026-09-30)
+
+**Pedido (Owner):** "reemplaza la imagen del main banner de metodologia, por esta IMG_9102".
+
+**Aplicado:**
+- `assets/img/metodologia/hero-9102.webp`:
+  - Franja 3:2 a todo el ancho del original vertical (4160×6240, y 14%–58%: del pelo al escritorio), 2200×1467, WebP q70, 65 KB. Mismo tamaño y calidad que los demás banners; el original no se toca.
+  - Nombre nuevo para que ningún navegador muestre el banner anterior desde caché (misma lección que D134).
+  - `metodologia/hero.webp` (IMG_9128, sin versionar, regenerable) se eliminó al quedar sin uso.
+- `patterns/metodologia-full.php` y página Metodología en Local (#97): se cambiaron solo el `src` y el `alt` del banner ("Integrante de AAA Estudio Legal atendiendo una llamada en su puesto de trabajo"), tras guardar respaldo fuera del repo y con revisión nativa. Ninguna otra entrada usaba el banner viejo.
+- `components.css` (`.hero--editorial--services`):
+  - El título de este banner va centrado; con la foto vertical, a todo el ancho la cabeza ocupa casi todo el alto.
+  - Con `object-position: 50% 60%` los ojos quedan visibles entre el header fijo y el eyebrow, y el texto cae sobre mentón, teléfono y saco (con 30–42% el título tapaba el rostro).
+  - Desde 1600px, 52%: a 2560px el 60% dejaba los ojos bajo el header.
+  - En móvil, 56% 50%: el título ocupa casi todo el banner y la foto queda de fondo bajo el degradado.
+- `WORDPRESS-SETUP.md`: fila del banner actualizada.
+
+**Verificación (Local):**
+- Carga `hero-9102.webp` (2200×1467) con el nuevo alt.
+- Encuadre revisado a 1024, 1280, 1440 y 1920px: ojos entre header y eyebrow, a ~130–205px del borde superior.
+- Móvil (375px): texto legible sobre la foto.
+- `php -l`, auditoría de bloques (95, sin discrepancias) y CSS balanceado.
+
+**Nota:** IMG_9102 es la misma foto que el cliente pidió quitar de "Nuestro enfoque" en Inicio (D127). Allí ya no se muestra, así que no se repite en el sitio.
+
+## Metodología — banner con la foto IMG_9116 (D141, 2026-09-30)
+
+**Pedido (Owner):** "no me gustó el resultado, intentemos con esta otra imagen IMG_9116". Reemplaza D140 (IMG_9102).
+
+**Aplicado:**
+- `assets/img/metodologia/hero-9116.webp`: foto completa (original horizontal 6240×4160, 3:2) → 2200×1467, WebP q70, 70 KB.
+  - Vista por encima del hombro, sin rostro, con la taza "Estudio Legal" al centro.
+  - `hero-9102.webp` (D140) se eliminó al quedar sin uso.
+- `patterns/metodologia-full.php` y página Metodología en Local (#97): se cambiaron solo el `src` y el `alt` ("Integrante de AAA Estudio Legal trabajando en su portátil, con la taza de la firma sobre el escritorio"), tras guardar respaldo fuera del repo y con revisión nativa.
+- `components.css` (`.hero--editorial--services`):
+  - Desde 1000px, `object-position: 50% calc(120px - 34.67vw)`. La foto cubre el ancho (alto = ancho / 1.5) y el logo de la taza está al 52% de su alto, así que cae siempre a ~120px del borde: entre el header fijo y el eyebrow, a cualquier ancho. Un porcentaje fijo lo escondía bajo el header a 1920px.
+  - De 641 a 999px, 45%. En móvil, 60% 50%.
+  - Se quitaron los ajustes de rostro de D140.
+- `WORDPRESS-SETUP.md`: fila del banner.
+
+**Verificación (Local):**
+- A 1024, 1280 y 1920px la taza con el logo asoma sobre el título y el texto cae sobre el portátil. A 960px se ve la taza completa.
+- La foto siempre cubre el banner.
+- `php -l` y CSS balanceado.
+
+**Nota:** IMG_9116 también se usa, en pequeño, en la tarjeta "Tecnología" de "¿Por qué confiar?" en Inicio.
+
+## Metodología — banner con la foto IMG_9095 (D142, 2026-09-30)
+
+**Pedido (Owner):** "nop, tampoco me gusta, usemos mejor IMG_9095". Reemplaza D141 (IMG_9116).
+
+**Aplicado:**
+- `assets/img/metodologia/hero-9095.webp`: foto completa (original 6240×4160) → 2200×1467, WebP q70, 79 KB.
+  - Equipo en la oficina: un abogado al fondo detrás de los monitores y otro en primer plano a la derecha.
+  - `hero-9116.webp` (D141) se eliminó al quedar sin uso.
+- `patterns/metodologia-full.php` y página Metodología en Local (#97): se cambiaron solo el `src` y el `alt` ("Integrantes del equipo de AAA Estudio Legal trabajando en la oficina"), tras guardar respaldo fuera del repo y con revisión nativa.
+- `components.css` (`.hero--editorial--services`):
+  - 35% en escritorio: el rostro del fondo queda justo sobre el eyebrow y el de primer plano a la derecha del título centrado.
+  - 70% 50% en móvil, para mostrar al de primer plano.
+  - Se retiró el ancla de la taza de D141.
+- `WORDPRESS-SETUP.md`: fila del banner.
+
+**Verificación (Local):** encuadre revisado a 1024, 1280, 1920 y 375px. `php -l` y CSS balanceado.
+
+**Nota:** IMG_9095 también aparece en una tarjeta de "¿Por qué confiar?" (Inicio) y en "Equipo jurídico" (Quiénes somos, temporal hasta el collage).
+
+## Inicio — sin franja navy entre el menú y el banner (D143, 2026-09-30)
+
+**Request (Owner, with a marked screenshot):** remove the "pequeño espacio azul" between the menu and the photo of the Home banner.
+
+**Cause:** from 1024px up the Home hero had `padding-top: 90px`, inherited from the prototype's taller header. The fixed header measures 79px at all widths since D126, so the photo started 11px lower and exposed the section's navy background. On mobile the padding was already 78px.
+
+**Applied (`components.css`):** `.hero-immersive:where(:not(.hero--editorial))` now uses 78px from 1024px up as well, and the header comment was updated. The interior page heroes had no problem (their photo starts behind the header).
+
+**Verification (Local):** at 390, 1024, 1280, 1440 and 1890px the photo starts right at the menu edge (0px gap; it tucks 1px under the header border). Balanced CSS. No pattern reinsertion needed.
+
+## Inicio, header y menú móvil — ajustes de presencia y navegación (D144, 2026-10-01)
+
+**Request (Owner, with screenshots):**
+1. Title "Soluciones legales estratégicas" with the serif + italic composition of "Nuestro enfoque".
+3. Menu with more height and presence over the banner.
+4. Restore the anchored button, or a centered down arrow with subtle animation.
+5. More top and bottom spacing in "Nuestro enfoque".
+6. "Áreas de práctica" back on a blue background.
+7. Mobile menu with icons and contact + social info as in the prototype; mobile Áreas cards with uneven gaps.
+
+(The numbering follows the Owner's message, which had no item 2.)
+
+**Applied:**
+- **Banner title (pattern + Inicio page #82):** "Soluciones legales *estratégicas*": the regular part in white, "estratégicas" in cobre italic (`.aaa-text-emphasis`). Before (D116) the whole H1 was cobre.
+- **Header (`components.css`, D144 block):**
+  - Height 88px (80px on mobile), unified in `--aaa-header-h`. Background navy-hover (one shade deeper than the banner's veil), cobre rule and soft shadow. Logo 54px (48px on mobile), 16px links with a cobre underline on hover and on the current page.
+  - "Mi caso" button 46px; arrow only on mobile, as before.
+  - The Home banner and the anchors' `scroll-margin` use the same variable, so there's still no strip between header and banner (D143).
+- **Scroll arrow:** `hero__scroll` paragraph with a link to `#nuestro-enfoque` (pattern + page #82; the section gets the `nuestro-enfoque` anchor).
+  - Chosen over the "Conozca cómo lo hacemos" button, because the client asked to remove that CTA (PPTX slide 2).
+  - Centered at the bottom of the banner: translucent circle, CSS-mask arrow, subtle bounce and delayed entrance. Hover and focus in cobre.
+  - The link text stays as its accessible name. Smooth scroll is enabled; with reduced motion there's no animation.
+- **"Nuestro enfoque":** spacing up from 96px to clamp(120px, 11vw, 160px), 88px on mobile. Covers the pattern markup and the stored page's markup (column).
+- **Áreas de práctica:** navy-deep again (reverts D128) with white title, cobre eyebrow and emphasis, and its own top spacing restored.
+  - On mobile and tablet the cards no longer have a fixed minimum height: 48px after the index, no uneven gaps.
+- **Mobile menu:**
+  - `functions.php`, new `aaa_mobile_nav_extras()` on `render_block_core/navigation`. It adds the logo and a contact block to the panel, only in the final render and only in the header menu. Contact: address, WhatsApp, email, LinkedIn and Instagram (same data and icons as the footer), plus a "Solicitar evaluación jurídica →" CTA to `/contacto/`.
+  - CSS: navy gradient with a 6% isotype watermark; 24px links with a cobre icon per page (home, compass, team, briefcase), dividers and a "→" on the current page; cobre focus instead of the blue ring; staggered entrance.
+  - None of this shows on desktop.
+- `STATUS.md` (this entry).
+
+**Verification (Local):**
+- Header: 89px at 1440 and 81px at 375.
+- Interior pages and Contacto: no title sits under the header.
+- Arrow: clicking it leaves "Nuestro enfoque" at 88px, right under the header.
+- "Nuestro enfoque": 158px of spacing at 1440.
+- Áreas: navy with 96px top spacing; on mobile, cards of 275–334px with an even 48px from index to title.
+- Mobile menu open at 375px: logo, 4 links with icons, contact, social and CTA without overflow; the extras are hidden on desktop.
+- `php -l` (functions, pattern), block audit (115, no discrepancies), balanced CSS.
+
+**Pending:** the CTA in the mobile menu goes to `/contacto/`; "Mi caso" stays dummy (`#mi-caso`) until the ADY URL arrives (D136).

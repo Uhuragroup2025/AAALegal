@@ -19,7 +19,13 @@
   var renderCount = function (element, value) {
     var prefix = element.getAttribute('data-count-prefix') || '';
     var suffix = element.getAttribute('data-count-suffix') || '';
-    element.textContent = prefix + Math.round(value) + suffix;
+    element.textContent = prefix + Math.round(value);
+    if (suffix) {
+      var unit = document.createElement('span');
+      unit.className = 'stat-card__unit';
+      unit.textContent = suffix;
+      element.appendChild(unit);
+    }
   };
 
   var setFinalCounts = function () {

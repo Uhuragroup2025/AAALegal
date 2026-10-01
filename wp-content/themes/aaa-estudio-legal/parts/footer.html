@@ -1,66 +1,68 @@
-<!-- wp:group {"tagName":"footer","className":"aaa-site-footer","style":{"spacing":{"padding":{"top":"var:preset|spacing|16","bottom":"var:preset|spacing|8"}}},"textColor":"white","layout":{"type":"constrained"}} -->
-<footer class="wp-block-group aaa-site-footer has-white-color has-text-color">
+<!-- wp:group {"tagName":"footer","className":"aaa-site-footer","style":{"spacing":{"padding":{"top":"var:preset|spacing|24","bottom":"var:preset|spacing|8"}}},"textColor":"white","layout":{"type":"constrained"}} -->
+<footer class="wp-block-group aaa-site-footer has-white-color has-text-color" style="padding-top:var(--wp--preset--spacing--24);padding-bottom:var(--wp--preset--spacing--8)">
 
-	<!-- wp:image {"className":"aaa-site-footer__watermark","sizeSlug":"full"} -->
-	<figure class="wp-block-image aaa-site-footer__watermark size-full"><img src="" alt="" /></figure>
-	<!-- /wp:image -->
+	<!-- wp:group {"className":"aaa-footer-watermark"} --><div class="wp-block-group aaa-footer-watermark"></div><!-- /wp:group -->
 
 	<!-- wp:columns {"style":{"spacing":{"blockGap":{"top":"var:preset|spacing|8","left":"var:preset|spacing|8"}}}} -->
 	<div class="wp-block-columns">
 
 		<!-- wp:column {"width":"32%"} -->
 		<div class="wp-block-column" style="flex-basis:32%">
-			<!-- wp:site-logo {"width":140} /-->
+			<!-- wp:group {"className":"aaa-footer-logo"} --><div class="wp-block-group aaa-footer-logo"></div><!-- /wp:group -->
 		</div>
 		<!-- /wp:column -->
 
 		<!-- wp:column -->
 		<div class="wp-block-column">
-			<!-- wp:heading {"level":2,"fontSize":"sm"} -->
-			<h2 class="wp-block-heading has-sm-font-size">Contacto</h2>
-			<!-- /wp:heading -->
-
-			<!-- wp:paragraph {"fontSize":"sm"} -->
-			<p class="has-sm-font-size"><strong>Dirección</strong><br>Calle 28 Norte # 6BIS - 26, Barrio San Vicente, Cali, Valle del Cauca</p>
-			<!-- /wp:paragraph -->
-
-			<!-- wp:paragraph {"fontSize":"sm"} -->
-			<p class="has-sm-font-size"><strong>Teléfono principal</strong><br><a href="tel:+573176551931">317 655 1931</a></p>
-			<!-- /wp:paragraph -->
-
-			<!-- wp:paragraph {"fontSize":"sm"} -->
-			<p class="has-sm-font-size"><strong>WhatsApp</strong><br><a href="https://wa.me/573176551931">317 655 1931</a></p>
-			<!-- /wp:paragraph -->
-
-			<!-- wp:paragraph {"fontSize":"sm"} -->
-			<p class="has-sm-font-size"><strong>Correo general</strong><br><a href="mailto:info@agudeloabogados.com">info@agudeloabogados.com</a></p>
-			<!-- /wp:paragraph -->
+			<!-- wp:html -->
+			<address class="aaa-site-footer__contact-list">
+				<div class="aaa-site-footer__contact-item">
+					<svg class="aaa-site-footer__icon" viewBox="0 0 256 256" fill="none" stroke="currentColor" stroke-width="14" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="128" cy="104" r="32"></circle><path d="M200 104c0 64-72 112-72 112S56 168 56 104a72 72 0 0 1 144 0Z"></path></svg>
+					<span><strong>Dirección</strong>Calle 28 Norte # 6BIS - 26, Barrio San Vicente, Cali, Valle del Cauca</span>
+				</div>
+				<a class="aaa-site-footer__contact-item" href="tel:+573176551931">
+					<svg class="aaa-site-footer__icon" viewBox="0 0 256 256" fill="none" stroke="currentColor" stroke-width="14" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M92 48 64 24 32 40c0 101.6 82.4 184 184 184l16-32-24-28-36 12a144 144 0 0 1-92-92Z"></path></svg>
+					<span><strong>Teléfono principal</strong>317 655 1931</span>
+				</a>
+				<a class="aaa-site-footer__contact-item" href="https://wa.me/573176551931" target="_blank" rel="noopener noreferrer">
+					<svg class="aaa-site-footer__icon" viewBox="0 0 256 256" fill="none" stroke="currentColor" stroke-width="14" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M88 72c8 48 48 88 96 96l16-24-32-16-16 16c-16-8-32-24-40-40l16-16-16-32Z"></path><path d="M48 208 56 176a88 88 0 1 1 32 24Z"></path></svg>
+					<span><strong>WhatsApp</strong>317 655 1931</span>
+				</a>
+				<a class="aaa-site-footer__contact-item" href="mailto:info@agudeloabogados.com">
+					<svg class="aaa-site-footer__icon" viewBox="0 0 256 256" fill="none" stroke="currentColor" stroke-width="14" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="24" y="48" width="208" height="160" rx="16"></rect><path d="m24 72 104 72L232 72"></path></svg>
+					<span><strong>Correo general</strong>info@agudeloabogados.com</span>
+				</a>
+			</address>
+			<!-- /wp:html -->
 		</div>
 		<!-- /wp:column -->
 
 		<!-- wp:column -->
 		<div class="wp-block-column">
-			<!-- wp:heading {"level":2,"fontSize":"sm"} -->
-			<h2 class="wp-block-heading has-sm-font-size">Sitio</h2>
-			<!-- /wp:heading -->
-
-			<!-- wp:navigation {"layout":{"type":"flex","orientation":"vertical"},"style":{"typography":{"fontSize":"0.9375rem"}}} /-->
+			<!-- wp:navigation {"overlayMenu":"never","className":"aaa-site-footer__sitemap-list","layout":{"type":"flex","orientation":"vertical"}} -->
+				<!-- wp:home-link {"label":"Inicio"} /-->
+				<!-- wp:navigation-link {"label":"Metodología","url":"/metodologia/","kind":"custom"} /-->
+				<!-- wp:navigation-link {"label":"Quiénes somos","url":"/quienes-somos/","kind":"custom"} /-->
+				<!-- wp:navigation-link {"label":"Trabaja con nosotros","url":"/trabaja-con-nosotros/","kind":"custom"} /-->
+				<!-- wp:navigation-link {"label":"Contacto","url":"/contacto/","kind":"custom"} /-->
+			<!-- /wp:navigation -->
 		</div>
 		<!-- /wp:column -->
 
 		<!-- wp:column -->
 		<div class="wp-block-column">
-			<!-- wp:heading {"level":2,"fontSize":"sm"} -->
-			<h2 class="wp-block-heading has-sm-font-size">Redes sociales</h2>
-			<!-- /wp:heading -->
-
-			<!-- wp:paragraph {"fontSize":"sm"} -->
-			<p class="has-sm-font-size"><a href="#url-linkedin-pendiente">LinkedIn <em>(URL pendiente)</em></a></p>
-			<!-- /wp:paragraph -->
-
-			<!-- wp:paragraph {"fontSize":"sm"} -->
-			<p class="has-sm-font-size"><a href="#url-instagram-pendiente">Instagram <em>(URL pendiente)</em></a></p>
-			<!-- /wp:paragraph -->
+			<!-- wp:html -->
+			<div class="aaa-site-footer__social-list">
+				<a class="aaa-site-footer__social-link" href="https://www.linkedin.com/company/agudelo-abogados-asociados/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn: AAA Estudio Legal (se abre en una pestaña nueva)">
+					<svg class="aaa-site-footer__icon" viewBox="0 0 256 256" fill="none" stroke="currentColor" stroke-width="14" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="28" y="28" width="200" height="200" rx="24"></rect><circle cx="80" cy="84" r="10" fill="currentColor" stroke="none"></circle><path d="M80 120v64M120 184v-64M120 148c8-20 48-28 56 8v28"></path></svg>
+					<span><strong>LinkedIn</strong><small>AAA Estudio Legal</small></span>
+				</a>
+				<a class="aaa-site-footer__social-link" href="https://www.instagram.com/aaaestudio/" target="_blank" rel="noopener noreferrer" aria-label="Instagram: @aaaestudio (se abre en una pestaña nueva)">
+					<svg class="aaa-site-footer__icon" viewBox="0 0 256 256" fill="none" stroke="currentColor" stroke-width="14" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="32" y="32" width="192" height="192" rx="48"></rect><circle cx="128" cy="128" r="44"></circle><circle cx="180" cy="76" r="8" fill="currentColor" stroke="none"></circle></svg>
+					<span><strong>Instagram</strong><small>@aaaestudio</small></span>
+				</a>
+			</div>
+			<!-- /wp:html -->
 		</div>
 		<!-- /wp:column -->
 
@@ -84,10 +86,7 @@
 
 <!-- wp:html -->
 <div class="aaa-cookie-banner" role="region" aria-label="Aviso de cookies" hidden>
-	<p>Usamos cookies propias y de terceros (GA4, GTM, Microsoft Clarity) para medir el uso del sitio. Puede conocer más en nuestro aviso de privacidad.</p>
-	<div class="wp-block-buttons">
-		<div class="wp-block-button is-style-outline"><a class="wp-block-button__link wp-element-button" href="/aviso-legal/">Consultar aviso de privacidad</a></div>
-		<button class="wp-element-button" type="button" data-cookie-accept>Aceptar</button>
-	</div>
+	<p class="aaa-cookie-banner__text">Usamos cookies propias y de terceros (Google Analytics, Google Tag Manager y Microsoft Clarity) para medir el uso del sitio y mejorar su experiencia. Conozca más en nuestra <a href="/politica-de-privacidad/">Política de privacidad</a>.</p>
+	<button class="aaa-cookie-banner__accept" type="button" data-cookie-accept>Aceptar</button>
 </div>
 <!-- /wp:html -->

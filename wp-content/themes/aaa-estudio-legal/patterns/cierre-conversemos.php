@@ -34,7 +34,7 @@
 		<div class="wp-block-buttons">
 			<!-- wp:button {"backgroundColor":"accent-main","textColor":"navy-hover"} -->
 			<div class="wp-block-button">
-				<a class="wp-block-button__link has-navy-hover-color has-accent-main-background-color has-text-color has-background wp-element-button" href="/captacion-b2b/">Hablemos de su caso →</a>
+				<a class="wp-block-button__link has-navy-hover-color has-accent-main-background-color has-text-color has-background wp-element-button" href="/contacto/">Hablemos de su caso →</a>
 			</div>
 			<!-- /wp:button -->
 		</div>

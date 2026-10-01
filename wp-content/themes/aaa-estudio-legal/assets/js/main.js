@@ -36,6 +36,81 @@
     revealEls.forEach(function (el) { observer.observe(el); });
   }
 
+  // --- Metodología: la línea recorre los pasos en orden (D138) ---
+  // Cada paso se "enciende" (.is-lit) cuando entra en pantalla, pero nunca
+  // antes que el anterior: si ya lo está, primero se dibuja el tramo que llega
+  // a él (.is-linked, 750ms en CSS) y después se enciende. Así la línea va de
+  // un paso al siguiente tanto si las 3 tarjetas aparecen juntas como si
+  // entran una a una al hacer scroll. Sin JS o con movimiento reducido no se
+  // marca `data-timeline-ready` y el CSS muestra el estado final.
+  if (!prefersReducedMotion && 'IntersectionObserver' in window) {
+    document.querySelectorAll('.stepper--timeline .stepper__steps').forEach(function (list) {
+      var steps = Array.prototype.slice.call(list.querySelectorAll('.stepper__step'));
+      if (!steps.length) return;
+      var SEGMENT_MS = 750;
+      var seen = steps.map(function () { return false; });
+      var lit = -1;
+      var busy = false;
+
+      var advance = function () {
+        var next = lit + 1;
+        if (busy || next >= steps.length || !seen[next]) return;
+        busy = true;
+        if (next > 0) steps[next].classList.add('is-linked');
+        window.setTimeout(function () {
+          steps[next].classList.add('is-lit');
+          lit = next;
+          busy = false;
+          advance();
+        }, next > 0 ? SEGMENT_MS : 300);
+      };
+
+      list.setAttribute('data-timeline-ready', '');
+      var stepObserver = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          // También cuenta un paso que ya quedó por encima de la pantalla
+          // (recarga a mitad de página): si no, la cadena se quedaría a medias.
+          if (entry.isIntersecting || entry.boundingClientRect.top < 0) {
+            seen[steps.indexOf(entry.target)] = true;
+            stepObserver.unobserve(entry.target);
+          }
+        });
+        advance();
+      }, { threshold: 0.55 });
+      steps.forEach(function (step) { stepObserver.observe(step); });
+    });
+  }
+
+  // --- Sectores (Home): carrusel continuo de logos por tarjeta (D119) ---
+  // Mete los logos en una pista y duplica el set las veces necesarias para que
+  // el loop nunca deje hueco (copias con aria-hidden y alt vacío). Sin JS o con
+  // movimiento reducido, CSS muestra la fila estática.
+  if (!prefersReducedMotion) {
+    document.querySelectorAll('.home-page .sector-card__logos').forEach(function (logos) {
+      var items = Array.prototype.filter.call(logos.children, function (el) {
+        return el.classList.contains('sector-card__logo');
+      });
+      if (items.length < 2) return;
+      var visible = parseFloat(window.getComputedStyle(logos).getPropertyValue('--sector-visible')) || 2.25;
+      var sets = Math.ceil(1 + visible / items.length);
+      var track = document.createElement('div');
+      track.className = 'sector-card__track';
+      items.forEach(function (item) { track.appendChild(item); });
+      for (var s = 1; s < sets; s++) {
+        items.forEach(function (item) {
+          var copy = item.cloneNode(true);
+          copy.setAttribute('aria-hidden', 'true');
+          Array.prototype.forEach.call(copy.querySelectorAll('img'), function (img) { img.alt = ''; });
+          track.appendChild(copy);
+        });
+      }
+      logos.appendChild(track);
+      logos.style.setProperty('--logo-count', items.length);
+      logos.style.setProperty('--sets', sets);
+      logos.classList.add('is-marquee');
+    });
+  }
+
   // --- Equipo: tarjetas flip accesibles ("Personas, no procesos") ---
   // El control explícito evita que un swipe táctil active el giro por accidente.
   // Sin JS, CSS presenta ambas caras en flujo para que el contenido siga disponible.
