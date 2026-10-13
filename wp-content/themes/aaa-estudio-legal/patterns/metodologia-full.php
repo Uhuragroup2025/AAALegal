@@ -22,7 +22,7 @@
 		<!-- /wp:group -->
 		<!-- wp:group {"className":"hero-shell__content"} -->
 		<div class="wp-block-group hero-shell__content">
-			<!-- wp:paragraph {"className":"aaa-eyebrow"} --><p class="aaa-eyebrow">Soluciones para acreedores</p><!-- /wp:paragraph -->
+			<!-- wp:paragraph {"className":"aaa-eyebrow"} --><p class="aaa-eyebrow">Soluciones</p><!-- /wp:paragraph -->
 			<!-- wp:heading {"level":1,"className":"hero__title"} -->
 			<h1 class="wp-block-heading hero__title">Insolvencia, normalización de activos y línea corporativa, <em class="aaa-text-emphasis">con una estrategia clara.</em></h1>
 			<!-- /wp:heading -->
@@ -51,7 +51,7 @@
 			<div class="wp-block-group stepper__step aaa-reveal aaa-stagger-0">
 				<!-- wp:group {"className":"stepper__node"} --><div class="wp-block-group stepper__node"></div><!-- /wp:group -->
 				<!-- wp:image {"className":"stepper__photo"} -->
-				<figure class="wp-block-image stepper__photo"><img src="<?php echo esc_url( get_theme_file_uri( 'assets/img/metodologia/paso-diagnostico.webp' ) ); ?>" alt="" /></figure>
+				<figure class="wp-block-image stepper__photo"><img src="<?php echo esc_url( get_theme_file_uri( 'assets/img/metodologia/aaa-paso-diagnostico.webp' ) ); ?>" alt="" /></figure>
 				<!-- /wp:image -->
 				<!-- wp:group {"className":"stepper__body"} -->
 				<div class="wp-block-group stepper__body">
@@ -66,7 +66,7 @@
 			<div class="wp-block-group stepper__step aaa-reveal aaa-stagger-1">
 				<!-- wp:group {"className":"stepper__node"} --><div class="wp-block-group stepper__node"></div><!-- /wp:group -->
 				<!-- wp:image {"className":"stepper__photo"} -->
-				<figure class="wp-block-image stepper__photo"><img src="<?php echo esc_url( get_theme_file_uri( 'assets/img/metodologia/paso-estrategia.webp' ) ); ?>" alt="" /></figure>
+				<figure class="wp-block-image stepper__photo"><img src="<?php echo esc_url( get_theme_file_uri( 'assets/img/metodologia/aaa-paso-estrategia-equipo.webp' ) ); ?>" alt="" /></figure>
 				<!-- /wp:image -->
 				<!-- wp:group {"className":"stepper__body"} -->
 				<div class="wp-block-group stepper__body">
@@ -81,7 +81,7 @@
 			<div class="wp-block-group stepper__step aaa-reveal aaa-stagger-2">
 				<!-- wp:group {"className":"stepper__node"} --><div class="wp-block-group stepper__node"></div><!-- /wp:group -->
 				<!-- wp:image {"className":"stepper__photo"} -->
-				<figure class="wp-block-image stepper__photo"><img src="<?php echo esc_url( get_theme_file_uri( 'assets/img/metodologia/paso-representacion.webp' ) ); ?>" alt="" /></figure>
+				<figure class="wp-block-image stepper__photo"><img src="<?php echo esc_url( get_theme_file_uri( 'assets/img/metodologia/aaa-paso-representacion-tribunal.webp' ) ); ?>" alt="" /></figure>
 				<!-- /wp:image -->
 				<!-- wp:group {"className":"stepper__body"} -->
 				<div class="wp-block-group stepper__body">
@@ -103,12 +103,12 @@
 <section class="wp-block-group alignfull services-intro surface-theme--light-base aaa-section has-surface-light-background-color has-background">
 	<!-- wp:group {"className":"services-intro__head section-heading--editorial aaa-motion-section-title"} -->
 	<div class="wp-block-group services-intro__head section-heading--editorial aaa-motion-section-title">
-		<!-- wp:paragraph {"className":"aaa-eyebrow"} --><p class="aaa-eyebrow">Representación especializada para acreedores</p><!-- /wp:paragraph -->
+		<!-- wp:paragraph {"className":"aaa-eyebrow"} --><p class="aaa-eyebrow">Representación especializada</p><!-- /wp:paragraph -->
 		<!-- wp:heading {"level":2} -->
 		<h2 class="wp-block-heading">Tres áreas de práctica, <em class="aaa-text-emphasis">un mismo criterio.</em></h2>
 		<!-- /wp:heading -->
 		<!-- wp:paragraph {"className":"services-intro__copy"} -->
-		<p class="services-intro__copy">Representamos exclusivamente los intereses del acreedor. Integramos defensa en procesos concursales, normalización de activos y línea corporativa y litigios para anticipar riesgos, proteger el crédito y maximizar sus posibilidades de recuperación.</p>
+		<p class="services-intro__copy">Integramos defensa en procesos concursales, normalización de activos y línea corporativa y litigios para anticipar riesgos, proteger el crédito y maximizar sus posibilidades de recuperación.</p>
 		<!-- /wp:paragraph -->
 	</div>
 	<!-- /wp:group -->
@@ -117,7 +117,7 @@
 		<!-- wp:group {"className":"service-card--editorial aaa-reveal aaa-stagger-0"} -->
 		<div class="wp-block-group service-card--editorial aaa-reveal aaa-stagger-0">
 			<!-- wp:image {"className":"service-card__media"} -->
-			<figure class="wp-block-image service-card__media"><img src="<?php echo esc_url( get_theme_file_uri( 'assets/img/metodologia/servicio-concursal.webp' ) ); ?>" alt="" /></figure>
+			<figure class="wp-block-image service-card__media"><img src="<?php echo esc_url( get_theme_file_uri( 'assets/img/metodologia/aaa-area-concursal.webp' ) ); ?>" alt="" /></figure>
 			<!-- /wp:image -->
 			<!-- wp:group {"className":"service-card__body"} -->
 			<div class="wp-block-group service-card__body">
@@ -140,7 +140,7 @@
 		<!-- wp:group {"className":"service-card--editorial aaa-reveal aaa-stagger-1"} -->
 		<div class="wp-block-group service-card--editorial aaa-reveal aaa-stagger-1">
 			<!-- wp:image {"className":"service-card__media"} -->
-			<figure class="wp-block-image service-card__media"><img src="<?php echo esc_url( get_theme_file_uri( 'assets/img/metodologia/servicio-normalizacion.webp' ) ); ?>" alt="" /></figure>
+			<figure class="wp-block-image service-card__media"><img src="<?php echo esc_url( get_theme_file_uri( 'assets/img/metodologia/aaa-area-normalizacion.webp' ) ); ?>" alt="" /></figure>
 			<!-- /wp:image -->
 			<!-- wp:group {"className":"service-card__body"} -->
 			<div class="wp-block-group service-card__body">
@@ -163,7 +163,7 @@
 		<!-- wp:group {"className":"service-card--editorial aaa-reveal aaa-stagger-2"} -->
 		<div class="wp-block-group service-card--editorial aaa-reveal aaa-stagger-2">
 			<!-- wp:image {"className":"service-card__media"} -->
-			<figure class="wp-block-image service-card__media"><img src="<?php echo esc_url( get_theme_file_uri( 'assets/img/metodologia/servicio-corporativa.webp' ) ); ?>" alt="" /></figure>
+			<figure class="wp-block-image service-card__media"><img src="<?php echo esc_url( get_theme_file_uri( 'assets/img/metodologia/aaa-area-corporativa.webp' ) ); ?>" alt="" /></figure>
 			<!-- /wp:image -->
 			<!-- wp:group {"className":"service-card__body"} -->
 			<div class="wp-block-group service-card__body">

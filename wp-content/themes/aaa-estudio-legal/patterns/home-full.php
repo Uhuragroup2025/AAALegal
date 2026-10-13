@@ -157,7 +157,7 @@
 			<!-- wp:group {"className":"why-trust__item aaa-reveal aaa-stagger-0"} -->
 			<div class="wp-block-group why-trust__item aaa-reveal aaa-stagger-0">
 				<!-- wp:image {"className":"why-trust__media"} -->
-				<figure class="wp-block-image why-trust__media"><img src="<?php echo esc_url( get_theme_file_uri( 'assets/img/home/confianza-casos.webp' ) ); ?>" alt="Equipo de AAA Estudio Legal trabajando en la oficina" /></figure>
+				<figure class="wp-block-image why-trust__media"><img src="<?php echo esc_url( get_theme_file_uri( 'assets/img/home/aaa-confianza-casos.webp' ) ); ?>" alt="Pilas de expedientes y carpetas de archivo en una oficina" /></figure>
 				<!-- /wp:image -->
 				<!-- wp:heading {"level":3} --><h3 class="wp-block-heading">Manejo de gran número de casos.</h3><!-- /wp:heading -->
 				<!-- wp:paragraph --><p>Procesos individuales y masivos, con infraestructura propia.</p><!-- /wp:paragraph -->
@@ -166,7 +166,7 @@
 			<!-- wp:group {"className":"why-trust__item aaa-reveal aaa-stagger-1"} -->
 			<div class="wp-block-group why-trust__item aaa-reveal aaa-stagger-1">
 				<!-- wp:image {"className":"why-trust__media"} -->
-				<figure class="wp-block-image why-trust__media"><img src="<?php echo esc_url( get_theme_file_uri( 'assets/img/home/confianza-equipo.webp' ) ); ?>" alt="Dos integrantes del equipo de AAA Estudio Legal en su puesto de trabajo" /></figure>
+				<figure class="wp-block-image why-trust__media"><img src="<?php echo esc_url( get_theme_file_uri( 'assets/img/home/aaa-confianza-equipo.webp' ) ); ?>" alt="Profesionales revisando documentos alrededor de una mesa de trabajo" /></figure>
 				<!-- /wp:image -->
 				<!-- wp:heading {"level":3} --><h3 class="wp-block-heading">Equipo especializado.</h3><!-- /wp:heading -->
 				<!-- wp:paragraph --><p>Experiencia jurídica y conocimiento sectorial.</p><!-- /wp:paragraph -->
@@ -175,7 +175,7 @@
 			<!-- wp:group {"className":"why-trust__item aaa-reveal aaa-stagger-2"} -->
 			<div class="wp-block-group why-trust__item aaa-reveal aaa-stagger-2">
 				<!-- wp:image {"className":"why-trust__media"} -->
-				<figure class="wp-block-image why-trust__media"><img src="<?php echo esc_url( get_theme_file_uri( 'assets/img/home/confianza-tecnologia.webp' ) ); ?>" alt="Puesto de trabajo con computador portátil y taza de AAA Estudio Legal" /></figure>
+				<figure class="wp-block-image why-trust__media"><img src="<?php echo esc_url( get_theme_file_uri( 'assets/img/home/aaa-confianza-tecnologia.webp' ) ); ?>" alt="Computador portátil con un tablero de indicadores en pantalla" /></figure>
 				<!-- /wp:image -->
 				<!-- wp:heading {"level":3} --><h3 class="wp-block-heading">Trabajo respaldado en tecnología propia (ADY).</h3><!-- /wp:heading -->
 				<!-- wp:paragraph --><p>Soluciones más ágiles y precisas en cada proceso.</p><!-- /wp:paragraph -->
@@ -184,7 +184,7 @@
 			<!-- wp:group {"className":"why-trust__item aaa-reveal aaa-stagger-3"} -->
 			<div class="wp-block-group why-trust__item aaa-reveal aaa-stagger-3">
 				<!-- wp:image {"className":"why-trust__media"} -->
-				<figure class="wp-block-image why-trust__media"><img src="<?php echo esc_url( get_theme_file_uri( 'assets/img/home/confianza-seguridad.webp' ) ); ?>" alt="Manos sobre el teclado y el mouse en un puesto de trabajo" /></figure>
+				<figure class="wp-block-image why-trust__media"><img src="<?php echo esc_url( get_theme_file_uri( 'assets/img/home/aaa-confianza-seguridad.webp' ) ); ?>" alt="Candado dorado sobre el teclado de un computador" /></figure>
 				<!-- /wp:image -->
 				<!-- wp:heading {"level":3} --><h3 class="wp-block-heading">Su información, protegida.</h3><!-- /wp:heading -->
 				<!-- wp:paragraph --><p>Servidores propios y continuidad alineada con ISO 27001.</p><!-- /wp:paragraph -->
@@ -193,7 +193,7 @@
 			<!-- wp:group {"className":"why-trust__item aaa-reveal aaa-stagger-4"} -->
 			<div class="wp-block-group why-trust__item aaa-reveal aaa-stagger-4">
 				<!-- wp:image {"className":"why-trust__media"} -->
-				<figure class="wp-block-image why-trust__media"><img src="<?php echo esc_url( get_theme_file_uri( 'assets/img/home/confianza-cumplimiento.webp' ) ); ?>" alt="Profesional de AAA Estudio Legal trabajando junto a un ventanal" /></figure>
+				<figure class="wp-block-image why-trust__media"><img src="<?php echo esc_url( get_theme_file_uri( 'assets/img/home/aaa-confianza-cumplimiento-sello.webp' ) ); ?>" alt="Sello de revisión apoyado sobre un documento normativo" /></figure>
 				<!-- /wp:image -->
 				<!-- wp:heading {"level":3} --><h3 class="wp-block-heading">Cumplimiento normativo (compliance).</h3><!-- /wp:heading -->
 				<!-- wp:paragraph --><p>Ética y transparencia en cada actuación.</p><!-- /wp:paragraph -->
@@ -202,7 +202,7 @@
 			<!-- wp:group {"className":"why-trust__item aaa-reveal aaa-stagger-5"} -->
 			<div class="wp-block-group why-trust__item aaa-reveal aaa-stagger-5">
 				<!-- wp:image {"className":"why-trust__media"} -->
-				<figure class="wp-block-image why-trust__media"><img src="<?php echo esc_url( get_theme_file_uri( 'assets/img/home/confianza-presencia.webp' ) ); ?>" alt="Integrante de AAA Estudio Legal con una taza de la firma" /></figure>
+				<figure class="wp-block-image why-trust__media"><img src="<?php echo esc_url( get_theme_file_uri( 'assets/img/home/aaa-confianza-presencia-bandera.webp' ) ); ?>" alt="Bandera de Colombia ondeando sobre la ciudad de Cartagena" /></figure>
 				<!-- /wp:image -->
 				<!-- wp:heading {"level":3} --><h3 class="wp-block-heading">Presencia en todo el país.</h3><!-- /wp:heading -->
 				<!-- wp:paragraph --><p>Acompañamos organizaciones en todo el territorio nacional.</p><!-- /wp:paragraph -->
@@ -316,13 +316,13 @@
 	<div class="wp-block-group stats-grid">
 		<!-- wp:group {"className":"stat-card"} -->
 		<div class="wp-block-group stat-card">
-			<!-- wp:paragraph {"className":"stat-card__number aaa-stat-cases"} --><p class="stat-card__number aaa-stat-cases">8754</p><!-- /wp:paragraph -->
+			<!-- wp:paragraph {"className":"stat-card__number aaa-stat-cases"} --><p class="stat-card__number aaa-stat-cases">+8.700</p><!-- /wp:paragraph -->
 			<!-- wp:paragraph {"className":"stat-card__label"} --><p class="stat-card__label">Casos gestionados</p><!-- /wp:paragraph -->
 		</div>
 		<!-- /wp:group -->
 		<!-- wp:group {"className":"stat-card"} -->
 		<div class="wp-block-group stat-card">
-			<!-- wp:paragraph {"className":"stat-card__number aaa-stat-clients"} --><p class="stat-card__number aaa-stat-clients">30</p><!-- /wp:paragraph -->
+			<!-- wp:paragraph {"className":"stat-card__number aaa-stat-clients"} --><p class="stat-card__number aaa-stat-clients">+30</p><!-- /wp:paragraph -->
 			<!-- wp:paragraph {"className":"stat-card__label"} --><p class="stat-card__label">Clientes atendidos</p><!-- /wp:paragraph -->
 		</div>
 		<!-- /wp:group -->

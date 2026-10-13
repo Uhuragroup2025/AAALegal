@@ -56,9 +56,9 @@
 			<!-- wp:heading {"level":2} -->
 			<h2 class="wp-block-heading">¿Por qué trabajar <em class="aaa-text-emphasis">con nosotros?</em></h2>
 			<!-- /wp:heading -->
-			<!-- wp:paragraph {"className":"why-work__lead"} --><p class="why-work__lead">En AAA creemos que el crecimiento de nuestra organización comienza con el crecimiento de nuestro talento.</p><!-- /wp:paragraph -->
+			<!-- wp:paragraph {"className":"why-work__lead"} --><p class="why-work__lead">En AAA Estudio Legal creemos que el crecimiento de nuestra organización comienza con el crecimiento de nuestro talento.</p><!-- /wp:paragraph -->
 			<!-- wp:paragraph --><p>Somos un equipo en constante evolución, donde cada persona aporta sus conocimientos, ideas y experiencia para alcanzar objetivos comunes. Trabajar con nosotros significa formar parte de un entorno profesional que promueve el aprendizaje, el desarrollo de habilidades y el crecimiento profesional.</p><!-- /wp:paragraph -->
-			<!-- wp:paragraph --><p>Haz parte de AAA y construye con nosotros una nueva etapa de crecimiento, aprendizaje y oportunidades.</p><!-- /wp:paragraph -->
+			<!-- wp:paragraph --><p>Haz parte de AAA Estudio Legal y construye con nosotros una nueva etapa de crecimiento, aprendizaje y oportunidades.</p><!-- /wp:paragraph -->
 		</div>
 		<!-- /wp:group -->
 	</div>
@@ -145,7 +145,7 @@
 	<div class="wp-block-group talent-application__heading section-heading--editorial aaa-motion-section-title">
 		<!-- wp:paragraph {"className":"aaa-eyebrow"} --><p class="aaa-eyebrow">Postulación</p><!-- /wp:paragraph -->
 		<!-- wp:heading {"level":2} -->
-		<h2 class="wp-block-heading">Donde el talento se convierte en trayectoria. <em class="aaa-text-emphasis">Conozca lo que significa ser parte de AAA.</em></h2>
+		<h2 class="wp-block-heading">Donde el talento se convierte en trayectoria. <em class="aaa-text-emphasis">Conozca lo que significa ser parte de AAA</em></h2>
 		<!-- /wp:heading -->
 		<!-- wp:paragraph {"className":"talent-application__intro"} -->
 		<p class="talent-application__intro">Crezca junto a un equipo que entiende el rigor, el criterio y la excelencia como parte de cada desafío.</p>

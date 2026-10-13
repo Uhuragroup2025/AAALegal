@@ -169,7 +169,7 @@ Pasos por página:
 
 Después de esto, revisar los botones de cierre — todos apuntan a `/contacto/`;
 si el slug real termina siendo distinto, ajustarlo en cada pattern (búsqueda
-simple de `/contacto/`). El botón "Mi caso" del header **no** va a Contacto: es
+simple de `/contacto/`). El botón del header (antes "Mi caso"; desde D155 "Nuestra plataforma", como pidió el cliente) **no** va a Contacto: es
 el acceso a la plataforma ADY (D42) y, mientras no llegue su URL, queda con el
 enlace provisional `#mi-caso` en `parts/header.html` (D136) — reemplazarlo ahí
 cuando el cliente la entregue.
@@ -218,8 +218,8 @@ la página muestra "Error: no se encontró el formulario". En la pestaña
 [text* nombre id:tf-nombre autocomplete:name]
 </div>
 <div class="talent-form__field">
-<label for="tf-telefono">Teléfono</label>
-[tel* telefono id:tf-telefono autocomplete:tel]
+<label for="tf-telefono">Celular</label>
+[tel* telefono id:tf-telefono autocomplete:tel minlength:10 maxlength:10]
 </div>
 <div class="talent-form__field">
 <label for="tf-cargo">Cargo de interés</label>
@@ -253,28 +253,32 @@ formulario **por su título**: basta con crearlo con el título exacto
 **Contacto B2B**. **En Local ya está creado (formulario #115, validador de CF7
 sin errores)**; en staging/producción hay que crearlo igual. En la pestaña
 **Formulario**, reemplazar todo por (D136: la lámina 3 de la PPTX quita Tipo de
-organización, Asunto de interés y Contexto general del asunto; quedan 5 campos):
+organización, Asunto de interés y Contexto general del asunto; quedan 5 campos. D155: se agrega al inicio el selector "Persona natural o empresa" pedido por el cliente en la reunión del 2026-10-02, y Empresa y Cargo pasan a opcionales):
 
 ```
+<div class="talent-form__field talent-form__field--wide">
+<label for="cf-tipo">Persona natural o empresa</label>
+[select* tipo-cliente id:cf-tipo first_as_label "Seleccione una opción" "Persona natural" "Empresa"]
+</div>
 <div class="talent-form__field talent-form__field--wide">
 <label for="cf-nombre">Nombre completo</label>
 [text* nombre id:cf-nombre autocomplete:name]
 </div>
 <div class="talent-form__field">
-<label for="cf-organizacion">Empresa u organización</label>
-[text* organizacion id:cf-organizacion autocomplete:organization]
+<label for="cf-organizacion">Empresa (si aplica)</label>
+[text organizacion id:cf-organizacion autocomplete:organization]
 </div>
 <div class="talent-form__field">
-<label for="cf-cargo">Cargo</label>
-[text* cargo id:cf-cargo autocomplete:organization-title]
+<label for="cf-cargo">Cargo (si aplica)</label>
+[text cargo id:cf-cargo autocomplete:organization-title]
 </div>
 <div class="talent-form__field">
-<label for="cf-correo">Correo corporativo</label>
+<label for="cf-correo">Correo electrónico</label>
 [email* correo id:cf-correo autocomplete:email]
 </div>
 <div class="talent-form__field">
-<label for="cf-telefono">Teléfono de contacto</label>
-[tel* telefono id:cf-telefono autocomplete:tel]
+<label for="cf-telefono">Celular de contacto</label>
+[tel* telefono id:cf-telefono autocomplete:tel minlength:10 maxlength:10]
 </div>
 <div class="talent-form__consent">
 [acceptance autorizacion-datos] Autorizo a Agudelo Abogados Asociados SAS — AAA Estudio Legal a tratar mis datos personales para atender esta solicitud, conforme a la Ley 1581 de 2012 y a su <a href="/politica-de-privacidad/" target="_blank" rel="noopener">Política de privacidad</a>. [/acceptance]
@@ -286,8 +290,8 @@ organización, Asunto de interés y Contexto general del asunto; quedan 5 campos
 
 En la pestaña **Correo electrónico**:
 - *Para*: `info@agudeloabogados.com` (destino provisional, a confirmar por el cliente — § 5).
-- *Asunto*: `Nueva solicitud de contacto: [organizacion] — [nombre]`.
-- *Cuerpo del mensaje*: los 5 campos (`[nombre]`, `[organizacion]`, `[cargo]`,
+- *Asunto*: `Nueva solicitud de contacto ([tipo-cliente]): [nombre]` (D155: la empresa ya no es obligatoria).
+- *Cuerpo del mensaje*: los 6 campos (`[tipo-cliente]`, `[nombre]`, `[organizacion]`, `[cargo]`,
   `[correo]`, `[telefono]`).
 - *Cabeceras adicionales*: `Reply-To: [correo]` (para responder directo a quien escribió).
 
@@ -337,7 +341,7 @@ Los originales pesados quedan en `assets/img/aprobadas-web/` (fuera de git).
 | Áreas de práctica — Derecho concursal | `home/area-concursal.webp` | aprobada (IMG_9091) |
 | Áreas de práctica — Normalización de activos | `home/area-normalizacion.webp` | aprobada (IMG_9086) |
 | Áreas de práctica — Línea corporativa y litigios | `home/area-corporativa.webp` | aprobada (IMG_9119) |
-| ¿Por qué confiar en nosotros? — 6 tarjetas | `home/confianza-*.webp` | aprobadas (IMG_9071, 9073, 9116, 9063, 9095, 9051) |
+| ¿Por qué confiar en nosotros? — 6 tarjetas | Biblioteca de medios: `aaa-confianza-casos`, `-equipo`, `-tecnologia`, `-seguridad`, `-cumplimiento-sello`, `-presencia-bandera` (copias en `home/` del tema) | **stock** autorizado por el cliente (reunión 2026-10-02) y elegido por el Owner (D151–D152), Licencia de Unsplash: Unsplash `snNHKZ-mGfE`, `BJqzjxwQhK8`, `hpjSkU2UYSU`, `FnA5pAzqhMM`, `7PMGUqYQpYc`, `EBAqM8b7Mqc`. Antes: fotos del cliente `home/confianza-*.webp` (se conservan) |
 | Foto del equipo bajo "En cifras" | `home/hero.webp` en blanco y negro por CSS | aprobada (2.jpg, la misma del hero — D130; antes 1.jpg en `home/cifras-equipo.webp`, que queda sin uso) |
 | Casos de éxito — las 3 tarjetas | `temp-prototype-home-case-preview.jpg` (Biblioteca) | temporal, hasta tener los videos |
 | Conversemos — foto de fondo del panel | `temp-prototype-home-cta.jpg` (Biblioteca) | temporal |
@@ -362,12 +366,12 @@ total): tampoco hay que subirlas a la Biblioteca.
 | Bloque/sección | Archivo | Origen |
 |---|---|---|
 | Hero | `metodologia/hero-9095.webp` | aprobada (IMG_9095, D142 — foto completa; antes IMG_9116 en D141, IMG_9102 en D140 e IMG_9128 en D125, retirados). También aparece en una tarjeta de "¿Por qué confiar?" (Inicio) y en "Equipo jurídico" (Quiénes somos, temporal) |
-| Metodología · 01 Diagnóstico | `metodologia/paso-diagnostico.webp` | **stock** aprobado por el Owner (D138): Unsplash `ZH4FUYiaczY`, foto de Dimitri Karastelev — Licencia de Unsplash (uso comercial, sin atribución obligatoria) |
-| Metodología · 02 Estrategia | `metodologia/paso-estrategia.webp` | **stock** aprobado (D138): Unsplash `RbYg6fKSfcY`, foto de Vitaly Gariev — Licencia de Unsplash |
-| Metodología · 03 Representación | `metodologia/paso-representacion.webp` | **stock** aprobado (D138): Unsplash `MYbhN8KaaEc`, foto de Hunters Race — Licencia de Unsplash |
-| Tarjeta Derecho concursal | `metodologia/servicio-concursal.webp` | aprobada (IMG_9091, la misma foto del panel de Inicio) |
-| Tarjeta Normalización de activos | `metodologia/servicio-normalizacion.webp` | aprobada (IMG_9086, ídem) |
-| Tarjeta Línea corporativa y litigios | `metodologia/servicio-corporativa.webp` | aprobada (IMG_9119, ídem) |
+| Metodología · 01 Diagnóstico | `aaa-paso-diagnostico` (Biblioteca; copia en `metodologia/`) | **stock** elegido por el Owner (D152): Unsplash `-LgSTma8GJs`, Harshit Suryawanshi — Licencia de Unsplash. Antes `paso-diagnostico.webp` (D138) |
+| Metodología · 02 Estrategia | `aaa-paso-estrategia-equipo` (Biblioteca; copia en `metodologia/`) | **stock** elegido por el Owner (D153): Unsplash `6jAq8MkbULo`, Sebastian Herrmann, equipo de abogados — Licencia de Unsplash. Sin ajedrez: el cliente lo excluyó en D138 |
+| Metodología · 03 Representación | `aaa-paso-representacion-tribunal` (Biblioteca; copia en `metodologia/`) | **stock** (D153): Unsplash `P5YN73KrUAA`, Saúl Bucio, abogado ante un tribunal (recorte hacia la derecha) — Licencia de Unsplash. Sin apretón de manos (excluido en D138) |
+| Tarjeta Derecho concursal | `aaa-area-concursal` (Biblioteca; copia en `metodologia/`) | **stock** autorizado por el cliente (D151): Unsplash `8wLZi9OhsWU`, Jakub Żerdzicki — Licencia de Unsplash. Antes `servicio-concursal.webp` |
+| Tarjeta Normalización de activos | `aaa-area-normalizacion` (Biblioteca; copia en `metodologia/`) | **stock** (D151): Unsplash `AT77Q0Njnt0`, Isaac Smith — Licencia de Unsplash. Antes `servicio-normalizacion.webp` |
+| Tarjeta Línea corporativa y litigios | `aaa-area-corporativa` (Biblioteca; copia en `metodologia/`) | **stock** (D151): Unsplash `GWe0dlVD9e0`, Benjamin Child — Licencia de Unsplash. Antes `servicio-corporativa.webp` |
 | Transparencia | `metodologia/transparencia.webp` | aprobada (IMG_9074) |
 | Conversemos — foto de fondo y marca de agua | `temp-prototype-home-cta.jpg` (Biblioteca), `brand/isotipo-blanco.svg` (tema) | igual que Inicio |
 
@@ -382,7 +386,10 @@ medios y viaja solo a staging/producción.
 | `brand/wordmark-blanco.svg` | header ("Estudio Legal" en blanco) |
 | `brand/logo-horizontal-claro.svg` (isotipo cobre + texto blanco) | footer |
 | `brand/isotipo-blanco.svg` | marcas de agua (footer, "Conversemos") y tarjetas de equipo de Quiénes somos |
-| `brand/favicon.svg` | ícono de la pestaña del navegador (solo si no se configura uno en Ajustes → General) |
+| `brand/favicon.svg` | ícono de la pestaña del navegador, isotipo cobre sobre cuadro navy (D151); solo se usa si no hay un ícono de sitio configurado |
+| `brand/aaa-icono-sitio-512.png` | el mismo ícono en PNG de 512 px: subirlo en Ajustes → General → Ícono del sitio (así lo usan también iPhone y Android). En el staging de Hostinger ya está configurado (D151) |
+
+**Logo en los títulos donde dice "AAA" (D157, reemplaza D156):** en los títulos, el tema muestra el logo completo (isotipo cobre + "Estudio Legal") cada vez que el texto dice "AAA" o "AAA Estudio Legal". Quien edite el sitio sigue escribiendo "AAA Estudio Legal" normalmente; el texto queda oculto dentro para lectores de pantalla y buscadores. En párrafos, listas y footer no se cambia nada: ahí va el nombre escrito, "AAA Estudio Legal". No aplica a títulos SEO, textos alternativos ni formularios.
 
 Los archivos viejos de la Biblioteca (`isotipo-AAA-legal.svg`,
 `letras-blanco-logo-AAA-legal.svg`, `logo-completo-AAA-legal-*.png`) ya no
@@ -399,7 +406,7 @@ la cambia al vuelo por el nuevo, así que no hace falta reinsertarlas.
 | Equipo jurídico | `nosotros/equipo-juridico.webp` | aprobada (IMG_9095) — temporal hasta el collage del equipo |
 | Equipo administrativo | `nosotros/equipo-administrativo.webp` | aprobada (IMG_9127, D125) — temporal hasta el collage del equipo |
 | Equipo de tecnología | `nosotros/equipo-tecnologia.webp` | aprobada (IMG_9123) — temporal hasta el collage del equipo |
-| Filosofía | `nosotros/filosofia.webp` | aprobada (IMG_9118, D125 — no se repite en ningún otro lugar del sitio; antes IMG_9049, bolso con el logo) |
+| Filosofía | `aaa-filosofia-biblioteca` (Biblioteca; copia en `nosotros/`) | composición (D153): biblioteca de Unsplash `A32Uo8lf-JE` (Jonathan Gong, Licencia de Unsplash) con velo navy al 62% e isotipo cobre centrado, según lo que pidió Julián en la reunión del 2026-10-02 (principios, sin personas, "conjugar la imagen con el logo"). Antes `nosotros/filosofia.webp` (IMG_9118) |
 
 **Trabaja con nosotros** (`trabaja-con-nosotros-full`, D124) — `assets/img/trabaja/`:
 

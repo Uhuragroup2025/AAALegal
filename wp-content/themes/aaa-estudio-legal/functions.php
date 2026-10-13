@@ -201,8 +201,8 @@ function aaa_inject_motion_attributes( $block_content, $block ) {
 		'aaa-motion-service-panels' => 'data-motion="service-panels"',
 		'aaa-motion-stats'          => 'data-motion="stats"',
 		'aaa-motion-media'          => 'data-motion-media',
-		'aaa-stat-cases'            => 'data-count-to="8754"',
-		'aaa-stat-clients'          => 'data-count-to="30"',
+		'aaa-stat-cases'            => 'data-count-to="8700" data-count-prefix="+"',
+		'aaa-stat-clients'          => 'data-count-to="30" data-count-prefix="+"',
 		'aaa-stat-recovered'        => 'data-count-to="10" data-count-prefix="+" data-count-suffix=" mil millones"',
 	);
 	foreach ( $map as $marker => $attr ) {
@@ -522,3 +522,44 @@ function aaa_register_block_styles() {
 	);
 }
 add_action( 'init', 'aaa_register_block_styles' );
+
+/**
+ * D149 — Fase 0 del backlog SEO: el endpoint público de usuarios
+ * (/wp-json/wp/v2/users) exponía el nombre de usuario del administrador.
+ * Solo se oculta a visitantes sin sesión; el editor de bloques y wp-admin
+ * lo siguen usando con normalidad.
+ */
+function aaa_hide_users_endpoint( $endpoints ) {
+	if ( is_user_logged_in() ) {
+		return $endpoints;
+	}
+	unset( $endpoints['/wp/v2/users'], $endpoints['/wp/v2/users/(?P<id>[\d]+)'] );
+	return $endpoints;
+}
+add_filter( 'rest_endpoints', 'aaa_hide_users_endpoint' );
+
+/**
+ * D157 (reemplaza D156) — Logo completo en los títulos donde dice "AAA".
+ * Pedido de Julián en la reunión del 2026-10-02 ("cada vez que se hable de
+ * triple A, pongan el logo"), ajustado por Oscar: en los títulos va el logo
+ * completo (isotipo + "Estudio Legal"); en párrafos y textos pequeños se deja
+ * el nombre escrito, "AAA Estudio Legal". Se hace al mostrar la página: en el
+ * editor y en el HTML el título sigue diciendo "AAA Estudio Legal" (oculto a
+ * la vista, así lo leen los lectores de pantalla y los buscadores) y el logo
+ * se dibuja con CSS (.aaa-logo-inline, components.css). Solo toca texto entre
+ * etiquetas, nunca atributos.
+ */
+function aaa_logo_in_headings( $block_content, $block ) {
+	if ( 'core/heading' !== ( $block['blockName'] ?? '' ) || false === strpos( $block_content, 'AAA' ) ) {
+		return $block_content;
+	}
+	$mark = '<span class="aaa-logo-inline"><span class="aaa-logo-inline__text">AAA Estudio Legal</span></span>';
+	return preg_replace_callback(
+		'/>([^<]*)</',
+		function ( $matches ) use ( $mark ) {
+			return '>' . preg_replace( '/\bAAA(?:\s+Estudio\s+Legal)?\b/', $mark, $matches[1] ) . '<';
+		},
+		$block_content
+	);
+}
+add_filter( 'render_block', 'aaa_logo_in_headings', 30, 2 );

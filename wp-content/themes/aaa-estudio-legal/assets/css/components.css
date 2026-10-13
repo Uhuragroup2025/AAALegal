@@ -4004,3 +4004,161 @@ section.aaa-section[id] {
   from { opacity: 0; transform: translateY(10px); }
   to { opacity: 1; transform: none; }
 }
+
+/* =====================================================================
+   D145 (Owner, 2026-10-01) — flecha del banner siempre visible y menú móvil
+   compacto
+   ===================================================================== */
+
+/* Banner de Inicio a la altura exacta de la pantalla visible: antes tenía un
+   mínimo fijo de 690px (+88px de header = ~778px) y en pantallas con menos
+   alto (portátiles, o con la barra de administración de WordPress) la flecha
+   de scroll quedaba debajo del borde. Ahora mide 100svh menos el header y la
+   barra de administración (si está), con un piso de 520px para pantallas muy
+   bajas y un techo de 860px. */
+.hero-immersive:where(:not(.hero--editorial)) .hero-shell {
+  min-height: clamp(520px, calc(100svh - var(--aaa-header-h) - var(--wp-admin--admin-bar--height, 0px)), 860px);
+}
+
+/* Menú móvil más compacto: en pantallas como la de un iPhone el pie del panel
+   (contacto, redes y CTA) quedaba fuera de la vista. Enlaces de 20px,
+   separaciones más cortas y pie más apretado; todo cabe en ~620px de alto.
+   El scroll lateral venía de la marca de agua (right: -4rem) desbordando el
+   panel: el panel ya no permite scroll horizontal y la marca queda dentro. */
+.aaa-site-header .wp-block-navigation__responsive-container.is-menu-open {
+  overflow-x: hidden;
+  padding: var(--wp--preset--spacing--4) clamp(var(--wp--preset--spacing--6), 7vw, var(--wp--preset--spacing--12)) var(--wp--preset--spacing--6);
+}
+.aaa-site-header .wp-block-navigation__responsive-container.is-menu-open::after {
+  right: 0;
+  bottom: 0;
+  width: 12rem;
+  background-position: 70% 70%;
+  clip-path: inset(0);
+}
+.aaa-site-header .wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation__responsive-container-content {
+  min-height: calc(100dvh - var(--wp--preset--spacing--4) - var(--wp--preset--spacing--6));
+  max-width: 100%;
+}
+.aaa-site-header .wp-block-navigation__responsive-container-close { top: calc(var(--wp--preset--spacing--4) + 0.75rem); }
+.aaa-site-header .is-menu-open .aaa-nav-brand { margin-bottom: var(--wp--preset--spacing--6); }
+.aaa-site-header .is-menu-open .aaa-nav-brand img { width: 136px; }
+.aaa-site-header .wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation-item a {
+  gap: var(--wp--preset--spacing--3);
+  padding: 0.8rem 0;
+  font-size: 1.25rem;
+}
+.aaa-site-header .is-menu-open .wp-block-navigation-item a::before { width: 1.25rem; height: 1.25rem; }
+.aaa-site-header .is-menu-open .aaa-nav-extra {
+  gap: var(--wp--preset--spacing--3);
+  padding-top: var(--wp--preset--spacing--8);
+}
+.aaa-nav-extra__list { gap: var(--wp--preset--spacing--2); }
+.aaa-site-header .aaa-nav-extra .aaa-nav-extra__item { font-size: 0.875rem; line-height: 1.45; }
+.aaa-nav-extra__icon { width: 1rem; height: 1rem; }
+.aaa-nav-extra__social { padding-top: 0; }
+.aaa-site-header .aaa-nav-extra__social a { width: 2.5rem; height: 2.5rem; }
+.aaa-nav-extra__social .aaa-nav-extra__icon { width: 1.125rem; height: 1.125rem; }
+.aaa-site-header .aaa-nav-extra .aaa-nav-extra__cta { margin-top: var(--wp--preset--spacing--1); padding: 0.8rem 1.125rem; }
+/* Pantallas bajas (teléfono en horizontal o con barras del navegador): sin
+   aire extra entre bloques para que el CTA siga a la vista. */
+@media (max-height: 680px) {
+  .aaa-site-header .is-menu-open .aaa-nav-brand { margin-bottom: var(--wp--preset--spacing--4); }
+  .aaa-site-header .wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation-item a { padding: 0.6rem 0; font-size: 1.125rem; }
+  .aaa-site-header .is-menu-open .aaa-nav-extra { padding-top: var(--wp--preset--spacing--6); }
+}
+
+/* =====================================================================
+   D146 (Owner, 2026-10-01) — botón "Mi caso" en móvil
+   ===================================================================== */
+/* En móvil el botón mostraba solo "→" como carácter de texto: por las
+   métricas de la fuente la flecha quedaba baja dentro de la caja, y el botón
+   (46px) se veía más alto que el menú y 4px por debajo de su centro. Ahora
+   mide 40px, va centrado en el header y lleva un ícono dibujado (desde D147, persona
+   "mi cuenta"), centrado exacto con máscara CSS. El texto "Mi caso →"
+   sigue siendo el nombre accesible del enlace (font-size:0). */
+@media (max-width: 560px) {
+  .aaa-site-header .wp-block-buttons { align-self: center; align-items: center; }
+  /* El enlace es inline-grid dentro de un bloque con altura de línea de texto
+     (27px): quedaba apoyado en la línea base, 6px por debajo del centro. */
+  .aaa-site-header .wp-block-button.aaa-cta-header { display: flex; }
+  .aaa-cta-header .wp-block-button__link {
+    width: 40px;
+    height: 40px;
+    min-height: 40px;
+    padding: 0;
+    line-height: 0;
+  }
+  /* D147: ícono de persona ("mi cuenta"), pedido del Owner en vez de la
+     carpeta. Va con posición absoluta centrada: el enlace es una grilla y el
+     texto oculto ("Mi caso →", font-size:0) ocupaba una fila propia, así que
+     el ícono quedaba en una segunda fila, fuera del centro real. El dibujo
+     (cabeza y hombros) está equilibrado en el centro de su caja de 24px. */
+  .aaa-cta-header .wp-block-button__link { position: relative; }
+  .aaa-cta-header .wp-block-button__link::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    width: 20px;
+    height: 20px;
+    margin: auto;
+    background: currentColor;
+    -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='8' r='3.5'/%3E%3Cpath d='M5 19.5c0-3.6 3.1-6 7-6s7 2.4 7 6'/%3E%3C/svg%3E") center / contain no-repeat;
+    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='8' r='3.5'/%3E%3Cpath d='M5 19.5c0-3.6 3.1-6 7-6s7 2.4 7 6'/%3E%3C/svg%3E") center / contain no-repeat;
+  }
+}
+
+/* ---------- D157 (reemplaza D156) — Logo completo en los títulos con "AAA" ----------
+   El filtro aaa_logo_in_headings (functions.php) cambia "AAA" o "AAA Estudio
+   Legal" de los títulos por este span. Se arma sobre el logo del sitio
+   (logo-horizontal-claro.svg, 1359×474) en dos capas, para que funcione en
+   fondos claros y oscuros sin un archivo de marca nuevo:
+   - ::before: la silueta completa del logo como máscara, recortada a la parte
+     de "Estudio Legal" (desde el 52% del ancho), en el color del título
+     (oscuro sobre claro, blanco sobre navy, cobre dentro de un énfasis);
+   - ::after: el isotipo cobre de marca, encima de su lugar exacto en el logo
+     (49,7% del ancho × 89,7% del alto, arriba a la izquierda).
+   Mismo tamaño que el logo de "Sobre nosotros" (1.4em de alto). */
+.aaa-logo-inline {
+  position: relative;
+  display: inline-block;
+  height: 1.4em;
+  aspect-ratio: 1359.36 / 474.25;
+  vertical-align: -0.36em;
+}
+/* D158: dentro de un énfasis en cursiva (Trabaja con nosotros, "ser parte de
+   [logo]") el logo va un poco más chico, a pedido de Oscar. */
+.aaa-text-emphasis .aaa-logo-inline {
+  height: 1.15em;
+  vertical-align: -0.24em;
+}
+.aaa-logo-inline::before,
+.aaa-logo-inline::after {
+  content: "";
+  position: absolute;
+}
+.aaa-logo-inline::before {
+  inset: 0;
+  background-color: currentColor;
+  -webkit-mask: url("../img/brand/logo-horizontal-claro.svg") center / contain no-repeat;
+  mask: url("../img/brand/logo-horizontal-claro.svg") center / contain no-repeat;
+  clip-path: inset(0 0 0 52%);
+}
+.aaa-logo-inline::after {
+  left: 0;
+  top: 0;
+  width: 49.7%;
+  height: 89.7%;
+  background: url("../img/brand/isotipo.svg") center / contain no-repeat;
+}
+.aaa-logo-inline__text {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}

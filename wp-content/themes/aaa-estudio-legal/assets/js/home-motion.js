@@ -19,7 +19,8 @@
   var renderCount = function (element, value) {
     var prefix = element.getAttribute('data-count-prefix') || '';
     var suffix = element.getAttribute('data-count-suffix') || '';
-    element.textContent = prefix + Math.round(value);
+    // D155: separador de miles con punto (8700 -> 8.700), como se escribe en Colombia.
+    element.textContent = prefix + String(Math.round(value)).replace(/\B(?=(\d{3})+(?!\d))/g, '.');
     if (suffix) {
       var unit = document.createElement('span');
       unit.className = 'stat-card__unit';

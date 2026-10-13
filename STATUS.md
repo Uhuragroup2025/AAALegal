@@ -2539,52 +2539,476 @@ Ambas preguntas quedan cerradas — ver PROJECT.md, filas D112 y D113.
 
 ## Inicio — sin franja navy entre el menú y el banner (D143, 2026-09-30)
 
-**Request (Owner, with a marked screenshot):** remove the "pequeño espacio azul" between the menu and the photo of the Home banner.
+**Pedido (Owner, con captura marcada):** quitar el "pequeño espacio azul" entre el menú y la foto del banner de Inicio.
 
-**Cause:** from 1024px up the Home hero had `padding-top: 90px`, inherited from the prototype's taller header. The fixed header measures 79px at all widths since D126, so the photo started 11px lower and exposed the section's navy background. On mobile the padding was already 78px.
+**Causa:** desde 1024px el hero de Inicio tenía `padding-top: 90px`, heredado del header más alto del prototipo. El header fijo mide 79px en todos los anchos desde D126, así que la foto empezaba 11px más abajo y dejaba ver el fondo navy de la sección. En móvil el padding ya era de 78px.
 
-**Applied (`components.css`):** `.hero-immersive:where(:not(.hero--editorial))` now uses 78px from 1024px up as well, and the header comment was updated. The interior page heroes had no problem (their photo starts behind the header).
+**Aplicado (`components.css`):** `.hero-immersive:where(:not(.hero--editorial))` usa 78px también desde 1024px, y se actualizó el comentario del header. Los héroes de las páginas internas no tenían el problema (su foto empieza detrás del header).
 
-**Verification (Local):** at 390, 1024, 1280, 1440 and 1890px the photo starts right at the menu edge (0px gap; it tucks 1px under the header border). Balanced CSS. No pattern reinsertion needed.
+**Verificación (Local):** a 390, 1024, 1280, 1440 y 1890px la foto empieza justo en el borde del menú (0px de separación; queda 1px bajo el borde del header). CSS balanceado. No hizo falta reinsertar patterns.
 
 ## Inicio, header y menú móvil — ajustes de presencia y navegación (D144, 2026-10-01)
 
-**Request (Owner, with screenshots):**
-1. Title "Soluciones legales estratégicas" with the serif + italic composition of "Nuestro enfoque".
-3. Menu with more height and presence over the banner.
-4. Restore the anchored button, or a centered down arrow with subtle animation.
-5. More top and bottom spacing in "Nuestro enfoque".
-6. "Áreas de práctica" back on a blue background.
-7. Mobile menu with icons and contact + social info as in the prototype; mobile Áreas cards with uneven gaps.
+**Pedido (Owner, con capturas):**
+1. Título "Soluciones legales estratégicas" con la composición serif + itálica de "Nuestro enfoque".
+3. Menú con más altura y presencia sobre el banner.
+4. Recuperar el botón anclado, o una flecha centrada hacia abajo con animación sutil.
+5. Más espacio arriba y abajo en "Nuestro enfoque".
+6. "Áreas de práctica" de nuevo sobre fondo azul.
+7. Menú móvil con íconos e información de contacto y redes como en el prototipo; tarjetas de Áreas en móvil con espacios desiguales.
 
-(The numbering follows the Owner's message, which had no item 2.)
+(La numeración sigue el mensaje del Owner, que no tenía punto 2.)
 
-**Applied:**
-- **Banner title (pattern + Inicio page #82):** "Soluciones legales *estratégicas*": the regular part in white, "estratégicas" in cobre italic (`.aaa-text-emphasis`). Before (D116) the whole H1 was cobre.
-- **Header (`components.css`, D144 block):**
-  - Height 88px (80px on mobile), unified in `--aaa-header-h`. Background navy-hover (one shade deeper than the banner's veil), cobre rule and soft shadow. Logo 54px (48px on mobile), 16px links with a cobre underline on hover and on the current page.
-  - "Mi caso" button 46px; arrow only on mobile, as before.
-  - The Home banner and the anchors' `scroll-margin` use the same variable, so there's still no strip between header and banner (D143).
-- **Scroll arrow:** `hero__scroll` paragraph with a link to `#nuestro-enfoque` (pattern + page #82; the section gets the `nuestro-enfoque` anchor).
-  - Chosen over the "Conozca cómo lo hacemos" button, because the client asked to remove that CTA (PPTX slide 2).
-  - Centered at the bottom of the banner: translucent circle, CSS-mask arrow, subtle bounce and delayed entrance. Hover and focus in cobre.
-  - The link text stays as its accessible name. Smooth scroll is enabled; with reduced motion there's no animation.
-- **"Nuestro enfoque":** spacing up from 96px to clamp(120px, 11vw, 160px), 88px on mobile. Covers the pattern markup and the stored page's markup (column).
-- **Áreas de práctica:** navy-deep again (reverts D128) with white title, cobre eyebrow and emphasis, and its own top spacing restored.
-  - On mobile and tablet the cards no longer have a fixed minimum height: 48px after the index, no uneven gaps.
-- **Mobile menu:**
-  - `functions.php`, new `aaa_mobile_nav_extras()` on `render_block_core/navigation`. It adds the logo and a contact block to the panel, only in the final render and only in the header menu. Contact: address, WhatsApp, email, LinkedIn and Instagram (same data and icons as the footer), plus a "Solicitar evaluación jurídica →" CTA to `/contacto/`.
-  - CSS: navy gradient with a 6% isotype watermark; 24px links with a cobre icon per page (home, compass, team, briefcase), dividers and a "→" on the current page; cobre focus instead of the blue ring; staggered entrance.
-  - None of this shows on desktop.
-- `STATUS.md` (this entry).
+**Aplicado:**
+- **Título del banner (pattern + página Inicio #82):** "Soluciones legales *estratégicas*": la parte regular en blanco y "estratégicas" en itálica cobre (`.aaa-text-emphasis`). Antes (D116) todo el H1 era cobre.
+- **Header (`components.css`, bloque D144):**
+  - Altura de 88px (80px en móvil), unificada en `--aaa-header-h`. Fondo navy-hover (un tono más profundo que el velo del banner), filete cobre y sombra suave. Logo de 54px (48px en móvil), enlaces de 16px con subrayado cobre al pasar el cursor y en la página actual.
+  - Botón "Mi caso" de 46px; flecha solo en móvil, como antes.
+  - El banner de Inicio y el `scroll-margin` de las anclas usan la misma variable, así que sigue sin haber franja entre header y banner (D143).
+- **Flecha de scroll:** párrafo `hero__scroll` con enlace a `#nuestro-enfoque` (pattern + página #82; la sección recibe el ancla `nuestro-enfoque`).
+  - Se eligió en lugar del botón "Conozca cómo lo hacemos", porque el cliente pidió quitar ese CTA (PPTX, lámina 2).
+  - Centrada al pie del banner: círculo translúcido, flecha con máscara CSS, rebote sutil y entrada retrasada. Hover y foco en cobre.
+  - El texto del enlace se conserva como nombre accesible. Scroll suave activado; con movimiento reducido no hay animación.
+- **"Nuestro enfoque":** espacio de 96px a clamp(120px, 11vw, 160px), 88px en móvil. Cubre el markup del pattern y el de la página guardada (columna).
+- **Áreas de práctica:** de nuevo navy-deep (revierte D128) con título blanco, eyebrow y énfasis cobre, y su espacio superior propio recuperado.
+  - En móvil y tablet las tarjetas ya no tienen altura mínima fija: 48px tras el índice, sin espacios desiguales.
+- **Menú móvil:**
+  - `functions.php`, nueva `aaa_mobile_nav_extras()` sobre `render_block_core/navigation`. Agrega al panel el logo y un bloque de contacto, solo en el render final y solo en el menú del header. Contacto: dirección, WhatsApp, correo, LinkedIn e Instagram (mismos datos e íconos del footer), más un CTA "Solicitar evaluación jurídica →" a `/contacto/`.
+  - CSS: degradado navy con marca de agua del isotipo al 6%; enlaces de 24px con un ícono cobre por página (casa, brújula, equipo, maletín), divisores y "→" en la página actual; foco cobre en lugar del anillo azul; entrada escalonada.
+  - Nada de esto se ve en escritorio.
+- `STATUS.md` (esta entrada).
 
-**Verification (Local):**
-- Header: 89px at 1440 and 81px at 375.
-- Interior pages and Contacto: no title sits under the header.
-- Arrow: clicking it leaves "Nuestro enfoque" at 88px, right under the header.
-- "Nuestro enfoque": 158px of spacing at 1440.
-- Áreas: navy with 96px top spacing; on mobile, cards of 275–334px with an even 48px from index to title.
-- Mobile menu open at 375px: logo, 4 links with icons, contact, social and CTA without overflow; the extras are hidden on desktop.
-- `php -l` (functions, pattern), block audit (115, no discrepancies), balanced CSS.
+**Verificación (Local):**
+- Header: 89px a 1440 y 81px a 375.
+- Páginas internas y Contacto: ningún título queda bajo el header.
+- Flecha: al hacer clic deja "Nuestro enfoque" a 88px, justo bajo el header.
+- "Nuestro enfoque": 158px de espacio a 1440.
+- Áreas: navy con 96px de espacio superior; en móvil, tarjetas de 275–334px con 48px parejos del índice al título.
+- Menú móvil abierto a 375px: logo, 4 enlaces con íconos, contacto, redes y CTA sin desbordes; los extras se ocultan en escritorio.
+- `php -l` (functions, pattern), auditoría de bloques (115, sin discrepancias), CSS balanceado.
 
-**Pending:** the CTA in the mobile menu goes to `/contacto/`; "Mi caso" stays dummy (`#mi-caso`) until the ADY URL arrives (D136).
+**Pendiente:** el CTA del menú móvil va a `/contacto/`; "Mi caso" sigue dummy (`#mi-caso`) hasta que llegue la URL de ADY (D136).
+
+## Inicio — flecha del banner siempre visible y menú móvil compacto (D145, 2026-10-01)
+
+**Pedido (Owner, con captura):**
+- En su pantalla no se veía la flecha de scroll del banner porque "la imagen es más alta que el viewport".
+- En iPhone el menú móvil tenía "fuente algo grande": el bloque de contacto y el CTA quedaban cortados, y además había un "scroll horizontal" extraño.
+
+**Causa:**
+- **Flecha:** el banner tenía una altura mínima fija de 690px más los 88px del header (~778px). En pantallas con menos alto visible (portátiles, o con la barra de administración de WordPress en una sesión iniciada) la flecha quedaba por debajo del borde.
+- **Menú:** enlaces de 24px con espaciado generoso. La marca de agua del isotipo (`right: -4rem`) se salía del panel y causaba el scroll horizontal.
+
+**Aplicado (`components.css`, bloque D145):**
+- **Banner:** `min-height: clamp(520px, 100svh − header − barra de admin, 860px)`. Siempre coincide con el alto visible de la pantalla, así que la flecha queda a la vista; WordPress define la variable de la barra de admin (32px / 46px) solo cuando la barra se muestra.
+- **Menú móvil:**
+  - Enlaces de 20px (18px en pantallas de menos de 680px de alto), logo de 136px, bloque de contacto, íconos sociales y CTA más compactos.
+  - El panel no tiene scroll horizontal y la marca de agua queda dentro (esquina inferior derecha, 6%).
+
+**Verificación (Local):**
+- **Flecha visible** a 1916×780, 1440×900, 1366×650, 1280×720, 1024×600 y 402×750, y con barra de admin simulada (1916×820). No se monta sobre el texto.
+- **Excepción:** 375×560 (teléfono en horizontal), donde el banner necesita su piso de 520px.
+- **Menú abierto:** cabe completo con el CTA visible y sin scroll vertical ni horizontal a 402×750 (iPhone 17), 402×620, 375×667 y 430×860.
+- CSS balanceado.
+
+**Nota:** no incluido en el checkpoint `checkpoint-wordpress-2026-10-01` (sin commit).
+
+## Botón "Mi caso" en móvil centrado y con ícono propio (D146, 2026-10-01)
+
+**Pedido (Owner, con captura a 393px):** en móvil la flecha del botón "Mi caso" se veía baja y el botón parecía más alto que el menú; "cambiar ese icono por uno que se ajuste mejor".
+
+**Causa:**
+- A ≤560px el botón mostraba solo "→" como carácter de texto, cuyas métricas de fuente lo dejaban bajo dentro de la caja.
+- Con 46px el botón quedaba 6px por debajo del centro del header: el `<a>` es inline-grid dentro de un bloque con alto de línea de texto (27px), así que se apoyaba en la línea base.
+
+**Aplicado (`components.css`, bloque D146, ≤560px):**
+- Botón de 40×40px. El contenedor `.wp-block-button` pasa a flex, así que el botón queda exactamente centrado en el header.
+- El carácter "→" se reemplaza por un **ícono de carpeta ("expediente")** dibujado, de 20px, centrado con máscara CSS en el color del botón: representa mejor "Mi caso" y no se confunde con la flecha de scroll del banner.
+- El texto "Mi caso →" se mantiene como nombre accesible del enlace.
+- Desde 561px el botón con texto no cambia.
+
+**Verificación (Local):** a 375, 393 y 560px el botón mide 40×40 con su centro a 40.0px (header 40.5px, ícono del menú 40.0px); a 561 y 1440px el botón "Mi caso →" sigue igual. CSS balanceado.
+
+**Nota:** no incluido en el checkpoint `checkpoint-wordpress-2026-10-01` (sin commit, como D145).
+
+## Botón "Mi caso" en móvil: ícono de persona y centrado real (D147, 2026-10-01)
+
+**Pedido (Owner):** cambiar la carpeta por el ícono de "mi cuenta" ofrecido en D146, y corregir que el ícono no quedaba centrado verticalmente dentro del botón.
+
+**Causa:** el enlace es una grilla. El texto oculto ("Mi caso →", font-size 0) ocupaba su propia fila y el ícono (`::after`) quedaba en una segunda fila, así que no estaba en el centro real del botón.
+
+**Aplicado (`components.css`, bloque D146, ≤560px):**
+- **Ícono:** una persona (cabeza y hombros, "mi cuenta"), de 20px, con máscara CSS en el color del botón. El dibujo está equilibrado sobre el centro de su caja de 24px.
+- **Centrado:** el ícono ahora se ubica con `position: absolute; inset: 0; margin: auto` sobre el enlace (`position: relative`). Este centrado no depende del texto oculto ni de la grilla.
+
+**Verificación (Local, 393px):**
+- Botón de 40×40 con su centro a 40px (header 40.5px).
+- Ícono de 20×20 con 9px de margen por cada lado (centro exacto dentro de la caja interior de 38px).
+- Revisado visualmente con zoom 3×.
+- CSS balanceado.
+
+**Nota:** sin commit, como D145–D146.
+
+## Live link en Hostinger con Duplicator (D148, 2026-10-02)
+
+**Pedido (Owner):** "Vamos a cargarlo a Hostinger para generar un live link para nuestro cliente, podemos usar un plugin como duplicator... entra a hostinger e instalalo". Elecciones del Owner: **Duplicator** (autoriza este plugin, fuera de la lista de D110, solo para la migración), **dominio temporal de Hostinger**, **oculto a Google (noindex)**.
+
+**Proceso:**
+1. Copia con Duplicator Lite 5.0.5 en Local: archivo `.daf` (72.881.656 bytes) + `installer.php`, guardados en `Desktop/AAA-Hostinger-paquete/`.
+2. El administrador de archivos de hPanel limita la subida a 10 MB por archivo, así que el paquete se dividió en 8 partes y se reconstruyó en el servidor con un script de un solo uso. El script verificó tamaño y MD5 y luego se borró a sí mismo junto con las partes.
+3. Instalador clásico de Duplicator en modo **Overwrite Install** sobre el WordPress en blanco que había creado Hostinger:
+   - Las credenciales de la base de datos salieron del propio `wp-config.php` del servidor; ninguna se tecleó ni se registró aquí.
+   - El Owner autorizó en el chat aceptar los avisos y sobrescribir.
+4. Resultado: todo en "good" (archivos, base de datos, search & replace, plugins); 21 tablas / 643 filas.
+
+**URL en vivo:** https://papayawhip-chicken-297614.hostingersite.com
+
+**Verificación (en vivo, 2026-10-02):**
+- Inicio, Metodología, Quiénes somos, Trabaja con nosotros y Contacto responden 200.
+- Sin imágenes rotas ni referencias a `aaa-estudio-legal.local`.
+- GSAP carga y los dos formularios CF7 se muestran.
+- `/blog/` responde 404 igual que en Local: todavía no existe la página Blog, no es una falla de la migración.
+
+**Pendiente para cerrar D148:**
+- Entrar al WP admin de Hostinger; el usuario y la contraseña son los mismos de Local, así que hay que cambiarlos. Al entrar, Duplicator borra sus archivos de instalación.
+- Activar Ajustes → Lectura → "Disuadir a los motores de búsqueda": el sitio respondía `index, follow`. *(Resuelto en D149.)*
+- Quitar Duplicator tras la migración, si no se va a reutilizar.
+- Confirmar el SMTP y el destinatario de los formularios en Hostinger.
+
+**Gobierno:** según AGENTS.md, compartir este staging con el cliente es decisión de la Product Lead o del Owner; nada se autoaprobó. Gate 2 sigue requiriendo aprobación explícita del cliente.
+
+## Auditoría SEO + GEO del staging y backlog para la responsable de SEO (2026-10-09)
+
+**Pedido (Owner):** revisión SEO exhaustiva del sitio en Hostinger (incluido wp-admin) y un backlog para Nayeliz (contenido y metadatos) con las tareas técnicas del Owner, considerando la optimización para LLMs (GEO). En alcance: la propuesta incluye "SEO + GEO + performance".
+
+**Método:** solo lectura. Se revisaron las 5 páginas públicas más `hello-world` (título, descripción, robots, canonical, OG, JSON-LD, encabezados, imágenes, peso), robots.txt, sitemaps, llms.txt, `/en/`, páginas legales y el endpoint REST de usuarios. En wp-admin: plugins, módulos de Rank Math, ajustes de lectura, enlaces permanentes y el listado de páginas. **No se cambió nada en el sitio.**
+
+**Hallazgos principales:**
+1. El staging era indexable (`index, follow`). "Disuadir a los motores de búsqueda" seguía desmarcado, contra la elección del Owner en D148. Solo Googlebot estaba bloqueado, por el robots.txt de Hostinger.
+2. Metadatos generados solos: descripciones de 14–26 caracteres, la de Inicio cortada, sin palabra clave foco.
+3. Schema débil: "Person/Organization" sin dirección, logo ni redes, "Article" en todas las páginas, y el usuario administrador expuesto como autor y en `/wp-json/wp/v2/users`.
+4. "Hello world!" publicado y presente en el sitemap.
+5. Páginas legales en 404 aunque están enlazadas desde el banner de cookies y los formularios.
+6. Polylang sin configurar (`/en/` 404, sin hreflang); sin blog ni llms.txt.
+7. Rendimiento: ~830 KB de logos PNG, 3 imágenes temporales de 326 KB, `<img>` sin width/height ni carga diferida, Google Fonts externas, HTML sin caché.
+
+**Entregable:** artifact privado "Backlog SEO y GEO AAA" (https://claude.ai/artifact/3SrEF25ZW4CPVYK2qYq8iE), con 37 tareas en 5 fases (T = Owner, N = Nayeliz) y fichas por página con el estado actual y keywords candidatas. *(Reemplazado por el Excel y la guía de D149.)*
+
+**Decisiones planteadas para la reunión (abiertas):**
+- Confirmar "Ley 116" vs Ley 1116 con el cliente: afecta keywords y la credibilidad del sitio ante buscadores e IA.
+- Nombre oficial de la entidad vs "Agudelo Abogados Asociados".
+- Dominio final; autoría del blog.
+- Política de rastreadores de IA (búsqueda vs entrenamiento).
+- Mecanismo de traducción al inglés; plugin de caché.
+- Datos que faltan del cliente: horario, año de fundación, biografías.
+
+## Fase 0 del backlog SEO aplicada al staging y separación en dos archivos (D149, 2026-10-09)
+
+**Pedido (Owner):** "Ejecuta la Fase 0, y separemos en dos archivos, uno para las tareas (backlog, puede ser un excel) y otro para Nayelis".
+
+**Aplicado en el staging de Hostinger (wp-admin, con la sesión de Chrome del Owner):**
+- **T01 (hecha):** "Disuade a los motores de búsqueda" marcada e "Indexado instantáneo" (IndexNow) de Rank Math apagado. Verificado desde fuera: las 5 páginas responden `nofollow, noindex`.
+- **T02 (hecha):**
+  - "Hello world!" movida a la papelera; vaciarla la hace el Owner (Claude no borra de forma definitiva).
+  - La categoría por defecto se renombró a "Análisis" (`/analisis/`).
+  - `sitemap_index.xml` ya solo lista `page-sitemap.xml`.
+  - El borrador "Privacy Policy" se conserva hasta T12.
+- **T03 (hecha):**
+  - El nombre público del administrador ahora es "AAA Estudio Legal" (apodo y nombre visible; no se tocaron usuario ni contraseña).
+  - Rank Math pasó a modo Avanzado, necesario para desactivar los archivos de autor. `/author/lucker/` redirige 301 a Inicio y el schema de ninguna página menciona "Lucker".
+  - Filtro `aaa_hide_users_endpoint` en `functions.php` (oculta `/wp-json/wp/v2/users` a visitantes sin sesión); pasa `php -l`. Al principio no se pudo subir: la sesión de hPanel había expirado y el control de permisos del agente bloqueó la edición desde el editor de temas de WordPress. Ver la actualización al final de esta entrada.
+- **T20 (pendiente, Owner):** crear el usuario de Nayeliz con rol Editor. Claude no crea cuentas ni maneja contraseñas.
+
+**Entregables:**
+- `seo/Backlog-SEO-GEO-AAA.xlsx`. Generado sin dependencias (Node + zlib). Tiene 4 hojas:
+  - Cómo usar.
+  - Backlog: 37 tareas; la columna Estado es una lista desplegable con color; estados de la Fase 0 ya cargados.
+  - Resumen: fórmulas COUNTIFS, verificadas abriendo el archivo en Excel.
+  - Decisiones: 8 decisiones abiertas.
+- Claude Doc "Guía SEO y GEO para Nayeliz · AAA Estudio Legal" (https://claude.ai/code/artifact/198f7607-78b0-4db0-b830-a57052c6d018). Contiene:
+  - Contexto y reglas de trabajo.
+  - El diagrama del flujo de trabajo.
+  - El estado por página.
+  - Una plantilla de metadatos con estado desplegable.
+  - Sus tareas por fase.
+  - Una guía de escritura para IA (GEO).
+  - Las decisiones que la bloquean.
+- El artifact "Backlog SEO y GEO AAA" de la sesión anterior queda reemplazado por estos dos archivos como referencia.
+
+**Actualización de D149 (2026-10-09, pedido del Owner "sube el functions.php"):** la sesión de hPanel había expirado (pedía login), así que el filtro se subió con el editor de temas de wp-admin (Apariencia → Editor de archivos de temas), por instrucción explícita del Owner. La copia del servidor coincidía con la versión del commit (525 líneas) y solo se agregó el filtro D149 al final. WordPress confirmó "El archivo ha sido editado con éxito". Verificado desde fuera: `/wp-json/wp/v2/users` y `/users/1` responden 404 sin sesión; las 5 páginas y `/wp-json/wp/v2/pages` responden 200. El servidor y el repo tienen ahora el mismo `functions.php`. T03 quedó marcada como hecha en el Excel.
+
+**Entrega en zip (2026-10-09):** `seo/SEO-AAA-Backlog-y-Guia-Nayeliz.zip`, con el Excel y la guía exportada a Word (`seo/Guia-SEO-GEO-Nayeliz-AAA.docx`).
+
+## Backlog sin la Fase 0 y registro en español (D150, 2026-10-09)
+
+**Pedido (Owner):** quitar del backlog las tareas de la Fase 0 "porque ya se ejecutaron o ya deberían estar ejecutadas", y responder en español.
+
+**Aplicado:**
+- Backlog regenerado sin T01, T02, T03 ni T20: quedan 33 tareas (Fases 1 a 4). La hoja Resumen ya no tiene fila de Fase 0, y "Cómo usar" indica que la Fase 0 se ejecutó el 9 de octubre.
+- `seo/SEO-AAA-Backlog-y-Guia-Nayeliz.zip` regenerado con el Excel nuevo.
+- El Excel suelto `seo/Backlog-SEO-GEO-AAA.xlsx` estaba abierto en el Excel del Owner; se reemplazó cuando el Owner lo cerró y ahora es idéntico al del zip.
+- Las entradas D143 a D149 de este archivo, que se habían escrito en inglés por error, se pasaron al español sin cambiar su contenido.
+
+**Pendiente (Owner):** crear el usuario de Nayeliz (antes T20) en Usuarios → Añadir nuevo, con rol Editor y aviso por correo para que ella defina su contraseña. Claude no crea cuentas.
+
+**Ajuste de D150 (2026-10-09, pedido del Owner):** en el backlog, "Owner" se reemplaza por **Oscar** (el Owner, que ejecuta las tareas técnicas) en la columna Responsable, el Resumen, la hoja Decisiones y los textos de las tareas; las frases se ajustaron ("revisada por Oscar", "autorización de Oscar"). Verificado en Excel: Oscar 15 tareas, Nayeliz 16, compartidas 2, total 33. Excel y zip actualizados en `seo/`.
+
+**Ajuste de D150 (2026-10-09, pedido del Owner):** también en la guía de Nayeliz (Claude Doc) "Owner" pasa a **Oscar** en las 17 menciones del texto, con las frases ajustadas ("revisión de Oscar", "lo confirma Oscar"), y en el diagrama del flujo (título, caja 3 y nombre accesible). Verificado: 0 menciones de "Owner" en el documento. Se exportó de nuevo a Word (`seo/Guia-SEO-GEO-Nayeliz-AAA.docx`) y se rearmó el zip.
+
+## Fotos de banco y favicon nuevo en el staging (D151, 2026-10-09)
+
+**Pedido (Owner):** aplicar en el WordPress en vivo (staging de Hostinger) los cambios de imágenes que el cliente autorizó en la reunión del 2026-10-02 (notas de Gemini, «Revisemos avances web AAA Estudio Legal - 2026_10_02») y el cambio del favicon.
+
+**Autorizaciones del cliente (transcripción):**
+- **Inicio, "¿Por qué confiar?" (6 fotos):** las fotos de oficina "no son coherentes porque no fueron pensadas para eso" (Francisco); "lo del home sí es para que saquemos de banco de imágenes". El cliente dirá después si le convence.
+- **Metodología, tres áreas de práctica (3 fotos):** Julián pide imágenes de las tres líneas "que no sean imágenes nuestras"; Paola: "¿las imágenes entonces de banco?", Francisco: "así es".
+- **Quiénes somos, Filosofía (1 foto):** Julián pide una imagen de banco que transmita filosofía, principios, "no una imagen de alguien".
+- **Favicon:** el resumen final menciona "el tema del favicon súper claro". El Owner confirmó que el problema es que se ve demasiado claro (isotipo cobre sobre fondo transparente).
+
+**Fotos (Unsplash, licencia gratuita; ninguna Unsplash+). Elegidas por el Owner (todas las propuestas A):**
+
+| Espacio | Archivo | Foto Unsplash | Autor |
+|---|---|---|---|
+| Manejo de gran número de casos | aaa-confianza-casos.webp | snNHKZ-mGfE | Wesley Tingey |
+| Equipo especializado | aaa-confianza-equipo.webp | BJqzjxwQhK8 | sarah b |
+| Tecnología propia (ADY) | aaa-confianza-tecnologia.webp | hpjSkU2UYSU | Carlos Muza |
+| Su información, protegida | aaa-confianza-seguridad.webp | FnA5pAzqhMM | Towfiqu barbhuiya |
+| Cumplimiento normativo | aaa-confianza-cumplimiento.webp | yKnIbJV0RbY | Jakub Żerdzicki |
+| Presencia en todo el país | aaa-confianza-presencia.webp | kMO9FvbJM7E (Medellín, Colombia) | Dimitry B |
+| Derecho concursal | aaa-area-concursal.webp | 8wLZi9OhsWU | Jakub Żerdzicki |
+| Normalización de activos | aaa-area-normalizacion.webp | AT77Q0Njnt0 | Isaac Smith |
+| Línea corporativa y litigios | aaa-area-corporativa.webp | GWe0dlVD9e0 | Benjamin Child |
+| Filosofía | aaa-filosofia.webp | KL6y557DX8w | Maik Winnecke |
+
+**Aplicado en vivo:**
+- Las 10 fotos (WebP de 1600 px; Presencia de 1200 px, para no pasar de ~200 KB) y el ícono se subieron a la Biblioteca de medios (IDs 124–134).
+- Se actualizaron las páginas Inicio (#82), Metodología (#97) y Quiénes somos (#101) por la API REST con la sesión del Owner (cada cambio deja revisión en WordPress). Cada bloque de imagen ahora lleva el id del adjunto y el tamaño "large", así WordPress sirve srcset. Textos alternativos nuevos y descriptivos; las tarjetas de Metodología siguen con alt vacío a propósito (el título está al lado).
+- **Favicon:** isotipo cobre sobre cuadro navy redondeado. Se configuró como Ícono del sitio (`site_icon` = 134, PNG de 512 px): WordPress publica 32 px, 192 px y apple-touch-icon, y el SVG del tema deja de imprimirse.
+- Verificado en vivo: las 10 fotos cargan en las tres páginas y el ícono responde 200 en sus dos tamaños.
+
+**Repo:** las fotos van a `assets/img/home/`, `metodologia/` y `nosotros/` con prefijo `aaa-`. Los patterns home-full, metodologia-full y quienes-somos-full apuntan a ellas (`php -l` sin errores). `brand/favicon.svg` es la versión navy y `brand/aaa-icono-sitio-512.png` queda guardado; documentado en WORDPRESS-SETUP.md. Las fotos anteriores se conservan por si el cliente pide volver a ellas.
+
+**Nota:** las reglas de encuadre de `components.css` que apuntan a `[src*="confianza-seguridad"]` y `[src*="confianza-presencia"]` también aplican a los archivos nuevos; mueven el recorte apenas unos píxeles y no afectan.
+
+**Pendientes de la misma reunión (no se aplicaron; dependen de insumos o de una decisión):**
+- Fotos que manda el cliente: hero de Inicio (más zoom a las personas o una foto nueva, con el logo en la pared), banner rotativo con Julián, pasos de Metodología, imagen de "Expectativas claras", fondo del CTA (Julián con el equipo), fotos de equipo unidas (Jonathan) y Julián con el equipo en Trabaja con nosotros.
+- Textos: "Nuestro enfoque" (no limitarlo al acreedor; lo envía el cliente), quitar "para acreedores" en Metodología ("Soluciones") y la frase "Representamos exclusivamente…" del bloque de áreas, cifra "+8.700 casos", descripciones de vacantes.
+- Marca: logo en lugar de "AAA Estudio Legal" en "Sobre nosotros", isotipo donde se mencione "AAA", explorar el logo como cursor o detalle interactivo y la animación de la A desde el centro.
+- Formularios: "Teléfono" pasa a "Celular" con 10 dígitos numéricos; en Contacto, selector "Persona natural / Empresa"; correos de destino (info@ para comercial, Angi para talento).
+- "Mi caso" pasa a "Nuestra plataforma" con la URL de ADY; segmentación correcta de clientes por sector (la manda el cliente); páginas legales (las redacta el cliente).
+
+## Ajuste de fotos de banco: Cumplimiento, Presencia y pasos de Metodología (D152, 2026-10-09)
+
+**Pedido (Owner):** cambiar dos fotos de "¿Por qué confiar?" que no le gustaron (Cumplimiento normativo y Presencia en todo el país) y reemplazar las tres fotos de los pasos de Metodología (Diagnóstico, Estrategia, Representación) por fotos de banco más enfocadas en cada paso.
+
+**Ojo con el cliente:** en la reunión del 2026-10-02 el cliente dijo que las fotos de los pasos las escogería de su propio material. El Owner decidió usar banco; conviene avisarle al cliente.
+
+**Elección (Owner), Unsplash, licencia gratuita, ninguna Unsplash+:**
+
+| Espacio | Archivo | Foto Unsplash | Autor |
+|---|---|---|---|
+| Cumplimiento normativo | aaa-confianza-cumplimiento-sello.webp | 7PMGUqYQpYc, recortada hacia el sello | Markus Spiske |
+| Presencia en todo el país | aaa-confianza-presencia-bandera.webp | EBAqM8b7Mqc (Cartagena) | Christine Ellsay |
+| 01 Diagnóstico | aaa-paso-diagnostico.webp | -LgSTma8GJs | Harshit Suryawanshi |
+| 02 Estrategia | aaa-paso-estrategia.webp | 9iY3Sqr1UWY | Mesh |
+| 03 Representación | aaa-paso-representacion.webp | NzIV4vOBA7s, recortada solo a las manos | Rock Staar |
+
+**Revisión antes de publicar (se detectaron problemas que no se veían en las miniaturas):**
+- Sello: la foto original muestra a la izquierda un libro con texto en alemán ("VermAnlG", "Gesetzes"). Se recortó hacia el sello; el texto restante sale desenfocado.
+- Diagnóstico: la primera opción elegida (lupa sobre un rollo religioso en hebreo) no se publicó. El Owner eligió la alternativa B, lupa sobre un libro.
+- Representación: la primera opción tenía una pistola sobre la mesa. El Owner eligió usarla recortada solo a las manos; la pistola no aparece en el encuadre.
+
+**Aplicado en vivo (staging de Hostinger):**
+- Subidas a la Biblioteca de medios: IDs 138, 139, 140, 143 y 144.
+- Inicio (#82) y Metodología (#97) actualizadas por la API REST, con revisión nativa de WordPress.
+- Pasos en 480×480 (tamaño "full"), alt vacío como antes porque son decorativos y el título va al lado. Tarjetas con alt descriptivo nuevo.
+- Verificado: las 5 cargan; los círculos de los pasos y las tarjetas se ven bien.
+
+**Repo:**
+- Copias en `assets/img/home/` y `assets/img/metodologia/`.
+- `home-full.php` y `metodologia-full.php` apuntan a ellas (`php -l` sin errores).
+- WORDPRESS-SETUP.md tiene el origen y la licencia de cada foto.
+- Se quitaron del repo las dos fotos de la primera ronda que el Owner descartó.
+- En la Biblioteca de medios de Hostinger siguen los adjuntos 128 y 129 (Cumplimiento y Presencia de D151) sin uso; borrarlos queda a criterio del Owner.
+- Las fotos de los pasos de D138 (`paso-*.webp`) se conservan por si el cliente prefiere volver a ellas.
+
+## Estrategia, Representación y Filosofía: fotos definitivas (D153, 2026-10-09)
+
+**Pedido (Owner):** cambiar la foto de ajedrez de Estrategia ("ellos dijeron que no era buena mostrar ajedrez"), buscar para Representación algo de "representación legal en un juzgado" y cambiar la imagen de Filosofía según lo que se dijo en la reunión del 2026-10-02.
+
+**Fuente de la restricción:** en la transcripción del 2026-10-02 no se menciona el ajedrez. La exclusión viene del pedido del cliente en D138 (2026-09-30): reemplazar las fotos de la referencia (balanza, ajedrez y apretón de manos) "por otras más adecuadas para la firma". Por eso también se cambió el apretón de manos de Representación (D152).
+
+**Elección (Owner), Unsplash, licencia gratuita, ninguna Unsplash+:**
+
+| Espacio | Archivo | Origen |
+|---|---|---|
+| 02 Estrategia | aaa-paso-estrategia-equipo.webp (480×480) | 6jAq8MkbULo, Sebastian Herrmann: equipo de abogados de traje revisando documentos |
+| 03 Representación | aaa-paso-representacion-tribunal.webp (480×480) | P5YN73KrUAA, Saúl Bucio: abogado de traje frente a un tribunal. Recortada hacia la derecha para centrar al abogado, porque el recorte centrado dejaba protagonista a una jueza con gesto de aburrimiento |
+| Filosofía | aaa-filosofia-biblioteca.webp (1108×738, 70 KB) | composición: biblioteca A32Uo8lf-JE (Jonathan Gong) + velo navy al 62% + isotipo cobre centrado con sombra suave |
+
+**Filosofía, criterio:** en la reunión Julián pidió una imagen que transmita "principios, una dogmática", sin personas ("la filosofía trasciende a las personas"), y "conjugar esa imagen con el logo". Se mostraron tres composiciones con el isotipo (mármol, biblioteca con velo navy, luz y sombra) y el Owner eligió la biblioteca. La composición se hizo en el navegador (canvas) con el isotipo del tema y se subió directo a la Biblioteca de medios. Francisco dijo en la reunión que buscarían un referente; si lo mandan, esta imagen se reemplaza.
+
+**Aplicado en vivo:**
+- Biblioteca de medios: IDs 146 (Estrategia), 147 (Representación) y 149 (Filosofía).
+- Metodología (#97) y Quiénes somos (#101) actualizadas por la API REST, con revisión nativa.
+- Verificado: las tres cargan y se ven bien.
+- Sin usar en la Biblioteca: 140 (ajedrez), 144 (apretón de manos), 133 (columna) y 128/129 de D151; borrarlos queda a criterio del Owner.
+
+**Repo:**
+- Copias en `assets/img/metodologia/` y `assets/img/nosotros/`.
+- Los patterns `metodologia-full` y `quienes-somos-full` apuntan a ellas (`php -l` sin errores).
+- WORDPRESS-SETUP.md tiene el origen de cada foto.
+- Se quitaron del repo las fotos descartadas: ajedrez, apretón de manos y columna.
+
+## Metodología sin "para acreedores" y campo "Celular" en los formularios (D154, 2026-10-09)
+
+**Pedido (Owner):** "quita para acreedores en Metodología y cambia Teléfono por Celular". Los dos puntos salieron de la reunión con el cliente del 2026-10-02:
+- Julián: "Soluciones, sí, pero no para acreedores", y quitar "para acreedores" del título de áreas.
+- Francisco y Luisa: "pongamos celular", con condición de 10 números.
+
+**Aplicado en vivo (staging de Hostinger):**
+- **Metodología (#97):** la etiqueta del banner pasa de "Soluciones para acreedores" a "Soluciones", y la del bloque de áreas de "Representación especializada para acreedores" a "Representación especializada". Se cambió por la API REST, con revisión nativa. Ya no queda "para acreedores" en la página.
+- **Formularios (Contact Form 7):**
+  - Postulación (#106): "Teléfono" pasa a "Celular". Contacto B2B (#115): "Teléfono de contacto" pasa a "Celular de contacto".
+  - El campo ahora exige 10 caracteres (`minlength:10 maxlength:10`). CF7 ya rechaza letras en campos de tipo teléfono, así que en la práctica pide 10 dígitos.
+  - Mensaje de error nuevo: "Ingrese un número de celular válido de 10 dígitos."
+  - El correo que llega dice "Celular: [telefono]". El nombre interno del campo (`telefono`) no cambia, así que la plantilla del correo sigue funcionando.
+  - Se guardó por la API de CF7 con `context: save`; el primer intento sin ese parámetro no persistió.
+  - Se verificó que la casilla de autorización de datos, `acceptance_as_validation` y el destinatario quedaron intactos.
+- **Verificado desde fuera:** "Celular" y "Celular de contacto" con `minlength=10 maxlength=10` en Trabaja con nosotros y en Contacto.
+
+**Aviso de CF7 (ya existía):** "La dirección de correo electrónico del remitente no pertenece al dominio del sitio". Puede mandar los correos a spam. Se resuelve junto con el SMTP y los correos de destino que debe definir el cliente.
+
+**Repo:** `patterns/metodologia-full.php` con las dos etiquetas nuevas; WORDPRESS-SETUP.md con las plantillas de CF7 actualizadas.
+
+**Sigue pendiente de la reunión:** quitar la frase "Representamos exclusivamente los intereses del acreedor." del párrafo de áreas de Metodología (Julián: "le quitaría... representamos exclusivamente, no lo metamos"). No se tocó porque no se pidió en este mensaje.
+
+## Pendientes de la reunión aplicados: cifras, Metodología, selector en Contacto, "Nuestra plataforma" y logo en "Sobre nosotros" (D155, 2026-10-09)
+
+**Contexto:** el Owner pidió revisar los pendientes de la reunión del 2026-10-02 (notas de Gemini) y eligió aplicar ya tres grupos:
+- Cifras y frase de Metodología.
+- Selector en Contacto.
+- "Nuestra plataforma" y logo en "Sobre nosotros".
+
+El bloque de videos sigue visible; no se eligió ocultarlo.
+
+**Aplicado en vivo (staging de Hostinger):**
+- **Cifras (Inicio #82):** "8754" pasa a "+8.700" y "30" a "+30", como pidió Francisco ("más de 8.700 casos, más de 30 clientes", igual que "+10 mil millones").
+  - `functions.php`: el conteo ahora termina en 8700 con prefijo "+" (y en 30 con "+").
+  - `assets/js/home-motion.js`: el número animado lleva separador de miles con punto (8.700).
+  - El HTML sin JavaScript también dice "+8.700" y "+30".
+- **Metodología (#97):** se quitó "Representamos exclusivamente los intereses del acreedor." del párrafo de áreas (pedido de Julián).
+- **Contacto, formulario CF7 #115:**
+  - Nuevo campo obligatorio "Persona natural o empresa" (lista desplegable, en ese orden), pedido en la reunión para que las personas naturales no sientan que el formulario es solo para empresas.
+  - "Empresa u organización" pasa a "Empresa (si aplica)" y "Cargo" a "Cargo (si aplica)", ambos opcionales. "Correo corporativo" pasa a "Correo electrónico".
+  - El correo incluye "Persona natural o empresa: [tipo-cliente]". El asunto pasa a "Nueva solicitud de contacto ([tipo-cliente]): [nombre]" para no quedar con un hueco cuando no hay empresa.
+  - Se verificó que la autorización de datos y `acceptance_as_validation` quedaron intactos.
+- **Header (`parts/header.html`):** "Mi caso →" pasa a "Nuestra plataforma →" (Julián: "Nuestra plataforma. Ya, punto."). El enlace sigue provisional (`#mi-caso`) hasta que llegue la URL de ADY.
+  - Medido: botón de 197×48 en una línea; desde 1280px queda a más de 150px del menú; por debajo el menú es hamburguesa; en móvil sigue el ícono de 40px.
+- **Quiénes somos (#101):** en "Sobre nosotros: AAA Estudio Legal" el nombre se reemplazó por el logo horizontal claro (isotipo cobre + "Estudio Legal"), a 1.4em de alto y centrado con el texto (193×67px a 1280).
+  - Para lectores de pantalla y buscadores el H1 sigue diciendo "Sobre nosotros: AAA Estudio Legal" (texto alternativo del logo).
+- Las ediciones de archivos del tema se hicieron con el editor de temas de wp-admin (respuesta "El archivo ha sido editado con éxito"). Las de páginas y del formulario, por la API REST con revisión nativa.
+
+**Verificado desde fuera:**
+- Botón "Nuestra plataforma →".
+- Cifras con `data-count-to="8700" data-count-prefix="+"` y texto "+8.700" / "+30".
+- `home-motion.js` nuevo publicado.
+- Contacto con sus 6 campos y las opciones "Persona natural" / "Empresa".
+- Metodología sin la frase.
+- No se pudo ver la animación de las cifras terminar porque la pestaña de Chrome estaba en segundo plano y el navegador pausa la animación. Se verificó la función de formato aparte (8700 → "8.700").
+
+**Repo:**
+- `functions.php`, `assets/js/home-motion.js` y `parts/header.html` quedaron idénticos a los del servidor (comparados).
+- Patterns `home-full`, `metodologia-full` y `quienes-somos-full` actualizados (`php -l` y `node --check` sin errores).
+- WORDPRESS-SETUP.md con la plantilla nueva del formulario de Contacto y la nota de "Nuestra plataforma".
+
+**Sugerencia, no aplicada:** el título de Contacto dice "Cuéntenos el contexto de su organización…". Con el selector nuevo podría ajustarse para incluir a personas naturales; es copy aprobado y lo decide el cliente.
+
+**Siguen pendientes de la reunión:**
+- **Lo podemos hacer nosotros:** isotipo en lugar de "AAA" en los textos, ocultar el bloque de videos, acercar la foto del banner de Inicio, explorar el logo interactivo y la animación de la "A".
+- **Dependen del cliente:** textos (banner, "Nuestro enfoque", vacantes, áreas); fotos (banner rotativo, CTA, equipos, "Expectativas claras", Trabaja con nosotros); segmentación de sectores; URL de ADY; correos de destino; accesos al hosting; páginas legales.
+
+## Isotipo en lugar de "AAA" en los textos y revisión responsive (D156, 2026-10-09)
+
+**Pedido (Owner):** "Isotipo en lugar de 'AAA' en los textos" y revisar el responsive "por si algo se rompe". Origen: reunión del 2026-10-02. Julián: "cada vez que en la página se hable de triple A, pongan el logo… el isotipo". Óscar respondió que había que modificar el bloque.
+
+**Solución:** un filtro al mostrar la página, para no tener que editar cada texto ni romper la edición del cliente.
+- `functions.php`, `aaa_isotype_in_text()` sobre `render_block` (prioridad 30), en párrafos, títulos, ítems de lista y bloques HTML. Cambia cada "AAA" (palabra completa) por `<span class="aaa-isotype"><span class="aaa-isotype__text">AAA</span></span>`.
+  - Solo toca texto entre etiquetas, nunca atributos: `alt` y `aria-label` siguen con "AAA".
+  - No entra en bloques con formularios de CF7: la autorización de datos conserva "Agudelo Abogados Asociados SAS — AAA Estudio Legal" literal.
+  - No entra en bloques con scripts.
+  - En el editor el texto sigue diciendo "AAA".
+- `components.css`, bloque D156: `.aaa-isotype` dibuja el isotipo con máscara CSS (`../img/brand/isotipo.svg`) en el color del texto que lo rodea, a 1.35×0.85em, apoyado en la línea de texto. `.aaa-isotype__text` deja "AAA" oculto a la vista, para lectores de pantalla y buscadores.
+- Probado con PHP en 7 casos: párrafo, título, footer HTML con `aria-label`, énfasis, formulario CF7, script e imagen. Solo cambian los que corresponden; "AAAA" no se toca.
+
+**Dónde aparece ahora:**
+- Quiénes somos: "En [isotipo] Estudio Legal hemos conformado…", título de Filosofía "[isotipo] Estudio Legal" y "En [isotipo] Estudio Legal actuamos…".
+- Trabaja con nosotros: "Talento [isotipo]", "En [isotipo] creemos…", "Haz parte de [isotipo]…" y "ser parte de [isotipo]."
+- Footer de todas las páginas: LinkedIn "[isotipo] Estudio Legal" y "© 2026 Agudelo Abogados Asociados SAS — [isotipo] Estudio Legal."
+- Conteo verificado en vivo: Inicio 2, Quiénes somos 5, Trabaja con nosotros 6, Contacto 2.
+
+**Subido al servidor** con el editor de temas de wp-admin ("El archivo ha sido editado con éxito"). `components.css` del servidor es idéntico al del repo (comparado). En `functions.php` se verificaron la función, la expresión regular, la marca y el filtro, una sola vez.
+
+**Revisión responsive (en vivo, sin barra de administración):**
+- **Desplazamiento lateral:** ninguno en Inicio, Metodología, Quiénes somos, Trabaja con nosotros ni Contacto, a 360, 390, 430, 768, 1024 y 1440px. Se probó forzando el desplazamiento horizontal. El primer barrido marcaba 8px en todas las páginas, pero era la barra de desplazamiento del marco de prueba y la barra de administración, no un error.
+- **Visual a 360px:** encabezado con el ícono de "Nuestra plataforma"; H1 de Quiénes somos con el logo en una segunda línea, centrado; isotipos en Trabaja con nosotros, Filosofía y footer; formulario de Contacto con el selector y las etiquetas "(si aplica)"; cifras "+8.700" y "+30".
+- **Visual a 768px:** botón "Nuestra plataforma →" con menú hamburguesa, sin choques; isotipo en cobre dentro de "ser parte de [isotipo]."
+- **Visual a 1440px:** encabezado completo y copyright con isotipo.
+- **Animación de cifras en pestaña visible:** termina en "+8.700 / +30 / +10 mil millones".
+- No se encontró nada roto.
+
+**Repo:** `functions.php` y `components.css` con el bloque D156 (`php -l` sin errores, llaves CSS balanceadas). WORDPRESS-SETUP.md con una nota para quien edite el sitio.
+
+## Logo completo en los títulos y nombre escrito en los párrafos (D157, 2026-10-09; reemplaza D156)
+
+**Pedido (Oscar, con captura de Trabaja con nosotros):** el isotipo suelto dentro de los párrafos ("En [isotipo] creemos…", "Haz parte de [isotipo]…") "se ve extraño". En los títulos debe ir el logo completo (isotipo + "Estudio Legal"), como el del sitio. En los párrafos se deja el nombre de la firma escrito, "AAA Estudio Legal".
+
+**Aplicado:**
+- **`functions.php`:** `aaa_isotype_in_text` (D156) se reemplaza por `aaa_logo_in_headings`.
+  - Solo actúa en títulos (`core/heading`). Cambia "AAA" o "AAA Estudio Legal" por `<span class="aaa-logo-inline">` con "AAA Estudio Legal" oculto dentro, para lectores de pantalla y buscadores.
+  - Párrafos, listas, footer y formularios ya no se tocan.
+- **`components.css`:** el bloque D156 se reemplaza por D157, `.aaa-logo-inline`, armado sobre el logo del sitio sin crear un archivo de marca nuevo:
+  - "Estudio Legal": la silueta de `logo-horizontal-claro.svg` como máscara, recortada desde el 52% del ancho, en el color del título (navy sobre claro, blanco sobre navy, cobre dentro de un énfasis).
+  - Isotipo: `isotipo.svg` en cobre de marca, encima de su posición exacta en el logo (49,7% × 89,7%, medido sobre el SVG).
+  - Tamaño: 1.4em de alto, igual que el logo de "Sobre nosotros".
+- **Trabaja con nosotros (#104 y pattern):** "En AAA creemos…" pasa a "En AAA Estudio Legal creemos…" y "Haz parte de AAA y…" a "Haz parte de AAA Estudio Legal y…".
+- **Probado con PHP:**
+  - El título "AAA Estudio Legal" y "ser parte de AAA." dentro de un énfasis se convierten en el logo.
+  - El H1 con imagen, los párrafos y el footer quedan iguales.
+
+**Dónde queda el logo:** título de Filosofía (Quiénes somos) y "Conozca lo que significa ser parte de [logo]." (Trabaja con nosotros). Ya estaba también en "Sobre nosotros: [logo]" (D155, como imagen).
+
+**Texto escrito:**
+- "En AAA Estudio Legal hemos conformado…" y "En AAA Estudio Legal actuamos…" (Quiénes somos).
+- Las dos frases de Trabaja con nosotros.
+- Footer (LinkedIn y copyright).
+- "Talento AAA" queda como estaba (etiqueta pequeña, sin isotipo).
+
+**Subido al servidor** con el editor de temas ("El archivo ha sido editado con éxito"). `components.css` del servidor es idéntico al del repo (comparado). En `functions.php` se verificó que está la función nueva con su expresión regular y que no queda la anterior.
+
+**Verificado en vivo:**
+- Un logo en Quiénes somos y uno en Trabaja con nosotros; cero restos de `aaa-isotype`.
+- Párrafos y footer con "AAA Estudio Legal" escrito.
+- Visual a 390, 700 y 760px: el logo se ve igual que el del encabezado.
+- Sin desplazamiento lateral a 360, 390, 768, 1024 y 1440px. Logo de 124×43px en móvil y 169×59px desde 768px, siempre dentro de la pantalla.
+
+**Repo:** `functions.php`, `components.css` y `patterns/trabaja-con-nosotros-full.php` (`php -l` sin errores, llaves CSS balanceadas). WORDPRESS-SETUP.md con la nota actualizada.
+
+## Trabaja con nosotros: logo del título más chico y sin punto final (D158, 2026-10-09)
+
+**Pedido (Oscar, con captura):** "bájale un poquito al tamaño de este logo y quítale ese punto al final", sobre el logo de "Conozca lo que significa ser parte de [logo]".
+
+**Aplicado:**
+- **`components.css`:** nueva regla `.aaa-text-emphasis .aaa-logo-inline` con 1.15em de alto (antes 1.4em) y `vertical-align: -0.24em`. Solo afecta al logo que va dentro de un énfasis en cursiva; el de Filosofía y el de "Sobre nosotros" no cambian.
+- **Trabaja con nosotros (#104 y pattern):** "ser parte de AAA." pasa a "ser parte de AAA"; el título ya no termina en punto.
+- Subido con el editor de temas. `components.css` del servidor es idéntico al del repo (comparado).
+
+**Verificado en vivo:** el logo pasa de 169×59 a 138×48px en escritorio (1100px) y mide 102×36px en móvil (390px). El título termina en el logo, sin punto.
+
+## Checkpoint antes de los cambios definitivos (2026-10-13)
+
+**Pedido (Oscar):** crear un checkpoint antes de los cambios definitivos.
+
+**Aplicado:** commit en `main` con D145–D158 (staging en Hostinger, backlog y guía SEO/GEO en `seo/`, fotos de banco, favicon, cifras, selector de Contacto, "Nuestra plataforma" y logo en títulos) y tag anotado `checkpoint-staging-2026-10-13` sobre ese commit. Reemplaza a `checkpoint-wordpress-2026-10-01` como punto de control vigente.
+
+**Estado:** el repo coincide con el staging en vivo (https://papayawhip-chicken-297614.hostingersite.com). Commit y tag quedan solo en local: no se hizo push (`main` está conectada a Cloudflare Pages y ya iba un commit por delante de `origin/main`), queda a decisión de Oscar.

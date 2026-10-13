@@ -24,7 +24,7 @@
 		<div class="wp-block-group hero-shell__content">
 			<!-- wp:paragraph {"className":"aaa-eyebrow"} --><p class="aaa-eyebrow">Nuestro equipo</p><!-- /wp:paragraph -->
 			<!-- wp:heading {"level":1,"className":"hero__title"} -->
-			<h1 class="wp-block-heading hero__title">Sobre nosotros: <em class="aaa-text-emphasis">AAA Estudio Legal</em></h1>
+			<h1 class="wp-block-heading hero__title">Sobre nosotros: <img src="<?php echo esc_url( get_theme_file_uri( 'assets/img/brand/logo-horizontal-claro.svg' ) ); ?>" alt="AAA Estudio Legal" style="height:1.4em;width:auto;vertical-align:-0.36em;display:inline-block"/></h1>
 			<!-- /wp:heading -->
 		</div>
 		<!-- /wp:group -->
@@ -156,7 +156,7 @@
 	<!-- wp:group {"className":"philosophy-block__grid aaa-motion-chapter"} -->
 	<div class="wp-block-group philosophy-block__grid aaa-motion-chapter">
 		<!-- wp:image {"className":"philosophy-block__visual aaa-motion-media"} -->
-		<figure class="wp-block-image philosophy-block__visual aaa-motion-media"><img src="<?php echo esc_url( get_theme_file_uri( 'assets/img/nosotros/filosofia.webp' ) ); ?>" alt="Integrante de AAA Estudio Legal sonriendo en su puesto de trabajo" /></figure>
+		<figure class="wp-block-image philosophy-block__visual aaa-motion-media"><img src="<?php echo esc_url( get_theme_file_uri( 'assets/img/nosotros/aaa-filosofia-biblioteca.webp' ) ); ?>" alt="Isotipo de AAA Estudio Legal sobre una biblioteca de libros antiguos" /></figure>
 		<!-- /wp:image -->
 		<!-- wp:group {"className":"philosophy-block__copy section-heading--editorial aaa-motion-section-title"} -->
 		<div class="wp-block-group philosophy-block__copy section-heading--editorial aaa-motion-section-title">
