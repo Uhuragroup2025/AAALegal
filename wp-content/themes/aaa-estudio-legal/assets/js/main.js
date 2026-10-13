@@ -88,7 +88,8 @@
   if (!prefersReducedMotion) {
     document.querySelectorAll('.home-page .sector-card__logos').forEach(function (logos) {
       var items = Array.prototype.filter.call(logos.children, function (el) {
-        return el.classList.contains('sector-card__logo');
+        // D170: también los bloques Imagen nativos (logos agregados desde el editor).
+        return el.classList.contains('sector-card__logo') || el.classList.contains('wp-block-image');
       });
       if (items.length < 2) return;
       var visible = parseFloat(window.getComputedStyle(logos).getPropertyValue('--sector-visible')) || 2.25;
@@ -115,6 +116,27 @@
   // El control explícito evita que un swipe táctil active el giro por accidente.
   // Sin JS, CSS presenta ambas caras en flujo para que el contenido siga disponible.
   document.querySelectorAll('.team-flip-card').forEach(function (card) {
+    // D170: en las tarjetas hechas con bloques nativos (editables desde la
+    // página) los botones no van en el contenido: se crean aquí, con el
+    // nombre del equipo en su etiqueta accesible.
+    if (!card.querySelector('[data-team-flip-toggle]')) {
+      var teamName = ((card.querySelector('.team-flip-card__name') || {}).textContent || '').trim();
+      var teamRef = teamName ? ' ' + (/^equipo /i.test(teamName) ? 'del ' + teamName.charAt(0).toLowerCase() + teamName.slice(1) : 'de ' + teamName) : '';
+      var makeToggle = function (label, aria) {
+        var button = document.createElement('button');
+        button.type = 'button';
+        button.className = 'team-flip-card__toggle';
+        button.setAttribute('data-team-flip-toggle', '');
+        button.setAttribute('aria-expanded', 'false');
+        button.setAttribute('aria-label', aria);
+        button.textContent = label;
+        return button;
+      };
+      var frontSlot = card.querySelector('.team-flip-card__caption') || card.querySelector('.team-flip-card__front');
+      var backSlot = card.querySelector('.team-flip-card__back');
+      if (frontSlot) frontSlot.appendChild(makeToggle('Ver funciones', 'Ver funciones' + teamRef));
+      if (backSlot) backSlot.appendChild(makeToggle('Volver', 'Volver' + (teamRef ? teamRef.replace(/^ del /, ' al ') : '')));
+    }
     var toggles = Array.prototype.slice.call(card.querySelectorAll('[data-team-flip-toggle]'));
     var setFlipped = function (flipped, focusIndex) {
       card.classList.toggle('is-flipped', flipped);

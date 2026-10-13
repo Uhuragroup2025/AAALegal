@@ -22,9 +22,9 @@
 		<!-- /wp:group -->
 		<!-- wp:group {"className":"hero-shell__content"} -->
 		<div class="wp-block-group hero-shell__content">
-			<!-- wp:paragraph {"className":"aaa-eyebrow"} --><p class="aaa-eyebrow">Nuestro equipo</p><!-- /wp:paragraph -->
+			<!-- wp:paragraph {"className":"aaa-eyebrow"} --><p class="aaa-eyebrow">Sobre nosotros</p><!-- /wp:paragraph -->
 			<!-- wp:heading {"level":1,"className":"hero__title"} -->
-			<h1 class="wp-block-heading hero__title">Sobre nosotros: <img src="<?php echo esc_url( get_theme_file_uri( 'assets/img/brand/logo-horizontal-claro.svg' ) ); ?>" alt="AAA Estudio Legal" style="height:1.4em;width:auto;vertical-align:-0.36em;display:inline-block"/></h1>
+			<h1 class="wp-block-heading hero__title">Una firma con una causa: <em class="aaa-text-emphasis">el crédito.</em></h1>
 			<!-- /wp:heading -->
 		</div>
 		<!-- /wp:group -->
@@ -39,12 +39,8 @@
 	<div class="wp-block-group origin-block__grid aaa-motion-chapter">
 		<!-- wp:group {"className":"origin-block__copy section-heading--editorial aaa-motion-section-title"} -->
 		<div class="wp-block-group origin-block__copy section-heading--editorial aaa-motion-section-title">
-			<!-- wp:heading {"level":2} -->
-			<h2 class="wp-block-heading">Origen y <em class="aaa-text-emphasis">especialización</em></h2>
-			<!-- /wp:heading -->
-			<!-- wp:paragraph --><p><strong>Nacimos en 2020 con un propósito claro:</strong> la representación técnica y estratégica de acreedores en procesos de insolvencia.</p><!-- /wp:paragraph -->
-			<!-- wp:paragraph --><p>Desde nuestra fundación, decidimos construir una firma altamente especializada, enfocando toda nuestra experiencia en organizaciones que requieren proteger sus derechos crediticios y tomar decisiones con información, respaldo jurídico y visión de negocio.</p><!-- /wp:paragraph -->
-			<!-- wp:paragraph --><p>Hoy acompañamos a organizaciones de múltiples sectores económicos en todo el territorio nacional, desarrollando estrategias que combinan conocimiento jurídico, cobertura operativa y tecnología para afrontar los desafíos del riesgo crediticio.</p><!-- /wp:paragraph -->
+			<!-- wp:paragraph {"className":"aaa-eyebrow"} --><p class="aaa-eyebrow">Origen y especialización</p><!-- /wp:paragraph -->
+				<!-- wp:paragraph --><p>Desde 2020 acompañamos el crédito de principio a fin, desde la garantía que lo respalda hasta el cobro cuando el pago se complica. En insolvencia estamos de un solo lado, el del acreedor, y esa posición nos enseñó a ver el crédito donde es más frágil. Hoy trabajamos desde Cali para entidades financieras, fondos de empleados y organizaciones del sector real de todo el país.</p><!-- /wp:paragraph -->
 		</div>
 		<!-- /wp:group -->
 		<!-- wp:image {"className":"origin-block__visual aaa-motion-media"} -->
@@ -59,36 +55,38 @@
 <section class="wp-block-group alignfull team-groups surface-theme--light-alt aaa-section has-surface-light-alt-background-color has-background">
 	<!-- wp:group {"className":"team-groups__head section-heading--editorial aaa-motion-section-title"} -->
 	<div class="wp-block-group team-groups__head section-heading--editorial aaa-motion-section-title">
-		<!-- wp:paragraph {"className":"aaa-eyebrow"} --><p class="aaa-eyebrow">Personas detrás de cada proceso</p><!-- /wp:paragraph -->
+		<!-- wp:paragraph {"className":"aaa-eyebrow"} --><p class="aaa-eyebrow">Equipo</p><!-- /wp:paragraph -->
 		<!-- wp:heading {"level":2} -->
-		<h2 class="wp-block-heading">Quiénes hacen posible <em class="aaa-text-emphasis">cada caso.</em></h2>
+		<h2 class="wp-block-heading">Quienes hacen posible <em class="aaa-text-emphasis">cada caso.</em></h2>
 		<!-- /wp:heading -->
-		<!-- wp:paragraph --><p>En AAA Estudio Legal hemos conformado un equipo multidisciplinario que integra criterio jurídico, gestión operativa y tecnología.</p><!-- /wp:paragraph -->
+		<!-- wp:paragraph --><p>Cuatro equipos que combinan criterio jurídico, control, negociación y tecnología.</p><!-- /wp:paragraph -->
 	</div>
 	<!-- /wp:group -->
 	<!-- wp:group {"className":"team-flip-grid"} -->
 	<div class="wp-block-group team-flip-grid">
 		<!-- wp:group {"className":"team-profile-pair aaa-reveal aaa-stagger-0"} -->
 		<div class="wp-block-group team-profile-pair aaa-reveal aaa-stagger-0">
-			<!-- wp:html -->
-			<article class="team-flip-card team-profile-pair__card">
-				<div class="team-flip-card__inner">
-					<div class="team-flip-card__face team-flip-card__front">
-						<img class="team-flip-card__logo" src="<?php echo esc_url( aaa_brand_url( 'isotipo-blanco.svg' ) ); ?>" alt="" aria-hidden="true" />
-						<div class="team-flip-card__caption">
-							<span class="team-flip-card__name">Equipo jurídico</span>
-							<span class="team-flip-card__role">Estrategia y representación</span>
-							<button class="team-flip-card__toggle" type="button" data-team-flip-toggle aria-expanded="false" aria-label="Ver funciones del equipo jurídico">Ver funciones</button>
-						</div>
-					</div>
-					<div class="team-flip-card__face team-flip-card__back">
-						<img class="team-flip-card__logo" src="<?php echo esc_url( aaa_brand_url( 'isotipo-blanco.svg' ) ); ?>" alt="" aria-hidden="true" />
-						<p class="team-flip-card__desc">Abogados especializados en derecho concursal, normalización de activos y derecho corporativo que diseñan la estrategia y representan a cada cliente en su caso.</p>
-						<button class="team-flip-card__toggle" type="button" data-team-flip-toggle aria-expanded="false" aria-label="Volver al equipo jurídico">Volver</button>
-					</div>
-				</div>
-			</article>
-			<!-- /wp:html -->
+			<!-- wp:group {"className":"team-flip-card team-profile-pair__card","layout":{"type":"default"}} -->
+<div class="wp-block-group team-flip-card team-profile-pair__card"><!-- wp:group {"className":"team-flip-card__inner","layout":{"type":"default"}} -->
+<div class="wp-block-group team-flip-card__inner"><!-- wp:group {"className":"team-flip-card__face team-flip-card__front","layout":{"type":"default"}} -->
+<div class="wp-block-group team-flip-card__face team-flip-card__front"><!-- wp:group {"className":"team-flip-card__caption","layout":{"type":"default"}} -->
+<div class="wp-block-group team-flip-card__caption"><!-- wp:paragraph {"className":"team-flip-card__name"} -->
+<p class="team-flip-card__name">Equipo jurídico</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"className":"team-flip-card__role"} -->
+<p class="team-flip-card__role">Estrategia y representación</p>
+<!-- /wp:paragraph --></div>
+<!-- /wp:group --></div>
+<!-- /wp:group -->
+
+<!-- wp:group {"className":"team-flip-card__face team-flip-card__back","layout":{"type":"default"}} -->
+<div class="wp-block-group team-flip-card__face team-flip-card__back"><!-- wp:paragraph {"className":"team-flip-card__desc"} -->
+<p class="team-flip-card__desc">Diseña la estrategia de cada caso y representa al cliente en el proceso, en insolvencia, recuperación de cartera, garantías y asesoría corporativa.</p>
+<!-- /wp:paragraph --></div>
+<!-- /wp:group --></div>
+<!-- /wp:group --></div>
+<!-- /wp:group -->
 			<!-- wp:image {"className":"team-profile-pair__photo"} -->
 			<figure class="wp-block-image team-profile-pair__photo"><img src="<?php echo esc_url( get_theme_file_uri( 'assets/img/nosotros/equipo-juridico.webp' ) ); ?>" alt="Integrantes de AAA Estudio Legal en su puesto de trabajo" /></figure>
 			<!-- /wp:image -->
@@ -96,51 +94,81 @@
 		<!-- /wp:group -->
 		<!-- wp:group {"className":"team-profile-pair aaa-reveal aaa-stagger-1"} -->
 		<div class="wp-block-group team-profile-pair aaa-reveal aaa-stagger-1">
-			<!-- wp:html -->
-			<article class="team-flip-card team-profile-pair__card">
-				<div class="team-flip-card__inner">
-					<div class="team-flip-card__face team-flip-card__front">
-						<img class="team-flip-card__logo" src="<?php echo esc_url( aaa_brand_url( 'isotipo-blanco.svg' ) ); ?>" alt="" aria-hidden="true" />
-						<div class="team-flip-card__caption">
-							<span class="team-flip-card__name">Equipo administrativo</span>
-							<span class="team-flip-card__role">Gestión operativa y seguimiento</span>
-							<button class="team-flip-card__toggle" type="button" data-team-flip-toggle aria-expanded="false" aria-label="Ver funciones del equipo administrativo">Ver funciones</button>
-						</div>
-					</div>
-					<div class="team-flip-card__face team-flip-card__back">
-						<img class="team-flip-card__logo" src="<?php echo esc_url( aaa_brand_url( 'isotipo-blanco.svg' ) ); ?>" alt="" aria-hidden="true" />
-						<p class="team-flip-card__desc">Gestiona la documentación, los términos y el seguimiento de cada proceso para que ningún caso pierda ritmo.</p>
-						<button class="team-flip-card__toggle" type="button" data-team-flip-toggle aria-expanded="false" aria-label="Volver al equipo administrativo">Volver</button>
-					</div>
-				</div>
-			</article>
-			<!-- /wp:html -->
+			<!-- wp:group {"className":"team-flip-card team-profile-pair__card","layout":{"type":"default"}} -->
+<div class="wp-block-group team-flip-card team-profile-pair__card"><!-- wp:group {"className":"team-flip-card__inner","layout":{"type":"default"}} -->
+<div class="wp-block-group team-flip-card__inner"><!-- wp:group {"className":"team-flip-card__face team-flip-card__front","layout":{"type":"default"}} -->
+<div class="wp-block-group team-flip-card__face team-flip-card__front"><!-- wp:group {"className":"team-flip-card__caption","layout":{"type":"default"}} -->
+<div class="wp-block-group team-flip-card__caption"><!-- wp:paragraph {"className":"team-flip-card__name"} -->
+<p class="team-flip-card__name">Equipo administrativo</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"className":"team-flip-card__role"} -->
+<p class="team-flip-card__role">Control y seguimiento</p>
+<!-- /wp:paragraph --></div>
+<!-- /wp:group --></div>
+<!-- /wp:group -->
+
+<!-- wp:group {"className":"team-flip-card__face team-flip-card__back","layout":{"type":"default"}} -->
+<div class="wp-block-group team-flip-card__face team-flip-card__back"><!-- wp:paragraph {"className":"team-flip-card__desc"} -->
+<p class="team-flip-card__desc">Controla los términos, la documentación y los indicadores de cada proceso, y vigila su cumplimiento.</p>
+<!-- /wp:paragraph --></div>
+<!-- /wp:group --></div>
+<!-- /wp:group --></div>
+<!-- /wp:group -->
 			<!-- wp:image {"className":"team-profile-pair__photo"} -->
 			<figure class="wp-block-image team-profile-pair__photo"><img src="<?php echo esc_url( get_theme_file_uri( 'assets/img/nosotros/equipo-administrativo.webp' ) ); ?>" alt="Integrante de AAA Estudio Legal trabajando en su escritorio" /></figure>
 			<!-- /wp:image -->
 		</div>
 		<!-- /wp:group -->
 		<!-- wp:group {"className":"team-profile-pair aaa-reveal aaa-stagger-2"} -->
-		<div class="wp-block-group team-profile-pair aaa-reveal aaa-stagger-2">
-			<!-- wp:html -->
-			<article class="team-flip-card team-profile-pair__card">
-				<div class="team-flip-card__inner">
-					<div class="team-flip-card__face team-flip-card__front">
-						<img class="team-flip-card__logo" src="<?php echo esc_url( aaa_brand_url( 'isotipo-blanco.svg' ) ); ?>" alt="" aria-hidden="true" />
-						<div class="team-flip-card__caption">
-							<span class="team-flip-card__name">Equipo de tecnología</span>
-							<span class="team-flip-card__role">Herramientas propias (ADY)</span>
-							<button class="team-flip-card__toggle" type="button" data-team-flip-toggle aria-expanded="false" aria-label="Ver funciones del equipo de tecnología">Ver funciones</button>
-						</div>
-					</div>
-					<div class="team-flip-card__face team-flip-card__back">
-						<img class="team-flip-card__logo" src="<?php echo esc_url( aaa_brand_url( 'isotipo-blanco.svg' ) ); ?>" alt="" aria-hidden="true" />
-						<p class="team-flip-card__desc">Desarrolla las herramientas tecnológicas que dan seguimiento en tiempo real a cada proceso.</p>
-						<button class="team-flip-card__toggle" type="button" data-team-flip-toggle aria-expanded="false" aria-label="Volver al equipo de tecnología">Volver</button>
-					</div>
-				</div>
-			</article>
-			<!-- /wp:html -->
+<div class="wp-block-group team-profile-pair aaa-reveal aaa-stagger-2">
+<!-- wp:group {"className":"team-flip-card team-profile-pair__card","layout":{"type":"default"}} -->
+<div class="wp-block-group team-flip-card team-profile-pair__card"><!-- wp:group {"className":"team-flip-card__inner","layout":{"type":"default"}} -->
+<div class="wp-block-group team-flip-card__inner"><!-- wp:group {"className":"team-flip-card__face team-flip-card__front","layout":{"type":"default"}} -->
+<div class="wp-block-group team-flip-card__face team-flip-card__front"><!-- wp:group {"className":"team-flip-card__caption","layout":{"type":"default"}} -->
+<div class="wp-block-group team-flip-card__caption"><!-- wp:paragraph {"className":"team-flip-card__name"} -->
+<p class="team-flip-card__name">Equipo de negociaciones</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"className":"team-flip-card__role"} -->
+<p class="team-flip-card__role">Articulación y recaudo</p>
+<!-- /wp:paragraph --></div>
+<!-- /wp:group --></div>
+<!-- /wp:group -->
+
+<!-- wp:group {"className":"team-flip-card__face team-flip-card__back","layout":{"type":"default"}} -->
+<div class="wp-block-group team-flip-card__face team-flip-card__back"><!-- wp:paragraph {"className":"team-flip-card__desc"} -->
+<p class="team-flip-card__desc">Une la estrategia jurídica con el recaudo: negocia los acuerdos y gestiona su cumplimiento.</p>
+<!-- /wp:paragraph --></div>
+<!-- /wp:group --></div>
+<!-- /wp:group --></div>
+<!-- /wp:group -->
+<!-- wp:group {"className":"team-profile-pair__placeholder"} --><div class="wp-block-group team-profile-pair__placeholder"></div><!-- /wp:group -->
+</div>
+<!-- /wp:group -->
+<!-- wp:group {"className":"team-profile-pair aaa-reveal aaa-stagger-3"} -->
+<div class="wp-block-group team-profile-pair aaa-reveal aaa-stagger-3">
+			<!-- wp:group {"className":"team-flip-card team-profile-pair__card","layout":{"type":"default"}} -->
+<div class="wp-block-group team-flip-card team-profile-pair__card"><!-- wp:group {"className":"team-flip-card__inner","layout":{"type":"default"}} -->
+<div class="wp-block-group team-flip-card__inner"><!-- wp:group {"className":"team-flip-card__face team-flip-card__front","layout":{"type":"default"}} -->
+<div class="wp-block-group team-flip-card__face team-flip-card__front"><!-- wp:group {"className":"team-flip-card__caption","layout":{"type":"default"}} -->
+<div class="wp-block-group team-flip-card__caption"><!-- wp:paragraph {"className":"team-flip-card__name"} -->
+<p class="team-flip-card__name">Equipo de tecnología</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph {"className":"team-flip-card__role"} -->
+<p class="team-flip-card__role">Automatización y plataforma propia</p>
+<!-- /wp:paragraph --></div>
+<!-- /wp:group --></div>
+<!-- /wp:group -->
+
+<!-- wp:group {"className":"team-flip-card__face team-flip-card__back","layout":{"type":"default"}} -->
+<div class="wp-block-group team-flip-card__face team-flip-card__back"><!-- wp:paragraph {"className":"team-flip-card__desc"} -->
+<p class="team-flip-card__desc">Automatiza procesos, desarrolla la plataforma propia y se ocupa de la seguridad de la información.</p>
+<!-- /wp:paragraph --></div>
+<!-- /wp:group --></div>
+<!-- /wp:group --></div>
+<!-- /wp:group -->
 			<!-- wp:image {"className":"team-profile-pair__photo"} -->
 			<figure class="wp-block-image team-profile-pair__photo"><img src="<?php echo esc_url( get_theme_file_uri( 'assets/img/nosotros/equipo-tecnologia.webp' ) ); ?>" alt="Manos de un integrante de AAA Estudio Legal trabajando en un portátil" /></figure>
 			<!-- /wp:image -->
@@ -163,13 +191,13 @@
 			<!-- wp:paragraph {"className":"aaa-eyebrow"} --><p class="aaa-eyebrow">Filosofía</p><!-- /wp:paragraph -->
 			<!-- wp:heading {"level":2} --><h2 class="wp-block-heading">AAA Estudio Legal</h2><!-- /wp:heading -->
 			<!-- wp:quote {"className":"philosophy-quote"} -->
-			<blockquote class="wp-block-quote philosophy-quote">
-				<!-- wp:paragraph --><p><strong><em>Innovación con rigor. Solidez con tecnología. Dimensión humana.</em></strong> Tres principios que orientan la práctica de la firma.</p><!-- /wp:paragraph -->
-			</blockquote>
-			<!-- /wp:quote -->
-			<!-- wp:paragraph {"className":"philosophy-description"} -->
-			<p class="philosophy-description"><strong>En AAA Estudio Legal actuamos con total transparencia:</strong> no prometemos resultados que ninguna firma seria puede garantizar, sino una representación jurídica especializada, una estrategia construida sobre un diagnóstico técnico y honorarios proporcionales a la naturaleza del caso. Nuestro compromiso es brindar a cada cliente el criterio, la experiencia y el acompañamiento necesarios para tomar decisiones informadas y proteger el valor de sus activos.</p>
-			<!-- /wp:paragraph -->
+<blockquote class="wp-block-quote philosophy-quote">
+<!-- wp:paragraph --><p>Nuestro diferencial es desmitificar las situaciones que parecen cerradas, y encontrar en ellas caminos que no son evidentes a primera vista.</p><!-- /wp:paragraph -->
+</blockquote>
+<!-- /wp:quote -->
+<!-- wp:paragraph {"className":"philosophy-description"} -->
+<p class="philosophy-description">Revisamos, analizamos e interiorizamos la ley, y con eso le mostramos al cliente puntos de definición que abren nuevas aristas a su situación.</p>
+<!-- /wp:paragraph -->
 		</div>
 		<!-- /wp:group -->
 	</div>
@@ -179,7 +207,7 @@
 
 <!-- wp:group {"tagName":"section","anchor":"cierre-heading","className":"site-closing-cta site-closing-cta--internal site-closing-cta--global aaa-section","backgroundColor":"surface-light","align":"full","layout":{"type":"constrained"}} -->
 <section class="wp-block-group alignfull site-closing-cta site-closing-cta--internal site-closing-cta--global aaa-section has-surface-light-background-color has-background" id="cierre-heading">
-	<!-- wp:group {"className":"site-closing-cta__panel"} -->
+	<!-- wp:group {"className":"site-closing-cta__panel","style":{"background":{"backgroundImage":{"url":"<?php echo esc_url( aaa_media_url( 'temp-prototype-home-cta.jpg' ) ); ?>","source":"file","title":"temp-prototype-home-cta"},"backgroundSize":"cover","backgroundPosition":"50% 52%"}}} -->
 	<div class="wp-block-group site-closing-cta__panel">
 		<!-- wp:image {"className":"site-closing-cta__watermark"} -->
 		<figure class="wp-block-image site-closing-cta__watermark"><img src="<?php echo esc_url( aaa_brand_url( 'isotipo-blanco.svg' ) ); ?>" alt="" /></figure>
@@ -187,16 +215,16 @@
 		<!-- wp:group {"className":"site-closing-cta__heading aaa-motion-section-title"} -->
 		<div class="wp-block-group site-closing-cta__heading aaa-motion-section-title">
 			<!-- wp:paragraph {"className":"aaa-eyebrow"} --><p class="aaa-eyebrow">Conversemos</p><!-- /wp:paragraph -->
-			<!-- wp:heading {"level":2} --><h2 class="wp-block-heading">Cada caso requiere <em class="aaa-text-emphasis">una defensa con criterio.</em></h2><!-- /wp:heading -->
+			<!-- wp:heading {"level":2} --><h2 class="wp-block-heading">Cada caso se estudia <em class="aaa-text-emphasis">antes de decidir.</em></h2><!-- /wp:heading -->
 		</div>
 		<!-- /wp:group -->
 		<!-- wp:group {"className":"site-closing-cta__content"} -->
 		<div class="wp-block-group site-closing-cta__content">
-			<!-- wp:paragraph {"className":"site-closing-cta__text"} --><p class="site-closing-cta__text">Si su organización enfrenta un reto jurídico, necesita proteger sus activos, gestionar riesgos o tomar decisiones corporativas, nuestro equipo puede evaluar la situación y definir una estrategia jurídica.</p><!-- /wp:paragraph -->
+			<!-- wp:paragraph {"className":"site-closing-cta__text"} --><p class="site-closing-cta__text">Si usted es una entidad financiera con cartera en mora, un fondo de empleados, una persona natural que quiere recuperar lo que le deben o una organización que necesita anticipar un riesgo legal, estudiamos su situación y le proponemos la vía que mejor la respalda.</p><!-- /wp:paragraph -->
 			<!-- wp:buttons -->
 			<div class="wp-block-buttons">
 				<!-- wp:button {"className":"site-closing-cta__button"} -->
-				<div class="wp-block-button site-closing-cta__button"><a class="wp-block-button__link wp-element-button" href="/contacto/">Solicitar evaluación jurídica <svg class="btn--icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+				<div class="wp-block-button site-closing-cta__button"><a class="wp-block-button__link wp-element-button" href="/contacto/">Solicitar el estudio de su caso <svg class="btn--icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
 				<!-- /wp:button -->
 			</div>
 			<!-- /wp:buttons -->

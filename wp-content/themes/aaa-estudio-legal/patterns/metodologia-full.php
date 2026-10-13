@@ -22,9 +22,9 @@
 		<!-- /wp:group -->
 		<!-- wp:group {"className":"hero-shell__content"} -->
 		<div class="wp-block-group hero-shell__content">
-			<!-- wp:paragraph {"className":"aaa-eyebrow"} --><p class="aaa-eyebrow">Soluciones</p><!-- /wp:paragraph -->
+			<!-- wp:paragraph {"className":"aaa-eyebrow"} --><p class="aaa-eyebrow">Soluciones jurídicas</p><!-- /wp:paragraph -->
 			<!-- wp:heading {"level":1,"className":"hero__title"} -->
-			<h1 class="wp-block-heading hero__title">Insolvencia, normalización de activos y línea corporativa, <em class="aaa-text-emphasis">con una estrategia clara.</em></h1>
+			<h1 class="wp-block-heading hero__title">Insolvencia, recuperación de cartera y asesoría corporativa, <em class="aaa-text-emphasis">bajo un mismo método.</em></h1>
 			<!-- /wp:heading -->
 		</div>
 		<!-- /wp:group -->
@@ -41,7 +41,7 @@
 		<div class="wp-block-group stepper__intro section-heading--editorial aaa-motion-section-title">
 			<!-- wp:paragraph {"className":"aaa-eyebrow"} --><p class="aaa-eyebrow">Nuestra metodología</p><!-- /wp:paragraph -->
 			<!-- wp:heading {"level":2} -->
-			<h2 class="wp-block-heading">Convertimos cada caso en <em class="aaa-text-emphasis">una estrategia jurídica.</em></h2>
+			<h2 class="wp-block-heading">Primero estudiamos, <em class="aaa-text-emphasis">después decidimos.</em></h2>
 			<!-- /wp:heading -->
 		</div>
 		<!-- /wp:group -->
@@ -57,7 +57,7 @@
 				<div class="wp-block-group stepper__body">
 					<!-- wp:paragraph {"className":"stepper__index"} --><p class="stepper__index">01</p><!-- /wp:paragraph -->
 					<!-- wp:heading {"level":3} --><h3 class="wp-block-heading">Diagnóstico</h3><!-- /wp:heading -->
-					<!-- wp:paragraph --><p>Antes de actuar, entendemos el contexto completo. Estudiamos el caso, identificamos los riesgos y construimos un diagnóstico jurídico que permite definir una ruta viable y proporcional a cada escenario.</p><!-- /wp:paragraph -->
+					<!-- wp:paragraph --><p>Antes de actuar, estudiamos el caso completo: el título, la garantía, la situación del deudor y el momento del proceso. De ese estudio sale una ruta viable y proporcional a lo que está en juego.</p><!-- /wp:paragraph -->
 				</div>
 				<!-- /wp:group -->
 			</div>
@@ -72,7 +72,7 @@
 				<div class="wp-block-group stepper__body">
 					<!-- wp:paragraph {"className":"stepper__index"} --><p class="stepper__index">02</p><!-- /wp:paragraph -->
 					<!-- wp:heading {"level":3} --><h3 class="wp-block-heading">Estrategia</h3><!-- /wp:heading -->
-					<!-- wp:paragraph --><p>No aplicamos estrategias estándar. Diseñamos la ruta jurídica según el momento de cada caso: para prevenir un riesgo, actuar dentro de un proceso o recuperar un activo.</p><!-- /wp:paragraph -->
+					<!-- wp:paragraph --><p>Asignamos cada caso a la vía que mejor lo respalda: prevenir el riesgo, actuar dentro de un proceso o recuperar el crédito. Cuando el volumen es alto, esa ruta se repite con orden, por fases y con un responsable por cada caso.</p><!-- /wp:paragraph -->
 				</div>
 				<!-- /wp:group -->
 			</div>
@@ -87,7 +87,7 @@
 				<div class="wp-block-group stepper__body">
 					<!-- wp:paragraph {"className":"stepper__index"} --><p class="stepper__index">03</p><!-- /wp:paragraph -->
 					<!-- wp:heading {"level":3} --><h3 class="wp-block-heading">Representación</h3><!-- /wp:heading -->
-					<!-- wp:paragraph --><p>Ejecutamos la estrategia con seguimiento permanente, representación especializada y control continuo de cada etapa para proteger sus intereses.</p><!-- /wp:paragraph -->
+					<!-- wp:paragraph --><p>Ejecutamos la estrategia con seguimiento permanente y control de cada etapa, para que el cliente sepa en qué punto está su caso.</p><!-- /wp:paragraph -->
 				</div>
 				<!-- /wp:group -->
 			</div>
@@ -103,12 +103,12 @@
 <section class="wp-block-group alignfull services-intro surface-theme--light-base aaa-section has-surface-light-background-color has-background">
 	<!-- wp:group {"className":"services-intro__head section-heading--editorial aaa-motion-section-title"} -->
 	<div class="wp-block-group services-intro__head section-heading--editorial aaa-motion-section-title">
-		<!-- wp:paragraph {"className":"aaa-eyebrow"} --><p class="aaa-eyebrow">Representación especializada</p><!-- /wp:paragraph -->
+		<!-- wp:paragraph {"className":"aaa-eyebrow"} --><p class="aaa-eyebrow">Áreas de práctica</p><!-- /wp:paragraph -->
 		<!-- wp:heading {"level":2} -->
-		<h2 class="wp-block-heading">Tres áreas de práctica, <em class="aaa-text-emphasis">un mismo criterio.</em></h2>
+		<h2 class="wp-block-heading">Lo que hacemos <em class="aaa-text-emphasis">en cada área.</em></h2>
 		<!-- /wp:heading -->
 		<!-- wp:paragraph {"className":"services-intro__copy"} -->
-		<p class="services-intro__copy">Integramos defensa en procesos concursales, normalización de activos y línea corporativa y litigios para anticipar riesgos, proteger el crédito y maximizar sus posibilidades de recuperación.</p>
+		<p class="services-intro__copy">Cada área tiene su propio alcance y todas parten del mismo estudio del caso. Este es el detalle de lo que hacemos en cada una.</p>
 		<!-- /wp:paragraph -->
 	</div>
 	<!-- /wp:group -->
@@ -122,15 +122,15 @@
 			<!-- wp:group {"className":"service-card__body"} -->
 			<div class="wp-block-group service-card__body">
 				<!-- wp:heading {"level":3} --><h3 class="wp-block-heading">Derecho concursal</h3><!-- /wp:heading -->
-				<!-- wp:paragraph {"className":"service-block__tag"} --><p class="service-block__tag">Perspectiva técnica y estratégica</p><!-- /wp:paragraph -->
+				<!-- wp:paragraph {"className":"service-block__tag"} --><p class="service-block__tag">Del lado del acreedor, en cada etapa del proceso.</p><!-- /wp:paragraph -->
 				<!-- wp:list {"className":"service-card__list"} -->
 				<ul class="wp-block-list service-card__list">
-					<!-- wp:list-item --><li>Representación de acreedores en procesos de reorganización y recuperación empresarial</li><!-- /wp:list-item -->
-					<!-- wp:list-item --><li>Representación de acreedores en procesos de insolvencia de persona natural</li><!-- /wp:list-item -->
-					<!-- wp:list-item --><li>Diagnóstico y estrategia concursal</li><!-- /wp:list-item -->
-					<!-- wp:list-item --><li>Representación en procesos de liquidación</li><!-- /wp:list-item -->
-					<!-- wp:list-item --><li>Controversias y acciones concursales</li><!-- /wp:list-item -->
-					<!-- wp:list-item --><li>Protección de garantías y negociación de acuerdos</li><!-- /wp:list-item -->
+					<!-- wp:list-item --><li>Insolvencia de la persona natural no comerciante y del pequeño comerciante: representación del acreedor en la negociación de deudas, el acuerdo y la liquidación patrimonial.</li><!-- /wp:list-item -->
+<!-- wp:list-item --><li>Reorganización y liquidación judicial: graduación y calificación de créditos, objeciones y votación del acuerdo.</li><!-- /wp:list-item -->
+<!-- wp:list-item --><li>Acuerdos de reestructuración, vistos desde el acreedor.</li><!-- /wp:list-item -->
+<!-- wp:list-item --><li>Controversias y acciones propias del concurso.</li><!-- /wp:list-item -->
+<!-- wp:list-item --><li>Protección de la garantía y negociación de las condiciones del acuerdo.</li><!-- /wp:list-item -->
+<!-- wp:list-item --><li>Los demás procesos concursales y mercantiles de liquidación.</li><!-- /wp:list-item -->
 				</ul>
 				<!-- /wp:list -->
 			</div>
@@ -144,18 +144,20 @@
 			<!-- /wp:image -->
 			<!-- wp:group {"className":"service-card__body"} -->
 			<div class="wp-block-group service-card__body">
-				<!-- wp:heading {"level":3} --><h3 class="wp-block-heading">Normalización de activos</h3><!-- /wp:heading -->
-				<!-- wp:paragraph {"className":"service-block__tag"} --><p class="service-block__tag">Preventivo, reactivo y a la medida</p><!-- /wp:paragraph -->
+				<!-- wp:heading {"level":3} --><h3 class="wp-block-heading">Recuperación de cartera y garantías</h3><!-- /wp:heading -->
+				<!-- wp:paragraph {"className":"service-block__tag"} --><p class="service-block__tag">Estudiamos la cartera antes de elegir la vía.</p><!-- /wp:paragraph -->
 				<!-- wp:list {"className":"service-card__list"} -->
 				<ul class="wp-block-list service-card__list">
-					<!-- wp:list-item --><li>Diagnóstico jurídico y documental</li><!-- /wp:list-item -->
-					<!-- wp:list-item --><li>Análisis de viabilidad de acciones de recuperación</li><!-- /wp:list-item -->
-					<!-- wp:list-item --><li>Diseño de estrategias de normalización</li><!-- /wp:list-item -->
-					<!-- wp:list-item --><li>Recuperación de activos y normalización de cartera</li><!-- /wp:list-item -->
-					<!-- wp:list-item --><li>Estructuración y constitución de garantías</li><!-- /wp:list-item -->
-					<!-- wp:list-item --><li>Estandarización de procesos de recuperación</li><!-- /wp:list-item -->
-				</ul>
-				<!-- /wp:list -->
+					<!-- wp:list-item --><li>Estudio jurídico y documental de la cartera: los títulos, las garantías y el estado de cada obligación.</li><!-- /wp:list-item -->
+<!-- wp:list-item --><li>Análisis de viabilidad: cuándo conviene el proceso y cuándo otra vía.</li><!-- /wp:list-item -->
+<!-- wp:list-item --><li>Procesos ejecutivos, incluido el cobro del aval del Fondo Nacional de Garantías.</li><!-- /wp:list-item -->
+<!-- wp:list-item --><li>Procesos de restitución de tenencia.</li><!-- /wp:list-item -->
+<!-- wp:list-item --><li>Estructuración y constitución de garantías, incluida la garantía mobiliaria sobre libranza.</li><!-- /wp:list-item -->
+<!-- wp:list-item --><li>Gestión de cartera, con cobro jurídico dirigido por abogados.</li><!-- /wp:list-item -->
+<!-- wp:list-item --><li>Rutas por fases y con responsable asignado para los procesos masivos.</li><!-- /wp:list-item -->
+</ul>
+<!-- /wp:list -->
+<!-- wp:paragraph {"className":"service-card__note"} --><p class="service-card__note">En el sector financiero, normalización de activos.</p><!-- /wp:paragraph -->
 			</div>
 			<!-- /wp:group -->
 		</div>
@@ -167,16 +169,15 @@
 			<!-- /wp:image -->
 			<!-- wp:group {"className":"service-card__body"} -->
 			<div class="wp-block-group service-card__body">
-				<!-- wp:heading {"level":3} --><h3 class="wp-block-heading">Línea corporativa y litigios</h3><!-- /wp:heading -->
-				<!-- wp:paragraph {"className":"service-block__tag"} --><p class="service-block__tag">Prevención antes que contingencia</p><!-- /wp:paragraph -->
+				<!-- wp:heading {"level":3} --><h3 class="wp-block-heading">Asesoría corporativa y litigios</h3><!-- /wp:heading -->
+				<!-- wp:paragraph {"className":"service-block__tag"} --><p class="service-block__tag">Anticipamos el riesgo legal, comercial y laboral antes de que se vuelva conflicto.</p><!-- /wp:paragraph -->
 				<!-- wp:list {"className":"service-card__list"} -->
 				<ul class="wp-block-list service-card__list">
-					<!-- wp:list-item --><li>Derecho societario y gobierno corporativo</li><!-- /wp:list-item -->
-					<!-- wp:list-item --><li>Estructuración de negocios y operaciones contractuales</li><!-- /wp:list-item -->
-					<!-- wp:list-item --><li>Asesoría preventiva y estratégica en asuntos laborales</li><!-- /wp:list-item -->
-					<!-- wp:list-item --><li>Litigios y resolución de controversias</li><!-- /wp:list-item -->
-					<!-- wp:list-item --><li>Planeación patrimonial y sucesoral</li><!-- /wp:list-item -->
-					<!-- wp:list-item --><li>Cumplimiento y gestión de riesgos corporativos</li><!-- /wp:list-item -->
+					<!-- wp:list-item --><li>Contratos y estructuración de negocios</li><!-- /wp:list-item -->
+<!-- wp:list-item --><li>Derecho societario y gobierno corporativo</li><!-- /wp:list-item -->
+<!-- wp:list-item --><li>Asesoría laboral preventiva</li><!-- /wp:list-item -->
+<!-- wp:list-item --><li>Planeación patrimonial y sucesoral</li><!-- /wp:list-item -->
+<!-- wp:list-item --><li>Litigios y resolución de controversias</li><!-- /wp:list-item -->
 				</ul>
 				<!-- /wp:list -->
 			</div>
@@ -198,7 +199,7 @@
 			<!-- wp:heading {"level":2} -->
 			<h2 class="wp-block-heading">Expectativas claras, <em class="aaa-text-emphasis">decisiones sustentadas.</em></h2>
 			<!-- /wp:heading -->
-			<!-- wp:paragraph --><p>Nuestro compromiso es la defensa técnica más rigurosa de sus intereses. Los honorarios se definen caso a caso, siempre en proporción a lo que está en juego.</p><!-- /wp:paragraph -->
+			<!-- wp:paragraph --><p>Nuestro compromiso es el análisis más riguroso de su caso y una representación diligente de sus intereses. No prometemos resultados: nos obligamos a estudiar, a actuar con cuidado y a informarle en qué punto está. Los honorarios se definen caso a caso, en proporción a lo que está en juego.</p><!-- /wp:paragraph -->
 		</div>
 		<!-- /wp:group -->
 		<!-- wp:group {"className":"transparency-block__media"} -->
@@ -215,7 +216,7 @@
 
 <!-- wp:group {"tagName":"section","anchor":"cierre-heading","className":"site-closing-cta site-closing-cta--internal site-closing-cta--global aaa-section","backgroundColor":"surface-light","align":"full","layout":{"type":"constrained"}} -->
 <section class="wp-block-group alignfull site-closing-cta site-closing-cta--internal site-closing-cta--global aaa-section has-surface-light-background-color has-background" id="cierre-heading">
-	<!-- wp:group {"className":"site-closing-cta__panel"} -->
+	<!-- wp:group {"className":"site-closing-cta__panel","style":{"background":{"backgroundImage":{"url":"<?php echo esc_url( aaa_media_url( 'temp-prototype-home-cta.jpg' ) ); ?>","source":"file","title":"temp-prototype-home-cta"},"backgroundSize":"cover","backgroundPosition":"50% 52%"}}} -->
 	<div class="wp-block-group site-closing-cta__panel">
 		<!-- wp:image {"className":"site-closing-cta__watermark"} -->
 		<figure class="wp-block-image site-closing-cta__watermark"><img src="<?php echo esc_url( aaa_brand_url( 'isotipo-blanco.svg' ) ); ?>" alt="" /></figure>
@@ -223,16 +224,16 @@
 		<!-- wp:group {"className":"site-closing-cta__heading aaa-motion-section-title"} -->
 		<div class="wp-block-group site-closing-cta__heading aaa-motion-section-title">
 			<!-- wp:paragraph {"className":"aaa-eyebrow"} --><p class="aaa-eyebrow">Conversemos</p><!-- /wp:paragraph -->
-			<!-- wp:heading {"level":2} --><h2 class="wp-block-heading">Cada caso requiere <em class="aaa-text-emphasis">una defensa con criterio.</em></h2><!-- /wp:heading -->
+			<!-- wp:heading {"level":2} --><h2 class="wp-block-heading">Cada caso se estudia <em class="aaa-text-emphasis">antes de decidir.</em></h2><!-- /wp:heading -->
 		</div>
 		<!-- /wp:group -->
 		<!-- wp:group {"className":"site-closing-cta__content"} -->
 		<div class="wp-block-group site-closing-cta__content">
-			<!-- wp:paragraph {"className":"site-closing-cta__text"} --><p class="site-closing-cta__text">Si su organización enfrenta un reto jurídico, necesita proteger sus activos, gestionar riesgos o tomar decisiones corporativas, nuestro equipo puede evaluar la situación y definir una estrategia jurídica.</p><!-- /wp:paragraph -->
+			<!-- wp:paragraph {"className":"site-closing-cta__text"} --><p class="site-closing-cta__text">Si usted es una entidad financiera con cartera en mora, un fondo de empleados, una persona natural que quiere recuperar lo que le deben o una organización que necesita anticipar un riesgo legal, estudiamos su situación y le proponemos la vía que mejor la respalda.</p><!-- /wp:paragraph -->
 			<!-- wp:buttons -->
 			<div class="wp-block-buttons">
 				<!-- wp:button {"className":"site-closing-cta__button"} -->
-				<div class="wp-block-button site-closing-cta__button"><a class="wp-block-button__link wp-element-button" href="/contacto/">Solicitar evaluación jurídica <svg class="btn--icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+				<div class="wp-block-button site-closing-cta__button"><a class="wp-block-button__link wp-element-button" href="/contacto/">Solicitar el estudio de su caso <svg class="btn--icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
 				<!-- /wp:button -->
 			</div>
 			<!-- /wp:buttons -->

@@ -201,9 +201,8 @@ function aaa_inject_motion_attributes( $block_content, $block ) {
 		'aaa-motion-service-panels' => 'data-motion="service-panels"',
 		'aaa-motion-stats'          => 'data-motion="stats"',
 		'aaa-motion-media'          => 'data-motion-media',
-		'aaa-stat-cases'            => 'data-count-to="8700" data-count-prefix="+"',
-		'aaa-stat-clients'          => 'data-count-to="30" data-count-prefix="+"',
-		'aaa-stat-recovered'        => 'data-count-to="10" data-count-prefix="+" data-count-suffix=" mil millones"',
+		// D170: las cifras de "En cifras" ya no van aquí; home-motion.js las lee
+		// del texto de cada `.stat-card__number`, así el cliente las cambia en el editor.
 	);
 	foreach ( $map as $marker => $attr ) {
 		if ( false !== strpos( $class, $marker ) ) {
@@ -539,11 +538,12 @@ function aaa_hide_users_endpoint( $endpoints ) {
 add_filter( 'rest_endpoints', 'aaa_hide_users_endpoint' );
 
 /**
- * D157 (reemplaza D156) — Logo completo en los títulos donde dice "AAA".
+ * D157 (reemplaza D156) — Logo en los títulos donde dice "AAA".
  * Pedido de Julián en la reunión del 2026-10-02 ("cada vez que se hable de
- * triple A, pongan el logo"), ajustado por Oscar: en los títulos va el logo
- * completo (isotipo + "Estudio Legal"); en párrafos y textos pequeños se deja
- * el nombre escrito, "AAA Estudio Legal". Se hace al mostrar la página: en el
+ * triple A, pongan el logo"), ajustado por Oscar: en los títulos va el logo;
+ * en párrafos y textos pequeños se deja el nombre escrito, "AAA Estudio
+ * Legal". Desde D159 (documento del cliente del 2026-10-12) el logo es solo
+ * el de las tres A, sin "Estudio Legal". Se hace al mostrar la página: en el
  * editor y en el HTML el título sigue diciendo "AAA Estudio Legal" (oculto a
  * la vista, así lo leen los lectores de pantalla y los buscadores) y el logo
  * se dibuja con CSS (.aaa-logo-inline, components.css). Solo toca texto entre

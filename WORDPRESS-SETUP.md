@@ -337,13 +337,13 @@ Los originales pesados quedan en `assets/img/aprobadas-web/` (fuera de git).
 | Bloque/sección | Archivo | Origen |
 |---|---|---|
 | Hero | `home/hero.webp` | aprobada (2.jpg, D125 — antes IMG_9118) |
-| "Nuestro enfoque" | — (sin foto desde D127: contenido centrado sobre beige) | `home/nuestro-enfoque.webp` queda solo para el Inicio insertado antes de D127 |
+| "Nuestro enfoque" | `aaa-enfoque-documento` (Biblioteca, medio 180; copia en `home/`) | **stock** (D160, documento del cliente del 2026-10-12): Unsplash `xYnominUM0I`, Guille B, mano señalando un documento — Licencia de Unsplash. Vuelve a dos columnas (D127 la había quitado); `home/nuestro-enfoque.webp` queda sin uso |
 | Áreas de práctica — Derecho concursal | `home/area-concursal.webp` | aprobada (IMG_9091) |
 | Áreas de práctica — Normalización de activos | `home/area-normalizacion.webp` | aprobada (IMG_9086) |
 | Áreas de práctica — Línea corporativa y litigios | `home/area-corporativa.webp` | aprobada (IMG_9119) |
-| ¿Por qué confiar en nosotros? — 6 tarjetas | Biblioteca de medios: `aaa-confianza-casos`, `-equipo`, `-tecnologia`, `-seguridad`, `-cumplimiento-sello`, `-presencia-bandera` (copias en `home/` del tema) | **stock** autorizado por el cliente (reunión 2026-10-02) y elegido por el Owner (D151–D152), Licencia de Unsplash: Unsplash `snNHKZ-mGfE`, `BJqzjxwQhK8`, `hpjSkU2UYSU`, `FnA5pAzqhMM`, `7PMGUqYQpYc`, `EBAqM8b7Mqc`. Antes: fotos del cliente `home/confianza-*.webp` (se conservan) |
+| ¿Por qué confiar en nosotros? — 6 tarjetas | Biblioteca de medios: `aaa-confianza-casos`, `-equipo`, `-tiempo-real` (176), `-huella-digital` (189), `-reportes-pantalla` (190), `-capitolio-bolivar` (193) (copias en `home/` del tema) | **stock**, Licencia de Unsplash. Casos `snNHKZ-mGfE` y equipo `BJqzjxwQhK8` (D151). D160, según la guía del documento del cliente (sin rostros ni texto legible, sin candados ni vistas aéreas): tiempo real `gp8BLyaTaA0` (Thomas Lefebvre). D164, enfoque actual y tecnológico pedido por Oscar, ligado a la descripción de cada tarjeta: huella digital `SRFG7iwktDk` (George Prentzas), reportes en pantalla `mcSDtbWXUZU` (Lukas Blazek), Capitolio Nacional con la estatua de Bolívar y la bandera `6HAzIKfCcaw` (Jhonny Estrada, recortada arriba en 5:3 para que la bandera quede completa; D165). Sin uso: `-tecnologia`, `-seguridad`, `-cumplimiento-sello`, `-presencia-bandera` (D160), `-sello-lacre`, `-reloj-arena`, `-presencia-bandera-tela` (D162) `-carpetas-manila`, `-lomos-carpetas`, `-colinas-meta` (D164) y `-bandera-capitolio` (D165) |
 | Foto del equipo bajo "En cifras" | `home/hero.webp` en blanco y negro por CSS | aprobada (2.jpg, la misma del hero — D130; antes 1.jpg en `home/cifras-equipo.webp`, que queda sin uso) |
-| Casos de éxito — las 3 tarjetas | `temp-prototype-home-case-preview.jpg` (Biblioteca) | temporal, hasta tener los videos |
+| Casos de éxito — las 3 tarjetas | `temp-prototype-home-case-preview.jpg` (Biblioteca) | sección oculta desde D159 (visibilidad de bloque nativa) hasta tener los videos con autorización |
 | Conversemos — foto de fondo del panel | `temp-prototype-home-cta.jpg` (Biblioteca) | temporal |
 | Cierre — marca de agua decorativa | `brand/isotipo-blanco.svg` (tema) | logo nuevo, D126 |
 
@@ -505,3 +505,21 @@ para esta pasada** (ver STATUS.md para el detalle completo):
   necesidad concreta todavía.
 - Gate 2 (staging) requiere aprobación explícita del cliente antes de avanzar — no
   se salta ese paso por tener ya el tema construido (AGENTS.md § Verificación).
+
+## Guía rápida de edición para el cliente (D170)
+
+Todo el contenido se edita con bloques nativos de WordPress; no hace falta tocar código.
+
+| Qué | Dónde |
+|---|---|
+| Textos, títulos, listas, botones y fotos de cada página | Páginas → la página → Editar |
+| Cifras de "En cifras" (Inicio) | Editar el texto del número ("+8.700", "95,5 %"…). La animación cuenta hasta lo escrito |
+| Foto del cierre "Conversemos" | Seleccionar el Grupo del panel → Estilos → Fondo → Imagen de fondo |
+| Logos de clientes por sector (Inicio) | Insertar o quitar un bloque Imagen dentro de la tarjeta del sector. Para un sector nuevo, duplicar una tarjeta y cambiar el nombre; el ícono sale de la clase `sector-card--financiero`, `--solidario`, `--publico`, `--salud`, `--construccion` o `--comercio` (Avanzado → Clases CSS) |
+| Tarjetas de equipo (Quiénes somos) | Editar nombre, cargo y descripción. En el editor el reverso aparece debajo del frente |
+| Menú y botón del encabezado | Apariencia → Editor → Patrones → Encabezado |
+| Dirección, teléfono, WhatsApp, correo y redes del pie | Apariencia → Editor → Patrones → Pie de página |
+| Formularios de Contacto y Postulación | Contacto (Contact Form 7) |
+| Secciones reutilizables | Insertador de bloques → Patrones → "aaa-estudio-legal": páginas completas, "Cierre — Conversemos" y "Portada interna (foto + título)" |
+
+Se editan con código, a propósito: el bloque de Casos de éxito (oculto; se rehace con los videos) y el aviso de cookies del pie.

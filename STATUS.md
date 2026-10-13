@@ -3012,3 +3012,269 @@ El bloque de videos sigue visible; no se eligió ocultarlo.
 **Aplicado:** commit en `main` con D145–D158 (staging en Hostinger, backlog y guía SEO/GEO en `seo/`, fotos de banco, favicon, cifras, selector de Contacto, "Nuestra plataforma" y logo en títulos) y tag anotado `checkpoint-staging-2026-10-13` sobre ese commit. Reemplaza a `checkpoint-wordpress-2026-10-01` como punto de control vigente.
 
 **Estado:** el repo coincide con el staging en vivo (https://papayawhip-chicken-297614.hostingersite.com). Commit y tag quedan solo en local: no se hizo push (`main` está conectada a Cloudflare Pages y ya iba un commit por delante de `origin/main`), queda a decisión de Oscar.
+
+## Textos definitivos del cliente, Bloque 1 (D159, 2026-10-13)
+
+**Fuente:** documento del cliente "Sitio web AAA Estudio Legal — Textos e instrucciones para el desarrollo" (12-oct-2026). Oscar aprobó el Bloque 1 (textos) con el enlace de ADY, ocultar Casos de éxito completo, cifras visibles sin resaltado y el isotipo provisional en títulos.
+
+**Aplicado en vivo (páginas por REST, con revisión) y en los patterns del repo:**
+- **Inicio (#82):**
+  - Portada con titular y subtítulo nuevos.
+  - Nuestro enfoque: título y dos párrafos; sale "No representamos al deudor".
+  - Áreas de práctica: "Tres áreas que se alimentan entre sí." y las tres tarjetas con nombre, frase y viñetas nuevas.
+  - ¿Por qué confiar?: título y seis tarjetas nuevas.
+  - Organizaciones: título y texto nuevos, sin la etiqueta "Empresas que ya confiaron".
+  - Casos de éxito oculto con la visibilidad nativa de bloques (`metadata.blockVisibility:false`, WordPress 7.1). Sigue en el editor para mostrarlo cuando haya videos y no publica los textos de relleno.
+  - En cifras: línea "Cifras en verificación por el área de Operaciones." Las cifras siguen visibles, sin resaltado.
+  - Cierre: título, texto y botón "Solicitar el estudio de su caso".
+- **Metodología (#97):** título de portada, "Primero estudiamos, después decidimos." y los tres pasos; Áreas de práctica en detalle, con la nota "En el sector financiero, normalización de activos."; Transparencia y cierre.
+- **Quiénes somos (#101):**
+  - Portada: "Sobre nosotros" / "Una firma con una causa: el crédito.".
+  - Origen: queda un solo párrafo nuevo, sin el título "Origen y especialización", con la misma foto.
+  - Equipo: cuatro equipos, se suma el de negociaciones con un panel navy en lugar de foto.
+  - Filosofía en dos párrafos, y el cierre.
+- **Encabezado (`parts/header.html`):** "Nuestra plataforma" apunta a https://adyapp.agudeloabogados.com/login. El texto del botón no cambia.
+- **CSS (`components.css`):**
+  - Bloque D159: nota de cifras, etiqueta de las áreas de Metodología en cursiva (ahora son oraciones), nota del área y grilla de cuatro equipos en damero. Entre 901 y 1100px se reduce el relleno y la letra del reverso para que no se corte.
+  - D157 → D159: los títulos con "AAA" muestran solo el isotipo de las tres A (`isotipo.svg`, provisional hasta el archivo oficial del diseñador).
+- **`functions.php`:** solo se actualizó el comentario de `aaa_logo_in_headings`.
+- Los tres archivos se subieron con el editor de temas y son idénticos al repo.
+
+**Verificado en vivo:**
+- Textos presentes; Casos de éxito y "Texto pendiente" ausentes del HTML; enlace de ADY en el encabezado.
+- Sin desplazamiento lateral a 360–1440px en Inicio, Metodología, Quiénes somos y Trabaja con nosotros. Los 8px a 390px en Inicio son la barra de desplazamiento del iframe de prueba: con la barra oculta, como en un teléfono, da 0.
+- Reverso de las cuatro tarjetas de equipo sin cortes a 901, 1024 y 1440px.
+
+**Notas:**
+- **Ediciones de Nayeliz (administradora) del 13-oct:** cambió la etiqueta de la portada de Metodología a "Soluciones JURÍDICAs" (09:23–09:42) y guardó datos de SEO de las tres páginas (10:38–10:40). Se conservaron sin cambios.
+- **Patterns del servidor:** siguen como en el despliegue D148. El sitio muestra el contenido de las páginas, no los patterns.
+
+**Pendiente de terceros (no se publica):**
+- Foto AAA1313 para la portada; la foto actual, de la oficina con diademas, no debe ir ahí.
+- Ubicación de la foto AAA1379.
+- Gestión Humana: fotos de equipos con autorizaciones, vacantes y formulario.
+- Anyelin: lista de logos por sector, GNB Sudameris, política de privacidad y aviso legal.
+- Operaciones: cifras.
+- Julián: texto del botón principal y de ADY, videos, WhatsApp y correos.
+- Archivo oficial del logo de tres A.
+- Página de Contacto.
+
+## Correcciones de Nayeliz y Bloque 2 de imágenes (D160, 2026-10-13)
+
+**Pedido (Oscar):** arrancar el Bloque 2 (imágenes del documento del cliente), corregir "Soluciones JURÍDICAs" y el título SEO "¡protegemos activos empresariales!".
+
+**Aplicado:**
+- **Metodología (#97):** etiqueta de portada "Soluciones jurídicas", en la página y en el pattern.
+- **Quiénes somos (#101), título SEO (Rank Math, `/rankmath/v1/updateMeta`):** "Somos AAA Estudio Legal: ¡protegemos el crédito!", en vez de "activos empresariales". Verificado en `<title>` y `og:title`.
+- **¿Por qué confiar? (Inicio #82 y pattern):** tres fotos de Unsplash elegidas por Oscar entre opciones revisadas en grande (sin rostros ni texto legible), con la guía del documento. Subidas a la Biblioteca de medios, con el crédito en la leyenda, y al tema en `assets/img/home/`:
+
+| Tarjeta | Archivo | Medio | Fuente |
+|---|---|---|---|
+| Seguimiento en tiempo real (antes: tablero con cifras legibles) | `aaa-confianza-tiempo-real.webp` | 176 | Thomas Lefebvre, Unsplash `gp8BLyaTaA0` |
+| Su información, protegida (antes: candado) | `aaa-confianza-sello-lacre.webp` | 177 | mk. s, Unsplash `KGDVTn9lYDE` |
+| Cumplimiento normativo (antes: sello sobre texto en alemán) | `aaa-confianza-reloj-arena.webp` | 178 | Nathan Dumlao, Unsplash `LPRrEJU2GbQ`, recortada sin las flores (`rect=1949,1150,4771,3181`) |
+
+- **Presencia en todo el país:** Oscar eligió la bandera en primer plano (`aaa-confianza-presencia-bandera-tela.webp`, medio 181, engin akyurt, Unsplash `tnlUkY7aXv0`; 1024×683 para que pese 190 KB). Reemplaza la vista de Cartagena desde lo alto; el documento pide evitar vistas aéreas.
+- Se conservan "Volumen con estructura" y "Equipo especializado", que cumplen la guía.
+- **Nuestro enfoque:**
+  - Vuelve a llevar foto, en dos columnas como eligió Oscar: `aaa-enfoque-documento.webp` (medio 180, Guille B, Unsplash `xYnominUM0I`, mano señalando un documento). Reemplaza la foto de la abogada al teléfono, que mostraba el rostro.
+  - **CSS:** el bloque D127 queda solo para la variante sin foto. El nuevo bloque D160 deja la foto en 3:2, centrada en altura y sangrando a la derecha; en ≤640px va debajo del texto.
+  - El pattern pasa a la grilla de dos columnas, igual que la página.
+  - Sin desplazamiento lateral a 360–1440px.
+
+**Pendiente:**
+- **Descripciones SEO de Nayeliz con "empresa(s)":** Inicio, Metodología y Quiénes somos.
+
+## Descripciones SEO sin "empresa" y logo de GNB Sudameris (D161, 2026-10-13)
+
+**Pedido (Oscar):** corregir las descripciones SEO que dicen "empresa(s)" y agregar el logo de GNB Sudameris, como pide el documento del cliente.
+
+**Descripciones SEO (Rank Math, `rank_math_description`).** Las vistas previas para redes (`og:description` y `twitter:description`) toman el mismo texto:
+
+| Página | Antes | Ahora |
+|---|---|---|
+| Inicio (#82) | "…acreedores y empresas con soluciones legales…" | "En AAA Estudio Legal protegemos los intereses de acreedores y organizaciones con soluciones legales en asuntos concursales y corporativos. Asesórese hoy." (153 caracteres) |
+| Metodología (#97) | "…defensa concursal, normalización de activos y litigios corporativos… protegiendo a su empresa." (161) | "Estrategias jurídicas en insolvencia, recuperación de cartera y litigios corporativos, anticipando riesgos y protegiendo a su organización." (139). También pasa a los términos nuevos del sitio. |
+| Quiénes somos (#101) | "…proteger los derechos de su empresa…" | "…proteger los derechos de su organización. Conozca más aquí." (146) |
+
+- Trabaja con nosotros y Contacto no usaban "empresa".
+- Las palabras clave de Metodología todavía incluyen "normalización de activos"; queda a criterio de Nayeliz.
+
+**GNB Sudameris:**
+- **Archivo:** `gnb_logo.png` del sitio oficial (gnbsudameris.com.co, 281×62, fondo transparente). Es la versión más grande que publican; no hay SVG ni versión en Wikimedia.
+- **Descarga:** el servidor del banco bloquea las descargas que no vienen de un navegador, así que se bajó desde Chrome.
+- **Publicación:** subido a la Biblioteca de medios como `logo-gnb-sudameris.png` (medio 183) y agregado junto a BBVA en la tarjeta "Financiero y Fintech" del Inicio (página y pattern), en sus colores originales.
+- **Sin cambios:** según el documento, no se agregan ni retiran otros logos hasta que Anyelin confirme la lista y los sectores.
+- **Resolución:** al ser un PNG pequeño, puede verse un poco suave en pantallas de alta densidad. Si el cliente consigue el logo vectorial del banco, se reemplaza el archivo.
+
+## ¿Por qué confiar?: segunda fila alineada al sitio de la firma (D162, 2026-10-13)
+
+**Pedido (Oscar, con captura):** las fotos de "Su información, protegida", "Cumplimiento normativo" y "Presencia en todo el país" (D160) no seguían los lineamientos. Revisar agudeloabogados.com y reemplazarlas.
+
+**Lectura del sitio actual de la firma:**
+- Sus fondos (`fondo-uno` a `fondo-cuatro`) son escenas de despacho (carpetas sobre escritorio, mazo sobre madera) lavadas en un velo de color de marca: bronce y arena, navy u hueso.
+- Las fotos son de bajo contraste, claras y suaves, sin negros profundos ni colores saturados.
+- Los fundadores van sobre fondo hueso con el isotipo de marca de agua.
+- **Por qué no encajaban las de D160:** el reloj de arena tenía fondo negro, la bandera colores primarios saturados, y el sobre madera oscura con lacre naranja.
+
+**Aplicado (elección de Oscar entre una simulación con la primera fila real; cada foto toma un color de la marca):**
+
+| Tarjeta | Archivo | Medio | Fuente |
+|---|---|---|---|
+| Su información, protegida | `aaa-confianza-carpetas-manila.webp` | 185 | George Diama, Unsplash `hwQuHrv6p8c` (bronce) |
+| Cumplimiento normativo | `aaa-confianza-lomos-carpetas.webp` | 186 | Robert Koorenny, Unsplash `jUnTd0qYy8E` (navy y hueso) |
+| Presencia en todo el país | `aaa-confianza-colinas-meta.webp` | 187 | Felipe, Unsplash `UpJj3u1T-R8`, Villavicencio, Meta (velo cálido; 1280×853, 145 KB) |
+
+- **Revisión:** las tres se revisaron en grande; no tienen rostros ni texto legible (la escritura de las pestañas manila está desenfocada), y no hay vistas aéreas.
+- **Dónde quedó:** Inicio #82 y el pattern; WORDPRESS-SETUP.md actualizado.
+- **Sin uso en la Biblioteca:** los medios 177, 178 y 181 de D160. Borrarlos es decisión de Oscar.
+
+## Nuestro enfoque: la foto ya no salta al hacer scroll (D163, 2026-10-13)
+
+**Pedido (Oscar):** la imagen de "Nuestro enfoque" (D160) daba un pequeño salto al hacer scroll hacia abajo.
+
+**Causa:**
+- La foto recibe la deriva de GSAP (`addMediaDrift` en `home-motion.js`): `yPercent` ±1.2 y `scale` 1.025→1.045 con `scrub` de 1.05s.
+- Desde D160 el `<img>` medía 776px de ancho, más que su columna (576px a 1536px), por el sangrado heredado del diseño previo a D127, y nada lo recortaba arriba ni abajo.
+- Al escalar y desplazarse se movían los bordes del propio marco respecto al texto, y seguían moviéndose un segundo después de soltar el scroll.
+
+**Aplicado (`components.css`, bloque D160):**
+- El `figure` pasa a ser un marco fijo 3:2 con `overflow: hidden`, del ancho de la columna.
+- El `<img>` lo llena con `object-fit: cover`, así que la deriva solo mueve la escena dentro del marco (parallax sutil, sin saltos).
+- La foto queda alineada a la columna, sin sangrado.
+
+**Verificado en vivo:**
+- La distancia marco–texto se mantiene constante (198px) de 0 a 900px de scroll, mientras la escena se desplaza por dentro.
+- Marco de 576×384 a 1440px, 456×304 a 1024px y 329×220 a 768px. A 390px va debajo del texto, sin deriva.
+- Sin desplazamiento lateral. El CSS del servidor es idéntico al del repo.
+
+## ¿Por qué confiar?: segunda fila con enfoque actual y tecnológico (D164, 2026-10-13)
+
+**Pedido (Oscar, con captura):** las fotos de D162 no le gustaron. Pidió un enfoque más actual y tecnológico, más alusivo a cada título y basado en la descripción del documento del cliente. Para Presencia pidió algo relacionado con la bandera de Colombia.
+
+**Criterio:**
+- Cada foto ilustra el texto de su tarjeta y respeta la guía del documento: plano cerrado, sin rostros ni texto legible, sin la interfaz de ADY, sin candados, escudos, engranajes, listas genéricas, mapas con puntos luminosos ni vistas aéreas.
+- **Descartadas:**
+  - interfaces de Google Analytics con cifras legibles;
+  - gráficos de bolsa;
+  - fotos de servidores con marcas visibles;
+  - candados e íconos de nube con candado;
+  - videollamadas con rostros;
+  - banderas sobre multitudes;
+  - una foto marcada (`flagged`) en Unsplash.
+
+| Tarjeta | Archivo | Medio | Fuente |
+|---|---|---|---|
+| Su información, protegida ("reserva profesional") | `aaa-confianza-huella-digital.webp` | 189 | George Prentzas, Unsplash `SRFG7iwktDk`: huella en un lector biométrico, azul marino |
+| Cumplimiento normativo ("controles internos, reportería") | `aaa-confianza-reportes-pantalla.webp` | 190 | Lukas Blazek, Unsplash `mcSDtbWXUZU`: portátil con reportes; a tamaño de tarjeta no se lee ninguna cifra |
+| Presencia en todo el país (bandera) | `aaa-confianza-bandera-capitolio.webp` | 191 | Brian Kyed, Unsplash `6o3KrwENlUc`: bandera sobre el Capitolio Nacional, Bogotá. En la original la bandera toca el borde superior, así que se descargó ya en 5:3 anclada arriba (`rect=0,0,5760,3456`, 1280×768) para que la tarjeta no la recorte. |
+
+- **Elección:** Oscar eligió entre dos simulaciones con la primera fila real.
+- **Dónde quedó:** Inicio #82, el pattern y WORDPRESS-SETUP.md.
+- **Verificado en vivo:** la tarjeta conserva 5:3 a 390, 768 y 1440px, así que la bandera se ve completa en todos los anchos.
+- **Sin uso en la Biblioteca:** los medios 185, 186 y 187 de D162.
+
+## Presencia en todo el país: Capitolio con la estatua de Bolívar (D165, 2026-10-13)
+
+**Pedido (Oscar):** usar la opción del Capitolio con la estatua de Bolívar en vez de la bandera sola sobre la fachada (D164).
+
+**Aplicado:**
+- `aaa-confianza-capitolio-bolivar.webp` (medio 193; Jhonny Estrada, Unsplash `6HAzIKfCcaw`). La original es 4:3; se descargó en 5:3 anclada arriba (`crop=top`, 1280×768, 112 KB) para que la bandera quede completa y con aire. Solo se pierde abajo la franja de columnas.
+- Alt: "Estatua de Simón Bolívar frente al Capitolio Nacional, con la bandera de Colombia, en Bogotá".
+- Actualizado en Inicio #82, el pattern y WORDPRESS-SETUP.md. Verificado en vivo.
+- El medio 191 (bandera sobre la fachada) queda sin uso.
+
+## Logo de GNB más pequeño (D166) e isotipo en "Sobre nosotros" (D167), 2026-10-13
+
+**D166, pedido de Oscar:** el logo de GNB Sudameris se veía grande frente a los demás de "Organizaciones que confían en nosotros". Es muy ancho (281×62) y tomaba la escala por defecto (1.55). Nueva regla en `components.css`: `--sector-logo-scale: 1.1` solo para ese logo. Probado en vivo; ahora queda del ancho de BBVA.
+
+**D167, pedido de Oscar (con captura):** en Quiénes somos, el párrafo de "Sobre nosotros" se veía solo a la izquierda de la foto de los fundadores.
+- Se agrega el isotipo cobre de marca encima del texto, como `::before` de `.origin-block__copy` (decorativo, sin cambiar el contenido de la página #101).
+- Mide 84px de ancho a 390px y 128px desde ~1420px, con espacio inferior `spacing--8`.
+- Verificado: sin desplazamiento lateral a 390 y 1440px.
+- `components.css` subido con el editor de temas; idéntico al repo.
+
+## Bordes redondeados en todas las fotos de bloque (D168, 2026-10-13)
+
+**Pedido (Oscar):** que toda imagen dentro de un bloque o sección tenga el borde redondeado, con el radio de "¿Por qué confiar?" como referencia (8px, `radius--md`).
+
+**Revisión:** barrido de todas las `<img>` de Inicio, Metodología, Quiénes somos y Trabaja con nosotros a 1440 y 390px. Ya tenían 8px:
+- tarjetas de ¿Por qué confiar?, foto bajo En cifras y panel del cierre;
+- áreas de Metodología;
+- fundadores, equipos y Filosofía;
+- las tres fotos de Trabaja con nosotros;
+- todas en móvil.
+
+**Faltaban en escritorio:**
+- **Nuestro enfoque:** el radio va en el marco con `overflow: hidden` de D163, así la deriva sigue recortada.
+- **Transparencia (Metodología):** sangra a la derecha, así que se ven redondeadas las esquinas del lado del texto.
+
+**Sin radio, a propósito:**
+- imágenes a sangre completa (portadas y paneles de Áreas de práctica en Inicio);
+- los círculos de los pasos de Metodología.
+
+**Verificado en vivo:** 8px a 390, 768 y 1440px y sin desplazamiento lateral. `components.css` subido; idéntico al repo.
+
+## "Sobre nosotros": eyebrow "Origen y especialización" e isotipo más pequeño (D169, 2026-10-13)
+
+**Pedido (Oscar, con captura):** agregar el eyebrow "Origen y especialización" antes del párrafo y hacer el isotipo de D167 un poco más pequeño.
+
+**Aplicado:**
+- **Página #101 (REST, con revisión) y pattern `quienes-somos-full.php`:** nuevo párrafo `aaa-eyebrow` "Origen y especialización" antes de "Desde 2020 acompañamos…". El orden queda isotipo → eyebrow → párrafo.
+- **`components.css` (bloque D167):** el isotipo pasa de `clamp(84px, 9vw, 128px)` a `clamp(68px, 7vw, 100px)` y su espacio inferior de `spacing--8` a `spacing--6`. Subido; idéntico al repo.
+- **Verificado en vivo:** isotipo de 100px a 1440px y eyebrow en cobre como el resto del sitio.
+
+**Nota D169 (15:57):** Nayeliz guardó Quiénes somos desde el editor 39 segundos después del cambio, con una copia abierta antes, y el eyebrow desapareció (revisión 201; no cambió nada más). Se volvió a aplicar sobre su versión y ya se ve en el HTML público. La página seguía abierta en su editor (bloqueada): si vuelve a guardar desde esa ventana sin recargar, se perderá otra vez.
+
+## Sitio administrable: auditoría y conversión a bloques nativos (D170, 2026-10-13)
+
+**Pedido (Oscar):** revisar todos los patterns y páginas porque había bloques que no se podían editar desde "Editar página"; el sitio debe ser lo más administrable posible antes de cargar la versión final. Aprobó los puntos 1, 2, 3, 4, 5 y 7 de la auditoría.
+
+**Auditoría (validación con `wp.blocks.parse`, el mismo analizador del editor):**
+- Inicio tenía 1 bloque inválido (panel del cierre) y 2 bloques HTML (logos de sectores y Casos de éxito).
+- Quiénes somos tenía 4 bloques HTML (tarjetas de equipo).
+- El pie tenía 3 bloques HTML (contacto, redes y aviso de cookies).
+- Las cifras de "En cifras" estaban fijas en `functions.php`.
+- Los patterns del servidor seguían como en D148.
+
+**Aplicado:**
+1. **Cifras (`home-motion.js`, `functions.php`):** la animación lee la cifra del texto de cada `.stat-card__number` (prefijo, punto de miles, coma decimal, texto o `<span class="stat-card__unit">` después) y al terminar deja exactamente lo escrito en el editor. Se quitaron `data-count-to`/`-prefix`/`-suffix` del mapa del filtro. Probado con "+9.250", "95,5 %", "+1.250.000", "Más de 40" y "12 años".
+2. **Cierre "Conversemos" (Inicio #82, Metodología #97, Quiénes somos #101 y patterns):**
+   - La foto pasa a la imagen de fondo nativa del Grupo `.site-closing-cta__panel` (medio 36), editable en Grupo → Fondo.
+   - El velo navy pasa a `::before`.
+   - El bloque de Inicio deja de ser inválido.
+3. **Pie (`parts/footer.html`):**
+   - Contacto y redes pasan a párrafos nativos `aaa-site-footer__item--{direccion|telefono|whatsapp|correo|linkedin|instagram}`: etiqueta en `<strong>` y dato como enlace.
+   - Los íconos van por CSS (`mask`), con los mismos SVG.
+   - Se editan en Apariencia → Editor → Pie de página.
+   - El aviso de cookies queda en HTML: es un componente funcional, no contenido.
+4. **Logos por sector (Inicio):**
+   - Cada sector es un Grupo `.sector-card.sector-card--{slug}` con un párrafo `.sector-card__name` y un Grupo `.sector-card__logos` con un bloque Imagen por logo (16 logos con sus IDs de la Biblioteca).
+   - Las 17 reglas de `.sector-card__logo` cubren también `.sector-card__logos .wp-block-image`, y `main.js` suma cualquier imagen al carrusel: agregar un logo es insertar una Imagen en la tarjeta.
+   - El ícono del sector va por CSS según la clase (por defecto, el financiero).
+5. **Tarjetas de equipo (Quiénes somos):**
+   - Pasan a Grupos y párrafos (nombre, cargo, descripción).
+   - `main.js` crea los botones "Ver funciones"/"Volver", con etiqueta accesible ("Ver funciones del equipo jurídico").
+   - El isotipo va por `::before`.
+   - En el editor las dos caras se muestran una debajo de la otra, sin girar (regla sobre `.block-editor-block-list__block`), para editar también el reverso.
+6. **Patterns:**
+   - Los 7 subidos al servidor e idénticos al repo; todos válidos y con el mismo texto que las páginas. El de Contacto se igualó al título editado por Nayeliz ("Nuestro equipo jurídico revisará…").
+   - `cierre-conversemos.php` (cierre de dos columnas del prototipo) pasa a ser el cierre oficial actual.
+   - `hero-simple.php` pasa a ser la portada interna actual (foto + eyebrow + H1), con textos de ejemplo.
+
+**Verificado en vivo:**
+- 0 bloques inválidos en las 5 páginas y en el pie.
+- Bloques HTML restantes: solo Casos de éxito (oculto; se rehace con los videos) y el aviso de cookies.
+- Carrusel de logos, escalas (GNB 1.1), íconos de sector, giro de tarjetas, cifras y cierre iguales que antes.
+- Sin desplazamiento lateral a 390 y 1440px en las 5 páginas.
+- `components.css`, `main.js`, `home-motion.js`, `functions.php`, `parts/footer.html` y los 7 patterns, idénticos al repo.
+- **Incidente corregido:** un `\b` en una expresión regular se escribió como carácter de retroceso al generarse por script; quedó `/^equipo /i` y se revisaron todos los archivos tocados: 0 caracteres de control.
+
+## Checkpoint con los textos definitivos y el sitio administrable (2026-10-13)
+
+**Pedido (Oscar):** crear el checkpoint de D159–D170 antes de cargar la versión final.
+
+**Aplicado:** commit en `main` con D159–D170 y tag anotado `checkpoint-textos-definitivos-2026-10-13`. Reemplaza a `checkpoint-staging-2026-10-13` como punto de control vigente.
+- **Incluye:** textos definitivos del documento del cliente, fotos de banco, logo de GNB, ajustes visuales y conversión a bloques nativos.
+- **Estado del repo:** coincide con el staging en vivo (páginas, tema y patterns).
+- **Push:** el commit y el tag quedan solo en local, a decisión de Oscar (`main` dispara Cloudflare Pages).

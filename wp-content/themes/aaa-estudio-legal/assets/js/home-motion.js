@@ -16,22 +16,46 @@
 
   gsap.registerPlugin(ScrollTrigger);
 
+  /* D170: la cifra se lee del texto que el cliente escribe en el editor
+     ("+8.700", "+10 mil millones", "95,5 %"…): prefijo, número con punto de
+     miles y coma decimal, y lo que sigue (o el <span class="stat-card__unit">).
+     Antes iba fija en functions.php y la animación pisaba lo editado. */
+  var parseCount = function (element) {
+    if (element._aaaCount !== undefined) return element._aaaCount;
+    var unitEl = element.querySelector('.stat-card__unit');
+    var unitHTML = unitEl ? unitEl.outerHTML : '';
+    var text = unitEl ? element.textContent.replace(unitEl.textContent, '') : element.textContent;
+    var match = text.match(/^(\D*?)(\d[\d.]*(?:,\d+)?)([\s\S]*)$/);
+    if (!match) { element._aaaCount = null; return null; }
+    var decimals = match[2].indexOf(',') > -1 ? match[2].split(',')[1].length : 0;
+    element._aaaCount = {
+      html: element.innerHTML,
+      prefix: match[1],
+      target: parseFloat(match[2].replace(/\./g, '').replace(',', '.')) || 0,
+      decimals: decimals,
+      rest: match[3],
+      unitHTML: unitHTML
+    };
+    return element._aaaCount;
+  };
+
   var renderCount = function (element, value) {
-    var prefix = element.getAttribute('data-count-prefix') || '';
-    var suffix = element.getAttribute('data-count-suffix') || '';
+    var count = parseCount(element);
+    if (!count) return;
     // D155: separador de miles con punto (8700 -> 8.700), como se escribe en Colombia.
-    element.textContent = prefix + String(Math.round(value)).replace(/\B(?=(\d{3})+(?!\d))/g, '.');
-    if (suffix) {
-      var unit = document.createElement('span');
-      unit.className = 'stat-card__unit';
-      unit.textContent = suffix;
-      element.appendChild(unit);
-    }
+    var parts = Number(value).toFixed(count.decimals).split('.');
+    var number = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, '.') + (parts[1] ? ',' + parts[1] : '');
+    element.textContent = count.prefix + number + count.rest;
+    if (count.unitHTML) element.insertAdjacentHTML('beforeend', count.unitHTML);
+  };
+
+  var countElements = function (scope) {
+    return Array.prototype.slice.call((scope || document).querySelectorAll('.stat-card__number')).filter(parseCount);
   };
 
   var setFinalCounts = function () {
-    document.querySelectorAll('[data-motion="stats"] [data-count-to]').forEach(function (element) {
-      renderCount(element, parseFloat(element.getAttribute('data-count-to')) || 0);
+    countElements(document.querySelector('[data-motion="stats"]')).forEach(function (element) {
+      element.innerHTML = element._aaaCount.html;
     });
   };
 
@@ -286,8 +310,8 @@
     });
 
     cards.forEach(function (card, index) {
-      var number = card.querySelector('[data-count-to]');
-      var target = number ? parseFloat(number.getAttribute('data-count-to')) || 0 : 0;
+      var number = countElements(card)[0];
+      var target = number ? number._aaaCount.target : 0;
       var proxy = { value: 0 };
       var position = index * (isMobile ? 0.1 : 0.13);
 

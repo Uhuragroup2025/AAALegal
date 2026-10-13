@@ -1,27 +1,34 @@
 <?php
 /**
- * Title: Hero simple (eyebrow + H1 + párrafo)
+ * Title: Portada interna (foto + título)
  * Slug: aaa-estudio-legal/hero-simple
  * Categories: aaa-estudio-legal
- * Description: Hero de una columna con eyebrow, H1 (con énfasis opcional en cursiva vía el estilo de texto "Énfasis") y un párrafo de apertura. Traducido de las 3 páginas de hero simple del prototipo (Metodología, Quiénes somos, Trabaja con nosotros) — Decisión D98 normalizó el párrafo a 1.0625rem en las tres, ya reflejado aquí (fontSize "base"). Editar el texto de ejemplo directamente en el bloque: no depende de ningún campo personalizado (D99 — bloques nativos antes que ACF).
+ * Description: Portada de las páginas internas (D170): foto de fondo a todo el ancho con velo navy, eyebrow y H1 con énfasis opcional en cursiva — la misma de Metodología y Quiénes somos. Cambie la foto, la etiqueta y el título desde los bloques. Asignar a la página la plantilla "Página con motion editorial (GSAP)". Reemplaza al hero de una columna del prototipo.
  *
  * @package aaa-estudio-legal
  */
 ?>
-<!-- wp:group {"tagName":"section","className":"has-navy-deep-background-color has-white-color","style":{"spacing":{"padding":{"top":"var:preset|spacing|24","bottom":"var:preset|spacing|16"}}},"backgroundColor":"navy-deep","textColor":"white","layout":{"type":"constrained"}} -->
-<section class="wp-block-group has-navy-deep-background-color has-white-color has-background">
-
-	<!-- wp:paragraph {"className":"aaa-eyebrow"} -->
-	<p class="aaa-eyebrow">Eyebrow de la página</p>
-	<!-- /wp:paragraph -->
-
-	<!-- wp:heading {"level":1,"fontSize":"2xl"} -->
-	<h1 class="wp-block-heading has-2xl-font-size">Título de la página <em class="aaa-text-emphasis">con la frase de énfasis</em></h1>
-	<!-- /wp:heading -->
-
-	<!-- wp:paragraph {"fontSize":"base"} -->
-	<p class="has-base-font-size">Párrafo de apertura — una o dos frases que resumen el propósito de esta página, mismo tamaño (1.0625rem) en las 3 páginas de hero simple (Decisión D98).</p>
-	<!-- /wp:paragraph -->
-
+<!-- wp:group {"tagName":"section","className":"hero-immersive hero--editorial hero--editorial--services is-dark-surface","align":"full"} -->
+<section class="wp-block-group alignfull hero-immersive hero--editorial hero--editorial--services is-dark-surface">
+	<!-- wp:group {"className":"hero-shell"} -->
+	<div class="wp-block-group hero-shell">
+		<!-- wp:group {"className":"hero-shell__media"} -->
+		<div class="wp-block-group hero-shell__media">
+			<!-- wp:image {"className":"hero-shell__img"} -->
+			<figure class="wp-block-image hero-shell__img"><img src="<?php echo esc_url( get_theme_file_uri( 'assets/img/metodologia/hero-9095.webp' ) ); ?>" alt="Describa aquí la fotografía de portada" /></figure>
+			<!-- /wp:image -->
+			<!-- wp:group {"className":"hero-shell__scrim"} --><div class="wp-block-group hero-shell__scrim"></div><!-- /wp:group -->
+		</div>
+		<!-- /wp:group -->
+		<!-- wp:group {"className":"hero-shell__content"} -->
+		<div class="wp-block-group hero-shell__content">
+			<!-- wp:paragraph {"className":"aaa-eyebrow"} --><p class="aaa-eyebrow">Etiqueta de la sección</p><!-- /wp:paragraph -->
+			<!-- wp:heading {"level":1,"className":"hero__title"} -->
+			<h1 class="wp-block-heading hero__title">Título de la página, <em class="aaa-text-emphasis">con énfasis en cursiva.</em></h1>
+			<!-- /wp:heading -->
+		</div>
+		<!-- /wp:group -->
+	</div>
+	<!-- /wp:group -->
 </section>
 <!-- /wp:group -->

@@ -959,8 +959,8 @@ section:has(> .what-we-do-grid) .wp-block-buttons .wp-block-button__link:focus-v
 .sector-card__icon { width: 38px; height: 38px; flex: 0 0 38px; color: var(--wp--preset--color--accent-main-strong); }
 .sector-card__name { font-family: var(--wp--preset--font-family--sans); font-size: 1.3rem; font-weight: 700; line-height: 1.08; letter-spacing: -0.02em; }
 .sector-card__logos { display: flex; flex-wrap: wrap; align-items: center; gap: var(--wp--preset--spacing--6); padding-top: var(--wp--preset--spacing--4); }
-.sector-card__logo { display: inline-flex; align-items: center; height: 85px; }
-.sector-card__logo img { max-height: 100%; max-width: 210px; width: auto; object-fit: contain; }
+:is(.sector-card__logo, .sector-card__logos .wp-block-image) { display: inline-flex; align-items: center; height: 85px; }
+:is(.sector-card__logo, .sector-card__logos .wp-block-image) img { max-height: 100%; max-width: 210px; width: auto; object-fit: contain; }
 @media (max-width: 900px) {
   .sector-experience__header { grid-template-columns: 1fr; gap: var(--wp--preset--spacing--8); align-items: start; }
 }
@@ -1195,7 +1195,7 @@ section.contact-intake.aaa-section {
 /* ---------- Sectores: separación extra cuando el logo pesa más ---------- */
 @media (min-width: 1024px) {
   .sector-card__logos--spaced { gap: var(--wp--preset--spacing--8); }
-  .sector-card__logos--spaced .sector-card__logo { padding-inline: var(--wp--preset--spacing--2); }
+  .sector-card__logos--spaced :is(.sector-card__logo, .sector-card__logos .wp-block-image) { padding-inline: var(--wp--preset--spacing--2); }
 }
 
 /* ---------- Cierre de Home — panel navy + foto (prototype/css/components.css
@@ -1227,12 +1227,26 @@ section.contact-intake.aaa-section {
   width: 100%;
   padding: clamp(var(--wp--preset--spacing--16), 8vw, var(--wp--preset--spacing--24)) clamp(var(--wp--preset--spacing--8), 7vw, var(--wp--preset--spacing--24));
   color: var(--wp--preset--color--white);
-  background:
-    radial-gradient(circle at 50% 0%, rgba(185, 206, 237, 0.12), transparent 42%),
-    linear-gradient(138deg, rgba(6, 59, 89, 0.94), rgba(6, 59, 89, 0.84)),
-    var(--cierre-photo-url) center 52% / cover no-repeat;
+  /* D170: la foto es el fondo propio del panel para que el cliente la cambie
+     desde el editor (Grupo → Fondo → Imagen de fondo: WordPress la pone inline
+     y gana sobre esta foto por defecto). El velo navy pasa al ::before. */
+  background-color: var(--wp--preset--color--navy-deep);
+  background-image: var(--cierre-photo-url);
+  background-position: center 52%;
+  background-size: cover;
+  background-repeat: no-repeat;
   border: 0;
   border-radius: var(--wp--custom--radius--md);
+}
+:is(.home-page, .site-closing-cta--global) .site-closing-cta__panel::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    radial-gradient(circle at 50% 0%, rgba(185, 206, 237, 0.12), transparent 42%),
+    linear-gradient(138deg, rgba(6, 59, 89, 0.94), rgba(6, 59, 89, 0.84));
+  pointer-events: none;
 }
 /* El pattern reutiliza `site-closing-cta--internal` (tratamiento CLARO de
    Metodología/Quiénes somos/Trabaja con nosotros) para esta sección de Home
@@ -1847,7 +1861,7 @@ body.home-page {
   width: 100%;
   padding-top: var(--wp--preset--spacing--8);
 }
-.home-page .sector-card__logo {
+.home-page :is(.sector-card__logo, .sector-card__logos .wp-block-image) {
   display: grid;
   place-items: center;
   width: 100%;
@@ -1855,7 +1869,7 @@ body.home-page {
   min-width: 0;
   overflow: visible;
 }
-.home-page .sector-card__logo img {
+.home-page :is(.sector-card__logo, .sector-card__logos .wp-block-image) img {
   --sector-logo-scale: 1.55;
   width: 100%;
   height: 100%;
@@ -1865,19 +1879,19 @@ body.home-page {
   transform: scale(var(--sector-logo-scale));
   transform-origin: center;
 }
-.home-page .sector-card__logo img:is(
+.home-page :is(.sector-card__logo, .sector-card__logos .wp-block-image) img:is(
   [src$="logo-coopunidos.png"],
   [src$="logo-k-listo.png"],
   [src$="logo-metrocali.png"],
   [src$="logo-gobernacion-valle-del-cauca-ribbon.png"],
   [src$="logo-constructora-melendez.png"]
 ) { --sector-logo-scale: 1.15; }
-.home-page .sector-card__logo img:is(
+.home-page :is(.sector-card__logo, .sector-card__logos .wp-block-image) img:is(
   [src$="logo-femcristar.png"],
   [src$="logo-ma-isabel.png"],
   [src$="logo-promedico.png"]
 ) { --sector-logo-scale: 1.55; }
-.home-page .sector-card__logo img:is(
+.home-page :is(.sector-card__logo, .sector-card__logos .wp-block-image) img:is(
   [src$="logo-bbva.png"],
   [src$="logo-comfandi.png"],
   [src$="logo-elgranlangostino.png"],
@@ -1888,7 +1902,7 @@ body.home-page {
 ) { --sector-logo-scale: 2.05; }
 @media (min-width: 1024px) {
   .home-page .sector-card__logos--spaced { gap: var(--wp--preset--spacing--8); }
-  .home-page .sector-card__logos--spaced .sector-card__logo { padding-inline: var(--wp--preset--spacing--2); }
+  .home-page .sector-card__logos--spaced :is(.sector-card__logo, .sector-card__logos .wp-block-image) { padding-inline: var(--wp--preset--spacing--2); }
 }
 @media (max-width: 1023px) {
   .home-page .sector-card { padding-bottom: var(--wp--preset--spacing--8); }
@@ -1905,25 +1919,25 @@ body.home-page {
   /* Reducción pensada para 3 logos en una fila angosta: en el carrusel
      (`.is-marquee`) los espacios son más anchos y se mantiene la escala de
      desktop. */
-  .home-page .sector-card__logo { height: 60px; }
-  .home-page .sector-card__logos:not(.is-marquee) .sector-card__logo img {
+  .home-page :is(.sector-card__logo, .sector-card__logos .wp-block-image) { height: 60px; }
+  .home-page .sector-card__logos:not(.is-marquee) :is(.sector-card__logo, .sector-card__logos .wp-block-image) img {
     max-width: 106px;
     max-height: 46px;
     --sector-logo-scale: 1.15;
   }
-  .home-page .sector-card__logos:not(.is-marquee) .sector-card__logo img:is(
+  .home-page .sector-card__logos:not(.is-marquee) :is(.sector-card__logo, .sector-card__logos .wp-block-image) img:is(
     [src$="logo-coopunidos.png"],
     [src$="logo-k-listo.png"],
     [src$="logo-metrocali.png"],
     [src$="logo-gobernacion-valle-del-cauca-ribbon.png"],
     [src$="logo-constructora-melendez.png"]
   ) { --sector-logo-scale: 0.88; }
-  .home-page .sector-card__logos:not(.is-marquee) .sector-card__logo img:is(
+  .home-page .sector-card__logos:not(.is-marquee) :is(.sector-card__logo, .sector-card__logos .wp-block-image) img:is(
     [src$="logo-femcristar.png"],
     [src$="logo-ma-isabel.png"],
     [src$="logo-promedico.png"]
   ) { --sector-logo-scale: 1.15; }
-  .home-page .sector-card__logos:not(.is-marquee) .sector-card__logo img:is(
+  .home-page .sector-card__logos:not(.is-marquee) :is(.sector-card__logo, .sector-card__logos .wp-block-image) img:is(
     [src$="logo-bbva.png"],
     [src$="logo-comfandi.png"],
     [src$="logo-elgranlangostino.png"],
@@ -1961,7 +1975,7 @@ body.home-page {
 .home-page .sector-card:hover .sector-card__track {
   animation-play-state: paused;
 }
-.home-page .sector-card__logos.is-marquee .sector-card__logo {
+.home-page .sector-card__logos.is-marquee :is(.sector-card__logo, .sector-card__logos .wp-block-image) {
   box-sizing: border-box;
   flex: 0 0 140px;
   width: 140px;
@@ -1975,7 +1989,7 @@ body.home-page {
    arriba, hasta 2.05), no el ancho del espacio. Con `18cqw` el alto baja
    junto con la tarjeta y los logos anchos no se tocan en tarjetas angostas
    (1024px: de 0px a >20px de separación). */
-.home-page .sector-card__logos.is-marquee .sector-card__logo img {
+.home-page .sector-card__logos.is-marquee :is(.sector-card__logo, .sector-card__logos .wp-block-image) img {
   max-width: 100%;
   max-height: 56px;
   max-height: min(56px, 18cqw);
@@ -3466,39 +3480,41 @@ section.aaa-section[id] { scroll-margin-top: 78px; }
    el Inicio insertado antes de D127 (grilla de 2 columnas con la foto) hasta
    que se reinserte el pattern: esconde la columna de la foto y centra la de
    texto.
+   D160: el documento del cliente del 12-oct-2026 vuelve a pedir foto en esta
+   sección. El Inicio guardado (grilla de 2 columnas) vuelve al diseño previo
+   a D127 —texto a la izquierda, foto a sangre a la derecha— y este bloque
+   queda solo para la variante sin foto (`.home-about-summary__content`).
    ===================================================================== */
 .home-page .home-about-summary {
   background: var(--wp--preset--color--surface-light-alt) !important;
 }
-.home-page .home-about-summary .what-we-do-grid { grid-template-columns: minmax(0, 1fr); }
-.home-page .home-about-summary .what-we-do-grid > .wp-block-column:has(.what-we-do-visual) { display: none; }
-.home-page :is(.home-about-summary__content, .home-about-summary .what-we-do-grid > .wp-block-column:first-child) {
+.home-page .home-about-summary__content {
   width: 100%;
   max-width: 760px;
   margin-inline: auto;
   text-align: center;
 }
-.home-page :is(.home-about-summary__content, .home-about-summary .what-we-do-grid > .wp-block-column:first-child) > * {
+.home-page .home-about-summary__content > * {
   margin-block: 0;
 }
-.home-page :is(.home-about-summary__content, .home-about-summary .what-we-do-grid > .wp-block-column:first-child) > .aaa-eyebrow {
+.home-page .home-about-summary__content > .aaa-eyebrow {
   margin-bottom: var(--wp--preset--spacing--4);
   color: var(--wp--preset--color--accent-main-strong);
 }
-.home-page :is(.home-about-summary__content, .home-about-summary .what-we-do-grid > .wp-block-column:first-child) > h2 {
+.home-page .home-about-summary__content > h2 {
   max-width: 22ch;
   margin-inline: auto;
   color: var(--wp--preset--color--navy-deep);
   text-wrap: balance;
 }
-.home-page :is(.home-about-summary__content, .home-about-summary .what-we-do-grid > .wp-block-column:first-child) > p:not(.aaa-eyebrow) {
+.home-page .home-about-summary__content > p:not(.aaa-eyebrow) {
   max-width: 60ch;
   margin: var(--wp--preset--spacing--6) auto 0;
 }
-.home-page :is(.home-about-summary__content, .home-about-summary .what-we-do-grid > .wp-block-column:first-child) strong {
+.home-page .home-about-summary__content strong {
   color: var(--wp--preset--color--navy-deep);
 }
-.home-page :is(.home-about-summary__content, .home-about-summary .what-we-do-grid > .wp-block-column:first-child) > .home-about-summary__action {
+.home-page .home-about-summary__content > .home-about-summary__action {
   justify-content: center;
   margin-top: var(--wp--preset--spacing--8);
 }
@@ -4108,47 +4124,30 @@ section.aaa-section[id] {
   }
 }
 
-/* ---------- D157 (reemplaza D156) — Logo completo en los títulos con "AAA" ----------
+/* ---------- D159 (reemplaza D157) — Solo las tres A en los títulos con "AAA" ----------
    El filtro aaa_logo_in_headings (functions.php) cambia "AAA" o "AAA Estudio
-   Legal" de los títulos por este span. Se arma sobre el logo del sitio
-   (logo-horizontal-claro.svg, 1359×474) en dos capas, para que funcione en
-   fondos claros y oscuros sin un archivo de marca nuevo:
-   - ::before: la silueta completa del logo como máscara, recortada a la parte
-     de "Estudio Legal" (desde el 52% del ancho), en el color del título
-     (oscuro sobre claro, blanco sobre navy, cobre dentro de un énfasis);
-   - ::after: el isotipo cobre de marca, encima de su lugar exacto en el logo
-     (49,7% del ancho × 89,7% del alto, arriba a la izquierda).
-   Mismo tamaño que el logo de "Sobre nosotros" (1.4em de alto). */
+   Legal" de los títulos por este span. El documento del cliente (12-oct-2026)
+   pide que en títulos la firma aparezca solo con el logo de las tres A, sin
+   "Estudio Legal": va el isotipo cobre de marca (isotipo.svg, 676×425) como
+   versión provisional hasta que el diseñador entregue el archivo oficial;
+   entonces basta con cambiar este url(). */
 .aaa-logo-inline {
   position: relative;
   display: inline-block;
-  height: 1.4em;
-  aspect-ratio: 1359.36 / 474.25;
-  vertical-align: -0.36em;
+  height: 1.25em;
+  aspect-ratio: 675.53 / 425.29;
+  vertical-align: -0.28em;
 }
 /* D158: dentro de un énfasis en cursiva (Trabaja con nosotros, "ser parte de
    [logo]") el logo va un poco más chico, a pedido de Oscar. */
 .aaa-text-emphasis .aaa-logo-inline {
-  height: 1.15em;
-  vertical-align: -0.24em;
+  height: 1.05em;
+  vertical-align: -0.2em;
 }
-.aaa-logo-inline::before,
 .aaa-logo-inline::after {
   content: "";
   position: absolute;
-}
-.aaa-logo-inline::before {
   inset: 0;
-  background-color: currentColor;
-  -webkit-mask: url("../img/brand/logo-horizontal-claro.svg") center / contain no-repeat;
-  mask: url("../img/brand/logo-horizontal-claro.svg") center / contain no-repeat;
-  clip-path: inset(0 0 0 52%);
-}
-.aaa-logo-inline::after {
-  left: 0;
-  top: 0;
-  width: 49.7%;
-  height: 89.7%;
   background: url("../img/brand/isotipo.svg") center / contain no-repeat;
 }
 .aaa-logo-inline__text {
@@ -4162,3 +4161,250 @@ section.aaa-section[id] {
   white-space: nowrap;
   border: 0;
 }
+
+/* ---------- D159 — Textos definitivos del cliente (documento del 12-oct-2026) ---------- */
+/* En cifras: línea "Cifras en verificación por el área de Operaciones." bajo las tres cifras. */
+.stats-counter__note,
+.home-page section:has(> .stats-grid) > p.stats-counter__note {
+  display: block;
+  margin-block-start: var(--wp--preset--spacing--8);
+  font-size: var(--wp--preset--font-size--sm);
+  color: rgba(255, 255, 255, 0.72);
+}
+/* Metodología: la etiqueta de cada área ahora es una oración completa; en
+   mayúsculas y espaciada se leía pesada, pasa a cursiva en caja normal. */
+.services-intro .service-card__body > .service-block__tag {
+  font-size: var(--wp--preset--font-size--sm);
+  font-style: italic;
+  letter-spacing: 0;
+  text-transform: none;
+  opacity: 0.75;
+}
+/* Metodología, Recuperación de cartera: nota al pie del área. */
+.services-intro .service-card__note {
+  margin-block-start: var(--wp--preset--spacing--4);
+  font-size: var(--wp--preset--font-size--xs);
+  font-style: italic;
+  color: var(--wp--preset--color--navy-deep);
+  opacity: 0.6;
+}
+/* Quiénes somos: cuatro equipos (se suma negociaciones). El damero sigue: los
+   pares pares llevan la foto arriba. El equipo sin foto lleva un panel navy
+   con el isotipo hasta que Gestión Humana entregue las fotos de la sede. */
+.team-groups .team-flip-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.team-groups .team-profile-pair:nth-child(2) > .wp-block-image { order: 0; }
+.team-groups .team-profile-pair:nth-child(even) > :is(.wp-block-image, .team-profile-pair__placeholder) { order: -1; }
+.team-groups .team-profile-pair__placeholder {
+  position: relative;
+  margin: 0;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  border-radius: var(--wp--custom--radius--md);
+  background: var(--wp--preset--color--navy-deep);
+}
+.team-groups .team-profile-pair__placeholder::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url("../img/brand/isotipo-blanco.svg") center / 38% no-repeat;
+  opacity: 0.12;
+}
+@media (min-width: 901px) {
+  .team-groups .team-flip-card__desc { font-size: var(--wp--preset--font-size--sm); }
+}
+/* Con cuatro columnas entre 901 y 1100px la tarjeta baja a ~190–240px: menos
+   relleno en el reverso, y letra más chica hasta 1000px, para que el texto
+   del equipo jurídico (el más largo) no se corte. */
+@media (min-width: 901px) and (max-width: 1100px) {
+  .team-groups .team-flip-card__back { padding: var(--wp--preset--spacing--4); }
+}
+@media (min-width: 901px) and (max-width: 1000px) {
+  .team-groups .team-flip-card__desc { font-size: var(--wp--preset--font-size--xs); }
+}
+@media (max-width: 900px) {
+  .team-groups .team-profile-pair > .team-profile-pair__placeholder { order: -1; aspect-ratio: 16 / 9; }
+}
+
+/* ---------- D160 — Inicio, "Nuestro enfoque" con foto horizontal ----------
+   El documento del cliente pide una imagen horizontal. El diseño previo a
+   D127 estiraba la foto al alto de la columna de texto (más alta que ancha) y
+   recortaba la escena; aquí la foto queda en 3:2, centrada en altura y
+   alineada a la columna (sin sangrado desde D163). En móvil sigue la regla
+   de ≤640px. */
+@media (min-width: 641px) {
+  .home-page .home-about-summary .what-we-do-grid > .wp-block-column:has(.what-we-do-visual) {
+    display: flex;
+    align-items: center;
+  }
+  /* D163: el marco (figure) es fijo y recorta; la deriva de GSAP
+     (addMediaDrift: yPercent ±1.2 y scale 1.025–1.045 en el <img>) mueve
+     la escena dentro del marco. Sin el recorte, el <img> —más ancho que la
+     columna por el sangrado heredado— movía sus propios bordes al hacer
+     scroll y la foto "saltaba" respecto al texto. */
+  .home-page .home-about-summary .what-we-do-grid > .wp-block-column:has(.what-we-do-visual) > figure {
+    width: 100%;
+    margin: 0;
+    overflow: hidden;
+    aspect-ratio: 3 / 2;
+  }
+  .home-page .home-about-summary .what-we-do-grid img.what-we-do-visual {
+    position: static;
+    width: 100%;
+    height: 100%;
+    aspect-ratio: auto;
+    object-fit: cover;
+    object-position: 35% 60%;
+  }
+}
+
+/* ---------- D166 — Logo de GNB Sudameris más pequeño ----------
+   Es un logo muy ancho (281×62) y con la escala por defecto (1.55) se veía más
+   grande que los demás de "Organizaciones que confían en nosotros". */
+.home-page :is(.sector-card__logo, .sector-card__logos .wp-block-image) img[src*="logo-gnb-sudameris"] { --sector-logo-scale: 1.1; }
+
+/* ---------- D167 — Quiénes somos, "Sobre nosotros": isotipo sobre el texto ----------
+   Desde D159 el bloque de origen solo tiene un párrafo (sin título) y se veía
+   solo frente a la foto de los fundadores. A pedido de Oscar, el isotipo cobre
+   de marca lo encabeza para equilibrar la sección. Decorativo, por CSS: no
+   cambia el contenido de la página. D169: un poco más pequeño y con el
+   eyebrow "Origen y especialización" debajo. */
+.origin-block__copy::before {
+  content: "";
+  display: block;
+  width: clamp(68px, 7vw, 100px);
+  aspect-ratio: 675.53 / 425.29;
+  margin-bottom: var(--wp--preset--spacing--6);
+  background: url("../img/brand/isotipo.svg") left center / contain no-repeat;
+}
+
+/* ---------- D168 — Bordes redondeados en todas las fotos de bloque ----------
+   Pedido de Oscar: toda imagen dentro de un bloque o sección lleva el mismo
+   radio que las tarjetas de "¿Por qué confiar?" (radius--md, 8px). En móvil ya
+   lo tenían; faltaban en escritorio "Nuestro enfoque" (el radio va en el
+   marco con overflow:hidden de D163, así la deriva queda recortada) y
+   Transparencia en Metodología (sangra a la derecha: se ven redondeadas las
+   esquinas del lado del texto). Quedan sin radio, a propósito, las imágenes
+   a sangre completa (portadas y paneles de Áreas de práctica) y los círculos
+   de los pasos de Metodología. */
+@media (min-width: 641px) {
+  .home-page .home-about-summary .what-we-do-grid > .wp-block-column:has(.what-we-do-visual) > figure {
+    border-radius: var(--wp--custom--radius--md);
+  }
+  .transparency-block img.transparency-block__visual {
+    border-radius: var(--wp--custom--radius--md);
+  }
+}
+
+
+/* ---------- D170 — Pie de página administrable ----------
+   Contacto y redes pasan de bloques "HTML personalizado" a párrafos nativos
+   (Apariencia → Editor → Pie de página): etiqueta en <strong> y dato como
+   enlace editable. El ícono lo dibuja el CSS según la clase del párrafo
+   (aaa-site-footer__item--direccion, --telefono, --whatsapp, --correo,
+   --linkedin, --instagram), con los mismos SVG que antes iban en el HTML. */
+.aaa-site-footer .aaa-site-footer__contact-list > *,
+.aaa-site-footer .aaa-site-footer__social-list > * { margin: 0; }
+.aaa-site-footer__item {
+  position: relative;
+  padding-left: calc(20px + var(--wp--preset--spacing--3));
+  color: rgba(255, 255, 255, 0.78);
+  font-size: var(--wp--preset--font-size--sm);
+  line-height: 1.5;
+}
+.aaa-site-footer__item::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 2px;
+  width: 20px;
+  height: 20px;
+  background-color: var(--wp--preset--color--accent-main);
+  -webkit-mask: var(--aaa-footer-icon) center / contain no-repeat;
+  mask: var(--aaa-footer-icon) center / contain no-repeat;
+}
+.aaa-site-footer__item strong {
+  display: block;
+  margin-bottom: 1px;
+  color: var(--wp--preset--color--white);
+  font-size: var(--wp--preset--font-size--sm);
+  font-weight: 500;
+}
+.aaa-site-footer__item a { color: inherit; text-decoration: none; }
+.aaa-site-footer__item a:hover,
+.aaa-site-footer__item a:focus-visible { color: var(--wp--preset--color--white); text-decoration: underline; }
+.aaa-site-footer__item:has(a:hover)::before { background-color: var(--wp--preset--color--accent-light); }
+.aaa-site-footer__item--linkedin a,
+.aaa-site-footer__item--instagram a { color: rgba(255, 255, 255, 0.56); font-size: 11px; letter-spacing: 0.025em; }
+.aaa-site-footer__item--direccion { --aaa-footer-icon: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20256%20256%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%2214%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Ccircle%20cx%3D%22128%22%20cy%3D%22104%22%20r%3D%2232%22%2F%3E%3Cpath%20d%3D%22M200%20104c0%2064-72%20112-72%20112S56%20168%2056%20104a72%2072%200%200%201%20144%200Z%22%2F%3E%3C%2Fsvg%3E"); }
+.aaa-site-footer__item--telefono { --aaa-footer-icon: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20256%20256%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%2214%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M92%2048%2064%2024%2032%2040c0%20101.6%2082.4%20184%20184%20184l16-32-24-28-36%2012a144%20144%200%200%201-92-92Z%22%2F%3E%3C%2Fsvg%3E"); }
+.aaa-site-footer__item--whatsapp { --aaa-footer-icon: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20256%20256%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%2214%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M88%2072c8%2048%2048%2088%2096%2096l16-24-32-16-16%2016c-16-8-32-24-40-40l16-16-16-32Z%22%2F%3E%3Cpath%20d%3D%22M48%20208%2056%20176a88%2088%200%201%201%2032%2024Z%22%2F%3E%3C%2Fsvg%3E"); }
+.aaa-site-footer__item--correo { --aaa-footer-icon: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20256%20256%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%2214%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Crect%20x%3D%2224%22%20y%3D%2248%22%20width%3D%22208%22%20height%3D%22160%22%20rx%3D%2216%22%2F%3E%3Cpath%20d%3D%22m24%2072%20104%2072L232%2072%22%2F%3E%3C%2Fsvg%3E"); }
+.aaa-site-footer__item--linkedin { --aaa-footer-icon: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20256%20256%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%2214%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Crect%20x%3D%2228%22%20y%3D%2228%22%20width%3D%22200%22%20height%3D%22200%22%20rx%3D%2224%22%2F%3E%3Ccircle%20cx%3D%2280%22%20cy%3D%2284%22%20r%3D%2210%22%20fill%3D%22black%22%20stroke%3D%22none%22%2F%3E%3Cpath%20d%3D%22M80%20120v64M120%20184v-64M120%20148c8-20%2048-28%2056%208v28%22%2F%3E%3C%2Fsvg%3E"); }
+.aaa-site-footer__item--instagram { --aaa-footer-icon: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20256%20256%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%2214%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Crect%20x%3D%2232%22%20y%3D%2232%22%20width%3D%22192%22%20height%3D%22192%22%20rx%3D%2248%22%2F%3E%3Ccircle%20cx%3D%22128%22%20cy%3D%22128%22%20r%3D%2244%22%2F%3E%3Ccircle%20cx%3D%22180%22%20cy%3D%2276%22%20r%3D%228%22%20fill%3D%22black%22%20stroke%3D%22none%22%2F%3E%3C%2Fsvg%3E"); }
+
+
+/* ---------- D170 — Logos de "Organizaciones que confían" administrables ----------
+   La grilla deja de ser un bloque "HTML personalizado": cada sector es un
+   Grupo (.sector-card) con un párrafo para el nombre y un Grupo
+   .sector-card__logos con un bloque Imagen por logo. Para agregar un logo
+   basta insertar una Imagen dentro de ese grupo: las reglas de
+   .sector-card__logo cubren también cualquier .wp-block-image de la tarjeta,
+   y main.js la suma al carrusel. El ícono del sector lo dibuja el CSS según
+   la clase de la tarjeta (sector-card--financiero, --solidario, --publico,
+   --salud, --construccion, --comercio); sin clase usa el del sector
+   financiero. */
+.sector-card__logos .wp-block-image { margin: 0; }
+.sector-card > *, .sector-card__header > * { margin: 0; }
+.sector-card__header::before {
+  content: "";
+  flex: 0 0 auto;
+  width: 38px;
+  height: 38px;
+  background-color: var(--wp--preset--color--accent-main-strong);
+  -webkit-mask: var(--sector-icon, url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20256%20256%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%2214%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M24%20104h208M40%20104V88l88-48%2088%2048v16M48%20104v80M88%20104v80M128%20104v80M168%20104v80M208%20104v80M24%20184h208M16%20216h224%22%2F%3E%3C%2Fsvg%3E")) center / contain no-repeat;
+  mask: var(--sector-icon, url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20256%20256%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%2214%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M24%20104h208M40%20104V88l88-48%2088%2048v16M48%20104v80M88%20104v80M128%20104v80M168%20104v80M208%20104v80M24%20184h208M16%20216h224%22%2F%3E%3C%2Fsvg%3E")) center / contain no-repeat;
+}
+.home-page .sector-card__header::before { width: 42px; height: 42px; }
+.sector-card--financiero { --sector-icon: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20256%20256%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%2214%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M24%20104h208M40%20104V88l88-48%2088%2048v16M48%20104v80M88%20104v80M128%20104v80M168%20104v80M208%20104v80M24%20184h208M16%20216h224%22%2F%3E%3C%2Fsvg%3E"); }
+.sector-card--solidario { --sector-icon: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20256%20256%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%2214%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22m88%20104%2032-32a24%2024%200%200%201%2034%200l14%2014M56%20152l42%2042a24%2024%200%200%200%2034%200l68-68M24%20112l32-32%2032%2024-40%2048ZM232%20112l-32-32-32%2024%2040%2048Z%22%2F%3E%3Cpath%20d%3D%22m112%20144%2024%2024M136%20120l32%2032%22%2F%3E%3C%2Fsvg%3E"); }
+.sector-card--publico { --sector-icon: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20256%20256%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%2214%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M32%20216h192M48%20216V88h64v128M112%20216V40h96v176M72%20120h16M72%20152h16M136%2072h16M168%2072h16M136%20104h16M168%20104h16M136%20136h16M168%20136h16%22%2F%3E%3C%2Fsvg%3E"); }
+.sector-card--salud { --sector-icon: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20256%20256%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%2214%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M128%20216S40%20168%2040%2096a48%2048%200%200%201%2088-26%2048%2048%200%200%201%2088%2026c0%2072-88%20120-88%20120Z%22%2F%3E%3Cpath%20d%3D%22M72%20128h32l16-32%2024%2064%2016-32h24%22%2F%3E%3C%2Fsvg%3E"); }
+.sector-card--construccion { --sector-icon: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20256%20256%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%2214%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M32%20216h192M56%20216V112L128%2056l72%2056v104M96%20216v-64h64v64%22%2F%3E%3C%2Fsvg%3E"); }
+.sector-card--comercio { --sector-icon: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.5%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M3%2010V19C3%2020.1046%203.89543%2021%205%2021H19C20.1046%2021%2021%2020.1046%2021%2019V10%22%2F%3E%3Cpath%20d%3D%22M14.8333%2021V15C14.8333%2013.8954%2013.9379%2013%2012.8333%2013H10.8333C9.72874%2013%208.83331%2013.8954%208.83331%2015V21%22%20stroke-miterlimit%3D%2216%22%2F%3E%3Cpath%20d%3D%22M21.8183%209.36418L20.1243%203.43517C20.0507%203.17759%2019.8153%203%2019.5474%203H15.5L15.9753%208.70377C15.9909%208.89043%2016.0923%209.05904%2016.2532%209.15495C16.6425%209.38698%2017.4052%209.81699%2018%2010C19.0158%2010.3125%2020.5008%2010.1998%2021.3465%2010.0958C21.6982%2010.0526%2021.9157%209.7049%2021.8183%209.36418Z%22%2F%3E%3Cpath%20d%3D%22M14%2010C14.5675%209.82538%2015.2879%209.42589%2015.6909%209.18807C15.8828%209.07486%2015.9884%208.86103%2015.9699%208.63904L15.5%203H8.5L8.03008%208.63904C8.01158%208.86103%208.11723%209.07486%208.30906%209.18807C8.71207%209.42589%209.4325%209.82538%2010%2010C11.493%2010.4594%2012.507%2010.4594%2014%2010Z%22%2F%3E%3Cpath%20d%3D%22M3.87567%203.43517L2.18166%209.36418C2.08431%209.7049%202.3018%2010.0526%202.6535%2010.0958C3.49916%2010.1998%204.98424%2010.3125%206%2010C6.59477%209.81699%207.35751%209.38698%207.74678%209.15495C7.90767%209.05904%208.00913%208.89043%208.02469%208.70377L8.5%203H4.45258C4.18469%203%203.94926%203.17759%203.87567%203.43517Z%22%2F%3E%3C%2Fsvg%3E"); }
+
+
+/* ---------- D170 — Tarjetas de equipo administrables (Quiénes somos) ----------
+   Pasan de "HTML personalizado" a Grupos y párrafos nativos (nombre, cargo y
+   descripción se editan en la página). Los botones "Ver funciones"/"Volver"
+   los crea main.js; el isotipo de la cara frontal lo dibuja este ::before
+   (solo si la tarjeta no trae el <img> de la versión anterior). En el editor,
+   las dos caras se muestran una debajo de la otra y sin girar, para poder
+   editar también el reverso. */
+.team-flip-card :is(.team-flip-card__inner, .team-flip-card__front, .team-flip-card__caption, .team-flip-card__back) > * { margin-block: 0; }
+.team-flip-card:not(:has(.team-flip-card__logo)) .team-flip-card__front::before {
+  content: "";
+  position: absolute;
+  top: var(--wp--preset--spacing--4);
+  left: var(--wp--preset--spacing--4);
+  width: 48px;
+  aspect-ratio: 675.53 / 425.29;
+  background: url("../img/brand/isotipo-blanco.svg") left top / contain no-repeat;
+  opacity: 0.22;
+  filter: grayscale(1) brightness(2.8);
+  pointer-events: none;
+}
+.team-groups .team-flip-card:not(:has(.team-flip-card__logo)) .team-flip-card__front::before {
+  top: var(--wp--preset--spacing--6);
+  left: var(--wp--preset--spacing--6);
+  width: 58px;
+}
+.team-flip-card.block-editor-block-list__block { aspect-ratio: auto; }
+.team-flip-card.block-editor-block-list__block .team-flip-card__inner { height: auto; transform: none !important; }
+.team-flip-card__face.block-editor-block-list__block {
+  position: relative;
+  inset: auto;
+  min-height: 220px;
+  visibility: visible !important;
+  transform: none !important;
+}
+.team-flip-card__back.block-editor-block-list__block { margin-top: var(--wp--preset--spacing--3); }

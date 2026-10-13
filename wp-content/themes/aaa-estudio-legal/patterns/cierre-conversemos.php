@@ -1,47 +1,39 @@
 <?php
 /**
- * Title: Cierre — "Conversemos sobre su caso."
+ * Title: Cierre — "Conversemos"
  * Slug: aaa-estudio-legal/cierre-conversemos
  * Categories: aaa-estudio-legal
- * Description: Bloque de cierre de dos columnas (fotografía + tarjeta navy con CTA) usado al final de Inicio y Metodología (Decisiones D73/D74/D87). La columna de fotografía usa el estilo de bloque "Placeholder de fotografía" — reemplazar por una imagen real cuando llegue el material del cliente, quitando ese estilo de bloque.
+ * Description: Cierre oficial del sitio (D170): panel navy con foto de fondo, eyebrow "Conversemos", título, texto y botón a Contacto — el mismo de Inicio, Metodología y Quiénes somos. La foto se cambia desde el bloque Grupo del panel (Fondo → Imagen de fondo). Reemplaza al cierre de dos columnas del prototipo (D73/D74/D87).
  *
  * @package aaa-estudio-legal
  */
 ?>
-<!-- wp:columns {"style":{"spacing":{"blockGap":{"top":"var:preset|spacing|6","left":"var:preset|spacing|6"}}}} -->
-<div class="wp-block-columns">
-
-	<!-- wp:column -->
-	<div class="wp-block-column">
-		<!-- wp:image {"className":"is-style-media-placeholder","style":{"border":{"radius":"var:preset|spacing|0"}}} -->
-		<figure class="wp-block-image is-style-media-placeholder"><img src="" alt="Espacio reservado para fotografía institucional — pendiente de material del cliente" /></figure>
+<!-- wp:group {"tagName":"section","anchor":"cierre-heading","className":"site-closing-cta site-closing-cta--internal site-closing-cta--global aaa-section","backgroundColor":"surface-light","align":"full","layout":{"type":"constrained"}} -->
+<section class="wp-block-group alignfull site-closing-cta site-closing-cta--internal site-closing-cta--global aaa-section has-surface-light-background-color has-background" id="cierre-heading">
+	<!-- wp:group {"className":"site-closing-cta__panel","style":{"background":{"backgroundImage":{"url":"<?php echo esc_url( aaa_media_url( 'temp-prototype-home-cta.jpg' ) ); ?>","source":"file","title":"temp-prototype-home-cta"},"backgroundSize":"cover","backgroundPosition":"50% 52%"}}} -->
+	<div class="wp-block-group site-closing-cta__panel">
+		<!-- wp:image {"className":"site-closing-cta__watermark"} -->
+		<figure class="wp-block-image site-closing-cta__watermark"><img src="<?php echo esc_url( aaa_brand_url( 'isotipo-blanco.svg' ) ); ?>" alt="" /></figure>
 		<!-- /wp:image -->
-	</div>
-	<!-- /wp:column -->
-
-	<!-- wp:column {"backgroundColor":"navy-deep","textColor":"white","style":{"spacing":{"padding":{"all":"var:preset|spacing|8"}},"border":{"radius":"var:preset|spacing|2"}}} -->
-	<div class="wp-block-column has-white-color has-navy-deep-background-color has-text-color has-background" style="padding:var(--wp--preset--spacing--8)">
-
-		<!-- wp:heading {"level":2,"fontSize":"xl"} -->
-		<h2 class="wp-block-heading has-xl-font-size">Conversemos sobre su caso.</h2>
-		<!-- /wp:heading -->
-
-		<!-- wp:paragraph -->
-		<p>Si enfrenta un proceso de insolvencia o necesita fortalecer la protección de su cartera, nuestro equipo está listo para acompañarlo.</p>
-		<!-- /wp:paragraph -->
-
-		<!-- wp:buttons -->
-		<div class="wp-block-buttons">
-			<!-- wp:button {"backgroundColor":"accent-main","textColor":"navy-hover"} -->
-			<div class="wp-block-button">
-				<a class="wp-block-button__link has-navy-hover-color has-accent-main-background-color has-text-color has-background wp-element-button" href="/contacto/">Hablemos de su caso →</a>
-			</div>
-			<!-- /wp:button -->
+		<!-- wp:group {"className":"site-closing-cta__heading aaa-motion-section-title"} -->
+		<div class="wp-block-group site-closing-cta__heading aaa-motion-section-title">
+			<!-- wp:paragraph {"className":"aaa-eyebrow"} --><p class="aaa-eyebrow">Conversemos</p><!-- /wp:paragraph -->
+			<!-- wp:heading {"level":2} --><h2 class="wp-block-heading">Cada caso se estudia <em class="aaa-text-emphasis">antes de decidir.</em></h2><!-- /wp:heading -->
 		</div>
-		<!-- /wp:buttons -->
-
+		<!-- /wp:group -->
+		<!-- wp:group {"className":"site-closing-cta__content"} -->
+		<div class="wp-block-group site-closing-cta__content">
+			<!-- wp:paragraph {"className":"site-closing-cta__text"} --><p class="site-closing-cta__text">Si usted es una entidad financiera con cartera en mora, un fondo de empleados, una persona natural que quiere recuperar lo que le deben o una organización que necesita anticipar un riesgo legal, estudiamos su situación y le proponemos la vía que mejor la respalda.</p><!-- /wp:paragraph -->
+			<!-- wp:buttons -->
+			<div class="wp-block-buttons">
+				<!-- wp:button {"className":"site-closing-cta__button"} -->
+				<div class="wp-block-button site-closing-cta__button"><a class="wp-block-button__link wp-element-button" href="/contacto/">Solicitar el estudio de su caso <svg class="btn--icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+				<!-- /wp:button -->
+			</div>
+			<!-- /wp:buttons -->
+		</div>
+		<!-- /wp:group -->
 	</div>
-	<!-- /wp:column -->
-
-</div>
-<!-- /wp:columns -->
+	<!-- /wp:group -->
+</section>
+<!-- /wp:group -->

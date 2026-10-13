@@ -17,7 +17,7 @@
 			<!-- wp:group {"className":"section-heading--editorial aaa-motion-section-title"} -->
 			<div class="wp-block-group section-heading--editorial aaa-motion-section-title">
 				<!-- wp:heading {"level":1,"className":"contact-intake__title"} -->
-				<h1 class="wp-block-heading contact-intake__title">Cuéntenos el contexto de su organización. <em class="aaa-text-emphasis">Nuestro equipo revisará su solicitud.</em></h1>
+				<h1 class="wp-block-heading contact-intake__title">Cuéntenos el contexto de su organización. <em class="aaa-text-emphasis">Nuestro equipo jurídico revisará su solicitud.</em></h1>
 				<!-- /wp:heading -->
 				<!-- wp:paragraph {"className":"contact-intake__intro"} -->
 				<p class="contact-intake__intro">Comparta la información inicial necesaria para que podamos comprender el asunto y establecer el canal de contacto adecuado.</p>
