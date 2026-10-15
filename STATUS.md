@@ -1906,7 +1906,7 @@ Ambas preguntas quedan cerradas — ver PROJECT.md, filas D112 y D113.
 **Requiere reinsertar el pattern "Home — página completa"** para ver: las listas de Áreas, el rediseño de "¿Por qué confiar?" y la animación del contador. Lo demás ya está en vivo.
 
 **Pendiente:**
-- Validación del cliente: "Ley 1116" (en vez de "Ley 116"), la selección de 4 ítems por línea, los 3 títulos reformulados y las 6 descripciones de "¿Por qué confiar?" — en especial la de compliance.
+- ~~Validación del cliente: "Ley 1116" (en vez de "Ley 116")~~ **Resuelto (Oscar, 2026-10-15, D178): se usa "Ley 116" en el sitio y en toda la documentación.** Sigue pendiente la validación de la selección de 4 ítems por línea, los 3 títulos reformulados y las 6 descripciones de "¿Por qué confiar?" — en especial la de compliance.
 - `hero-simple.php`: revisar `has-text-color` (fuera de Home).
 
 ## Home — ajustes sobre D118: paneles de Áreas más bajos y carrusel de logos con 2-3 a la vez (D119, 2026-09-29)
@@ -2174,7 +2174,7 @@ Ambas preguntas quedan cerradas — ver PROJECT.md, filas D112 y D113.
 
 **Pendiente:**
 - ~~El cambio a "Ley 116" solo se ve al reinsertar el pattern de Inicio~~ — **resuelto el mismo día**, a pedido explícito del Owner. Se corrigió directamente en la página Inicio de Local (ID 82): era la única que contenía "Ley 1116" y se cambió solo ese ítem de la lista, tras guardar respaldo del contenido previo (fuera del repo) y con revisión nativa de WordPress. Verificado en el HTML servido: "Ley 116" aparece 1 vez y "Ley 1116", 0.
-- **Para confirmar con el cliente:** el régimen de insolvencia empresarial en Colombia es la **Ley 1116 de 2006**; no encuentro una "Ley 116" relacionada con derecho concursal. Se aplicó el cambio por instrucción explícita del Owner, pero conviene confirmarlo antes de publicar, para no corregir un dato que quizá era correcto.
+- **Para confirmar con el cliente:** el régimen de insolvencia empresarial en Colombia es la **Ley 1116 de 2006**; no encuentro una "Ley 116" relacionada con derecho concursal. Se aplicó el cambio por instrucción explícita del Owner, pero conviene confirmarlo antes de publicar, para no corregir un dato que quizá era correcto. **Resuelto (Oscar, 2026-10-15, D178): se usa "Ley 116" en el sitio y en toda la documentación.**
 
 ## Inicio — "Áreas de práctica": títulos e índices más grandes (D129, 2026-09-30)
 
@@ -2695,7 +2695,7 @@ Ambas preguntas quedan cerradas — ver PROJECT.md, filas D112 y D113.
 **Entregable:** artifact privado "Backlog SEO y GEO AAA" (https://claude.ai/artifact/3SrEF25ZW4CPVYK2qYq8iE), con 37 tareas en 5 fases (T = Owner, N = Nayeliz) y fichas por página con el estado actual y keywords candidatas. *(Reemplazado por el Excel y la guía de D149.)*
 
 **Decisiones planteadas para la reunión (abiertas):**
-- Confirmar "Ley 116" vs Ley 1116 con el cliente: afecta keywords y la credibilidad del sitio ante buscadores e IA.
+- ~~Confirmar "Ley 116" vs Ley 1116 con el cliente~~ **Resuelto (Oscar, 2026-10-15, D178): se usa "Ley 116" en el sitio y en toda la documentación.**
 - Nombre oficial de la entidad vs "Agudelo Abogados Asociados".
 - Dominio final; autoría del blog.
 - Política de rastreadores de IA (búsqueda vs entrenamiento).
@@ -3278,3 +3278,221 @@ El bloque de videos sigue visible; no se eligió ocultarlo.
 - **Incluye:** textos definitivos del documento del cliente, fotos de banco, logo de GNB, ajustes visuales y conversión a bloques nativos.
 - **Estado del repo:** coincide con el staging en vivo (páginas, tema y patterns).
 - **Push:** el commit y el tag quedan solo en local, a decisión de Oscar (`main` dispara Cloudflare Pages).
+
+## Foto de "Equipo de negociaciones" e imágenes de los patterns (D171, 2026-10-13)
+
+**Pedido (Oscar, con captura):** la tarjeta de Equipo de negociaciones (D159) no tenía foto. Buscar una de banco relacionada, por ahora.
+
+**Aplicado:**
+- **Foto:** `equipo-negociaciones.webp` (medio 209; Carrie Allen, Unsplash `1H1LBKvD7ew`; 1200×800). Dos personas de traje intercambian un documento y una pluma: sin rostros, texto ilegible y sin apretón de manos (excluido por el cliente en D138). Elegida por Oscar (opción A entre tres simuladas en la tarjeta).
+- **Dónde:** reemplaza el panel navy de D159 como bloque Imagen `team-profile-pair__photo`, en Quiénes somos #101 y en el pattern. Mide 282×282 a 1440px y 16:9 en móvil, con borde de 8px y sin desplazamiento lateral.
+- **Hallazgo:** 14 imágenes de los patterns (¿Por qué confiar?, Nuestro enfoque, áreas y pasos de Metodología, Filosofía) apuntaban a `assets/img/…` del tema, que no existen en el servidor (desde D151 las fotos solo se suben a la Biblioteca); daban 404 si se insertaba el pattern. Las páginas no estaban afectadas.
+- **Corrección:**
+  - Los 14 pasan a `aaa_media_url()`.
+  - `aaa_media_url()` ahora, si no encuentra el título del adjunto (por ejemplo, retitulado "Equipo de negociaciones"), busca por el nombre real del archivo en `_wp_attached_file`.
+  - Verificado: las 59 imágenes de los 7 patterns responden 200 y todos los bloques son válidos.
+- `functions.php` y los patterns de Inicio, Metodología y Quiénes somos subidos; idénticos al repo.
+- **Commit:** los cambios están en el repo pero fuera del checkpoint `checkpoint-textos-definitivos-2026-10-13`; no tienen commit todavía.
+
+## Áreas de práctica (Inicio): título y contenido más arriba (D172, 2026-10-14)
+
+**Pedido (Oscar, con captura):** con los textos definitivos, al pasar el cursor el contenido de los tres paneles quedaba muy pegado abajo. Subir títulos y contenido sin cambiar el tamaño de los paneles.
+
+**Aplicado (`components.css`, desde 1024px):** la primera fila de la grilla interna del panel baja de 50% (D128) a 34%. Mediciones antes → después, con la lista desplegada:
+- **Título:** sube ~90px, de 315 a 224px desde el borde superior.
+- **Aire bajo la lista:** a 1280px pasa de 15px a 105px en "Derecho concursal" y de 80 a 171px en los otros dos; a 1920px pasa de 103 a 194px.
+
+**Sin cambios:** el tamaño de los paneles (540–630px de alto). Subido; idéntico al repo. Verificado en vivo con el cursor sobre el panel.
+
+## Logos por sector: primera tarjeta alineada (D173, 2026-10-14)
+
+**Pedido (Oscar, con captura):** en "Organizaciones que confían en nosotros" la primera tarjeta quedaba más alta que las demás.
+
+**Causa:** desde D170 la grilla es un Grupo nativo con layout "flow", y WordPress suma 24px de `margin-block-start` a cada hijo menos al primero. Es el mismo efecto ya corregido en los paneles de Áreas.
+
+**Aplicado:** `.sector-grid > .sector-card { margin-block: 0; }` en el bloque D170 de `components.css`. Subido; idéntico al repo.
+
+**Verificado:** misma altura de inicio para las tarjetas de cada fila a 1440px (3 por fila) y 768px (2 por fila); en móvil se apilan sin margen extra.
+
+## Pedidos del cliente: pestaña nueva, foto de Metodología, animaciones e isotipo (D174, 2026-10-15)
+
+**Pedido (Oscar, de parte del cliente):**
+1. "Nuestra plataforma" en el menú se abre en una pestaña nueva.
+2. En Metodología, la imagen de "Asesoría corporativa y litigios" pasa a ser la del banner de Inicio.
+3. Animaciones más intuitivas y modernas, sin recargar.
+4. El isotipo de los títulos se anima al entrar en la página o al hacer scroll, como el del menú.
+
+**Aplicado:**
+1. **`parts/header.html`:** el botón lleva `linkTarget: _blank` y `rel="noreferrer noopener"` (bloque válido). Verificado: `target="_blank"` en vivo.
+2. **Metodología #97 y pattern:** la tercera tarjeta de áreas usa `home/hero.webp` (foto del banner de Inicio; existe en el servidor), con alt "Equipo de AAA Estudio Legal trabajando en su oficina".
+3. **Animaciones**, eligiendo solo donde aporta, porque el sitio ya tiene revelado de tarjetas, deriva de fotos, cifras, carrusel y zoom al pasar el cursor en "¿Por qué confiar?" y Metodología:
+   - **`home-motion.js` (revealChapter):** las fotos editoriales (Nuestro enfoque, Transparencia, Origen, Filosofía, Trabaja con nosotros) pasan de un recorte del 3% casi imperceptible a un revelado tipo cortina de abajo hacia arriba (1.15s; 0.85s en móvil).
+   - **CSS (solo con mouse y sin "reducir movimiento"):** la flecha de los botones se desplaza 4px al pasar el cursor, y las fotos de equipos (Quiénes somos) hacen zoom 1.04 dentro de su marco.
+4. **Isotipo:**
+   - **`main.js`:** pone `.is-inview` (IntersectionObserver) en `.aaa-logo-inline` y `.origin-block__copy`.
+   - **CSS:** el isotipo arranca oculto y se revela con el keyframe `aaa-header-isotype-reveal` del encabezado. Aplica a Filosofía, "ser parte de [logo]", Origen y especialización y "Talento AAA".
+   - **`functions.php` (`aaa_logo_in_headings`):** ahora también procesa eyebrows (`.aaa-eyebrow`), así "Talento AAA" muestra el isotipo (1.9em) y el texto oculto sigue diciendo "AAA Estudio Legal" para lectores de pantalla.
+   - Sin JS se ve normal; con "reducir movimiento" no se anima.
+
+**Verificado en vivo:**
+- Cortina de la foto de Origen capturada en tres momentos; isotipo de "Talento AAA" revelado al llegar a la sección.
+- Sin desplazamiento lateral a 390 y 1440px en las 5 páginas; 0 caracteres de control en los archivos.
+- `components.css`, `main.js`, `home-motion.js`, `functions.php`, `parts/header.html` y `patterns/metodologia-full.php` subidos; idénticos al repo.
+
+## Fundido de fotos y preloader de entrada (D175, 2026-10-15)
+
+**Pedido (Oscar, de parte del cliente):**
+1. El revelado tipo cortina de las fotos (D174) se ve extraño: mejor un fundido, pero no tan lento que parezca que la imagen no termina de cargar.
+2. Un preloader muy corto y estético antes de cargar el sitio, con el logo completo del menú (isotipo + "Estudio Legal") y una animación distinta a la del encabezado, por ejemplo las A una tras otra y luego el texto.
+
+**Aplicado:**
+1. **`home-motion.js` (revealChapter):** la foto editorial entra con un fundido de opacidad 0→1 en 0.55s (0.45s en móvil), con curva `power2.out`, que llega casi entera en el primer tercio. Ya no hay recorte ni escala, porque la deriva de la foto ya anima la escala. El texto del capítulo entra 0.1s después.
+2. **Preloader:**
+   - **Cuándo aparece:** un script al inicio del `<head>` (`aaa_preloader_flag`) marca `<html class="aaa-preloading">` solo en la primera página de cada sesión de pestaña (`sessionStorage`) y si el usuario no pidió "reducir movimiento". En las páginas siguientes no vuelve a salir. Sin JS nunca aparece (el marcado lleva `hidden`).
+   - **Marcado (`aaa_preloader_markup`, en `wp_body_open`):** isotipo en línea con los trazos de `assets/img/brand/isotipo.svg`, separado en sus tres A. La A izquierda son los trazos 2 y 3 del archivo. Las otras dos comparten el trazo 1 y se separan con dos polígonos trazados por los huecos donde una pierna pasa sobre la otra; la tercera A es el resto (máscara inversa). Al lado va `wordmark-blanco.svg`, el mismo archivo del menú. Si algún día cambia la estructura del isotipo, el preloader lo anima completo como una sola pieza.
+   - **Animación (CSS, `components.css` § D175), ~0.95s en total:** las tres A suben desde la línea base una tras otra (0–0.48s); "Estudio Legal" entra de izquierda a derecha (0.28–0.6s); el telón azul se retira con un fundido (0.66–0.96s). No espera a que cargue nada: la página carga debajo.
+   - **Coordinación:** mientras el telón se retira, el isotipo del encabezado hace su revelado de siempre (retrasado 0.6s). Las entradas GSAP (Hero incluido) y el isotipo de los eyebrows esperan 0.6s para no animarse escondidos detrás. `main.js` retira el nodo al terminar.
+
+**Verificado:**
+- **Local:** la separación de las A, pintada en tres colores, da tres A completas sin cruces; además, tira de cuadros de la secuencia.
+- **En vivo (Inicio):** capturas reales de la recarga, que muestran las A completas, "Estudio Legal" entrando y el telón saliendo con el isotipo del encabezado empezando su revelado. Logo completo sin costuras en las uniones.
+- **Segunda página de la sesión** (Metodología): sin preloader.
+- **Foto de Transparencia:** entra con el fundido.
+- **"Talento AAA":** el isotipo sigue revelándose al llegar a la sección.
+- **Errores y desplazamiento:** 0 errores en consola; sin desplazamiento lateral (el preloader es fijo y no ocupa espacio en la página).
+- **Archivos subidos:** `functions.php`, `components.css`, `main.js` y `home-motion.js`, idénticos al repo; el servidor no tenía cambios ajenos antes de subir.
+
+**Nota:** si el diseñador entrega el logo oficial con otro isotipo, hay que recalcular los dos polígonos de `aaa_preloader_markup`. Si el archivo nuevo no tiene exactamente 3 trazos, el preloader cae solo al modo "isotipo completo"; si tiene 3 pero con otra forma, los cortes quedarían mal.
+
+## Fotos stock nuevas entregadas por Oscar (D176, 2026-10-15)
+
+**Pedido:** reemplazar imágenes con 8 fotos stock nuevas, nombradas según la sección (dos opciones para Volumen, Seguimiento y Cumplimiento), eligiendo las mejores, comprimidas.
+
+**Elegidas y aplicadas** (WebP, recortadas al formato de cada tarjeta, 32–181 KB; originales de 6–12 MB):
+- **Volumen con estructura** (Inicio, "¿Por qué confiar?"): pila de expedientes con biblioteca al fondo. Descartada: escritorio con lámpara (menos alusiva a "volumen"). Media 212.
+- **Seguimiento en tiempo real:** manos con reloj sobre el portátil con reportes; el reloj refuerza "tiempo real". Descartada: mano con lápiz digital, muy oscura. Media 213.
+- **Cumplimiento normativo:** mano firmando un documento. Descartada: escudo con candado digital, que la guía del documento excluye (candados y escudos). Media 214, título `aaa-confianza-cumplimiento-1` porque ya existía uno con el nombre anterior.
+- **Derecho concursal** (panel 01 de Inicio y tarjeta de Metodología): reunión con balanza de la justicia. Media 215.
+- **Recuperación de cartera y garantías** (panel 02 de Inicio y tarjeta de Metodología): reportes de crédito junto a un portátil. Media 216.
+
+**Cómo:** las fotos se redujeron a 2400 px (PowerShell/System.Drawing) y se codificaron a WebP en el navegador; se subieron a la Biblioteca con texto alternativo. En Inicio #82 y Metodología #97 se cambió solo el `src`/`id`/`alt` de esos bloques Imagen (0 bloques inválidos antes y después; ninguna otra edición entre la lectura y el guardado). Patterns `home-full.php` y `metodologia-full.php` actualizados (`aaa_media_url`) y subidos, idénticos al repo.
+
+**Pendiente de decisión de Oscar:** las fotos reemplazadas (`aaa-confianza-casos`, `-tiempo-real`, `-reportes-pantalla`, `aaa-area-concursal`, `aaa-area-normalizacion`) siguen en la Biblioteca; borrarlas es decisión suya. Nota: Recuperación de cartera muestra textos en inglés en las hojas ("Loan Comparison", "Budget") y el portátil de Seguimiento un titular en inglés; a tamaño de tarjeta casi no se leen.
+
+## Documento de SEO de Nayeliz aplicado al staging (D177, 2026-10-15)
+
+**Pedido (Oscar):** aplicar "AAA LEGAL SEO _ ACCIONES.docx" de Nayeliz y dar el estatus frente al backlog SEO + GEO (D149–D150).
+
+**Contenido del documento:** descripción canónica en 3 versiones (N09), revisión de slugs y anclas del sitio anterior (N05), encabezados ("No le veo sentido", es decir N08 sin cambios), 8 preguntas frecuentes (N10) y el texto de llms.txt (N13).
+
+**Aplicado:**
+- **Rank Math, módulos (T06):** se encendieron SEO local, Redirecciones y Monitor 404. LLMS Txt se encendió y se volvió a apagar, porque el archivo lo sirve el tema (ver abajo). Content AI y AI Visibility siguen encendidos; apagarlos depende de si se van a pagar.
+- **Entidad de la firma (T04), en Títulos y meta → SEO local:**
+  - Organización tipo LegalService, nombre "AAA Estudio Legal" y nombre alterno "Agudelo Abogados Asociados".
+  - Razón social (legalName) "Agudelo Abogados Asociados SAS" y año de fundación 2020.
+  - Descripción: la versión de 51 palabras de Nayeliz.
+  - Logo: isotipo cuadrado (medio 134).
+  - Correo, dirección D14 (Cali, Valle del Cauca, CO) y teléfono +57 317 655 1931.
+  - Página "Acerca de" = Quiénes somos y página de contacto = Contacto.
+  - Se quitaron los horarios genéricos de 9 a 17 que traía Rank Math, porque el cliente no los ha confirmado.
+  - En Meta social se agregaron LinkedIn e Instagram (sameAs).
+- **Schema por página (T05):**
+  - Probar "Ninguno" como tipo por defecto dejó Metodología y Trabaja sin ningún schema, así que se volvió a "Artículo".
+  - El filtro `aaa_schema_pages` (functions.php, `rank_math/json_ld`) quita Article y Person (autor) en las páginas.
+  - Metodología suma un Service por cada tarjeta de área y un FAQPage leído de los bloques Detalles. Si se editan las preguntas en la página, el schema se actualiza solo.
+  - Resultado: Inicio y Trabaja = WebPage; Quiénes somos = AboutPage; Contacto = ContactPage; Metodología = WebPage + 3 Service + FAQPage (8 preguntas). La ficha LegalService aparece en todas y ninguna lleva Article.
+- **Preguntas frecuentes (N10):**
+  - Sección nueva en Metodología, entre Transparencia y el cierre (página #97 y pattern), con las 8 preguntas tal cual las entregó Nayeliz.
+  - Usa bloques Detalles nativos, editables desde la página. CSS D177: título editorial a la izquierda (fijo en escritorio) y acordeón a la derecha.
+  - 0 bloques inválidos. Ancla `#preguntas-frecuentes`.
+- **llms.txt (N13/T16):** `aaa_llms_txt` sirve /llms.txt (200, texto plano) con el texto exacto de Nayeliz. Los enlaces salen de `home_url()`, así que tras migrar apuntan solos al dominio final.
+- **Anclas del sitio anterior (N05):** los `#` no llegan al servidor, así que no admiten un 301. Un script al inicio del `<head>` de Inicio redirige #lafirma y #equipo → /quienes-somos/, #comolohacemos → /metodologia/ y #contacto → /contacto/. #nuestrosclientes se queda en Inicio. Verificado: `/#comolohacemos` abre /metodologia/.
+
+**Por confirmar (Oscar / cliente):**
+- **H2 de las preguntas:** "Dudas comunes del acreedor." es un texto provisional mío (el documento no trae título); necesita aprobación.
+- **Revisión jurídica:** el backlog pide que un abogado de la firma valide las respuestas antes del lanzamiento.
+- **Slug de Metodología:** Nayeliz propone `/soluciones-juridicas/`. No se cambió: su propio llms.txt usa /metodologia. Si se aprueba, hay que actualizar el menú, el footer, los enlaces internos, el llms.txt y crear una redirección 301.
+- **Términos:** la descripción canónica y el llms.txt dicen "normalización de activos", mientras el sitio usa "Recuperación de cartera y garantías" (D161). Para la entidad conviene un solo término.
+- ~~**Ley 1116:** las preguntas usan "Ley 1116 de 2006"~~ **Resuelto (Oscar, 2026-10-15, D178): se usa "Ley 116" en el sitio y en toda la documentación.** Las preguntas frecuentes ya dicen "Ley 116".
+
+## Preguntas ocultas, Ley 116, término definitivo, imágenes para compartir, fuentes propias y caché (D178, 2026-10-15)
+
+**Pedido (Oscar):**
+- Ocultar las preguntas frecuentes, que aún no están aprobadas.
+- "Recuperación de cartera y garantías" como término definitivo.
+- La ley es "Ley 116", en toda la documentación.
+- Imagen y metadatos para compartir en Inicio y Contacto.
+- Fuentes propias en lugar de Google Fonts.
+- Instalar y configurar un plugin de caché con cuidado.
+- Apagar Content AI y AI Visibility de Rank Math.
+
+**Aplicado:**
+- **Preguntas frecuentes, ocultas (no borradas):**
+  - Se usó la opción nativa de WordPress 7.1 para ocultar bloques: `metadata.blockVisibility: false` en la sección, con el nombre "Preguntas frecuentes (pendiente de aprobación)" (página #97 y pattern).
+  - No se muestran en la página, y el filtro de schema ignora bloques ocultos: ya no sale el FAQPage.
+  - Para publicarlas: en el editor de Metodología, Vista de lista → esa sección → menú ⋮ → "Mostrar".
+  - Sus respuestas ya dicen "Ley 116".
+- **Ley 116:**
+  - Las 5 menciones de las preguntas (página y pattern) pasaron a "Ley 116".
+  - En el backlog (Excel), la decisión 1 quedó "Resuelta" con su resolución, y la tarea N01 dice usar "Ley 116".
+  - En la guía de Nayeliz (Word) se ajustaron la keyword de ejemplo, el ejemplo de cita y la decisión, que figura como resuelta.
+  - El zip de entrega (`seo/`) se rearmó; Excel y Word se verificaron abriéndolos.
+  - En este archivo, las notas que lo dejaban pendiente quedaron como resueltas.
+  - No se tocaron las citas textuales del brief del cliente ("1116/2006") en `content/` y en la Sesión 01, porque reproducen lo que dice ese documento.
+- **"Recuperación de cartera y garantías":** se usa en la descripción de la firma (Rank Math, SEO local), el llms.txt, las palabras clave de Metodología, la plantilla del blog (`templates/home.html`) y la guía de Nayeliz. Se conserva la nota de Metodología "En el sector financiero, normalización de activos.", texto del cliente que explica la equivalencia.
+- **Imágenes para compartir (1200×630, JPEG):**
+  - `aaa-og-inicio.jpg` (medio 230, 91 KB): foto del banner con velo azul de marca, logo completo y la frase del H1 de Inicio.
+  - `aaa-og-contacto.jpg` (medio 231, 58 KB): reunión con manos conversando, sin rostros, con "Cuéntenos el contexto de su organización."
+  - Inicio, título para compartir: "AAA Estudio Legal | Defensa estratégica del acreedor". Descripción: la de Nayeliz, con "su empresa" → "su organización".
+  - Contacto, título: "Solicite su evaluación jurídica | AAA Estudio Legal". Descripción tomada de su H1 y de la descripción canónica.
+  - X (Twitter) usa los mismos datos; antes la descripción de Inicio para X decía "acreedores y empresas".
+  - La imagen de Inicio también es la imagen por defecto de Rank Math para páginas sin imagen propia.
+- **Fuentes propias (T10):**
+  - Krub 400–700, Libre Caslon Display y Libre Caslon Text itálica: los .woff2 latinos de Google (licencia OFL, ~99 KB).
+  - Ubicación: en el repo, en `assets/fonts/`; en el staging, en la Biblioteca de fuentes de WordPress (`/wp-content/uploads/fonts/`, subidas por la API REST nativa, sin plugin).
+  - `functions.php` (`aaa_font_faces`, `aaa_print_fonts`, `aaa_editor_fonts`) imprime las @font-face (font-display: swap), precarga las 3 del primer pantallazo y las agrega al editor. Se quitó Google Fonts.
+  - Verificado como visitante: las 6 fuentes cargan y no hay ninguna petición a fonts.googleapis.com.
+- **Rank Math:** Content AI y AI Visibility, apagados.
+- **Caché (LiteSpeed Cache 7.9.1):** ya estaba instalado e inactivo; WP Fastest Cache sigue inactivo.
+  - Caché de página para visitantes; sin caché para usuarios con sesión ni para la API REST.
+  - TTL público y de portada: 600 s.
+  - Minificación de CSS y JS, sin combinar ni diferir. Se quitan los emojis de WordPress.
+  - Sin carga diferida de imágenes, optimización de imágenes, QUIC.cloud, caché de objetos ni crawler.
+  - Medición: Inicio pasa de ~420 ms a ~90 ms.
+  - **CDN de Hostinger:** guarda el HTML durante el TTL de LiteSpeed (comprobado con 60 s: pasa a EXPIRED a los 60 s) y **no se vacía con las purgas del plugin**, ni con "Purgar todo". Por eso el TTL quedó en 10 minutos: una edición la ve un visitante en 10 minutos como máximo; quien tiene sesión la ve al instante.
+  - `functions.php` también purga todo al guardar contenido o metadatos de Rank Math, para la caché del servidor.
+  - Verificado como visitante en Inicio, Metodología y Trabaja: formularios inicializados, GSAP y línea de tiempo funcionando, 0 errores en consola y sin desplazamiento lateral.
+
+**Pendiente (Oscar):**
+- **Purgar una vez el CDN desde hPanel** (Sitio web → Rendimiento → CDN → Purgar caché). Las copias de las 5 páginas guardadas antes de bajar el TTL tienen 7 días de vida en el CDN; hoy son el contenido actual, pero una edición en esas páginas no se vería hasta purgarlas.
+- Vaciar del todo los plugins inactivos (WP Fastest Cache y los 3 de Hostinger) cuando lo decidas; Claude no borra de forma definitiva.
+- La guía de Nayeliz también existe como Claude Doc en claude.ai (D149); esa copia no se actualizó.
+
+## Backlog SEO al día (Drive y repo) y checkpoint del MVP (D179, 2026-10-15)
+
+**Pedido (Oscar):** actualizar el backlog en nuestra documentación y en el archivo compartido de Google Drive que también revisa Nayeliz, y crear un checkpoint antes de subir el MVP al servidor del cliente. Oscar ya purgó el CDN de Hostinger.
+
+**Backlog:**
+- **Versión maestra:** el archivo de Drive (`Backlog-SEO-GEO-AAA.xlsx`, compartido).
+  - Nayeliz ya había marcado ahí como hechas N01, N02, N03, N04, N05, N07, N09, N10 y N13, con N06 en curso.
+  - Ya no tiene la tarea N17 (página por vacante), así que esa versión manda.
+  - Se editó en Hojas de cálculo sin tocar su trabajo, y su filtro de Responsable ("Nayeliz" y "Oscar + Nayeliz") quedó como estaba.
+- **Tareas de Oscar:**
+  - T04, T05, T06, T07, T10 y T16 → Hecho (2026-10-15) con notas.
+  - T11 → En curso: falta borrar los plugins inactivos y Duplicator tras la migración.
+- **Tareas de Nayeliz:**
+  - Notas en N01, N04, N05, N07, N09 y N13.
+  - N08 → Hecho: ella no propone cambios a los encabezados.
+  - N10 → Bloqueado: preguntas ocultas hasta la aprobación de la firma.
+- **Decisiones:** la 1 (Ley 116) y la 7 (LiteSpeed Cache) quedan resueltas. La 2 (nombre) y la 8 (datos del cliente) llevan avances.
+- **Resumen:** 47% del backlog hecho (antes 31%) y 63% de las urgentes (P0).
+- **Repo:** la versión de Drive se descargó, se verificó en Excel y reemplazó a `seo/Backlog-SEO-GEO-AAA.xlsx`. El zip `seo/SEO-AAA-Backlog-y-Guia-Nayeliz.zip` se rearmó con la guía D178.
+
+**Checkpoint:** commit de D171–D179 y tag `checkpoint-mvp-final-2026-10-15` en `main`, local y sin push. Las ramas `product-lead-*` y `origin/main` no tenían commits ausentes en `main`.
+
+**Para subir al servidor del cliente (revisar al migrar):**
+- **Fuentes:** están en la Biblioteca de fuentes (`wp-content/uploads/fonts/`), que viaja con las subidas. Si el tema se sube desde el repo, también están en `assets/fonts/`.
+- **Caché:** LiteSpeed Cache solo cachea si el servidor es LiteSpeed. El TTL de 10 min responde al CDN de Hostinger; en otro hosting se puede revisar. Purgar todo después de migrar.
+- **URLs:** el llms.txt y la redirección de anclas toman solos el dominio. Las URLs del staging en la base de datos (SEO local de Rank Math, imágenes para compartir) se reemplazan con la búsqueda y reemplazo de la migración.
+- **Indexación:** al lanzar, desmarcar "Disuade a los motores de búsqueda" y revisar robots.txt (T15, T17).
+- **Pendiente:** las preguntas frecuentes siguen ocultas en Metodología hasta su aprobación.

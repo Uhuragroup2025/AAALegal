@@ -19,6 +19,22 @@
 
   var prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+  // --- Preloader de entrada (D175) ---
+  // Lo muestra el CSS cuando el <head> marcó `aaa-preloading` (primera página
+  // de la sesión). Aquí solo se retira del DOM al terminar; lo que ya está a la
+  // vista espera `introDelay` para no animarse escondido detrás.
+  var introDelay = document.documentElement.classList.contains('aaa-preloading') ? 600 : 0;
+  var preloader = document.querySelector('.aaa-preloader');
+  if (preloader) {
+    var removePreloader = function () {
+      if (preloader.parentNode) preloader.parentNode.removeChild(preloader);
+    };
+    preloader.addEventListener('animationend', function (event) {
+      if (event.animationName === 'aaa-preloader-out') removePreloader();
+    });
+    window.setTimeout(removePreloader, introDelay ? 2500 : 0);
+  }
+
   // --- Revelado en scroll (.aaa-reveal) ---
   var revealEls = document.querySelectorAll('.aaa-reveal');
   if (revealEls.length && 'IntersectionObserver' in window && !prefersReducedMotion) {
@@ -79,6 +95,28 @@
       }, { threshold: 0.55 });
       steps.forEach(function (step) { stepObserver.observe(step); });
     });
+  }
+
+  // --- Isotipo en títulos y eyebrows (D174) ---
+  // Al entrar en pantalla, el isotipo se revela como el del encabezado al
+  // cargar (keyframes aaa-header-isotype-reveal). Sin IntersectionObserver
+  // queda visible de una vez; con movimiento reducido el CSS no lo oculta.
+  var isotypes = document.querySelectorAll('.aaa-logo-inline, .origin-block__copy');
+  if (isotypes.length) {
+    if ('IntersectionObserver' in window && !prefersReducedMotion) {
+      var isotypeObserver = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add('is-inview');
+          isotypeObserver.unobserve(entry.target);
+        });
+      }, { threshold: 0.4, rootMargin: '0px 0px -8% 0px' });
+      window.setTimeout(function () {
+        isotypes.forEach(function (element) { isotypeObserver.observe(element); });
+      }, introDelay);
+    } else {
+      isotypes.forEach(function (element) { element.classList.add('is-inview'); });
+    }
   }
 
   // --- Sectores (Home): carrusel continuo de logos por tarjeta (D119) ---

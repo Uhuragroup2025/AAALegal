@@ -45,25 +45,102 @@ function aaa_theme_setup() {
 add_action( 'after_setup_theme', 'aaa_theme_setup' );
 
 /**
- * Encolado de fuentes y CSS de componentes.
+ * D178 — Fuentes propias (backlog SEO T10): ya no se piden a Google Fonts
+ * (petición externa que bloqueaba el render y enviaba la IP del visitante a
+ * Google). Son los mismos .woff2 de Google, solo el subconjunto latino
+ * (español completo), con licencia SIL OFL. theme.json sigue declarando
+ * solo las familias; las @font-face salen de aquí.
  *
- * Fuentes vía Google Fonts (mismo mecanismo que usa hoy prototype/*.html —
- * README.md § 7 registra el auto-hospedaje como mejora futura, no como
- * bloqueante de Gate 1). theme.json solo declara los fontFamily/fallback;
- * no hay archivos .woff2 reales en el repo todavía, así que fontFace no se usa.
+ * Los archivos se buscan primero en `assets/fonts/` del tema (repo y
+ * entornos locales) y, si no están, en la Biblioteca de fuentes de WordPress
+ * (`wp-content/fonts/`), que es donde se subieron en el staging: el editor de
+ * archivos de WordPress no permite subir binarios al tema.
+ */
+function aaa_font_faces() {
+	static $faces = null;
+	if ( null !== $faces ) {
+		return $faces;
+	}
+	$fonts   = array(
+		array( 'Krub', 'normal', 400, 'krub-400-latin.woff2', true ),
+		array( 'Krub', 'normal', 500, 'krub-500-latin.woff2', false ),
+		array( 'Krub', 'normal', 600, 'krub-600-latin.woff2', false ),
+		array( 'Krub', 'normal', 700, 'krub-700-latin.woff2', false ),
+		array( 'Libre Caslon Display', 'normal', 400, 'libre-caslon-display-400-latin.woff2', true ),
+		array( 'Libre Caslon Text', 'italic', 400, 'libre-caslon-text-400-italic-latin.woff2', true ),
+	);
+	$library = function_exists( 'wp_get_font_dir' ) ? wp_get_font_dir() : null;
+	$faces   = array();
+	foreach ( $fonts as $font ) {
+		if ( file_exists( get_theme_file_path( 'assets/fonts/' . $font[3] ) ) ) {
+			$url = get_theme_file_uri( 'assets/fonts/' . $font[3] );
+		} elseif ( $library && file_exists( trailingslashit( $library['path'] ) . $font[3] ) ) {
+			$url = trailingslashit( $library['url'] ) . $font[3];
+		} else {
+			continue;
+		}
+		$faces[] = array(
+			'family'  => $font[0],
+			'style'   => $font[1],
+			'weight'  => $font[2],
+			'url'     => $url,
+			'preload' => $font[4],
+		);
+	}
+	return $faces;
+}
+
+function aaa_font_face_css() {
+	$range = 'U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD';
+	$css   = '';
+	foreach ( aaa_font_faces() as $face ) {
+		$css .= sprintf(
+			"@font-face{font-family:'%s';font-style:%s;font-weight:%d;font-display:swap;src:url('%s') format('woff2');unicode-range:%s;}",
+			$face['family'],
+			$face['style'],
+			$face['weight'],
+			esc_url( $face['url'] ),
+			$range
+		);
+	}
+	return $css;
+}
+
+/**
+ * Las tres fuentes del primer pantallazo (cuerpo, título y su itálica) se
+ * precargan; el resto se pide cuando el CSS las usa.
+ */
+function aaa_print_fonts() {
+	foreach ( aaa_font_faces() as $face ) {
+		if ( $face['preload'] ) {
+			printf( '<link rel="preload" href="%s" as="font" type="font/woff2" crossorigin />' . "\n", esc_url( $face['url'] ) );
+		}
+	}
+	$css = aaa_font_face_css();
+	if ( $css ) {
+		echo '<style id="aaa-fonts">' . $css . "</style>\n"; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- CSS armado arriba con URLs escapadas.
+	}
+}
+add_action( 'wp_head', 'aaa_print_fonts', 2 );
+
+// Las mismas fuentes dentro del editor de bloques (su vista va en un iframe).
+function aaa_editor_fonts( $settings ) {
+	$css = aaa_font_face_css();
+	if ( $css ) {
+		$settings['styles'][] = array( 'css' => $css );
+	}
+	return $settings;
+}
+add_filter( 'block_editor_settings_all', 'aaa_editor_fonts' );
+
+/**
+ * Encolado del CSS de componentes y los scripts.
  */
 function aaa_theme_assets() {
 	wp_enqueue_style(
-		'aaa-google-fonts',
-		'https://fonts.googleapis.com/css2?family=Krub:wght@400;500;600;700&family=Libre+Caslon+Display&family=Libre+Caslon+Text:ital@1&display=swap',
-		array(),
-		null
-	);
-
-	wp_enqueue_style(
 		'aaa-components',
 		get_theme_file_uri( 'assets/css/components.css' ),
-		array( 'aaa-google-fonts' ),
+		array(),
 		aaa_asset_version( 'assets/css/components.css' )
 	);
 
@@ -168,6 +245,17 @@ function aaa_media_url( $filename ) {
 			$name
 		)
 	);
+	// D171: si el título se cambió en la Biblioteca (p. ej. "Equipo de
+	// negociaciones"), se busca por el nombre real del archivo subido.
+	if ( ! $attachment_id ) {
+		$attachment_id = $wpdb->get_var(
+			$wpdb->prepare(
+				"SELECT post_id FROM {$wpdb->postmeta} WHERE meta_key = '_wp_attached_file' AND ( meta_value = %s OR meta_value LIKE %s ) LIMIT 1",
+				$filename,
+				'%/' . $wpdb->esc_like( $filename )
+			)
+		);
+	}
 	$url                   = $attachment_id ? wp_get_attachment_url( (int) $attachment_id ) : '';
 	$cache[ $filename ]    = $url;
 	return $url;
@@ -428,6 +516,241 @@ function aaa_brand_favicon() {
 add_action( 'wp_head', 'aaa_brand_favicon' );
 
 /**
+ * D175 — Preloader de entrada: el logo completo del encabezado (isotipo +
+ * "Estudio Legal") sobre azul, en menos de un segundo y solo en la primera
+ * página de cada sesión. Es estético: no espera a que cargue nada (la página
+ * carga debajo) y toda la animación es CSS (components.css § D175).
+ *
+ * Este script, lo primero del <head>, decide si se muestra: marca <html> con
+ * `aaa-preloading` solo si es la primera página de la sesión y el usuario no
+ * pidió movimiento reducido. Sin JS nunca aparece (el marcado lleva `hidden`).
+ */
+function aaa_preloader_flag() {
+	echo "<script>(function(){try{if(sessionStorage.getItem('aaa-intro')||window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;sessionStorage.setItem('aaa-intro','1');document.documentElement.classList.add('aaa-preloading');}catch(e){}})();</script>\n";
+}
+add_action( 'wp_head', 'aaa_preloader_flag', 1 );
+
+/**
+ * Marcado del preloader. El isotipo va en línea (no como <img>) para animar
+ * cada A por separado, con los trazos del propio isotipo.svg: la A izquierda
+ * son sus trazos 2 y 3, y las otras dos comparten el trazo 1. Los polígonos
+ * (coordenadas del viewBox del archivo) separan esas dos por los huecos donde
+ * una pierna pasa sobre la otra; la tercera A es el resto (máscara inversa).
+ * Si el archivo cambia de estructura, el isotipo entra completo de una vez.
+ */
+function aaa_preloader_markup() {
+	$svg = file_get_contents( get_theme_file_path( 'assets/img/brand/isotipo.svg' ) );
+	if ( ! $svg || ! preg_match( '/viewBox="([^"]+)"/', $svg, $view ) || ! preg_match_all( '/<path[^>]*\sd="([^"]+)"/', $svg, $paths ) ) {
+		return;
+	}
+	$fill = preg_match( '/fill="(#[0-9A-Fa-f]{3,6})"/', $svg, $color ) ? $color[1] : '#DCA97E';
+	$d    = array_map( 'esc_attr', $paths[1] );
+
+	if ( 3 === count( $d ) ) {
+		$middle_a   = '1250,200 1585.7,200 1460,560 1397,625 1397,660 1250,660';
+		$middle_leg = '1531,660 1531,540 1541.3,490 1560,440 1600,440 1650,583 1660,625 1660,660';
+		$mark = sprintf(
+			'<defs><clipPath id="aaa-preloader-a2"><polygon points="%1$s"/><polygon points="%2$s"/></clipPath>' .
+			'<mask id="aaa-preloader-a3" maskUnits="userSpaceOnUse" x="1100" y="150" width="750" height="550"><rect x="1100" y="150" width="750" height="550" fill="#fff"/><polygon points="%1$s" fill="#000"/><polygon points="%2$s" fill="#000"/></mask></defs>' .
+			'<g class="aaa-preloader__a aaa-preloader__a--1"><path d="%3$s"/><path d="%4$s"/></g>' .
+			'<g class="aaa-preloader__a aaa-preloader__a--2"><path clip-path="url(#aaa-preloader-a2)" d="%5$s"/></g>' .
+			'<g class="aaa-preloader__a aaa-preloader__a--3"><path mask="url(#aaa-preloader-a3)" d="%5$s"/></g>',
+			$middle_a,
+			$middle_leg,
+			$d[1],
+			$d[2],
+			$d[0]
+		);
+	} else {
+		$mark = '<g class="aaa-preloader__a aaa-preloader__a--1"><path d="' . implode( '"/><path d="', $d ) . '"/></g>';
+	}
+
+	printf(
+		'<div class="aaa-preloader" aria-hidden="true" hidden><div class="aaa-preloader__logo">' .
+			'<svg class="aaa-preloader__mark" viewBox="%1$s" width="676" height="425" fill="%2$s" focusable="false">%3$s</svg>' .
+			'<img class="aaa-preloader__wordmark" src="%4$s" alt="" width="623" height="389" />' .
+		'</div></div>' . "\n",
+		esc_attr( $view[1] ),
+		esc_attr( $fill ),
+		$mark,
+		esc_url( aaa_brand_url( 'wordmark-blanco.svg' ) )
+	);
+}
+add_action( 'wp_body_open', 'aaa_preloader_markup' );
+
+/**
+ * D177 — Schema de las páginas (backlog SEO T05 y N10). Rank Math marca cada
+ * página como "Article" con un autor, como si fuera una entrada del blog; si
+ * se cambia el tipo por defecto a "Ninguno", deja Metodología y Trabaja sin
+ * ningún schema, ni siquiera la ficha de la firma. Por eso se conserva su
+ * salida y aquí, solo en páginas:
+ * - se quitan Article y Person (autor);
+ * - Metodología suma un Service por cada tarjeta de área (`.service-card--editorial`);
+ * - toda página con preguntas frecuentes (bloques Detalles dentro de un grupo
+ *   `.aaa-faq`) suma su FAQPage, leída del contenido: lo que se edite en la
+ *   página queda en el schema sin tocar código.
+ */
+function aaa_page_schema_parts( $blocks, &$faq, &$services, $in_faq = false, $in_service = false ) {
+	foreach ( $blocks as $block ) {
+		// D178: un bloque oculto desde el editor ("Ocultar") no entra al schema.
+		if ( false === ( $block['attrs']['metadata']['blockVisibility'] ?? true ) ) {
+			continue;
+		}
+		$class      = $block['attrs']['className'] ?? '';
+		$block_faq  = $in_faq || false !== strpos( $class, 'aaa-faq' );
+		$block_serv = $in_service || false !== strpos( $class, 'service-card--editorial' );
+		$name       = $block['blockName'] ?? '';
+		if ( $block_faq && 'core/details' === $name ) {
+			$question = preg_match( '#<summary[^>]*>(.*?)</summary>#s', $block['innerHTML'], $match ) ? $match[1] : '';
+			$answer   = implode( ' ', array_map( 'render_block', $block['innerBlocks'] ) );
+			$question = trim( html_entity_decode( wp_strip_all_tags( $question ), ENT_QUOTES, 'UTF-8' ) );
+			$answer   = trim( preg_replace( '/\s+/', ' ', html_entity_decode( wp_strip_all_tags( $answer ), ENT_QUOTES, 'UTF-8' ) ) );
+			if ( $question && $answer ) {
+				$faq[] = array(
+					'@type'          => 'Question',
+					'name'           => $question,
+					'acceptedAnswer' => array( '@type' => 'Answer', 'text' => $answer ),
+				);
+			}
+			continue;
+		}
+		if ( $block_serv && 'core/heading' === $name ) {
+			$services[] = trim( html_entity_decode( wp_strip_all_tags( $block['innerHTML'] ), ENT_QUOTES, 'UTF-8' ) );
+			continue;
+		}
+		if ( ! empty( $block['innerBlocks'] ) ) {
+			aaa_page_schema_parts( $block['innerBlocks'], $faq, $services, $block_faq, $block_serv );
+		}
+	}
+}
+
+function aaa_schema_pages( $data ) {
+	if ( ! is_page() ) {
+		return $data;
+	}
+	foreach ( $data as $key => $entity ) {
+		$types = (array) ( $entity['@type'] ?? array() );
+		if ( array_intersect( $types, array( 'Article', 'BlogPosting', 'NewsArticle', 'Person' ) ) ) {
+			unset( $data[ $key ] );
+		} elseif ( is_array( $entity ) && isset( $entity['author'] ) ) {
+			unset( $data[ $key ]['author'] );
+		}
+	}
+
+	$post     = get_post();
+	$url      = get_permalink( $post );
+	$faq      = array();
+	$services = array();
+	aaa_page_schema_parts( parse_blocks( $post->post_content ), $faq, $services );
+
+	foreach ( array_values( array_unique( array_filter( $services ) ) ) as $index => $service ) {
+		$data[ 'aaaService' . $index ] = array(
+			'@type'       => 'Service',
+			'@id'         => $url . '#servicio-' . ( $index + 1 ),
+			'name'        => $service,
+			'serviceType' => $service,
+			'url'         => $url,
+			'provider'    => array( '@id' => home_url( '/#organization' ) ),
+			'areaServed'  => array( '@type' => 'Country', 'name' => 'Colombia' ),
+		);
+	}
+	if ( $faq ) {
+		$data['aaaFAQPage'] = array(
+			'@type'      => 'FAQPage',
+			'@id'        => $url . '#preguntas-frecuentes',
+			'mainEntity' => $faq,
+		);
+	}
+	return $data;
+}
+add_filter( 'rank_math/json_ld', 'aaa_schema_pages', 999 );
+
+/**
+ * D177 — /llms.txt con el texto entregado por Nayeliz (backlog N13/T16). Lo
+ * sirve el tema y no el módulo de Rank Math, que arma su propio encabezado y
+ * toma descripciones automáticas. Los enlaces salen de home_url(), así que al
+ * migrar al dominio final apuntan solos a él. Si cambia el slug de una página,
+ * se actualiza aquí.
+ */
+function aaa_llms_txt() {
+	$path = trim( (string) wp_parse_url( $_SERVER['REQUEST_URI'] ?? '', PHP_URL_PATH ), '/' );
+	if ( 'llms.txt' !== $path ) {
+		return;
+	}
+	$lines = array(
+		'# AAA Estudio Legal - Insolvencia, recuperación de cartera y asesoría corporativa, bajo un mismo método.',
+		'',
+		'> AAA Estudio Legal es una firma colombiana especializada en la protección del crédito y la defensa del acreedor. Integra criterio jurídico, gestión operativa y tecnología para atender asuntos en derecho concursal, insolvencia, recuperación de cartera y garantías, litigios corporativos y gestión del riesgo legal y comercial en organizaciones.',
+		'',
+		'## Páginas clave del sitio web',
+		'',
+		'- [Página de inicio](' . home_url( '/' ) . '): Responde a la presentación general de la firma, la metodología integradora y la visión global de servicios de protección del crédito.',
+		'- [Soluciones y metodología](' . home_url( '/metodologia/' ) . '): Responde a los detalles técnicos de las áreas de práctica: derecho concursal, recuperación de cartera y garantías, asesoría corporativa y litigios.',
+		'- [Equipo / Quiénes somos](' . home_url( '/quienes-somos/' ) . '): Responde a la trayectoria, origen y especialización, equipos, filosofía.',
+		'- [Contacto](' . home_url( '/contacto/' ) . '): Responde a la página de contacto, canales directos de atención y formulario de solicitud evaluación jurídica.',
+	);
+	status_header( 200 );
+	header( 'Content-Type: text/plain; charset=utf-8' );
+	echo implode( "\n", $lines ) . "\n"; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- texto plano fijo.
+	exit;
+}
+add_action( 'init', 'aaa_llms_txt', 0 );
+
+/**
+ * D177 — El sitio anterior (agudeloabogados.com) era de una sola página con
+ * anclas. Los fragmentos (#…) no llegan al servidor, así que no admiten una
+ * redirección 301: este script, lo primero del <head> de Inicio, lleva cada
+ * ancla vieja a su página nueva antes de pintar nada (documento de SEO de
+ * Nayeliz). #nuestrosclientes se queda en Inicio.
+ */
+function aaa_legacy_hash_redirect() {
+	if ( ! is_front_page() ) {
+		return;
+	}
+	$map = array(
+		'lafirma'       => home_url( '/quienes-somos/' ),
+		'equipo'        => home_url( '/quienes-somos/' ),
+		'comolohacemos' => home_url( '/metodologia/' ),
+		'contacto'      => home_url( '/contacto/' ),
+	);
+	printf(
+		"<script>(function(m){var h=window.location.hash.slice(1).toLowerCase();if(h&&m[h])window.location.replace(m[h]);})(%s);</script>\n",
+		wp_json_encode( $map )
+	);
+}
+add_action( 'wp_head', 'aaa_legacy_hash_redirect', 0 );
+
+/**
+ * D178 — Caché (LiteSpeed Cache). El CDN de Hostinger guarda el HTML que
+ * LiteSpeed marca como cacheable, pero solo se vacía con "Purgar todo": la
+ * purga por página que LiteSpeed hace al guardar no le llega, y el CDN
+ * seguiría sirviendo la versión vieja. Como el sitio tiene pocas páginas, cada
+ * guardado de contenido (páginas, entradas, plantillas, menús, estilos,
+ * formularios) y cada cambio de metadatos SEO de Rank Math vacía todo.
+ * Sin el plugin activo, la acción no hace nada.
+ */
+function aaa_purge_all_cache( $post_id = 0 ) {
+	static $done = false;
+	if ( $done ) {
+		return;
+	}
+	if ( $post_id && ( wp_is_post_revision( $post_id ) || wp_is_post_autosave( $post_id ) || 'attachment' === get_post_type( $post_id ) ) ) {
+		return;
+	}
+	$done = true;
+	do_action( 'litespeed_purge_all' );
+}
+add_action( 'save_post', 'aaa_purge_all_cache', 99 );
+
+function aaa_purge_on_seo_meta( $meta_id, $post_id, $meta_key ) {
+	if ( 0 === strpos( (string) $meta_key, 'rank_math_' ) ) {
+		aaa_purge_all_cache( $post_id );
+	}
+}
+add_action( 'added_post_meta', 'aaa_purge_on_seo_meta', 10, 3 );
+add_action( 'updated_post_meta', 'aaa_purge_on_seo_meta', 10, 3 );
+
+/**
  * El bloque core/image siempre pone su `className` en el <figure> que envuelve
  * la foto — el editor no ofrece forma de clasificar el <img> interno
  * directamente. El prototipo escribe clases como `hero-shell__img`,
@@ -550,7 +873,10 @@ add_filter( 'rest_endpoints', 'aaa_hide_users_endpoint' );
  * etiquetas, nunca atributos.
  */
 function aaa_logo_in_headings( $block_content, $block ) {
-	if ( 'core/heading' !== ( $block['blockName'] ?? '' ) || false === strpos( $block_content, 'AAA' ) ) {
+	$name = $block['blockName'] ?? '';
+	// D174: también los eyebrows ("Talento AAA"), que son título de sección.
+	$is_eyebrow = 'core/paragraph' === $name && false !== strpos( $block['attrs']['className'] ?? '', 'aaa-eyebrow' );
+	if ( ( 'core/heading' !== $name && ! $is_eyebrow ) || false === strpos( $block_content, 'AAA' ) ) {
 		return $block_content;
 	}
 	$mark = '<span class="aaa-logo-inline"><span class="aaa-logo-inline__text">AAA Estudio Legal</span></span>';

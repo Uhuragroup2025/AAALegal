@@ -24,7 +24,7 @@ Ver detalle completo de la síntesis en [PROJECT.md](PROJECT.md), preguntas abie
 - **Hosting recomendado:** Hostinger (plan WordPress CMS).
 - **Traducción:** Polylang (ES nativo, EN automático).
 - **Analítica:** GA4 + GTM + Microsoft Clarity (Decisión D20, vía GTM, sin plugin nuevo).
-- **Marco técnico (candidato en C1, confirmado como decisión final por 03A — Arquitectura WordPress, Decisión D110, 2026-09-07):** block theme propio + Gutenberg nativo + `theme.json` (traducido de `prototype/css/tokens.css`) + patterns/template parts + core blocks primero + JS mínimo + CSS por tokens + plugins mínimos (Polylang, Contact Form 7, Rank Math — sin ACF ni caché/seguridad en esta fase). Ver `WORDPRESS-SETUP.md` y `wp-content/themes/aaa-estudio-legal/`.
+- **Marco técnico (candidato en C1, confirmado como decisión final por 03A — Arquitectura WordPress, Decisión D110, 2026-09-07):** block theme propio + Gutenberg nativo + `theme.json` (traducido de `prototype/css/tokens.css`) + patterns/template parts + core blocks primero + JS mínimo + CSS por tokens + plugins mínimos (Polylang, Contact Form 7, Rank Math — sin ACF ni caché/seguridad en esta fase; la caché se resolvió después con LiteSpeed Cache, Decisión D178, 2026-10-15). Ver `WORDPRESS-SETUP.md` y `wp-content/themes/aaa-estudio-legal/`.
 
 ## Prohibiciones
 

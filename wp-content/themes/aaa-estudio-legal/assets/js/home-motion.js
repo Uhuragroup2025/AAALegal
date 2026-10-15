@@ -196,14 +196,17 @@
       onComplete: function () {
         chapter.dataset.motionPlayed = 'true';
         if (copy.length) gsap.set(copy, { clearProps: 'opacity,transform' });
-        if (mediaShell) gsap.set(mediaShell, { clearProps: 'opacity,clipPath' });
+        if (mediaShell) gsap.set(mediaShell, { clearProps: 'opacity' });
       }
     });
 
     if (mediaShell) {
+      // D175: fundido corto. La cortina de D174 se leía como una foto que aún
+      // no termina de cargar; este llega casi entero en el primer tercio. Solo
+      // opacidad: la deriva (addMediaDrift) ya anima la escala de la misma foto.
       timeline.fromTo(mediaShell,
-        { opacity: 0.72, clipPath: isMobile ? 'inset(2% 0 2% 0)' : 'inset(3% 0 3% 0)' },
-        { opacity: 1, clipPath: 'inset(0% 0 0% 0)', duration: isMobile ? 0.72 : 0.92 },
+        { opacity: 0 },
+        { opacity: 1, duration: isMobile ? 0.45 : 0.55, ease: 'power2.out' },
         0
       );
     }
@@ -212,7 +215,7 @@
       timeline.fromTo(copy,
         { opacity: 0.58, y: isMobile ? 9 : 13 },
         { opacity: 1, y: 0, duration: isMobile ? 0.56 : 0.68, stagger: isMobile ? 0.045 : 0.065 },
-        mediaShell ? 0.18 : 0
+        mediaShell ? 0.1 : 0
       );
     }
 
@@ -349,8 +352,13 @@
     });
   };
 
+  // D175: en la primera página de la sesión el preloader cubre la pantalla
+  // ~0,9 s; las entradas de lo que ya está a la vista (Hero incluido) se
+  // preparan debajo y arrancan cuando se está retirando, no a ciegas detrás.
+  var introDelay = document.documentElement.classList.contains('aaa-preloading') ? 0.6 : 0;
+
   var media = gsap.matchMedia();
-  media.add({
+  var setupMotion = function () { media.add({
     isDesktop: '(min-width: 1024px)',
     isMobile: '(max-width: 1023px)',
     reduceMotion: '(prefers-reduced-motion: reduce)'
@@ -377,7 +385,10 @@
     });
 
     if (isHome && conditions.isDesktop) addHeroParallax(hero);
-  });
+  }); };
+
+  if (introDelay) gsap.delayedCall(introDelay, setupMotion);
+  else setupMotion();
 
   window.addEventListener('load', function () {
     ScrollTrigger.refresh();

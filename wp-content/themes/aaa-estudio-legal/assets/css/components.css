@@ -2361,10 +2361,14 @@ body.home-page {
      "01/02/03" arriba; como el padding de arriba y de abajo es igual, el
      título empieza justo en la mitad del panel. La lista va debajo y la
      última fila (1fr) absorbe su despliegue: el título ya no se mueve. */
+  /* D172: con los textos definitivos (frase + 4 viñetas) la lista desplegada
+     quedaba pegada al borde inferior (15px a 1280px). La primera fila baja de
+     50% a 34%: título y contenido suben ~90px y la lista queda con >100px de
+     aire, sin cambiar el tamaño de los paneles. */
   .home-page #servicios-home-heading .surface-visual__caption {
     display: grid;
     grid-template-columns: minmax(0, 1fr);
-    grid-template-rows: 50% auto auto 1fr;
+    grid-template-rows: 34% auto auto 1fr;
   }
   .home-page #servicios-home-heading .surface-visual__caption .focus-card__index {
     align-self: start;
@@ -4355,6 +4359,10 @@ section.aaa-section[id] {
    financiero. */
 .sector-card__logos .wp-block-image { margin: 0; }
 .sector-card > *, .sector-card__header > * { margin: 0; }
+/* D173: la grilla es un Grupo con layout "flow" y WordPress le suma 24px de
+   margin-block-start a cada hijo menos al primero; en la primera fila eso
+   dejaba la tarjeta 1 más arriba que la 2 y la 3. */
+.sector-grid > .sector-card { margin-block: 0; }
 .sector-card__header::before {
   content: "";
   flex: 0 0 auto;
@@ -4408,3 +4416,169 @@ section.aaa-section[id] {
   transform: none !important;
 }
 .team-flip-card__back.block-editor-block-list__block { margin-top: var(--wp--preset--spacing--3); }
+
+/* ---------- D174 — Animaciones del isotipo y microinteracciones ----------
+   Pedido del cliente: interacciones más modernas sin recargar el sitio.
+   1) El isotipo de los títulos (.aaa-logo-inline), del eyebrow "Talento AAA"
+      y de "Origen y especialización" se revela al entrar en pantalla con el
+      mismo keyframe del logo del encabezado; main.js pone .is-inview.
+   2) La flecha de los botones se desplaza al pasar el cursor.
+   3) Las fotos de equipos hacen un zoom suave dentro de su marco, como ya lo
+      hacen "¿Por qué confiar?" y las áreas de Metodología.
+   Sin JS el isotipo se ve normal (la regla depende de .js) y con movimiento
+   reducido no se anima nada. */
+.aaa-eyebrow .aaa-logo-inline {
+  height: 1.9em;
+  vertical-align: -0.62em;
+  margin-left: 0.15em;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .js .aaa-logo-inline:not(.is-inview)::after,
+  .js .origin-block__copy:not(.is-inview)::before {
+    clip-path: inset(0 100% 0 0);
+    opacity: 0.25;
+  }
+  .js .aaa-logo-inline.is-inview::after,
+  .js .origin-block__copy.is-inview::before {
+    animation: aaa-header-isotype-reveal 1.15s var(--wp--custom--motion--ease) 0.1s 1 both;
+  }
+}
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .wp-block-button__link .btn--icon { transition: transform 280ms var(--wp--custom--motion--ease); }
+  .wp-block-button__link:hover .btn--icon,
+  .wp-block-button__link:focus-visible .btn--icon { transform: translateX(4px); }
+  .team-groups img.team-profile-pair__photo { transition: transform 700ms var(--wp--custom--motion--ease); }
+  .team-groups .team-profile-pair:hover img.team-profile-pair__photo { transform: scale(1.04); }
+}
+
+/* ---------- D175 — Preloader de entrada ----------
+   Pedido del cliente: un preload estético y muy corto, con el logo completo
+   del menú y una animación distinta a la del encabezado. Solo aparece cuando
+   el <head> marcó `aaa-preloading` (primera página de la sesión y sin
+   movimiento reducido; ver aaa_preloader_flag en functions.php).
+   Secuencia (~0,95 s): las tres A suben desde la línea base una tras otra
+   (0–0,48 s), "Estudio Legal" entra de izquierda a derecha (0,28–0,6 s) y el
+   telón se retira con un fundido (0,66–0,96 s). El isotipo del encabezado
+   espera a ese fundido para hacer su propio revelado. */
+.aaa-preloading .aaa-preloader {
+  position: fixed;
+  inset: 0;
+  z-index: 100000;
+  display: grid;
+  place-items: center;
+  background: var(--wp--preset--color--navy-deep);
+  animation: aaa-preloader-out 0.3s ease-in 0.66s 1 forwards;
+}
+.aaa-preloader__logo {
+  --brand-h: clamp(64px, 11vw, 96px);
+  display: flex;
+  align-items: flex-start;
+  gap: calc(var(--brand-h) * 0.1289);
+  animation: aaa-preloader-logo-out 0.3s ease-in 0.66s 1 forwards;
+}
+.aaa-preloader__mark {
+  display: block;
+  flex: 0 0 auto;
+  width: auto;
+  height: calc(var(--brand-h) * 0.8968);
+  aspect-ratio: 675.53 / 425.29;
+  overflow: hidden;
+}
+.aaa-preloader__a {
+  animation: aaa-preloader-a 0.34s cubic-bezier(0.22, 1, 0.36, 1) 1 both;
+}
+.aaa-preloader__a--2 { animation-delay: 0.07s; }
+.aaa-preloader__a--3 { animation-delay: 0.14s; }
+.aaa-preloader__wordmark {
+  display: block;
+  flex: 0 0 auto;
+  width: auto;
+  height: calc(var(--brand-h) * 0.8196);
+  margin-top: calc(var(--brand-h) * 0.1804);
+  animation: aaa-preloader-wordmark 0.32s cubic-bezier(0.22, 1, 0.36, 1) 0.28s 1 both;
+}
+.aaa-preloading .brand__isotype { animation-delay: 0.6s; }
+/* Dentro del SVG, 1px = 1 unidad del viewBox: 260 ≈ 60% del alto del isotipo,
+   y el SVG recorta en la línea base, así que cada A "emerge" de ella. */
+@keyframes aaa-preloader-a {
+  from { opacity: 0; transform: translateY(260px); }
+  60% { opacity: 1; }
+  to { opacity: 1; transform: none; }
+}
+@keyframes aaa-preloader-wordmark {
+  from { opacity: 0; clip-path: inset(0 100% 0 0); transform: translateX(-10px); }
+  to { opacity: 1; clip-path: inset(0); transform: none; }
+}
+@keyframes aaa-preloader-logo-out {
+  to { opacity: 0; transform: translateY(-8px) scale(0.98); }
+}
+@keyframes aaa-preloader-out {
+  to { opacity: 0; visibility: hidden; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .aaa-preloading .aaa-preloader { display: none; }
+}
+
+/* ---------- D177 — Preguntas frecuentes (Metodología) ----------
+   Documento de SEO de Nayeliz (backlog N10). Bloques Detalles nativos, así
+   que se editan, agregan o quitan desde la página; functions.php arma con
+   ellos el schema FAQPage. Título editorial a la izquierda (fijo al hacer
+   scroll en escritorio) y acordeón a la derecha. */
+.aaa-faq .aaa-faq__grid {
+  display: grid;
+  gap: var(--wp--preset--spacing--12);
+  align-items: start;
+}
+.aaa-faq :is(.aaa-faq__grid, .aaa-faq__head, .aaa-faq__list) > * { margin-block: 0; }
+.aaa-faq .aaa-faq__head .aaa-eyebrow { margin-bottom: var(--wp--preset--spacing--4); }
+.aaa-faq .aaa-faq__head .aaa-text-emphasis { display: block; color: var(--wp--preset--color--accent-main); }
+.aaa-faq .aaa-faq__list { border-top: 1px solid rgba(6, 59, 89, 0.18); }
+.aaa-faq .aaa-faq__item {
+  border-bottom: 1px solid rgba(6, 59, 89, 0.18);
+  padding: 0;
+}
+.aaa-faq .aaa-faq__item > summary {
+  position: relative;
+  display: block;
+  padding: var(--wp--preset--spacing--6) 3rem var(--wp--preset--spacing--6) 0;
+  color: var(--wp--preset--color--navy-deep);
+  font-family: var(--wp--preset--font-family--sans);
+  font-size: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
+  font-weight: 600;
+  line-height: 1.4;
+  list-style: none;
+  cursor: pointer;
+}
+.aaa-faq .aaa-faq__item > summary::-webkit-details-marker { display: none; }
+.aaa-faq .aaa-faq__item > summary::before,
+.aaa-faq .aaa-faq__item > summary::after {
+  content: "";
+  position: absolute;
+  right: 0.5rem;
+  top: 50%;
+  width: 14px;
+  height: 1.5px;
+  background: var(--wp--preset--color--accent-main);
+  transition: transform 280ms var(--wp--custom--motion--ease);
+}
+.aaa-faq .aaa-faq__item > summary::after { transform: rotate(90deg); }
+.aaa-faq .aaa-faq__item[open] > summary::after { transform: rotate(0deg); }
+.aaa-faq .aaa-faq__item > summary:hover { color: var(--wp--preset--color--accent-main-strong); }
+.aaa-faq .aaa-faq__item > summary:focus-visible {
+  outline: 2px solid var(--wp--preset--color--accent-main);
+  outline-offset: 4px;
+}
+.aaa-faq .aaa-faq__item > p {
+  margin: 0;
+  padding: 0 3rem var(--wp--preset--spacing--6) 0;
+  max-width: 68ch;
+  color: var(--wp--preset--color--text-muted);
+  line-height: 1.65;
+}
+@media (min-width: 1024px) {
+  .aaa-faq .aaa-faq__grid { grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.4fr); gap: var(--wp--preset--spacing--16, 4rem); }
+  .aaa-faq .aaa-faq__head { position: sticky; top: 120px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .aaa-faq .aaa-faq__item > summary::after { transition: none; }
+}

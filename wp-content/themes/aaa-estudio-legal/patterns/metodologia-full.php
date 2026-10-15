@@ -51,7 +51,7 @@
 			<div class="wp-block-group stepper__step aaa-reveal aaa-stagger-0">
 				<!-- wp:group {"className":"stepper__node"} --><div class="wp-block-group stepper__node"></div><!-- /wp:group -->
 				<!-- wp:image {"className":"stepper__photo"} -->
-				<figure class="wp-block-image stepper__photo"><img src="<?php echo esc_url( get_theme_file_uri( 'assets/img/metodologia/aaa-paso-diagnostico.webp' ) ); ?>" alt="" /></figure>
+				<figure class="wp-block-image stepper__photo"><img src="<?php echo esc_url( aaa_media_url( 'aaa-paso-diagnostico.webp' ) ); ?>" alt="" /></figure>
 				<!-- /wp:image -->
 				<!-- wp:group {"className":"stepper__body"} -->
 				<div class="wp-block-group stepper__body">
@@ -66,7 +66,7 @@
 			<div class="wp-block-group stepper__step aaa-reveal aaa-stagger-1">
 				<!-- wp:group {"className":"stepper__node"} --><div class="wp-block-group stepper__node"></div><!-- /wp:group -->
 				<!-- wp:image {"className":"stepper__photo"} -->
-				<figure class="wp-block-image stepper__photo"><img src="<?php echo esc_url( get_theme_file_uri( 'assets/img/metodologia/aaa-paso-estrategia-equipo.webp' ) ); ?>" alt="" /></figure>
+				<figure class="wp-block-image stepper__photo"><img src="<?php echo esc_url( aaa_media_url( 'aaa-paso-estrategia-equipo.webp' ) ); ?>" alt="" /></figure>
 				<!-- /wp:image -->
 				<!-- wp:group {"className":"stepper__body"} -->
 				<div class="wp-block-group stepper__body">
@@ -81,7 +81,7 @@
 			<div class="wp-block-group stepper__step aaa-reveal aaa-stagger-2">
 				<!-- wp:group {"className":"stepper__node"} --><div class="wp-block-group stepper__node"></div><!-- /wp:group -->
 				<!-- wp:image {"className":"stepper__photo"} -->
-				<figure class="wp-block-image stepper__photo"><img src="<?php echo esc_url( get_theme_file_uri( 'assets/img/metodologia/aaa-paso-representacion-tribunal.webp' ) ); ?>" alt="" /></figure>
+				<figure class="wp-block-image stepper__photo"><img src="<?php echo esc_url( aaa_media_url( 'aaa-paso-representacion-tribunal.webp' ) ); ?>" alt="" /></figure>
 				<!-- /wp:image -->
 				<!-- wp:group {"className":"stepper__body"} -->
 				<div class="wp-block-group stepper__body">
@@ -117,7 +117,7 @@
 		<!-- wp:group {"className":"service-card--editorial aaa-reveal aaa-stagger-0"} -->
 		<div class="wp-block-group service-card--editorial aaa-reveal aaa-stagger-0">
 			<!-- wp:image {"className":"service-card__media"} -->
-			<figure class="wp-block-image service-card__media"><img src="<?php echo esc_url( get_theme_file_uri( 'assets/img/metodologia/aaa-area-concursal.webp' ) ); ?>" alt="" /></figure>
+			<figure class="wp-block-image service-card__media"><img src="<?php echo esc_url( aaa_media_url( 'aaa-area-derecho-concursal.webp' ) ); ?>" alt="Reunión de abogados revisando documentos junto a una balanza de la justicia" /></figure>
 			<!-- /wp:image -->
 			<!-- wp:group {"className":"service-card__body"} -->
 			<div class="wp-block-group service-card__body">
@@ -140,7 +140,7 @@
 		<!-- wp:group {"className":"service-card--editorial aaa-reveal aaa-stagger-1"} -->
 		<div class="wp-block-group service-card--editorial aaa-reveal aaa-stagger-1">
 			<!-- wp:image {"className":"service-card__media"} -->
-			<figure class="wp-block-image service-card__media"><img src="<?php echo esc_url( get_theme_file_uri( 'assets/img/metodologia/aaa-area-normalizacion.webp' ) ); ?>" alt="" /></figure>
+			<figure class="wp-block-image service-card__media"><img src="<?php echo esc_url( aaa_media_url( 'aaa-area-recuperacion-cartera.webp' ) ); ?>" alt="Revisión de reportes financieros y de crédito junto a un computador portátil" /></figure>
 			<!-- /wp:image -->
 			<!-- wp:group {"className":"service-card__body"} -->
 			<div class="wp-block-group service-card__body">
@@ -165,7 +165,7 @@
 		<!-- wp:group {"className":"service-card--editorial aaa-reveal aaa-stagger-2"} -->
 		<div class="wp-block-group service-card--editorial aaa-reveal aaa-stagger-2">
 			<!-- wp:image {"className":"service-card__media"} -->
-			<figure class="wp-block-image service-card__media"><img src="<?php echo esc_url( get_theme_file_uri( 'assets/img/metodologia/aaa-area-corporativa.webp' ) ); ?>" alt="" /></figure>
+			<figure class="wp-block-image service-card__media"><img src="<?php echo esc_url( get_theme_file_uri( 'assets/img/home/hero.webp' ) ); ?>" alt="Equipo de AAA Estudio Legal trabajando en su oficina" /></figure>
 			<!-- /wp:image -->
 			<!-- wp:group {"className":"service-card__body"} -->
 			<div class="wp-block-group service-card__body">
@@ -207,6 +207,67 @@
 			<!-- wp:image {"className":"transparency-block__visual aaa-motion-media"} -->
 			<figure class="wp-block-image transparency-block__visual aaa-motion-media"><img src="<?php echo esc_url( get_theme_file_uri( 'assets/img/metodologia/transparencia.webp' ) ); ?>" alt="Integrante del equipo de AAA Estudio Legal en su puesto de trabajo" /></figure>
 			<!-- /wp:image -->
+		</div>
+		<!-- /wp:group -->
+	</div>
+	<!-- /wp:group -->
+</section>
+<!-- /wp:group -->
+
+<!-- wp:group {"metadata":{"name":"Preguntas frecuentes (pendiente de aprobación)","blockVisibility":false},"tagName":"section","anchor":"preguntas-frecuentes","className":"aaa-faq surface-theme--light-base aaa-section","backgroundColor":"surface-light","align":"full","layout":{"type":"constrained"}} -->
+<section id="preguntas-frecuentes" class="wp-block-group alignfull aaa-faq surface-theme--light-base aaa-section has-surface-light-background-color has-background">
+	<!-- wp:group {"className":"aaa-faq__grid"} -->
+	<div class="wp-block-group aaa-faq__grid">
+		<!-- wp:group {"className":"aaa-faq__head section-heading--editorial aaa-motion-section-title"} -->
+		<div class="wp-block-group aaa-faq__head section-heading--editorial aaa-motion-section-title">
+			<!-- wp:paragraph {"className":"aaa-eyebrow"} --><p class="aaa-eyebrow">Preguntas frecuentes</p><!-- /wp:paragraph -->
+			<!-- wp:heading {"level":2} -->
+			<h2 class="wp-block-heading">Dudas comunes <em class="aaa-text-emphasis">del acreedor.</em></h2>
+			<!-- /wp:heading -->
+		</div>
+		<!-- /wp:group -->
+		<!-- wp:group {"className":"aaa-faq__list"} -->
+		<div class="wp-block-group aaa-faq__list">
+			<!-- wp:details {"className":"aaa-faq__item"} -->
+			<details class="wp-block-details aaa-faq__item"><summary>¿Cómo puede mi empresa proteger sus cuentas por cobrar frente al riesgo de insolvencia de un cliente?</summary><!-- wp:paragraph -->
+			<p>La clave es la anticipación. Garantizar acreencias desde la firma del contrato mediante garantías reales o mobiliarias (Ley 1676 de 2013), establecer cláusulas de aceleración y monitorear permanentemente la salud financiera de los clientes permite reaccionar a tiempo y asegurar prioridad de cobro antes de que la empresa entre en cesación de pagos.</p>
+			<!-- /wp:paragraph --></details>
+			<!-- /wp:details -->
+			<!-- wp:details {"className":"aaa-faq__item"} -->
+			<details class="wp-block-details aaa-faq__item"><summary>¿Qué ocurre con la deuda cuando un cliente o deudor entra en proceso de reorganización?</summary><!-- wp:paragraph -->
+			<p>Los cobros ejecutivos se suspenden temporalmente, pero la deuda no desaparece. La empresa debe hacerse parte formal del proceso concursando sus créditos ante el juez o la Superintendencia de Sociedades (Ley 116 de 2006) dentro de los plazos legales para defender su derecho a voto y asegurar que sea incluida en el acuerdo de pago.</p>
+			<!-- /wp:paragraph --></details>
+			<!-- /wp:details -->
+			<!-- wp:details {"className":"aaa-faq__item"} -->
+			<details class="wp-block-details aaa-faq__item"><summary>Si el deudor incumple el acuerdo de reorganización, ¿qué alternativa legal tiene el acreedor?</summary><!-- wp:paragraph -->
+			<p>Puede solicitar el fracaso o incumplimiento del acuerdo ante la Superintendencia de Sociedades (Ley 116 de 2006, Art. 45 y 46). Esto desencadena la apertura del proceso de liquidación judicial, donde se embargan y rematan los bienes del deudor para pagar a los acreedores según la prelación legal.</p>
+			<!-- /wp:paragraph --></details>
+			<!-- /wp:details -->
+			<!-- wp:details {"className":"aaa-faq__item"} -->
+			<details class="wp-block-details aaa-faq__item"><summary>¿Es posible recuperar dinero o bienes si el deudor los traspasó a terceros antes de declararse en quiebra?</summary><!-- wp:paragraph -->
+			<p>Sí. La legislación mercantil y concursal en Colombia contempla la Acción Revocatoria Concursal (Ley 116 de 2006, Art. 74). Este mecanismo permite dejar sin efecto las ventas, traspasos o donaciones sospechosas realizadas en los 18 meses anteriores al proceso, retornando los bienes al deudor para responder a los acreedores.</p>
+			<!-- /wp:paragraph --></details>
+			<!-- /wp:details -->
+			<!-- wp:details {"className":"aaa-faq__item"} -->
+			<details class="wp-block-details aaa-faq__item"><summary>¿Qué diferencia hay entre una garantía normal y una garantía real o mobiliaria al momento de cobrar?</summary><!-- wp:paragraph -->
+			<p>Una factura o pagaré simple otorga un crédito ordinario (sin preferencia). En cambio, las garantías reales (hipoteca) o mobiliarias (inventario, maquinaria, cuentas de cobro inscritas en el RUGM según la Ley 1676 de 2013) otorgan prelación de pago. Esto significa que su empresa cobra primero sobre el valor de ese bien específico.</p>
+			<!-- /wp:paragraph --></details>
+			<!-- /wp:details -->
+			<!-- wp:details {"className":"aaa-faq__item"} -->
+			<details class="wp-block-details aaa-faq__item"><summary>¿Cuánto tiempo puede tardar la recuperación de una cartera en vía judicial frente a una negociación estratégica?</summary><!-- wp:paragraph -->
+			<p>Un litigio o ejecutivo judicial tradicional puede tomar de 2 a 4 años. A través de la negociación estratégica, reestructuración extrajudicial o ejecución especial de garantías ante notarios/cámaras de comercio, los tiempos pueden reducirse a meses, minimizando costos y recuperando flujo de caja de manera más ágil.</p>
+			<!-- /wp:paragraph --></details>
+			<!-- /wp:details -->
+			<!-- wp:details {"className":"aaa-faq__item"} -->
+			<details class="wp-block-details aaa-faq__item"><summary>Si mi empresa es uno de los mayores acreedores, ¿qué control tiene en el proceso de insolvencia?</summary><!-- wp:paragraph -->
+			<p>El peso del voto en las decisiones del concurso depende del porcentaje del pasivo que represente su crédito (Ley 116 de 2006, Art. 31). Los acreedores con alta participación tienen poder de veto sobre la fórmula de pago, pueden proponer alternativas de salvamento o exigir la liquidación si el plan no es viable.</p>
+			<!-- /wp:paragraph --></details>
+			<!-- /wp:details -->
+			<!-- wp:details {"className":"aaa-faq__item"} -->
+			<details class="wp-block-details aaa-faq__item"><summary>¿Cuánto tiempo tarda un proceso de insolvencia en Colombia y cómo afecta el cobro de la garantía?</summary><!-- wp:paragraph -->
+			<p>Un proceso de reorganización suele durar entre 8 y 18 meses, mientras que una liquidación judicial toma de 2 a 4 años. Respecto a la garantía, los acreedores con garantía real (hipoteca o prenda) tienen prelación de pago sobre el bien o el producto de su venta (Ley 116, Art. 50 y Ley 1676 de 2013).</p>
+			<!-- /wp:paragraph --></details>
+			<!-- /wp:details -->
 		</div>
 		<!-- /wp:group -->
 	</div>

@@ -65,7 +65,7 @@
 		<!-- wp:column -->
 		<div class="wp-block-column">
 			<!-- wp:image {"className":"what-we-do-visual aaa-motion-media"} -->
-			<figure class="wp-block-image what-we-do-visual aaa-motion-media"><img src="<?php echo esc_url( get_theme_file_uri( 'assets/img/home/aaa-enfoque-documento.webp' ) ); ?>" alt="Manos sobre un escritorio: una señala un documento y otra toma notas" /></figure>
+			<figure class="wp-block-image what-we-do-visual aaa-motion-media"><img src="<?php echo esc_url( aaa_media_url( 'aaa-enfoque-documento.webp' ) ); ?>" alt="Manos sobre un escritorio: una señala un documento y otra toma notas" /></figure>
 			<!-- /wp:image -->
 		</div>
 		<!-- /wp:column -->
@@ -89,7 +89,7 @@
 		<!-- wp:group {"className":"surface-visual"} -->
 		<div class="wp-block-group surface-visual">
 			<!-- wp:image {"className":"media-placeholder"} -->
-			<figure class="wp-block-image media-placeholder"><img src="<?php echo esc_url( get_theme_file_uri( 'assets/img/home/area-concursal.webp' ) ); ?>" alt="" /></figure>
+			<figure class="wp-block-image media-placeholder"><img src="<?php echo esc_url( aaa_media_url( 'aaa-area-derecho-concursal.webp' ) ); ?>" alt="" /></figure>
 			<!-- /wp:image -->
 			<!-- wp:group {"className":"surface-visual__caption"} -->
 			<div class="wp-block-group surface-visual__caption">
@@ -111,7 +111,7 @@
 		<!-- wp:group {"className":"surface-visual"} -->
 		<div class="wp-block-group surface-visual">
 			<!-- wp:image {"className":"media-placeholder"} -->
-			<figure class="wp-block-image media-placeholder"><img src="<?php echo esc_url( get_theme_file_uri( 'assets/img/home/area-normalizacion.webp' ) ); ?>" alt="" /></figure>
+			<figure class="wp-block-image media-placeholder"><img src="<?php echo esc_url( aaa_media_url( 'aaa-area-recuperacion-cartera.webp' ) ); ?>" alt="" /></figure>
 			<!-- /wp:image -->
 			<!-- wp:group {"className":"surface-visual__caption"} -->
 			<div class="wp-block-group surface-visual__caption">
@@ -175,7 +175,7 @@
 			<!-- wp:group {"className":"why-trust__item aaa-reveal aaa-stagger-0"} -->
 			<div class="wp-block-group why-trust__item aaa-reveal aaa-stagger-0">
 				<!-- wp:image {"className":"why-trust__media"} -->
-				<figure class="wp-block-image why-trust__media"><img src="<?php echo esc_url( get_theme_file_uri( 'assets/img/home/aaa-confianza-casos.webp' ) ); ?>" alt="Pilas de expedientes y carpetas de archivo en una oficina" /></figure>
+				<figure class="wp-block-image why-trust__media"><img src="<?php echo esc_url( aaa_media_url( 'aaa-confianza-volumen.webp' ) ); ?>" alt="Pila de expedientes y carpetas sobre un escritorio de oficina" /></figure>
 				<!-- /wp:image -->
 				<!-- wp:heading {"level":3} --><h3 class="wp-block-heading">Volumen con estructura.</h3><!-- /wp:heading -->
 				<!-- wp:paragraph --><p>Procesos individuales y masivos, atendidos por fases y con responsables asignados.</p><!-- /wp:paragraph -->
@@ -184,7 +184,7 @@
 			<!-- wp:group {"className":"why-trust__item aaa-reveal aaa-stagger-1"} -->
 			<div class="wp-block-group why-trust__item aaa-reveal aaa-stagger-1">
 				<!-- wp:image {"className":"why-trust__media"} -->
-				<figure class="wp-block-image why-trust__media"><img src="<?php echo esc_url( get_theme_file_uri( 'assets/img/home/aaa-confianza-equipo.webp' ) ); ?>" alt="Profesionales revisando documentos alrededor de una mesa de trabajo" /></figure>
+				<figure class="wp-block-image why-trust__media"><img src="<?php echo esc_url( aaa_media_url( 'aaa-confianza-equipo.webp' ) ); ?>" alt="Profesionales revisando documentos alrededor de una mesa de trabajo" /></figure>
 				<!-- /wp:image -->
 				<!-- wp:heading {"level":3} --><h3 class="wp-block-heading">Equipo especializado.</h3><!-- /wp:heading -->
 				<!-- wp:paragraph --><p>Experiencia jurídica y conocimiento sectorial.</p><!-- /wp:paragraph -->
@@ -193,7 +193,7 @@
 			<!-- wp:group {"className":"why-trust__item aaa-reveal aaa-stagger-2"} -->
 			<div class="wp-block-group why-trust__item aaa-reveal aaa-stagger-2">
 				<!-- wp:image {"className":"why-trust__media"} -->
-				<figure class="wp-block-image why-trust__media"><img src="<?php echo esc_url( get_theme_file_uri( 'assets/img/home/aaa-confianza-tiempo-real.webp' ) ); ?>" alt="Manos escribiendo en un computador portátil con luz lateral" /></figure>
+				<figure class="wp-block-image why-trust__media"><img src="<?php echo esc_url( aaa_media_url( 'aaa-confianza-seguimiento.webp' ) ); ?>" alt="Manos con reloj trabajando en un computador portátil con reportes" /></figure>
 				<!-- /wp:image -->
 				<!-- wp:heading {"level":3} --><h3 class="wp-block-heading">Seguimiento en tiempo real.</h3><!-- /wp:heading -->
 				<!-- wp:paragraph --><p>Cada proceso se registra y se reporta con herramientas propias, para que el cliente sepa en qué etapa está su cartera.</p><!-- /wp:paragraph -->
@@ -202,7 +202,7 @@
 			<!-- wp:group {"className":"why-trust__item aaa-reveal aaa-stagger-3"} -->
 			<div class="wp-block-group why-trust__item aaa-reveal aaa-stagger-3">
 				<!-- wp:image {"className":"why-trust__media"} -->
-				<figure class="wp-block-image why-trust__media"><img src="<?php echo esc_url( get_theme_file_uri( 'assets/img/home/aaa-confianza-huella-digital.webp' ) ); ?>" alt="Huella digital iluminada sobre un lector biométrico" /></figure>
+				<figure class="wp-block-image why-trust__media"><img src="<?php echo esc_url( aaa_media_url( 'aaa-confianza-huella-digital.webp' ) ); ?>" alt="Huella digital iluminada sobre un lector biométrico" /></figure>
 				<!-- /wp:image -->
 				<!-- wp:heading {"level":3} --><h3 class="wp-block-heading">Su información, protegida.</h3><!-- /wp:heading -->
 				<!-- wp:paragraph --><p>Cada caso se maneja bajo reserva profesional, con el cuidado que exige la información de nuestros clientes.</p><!-- /wp:paragraph -->
@@ -211,7 +211,7 @@
 			<!-- wp:group {"className":"why-trust__item aaa-reveal aaa-stagger-4"} -->
 			<div class="wp-block-group why-trust__item aaa-reveal aaa-stagger-4">
 				<!-- wp:image {"className":"why-trust__media"} -->
-				<figure class="wp-block-image why-trust__media"><img src="<?php echo esc_url( get_theme_file_uri( 'assets/img/home/aaa-confianza-reportes-pantalla.webp' ) ); ?>" alt="Computador portátil con reportes e indicadores en pantalla" /></figure>
+				<figure class="wp-block-image why-trust__media"><img src="<?php echo esc_url( aaa_media_url( 'aaa-confianza-cumplimiento-1.webp' ) ); ?>" alt="Mano firmando un documento con pluma en una mesa de reuniones" /></figure>
 				<!-- /wp:image -->
 				<!-- wp:heading {"level":3} --><h3 class="wp-block-heading">Cumplimiento normativo.</h3><!-- /wp:heading -->
 				<!-- wp:paragraph --><p>Controles internos, reportería y seguimiento de términos en cada proceso.</p><!-- /wp:paragraph -->
@@ -220,7 +220,7 @@
 			<!-- wp:group {"className":"why-trust__item aaa-reveal aaa-stagger-5"} -->
 			<div class="wp-block-group why-trust__item aaa-reveal aaa-stagger-5">
 				<!-- wp:image {"className":"why-trust__media"} -->
-				<figure class="wp-block-image why-trust__media"><img src="<?php echo esc_url( get_theme_file_uri( 'assets/img/home/aaa-confianza-capitolio-bolivar.webp' ) ); ?>" alt="Estatua de Simón Bolívar frente al Capitolio Nacional, con la bandera de Colombia, en Bogotá" /></figure>
+				<figure class="wp-block-image why-trust__media"><img src="<?php echo esc_url( aaa_media_url( 'aaa-confianza-capitolio-bolivar.webp' ) ); ?>" alt="Estatua de Simón Bolívar frente al Capitolio Nacional, con la bandera de Colombia, en Bogotá" /></figure>
 				<!-- /wp:image -->
 				<!-- wp:heading {"level":3} --><h3 class="wp-block-heading">Presencia en todo el país.</h3><!-- /wp:heading -->
 				<!-- wp:paragraph --><p>Acompañamos organizaciones en todo el territorio nacional.</p><!-- /wp:paragraph -->

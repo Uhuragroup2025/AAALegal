@@ -143,7 +143,7 @@
 <!-- /wp:group --></div>
 <!-- /wp:group --></div>
 <!-- /wp:group -->
-<!-- wp:group {"className":"team-profile-pair__placeholder"} --><div class="wp-block-group team-profile-pair__placeholder"></div><!-- /wp:group -->
+<!-- wp:image {"className":"team-profile-pair__photo"} --><figure class="wp-block-image team-profile-pair__photo"><img src="<?php echo esc_url( aaa_media_url( 'equipo-negociaciones.webp' ) ); ?>" alt="Dos integrantes de un equipo revisan y firman un acuerdo sobre una mesa" /></figure><!-- /wp:image -->
 </div>
 <!-- /wp:group -->
 <!-- wp:group {"className":"team-profile-pair aaa-reveal aaa-stagger-3"} -->
@@ -184,7 +184,7 @@
 	<!-- wp:group {"className":"philosophy-block__grid aaa-motion-chapter"} -->
 	<div class="wp-block-group philosophy-block__grid aaa-motion-chapter">
 		<!-- wp:image {"className":"philosophy-block__visual aaa-motion-media"} -->
-		<figure class="wp-block-image philosophy-block__visual aaa-motion-media"><img src="<?php echo esc_url( get_theme_file_uri( 'assets/img/nosotros/aaa-filosofia-biblioteca.webp' ) ); ?>" alt="Isotipo de AAA Estudio Legal sobre una biblioteca de libros antiguos" /></figure>
+		<figure class="wp-block-image philosophy-block__visual aaa-motion-media"><img src="<?php echo esc_url( aaa_media_url( 'aaa-filosofia-biblioteca.webp' ) ); ?>" alt="Isotipo de AAA Estudio Legal sobre una biblioteca de libros antiguos" /></figure>
 		<!-- /wp:image -->
 		<!-- wp:group {"className":"philosophy-block__copy section-heading--editorial aaa-motion-section-title"} -->
 		<div class="wp-block-group philosophy-block__copy section-heading--editorial aaa-motion-section-title">

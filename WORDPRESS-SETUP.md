@@ -112,6 +112,7 @@ plugins de caché/seguridad (se deciden cuando exista hosting real de
 staging/producción, no en desarrollo local). Si en el camino aparece una necesidad
 real de alguno de estos, se registra como una nueva decisión antes de instalarlo
 (AGENTS.md § Prohibiciones/Condiciones de parada) — no se instala por conveniencia.
+(**actualización D178, 2026-10-15:** la caché ya se decidió: LiteSpeed Cache en el staging de Hostinger; configuración en STATUS.md, D178)
 
 ## 5bis. Motion editorial — GSAP + ScrollTrigger (Decisión D112)
 
@@ -500,7 +501,7 @@ para esta pasada** (ver STATUS.md para el detalle completo):
   necesarias para Gate 2 — no son errores, son alcance recortado a propósito.
 - Subir fotografía real cuando el cliente la entregue (ver `IMAGE-BRIEF.md`).
 - Cuando exista hosting real confirmado (Hostinger, recomendado en AGENTS.md):
-  decidir plugin de caché (candidato: LiteSpeed Cache, si el plan de Hostinger corre
+  ~~decidir plugin de caché~~ (hecho en D178: LiteSpeed Cache, ver STATUS.md) (candidato: LiteSpeed Cache, si el plan de Hostinger corre
   sobre LiteSpeed) y de seguridad — **no antes**, sería instalar dependencias sin
   necesidad concreta todavía.
 - Gate 2 (staging) requiere aprobación explícita del cliente antes de avanzar — no
