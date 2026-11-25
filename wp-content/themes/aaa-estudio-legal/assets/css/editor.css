@@ -60,3 +60,86 @@
 @media (max-width: 600px) {
   .why-trust .why-trust__grid { grid-template-columns: minmax(0, 1fr); }
 }
+
+/* =====================================================================
+   D193 — Modo edición: fotos accesibles en las secciones con texto encima
+   En el sitio, varias fotos van detrás del texto (portadas, paneles de
+   "Áreas de práctica"). En el editor eso las dejaba tapadas o sin tamaño
+   (0×0) y no se podían seleccionar ni reemplazar; en Inicio llevó a usar el
+   "fondo" del grupo, que queda escondido detrás de la foto real. Aquí la
+   foto se muestra como una franja encima del texto, para hacer clic en ella
+   y usar "Reemplazar". Solo cambia el editor; el sitio se ve igual.
+   ===================================================================== */
+
+/* Portadas (las 4 páginas). */
+.hero-shell {
+  flex-direction: column;
+  align-items: stretch;
+  min-height: 0;
+}
+.hero-shell::after { display: none; }
+.hero-shell__media {
+  position: relative !important;
+  inset: auto !important;
+  flex: 0 0 auto;
+  height: 280px;
+}
+.hero-shell__media .hero-shell__img {
+  position: relative !important;
+  inset: auto !important;
+  width: 100% !important;
+  height: 100% !important;
+  margin: 0;
+}
+.hero-shell__media .hero-shell__img img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover;
+  opacity: 1;
+  filter: none;
+}
+/* La capa oscura es un grupo vacío: en el editor mostraba el selector de
+   diseño encima de la foto. */
+.hero-shell__scrim { display: none !important; }
+
+/* Inicio — paneles de "Áreas de práctica". */
+.focus-mosaic .surface-visual {
+  flex-direction: column;
+  align-items: stretch;
+  min-height: 0;
+  background: var(--wp--preset--color--navy-deep);
+}
+.surface-visual > .wp-block-image {
+  position: relative !important;
+  inset: auto !important;
+  flex: 0 0 auto;
+  height: 220px;
+  margin: 0;
+}
+.surface-visual > .wp-block-image img {
+  position: static !important;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover;
+}
+.surface-visual__caption {
+  position: relative !important;
+  inset: auto !important;
+  height: auto !important;
+  background: var(--wp--preset--color--navy-deep);
+}
+
+/* Quiénes somos — tarjetas de equipo: en el editor las dos caras van una
+   debajo de otra; la proporción 12:5 del sitio (D192) metía el reverso
+   debajo de la tarjeta siguiente. */
+.team-groups .team-flip-card { aspect-ratio: auto !important; }
+.team-groups .team-flip-card__back > .wp-block-image {
+  flex: 0 0 auto;
+  height: 200px;
+}
+
+/* Grupos decorativos vacíos (puntos de la línea de Metodología, fondos):
+   sin el selector de diseño que invitaba a llenarlos. */
+:is(.stepper__node, .atmosphere) :is(.wp-block-group-placeholder, .block-editor-block-variation-picker) {
+  display: none;
+}

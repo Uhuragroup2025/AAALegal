@@ -807,6 +807,26 @@ function aaa_image_dimensions( $block_content, $block ) {
 add_filter( 'render_block', 'aaa_image_dimensions', 5, 2 );
 
 /**
+ * D193 — Si en el editor se arrastran las manijas de tamaño (o se cambia la
+ * proporción) de una foto de la maqueta —portadas, paneles, tarjetas, fotos
+ * de sección—, WordPress le escribe ancho y alto fijos (`style` en el <img> y
+ * la clase `is-resized`) y la foto deja de cubrir su marco. En esas fotos se
+ * ignoran: el tamaño lo da el tema. Las imágenes sueltas (logos, blog) no se
+ * tocan.
+ */
+function aaa_ignore_image_resize( $block_content, $block ) {
+	if ( 'core/image' !== ( $block['blockName'] ?? '' ) ) {
+		return $block_content;
+	}
+	if ( ! preg_match( '/(?:__img|__media|[_-]visual|__photo|media-placeholder)\b/', $block['attrs']['className'] ?? '' ) ) {
+		return $block_content;
+	}
+	$block_content = preg_replace( '/(<img\b[^>]*?)\sstyle="[^"]*"/', '$1', $block_content );
+	return str_replace( ' is-resized', '', $block_content );
+}
+add_filter( 'render_block', 'aaa_ignore_image_resize', 4, 2 );
+
+/**
  * D183 — robots.txt (backlog SEO T15). Solo lo usa WordPress cuando no hay un
  * archivo robots.txt físico (el staging de Hostinger tiene uno propio para el
  * dominio temporal). Con el sitio en "disuadir a los motores" se respeta lo

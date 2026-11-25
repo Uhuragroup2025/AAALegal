@@ -3866,3 +3866,28 @@ Rendimiento: 96 en Inicio y Metodología. Se cumple el criterio de T09: LCP meno
   - clonar el repo;
   - abrir la carpeta en Claude;
   - para SSH a webtest, generar una llave nueva en ese equipo y agregarla al usuario `aaa-webtest` en CloudPanel. La llave privada de este equipo no se copia.
+
+## Foto de la asesora, editor a prueba de errores y patterns iguales al sitio (D193, 2026-11-25)
+
+**Pedido de Oscar:**
+- Poner la foto de la asesora con diadema en la portada de Metodología y en el panel "Asesoría corporativa y litigios" de Inicio.
+- Revisar todos los patterns, porque al cambiar imágenes desde "Editar página" no se podía o se rompía la sección.
+- Dejar los patterns lo más parecidos posible a las páginas en vivo.
+
+**Diagnóstico** (prueba automática en el editor, imagen por imagen, con la sesión de Chrome de Oscar, que tenía abierta la cuenta de Laura; no se guardó nada desde el editor):
+- **Portadas de las 4 páginas:** el texto tapaba la foto. En Inicio, además, la capa oscura (grupo vacío) mostraba el selector de diseño encima.
+- **Inicio, "Áreas de práctica":** las 3 fotos medían 0×0 en el editor. Por eso Laura usó el "fondo" del grupo del panel 3, que queda escondido detrás de la foto real, y el cambio no se veía.
+- **Quiénes somos:** el reverso de las tarjetas de equipo quedaba debajo de la tarjeta siguiente, por la proporción 12:5 de D192.
+- **Grupos decorativos vacíos** (puntos de la línea de Metodología): mostraban el selector de diseño.
+
+**Hecho (webtest + repo):**
+- **`editor.css`, modo edición:** en el editor, las fotos de las portadas y de los paneles se muestran como una franja encima del texto, seleccionables. Las tarjetas de equipo van sin proporción fija y los grupos decorativos sin selector. El sitio no cambia.
+  - Verificado con la prueba automática: todas las imágenes de Inicio y Quiénes somos se pueden seleccionar y no queda ningún selector vacío visible.
+- **`functions.php`, `aaa_ignore_image_resize()`:** si en el editor se arrastran las manijas de tamaño o se cambia la proporción de una foto de la maqueta, el sitio lo ignora. Se quitan el `style` del `<img>` y la clase `is-resized`. Logos y blog no se tocan.
+- **Foto nueva:** es el adjunto 337, ya subido por Laura (la misma foto que envió Oscar, a mejor resolución), con texto alternativo.
+  - Metodología: portada, con encuadre `50% 31%` en escritorio y móvil (sustituye las reglas anteriores de 35% y 70%).
+  - Inicio: panel 3. Se quitó el fondo de grupo que había quedado escondido.
+- **Patterns sincronizados con el sitio:** `home-full`, `metodologia-full`, `quienes-somos-full`, `trabaja-con-nosotros-full` y `contacto-full` tienen ahora exactamente el contenido de su página en vivo. La dirección de webtest se cambió por `home_url()` para que sirvan también en el dominio final.
+- **Respaldo:** en `~/d193/` (archivos del tema, patterns anteriores y contenido previo de las páginas 82 y 97). Las 5 páginas responden 200, sin recursos rotos, y se vació la caché.
+
+**Queda en el servidor:** el original de 4160×6240 px (4,7 MB) que subió Laura (adjunto 336). No se usa, y se puede borrar si Oscar lo decide.

@@ -2566,10 +2566,9 @@ section.aaa-section {
    sobre el eyebrow y el de primer plano a la derecha del texto (de 1024 a
    1920px la caja mide 420–520px y el porcentaje se comporta parecido). En
    móvil la foto se recorta a los lados y el 70% muestra al de primer plano. */
-.hero--editorial--services .hero-shell__media .hero-shell__img { object-position: 50% 35%; }
-@media (max-width: 640px) {
-  .hero--editorial--services .hero-shell__media .hero-shell__img { object-position: 70% 50%; }
-}
+/* D193: la foto pasa a ser vertical (asesora con diadema). Con 31% la cara
+   queda entre el menú y el título, en escritorio y en móvil. */
+.hero--editorial--services .hero-shell__media .hero-shell__img { object-position: 50% 31%; }
 
 /* ---------- Nuestra metodología — tarjetas con conector (D138) ----------
    Rediseño pedido por el cliente con imagen de referencia (tercera vuelta
