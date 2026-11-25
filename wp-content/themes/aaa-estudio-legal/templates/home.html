@@ -3,39 +3,44 @@
 <!-- wp:group {"tagName":"main","className":"blog-index"} -->
 <main class="wp-block-group blog-index">
 
-	<!-- wp:group {"tagName":"section","className":"is-dark-surface","backgroundColor":"navy-deep","textColor":"white","layout":{"type":"constrained"}} -->
-	<section class="wp-block-group is-dark-surface has-white-color has-navy-deep-background-color has-text-color has-background">
+	<!-- wp:group {"tagName":"section","className":"blog-hero is-dark-surface","backgroundColor":"navy-deep","textColor":"white","align":"full","layout":{"type":"constrained"}} -->
+	<section class="wp-block-group alignfull blog-hero is-dark-surface has-white-color has-navy-deep-background-color has-text-color has-background">
 		<!-- wp:paragraph {"className":"aaa-eyebrow"} --><p class="aaa-eyebrow">Blog</p><!-- /wp:paragraph -->
-		<!-- wp:heading {"level":1} --><h1 class="wp-block-heading">Blog</h1><!-- /wp:heading -->
-		<!-- wp:paragraph --><p>Análisis jurídico y actualidad sobre insolvencia, recuperación de cartera y garantías, y derecho corporativo desde la perspectiva del acreedor.</p><!-- /wp:paragraph -->
+		<!-- wp:heading {"level":1,"className":"blog-hero__title"} --><h1 class="wp-block-heading blog-hero__title">Análisis jurídico <em class="aaa-text-emphasis">desde el lado del acreedor.</em></h1><!-- /wp:heading -->
+		<!-- wp:paragraph {"className":"blog-hero__intro"} --><p class="blog-hero__intro">Insolvencia, recuperación de cartera y garantías, y derecho corporativo: análisis y actualidad para quienes protegen el crédito.</p><!-- /wp:paragraph -->
 	</section>
 	<!-- /wp:group -->
 
-	<!-- wp:group {"tagName":"section","layout":{"type":"constrained"}} -->
-	<section class="wp-block-group">
-		<!-- wp:query {"query":{"perPage":10,"pages":0,"offset":0,"postType":"post","order":"desc","orderBy":"date"},"className":"blog-grid"} -->
+	<!-- wp:group {"tagName":"section","className":"blog-list aaa-section","backgroundColor":"surface-light","align":"full","layout":{"type":"constrained"}} -->
+	<section class="wp-block-group alignfull blog-list aaa-section has-surface-light-background-color has-background">
+		<!-- wp:query {"queryId":1,"query":{"perPage":9,"pages":0,"offset":0,"postType":"post","order":"desc","orderBy":"date","inherit":true},"className":"blog-grid"} -->
 		<div class="wp-block-query blog-grid">
-			<!-- wp:post-template -->
-				<!-- wp:group {"className":"is-style-surface-solid blog-card"} -->
-				<div class="wp-block-group is-style-surface-solid blog-card">
-					<!-- wp:post-featured-image {"className":"blog-card__media","isLink":true} /-->
-					<!-- wp:post-terms {"term":"category","className":"blog-card__tag"} /-->
-					<!-- wp:post-title {"level":3,"isLink":true} /-->
-					<!-- wp:post-excerpt /-->
-					<!-- wp:read-more {"content":"Leer más →"} /-->
+			<!-- wp:post-template {"className":"blog-grid__items"} -->
+				<!-- wp:group {"className":"blog-card"} -->
+				<div class="wp-block-group blog-card">
+					<!-- wp:post-featured-image {"isLink":true,"aspectRatio":"3/2","className":"blog-card__media"} /-->
+					<!-- wp:group {"className":"blog-card__body"} -->
+					<div class="wp-block-group blog-card__body">
+						<!-- wp:post-terms {"term":"category","className":"blog-card__tag"} /-->
+						<!-- wp:post-title {"level":2,"isLink":true,"className":"blog-card__title"} /-->
+						<!-- wp:post-date {"format":"j \\d\\e F \\d\\e Y","className":"blog-card__date"} /-->
+						<!-- wp:post-excerpt {"excerptLength":28,"className":"blog-card__excerpt"} /-->
+						<!-- wp:read-more {"content":"Leer el análisis →","className":"blog-card__more"} /-->
+					</div>
+					<!-- /wp:group -->
 				</div>
 				<!-- /wp:group -->
 			<!-- /wp:post-template -->
 
-			<!-- wp:query-pagination -->
-				<!-- wp:query-pagination-previous /-->
+			<!-- wp:query-pagination {"className":"blog-grid__pagination"} -->
+				<!-- wp:query-pagination-previous {"label":"Anteriores"} /-->
 				<!-- wp:query-pagination-numbers /-->
-				<!-- wp:query-pagination-next /-->
+				<!-- wp:query-pagination-next {"label":"Siguientes"} /-->
 			<!-- /wp:query-pagination -->
 
 			<!-- wp:query-no-results -->
-				<!-- wp:paragraph -->
-				<p>Todavía no hay publicaciones. Contenido de ejemplo — mientras el equipo confirma la autoría editorial del blog — no se publica hasta esa confirmación (ver STATUS.md).</p>
+				<!-- wp:paragraph {"className":"blog-grid__empty"} -->
+				<p class="blog-grid__empty">Pronto publicaremos aquí nuestros primeros análisis.</p>
 				<!-- /wp:paragraph -->
 			<!-- /wp:query-no-results -->
 		</div>

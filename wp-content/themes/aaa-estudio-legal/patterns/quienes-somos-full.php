@@ -15,7 +15,7 @@
 		<!-- wp:group {"className":"hero-shell__media"} -->
 		<div class="wp-block-group hero-shell__media">
 			<!-- wp:image {"className":"hero-shell__img"} -->
-			<figure class="wp-block-image hero-shell__img"><img src="<?php echo esc_url( get_theme_file_uri( 'assets/img/nosotros/hero.webp' ) ); ?>" alt="Equipo de AAA Estudio Legal trabajando en su oficina" /></figure>
+			<figure class="wp-block-image hero-shell__img"><img src="<?php echo esc_url( aaa_media_url( 'aaa-hero-quienes-somos.webp' ) ); ?>" alt="Equipo de AAA Estudio Legal trabajando en su oficina" /></figure>
 			<!-- /wp:image -->
 			<!-- wp:group {"className":"hero-shell__scrim"} --><div class="wp-block-group hero-shell__scrim"></div><!-- /wp:group -->
 		</div>

@@ -22,7 +22,7 @@
 		<!-- wp:group {"className":"hero-shell__media"} -->
 		<div class="wp-block-group hero-shell__media">
 			<!-- wp:image {"className":"hero-shell__img"} -->
-			<figure class="wp-block-image hero-shell__img"><img src="<?php echo esc_url( get_theme_file_uri( 'assets/img/home/hero.webp' ) ); ?>" alt="Oficina de AAA Estudio Legal con el equipo trabajando" /></figure>
+			<figure class="wp-block-image hero-shell__img"><img src="<?php echo esc_url( aaa_media_url( 'aaa-portada-fundadores.webp' ) ); ?>" alt="Fundadores de AAA Estudio Legal sobre fondo azul" /></figure>
 			<!-- /wp:image -->
 			<!-- wp:group {"className":"hero-shell__scrim"} --><div class="wp-block-group hero-shell__scrim"></div><!-- /wp:group -->
 		</div>
@@ -265,7 +265,7 @@
 				<figure class="wp-block-image size-full"><img src="<?php echo esc_url( aaa_media_url('logo-gnb-sudameris.png') ); ?>" alt="Logo de Banco GNB Sudameris"/></figure>
 				<!-- /wp:image -->
 				<!-- wp:image {"sizeSlug":"full","linkDestination":"none"} -->
-				<figure class="wp-block-image size-full"><img src="<?php echo esc_url( aaa_media_url('logo-femcristar.png') ); ?>" alt="Logo de Femcristar"/></figure>
+				<figure class="wp-block-image size-full"><img src="<?php echo esc_url( aaa_media_url('logo-femcristar.webp') ); ?>" alt="Logo de Femcristar"/></figure>
 				<!-- /wp:image -->
 				<!-- wp:image {"sizeSlug":"full","linkDestination":"none"} -->
 				<figure class="wp-block-image size-full"><img src="<?php echo esc_url( aaa_media_url('logo-nuestro-fondo.png') ); ?>" alt="Logo de Nuestro Fondo"/></figure>
@@ -284,7 +284,7 @@
 			<!-- wp:group {"className":"sector-card__logos sector-card__logos--spaced","layout":{"type":"default"}} -->
 			<div class="wp-block-group sector-card__logos sector-card__logos--spaced">
 				<!-- wp:image {"sizeSlug":"full","linkDestination":"none"} -->
-				<figure class="wp-block-image size-full"><img src="<?php echo esc_url( aaa_media_url('logo-coopunidos.png') ); ?>" alt="Logo de Coopunidos"/></figure>
+				<figure class="wp-block-image size-full"><img src="<?php echo esc_url( aaa_media_url('logo-coopunidos.webp') ); ?>" alt="Logo de Coopunidos"/></figure>
 				<!-- /wp:image -->
 				<!-- wp:image {"sizeSlug":"full","linkDestination":"none"} -->
 				<figure class="wp-block-image size-full"><img src="<?php echo esc_url( aaa_media_url('logo-fetrabuv.png') ); ?>" alt="Logo de Fetrabuv"/></figure>
@@ -309,7 +309,7 @@
 				<figure class="wp-block-image size-full"><img src="<?php echo esc_url( aaa_media_url('logo-gobernacion-valle-del-cauca-ribbon.png') ); ?>" alt="Logo de la Gobernación del Valle del Cauca"/></figure>
 				<!-- /wp:image -->
 				<!-- wp:image {"sizeSlug":"full","linkDestination":"none"} -->
-				<figure class="wp-block-image size-full"><img src="<?php echo esc_url( aaa_media_url('logo-metrocali.png') ); ?>" alt="Logo de MetroCali"/></figure>
+				<figure class="wp-block-image size-full"><img src="<?php echo esc_url( aaa_media_url('logo-metrocali.webp') ); ?>" alt="Logo de MetroCali"/></figure>
 				<!-- /wp:image -->
 			</div>
 			<!-- /wp:group -->
@@ -325,7 +325,7 @@
 			<!-- wp:group {"className":"sector-card__logos","layout":{"type":"default"}} -->
 			<div class="wp-block-group sector-card__logos">
 				<!-- wp:image {"sizeSlug":"full","linkDestination":"none"} -->
-				<figure class="wp-block-image size-full"><img src="<?php echo esc_url( aaa_media_url('logo-promedico.png') ); ?>" alt="Logo de Promédico"/></figure>
+				<figure class="wp-block-image size-full"><img src="<?php echo esc_url( aaa_media_url('logo-promedico.webp') ); ?>" alt="Logo de Promédico"/></figure>
 				<!-- /wp:image -->
 				<!-- wp:image {"sizeSlug":"full","linkDestination":"none"} -->
 				<figure class="wp-block-image size-full"><img src="<?php echo esc_url( aaa_media_url('logo-comfandi.png') ); ?>" alt="Logo de Comfandi"/></figure>
@@ -366,10 +366,10 @@
 				<figure class="wp-block-image size-full"><img src="<?php echo esc_url( aaa_media_url('logo-elgranlangostino.png') ); ?>" alt="Logo de El Gran Langostino"/></figure>
 				<!-- /wp:image -->
 				<!-- wp:image {"sizeSlug":"full","linkDestination":"none"} -->
-				<figure class="wp-block-image size-full"><img src="<?php echo esc_url( aaa_media_url('logo-ma-isabel.png') ); ?>" alt="Logo de Ma. Isabel"/></figure>
+				<figure class="wp-block-image size-full"><img src="<?php echo esc_url( aaa_media_url('logo-ma-isabel.webp') ); ?>" alt="Logo de Ma. Isabel"/></figure>
 				<!-- /wp:image -->
 				<!-- wp:image {"sizeSlug":"full","linkDestination":"none"} -->
-				<figure class="wp-block-image size-full"><img src="<?php echo esc_url( aaa_media_url('logo-k-listo.png') ); ?>" alt="Logo de K-Listo"/></figure>
+				<figure class="wp-block-image size-full"><img src="<?php echo esc_url( aaa_media_url('logo-k-listo.webp') ); ?>" alt="Logo de K-Listo"/></figure>
 				<!-- /wp:image -->
 			</div>
 			<!-- /wp:group -->

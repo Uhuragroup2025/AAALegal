@@ -353,9 +353,9 @@
   };
 
   // D175: en la primera página de la sesión el preloader cubre la pantalla
-  // ~0,9 s; las entradas de lo que ya está a la vista (Hero incluido) se
+  // (2,5 s desde D191); las entradas de lo que ya está a la vista (Hero incluido) se
   // preparan debajo y arrancan cuando se está retirando, no a ciegas detrás.
-  var introDelay = document.documentElement.classList.contains('aaa-preloading') ? 0.6 : 0;
+  var introDelay = document.documentElement.classList.contains('aaa-preloading') ? 1.95 : 0;
 
   var media = gsap.matchMedia();
   var setupMotion = function () { media.add({

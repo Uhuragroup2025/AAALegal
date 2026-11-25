@@ -224,14 +224,14 @@ la página muestra "Error: no se encontró el formulario". En la pestaña
 </div>
 <div class="talent-form__field">
 <label for="tf-cargo">Cargo de interés</label>
-[select* cargo id:tf-cargo first_as_label "Seleccione un cargo" "Abogado junior" "Abogado senior" "Dependiente judicial" "Auxiliar jurídico" "Otro"]
+[select* cargo id:tf-cargo first_as_label "Seleccione un cargo" "Dependiente judicial" "Abogado(a) junior" "Abogado(a) senior" "Otro"]
 </div>
 <div class="talent-form__field">
 <label for="tf-cv">Hoja de vida (PDF o Word, máx. 5 MB)</label>
 [file* cv id:tf-cv limit:5mb filetypes:pdf|doc|docx]
 </div>
 <div class="talent-form__consent">
-[acceptance autorizacion-datos] Autorizo a Agudelo Abogados Asociados SAS — AAA Estudio Legal a tratar mis datos personales y mi hoja de vida para gestionar esta postulación, conforme a la Ley 1581 de 2012 y a su <a href="/politica-de-privacidad/" target="_blank" rel="noopener">Política de privacidad</a>. [/acceptance]
+[acceptance autorizacion-datos] Autorizo a Agudelo Abogados Asociados SAS — AAA Estudio Legal a tratar mis datos personales y mi hoja de vida para gestionar esta postulación, conforme a la Ley 1581 de 2012 y a su <a href="/politica-de-tratamiento-de-datos-personales/" target="_blank" rel="noopener">Política de tratamiento de datos personales</a>. [/acceptance]
 </div>
 <div class="talent-form__actions">
 [submit "Enviar postulación →"]
@@ -282,7 +282,7 @@ organización, Asunto de interés y Contexto general del asunto; quedan 5 campos
 [tel* telefono id:cf-telefono autocomplete:tel minlength:10 maxlength:10]
 </div>
 <div class="talent-form__consent">
-[acceptance autorizacion-datos] Autorizo a Agudelo Abogados Asociados SAS — AAA Estudio Legal a tratar mis datos personales para atender esta solicitud, conforme a la Ley 1581 de 2012 y a su <a href="/politica-de-privacidad/" target="_blank" rel="noopener">Política de privacidad</a>. [/acceptance]
+[acceptance autorizacion-datos] Autorizo a Agudelo Abogados Asociados SAS — AAA Estudio Legal a tratar mis datos personales para atender esta solicitud, conforme a la Ley 1581 de 2012 y a su <a href="/politica-de-tratamiento-de-datos-personales/" target="_blank" rel="noopener">Política de tratamiento de datos personales</a>. [/acceptance]
 </div>
 <div class="talent-form__actions">
 [submit "Solicitar contacto →"]

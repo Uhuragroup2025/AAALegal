@@ -38,9 +38,10 @@ function aaa_theme_setup() {
 	add_theme_support( 'responsive-embeds' );
 	add_theme_support( 'html5', array( 'search-form', 'comment-form', 'comment-list', 'gallery', 'caption', 'style', 'script', 'navigation-widgets' ) );
 
-	// El editor usa el mismo CSS de front-end — sin una hoja "solo editor" que
-	// pueda desincronizarse (mismo principio de fidelidad que el prototipo).
-	add_editor_style( 'assets/css/components.css' );
+	// El editor usa el mismo CSS de front-end. editor.css solo suple, para el
+	// editor, la maqueta de las secciones que en el front dependen de la clase
+	// `.home-page` del <body>, que en el editor no existe (D190).
+	add_editor_style( array( 'assets/css/components.css', 'assets/css/editor.css' ) );
 }
 add_action( 'after_setup_theme', 'aaa_theme_setup' );
 
@@ -168,25 +169,40 @@ function aaa_theme_assets() {
 			get_theme_file_uri( 'assets/js/gsap/gsap-3.15.0.min.js' ),
 			array(),
 			'3.15.0',
-			array( 'in_footer' => true )
+			array( 'in_footer' => true, 'strategy' => 'defer' )
 		);
 		wp_enqueue_script(
 			'aaa-gsap-scrolltrigger',
 			get_theme_file_uri( 'assets/js/gsap/ScrollTrigger-3.15.0.min.js' ),
 			array( 'aaa-gsap' ),
 			'3.15.0',
-			array( 'in_footer' => true )
+			array( 'in_footer' => true, 'strategy' => 'defer' )
 		);
 		wp_enqueue_script(
 			'aaa-home-motion',
 			get_theme_file_uri( 'assets/js/home-motion.js' ),
 			array( 'aaa-gsap', 'aaa-gsap-scrolltrigger' ),
 			aaa_asset_version( 'assets/js/home-motion.js' ),
-			array( 'in_footer' => true )
+			array( 'in_footer' => true, 'strategy' => 'defer' )
 		);
 	}
 }
 add_action( 'wp_enqueue_scripts', 'aaa_theme_assets' );
+
+/**
+ * D183 — Contact Form 7 carga sus scripts y estilos en todas las páginas; solo
+ * Contacto y Trabaja con nosotros tienen formulario. En las demás se omiten
+ * (PageSpeed móvil: menos archivos antes de mostrar la portada).
+ */
+function aaa_cf7_only_with_form() {
+	if ( ! is_singular() ) {
+		return false;
+	}
+	$content = (string) get_post_field( 'post_content', get_queried_object_id() );
+	return has_shortcode( $content, 'contact-form-7' ) || false !== strpos( $content, 'wp:contact-form-7/' );
+}
+add_filter( 'wpcf7_load_js', 'aaa_cf7_only_with_form' );
+add_filter( 'wpcf7_load_css', 'aaa_cf7_only_with_form' );
 
 /**
  * home-motion.js (portado tal cual desde prototype/js/) detecta la portada
@@ -339,8 +355,8 @@ function aaa_render_brand_lockup( $block_content, $block ) {
 	$wordmark = esc_url( aaa_brand_url( 'wordmark-blanco.svg' ) );
 	return sprintf(
 		'<a class="brand" href="%1$s" aria-label="%2$s">' .
-			'<span class="brand__mark" aria-hidden="true"><img class="brand__isotype" src="%3$s" alt="" /></span>' .
-			'<span class="brand__wordmark" aria-hidden="true"><img class="brand__wordmark-light" src="%4$s" alt="" /></span>' .
+			'<span class="brand__mark" aria-hidden="true"><img class="brand__isotype" src="%3$s" alt="" width="676" height="425" /></span>' .
+			'<span class="brand__wordmark" aria-hidden="true"><img class="brand__wordmark-light" src="%4$s" alt="" width="623" height="389" /></span>' .
 		'</a>',
 		esc_url( home_url( '/' ) ),
 		esc_attr__( 'AAA Estudio Legal — Inicio', 'aaa-estudio-legal' ),
@@ -721,6 +737,166 @@ function aaa_legacy_hash_redirect() {
 add_action( 'wp_head', 'aaa_legacy_hash_redirect', 0 );
 
 /**
+ * D183 — Ancho y alto en las imágenes del tema (backlog SEO T09). WordPress
+ * solo los agrega a las imágenes de la Biblioteca de medios; las que vienen
+ * del tema (portadas, fotos de los patterns) salían sin ellos, lo que provoca
+ * saltos de diseño (CLS) y le impedía a WordPress reconocer la foto de
+ * portada como la imagen principal: le daba prioridad de carga a otra. Aquí
+ * se leen las medidas del archivo y, en la foto de portada (`hero-shell__img`),
+ * se pide carga prioritaria y sin diferir.
+ * Además (PageSpeed móvil): las fotos de la Biblioteca salían sin `srcset`, así
+ * que el móvil bajaba el archivo de 1800 px para mostrarlo a ~700; se agregan
+ * sus tamaños intermedios. Y desde la segunda foto de la página, las que no
+ * tienen `loading` se difieren, para no competir con la portada.
+ */
+function aaa_image_dimensions( $block_content, $block ) {
+	if ( 'core/image' !== ( $block['blockName'] ?? '' ) || false === strpos( $block_content, '<img' ) ) {
+		return $block_content;
+	}
+	static $cache = array();
+	static $seen  = 0;
+	++$seen;
+	$is_hero  = false !== strpos( $block['attrs']['className'] ?? '', 'hero-shell__img' );
+	$is_first = 1 === $seen;
+	return preg_replace_callback(
+		'/<img\b[^>]*>/',
+		function ( $match ) use ( &$cache, $is_hero, $is_first ) {
+			$img = $match[0];
+			if ( ! $is_hero && ! $is_first && false === strpos( $img, ' loading=' ) ) {
+				$img = str_replace( '<img ', '<img loading="lazy" ', $img );
+			}
+			// D191: si la foto se cambió desde el editor (lleva `wp-image-ID`),
+			// WordPress le pone después su propio srcset con `sizes` según el
+			// tamaño del bloque (1024px máx.) y la portada salía borrosa en
+			// pantallas grandes. La portada siempre ocupa la pantalla: se
+			// adelanta aquí con 100vw y WordPress ya no la toca.
+			$wp_id = preg_match( '/\bwp-image-(\d+)/', $img, $wp_match ) ? (int) $wp_match[1] : 0;
+			if ( false === strpos( $img, ' srcset=' ) && ( ! $wp_id || $is_hero ) && preg_match( '/\ssrc="([^"]+)"/', $img, $src ) ) {
+				$id = $wp_id ? $wp_id : attachment_url_to_postid( strtok( $src[1], '?' ) );
+				$srcset = $id ? wp_get_attachment_image_srcset( $id, 'full' ) : false;
+				if ( $srcset ) {
+					$sizes = $is_hero ? '100vw' : '(max-width: 1023px) 100vw, 60vw';
+					$img   = str_replace( '<img ', sprintf( '<img srcset="%s" sizes="%s" ', esc_attr( $srcset ), esc_attr( $sizes ) ), $img );
+				}
+			}
+			if ( ! preg_match( '/\swidth="/', $img ) && preg_match( '/\ssrc="([^"]+)"/', $img, $src ) ) {
+				$url  = strtok( $src[1], '?' );
+				$path = '';
+				$up   = wp_upload_dir();
+				if ( 0 === strpos( $url, get_theme_file_uri() ) ) {
+					$path = get_theme_file_path( substr( $url, strlen( get_theme_file_uri() ) ) );
+				} elseif ( 0 === strpos( $url, $up['baseurl'] ) ) {
+					$path = $up['basedir'] . substr( $url, strlen( $up['baseurl'] ) );
+				}
+				if ( $path && ! isset( $cache[ $path ] ) ) {
+					$size           = file_exists( $path ) ? wp_getimagesize( $path ) : false;
+					$cache[ $path ] = $size ? array( (int) $size[0], (int) $size[1] ) : false;
+				}
+				if ( $path && $cache[ $path ] ) {
+					$img = str_replace( '<img ', sprintf( '<img width="%d" height="%d" ', $cache[ $path ][0], $cache[ $path ][1] ), $img );
+				}
+			}
+			if ( $is_hero && false === strpos( $img, 'fetchpriority=' ) ) {
+				$img = str_replace( '<img ', '<img fetchpriority="high" loading="eager" decoding="async" ', $img );
+			}
+			return $img;
+		},
+		$block_content
+	);
+}
+add_filter( 'render_block', 'aaa_image_dimensions', 5, 2 );
+
+/**
+ * D183 — robots.txt (backlog SEO T15). Solo lo usa WordPress cuando no hay un
+ * archivo robots.txt físico (el staging de Hostinger tiene uno propio para el
+ * dominio temporal). Con el sitio en "disuadir a los motores" se respeta lo
+ * que pone WordPress (todo bloqueado). En el sitio público:
+ * - permite a todos, salvo el escritorio de WordPress;
+ * - permite de forma explícita a los buscadores con IA que citan fuentes
+ *   (ChatGPT Search, Perplexity, Claude, Copilot/Bing);
+ * - los rastreadores de entrenamiento (GPTBot, ClaudeBot, Google-Extended,
+ *   CCBot) quedan permitidos por la regla general hasta que el cliente decida
+ *   (decisión 5 del backlog); para bloquearlos, se agregan aquí;
+ * - declara el sitemap de Rank Math.
+ * Reemplaza lo que se edite en Rank Math → Editar robots.txt.
+ */
+function aaa_robots_txt( $output, $public ) {
+	if ( ! $public ) {
+		return $output;
+	}
+	$lines = array(
+		'User-agent: *',
+		'Disallow: /wp-admin/',
+		'Allow: /wp-admin/admin-ajax.php',
+		'',
+		'# Buscadores con IA que citan fuentes',
+		'User-agent: OAI-SearchBot',
+		'User-agent: ChatGPT-User',
+		'User-agent: PerplexityBot',
+		'User-agent: Perplexity-User',
+		'User-agent: Claude-SearchBot',
+		'User-agent: Claude-User',
+		'User-agent: bingbot',
+		'Allow: /',
+		'Disallow: /wp-admin/',
+		'',
+		'Sitemap: ' . home_url( '/sitemap_index.xml' ),
+	);
+	return implode( "\n", $lines ) . "\n";
+}
+add_filter( 'robots_txt', 'aaa_robots_txt', 99, 2 );
+
+/**
+ * D183 — Analítica con consentimiento (backlog T14, D20: GTM + GA4 + Clarity
+ * vía GTM, sin plugin). Google Consent Mode v2 arranca en "denegado" para la
+ * analítica y la publicidad; el aviso de cookies (pie de página + main.js)
+ * guarda la elección del visitante y la actualiza. Google Tag Manager solo se
+ * carga si hay un ID en Ajustes → Generales → "ID de Google Tag Manager":
+ * mientras esté vacío, el sitio no hace ninguna petición a Google.
+ * La elección se recuerda en el navegador (`aaa-cookie-ack`: granted/denied;
+ * el valor antiguo "1" cuenta como aceptado).
+ */
+function aaa_consent_and_gtm() {
+	$gtm = trim( (string) get_option( 'aaa_gtm_id', '' ) );
+	echo "<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}(function(){var c=null;try{c=localStorage.getItem('aaa-cookie-ack');}catch(e){}var g=(c==='granted'||c==='1')?'granted':'denied';gtag('consent','default',{ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',analytics_storage:g,functionality_storage:'granted',security_storage:'granted',wait_for_update:500});})();</script>\n";
+	if ( preg_match( '/^GTM-[A-Z0-9]{4,12}$/', $gtm ) ) {
+		printf(
+			"<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','%s');</script>\n",
+			esc_js( $gtm )
+		);
+	}
+}
+add_action( 'wp_head', 'aaa_consent_and_gtm', 1 );
+
+function aaa_register_gtm_setting() {
+	register_setting(
+		'general',
+		'aaa_gtm_id',
+		array(
+			'type'              => 'string',
+			'sanitize_callback' => function ( $value ) {
+				$value = strtoupper( trim( (string) $value ) );
+				return preg_match( '/^GTM-[A-Z0-9]{4,12}$/', $value ) ? $value : '';
+			},
+			'default'           => '',
+		)
+	);
+	add_settings_field(
+		'aaa_gtm_id',
+		__( 'ID de Google Tag Manager', 'aaa-estudio-legal' ),
+		function () {
+			printf(
+				'<input name="aaa_gtm_id" id="aaa_gtm_id" type="text" class="regular-text" value="%s" placeholder="GTM-XXXXXXX" /><p class="description">%s</p>',
+				esc_attr( get_option( 'aaa_gtm_id', '' ) ),
+				esc_html__( 'Se carga solo si el visitante acepta las cookies (Consent Mode v2). Déjelo vacío para no cargar analítica.', 'aaa-estudio-legal' )
+			);
+		},
+		'general'
+	);
+}
+add_action( 'admin_init', 'aaa_register_gtm_setting' );
+
+/**
  * D178 — Caché (LiteSpeed Cache). El CDN de Hostinger guarda el HTML que
  * LiteSpeed marca como cacheable, pero solo se vacía con "Purgar todo": la
  * purga por página que LiteSpeed hace al guardar no le llega, y el CDN
@@ -749,6 +925,42 @@ function aaa_purge_on_seo_meta( $meta_id, $post_id, $meta_key ) {
 }
 add_action( 'added_post_meta', 'aaa_purge_on_seo_meta', 10, 3 );
 add_action( 'updated_post_meta', 'aaa_purge_on_seo_meta', 10, 3 );
+
+/**
+ * D186 — En el servidor del cliente (CloudPanel) el HTML lo guarda Varnish, no
+ * LiteSpeed. "Purgar todo" de LiteSpeed borra sus CSS/JS minificados y genera
+ * otros con otro nombre, pero Varnish seguía sirviendo páginas que pedían los
+ * archivos borrados (404): el sitio se veía sin estilos. Cada vez que LiteSpeed
+ * vacía todo o sus CSS/JS, se vacía también Varnish. Sin el plugin CLP Varnish
+ * Cache activo (staging de Hostinger) no hace nada. El plugin solo carga sus
+ * clases dentro del admin, así que fuera de él se carga aquí.
+ */
+function aaa_purge_varnish() {
+	static $done = false;
+	$plugin = 'clp-varnish-cache/clp-varnish-cache.php';
+	$file   = WP_PLUGIN_DIR . '/clp-varnish-cache/class.varnish-cache-manager.php';
+	if ( $done || ! in_array( $plugin, (array) get_option( 'active_plugins', array() ), true ) ) {
+		return;
+	}
+	if ( ! class_exists( 'ClpVarnishCacheManager' ) && file_exists( $file ) ) {
+		require_once $file;
+	}
+	if ( ! class_exists( 'ClpVarnishCacheManager' ) ) {
+		return;
+	}
+	$manager = new ClpVarnishCacheManager();
+	if ( ! $manager->is_enabled() ) {
+		return;
+	}
+	$done = true;
+	$manager->purge_host( (string) wp_parse_url( home_url(), PHP_URL_HOST ) );
+	$prefix = $manager->get_cache_tag_prefix();
+	if ( $prefix ) {
+		$manager->purge_tag( $prefix );
+	}
+}
+add_action( 'litespeed_purged_all', 'aaa_purge_varnish' );
+add_action( 'litespeed_purged_all_cssjs', 'aaa_purge_varnish' );
 
 /**
  * El bloque core/image siempre pone su `className` en el <figure> que envuelve

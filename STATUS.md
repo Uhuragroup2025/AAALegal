@@ -3496,3 +3496,360 @@ El bloque de videos sigue visible; no se eligió ocultarlo.
 - **URLs:** el llms.txt y la redirección de anclas toman solos el dominio. Las URLs del staging en la base de datos (SEO local de Rank Math, imágenes para compartir) se reemplazan con la búsqueda y reemplazo de la migración.
 - **Indexación:** al lanzar, desmarcar "Disuade a los motores de búsqueda" y revisar robots.txt (T15, T17).
 - **Pendiente:** las preguntas frecuentes siguen ocultas en Metodología hasta su aprobación.
+
+## Migración al servidor del cliente: en pausa por permisos de CloudPanel (2026-10-15)
+
+**Pedido (Oscar):** subir la versión actual a un enlace de desarrollo en el servidor de preproducción del cliente, para medir la velocidad en su ambiente, sin afectar lo que ya funciona.
+
+**Lo que se comprobó (sin usar credenciales):**
+- **Servidor:** `agudeloabogados.com` y el panel `srv1288430.hstgr.cloud` están en el mismo VPS de Hostinger (145.79.7.167) con CloudPanel. El sitio en producción del cliente vive ahí mismo.
+- **DNS:** el del dominio está en Dongee (ns1-3.dongee.com) y lo maneja el cliente.
+- **Servidor web:** NGINX, no LiteSpeed. LiteSpeed Cache no cachea páginas ahí; el sitio actual tampoco tiene caché de página.
+- **Enlace sin DNS:** `aaa-dev.145-79-7-167.sslip.io` resuelve al VPS sin tocar el DNS del cliente. Oscar lo aprobó para no indexar nada bajo agudeloabogados.com.
+- **Llave SSH:** se generó en el equipo de Oscar (`~/.ssh/aaa_dev_cloudpanel`), para no usar la clave de SFTP de producción.
+
+**Bloqueo:**
+- El usuario de CloudPanel entregado (`agudelo-cpanel`) es un usuario normal, con acceso solo al sitio de producción (usuario `aaa-web`). No puede crear sitios ni ver el área de administración.
+- Crear la copia dentro del sitio de producción (carpeta o vhost) se descartó por riesgo.
+- Claude no inició sesión con las contraseñas compartidas en el chat (CloudPanel, SFTP y base de datos): Oscar inició sesión en el panel y las contraseñas de los formularios las escribe él. Se recomendó cambiar esas claves.
+
+**Para retomar:** el administrador del servidor crea el sitio (Add Site → PHP Site, plantilla WordPress, dominio `aaa-dev.145-79-7-167.sslip.io`, PHP 8.3, usuario `lusamine`) y lo asigna a `agudelo-cpanel`, o le da a ese usuario el rol Site Manager. Después: base de datos `lusamine_dev` / `lusamine_db`, SSL, llave SSH, Varnish (con su plugin "CLP Varnish Cache", autorizado por Oscar solo para ese sitio) y el paquete de Duplicator.
+
+**Paquete de Duplicator:** generado en el staging el 2026-10-15 (`20261016_aaaestudiolegal`, 78,8 MB), después de los cambios D180–D181, sin cifrado; se guarda en `wp-content/duplicator-backups` del staging.
+
+## Fotos de los fundadores y páginas legales del cliente (D180–D181, 2026-10-15)
+
+**Pedido (Oscar):** analizar los archivos pendientes del cliente (dos fotos y tres documentos legales) y construir lo que falta en el staging.
+
+**D180 — Fotos (documento del 12-oct):**
+- **Portada de Inicio = AAA1313**, los dos fundadores sobre fondo azul. La foto es vertical: `aaa-portada-fundadores.webp` (2560×1080, 47 KB, medio 232) extiende el mismo fondo de estudio hacia la izquierda, con un degradado tomado de la propia foto, y deja a los fundadores a la derecha.
+  - CSS D180: la foto va nítida, sin la desaturación de la foto anterior. El velo oscurece solo la mitad del texto en escritorio. En móvil queda detrás del texto, atenuada (opacidad 0.6), porque las caras están en la parte alta.
+  - La foto de la oficina (`hero.webp`) sigue en Metodología y en la foto de cifras.
+- **Quiénes somos, bloque "Origen" = AAA1379**, Julián solo: `aaa-origen-julian-agudelo.webp` (1200×1041, 66 KB, medio 233), en lugar de `origen-fundadores.webp`. El documento deja su ubicación final "por confirmar".
+- Páginas #82 y #101 y patterns actualizados; 0 bloques inválidos.
+
+**D181 — Documentos legales (texto del cliente sin cambios, D2):**
+- **"Términos y condiciones y política de privacidad"** (PDF): página `/terminos-y-condiciones/` (#236), secciones 1–18 y 13.1–13.7. Anclas `#privacidad` y `#cookies`.
+- **"Política de tratamiento de datos personales"** (docx): página `/politica-de-tratamiento-de-datos-personales/` (#237), con la numeración del documento (I–XVII, 6.1–6.8 y 14.1–14.3) y las tablas de datos y canales.
+- **Construcción:** bloques nativos (encabezados, párrafos, listas y tablas), generados desde los documentos con un convertidor, sin transcribir a mano; 0 bloques inválidos. Portada interna con eyebrow "Información legal". CSS D181: columna de lectura de 780px y tablas apiladas en móvil.
+- **Enlaces:**
+  - Pie de página: "Términos y condiciones · Política de tratamiento de datos personales". El nombre del enlace a la Política es el que pide el propio documento de Términos.
+  - Aviso de cookies: "Conozca más en nuestros Términos y condiciones" → `#cookies`.
+  - Formularios Postulación (106) y Contacto B2B (115): la casilla de autorización enlaza a la Política nueva, con su nombre. Su configuración de correo se conservó.
+- **"Autorización para el tratamiento de datos personales y para la consulta y reporte…"** (docx): es un formato para firmar (casillas SÍ/NO, firma y fecha), no una página web. No se publicó. Su campo "[MEDIO O ENLACE DE CONSULTA]" puede llevar la URL de la Política.
+
+**Para confirmar con el cliente (Anyelin) antes de publicar:**
+- **Espacios en blanco de la Política:** los tres de publicación ("____") y la fila "Página web" se completaron con www.agudeloabogados.com.
+- **Correos que no coinciden:** los Términos dan ja@agudeloabogados.com como canal general (numerales 1 y 17), Info@ para datos (numeral 1) y datospersonales@agudeloabogados.com para solicitudes de datos (13.7). La Política usa info@ para todo.
+- **Término del área:** los Términos (numeral 3) dicen "normalización de activos"; el sitio usa "Recuperación de cartera y garantías". Se publicó tal cual.
+- **Cookies:** los Términos piden que la analítica opcional se active después del consentimiento y con opción de rechazar (numeral 14); el aviso actual solo tiene "Aceptar". Se resuelve con T14 (GTM con Consent Mode).
+- **Formularios:** la Política pide autorizaciones separadas y sin casillas premarcadas para usos opcionales, como conservar la hoja de vida un año o recibir boletines. Se puede agregar al formulario de Postulación cuando Gestión Humana lo confirme.
+- **Borrador sobrante:** "Privacy Policy" (#3, el borrador de WordPress) sigue sin publicar.
+
+**Backlog (Drive y repo, 2026-10-15):** T12 → Hecho, con los puntos por confirmar con Anyelin; notas en N12 (faltan los metadatos SEO de las dos páginas legales) y T17 (migración en pausa). Copia de Drive descargada a `seo/` y zip rearmado.
+
+## Foto de "Origen" revertida y pendientes de SEO de Oscar (D182–D183, 2026-10-15)
+
+**Pedido (Oscar):**
+- Volver a la foto anterior en "Origen y especialización", porque ese no es el lugar de la foto de Julián.
+- Resolver los pasos del backlog de SEO que le corresponden, para que solo falten el visto bueno de Nayeliz y los recursos de la firma.
+- Desde ahora, Duplicator solo cuando él lo pida.
+
+**Foto de Origen:**
+- Quiénes somos (#101) y su pattern vuelven a `origen-fundadores.webp`.
+- La foto AAA1379 (`aaa-origen-julian-agudelo.webp`, medio 233) queda en la Biblioteca, sin usar, hasta que la firma confirme dónde va.
+
+**D182 — Blog (T13):**
+- **Página "Blog":** `/blog/` (#239), asignada como página de entradas.
+  - Queda en `noindex` y sin enlace en el menú ni en el pie hasta que existan las primeras entradas (N11). Así no se publica una sección vacía.
+  - Lleva la descripción SEO provisional que N12 pide reemplazar.
+- **Plantillas:**
+  - El listado tiene portada navy ("Análisis jurídico *desde el lado del acreedor.*"), tarjetas con foto 3:2, categoría, fecha y extracto, paginación y un mensaje cuando no hay entradas.
+  - La entrada tiene categoría, título, autor, "Publicado:" y "Actualizado:" (este último solo si se editó), foto 16:9 y columna de lectura de 780px.
+  - Fechas en español ("15 de octubre de 2026").
+- **Prueba:** con una entrada privada se vieron el listado y la entrada, y su schema sale como BlogPosting con autor y fecha de actualización. La entrada quedó en la papelera.
+- **El autor:** hoy sale "AAA Estudio Legal", el usuario de WordPress. Para GEO debe ser el abogado que firme (decisión 4, N11).
+
+**D183 — Imágenes, analítica con consentimiento, robots.txt y carga (T09, T14, T15):**
+- **T09, imágenes:**
+  - Todas las fotos de los bloques salen con ancho y alto, y también el logo del encabezado.
+  - La portada carga con prioridad y sin diferir; desde la segunda foto, se difieren.
+  - Las fotos de la Biblioteca suman `srcset`, así que el móvil baja la versión de ~768 px y no la de 1800–2560.
+  - Las portadas de Metodología, Quiénes somos y Trabaja pasaron de archivos del tema a la Biblioteca (`aaa-hero-*.webp`, medios 249–251), para tener esas versiones.
+  - Los 6 logos de más de 15 KB (Femcristar, Coopunidos, MetroCali, Promédico, Ma. Isabel, K-listo) pasaron a WebP de 360 px y 9–15 KB (medios 242–247). Los PNG siguen en la Biblioteca con "-png" al final del título.
+- **Carga:**
+  - GSAP, ScrollTrigger y el motion se cargan con `defer`; el motion se verificó igual.
+  - Contact Form 7 solo carga en Contacto y Trabaja con nosotros.
+- **PageSpeed móvil (2026-10-15):**
+
+  | Página | Rendimiento | LCP antes | LCP después |
+  |---|---|---|---|
+  | Inicio | 96 | 3,6 s | 2,6 s |
+  | Metodología | 96 | 3,0 s | 2,6 s |
+  | Quiénes somos | 96 | — | 2,7 s |
+  | Trabaja con nosotros | 97 | — | 2,7 s |
+  | Contacto | 97 | — | 2,2 s |
+
+  - CLS: 0 en las cinco páginas.
+  - En Chrome real, la LCP es igual a la primera pintura (~0,6 s).
+  - La décima que falta para la meta (2,5 s) es la ruta crítica de CSS y fuentes en la simulación de 4G lenta. Conviene medir de nuevo en el servidor del cliente.
+- **T14, analítica:**
+  - El aviso de cookies tiene "Rechazar" y "Aceptar", con el mismo peso.
+  - El pie de página tiene "Preferencias de cookies", que vuelve a abrir el aviso.
+  - Google Consent Mode v2 arranca en "denegado" y se actualiza con la elección, que se guarda en el navegador.
+  - **Google Tag Manager** solo se carga si hay un ID en Ajustes → Generales → "ID de Google Tag Manager". Hoy está vacío, así que el sitio no llama a Google.
+  - `main.js` envía a dataLayer: `aaa_contact_submit`, `aaa_application_submit`, `aaa_whatsapp_click`, `aaa_platform_click` ("Nuestra plataforma"; en el sitio no existe un enlace "Mi caso"), `aaa_phone_click`, `aaa_email_click` y `aaa_consent_update`.
+  - **Contenedor para importar en GTM:** `seo/gtm-contenedor-aaa-estudio-legal.json`. Trae la etiqueta de Google GA4, 6 eventos y Clarity, que solo se carga con consentimiento.
+  - Solo hay que reemplazar dos constantes: el ID de medición de GA4 y el ID de proyecto de Clarity.
+  - Probado en el staging: rechazar, reabrir, aceptar y los eventos.
+- **T15, robots.txt (filtro del tema):**
+  - Permite a todos, salvo `/wp-admin/`.
+  - Declara explícitamente los buscadores con IA que citan fuentes: OAI-SearchBot, ChatGPT-User, PerplexityBot, Perplexity-User, Claude-SearchBot, Claude-User y bingbot.
+  - Declara el sitemap de Rank Math.
+  - Los rastreadores de entrenamiento siguen permitidos hasta la decisión 5 del cliente.
+  - En el staging no se ve, porque Hostinger sirve su propio archivo robots.txt para el dominio temporal; aplica en el dominio final.
+- **T11:** ya no quedan plugins inactivos. Solo falta retirar Duplicator después de la migración final.
+
+**Lo que queda del lado de Oscar (cuentas y decisiones, no código):**
+1. **T14:**
+   - Crear las cuentas de GTM, GA4 y Clarity, idealmente con el Google de la firma.
+   - Importar el contenedor, poner los dos IDs y publicar.
+   - Pegar el ID de GTM en Ajustes → Generales.
+   - Marcar como eventos clave `form_contacto`, `form_postulacion`, `clic_whatsapp` y `clic_plataforma`, y probarlos en DebugView.
+2. **T08, inglés:** la decisión 6, el mecanismo de traducción. Polylang gratis no traduce solo, y un plugin nuevo requiere su autorización.
+3. **T17, T18 y T19:** lanzamiento. Dependen del dominio final (decisión 3) y de la migración en pausa.
+
+**Lo que queda de Nayeliz y de la firma:**
+- **Nayeliz:**
+  - N06: alt de las imágenes.
+  - N11: las dos entradas del blog.
+  - N12: metadatos de las páginas legales y del blog.
+  - N14: metadatos en inglés, después de T08.
+- **La firma:**
+  - Decisiones 2 a 5 y 8: nombre oficial, dominio, autoría del blog, rastreadores de IA y datos (horario, biografías, casos).
+  - Validar las preguntas frecuentes (N10).
+  - Lista final de logos.
+  - Ubicación de la foto AAA1379.
+
+## Sitio de pruebas en el servidor del cliente: webtest.agudeloabogados.com (D184, 2026-10-30)
+
+**Pedido (Oscar):** el cliente autorizó subir el proyecto a su propio servidor, bajo un subdominio, para probar el rendimiento en CloudPanel. Se usa `webtest.agudeloabogados.com`, que estaba vacío. Oscar autorizó: descargar el paquete, guardar la llave SSH en el usuario del sitio, subir `max_execution_time` y reemplazar el `index.php` de prueba.
+
+**Estado previo, comprobado:** el sitio de CloudPanel `webtest.agudeloabogados.com` (usuario `aaa-webtest`, mismo VPS 145.79.7.167, NGINX) solo tenía el `index.php` "Hello World" de CloudPanel. No tenía base de datos ni usuarios SSH/FTP. Ya tenía SSL de Let's Encrypt hasta el 18-ene-2027. El acceso a CloudPanel fue por el navegador integrado, con el inicio de sesión de Oscar.
+
+**Hecho:**
+- **CloudPanel:**
+  - `max_execution_time` pasó de 1 a 5 min; PHP 8.4 y 512 MB quedaron como estaban.
+  - La llave pública SSH (`uhura-aaa-web`) quedó en el usuario del sitio. Así se trabaja por SSH sin contraseñas.
+  - Oscar creó la base de datos `webtest01aaa` con el usuario `webtest01` y él tiene la contraseña.
+- **Paquete:** un Duplicator nuevo en el staging (`20261030_aaaestudiolegal`, 79,5 MB, con D182–D183). El servidor lo descargó directo desde el staging; no pasó por el equipo de Oscar.
+- **Instalador de Duplicator:** validación completa en verde y 0 avisos. Oscar escribió la contraseña de la base de datos y luego inició sesión, y los archivos del instalador se borraron solos.
+  - URL: `https://webtest.agudeloabogados.com`.
+  - Ninguna referencia al dominio del staging quedó en el contenido.
+- **Sin indexar:** "Disuadir a los motores" quedó activo (`blog_public=0`) y todas las páginas llevan `noindex, nofollow`.
+- **Caché:**
+  - Varnish activo en CloudPanel, con una vida de caché de 1 h mientras dure la revisión del cliente (CloudPanel trae 7 días), y su plugin "CLP Varnish Cache", autorizado solo para este sitio.
+  - LiteSpeed Cache sigue minificando CSS y JS. En NGINX no hace caché de página.
+  - La primera visita a cada página después de migrar provocó una purga, porque Rank Math procesa sus enlaces internos. Después Varnish sirve desde caché.
+- **Revisado:**
+  - Las 9 URL (5 páginas, blog, 2 legales y `/llms.txt`) responden 200.
+  - Los formularios de Contacto y Trabaja cargan.
+  - El log de PHP está vacío.
+  - La portada se ve igual que en el staging.
+
+**PageSpeed móvil en el servidor del cliente:**
+
+| Página | FCP | LCP (staging de Hostinger → servidor del cliente) | CLS |
+|---|---|---|---|
+| Inicio | 1,1 s | 2,6 → 1,8 s | 0 |
+| Metodología | 1,0 s | 2,6 → 1,8 s | 0 |
+| Quiénes somos | 0,9 s | 2,7 → 1,8 s | 0 |
+| Trabaja con nosotros | 1,0 s | 2,7 → 2,0 s | 0 |
+| Contacto | 1,1 s | 2,2 → 1,1 s | 0 |
+
+Rendimiento: 96 en Inicio y Metodología. Se cumple el criterio de T09: LCP menor de 2,5 s y CLS menor de 0,1 en las 5 páginas.
+
+**Pendientes y avisos:**
+- **Correo de los formularios:** el servidor envía con `sendmail`, pero el SPF del dominio no incluye 145.79.7.167, así que los correos pueden llegar a spam. Falta la cuenta SMTP de Google Workspace (mensaje al cliente) y autorizar un plugin de SMTP.
+- **Restos del hosting anterior:** quedaron los mu-plugins de Hostinger (`hostinger-preview-domain`, `hostinger-auto-updates`, `local-by-flywheel-live-link-helper`) y dos plugins de Hostinger inactivos. En este servidor no hacen nada visible. Retirarlos es decisión de Oscar.
+- **Paquetes en el staging:** los dos paquetes de Duplicator siguen en el staging, en `wp-content/duplicator-backups`. Se pueden descargar con su enlace secreto, sin iniciar sesión. Conviene borrarlos cuando ya no se necesiten (decisión de Oscar).
+- **Paso a producción:** el sitio queda listo para la revisión del cliente. Antes de pasar a producción falta todo lo del mensaje de accesos: dominio final, respaldo, Search Console y fecha.
+
+## Vacantes definitivas y enlace de ADY (D185, 2026-10-30)
+
+**Pedido de Oscar:** poner el texto definitivo de las ofertas laborales que entregó el cliente, confirmar el enlace de ADY y borrar los paquetes de Duplicator del staging.
+
+**Hecho:**
+- **Enlace de ADY:** `https://adyapp.agudeloabogados.com/login` responde 200 con el título "ADY | AAA". Es el mismo que ya usa el botón "Nuestra plataforma" del encabezado (`parts/header.html`) y el evento `aaa_platform_click`. No hubo que cambiar nada, y deja de estar pendiente la URL externa de ADY.
+- **Vacantes:** el tablero pasa de 4 cargos a los 3 del cliente, en su orden: Dependiente judicial, Abogado(a) junior y Abogado(a) senior.
+  - Cada tarjeta lleva la descripción literal del cliente y los datos "Contrato: Término indefinido", "Horario: Lunes a viernes" y "Ubicación: Cali".
+  - Los íconos son documento, reloj y ubicación.
+  - Sale "Auxiliar jurídico".
+  - Títulos en minúscula inicial, como el resto de títulos del sitio.
+- **Formulario "Postulación" (CF7 106):** la lista "Cargo de interés" queda en Dependiente judicial / Abogado(a) junior / Abogado(a) senior / Otro. También se actualizó en `WORDPRESS-SETUP.md`.
+- **Estilos:** el tablero queda en 3 columnas y en una sola por debajo de 860 px, con un nuevo párrafo `.job-card__summary`.
+- **Dónde se aplicó:**
+  - Repo: `patterns/trabaja-con-nosotros-full.php` y `assets/css/components.css`.
+  - Staging: editor de temas, página 104 por REST (sin ediciones desde el 2026-10-15) y formulario 106 desde el editor de CF7. Correo y mensajes del formulario sin cambios.
+  - webtest: por SSH + WP-CLI. Hay respaldo previo en `~/d185/` del usuario `aaa-webtest`.
+- **Verificación:** en webtest se revisó a la vista en móvil y escritorio; en staging se revisó el HTML publicado y el CSS minificado de LiteSpeed.
+
+**Paquetes de Duplicator del staging:** quedan 2, `20261030_aaaestudiolegal` (79 MB) y `20261016_aaaestudiolegal` (79 MB). Borrarlos es definitivo, así que el borrado lo hace Oscar desde Duplicator → Backups; queda la página abierta. Pendiente de confirmar.
+
+## Sitio sin estilos en webtest: Varnish con HTML viejo (D186, 2026-10-30)
+
+**Síntoma (Oscar, en Firefox):** webtest.agudeloabogados.com se veía sin diseño: menú en lista, logo e íconos gigantes.
+
+**Causa:**
+- En el servidor del cliente el HTML lo guarda **Varnish**.
+- "Purgar todo" de LiteSpeed se ejecuta en cada guardado de contenido (D178) y en los cambios de tema. Esa purga borra los CSS/JS minificados (`/wp-content/litespeed/css|js/…`) y los regenera con otro nombre.
+- Varnish no se enteraba y seguía sirviendo páginas, algunas con más de 1 h, que pedían los archivos borrados. Esos archivos daban 404, así que la página llegaba sin CSS.
+- El cambio de vacantes (D185) disparó una de esas purgas. Inicio y Quiénes somos quedaron rotas, y después de la purga de prueba todas.
+- El plugin CLP Varnish Cache solo carga sus clases dentro del admin. No vacía nada cuando se guarda por REST, por WP-CLI ni cuando la purga la hace LiteSpeed.
+
+**Arreglo:**
+- **Función nueva** `aaa_purge_varnish()` en `functions.php`, conectada a `litespeed_purged_all` y `litespeed_purged_all_cssjs`.
+  - Si CLP Varnish Cache está activo, carga su clase y vacía Varnish por host y por la etiqueta del sitio.
+  - En el staging de Hostinger no hace nada, porque allá no está ese plugin.
+- **Dónde se aplicó:** en webtest por SSH, con el respaldo previo en `~/d185/functions.php.bak`; en staging desde el editor de temas; y en el repo.
+- **Verificación:**
+  - Vaciado inmediato: las 7 URL quedaron con `X-Cache-Age: 0` y 0 recursos CSS/JS rotos.
+  - Prueba del caso automático: `do_action('litespeed_purge_all')` hizo 2 PURGE a Varnish (200), y las páginas volvieron a 0 recursos rotos.
+
+**Ojo:** el comando `wp litespeed-purge all` de WP-CLI no ejecuta el gancho, porque manda la purga al servidor web. Si se usa por terminal, hay que vaciar Varnish también, desde CloudPanel → Varnish Cache → Purge, o con el botón de la barra del admin.
+
+## Nueva foto del equipo de negociaciones en webtest (D187, 2026-11-03)
+
+**Pedido de Oscar:** en https://webtest.agudeloabogados.com/quienes-somos/ reemplazar la foto del "Equipo de negociaciones" por la que envió: 4 integrantes sobre fondo blanco, 2000×1386.
+
+**Hecho (solo en webtest):**
+- **Imagen:** se convirtió a WebP (calidad 82, sin metadatos) y quedó en la Biblioteca como adjunto 257, `uploads/2026/11/equipo-negociaciones-aaa.webp`, con el texto alternativo "Cuatro integrantes del equipo de negociaciones de AAA Estudio Legal".
+- **Página 101:** el bloque de imagen pasa del adjunto 209 al 257 y suma la clase `team-profile-pair__photo--grupo`. Respaldo previo en `~/d187/backup-101.html`.
+- **Estilos:** nueva regla `.team-groups img.team-profile-pair__photo--grupo` en `components.css`: `object-fit: contain` sobre fondo blanco.
+  - En el cuadro 1:1 de escritorio, recortar la foto habría dejado por fuera a las personas de los extremos. Así se ven las cuatro completas y el blanco se funde con el fondo de la foto.
+  - En móvil el marco es 16:9 y se ven igual de completas.
+- **Verificación:** al guardar, Varnish se vació solo (`X-Cache-Age: 0`) gracias a D186. Ningún recurso roto, y la revisión a la vista en escritorio salió bien.
+
+**Pendiente:** el staging de Hostinger conserva la foto anterior. El adjunto 209 sigue en la Biblioteca de webtest y no se borró.
+
+**Ajuste (2026-11-03, pedido de Oscar: "la imagen queda cortada abajo"):** la foto original corta a las personas a media pierna. Centrada con `contain`, quedaba una franja blanca debajo que hacía ver el recorte. Se agrega `object-position: center bottom` para que los cuerpos lleguen al borde inferior del marco. Revisado a la vista en escritorio (cuadro 1:1) y en móvil (16:9), sin recursos rotos.
+
+## Fotos reales de los otros tres equipos en webtest (D188, 2026-11-05)
+
+**Pedido de Oscar:** poner las otras tres fotos grupales en sus bloques del equipo en https://webtest.agudeloabogados.com/quienes-somos/ y comprimirlas.
+
+**Hecho (solo en webtest):**
+- **Correspondencia:** se usó el orden de envío, que es el mismo de la página.
+  - Equipo jurídico: foto de 8 personas, adjunto 259.
+  - Equipo administrativo: foto de 7 personas, adjunto 260.
+  - Equipo de tecnología: foto de 10 personas, adjunto 261.
+- **Compresión:** se recortó el blanco sobrante de los bordes (con un margen fino), se redujo a 1600 px de ancho y se pasó a WebP q80 sin metadatos. Los pesos pasaron de 223/253/190 KB a 56/58/51 KB. WordPress generó los tamaños intermedios, y el sitio sirve la versión de 1024 px o menor según la pantalla (`srcset`).
+- **Página 101:** los tres bloques pasan de las fotos del tema (`assets/img/nosotros/equipo-*.webp`) a los adjuntos nuevos, con la misma clase `team-profile-pair__photo--grupo` de D187: completas, sobre blanco y ancladas abajo. Respaldo previo en `~/d188/backup-101.html`.
+- **Verificación:** Varnish se vació solo, ningún recurso roto y las 4 fotos cargan. Revisado a la vista en escritorio (cuadros 1:1) y en móvil (16:9).
+
+**Notas:**
+- Las fotos son muy panorámicas (2,3 a 3,3:1). En el cuadro 1:1 de escritorio las personas se ven pequeñas, con blanco arriba. En móvil se ven bien.
+- El staging de Hostinger conserva las fotos anteriores. Las fotos del tema no se borraron.
+
+## Caja de luz para las fotos de los equipos y ajustes de móvil (D189, 2026-11-06)
+
+**Pedido de Oscar:**
+- Que las fotos de los equipos se amplíen a pantalla completa al tocarlas, en escritorio y en móvil.
+- Corregir los detalles de móvil que mandó el cliente en un screenshot: texto poco legible en "Qué hacemos" de Inicio, la palabra "caso" sola en el botón del cierre, el énfasis del título de Contacto en el otro tono, y el enlace "Política de privacidad" del formulario, que no cargaba.
+
+**Hecho (webtest + repo):**
+- **Caja de luz** (Quiénes somos → equipos). Está en `main.js` con un `<dialog>` nativo, sin librerías.
+  - Cada foto queda como botón accesible: se abre con clic, toque, Enter o Espacio, y tiene el `aria-label` "Ampliar foto: …".
+  - Se carga la versión más grande del `srcset` (1600 px) y se muestra completa sobre fondo navy, con el texto alternativo como pie.
+  - Se cierra con la ×, con Esc o tocando fuera; el foco vuelve a la foto y el scroll de la página queda bloqueado mientras está abierta.
+  - Respeta `prefers-reduced-motion`. Sin JS las fotos quedan como antes.
+  - Probado en 390 px y 1440 px.
+- **Inicio, "Qué hacemos" (≤1023 px):** la capa navy sobre la foto pasa del 70 % al 86 %, y los textos a blanco 90–92 %. En móvil el texto va sobre toda la foto, y en la de cartera (foto clara) no se leía.
+- **Botón del cierre (≤640 px):** `text-wrap: balance` y menos interletra. Ahora queda "Solicitar el / estudio de su caso", en lugar de "caso" sola.
+- **Contacto:** el énfasis del título ("Nuestro equipo jurídico revisará su solicitud.") pasa de navy a cobre, como en el resto de títulos.
+- **Formularios Contacto (115) y Postulación (106):**
+  - El enlace apuntaba a `/politica-de-privacidad/`, que no existe (404). Ahora va a `/politica-de-tratamiento-de-datos-personales/` (página 237, responde 200).
+  - El texto del enlace pasa a "Política de tratamiento de datos personales", que es el nombre de esa página. El resto de la autorización no cambió.
+  - Se actualizó también en `WORDPRESS-SETUP.md`. Respaldo de ambos formularios en `~/d189/`.
+- **Verificación:** 5 páginas con 0 recursos rotos y Varnish vaciado solo (D186).
+
+**Pendiente:**
+- El staging de Hostinger no tiene estos cambios.
+- La opción de WordPress "Página de política de privacidad" sigue apuntando al borrador "Privacy Policy" (ID 3), que no se usa.
+
+## Sección "La capacidad detrás de cada caso" compacta en el editor (D190, 2026-11-11)
+
+**Pedido de Oscar:** en el editor de la página Inicio, la sección "La capacidad detrás de cada caso" obligaba a un scroll muy largo: las 6 tarjetas salían una debajo de otra, con cada foto a todo el ancho. Como el cliente va a editar ese contenido, se pidió que se viera más claro al editar.
+
+**Causa:** todas las reglas de esa sección en `components.css` empiezan por `.home-page #confianza-heading`. `.home-page` es la clase que el tema pone en el `<body>` del Inicio público, y en el editor no existe. Por eso el editor cargaba el CSS del sitio pero la sección quedaba sin su grilla.
+
+**Hecho (webtest + repo):**
+- **`assets/css/editor.css`** (nuevo): se carga solo en el editor, con `add_editor_style()` después de `components.css`, y WordPress le antepone `.editor-styles-wrapper`, así que no llega al sitio público. Da a la sección la misma maqueta que tiene el sitio:
+  - 3 columnas (2 por debajo de 1024 px y 1 por debajo de 600 px);
+  - fotos en proporción 5:3 recortadas;
+  - títulos y textos con el tamaño del sitio.
+- **`functions.php`:** `add_editor_style()` ahora recibe las dos hojas.
+- **Sitio público:** sin cambios. El Inicio responde 200, `php -l` está limpio y hay respaldo en `~/d190/`.
+
+**Pendiente:** la verificación a la vista dentro del editor, que requiere sesión en WordPress. Otras secciones del Inicio con reglas `.home-page` pueden verse distintas en el editor; si Oscar lo nota, se suman a `editor.css`.
+
+## Revisión de los cambios de Laura y ajustes posteriores (D191, 2026-11-23)
+
+**Escaneo pedido por Oscar:**
+- En el repo no hay cambios de nadie más.
+- En webtest, **Laura Gomez** (usuario `Laura`, administradora, creada el 2026-11-17) editó el 2026-11-18 desde el editor:
+  - fotos principales y de secciones de Inicio, Metodología, Quiénes somos y Trabaja con nosotros;
+  - textos ampliados de las 3 vacantes;
+  - 12 fotos subidas.
+- Los archivos del tema no se tocaron.
+
+**Problemas de esas ediciones, corregidos a pedido de Oscar (webtest + repo):**
+1. **Fotos principales borrosas en pantallas grandes.**
+   - Causa: al cambiar la foto desde el editor, el bloque queda vinculado a la Biblioteca (`wp-image-ID`), y WordPress le asigna después `sizes="(max-width: 1024px) 100vw, 1024px"`. Con eso el navegador descargaba la versión de 1024 px y la estiraba.
+   - Arreglo: `aaa_image_dimensions()` en `functions.php` ahora también pone `srcset` (hasta 2560 px) y `sizes="100vw"` en la foto principal (`hero-shell__img`) cuando está vinculada. WordPress respeta ese srcset y ya no lo reemplaza.
+   - Queda verificado en las 4 páginas.
+2. **Fotos sin texto alternativo.** Se pusieron, en la página y en la Biblioteca, en las 2 fotos del Inicio (portada 272 y "Nuestro enfoque" 268) y en las fotos principales de Metodología (285), Quiénes somos (300) y Trabaja con nosotros (302).
+3. **Fotos pesadas del Inicio.**
+   - Portada: de 1279 KB a 70 KB.
+   - "Nuestro enfoque": de 882 KB a 67 KB.
+   - Se pasaron a WebP q80 sin metadatos, con el mismo nombre de archivo, y se regeneraron sus tamaños intermedios.
+   - Los originales de 6240 px de las otras fotos de Laura siguen en el servidor. No se sirven a los visitantes, porque se usan las versiones reducidas.
+
+**Animación de entrada más notable (pedido del cliente, 2,5 s propuestos por Oscar):**
+- El preloader pasa de ~0,95 s a 2,5 s: las tres A (0–1,16 s), "Estudio Legal" (0,75–1,45 s), el logo sostenido y el fundido (1,95–2,5 s).
+- Se movieron igual las esperas que dependen de él: el isotipo del encabezado (`components.css`), y `introDelay` en `main.js` (1950 ms) y en `home-motion.js` (1,95 s). La retirada de respaldo del preloader pasa a 3,2 s.
+- Sigue apareciendo solo en la primera página de la sesión y nunca con movimiento reducido.
+- Verificado en el navegador: tiempos correctos y logo completo a 1,6 s.
+
+**Respaldo:** `~/d191/` en webtest (archivos del tema, fotos originales y contenido previo de las páginas 82, 97, 101 y 104). Todo se aplicó con `php -l` limpio y sin recursos rotos. El staging de Hostinger no tiene estos cambios.
+
+## Ajustes del cliente antes del cierre: logos y tarjetas de equipo (D192, 2026-11-25)
+
+**Origen:** mensaje de Paola Monsalve (cliente) para Laura, reenviado por Oscar, con el orden de los logos.
+
+**Hecho en webtest:**
+- **"Organizaciones que confían en nosotros"**
+  - Los logos ya no se detienen al pasar el cursor: se quitó `animation-play-state: paused` en hover.
+  - La grilla se rehízo con los 5 grupos del documento y en su orden:
+    - Sector financiero: BBVA, GNB Sudameris.
+    - Sector solidario: Promédico, Fetrabuv, Fonalianza, Nuestro Fondo, Femcristar, Coopunidos.
+    - Organismos públicos: Metro Cali, Gobernación del Valle.
+    - Sector real: Constructora Meléndez, El Gran Langostino, K-Listo, Ma. Isabel, Neat.
+    - Cajas de compensación familiar: Comfandi.
+  - Se usaron los 16 bloques de logo existentes, sin cambios.
+  - **Faltan los archivos de 16 logos del documento:** Banco de Occidente, Banco Unión, Ban100, Fenalco, Juriscoop, Fedejohnson, Creciat, Emcali, Hero Motos, Colombina, Recamier, BAT, Aldor, Trolli, Eurobelleza e IGT. Se agregan cuando el cliente los envíe.
+- **Equipo (Quiénes somos)**
+  - Cada equipo queda como una sola tarjeta horizontal: 2×2 en escritorio (proporción 12:5) y 1 por fila en móvil (2:1).
+  - El frente no cambia (nombre y rol).
+  - El reverso muestra la foto del equipo con un pie de foto con su nombre. Se gira con hover, o con "Ver equipo" en táctil.
+  - Salió la foto suelta de al lado y el texto de funciones del reverso. Ese texto queda en el respaldo `~/d192/backup-101.html` por si se quiere recuperar.
+  - **Fotos al mismo tamaño:** las 4 se pusieron en un lienzo idéntico de 2320×800, con el grupo apoyado abajo y a la misma altura (672 px). Negociaciones y administrativo van al 86 % y al 92 %, porque esas fotos cortan más arriba del cuerpo; así las cabezas quedan parejas. Son los adjuntos 340–343, de 29 a 81 KB.
+  - La caja de luz (D189) funciona también sobre la foto del reverso.
+  - En móvil, el isotipo de fondo del frente se achica para no rozar el nombre.
+- **Código** (`components.css`, `main.js`): nuevo bloque CSS D192, el botón pasa a "Ver equipo", y la caja de luz toma también `img.team-flip-card__photo`.
+- **Verificación:**
+  - Revisado a la vista en escritorio (1440 px) y en móvil (375 px).
+  - La pista de logos sigue en `running` con el cursor encima, y no hay recursos rotos en Inicio ni en Quiénes somos.
+  - Antes de guardar se comprobó que nadie más estuviera editando: Laura y Nayeliz habían editado ese día, pero ninguna tenía la página abierta.
+
+**Nota:** el contenido vivo de las páginas es la fuente de verdad (sitio administrable, D159–D170). Los patterns del repo no se actualizaron con esta reorganización de contenido; el CSS y el JS sí.

@@ -3,7 +3,7 @@
  * Title: Trabaja con nosotros — página completa
  * Slug: aaa-estudio-legal/trabaja-con-nosotros-full
  * Categories: aaa-estudio-legal
- * Description: Página "Trabaja con nosotros" completa (prototype/trabaja-con-nosotros.html + estructura y copy del cliente de la PPTX "Estructura y Copies", láminas 23–24 — D124): hero editorial, "¿Por qué trabajar con nosotros?", "Vacantes disponibles" (4 cargos) y Postulación con el formulario de Contact Form 7 titulado "Postulación" (nombre, teléfono, cargo de interés y hoja de vida — ver WORDPRESS-SETUP.md § 7bis). Asignar la plantilla "Página con motion editorial (GSAP)" a esta página.
+ * Description: Página "Trabaja con nosotros" completa (prototype/trabaja-con-nosotros.html + estructura y copy del cliente de la PPTX "Estructura y Copies", láminas 23–24 — D124): hero editorial, "¿Por qué trabajar con nosotros?", "Vacantes disponibles" (3 cargos con descripción — D185) y Postulación con el formulario de Contact Form 7 titulado "Postulación" (nombre, teléfono, cargo de interés y hoja de vida — ver WORDPRESS-SETUP.md § 7bis). Asignar la plantilla "Página con motion editorial (GSAP)" a esta página.
  *
  * @package aaa-estudio-legal
  */
@@ -15,7 +15,7 @@
 		<!-- wp:group {"className":"hero-shell__media"} -->
 		<div class="wp-block-group hero-shell__media">
 			<!-- wp:image {"className":"hero-shell__img"} -->
-			<figure class="wp-block-image hero-shell__img"><img src="<?php echo esc_url( get_theme_file_uri( 'assets/img/trabaja/hero.webp' ) ); ?>" alt="Integrantes de AAA Estudio Legal trabajando en la oficina" /></figure>
+			<figure class="wp-block-image hero-shell__img"><img src="<?php echo esc_url( aaa_media_url( 'aaa-hero-trabaja.webp' ) ); ?>" alt="Integrantes de AAA Estudio Legal trabajando en la oficina" /></figure>
 			<!-- /wp:image -->
 			<!-- wp:group {"className":"hero-shell__scrim"} --><div class="wp-block-group hero-shell__scrim"></div><!-- /wp:group -->
 		</div>
@@ -80,58 +80,44 @@
 	<div class="wp-block-group jobs-board">
 		<!-- wp:group {"className":"job-card aaa-reveal aaa-stagger-0"} -->
 		<div class="wp-block-group job-card aaa-reveal aaa-stagger-0">
-			<!-- wp:heading {"level":3} --><h3 class="wp-block-heading">Abogado junior</h3><!-- /wp:heading -->
-			<!-- wp:list {"className":"job-card__meta"} -->
-			<ul class="wp-block-list job-card__meta">
-				<!-- wp:list-item --><li>Con o sin experiencia</li><!-- /wp:list-item -->
-				<!-- wp:list-item --><li>Con tarjeta profesional</li><!-- /wp:list-item -->
-				<!-- wp:list-item --><li>Contrato indefinido</li><!-- /wp:list-item -->
-				<!-- wp:list-item --><li>Cali</li><!-- /wp:list-item -->
-			</ul>
-			<!-- /wp:list -->
-			<!-- wp:paragraph {"className":"job-card__cta"} --><p class="job-card__cta"><a href="#postulacion" aria-label="Postularme a la vacante de Abogado junior">Postularme →</a></p><!-- /wp:paragraph -->
-		</div>
-		<!-- /wp:group -->
-		<!-- wp:group {"className":"job-card aaa-reveal aaa-stagger-1"} -->
-		<div class="wp-block-group job-card aaa-reveal aaa-stagger-1">
-			<!-- wp:heading {"level":3} --><h3 class="wp-block-heading">Abogado senior</h3><!-- /wp:heading -->
-			<!-- wp:list {"className":"job-card__meta"} -->
-			<ul class="wp-block-list job-card__meta">
-				<!-- wp:list-item --><li>Con o sin experiencia</li><!-- /wp:list-item -->
-				<!-- wp:list-item --><li>Con tarjeta profesional</li><!-- /wp:list-item -->
-				<!-- wp:list-item --><li>Contrato indefinido</li><!-- /wp:list-item -->
-				<!-- wp:list-item --><li>Cali</li><!-- /wp:list-item -->
-			</ul>
-			<!-- /wp:list -->
-			<!-- wp:paragraph {"className":"job-card__cta"} --><p class="job-card__cta"><a href="#postulacion" aria-label="Postularme a la vacante de Abogado senior">Postularme →</a></p><!-- /wp:paragraph -->
-		</div>
-		<!-- /wp:group -->
-		<!-- wp:group {"className":"job-card aaa-reveal aaa-stagger-2"} -->
-		<div class="wp-block-group job-card aaa-reveal aaa-stagger-2">
 			<!-- wp:heading {"level":3} --><h3 class="wp-block-heading">Dependiente judicial</h3><!-- /wp:heading -->
+			<!-- wp:paragraph {"className":"job-card__summary"} --><p class="job-card__summary">Buscamos estudiante de Derecho con interés en fortalecer sus conocimientos y adquirir experiencia en el ámbito jurídico, apoyando la gestión, revisión y seguimiento de procesos judiciales.</p><!-- /wp:paragraph -->
 			<!-- wp:list {"className":"job-card__meta"} -->
 			<ul class="wp-block-list job-card__meta">
-				<!-- wp:list-item --><li>Con o sin experiencia</li><!-- /wp:list-item -->
-				<!-- wp:list-item --><li>Estudiante de derecho</li><!-- /wp:list-item -->
-				<!-- wp:list-item --><li>Contrato indefinido</li><!-- /wp:list-item -->
-				<!-- wp:list-item --><li>Cali</li><!-- /wp:list-item -->
+				<!-- wp:list-item --><li><strong>Contrato:</strong> Término indefinido</li><!-- /wp:list-item -->
+				<!-- wp:list-item --><li><strong>Horario:</strong> Lunes a viernes</li><!-- /wp:list-item -->
+				<!-- wp:list-item --><li><strong>Ubicación:</strong> Cali</li><!-- /wp:list-item -->
 			</ul>
 			<!-- /wp:list -->
 			<!-- wp:paragraph {"className":"job-card__cta"} --><p class="job-card__cta"><a href="#postulacion" aria-label="Postularme a la vacante de Dependiente judicial">Postularme →</a></p><!-- /wp:paragraph -->
 		</div>
 		<!-- /wp:group -->
-		<!-- wp:group {"className":"job-card aaa-reveal aaa-stagger-3"} -->
-		<div class="wp-block-group job-card aaa-reveal aaa-stagger-3">
-			<!-- wp:heading {"level":3} --><h3 class="wp-block-heading">Auxiliar jurídico</h3><!-- /wp:heading -->
+		<!-- wp:group {"className":"job-card aaa-reveal aaa-stagger-1"} -->
+		<div class="wp-block-group job-card aaa-reveal aaa-stagger-1">
+			<!-- wp:heading {"level":3} --><h3 class="wp-block-heading">Abogado(a) junior</h3><!-- /wp:heading -->
+			<!-- wp:paragraph {"className":"job-card__summary"} --><p class="job-card__summary">Buscamos profesional en Derecho con tarjeta profesional vigente, sin experiencia laboral, con disposición para aprender, compromiso y orientación al detalle, que desee desarrollar su carrera profesional en el área jurídica.</p><!-- /wp:paragraph -->
 			<!-- wp:list {"className":"job-card__meta"} -->
 			<ul class="wp-block-list job-card__meta">
-				<!-- wp:list-item --><li>Con o sin experiencia</li><!-- /wp:list-item -->
-				<!-- wp:list-item --><li>Recién graduado</li><!-- /wp:list-item -->
-				<!-- wp:list-item --><li>Contrato indefinido</li><!-- /wp:list-item -->
-				<!-- wp:list-item --><li>Cali</li><!-- /wp:list-item -->
+				<!-- wp:list-item --><li><strong>Contrato:</strong> Término indefinido</li><!-- /wp:list-item -->
+				<!-- wp:list-item --><li><strong>Horario:</strong> Lunes a viernes</li><!-- /wp:list-item -->
+				<!-- wp:list-item --><li><strong>Ubicación:</strong> Cali</li><!-- /wp:list-item -->
 			</ul>
 			<!-- /wp:list -->
-			<!-- wp:paragraph {"className":"job-card__cta"} --><p class="job-card__cta"><a href="#postulacion" aria-label="Postularme a la vacante de Auxiliar jurídico">Postularme →</a></p><!-- /wp:paragraph -->
+			<!-- wp:paragraph {"className":"job-card__cta"} --><p class="job-card__cta"><a href="#postulacion" aria-label="Postularme a la vacante de Abogado(a) junior">Postularme →</a></p><!-- /wp:paragraph -->
+		</div>
+		<!-- /wp:group -->
+		<!-- wp:group {"className":"job-card aaa-reveal aaa-stagger-2"} -->
+		<div class="wp-block-group job-card aaa-reveal aaa-stagger-2">
+			<!-- wp:heading {"level":3} --><h3 class="wp-block-heading">Abogado(a) senior</h3><!-- /wp:heading -->
+			<!-- wp:paragraph {"className":"job-card__summary"} --><p class="job-card__summary">Buscamos profesional en Derecho con tarjeta profesional vigente y experiencia en el ejercicio jurídico, con capacidad de análisis, autonomía, criterio profesional y orientación al cumplimiento de objetivos.</p><!-- /wp:paragraph -->
+			<!-- wp:list {"className":"job-card__meta"} -->
+			<ul class="wp-block-list job-card__meta">
+				<!-- wp:list-item --><li><strong>Contrato:</strong> Término indefinido</li><!-- /wp:list-item -->
+				<!-- wp:list-item --><li><strong>Horario:</strong> Lunes a viernes</li><!-- /wp:list-item -->
+				<!-- wp:list-item --><li><strong>Ubicación:</strong> Cali</li><!-- /wp:list-item -->
+			</ul>
+			<!-- /wp:list -->
+			<!-- wp:paragraph {"className":"job-card__cta"} --><p class="job-card__cta"><a href="#postulacion" aria-label="Postularme a la vacante de Abogado(a) senior">Postularme →</a></p><!-- /wp:paragraph -->
 		</div>
 		<!-- /wp:group -->
 	</div>

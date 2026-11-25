@@ -1,0 +1,62 @@
+/* =====================================================================
+   Solo editor de bloques (D190). Se carga con add_editor_style() después
+   de components.css; WordPress antepone `.editor-styles-wrapper` a cada
+   selector, así que nada de esto llega al front.
+
+   Para lo que en el front depende de `.home-page` (la clase que
+   aaa_add_home_page_body_class() pone en el <body> de Inicio): en el
+   editor no existe, y sin ella esas secciones quedan sin su grilla. Aquí va
+   solo la maqueta mínima para que se editen con la forma del sitio; el
+   detalle visual sigue en components.css.
+   ===================================================================== */
+
+/* Inicio — "La capacidad detrás de cada caso": 6 tarjetas en 3 columnas,
+   como en el front, en lugar de una debajo de otra con la foto a todo el
+   ancho. En el editor la clase del bloque queda en el <figure> (en el front
+   functions.php la pasa al <img>), por eso se apunta a `.why-trust__media img`. */
+.why-trust .why-trust__intro {
+  max-width: 760px;
+  margin-inline: auto;
+  text-align: center;
+}
+.why-trust .why-trust__grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--wp--preset--spacing--8) var(--wp--preset--spacing--6);
+  margin-top: var(--wp--preset--spacing--12);
+}
+.why-trust .why-trust__grid > *,
+.why-trust .why-trust__item > * {
+  margin-block: 0;
+}
+.why-trust .why-trust__item .why-trust__media {
+  overflow: hidden;
+  border-radius: var(--wp--custom--radius--md);
+}
+.why-trust .why-trust__item .why-trust__media img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 5 / 3;
+  object-fit: cover;
+}
+.why-trust .why-trust__item h3 {
+  margin-top: var(--wp--preset--spacing--4);
+  font-family: var(--wp--preset--font-family--sans);
+  font-size: 1.125rem;
+  font-weight: 700;
+  line-height: 1.3;
+  color: var(--wp--preset--color--navy-deep);
+}
+.why-trust .why-trust__item p {
+  margin-top: var(--wp--preset--spacing--1);
+  font-size: 0.9375rem;
+  line-height: 1.5;
+  color: var(--wp--preset--color--text-muted);
+}
+@media (max-width: 1023px) {
+  .why-trust .why-trust__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 600px) {
+  .why-trust .why-trust__grid { grid-template-columns: minmax(0, 1fr); }
+}
