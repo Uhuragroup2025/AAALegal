@@ -3853,3 +3853,16 @@ Rendimiento: 96 en Inicio y Metodología. Se cumple el criterio de T09: LCP meno
   - Antes de guardar se comprobó que nadie más estuviera editando: Laura y Nayeliz habían editado ese día, pero ninguna tenía la página abierta.
 
 **Nota:** el contenido vivo de las páginas es la fuente de verdad (sitio administrable, D159–D170). Los patterns del repo no se actualizaron con esta reorganización de contenido; el CSS y el JS sí.
+
+## Repositorio sincronizado y proyecto listo para otro equipo (2026-11-25)
+
+- **Repositorio:** commit `7249edf` ("D180–D192") subido a `origin/main` (GitHub `Uhuragroup2025/AAALegal`). Antes se comprobó que las otras dos ramas no tuvieran commits ausentes en `main`, que no viajara ningún secreto y que no hubiera cambios en `prototype/`. El sitio de Cloudflare sigue respondiendo 200.
+- **Lo que no viaja por git (a propósito):**
+  - `assets/img/aprobadas-web/`: 302 MB de fotos originales de la sesión. El sitio usa las versiones comprimidas de la Biblioteca.
+  - `.claude/settings.local.json`: permisos locales de Claude.
+  - El contenido de WordPress, que vive en la base de datos de webtest; para llevárselo se usa Duplicator.
+- **Memoria de Claude:** copiada en `docs/memoria-claude/` (instrucciones en `LEEME.md`) para usarla desde otro equipo.
+- **Acceso desde otro equipo:**
+  - clonar el repo;
+  - abrir la carpeta en Claude;
+  - para SSH a webtest, generar una llave nueva en ese equipo y agregarla al usuario `aaa-webtest` en CloudPanel. La llave privada de este equipo no se copia.

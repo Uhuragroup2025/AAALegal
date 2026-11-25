@@ -1,0 +1,3 @@
+- [Usuario: Oscar, Owner](usuario-oscar-owner.md) — Oscar ejecuta las tareas técnicas; usar su nombre en vez de "Owner" en entregables
+- [Responder en español](responder-en-espanol.md) — chat y registros del repo siempre en español
+- [Duplicator solo cuando lo pida](duplicator-solo-cuando-lo-pida.md) — no generar paquetes de migración sin que Oscar lo pida
