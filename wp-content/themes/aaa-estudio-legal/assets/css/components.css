@@ -4956,3 +4956,18 @@ body:not(.home-page) section.contact-intake .aaa-text-emphasis {
   /* En la tarjeta más baja el isotipo de fondo rozaba el nombre del equipo. */
   .team-groups .team-flip-card:not(:has(.team-flip-card__logo)) .team-flip-card__front::before { top: var(--wp--preset--spacing--4); left: var(--wp--preset--spacing--4); width: 40px; height: 25px; }
 }
+
+/* =====================================================================
+   D195 — Logos de sectores: tamaño por proporción, no por archivo
+   functions.php (aaa_sector_logos) entrega cada logo recortado al borde y
+   con `--logo-h` calculado por su proporción. Se anulan la escala fija y los
+   ajustes por nombre de archivo de arriba, que deformaban cualquier logo
+   nuevo con otro formato.
+   ===================================================================== */
+.home-page .sector-card__logos img {
+  --sector-logo-scale: 1 !important;
+  width: auto !important;
+  height: var(--logo-h, 44px) !important;
+  max-width: 100% !important;
+  object-fit: contain;
+}

@@ -3905,3 +3905,23 @@ Rendimiento: 96 en Inicio y Metodología. Se cumple el criterio de T09: LCP meno
   - Resultado: 7 patterns y 461 bloques, sin bloques inválidos ni desconocidos.
   - Los 5 patterns de página son idénticos a su página en vivo, con 0 imágenes rotas.
   - Se salió del editor sin guardar.
+
+## Logos de sectores a prueba de cualquier archivo (D195, 2026-11-27)
+
+**Problema (reportado por Oscar):** Laura subió desde el editor los logos de Banco de Occidente y Banco Unión, y salían enormes y cortados en el carrusel.
+- Causa: el tamaño de los logos dependía de una escala fija (×1,55, y hasta ×2,05 según el nombre del archivo), pensada para los archivos originales cuadrados (601×601 o 360×360) con la marca en una franja y mucho blanco alrededor.
+- Los logos nuevos venían recortados al borde (277×300) o muy pequeños (82×32): recibían la misma ampliación y se salían del espacio.
+- Por eso cualquier logo nuevo con otro formato volvía a deformarse.
+
+**Solución definitiva (`functions.php`, `aaa_sector_logos()` + `components.css`):**
+- **Cualquier imagen dentro de una tarjeta de sectores pasa por el tema.** Toma el archivo original del adjunto (aunque en el editor se haya elegido un tamaño intermedio), le recorta el margen sobrante y guarda esa versión una sola vez junto al original (`<nombre>-logo.webp`, máx. 480×200). Si el original cambia, la versión se regenera.
+- **El alto de cada logo se calcula por su proporción** (`--logo-h`, de 26 a 52 px), para que todos tengan el mismo peso visual: los anchos van más bajos y los cuadrados más altos.
+- Se anulan la escala fija y los ajustes por nombre de archivo.
+- Si el logo no tiene texto alternativo en la página, se usa el de la Biblioteca. A los 2 logos nuevos se les puso ("Logo de Banco de Occidente", "Logo de Banco Unión").
+- Sin Imagick o con SVG, el logo queda como está.
+
+**Verificado:** los 18 logos se generaron y se ven en escritorio entre 26 y 52 px de alto, ninguno cortado ni ampliado de más.
+- **Nota:** el archivo de Banco Unión mide solo 82×32 px y se ve algo borroso al ampliarse. Conviene pedir una versión más grande.
+- Los patterns `home-full` y `metodologia-full` se volvieron a sincronizar con las páginas en vivo, porque Laura editó Inicio y Metodología el 2026-11-27.
+- Respaldo en `~/d195/`. Caché vaciada.
+- **Pendiente:** commit y push al repositorio (no se pidió en esta tanda).

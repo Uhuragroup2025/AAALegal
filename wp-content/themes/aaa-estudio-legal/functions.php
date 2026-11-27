@@ -827,6 +827,75 @@ function aaa_ignore_image_resize( $block_content, $block ) {
 add_filter( 'render_block', 'aaa_ignore_image_resize', 4, 2 );
 
 /**
+ * D195 — Logos de "Organizaciones que confían en nosotros", a prueba de
+ * cualquier archivo. Antes el tamaño dependía de una escala fija pensada para
+ * logos cuadrados con mucho blanco alrededor, más ajustes por nombre de
+ * archivo; un logo nuevo recortado al borde (o muy pequeño) salía enorme y
+ * cortado. Ahora, para cada imagen dentro de `.sector-card__logos`:
+ * 1. se usa el archivo original del adjunto (aunque en el editor se haya
+ *    elegido un tamaño intermedio) y se le recorta el margen sobrante; esa
+ *    versión se guarda una vez junto al original (`-logo.webp`);
+ * 2. el alto se calcula por su proporción para que todos tengan el mismo peso
+ *    visual (`--logo-h`): un logo ancho va más bajo, uno cuadrado más alto.
+ * Sin Imagick o con SVG, el logo se deja como está.
+ */
+function aaa_sector_logos( $block_content, $block ) {
+	if ( 'core/group' !== ( $block['blockName'] ?? '' ) || false === strpos( $block['attrs']['className'] ?? '', 'sector-card__logos' ) ) {
+		return $block_content;
+	}
+	return preg_replace_callback( '/<img\b[^>]*>/', 'aaa_sector_logo_img', $block_content );
+}
+add_filter( 'render_block', 'aaa_sector_logos', 10, 2 );
+
+function aaa_sector_logo_img( $match ) {
+	$img = $match[0];
+	if ( ! class_exists( 'Imagick' ) || ! preg_match( '/\ssrc="([^"]+)"/', $img, $src ) ) {
+		return $img;
+	}
+	$id   = preg_match( '/\bwp-image-(\d+)/', $img, $m ) ? (int) $m[1] : attachment_url_to_postid( strtok( $src[1], '?' ) );
+	$file = $id ? get_attached_file( $id ) : '';
+	if ( ! $file || ! file_exists( $file ) || ! preg_match( '/\.(png|jpe?g|webp|gif)$/i', $file ) ) {
+		return $img;
+	}
+	$logo = preg_replace( '/\.[^.]+$/', '-logo.webp', $file );
+	if ( ! file_exists( $logo ) || filemtime( $logo ) < filemtime( $file ) ) {
+		try {
+			$im = new Imagick( $file );
+			$im->setIteratorIndex( 0 );
+			$im->trimImage( 0.08 * Imagick::getQuantum() );
+			$im->setImagePage( 0, 0, 0, 0 );
+			if ( $im->getImageWidth() > 480 || $im->getImageHeight() > 200 ) {
+				$im->thumbnailImage( 480, 200, true );
+			}
+			$im->setImageFormat( 'webp' );
+			$im->setImageCompressionQuality( 90 );
+			$im->writeImage( $logo );
+			$im->clear();
+		} catch ( Exception $e ) {
+			return $img;
+		}
+	}
+	$size = wp_getimagesize( $logo );
+	if ( ! $size ) {
+		return $img;
+	}
+	// Mismo "área" para todos: un cuadrado va a 52px de alto; uno de 3,5:1 a ~28px.
+	$ratio = $size[0] / max( 1, $size[1] );
+	$h     = (int) round( max( 26, min( 52, sqrt( 2800 / $ratio ) ) ) );
+	$url   = preg_replace( '/\.[^.\/]+$/', '-logo.webp', wp_get_attachment_url( $id ) ) . '?v=' . filemtime( $logo );
+	$alt   = trim( (string) get_post_meta( $id, '_wp_attachment_image_alt', true ) );
+	$img   = preg_replace( '/\s(?:src|srcset|sizes|width|height|style)="[^"]*"/', '', $img );
+	if ( $alt && preg_match( '/\salt=""/', $img ) ) {
+		$img = str_replace( ' alt=""', ' alt="' . esc_attr( $alt ) . '"', $img );
+	}
+	return str_replace(
+		'<img',
+		sprintf( '<img src="%1$s" srcset="%1$s %2$dw" width="%2$d" height="%3$d" style="--logo-h:%4$dpx"', esc_url( $url ), $size[0], $size[1], $h ),
+		$img
+	);
+}
+
+/**
  * D183 — robots.txt (backlog SEO T15). Solo lo usa WordPress cuando no hay un
  * archivo robots.txt físico (el staging de Hostinger tiene uno propio para el
  * dominio temporal). Con el sitio en "disuadir a los motores" se respeta lo

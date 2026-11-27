@@ -324,7 +324,7 @@
 <!-- /wp:group -->
 
 <!-- wp:group {"className":"sector-grid","layout":{"type":"default"}} -->
-<div class="wp-block-group sector-grid"><!-- wp:group {"className":"sector-card sector-card--financiero aaa-reveal aaa-stagger-0","layout":{"type":"default"}} -->
+<div class="wp-block-group sector-grid"><!-- wp:group {"className":"sector-card sector-card\u002d\u002dfinanciero aaa-reveal aaa-stagger-0","layout":{"type":"default"}} -->
 <div class="wp-block-group sector-card sector-card--financiero aaa-reveal aaa-stagger-0"><!-- wp:group {"className":"sector-card__header","layout":{"type":"default"}} -->
 <div class="wp-block-group sector-card__header"><!-- wp:paragraph {"className":"sector-card__name"} -->
 <p class="sector-card__name">Sector financiero</p>
@@ -336,20 +336,28 @@
 <figure class="wp-block-image size-full"><img src="<?php echo esc_url( home_url() ); ?>/wp-content/uploads/2026/09/logo-bbva.png" alt="Logo de BBVA" class="wp-image-16"/></figure>
 <!-- /wp:image -->
 
+<!-- wp:image {"id":360,"sizeSlug":"medium","linkDestination":"none"} -->
+<figure class="wp-block-image size-medium"><img src="<?php echo esc_url( home_url() ); ?>/wp-content/uploads/2026/11/logo-banco-de-occidente-277x300.png" alt="" class="wp-image-360"/></figure>
+<!-- /wp:image -->
+
+<!-- wp:image {"id":365,"sizeSlug":"full","linkDestination":"none"} -->
+<figure class="wp-block-image size-full"><img src="<?php echo esc_url( home_url() ); ?>/wp-content/uploads/2026/11/logo-banco-union.png" alt="" class="wp-image-365"/></figure>
+<!-- /wp:image -->
+
 <!-- wp:image {"id":183,"sizeSlug":"full","linkDestination":"none"} -->
 <figure class="wp-block-image size-full"><img src="<?php echo esc_url( home_url() ); ?>/wp-content/uploads/2026/10/logo-gnb-sudameris.png" alt="Logo de Banco GNB Sudameris" class="wp-image-183"/></figure>
 <!-- /wp:image --></div>
 <!-- /wp:group --></div>
 <!-- /wp:group -->
 
-<!-- wp:group {"className":"sector-card sector-card--solidario aaa-reveal aaa-stagger-1","layout":{"type":"default"}} -->
+<!-- wp:group {"className":"sector-card sector-card\u002d\u002dsolidario aaa-reveal aaa-stagger-1","layout":{"type":"default"}} -->
 <div class="wp-block-group sector-card sector-card--solidario aaa-reveal aaa-stagger-1"><!-- wp:group {"className":"sector-card__header","layout":{"type":"default"}} -->
 <div class="wp-block-group sector-card__header"><!-- wp:paragraph {"className":"sector-card__name"} -->
 <p class="sector-card__name">Sector solidario</p>
 <!-- /wp:paragraph --></div>
 <!-- /wp:group -->
 
-<!-- wp:group {"className":"sector-card__logos sector-card__logos--spaced","layout":{"type":"default"}} -->
+<!-- wp:group {"className":"sector-card__logos sector-card__logos\u002d\u002dspaced","layout":{"type":"default"}} -->
 <div class="wp-block-group sector-card__logos sector-card__logos--spaced"><!-- wp:image {"id":245,"sizeSlug":"full","linkDestination":"none"} -->
 <figure class="wp-block-image size-full"><img src="<?php echo esc_url( home_url() ); ?>/wp-content/uploads/2026/10/logo-promedico.webp" alt="Logo de Promédico" class="wp-image-245"/></figure>
 <!-- /wp:image -->
@@ -376,7 +384,7 @@
 <!-- /wp:group --></div>
 <!-- /wp:group -->
 
-<!-- wp:group {"className":"sector-card sector-card--publico aaa-reveal aaa-stagger-2","layout":{"type":"default"}} -->
+<!-- wp:group {"className":"sector-card sector-card\u002d\u002dpublico aaa-reveal aaa-stagger-2","layout":{"type":"default"}} -->
 <div class="wp-block-group sector-card sector-card--publico aaa-reveal aaa-stagger-2"><!-- wp:group {"className":"sector-card__header","layout":{"type":"default"}} -->
 <div class="wp-block-group sector-card__header"><!-- wp:paragraph {"className":"sector-card__name"} -->
 <p class="sector-card__name">Organismos públicos</p>
@@ -394,14 +402,14 @@
 <!-- /wp:group --></div>
 <!-- /wp:group -->
 
-<!-- wp:group {"className":"sector-card sector-card--comercio aaa-reveal aaa-stagger-3","layout":{"type":"default"}} -->
+<!-- wp:group {"className":"sector-card sector-card\u002d\u002dcomercio aaa-reveal aaa-stagger-3","layout":{"type":"default"}} -->
 <div class="wp-block-group sector-card sector-card--comercio aaa-reveal aaa-stagger-3"><!-- wp:group {"className":"sector-card__header","layout":{"type":"default"}} -->
 <div class="wp-block-group sector-card__header"><!-- wp:paragraph {"className":"sector-card__name"} -->
 <p class="sector-card__name">Sector real</p>
 <!-- /wp:paragraph --></div>
 <!-- /wp:group -->
 
-<!-- wp:group {"className":"sector-card__logos sector-card__logos--spaced","layout":{"type":"default"}} -->
+<!-- wp:group {"className":"sector-card__logos sector-card__logos\u002d\u002dspaced","layout":{"type":"default"}} -->
 <div class="wp-block-group sector-card__logos sector-card__logos--spaced"><!-- wp:image {"id":20,"sizeSlug":"full","linkDestination":"none"} -->
 <figure class="wp-block-image size-full"><img src="<?php echo esc_url( home_url() ); ?>/wp-content/uploads/2026/09/logo-constructora-melendez.png" alt="Logo de Constructora Meléndez" class="wp-image-20"/></figure>
 <!-- /wp:image -->
@@ -424,7 +432,7 @@
 <!-- /wp:group --></div>
 <!-- /wp:group -->
 
-<!-- wp:group {"className":"sector-card sector-card--salud aaa-reveal aaa-stagger-4","layout":{"type":"default"}} -->
+<!-- wp:group {"className":"sector-card sector-card\u002d\u002dsalud aaa-reveal aaa-stagger-4","layout":{"type":"default"}} -->
 <div class="wp-block-group sector-card sector-card--salud aaa-reveal aaa-stagger-4"><!-- wp:group {"className":"sector-card__header","layout":{"type":"default"}} -->
 <div class="wp-block-group sector-card__header"><!-- wp:paragraph {"className":"sector-card__name"} -->
 <p class="sector-card__name">Cajas de compensación familiar</p>
