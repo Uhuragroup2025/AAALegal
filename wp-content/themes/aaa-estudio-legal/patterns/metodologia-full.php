@@ -12,8 +12,8 @@
 <!-- wp:group {"tagName":"section","align":"full","className":"hero-immersive hero\u002d\u002deditorial hero\u002d\u002deditorial\u002d\u002dservices is-dark-surface is-style-default"} -->
 <section class="wp-block-group alignfull hero-immersive hero--editorial hero--editorial--services is-dark-surface is-style-default"><!-- wp:group {"className":"hero-shell"} -->
 <div class="wp-block-group hero-shell"><!-- wp:group {"className":"hero-shell__media"} -->
-<div class="wp-block-group hero-shell__media"><!-- wp:image {"id":337,"sizeSlug":"large","linkDestination":"none","className":"hero-shell__img"} -->
-<figure class="wp-block-image size-large hero-shell__img"><img src="<?php echo esc_url( home_url() ); ?>/wp-content/uploads/2026/11/area-de-practica-1-683x1024.webp" alt="Integrante de AAA Estudio Legal con diadema, atendiendo un caso en su computador" class="wp-image-337"/></figure>
+<div class="wp-block-group hero-shell__media"><!-- wp:image {"id":350,"sizeSlug":"large","linkDestination":"none","className":"hero-shell__img"} -->
+<figure class="wp-block-image size-large hero-shell__img"><img src="<?php echo esc_url( home_url() ); ?>/wp-content/uploads/2026/11/solucio-juridica-1024x683.webp" alt="Integrantes de AAA Estudio Legal trabajando en sus computadores en la oficina" class="wp-image-350"/></figure>
 <!-- /wp:image -->
 
 <!-- wp:group {"className":"hero-shell__scrim"} -->

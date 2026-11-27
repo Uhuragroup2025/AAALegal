@@ -3891,3 +3891,17 @@ Rendimiento: 96 en Inicio y Metodología. Se cumple el criterio de T09: LCP meno
 - **Respaldo:** en `~/d193/` (archivos del tema, patterns anteriores y contenido previo de las páginas 82 y 97). Las 5 páginas responden 200, sin recursos rotos, y se vació la caché.
 
 **Queda en el servidor:** el original de 4160×6240 px (4,7 MB) que subió Laura (adjunto 336). No se usa, y se puede borrar si Oscar lo decide.
+
+## Limpieza de la foto sin uso y prueba final de patterns (2026-11-27)
+
+- **Borrado el adjunto 336:** original de 4160×6240 de la foto de la asesora, subido por Laura y sin uso. Eran 6 archivos y 4,9 MB.
+  - Antes se comprobó que no apareciera en ningún contenido, imagen destacada, metadato, opción ni archivo del tema. Las referencias encontradas eran del adjunto 337 (`area-de-practica-1-…`), que se conserva.
+  - Inicio y Metodología siguen sin recursos rotos.
+- **Cambio de Laura detectado:** el 2026-11-25 a las 17:58, una hora después de D193, Laura reemplazó desde el editor la foto de portada de Metodología por "solucio-juridica" (adjunto 350, recortada en el editor). Se respeta su elección.
+  - Se le puso texto alternativo.
+  - El encuadre de esa portada en móvil pasa a `85% 40%`, para mostrar a la integrante de la derecha en lugar del escritorio vacío.
+  - El pattern `metodologia-full` se volvió a sincronizar con la página.
+- **Prueba final de patterns:** se hizo con el parser y el validador de bloques del propio editor de WordPress, sobre los patterns registrados.
+  - Resultado: 7 patterns y 461 bloques, sin bloques inválidos ni desconocidos.
+  - Los 5 patterns de página son idénticos a su página en vivo, con 0 imágenes rotas.
+  - Se salió del editor sin guardar.

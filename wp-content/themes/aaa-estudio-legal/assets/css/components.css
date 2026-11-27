@@ -2566,9 +2566,14 @@ section.aaa-section {
    sobre el eyebrow y el de primer plano a la derecha del texto (de 1024 a
    1920px la caja mide 420–520px y el porcentaje se comporta parecido). En
    móvil la foto se recorta a los lados y el 70% muestra al de primer plano. */
-/* D193: la foto pasa a ser vertical (asesora con diadema). Con 31% la cara
-   queda entre el menú y el título, en escritorio y en móvil. */
+/* D193: encuadre alto (31%) para que las caras queden entre el menú y el
+   título. Desde el 2026-11-25 la foto es horizontal (equipo en computadores,
+   elegida por Laura): en móvil se recorta a los lados y el 85% muestra a la
+   integrante de la derecha en lugar del escritorio vacío del centro. */
 .hero--editorial--services .hero-shell__media .hero-shell__img { object-position: 50% 31%; }
+@media (max-width: 640px) {
+  .hero--editorial--services .hero-shell__media .hero-shell__img { object-position: 85% 40%; }
+}
 
 /* ---------- Nuestra metodología — tarjetas con conector (D138) ----------
    Rediseño pedido por el cliente con imagen de referencia (tercera vuelta
